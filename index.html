@@ -1,0 +1,295 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CaseWhen — content samples</title>
+<style>
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+:root{
+ --ink:#1A1615;--bg:#FBFCFC;--card:#fff;--line:#E4E8E7;--mut:#5f6b68;--faint:#9aa5a2;
+ --brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8;--terra:#CE8168;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 26px}
+h1,h2,h3,h4{font-weight:700;letter-spacing:-0.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* header */
+.top{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:5}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 26px}
+.top img{height:26px;display:block}
+.top .rt{font-size:12.5px;color:var(--mut);letter-spacing:.02em}
+/* hero */
+.hero{padding:62px 0 40px;border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(30px,4.6vw,50px);max-width:20ch}
+.hero h1 em{font-style:normal;color:var(--brand)}
+.hero p{font-size:18px;color:var(--mut);max-width:66ch;margin:18px 0 0;font-weight:400}
+.hero .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.pill{font-size:12.5px;font-weight:500;background:var(--pale);color:var(--dark);border-radius:999px;padding:5px 13px}
+/* sections */
+section{padding:52px 0;border-bottom:1px solid var(--line)}
+.slab{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:8px}
+.sh{font-size:clamp(23px,3vw,31px);margin-bottom:6px}
+.sd{font-size:16px;color:var(--mut);max-width:70ch;margin-bottom:26px}
+/* provenance chip */
+.prov{display:flex;gap:8px;flex-wrap:wrap;font-size:12px;margin-top:12px}
+.prov span{border:1px solid var(--line);border-radius:6px;padding:3px 9px;color:var(--mut);background:#fff}
+.prov .kw{border-color:var(--mid);color:var(--dark);font-weight:500}
+.prov b{color:var(--ink);font-weight:600}
+/* blog */
+.blog{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;margin-bottom:24px}
+.blog .cover{background:var(--dark);color:#eafaf5;padding:24px 30px}
+.blog .cover .eb{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid)}
+.blog .cover h3{font-size:clamp(21px,2.6vw,28px);margin-top:8px;color:#fff;max-width:26ch}
+.blog .body{padding:24px 30px}
+.blog .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:13px 16px;font-size:15px;margin-bottom:16px}
+.blog .qa b{color:var(--dark)}
+.blog .q{font-weight:700;font-size:16px;margin:18px 0 4px}
+.blog p{font-size:14.5px;color:#39352f;margin:0 0 10px}
+.blog p b{color:var(--ink)}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+.tbl th{text-align:left;background:var(--neutral);padding:8px 10px;font-size:12px;font-weight:600}
+.tbl td{border-top:1px solid var(--line);padding:8px 10px;vertical-align:top}
+.cta{display:inline-block;background:var(--brand);color:#fff;font-weight:600;font-size:14px;border-radius:999px;padding:9px 19px;margin-top:8px;text-decoration:none}
+.fade{color:var(--faint);font-size:12.5px;margin-top:14px}
+/* linkedin */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.li{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.li .h{display:flex;align-items:center;gap:11px;padding:14px 16px 8px}
+.li .h img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:none}
+.li .h .n{font-weight:700;font-size:14.5px}.li .h .t{font-size:12px;color:var(--faint)}
+.li .b{padding:2px 16px 14px;font-size:14px;white-space:pre-line;color:#2b2824}
+.li .b .hk{font-weight:700;font-size:15.5px;display:block;margin-bottom:7px;color:var(--ink)}
+.li .f{border-top:1px solid var(--line);padding:9px 16px;font-size:11.5px;color:var(--faint);display:flex;justify-content:space-between;align-items:center}
+.tag{font-size:10.5px;font-weight:600;border-radius:20px;padding:2px 9px}
+.t-gov{background:var(--pale);color:var(--dark)}.t-pri{background:#FBEFD3;color:#7a5713}.t-mig{background:#DEE7EF;color:#2c4a63}.t-fab{background:#E8E2F0;color:#5b4a7a}
+/* reels */
+.reel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:16px}
+.reel .rh{font-size:13px;font-weight:600;color:var(--brand);margin-bottom:10px}
+.reel .rl{display:flex;gap:10px;font-size:13.5px;margin:6px 0;color:#39352f}
+.reel .rl b{flex:none;width:52px;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);padding-top:3px}
+/* template frames */
+.row{display:flex;gap:16px;overflow-x:auto;padding-bottom:8px}
+.frame{flex:none;border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(17,73,63,.10);position:relative}
+.p45{width:238px;height:298px}.land{width:352px;height:185px}
+.v-dark{background:var(--dark);color:#eafaf5}.v-base{background:var(--brand);color:#eafaf5}
+.v-mint{background:var(--pale);color:var(--dark)}.v-white{background:#eef1ef;color:var(--ink)}
+.v-split{background:linear-gradient(90deg,var(--dark) 0 50%,var(--pale) 50% 100%)}
+.frame .in{padding:17px 16px;height:100%;display:flex;flex-direction:column}
+.frame .eb{font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;opacity:.82}
+.frame .cwm{position:absolute;bottom:11px;left:15px;font-size:8.5px;font-weight:700;opacity:.5;display:flex;align-items:center;gap:5px}
+.frame .cwm img{height:11px;filter:none}
+.v-dark .cwm img,.v-base .cwm img{filter:brightness(0) invert(1);opacity:.7}
+.qmark{font-family:Georgia,serif;font-size:56px;line-height:.5;font-weight:700;opacity:.2;margin-bottom:6px}
+.qtext{font-size:16px;font-weight:700;letter-spacing:-.01em;line-height:1.24;margin-top:auto}
+.qattr{display:flex;align-items:center;gap:9px;margin-top:13px;padding-top:11px;border-top:1px solid rgba(255,255,255,.22)}
+.v-mint .qattr,.v-white .qattr{border-top-color:rgba(17,73,63,.16)}
+.qattr img{width:28px;height:28px;border-radius:50%;object-fit:cover;flex:none}
+.qattr .an{font-size:11px;font-weight:700}.qattr .al{font-size:9.5px;opacity:.78}
+.big{font-size:46px;font-weight:700;letter-spacing:-.03em;line-height:.92}
+.stat-l{font-size:13px;font-weight:500;line-height:1.28;margin-top:9px}
+.chk .cn{font-size:36px;font-weight:700;opacity:.9}.chk .ci{font-size:13.5px;font-weight:500;line-height:1.28;margin-top:5px}
+.sph{font-size:9px;font-weight:700;letter-spacing:.12em}.spt{font-size:13.5px;font-weight:700;line-height:1.22;margin-top:6px}
+.step{display:flex;gap:9px;margin-top:8px;font-size:11.5px;line-height:1.28}.step .sn{font-weight:700;color:var(--mid)}.v-mint .step .sn{color:var(--brand)}
+.cover-h{font-size:19px;font-weight:700;letter-spacing:-.02em;line-height:1.14;margin-top:auto}.cover-h .kw{color:var(--mid)}.v-mint .cover-h .kw,.v-white .cover-h .kw{color:var(--brand)}
+.alert-tab{position:absolute;top:0;left:0;background:var(--terra);color:#fff;font-size:8.5px;font-weight:700;letter-spacing:.07em;padding:3px 10px;border-radius:0 0 8px 0}
+.alert-h{font-size:15px;font-weight:700;line-height:1.16;margin-top:22px}.alert-b{font-size:10.5px;line-height:1.36;margin-top:8px;opacity:.9}
+.tplname{font-weight:600;font-size:15px;margin:22px 0 3px}.tplname span{color:var(--faint);font-weight:400;font-size:13px}
+/* foot */
+.foot{padding:34px 0 46px;color:var(--mut);font-size:13px}
+.foot img{height:22px;opacity:.7;margin-bottom:10px;display:block}
+@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+</style></head>
+<body>
+
+<header class="top"><div class="wrap">
+ <img src="img/wordmark.png" alt="CaseWhen">
+ <span class="rt">Content samples · internal preview</span>
+</div></header>
+
+<section class="hero"><div class="wrap">
+ <h1>Sample content, written the way it would actually <em>publish</em>.</h1>
+ <p>A working set: blog articles, LinkedIn posts, short-form scripts, and the visual templates. Every piece targets a real search term, is modeled on a post that already performed for another creator, and passed the language gate before it landed here. Direct, plain, one real number per piece.</p>
+ <div class="meta">
+  <span class="pill">Every piece targets a real keyword</span>
+  <span class="pill">Modeled on proven posts</span>
+  <span class="pill">Cleared the language gate</span>
+ </div>
+</div></section>
+
+<!-- BLOGS -->
+<section><div class="wrap">
+ <div class="slab">Blog articles</div>
+ <h2 class="sh">Built to be quoted by Google and by AI answers.</h2>
+ <p class="sd">A "quick answer" box the AI engine lifts, People-Also-Ask questions as headings, a real table, and a named byline. The opener names the exact problem, not a vague claim.</p>
+
+ <div class="blog">
+  <div class="cover"><div class="eb">Governance · Austin Levine</div><h3>Two people ask Power BI for "last month's revenue" and get two different numbers</h3></div>
+  <div class="body">
+   <div class="qa"><b>Quick answer.</b> A data governance framework is the written set of rules that gives every metric one definition, one owner, one place that definition lives, and one path a change takes before it reaches a live report. It stops the same metric from returning two different numbers to two people.</div>
+   <p>Here is the exact problem, with no wrapping. Two people on your finance team can open Power BI right now, both ask for last month's revenue, and get different numbers. One report counts returns and credit notes. The other does not. Both are correct. The board sees one of them, and nobody wrote down which is the reported figure. This has nothing to do with the formula, and nobody can fix it in DAX.</p>
+   <div class="q">Why does the same metric show two numbers?</div>
+   <p><b>Because two people defined it differently and nobody wrote down the correct version.</b> "Revenue last month" gets booked gross in the sales report, net of returns in finance, and by delivery date in operations. Three numbers, all calculated correctly, none agreed. When two of them reach a board meeting, the more senior person's version wins. Seniority decides the number.</p>
+   <div class="q">Do you need Microsoft Fabric to get governance right?</div>
+   <p><b>No. Fabric changes what you pay Microsoft for compute. It has no bearing on whether "revenue" has an owner.</b> Any firm that tells you the fix is a platform upgrade is selling you the upgrade.</p>
+   <div class="q">How do you know which governance stage you are at?</div>
+   <table class="tbl"><tr><th>Stage</th><th>What it looks like</th><th>The test</th></tr>
+    <tr><td>Fragile</td><td>No named owners, changes go straight to the live report</td><td>Nobody can name the owner of the board dataset</td></tr>
+    <tr><td>Functional</td><td>Owners assigned, definitions written down</td><td>A change still breaks a report nobody expected</td></tr>
+    <tr><td>Board-ready</td><td>Dev, test and live reports, versioned changes, RLS re-tested</td><td>A wrong number is caught before the board sees it</td></tr></table>
+   <p>A green status light on a report means the data loaded on schedule. It says nothing about whether the number itself is correct. We watched a board approve a cash balance three times too high under a green checkmark.</p>
+   <a class="cta" href="#">Book a fixed-price Reporting Foundation Review →</a>
+   <div class="prov"><span class="kw">🔍 "data governance framework" · 1,900 / mo · low difficulty</span><span>📈 modeled on <b>Reporting Hub</b> (ranks #1 for "governance") — question-headings, bold one-line answers</span><span>✓ Article + FAQPage schema</span></div>
+  </div>
+ </div>
+
+ <div class="blog">
+  <div class="cover"><div class="eb">KPI &amp; Datenmodellierung · Sajagan Thirugnanam</div><h3>Bedeutung KPI: eine Definition, die im Meeting standhält</h3></div>
+  <div class="body">
+   <div class="qa"><b>Quick answer.</b> Eine KPI ist eine Kennzahl mit Ziel und Besitzer. Die Bedeutung steckt nicht in der Zahl, sondern in der Definition und im Besitzer. Ohne beides berichtet jede Abteilung dieselbe KPI anders.</div>
+   <p>Der häufigste Irrtum: eine KPI ist keine Metrik ohne Ziel. "Umsatz" ist eine Metrik. "Umsatz gegen Plan pro Monat" ist eine KPI, weil ein Ziel und ein Zeitbezug dranhängen.</p>
+   <div class="q">Warum hat dieselbe KPI in drei Systemen drei Werte?</div>
+   <p><b>Weil drei Personen sie unterschiedlich definiert haben, und keine Definition ist aufgeschrieben.</b> Der "Umsatz letzter Monat" kann brutto oder netto sein, nach Rechnungs- oder Lieferdatum. Alle drei Werte sind richtig, keiner ist abgestimmt. Genau hier entsteht die falsche Zahl im Aufsichtsrat, und in Deutschland ist das eine Haftungsfrage.</p>
+   <div class="q">Wie definiert man eine KPI, die standhält?</div>
+   <p>Auf einer Seite, in fünf Feldern: Name, Formel, Quelle, Besitzer, Stand. Diese Seite ist das eigentliche Produkt. In Power BI gehört die Definition ins zentrale Datenmodell als Measure, damit jeder Bericht denselben Wert zeigt.</p>
+   <a class="cta" href="#">Reporting-Review buchen →</a>
+   <div class="prov"><span class="kw">🔍 "bedeutung kpi" · 8,100 / mo · das größte deutsche Keyword</span><span>📈 modeled on <b>Klipfolio</b>'s "What is a KPI" (definition-first, owns the term)</span><span>✓ Sie-Register · Article + FAQPage</span></div>
+  </div>
+ </div>
+</div></section>
+
+<!-- LINKEDIN -->
+<section><div class="wrap">
+ <div class="slab">LinkedIn posts</div>
+ <h2 class="sh">A flat declarative hook, one real number, one question that pulls a reply.</h2>
+ <p class="sd">The structure 63% of the outlier posts in the research used. No link in the body — that cuts reach by a third — the link goes in the first comment.</p>
+ <div class="grid2">
+
+  <div class="li"><div class="h"><img src="img/austin.jpg" alt=""><div><div class="n">Austin Levine</div><div class="t">Power BI that leaders trust · Co-Founder, CaseWhen</div></div></div>
+   <div class="b"><span class="hk">Two people pulled "revenue" from Power BI last week and got different numbers.</span>One report counted returns. The other did not. Both were correct.
+The board saw one of them, and nobody had decided which one is the reported figure.
+This has nothing to do with the formula. You cannot fix it in DAX.
+The metric has no single written definition and no owner, so two people built it two ways.
+The fix is one page per metric, and one person who decides.
+
+Open two of your reports and ask both for last month's revenue. Do the numbers match?</div>
+   <div class="f"><span class="tag t-gov">Governance</span><span>🔍 data governance · 📈 David Langer 9.4×</span></div></div>
+
+  <div class="li"><div class="h"><img src="img/austin.jpg" alt=""><div><div class="n">Austin Levine</div><div class="t">Power BI that leaders trust · Co-Founder, CaseWhen</div></div></div>
+   <div class="b"><span class="hk">Nineteen DACH Power BI firms publish zero prices. We publish ours.</span>Not banded ranges. Not a starting number. We checked.
+We publish our day rate, our fixed-project bands, and the price of the entry workshop.
+We do it because we have no reason to hide the number.
+A Controller who can see the number before the call spends the call on the work.
+
+Would a published price make you more likely to shortlist a consultancy, or less?</div>
+   <div class="f"><span class="tag t-pri">Pricing</span><span>🔍 pricing transparency · 📈 highest-comment topic</span></div></div>
+
+  <div class="li"><div class="h"><img src="img/austin.jpg" alt=""><div><div class="n">Austin Levine</div><div class="t">Power BI that leaders trust · Co-Founder, CaseWhen</div></div></div>
+   <div class="b"><span class="hk">A global manufacturer's reporting ran on legacy SSIS nobody had touched in years.</span>We rebuilt it on Azure in two fixed-price projects.
+The first, the Customer Success report: roughly ten to twelve and a half days.
+The second, the modular Azure architecture and a Power BI MVP: eighteen to twenty-two days.
+Moving the data took a few days.
+The hard part was the assumptions inside the old reports.
+You see the shape of the work before you commit.</div>
+   <div class="f"><span class="tag t-mig">Schindler · real, won</span><span>🔍 azure migration · 📈 case-study-as-pattern</span></div></div>
+
+  <div class="li"><div class="h"><img src="img/saju.jpg" alt=""><div><div class="n">Sajagan Thirugnanam</div><div class="t">Gründer, CaseWhen · Power BI für Controlling</div></div></div>
+   <div class="b"><span class="hk">Die falsche Zahl im Aufsichtsrat ist kein Formelfehler.</span>In fast jedem Review stimmt die Formel.
+Es fehlt nur der Besitzer der Definition.
+In Deutschland ist das keine IT-Frage. Es ist eine Haftungsfrage.
+Ein Besitzer pro Kennzahl. Eine schriftliche Definition. Ein Ort, an dem sie steht.
+
+Wer bei Ihnen findet zuerst heraus, dass eine Board-Zahl falsch war: Sie oder der Vorstand?</div>
+   <div class="f"><span class="tag t-gov">Governance · DE</span><span>🔍 datengovernance · 📈 Reza Rad 5.6×</span></div></div>
+
+ </div>
+</div></section>
+
+<!-- REELS -->
+<section><div class="wrap">
+ <div class="slab">Short-form scripts</div>
+ <h2 class="sh">Every script opens with a misconception that carries the search term.</h2>
+ <p class="sd">The structure that nearly doubled recall in the Veritasium study. Payoff shown in the first two seconds, one A-plot and one real client B-plot. The topic is always the reporting foundation, never a visual makeover.</p>
+
+ <div class="reel"><div class="rh">EN · "power bi licenses" — the single highest-frequency query</div>
+  <div class="rl"><b>Hook</b><span>Most people think a Power BI license is ten euros a user. For a real deployment, that is the number that gets you approved and then blown past.</span></div>
+  <div class="rl"><b>A-plot</b><span>Pro is ten euros. The moment you need shared capacity for refresh and scale, you move off the per-user plan onto a capacity, which is a separate invoice.</span></div>
+  <div class="rl"><b>B-plot</b><span>We watched a rollout get signed off on the ten-euro math, then hit a five-figure capacity in month three that nobody had budgeted.</span></div>
+  <div class="rl"><b>Close</b><span>Price the capacity before the rollout, not after.</span></div>
+  <div class="prov"><span class="kw">🔍 "power bi licenses"</span><span>📈 how.to.power.bi mistake-callout format (239k views on "ARE YOU STILL DOING THIS")</span></div></div>
+
+ <div class="reel"><div class="rh">EN · "data governance" — the no-owner gap</div>
+  <div class="rl"><b>Hook</b><span>Most teams think governance means locking down who can publish. The most common gap we find is a dataset with no owner at all.</span></div>
+  <div class="rl"><b>A-plot</b><span>Open your workspace settings. If the dataset owner is blank, nobody is responsible when the number is wrong, and nobody gets the alert when the refresh stops.</span></div>
+  <div class="rl"><b>B-plot</b><span>In a first audit this year, the no-owner dataset showed up before anything else, every single time.</span></div>
+  <div class="rl"><b>Close</b><span>Two-minute fix, and almost nobody does it.</span></div>
+  <div class="prov"><span class="kw">🔍 "data governance"</span><span>📈 mistake-callout — the practitioner-correction driver</span></div></div>
+
+ <div class="reel"><div class="rh">DE · "power bi grundlagen" — the single highest-frequency German query</div>
+  <div class="rl"><b>Hook</b><span>Die meisten fangen bei Power BI mit dem Bericht an. Der Schritt, den fast alle überspringen, ist das Modell, und genau dort entsteht später die falsche Zahl.</span></div>
+  <div class="rl"><b>A-plot</b><span>Power BI hat drei Ebenen: Datenquelle, Modell, Bericht. Der Bericht ist nur so gut wie das Modell darunter.</span></div>
+  <div class="rl"><b>B-plot</b><span>Ein schöner Bericht auf einem Modell mit drei Umsatzdefinitionen. Alle drei erscheinen, je nach Filter.</span></div>
+  <div class="rl"><b>Close</b><span>Erst das Modell, dann der Bericht.</span></div>
+  <div class="prov"><span class="kw">🔍 "power bi grundlagen"</span><span>📈 DE "einfach erklärt" comprehension format · money-framed, no comment-to-DM</span></div></div>
+</div></section>
+
+<!-- TEMPLATES -->
+<section><div class="wrap">
+ <div class="slab">Visual templates</div>
+ <h2 class="sh">Twelve templates, so the audience is everyone — not only the buyer who searches.</h2>
+ <p class="sd">SEO reaches the person already searching. The bigger reach comes from framing the same expertise so anyone who reports a number can watch it. The four colour variants rotate across the week so the feed reads as one brand. Real gated copy in each.</p>
+
+ <div class="tplname">Quote cards <span>· a founder line, fans out to four platforms — the cheapest reach you have</span></div>
+ <div class="row">
+  <div class="frame p45 v-mint"><div class="in"><div class="eb">Governance</div><div class="qmark">"</div><div class="qtext">Two people pulled "revenue" from Power BI and got different numbers. Both were right.</div><div class="qattr"><img src="img/austin.jpg" alt=""><div><div class="an">Austin Levine</div><div class="al">Co-Founder, CaseWhen</div></div></div></div></div>
+  <div class="frame p45 v-dark"><div class="in"><div class="eb">Controlling · DE</div><div class="qmark">"</div><div class="qtext">Eine falsche Zahl im Aufsichtsrat ist eine Haftungsfrage, keine IT-Frage.</div><div class="qattr"><img src="img/saju.jpg" alt=""><div><div class="an">Sajagan Thirugnanam</div><div class="al">Gründer, CaseWhen</div></div></div></div></div>
+  <div class="frame p45 v-base"><div class="in"><div class="eb">Pricing</div><div class="qmark">"</div><div class="qtext">Ten euros a user is the price that gets a rollout approved, then blown past.</div><div class="qattr"><img src="img/austin.jpg" alt=""><div><div class="an">Austin Levine</div><div class="al">Co-Founder, CaseWhen</div></div></div></div></div>
+  <div class="frame p45 v-white"><div class="in"><div class="eb">Governance</div><div class="qmark">"</div><div class="qtext">A green checkmark means the refresh ran. Whether the number is right is a separate question.</div><div class="qattr"><img src="img/austin.jpg" alt=""><div><div class="an">Austin Levine</div><div class="al">Co-Founder, CaseWhen</div></div></div></div></div>
+ </div>
+
+ <div class="tplname">Checklist carousel <span>· "5 signs…", the save-and-share format</span></div>
+ <div class="row">
+  <div class="frame p45 v-dark"><div class="in"><div class="eb">Governance</div><div class="cover-h">5 signs your Power BI numbers won't survive a board review</div><div class="cwm"><img src="img/icon.png" alt="">swipe →</div></div></div>
+  <div class="frame p45 v-white"><div class="in"><div class="chk"><div class="cn">1</div><div class="ci">Nobody can name the owner of the board dataset.</div></div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
+  <div class="frame p45 v-mint"><div class="in"><div class="chk"><div class="cn">2</div><div class="ci">The same metric shows two numbers in two reports.</div></div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
+  <div class="frame p45 v-white"><div class="in"><div class="chk"><div class="cn">4</div><div class="ci">Row-level security has not been re-tested since the rollout.</div></div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
+ </div>
+
+ <div class="tplname">Stat-reveal &amp; comparison <span>· one number, or myth vs reality</span></div>
+ <div class="row">
+  <div class="frame p45 v-dark"><div class="in"><div class="eb">Search demand</div><div class="big" style="margin-top:auto">1,900</div><div class="stat-l">people a month search "data governance framework". The top results name zero owners.</div><div class="cwm"><img src="img/icon.png" alt="">swipe →</div></div></div>
+  <div class="frame p45 v-base"><div class="in"><div class="eb">Pricing</div><div class="big" style="margin-top:auto">0 of 19</div><div class="stat-l">DACH Power BI firms publish a price. We publish ours.</div><div class="cwm"><img src="img/icon.png" alt="">swipe →</div></div></div>
+  <div class="frame p45 v-split"><div class="in" style="color:#fff"><div class="sph" style="color:#eafaf5">Myth</div><div class="spt" style="color:#eafaf5;max-width:44%">A Tableau migration means rebuilding from zero.</div><div class="sph" style="color:var(--dark);position:absolute;right:16px;top:17px;text-align:right;width:44%">Reality</div><div class="spt" style="color:var(--dark);position:absolute;right:16px;top:42px;width:44%">Most calculations transfer. The row-level security does not, and nobody checks.</div></div></div>
+  <div class="frame p45 v-split"><div class="in" style="color:#fff"><div class="sph" style="color:#eafaf5">Myth</div><div class="spt" style="color:#eafaf5;max-width:44%">Fabric is a Power BI upgrade.</div><div class="sph" style="color:var(--dark);position:absolute;right:16px;top:17px;text-align:right;width:44%">Reality</div><div class="spt" style="color:var(--dark);position:absolute;right:16px;top:42px;width:44%">Fabric is the compute layer. Your reports are only as good as the model under them.</div></div></div>
+ </div>
+
+ <div class="tplname">Framework &amp; news alert <span>· the explainer, and a Microsoft release reacted to same-day</span></div>
+ <div class="row">
+  <div class="frame p45 v-dark"><div class="in"><div class="cover-h" style="margin-top:0">A <span class="kw">governed metric</span>, in 4 steps</div>
+   <div class="step"><span class="sn">1</span><span>One written definition: name, formula, source.</span></div>
+   <div class="step"><span class="sn">2</span><span>One named owner.</span></div>
+   <div class="step"><span class="sn">3</span><span>One place the definition lives.</span></div>
+   <div class="step"><span class="sn">4</span><span>One approval path before a change goes live.</span></div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
+  <div class="frame land v-white" style="height:298px"><span class="alert-tab">CaseWhen alert</span><div class="in"><div class="alert-h" style="margin-top:24px">Microsoft is raising Power BI Pro to fourteen dollars a seat.</div><div class="alert-b">A 400-seat estate just moved 19,200 dollars a year, and most of those seats only ever open two reports. Pull your usage metrics before the renewal, not after.</div><div class="cwm"><img src="img/icon.png" alt="">Source: casewhen.co/blog</div></div></div>
+  <div class="frame p45 v-mint"><div class="in"><div class="cover-h" style="margin-top:0">Microsoft <span class="kw">Fabric</span>, in 4 layers</div>
+   <div class="step"><span class="sn">1</span><span>OneLake — one copy of the data.</span></div>
+   <div class="step"><span class="sn">2</span><span>Lakehouse and Warehouse — how you query it.</span></div>
+   <div class="step"><span class="sn">3</span><span>Direct Lake — reports read data without an import.</span></div>
+   <div class="step"><span class="sn">4</span><span>Capacity and governance — the part that sets your bill.</span></div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
+ </div>
+
+ <div class="tplname">Blog covers <span>· the header on every article · 1200 × 630</span></div>
+ <div class="row">
+  <div class="frame land v-dark"><div class="in"><div class="eb">Governance</div><div class="cover-h">The same metric shows two numbers. That is a <span class="kw">governance problem</span>.</div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
+  <div class="frame land v-mint"><div class="in"><div class="eb">Pricing</div><div class="cover-h">Power BI Pro cost: <span class="kw">the real number</span> nobody publishes.</div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
+ </div>
+ <p class="fade">Also built, not shown here: the stat-reveal and framework body slides, the 9:16 infographic, digest, story and meme frames, profile banners for all seven platforms, and the Clutch award banners. Display type is Sharp Sans No. 2; everything else is Neue Montreal, the fonts shown on this page.</p>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+ <img src="img/wordmark.png" alt="CaseWhen">
+ Sample content · every piece targets a real search term, is modeled on a post that already performed, and cleared the language gate. Nothing here is invented.
+</div></footer>
+
+</body></html>
