@@ -710,6 +710,111 @@ written posts, and each slide carries one real, concrete specific.</p></div></se
 </div>"""
     (OUT / "visuals.html").write_text(shell("visuals.html", "Visuals", body), encoding="utf-8")
 
+BLOGDIR = Path(r"J:\Claude Code\casewhen-research\content\w-batch03-blogs")
+
+def _fm_body(md):
+    fm = {}; body = md
+    if "---" in md:
+        head, _, rest = md.partition("---")
+        for ln in head.splitlines():
+            m = re.match(r"^([A-Za-z][\w ()',.&/-]*?):\s*(.*)$", ln)
+            if m: fm[re.sub(r"\s*\(.*?\)", "", m.group(1)).strip().upper()] = m.group(2).strip()
+        body = rest
+    return fm, body
+
+def article_chart(kw):
+    k = (kw or "").lower()
+    if any(w in k for w in ["train","cert","course","class","tutorial","learn","schulung"]):
+        title, src = "Business spreadsheets used in decision-making", "Poon et al. (peer-reviewed), 2024"
+        data = [("Error-free", 6, "6%"), ("Contain errors", 94, "94%")]
+    elif any(w in k for w in ["pric","licens","cost"," pro","premium","capacity"]):
+        title, src = "Power BI Pro list price, per user per month", "Microsoft, 2025 price update"
+        data = [("2024", 10, "$10"), ("2025", 14, "$14")]
+    elif any(w in k for w in ["azure","fabric","migration","datenmodell","modellierung","onelake"]):
+        title, src = "Organizations with data good enough to use for AI", "Precisely & Drexel LeBow, 2025"
+        data = [("Ready", 12, "12%"), ("Not ready", 88, "88%")]
+    elif any(w in k for w in ["kpi","governance","trust","definition","dashboard","reporting","daten"]):
+        title, src = "Organizations that fully trust their data", "Precisely & Drexel LeBow, 2025"
+        data = [("Trust it", 33, "33%"), ("Do not", 67, "67%")]
+    else:
+        title, src = "Regular business decisions made on gut feel, not data", "BARC"
+        data = [("On data", 42, "42%"), ("On gut feel", 58, "58%")]
+    maxv = max(v for _, v, _ in data)
+    bars = "".join(f'<div class="cbar"><span class="cl">{esc(l)}</span><div class="ctrack">'
+                   f'<div class="cfill" style="width:{int(v/maxv*100)}%"></div></div>'
+                   f'<span class="cv">{esc(d)}</span></div>' for l, v, d in data)
+    return f'<figure class="achart"><figcaption>{esc(title)}</figcaption>{bars}<div class="csrc">Source: {esc(src)}</div></figure>'
+
+ARTCSS = """
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid cover cards */
+.bgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcov{display:block;text-decoration:none;border-radius:14px;overflow:hidden;background:var(--dark);color:#eafaf5;min-height:200px;padding:20px;position:relative;transition:transform .14s,box-shadow .14s}
+.bcov:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(17,73,63,.18)}
+.bcov .eb{font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--mid)}
+.bcov h3{font-size:19px;line-height:1.15;margin:8px 0 0;color:#fff;letter-spacing:-.01em}
+.bcov h3 .kw{color:var(--mid)}
+.bcov .rd{position:absolute;bottom:16px;left:20px;font-size:11.5px;color:#9fc2b8}
+@media(max-width:820px){.bgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.bgrid{grid-template-columns:1fr}}
+"""
+
+def blog_articles_and_grid():
+    files = sorted(BLOGDIR.glob("*.md"))
+    cards = []
+    for f in files:
+        md = f.read_text(encoding="utf-8"); fm, body = _fm_body(md)
+        kw = (fm.get("KEYWORD", "").split("|")[0]).strip()
+        h1 = fm.get("H1", "") or fm.get("META_TITLE", "")
+        cluster = fm.get("CLUSTER", "") or ("KPI" if "kpi" in kw.lower() else "Power BI")
+        art = md_to_html(md)
+        # insert the chart right after the Quick Answer box (or after H1)
+        chart = article_chart(kw)
+        if 'class="qa"' in art:
+            art = re.sub(r'(</div>)', r'\1' + chart, art, count=1)
+        else:
+            art = re.sub(r'(</h1>)', r'\1' + chart, art, count=1)
+        # keyword / GEO section
+        bl = body.lower(); words = re.findall(r"[a-z0-9']+", bl)
+        secs = [s.strip() for s in re.split(r"·|\|", fm.get("SECONDARY", "")) if s.strip()]
+        placements = [n for n, ok in [
+            ("meta title", kw.lower() in fm.get("META_TITLE", "").lower()),
+            ("H1", kw.lower() in h1.lower()),
+            ("first 100 words", kw.lower() in " ".join(words[:100])),
+            ("an H2", any(kw.lower() in l.lower() for l in body.splitlines() if l.strip().startswith("## "))),
+            ("meta description", kw.lower() in fm.get("META_DESC", fm.get("META", "")).lower()),
+            ("URL slug", kw.lower().replace(" ", "-") in fm.get("SLUG", "").lower()),
+        ] if ok]
+        geo = (f'<div class="geo"><h3>Keywords this article targets</h3>'
+               f'<div class="chips"><span class="c" style="background:var(--dark);color:#fff">{esc(kw)}</span>'
+               + "".join(f'<span class="c">{esc(s)}</span>' for s in secs) + '</div>'
+               f'<div class="plc">' + "".join(f'<span class="p">{p}</span>' for p in placements) + '</div>'
+               f'<p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), '
+               f'it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div>')
+        inner = f'<section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">\u2190 all articles</a></div></section><div class="wrap article-wrap">{art}{chart if False else ""}{geo}</div>'
+        (OUT / f"{f.stem}.html").write_text(shell(f"{f.stem}.html", h1[:60], f"<style>{ARTCSS}</style>{inner}"), encoding="utf-8")
+        two = h1.split(":", 1)
+        htitle = (f'{esc(two[0])}<span class="kw">{esc(":"+two[1]) if len(two)>1 else ""}</span>') if two else esc(h1)
+        cards.append(f'<a class="bcov" href="{f.stem}.html"><div class="eb">{esc(cluster)}</div><h3>{htitle}</h3><div class="rd">Read the full article \u2192</div></a>')
+    grid = f'<section class="ph"><div class="wrap"><div class="eb">Blog</div><h2>{len(files)} full articles, written and gated</h2><p style="color:var(--mut);font-size:15px;margin:10px 0 0">One English article a day plus three German a week. Click any cover to read the finished, SEO-optimized article, each with a chart and the keywords it targets.</p></div></section><div class="wrap"><div class="bgrid">{"".join(cards)}</div></div>'
+    (OUT / "blog.html").write_text(shell("blog.html", "Blog", f"<style>{ARTCSS}</style>{grid}"), encoding="utf-8")
+    return len(files)
+
 def home():
     cards = ""
     for k, cfg in PLATFORMS.items():
@@ -733,6 +838,8 @@ visuals_page()
 tot = don = 0
 for k, cfg in PLATFORMS.items():
     n, d = platform_page(k, cfg); tot += n; don += d
+nblogs = blog_articles_and_grid()   # overwrite blog.html with the full-article grid
+print(f"blog articles assembled: {nblogs}")
 print(f"built index + {len(PLATFORMS)} platform pages · {tot} slots scheduled · {don} finished/gated")
 for k, cfg in PLATFORMS.items():
     print(f"  {k:10} {len(cfg['slots'])} posts")

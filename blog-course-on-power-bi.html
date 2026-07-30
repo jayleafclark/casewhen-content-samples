@@ -1,0 +1,142 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · A course on Power BI teaches the buttons. Here is what it le</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid cover cards */
+.bgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcov{display:block;text-decoration:none;border-radius:14px;overflow:hidden;background:var(--dark);color:#eafaf5;min-height:200px;padding:20px;position:relative;transition:transform .14s,box-shadow .14s}
+.bcov:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(17,73,63,.18)}
+.bcov .eb{font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--mid)}
+.bcov h3{font-size:19px;line-height:1.15;margin:8px 0 0;color:#fff;letter-spacing:-.01em}
+.bcov h3 .kw{color:var(--mid)}
+.bcov .rd{position:absolute;bottom:16px;left:20px;font-size:11.5px;color:#9fc2b8}
+@media(max-width:820px){.bgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>course on power bi</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Business spreadsheets used in decision-making</figcaption><div class="cbar"><span class="cl">Error-free</span><div class="ctrack"><div class="cfill" style="width:6%"></div></div><span class="cv">6%</span></div><div class="cbar"><span class="cl">Contain errors</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">94%</span></div><div class="csrc">Source: Poon et al. (peer-reviewed), 2024</div></figure><h1>A course on Power BI teaches the buttons. Here is what it leaves out.</h1><div class="qa"><b>Quick answer.</b> A course on Power BI is worth it if it makes you build a real report instead of watching one. The best option in 2026 is a project-based course aligned to the PL-300 exam. Expect four to eight weeks part time. Judgment about what a number means still comes from real work.</div><p>Most people choose a course on Power BI by two numbers: the price and the length. Those two numbers tell you the least about whether the course will get you hired. A cheap 40-hour course that has you build three real reports beats an expensive 8-hour course that has you watch someone else click through menus. What matters is how much you build with your own hands, and whether anyone checks that the number you produced is correct.</p><p>So this guide does three things. It shows what a course on Power BI should teach and in what order, it helps you pick one in 2026 without wasting a month on the wrong track, and it is honest about the one skill no course can hand you, because that skill is what separates a report a board trusts from one it sets aside.</p><h2>What does a good course on Power BI cover?</h2><p>A report goes through the same four stages every time, and a good course walks you through all four in order. Skip a stage and the report breaks later, usually at month-end when someone senior is reading it.</p><ol><li>Get the data in and clean it. This happens in Power Query. Most report errors are born here, in the step where you fix column types, remove duplicate rows, and merge tables. A course that spends only ten minutes on Power Query is skipping the part where the real work lives.</li><li>Build the data model. You connect your tables with relationships and write measures in DAX. This is the stage that decides whether a total adds up right or reports a number three times too high with no warning light.</li><li>Build the report pages. You pick visuals, add slicers, and set up drill-through so a reader can click a bar and see the detail behind it.</li><li>Publish and secure it. You send the report to a workspace, set up row-level security so each person sees only their own data, and schedule a refresh so the numbers stay current.</li></ol><p>A weekend Power BI tutorial on YouTube can show you stage three, the pretty part, in an hour. The stages that get you hired are one and two, and those are the ones a real course on Power BI makes you practice until they are automatic.</p><h2>Which course on Power BI should you pick?</h2><p>Pick by the exam it aligns to and the amount of hands-on building it asks of you. In 2026 the exam that carries weight is the PL-300, listed by Microsoft as the Power BI Data Analyst Associate. A course that maps to the PL-300 covers the four stages above because the exam tests all four, including a live hands-on section you cannot pass by watching.</p><p>Here is how the common options compare, so you can match one to where you are starting from.</p><table><tr><th>Option</th><th>Cost</th><th>Best for</th><th>Watch out for</th></tr><tr><td>Microsoft Learn (free)</td><td>Free</td><td>A first tutorial for Power BI before you spend money</td><td>You have to keep yourself moving; no one checks your work</td></tr><tr><td>Coursera or Udemy courses for Power BI</td><td>Low, often under 100 dollars</td><td>Structured self-paced study toward the PL-300</td><td>Some are years out of date and still teach the retired DA-100</td></tr><tr><td>Live instructor course on Power BI</td><td>Higher</td><td>People who need a schedule and someone to ask</td><td>Quality swings a lot by instructor; ask to see a syllabus</td></tr><tr><td>A session on your own reports</td><td>Fixed price</td><td>Teams that already have Power BI and want it done right</td><td>Not a substitute for exam prep if you need the badge itself</td></tr></table><p>The free Microsoft Learn path is a solid place to start, and there is no reason to pay for a course until you have finished it and know Power BI is for you. When you do pay, pick a course that assigns projects, not one that only assigns videos.</p><h2>How long does a course on Power BI take?</h2><p>The honest answer depends on what you already know. A course sells you a run time. Your real time is that run time plus the hours you spend building on your own, and the second number is bigger.</p><p>If you use Power BI at work most weeks, four to six weeks part time is enough to be ready for the PL-300. If you know Excel well but have barely opened Power BI, plan for eight to ten weeks, and spend the first three on Power Query and the data model before you touch a single chart. If you are new to data reporting, three to four months part time is realistic, and you should learn the model first, because a tutorial for Power BI that starts with dashboards teaches you to decorate a number before you know whether the number is right.</p><p>The section that trips everyone up is DAX. You can learn the syntax in a weekend. Learning why a measure returns the wrong figure inside a specific filter takes weeks of real reps, and both the exam and the job test exactly that.</p><h2>Do employers care which course on Power BI you took?</h2><p>Less than you think. In an interview, the name of your course gets about six seconds of attention. What earns the offer is your ability to open a messy file, build a small model, and explain clearly why your total is correct. No hiring manager has ever been won over by a certificate of completion alone.</p><p>This is why a project-based course beats a lecture-based one for getting hired. When you finish a course that made you build three reports, you walk into the interview with three reports you can talk through. When you finish a course that only made you watch, you have a certificate and no story. Save every file you build, because those files are the real portfolio, and they matter more than the logo on your course.</p><h2>What can no course on Power BI give you?</h2><p>Judgment about what a number should mean. A course teaches you to produce a number. It cannot teach you to decide, when the sales team counts a signed order and the finance team counts an invoiced one, which count belongs in the board report. Both teams are right, and their two reports disagree every single month. Resolving that is a definition decision made with people, and no DAX function settles it.</p><p>This gap is not small. Peer-reviewed work found that 94% of business spreadsheets used in decision-making contain errors (Poon et al., 2024). Power BI removes some of those errors and adds new ways to be confidently wrong, because a wrong measure refreshes on a green light and looks trustworthy. We have reviewed reports built by course graduates that summed every month&#x27;s closing cash balance instead of taking the final month, and reported a figure three times too high under that green light. The DAX was clean. The judgment about what the number meant was missing, and that judgment is most of the job.</p><p>So treat any course on Power BI as step one. Finish it, get certified if the badge helps you get shortlisted, then get real reps on real data, ideally next to someone who has done the work before and will tell you when your number is off.</p><h2>How CaseWhen approaches this</h2><p>We do not run a certification mill and we will not sell you a video library. When a team already has Power BI and wants to be excellent at it, we run a short, fixed-price session on the team&#x27;s own reports. People learn the model, the definitions, and the review habits on the exact data they use every week. A course teaches you to press the buttons. Two days on your own board pack teaches the judgment that keeps the numbers trusted after you publish them.</p><h2>Frequently asked questions</h2><p>Is a course on Power BI worth it in 2026? Yes, if it is project-based and aligned to the PL-300. Start with the free Microsoft Learn path before you pay for anything.</p><p>What is the best free course on Power BI? Microsoft Learn is the strongest free starting point, and it maps directly to the current PL-300 exam topics.</p><p>Are Udemy or Coursera courses for Power BI any good? Some are excellent and some are years out of date. Check the last-updated date and make sure it teaches the PL-300, not the retired DA-100.</p><p>How long before I can build a real report? With steady part-time study, most people build a trustworthy small report within four to eight weeks, sooner if they already use Excel heavily.</p><p>Do I need a course to learn Power BI? No, a free tutorial for Power BI can get you started, but a structured course keeps you moving and covers Power Query and the data model, the two areas beginners skip.</p><p>Read next: our pillar guide to Power BI training without the sales pitch, and our straight take on whether a Power BI certification gets you hired. Save your project files either way, because those files are the portfolio that gets the interview.</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">course on power bi</span><span class="c">courses for power bi</span><span class="c">power bi tutorial</span><span class="c">tutorial for power bi</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+</body></html>

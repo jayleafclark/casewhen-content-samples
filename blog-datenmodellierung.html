@@ -1,0 +1,148 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Datenmodellierung: warum Ihr Power-BI-Bericht die falschen Z</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid cover cards */
+.bgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcov{display:block;text-decoration:none;border-radius:14px;overflow:hidden;background:var(--dark);color:#eafaf5;min-height:200px;padding:20px;position:relative;transition:transform .14s,box-shadow .14s}
+.bcov:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(17,73,63,.18)}
+.bcov .eb{font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--mid)}
+.bcov h3{font-size:19px;line-height:1.15;margin:8px 0 0;color:#fff;letter-spacing:-.01em}
+.bcov h3 .kw{color:var(--mid)}
+.bcov .rd{position:absolute;bottom:16px;left:20px;font-size:11.5px;color:#9fc2b8}
+@media(max-width:820px){.bgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article"><div class="fm"><b>Sajagan Thirugnanam, CaseWhen</b><span>datenmodellierung</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Organizations with data good enough to use for AI</figcaption><div class="cbar"><span class="cl">Ready</span><div class="ctrack"><div class="cfill" style="width:13%"></div></div><span class="cv">12%</span></div><div class="cbar"><span class="cl">Not ready</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">88%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><h1>Datenmodellierung: warum Ihr Power-BI-Bericht die falschen Zahlen zeigt</h1><div class="qa"><b>Quick answer.</b> </div><p>Datenmodellierung ist die Art, wie Sie Ihre Daten in Power BI auf Tabellen und Beziehungen verteilen, bevor Sie eine Kennzahl bauen. Ein sauberes Modell, meist ein Sternschema aus einer Faktentabelle und mehreren Dimensionen, sorgt dafür, dass jede KPI im Bericht dieselbe Zahl zeigt und die Aktualisierung schnell bleibt.
+---</p><p>94 Prozent der Tabellen, die in Entscheidungen einfließen, enthalten Fehler (Poon et al., 2024). Wenn Ihre KPIs im Bericht nicht zusammenpassen, liegt die Ursache meist eine Ebene tiefer, in der Datenmodellierung. Hier sind die Schritte, mit denen wir das in Power BI beheben.</p><p>Die meisten Teams merken das Problem erst spät. Der Umsatz auf der Startseite weicht um ein paar Prozent von der Zahl im Detailbericht ab. Im Aufsichtsrat fragt jemand nach, und niemand kann in dem Moment erklären, welche Zahl stimmt. Das ist selten ein Fehler in der Formel. Es ist fast immer der Aufbau der Daten dahinter.</p><h2>Was ist Datenmodellierung in Power BI eigentlich?</h2><p>Datenmodellierung heißt, Ihre Daten in mehrere verbundene Tabellen aufzuteilen, statt alles in eine große Tabelle zu kippen. In Power BI sehen Sie das in der Modellansicht: Kästchen für jede Tabelle, Linien für jede Beziehung.</p><p>Der bewährte Aufbau ist das Sternschema. In der Mitte steht eine Faktentabelle mit den Vorgängen, zum Beispiel jede einzelne Bestellung oder Rechnung. Darum herum liegen Dimensionstabellen mit den beschreibenden Angaben: Kunde, Produkt, Datum, Region. Jede Dimension ist über eine 1-zu-n-Beziehung mit der Faktentabelle verbunden.</p><p>Warum dieser Umweg über mehrere Tabellen? Weil Power BI genau dafür gebaut ist. Die Engine rechnet schneller, die Filter fließen sauber in eine Richtung, und Ihre Kennzahlen bleiben eindeutig. Ein Modell, das dem Sternschema folgt, ist der Unterschied zwischen einem Bericht, dem der Vorstand glaubt, und einem, den jeder noch einmal in Excel nachrechnet.</p><h2>Warum zeigt Ihr Bericht im Aufsichtsrat die falschen Zahlen?</h2><p>67 Prozent der Organisationen vertrauen den Daten, mit denen sie Entscheidungen treffen, nicht vollständig (Drexel LeBow und Precisely, 2025). Bei falschen Zahlen im Bericht stecken fast immer die gleichen drei Ursachen im Datenmodell.</p><p>Erstens: eine einzige große flache Tabelle. Wenn Kunden-, Produkt- und Umsatzdaten in einer Tabelle liegen, wiederholen sich die Angaben in jeder Zeile. Zählen Sie dann die Kunden, zählen Sie in Wahrheit Bestellzeilen. Die Zahl ist zu hoch, und keiner sieht sofort, warum.</p><p>Zweitens: bidirektionale Filter. Power BI erlaubt, dass Filter in beide Richtungen laufen. Das wirkt bequem, führt aber bei mehreren Tabellen zu mehrdeutigen Ergebnissen, die je nach Reihenfolge der Filter anders ausfallen. Dieselbe Kennzahl liefert an zwei Stellen zwei Werte.</p><p>Drittens: unterschiedliche Granularität. Eine Tabelle liegt auf Tagesebene, die andere auf Monatsebene. Verbinden Sie beide ohne Zwischenschritt, vervielfacht sich die Zahl beim Zusammenführen. Schlechte Datenqualität kostet Organisationen im Schnitt 12,9 Millionen US-Dollar pro Jahr (Gartner), und ein großer Teil davon entsteht genau an solchen Stellen.</p><h2>Wie bauen Sie ein sauberes Sternschema in Power BI?</h2><p>Ein Sternschema entsteht in klaren Schritten. Sie können heute damit anfangen.</p><ol><li>Faktentabelle festlegen. Suchen Sie die Tabelle mit den Vorgängen, die Sie messen wollen: Bestellungen, Rechnungen, Buchungen. Jede Zeile ist ein Ereignis. Zahlen wie Menge und Betrag bleiben hier.</li><li>Dimensionen abtrennen. Ziehen Sie Kunde, Produkt und Region in eigene Tabellen. Das geht in Power Query über &quot;Verweis&quot; und das Entfernen doppelter Zeilen, sodass jede Dimension jeden Eintrag nur einmal enthält.</li><li>Beziehungen als 1-zu-n anlegen. Verbinden Sie jede Dimension mit der Faktentabelle. Die Filterrichtung stellen Sie auf &quot;einfach&quot;, nicht auf beide Richtungen.</li><li>Eine Datumstabelle bauen und markieren. Legen Sie eine eigene Kalendertabelle an und wählen Sie &quot;Als Datumstabelle markieren&quot;. Erst dann arbeiten Zeitfunktionen in DAX wie erwartet.</li><li>Kennzahlen als Measures schreiben. Definieren Sie KPIs als DAX-Measures, etwa `Umsatz = SUM(Fakten[Betrag])`, statt als berechnete Spalten. Measures rechnen im Kontext des Berichts und belasten das Modell weniger.</li><li>Große Faktentabellen inkrementell aktualisieren. Ab einigen Millionen Zeilen richten Sie eine inkrementelle Aktualisierung mit den Parametern RangeStart und RangeEnd ein. Power BI lädt dann nur die neuen Tage nach, statt jedes Mal alles.</li></ol><p>Nach diesen Schritten zeigt jede Kennzahl an jeder Stelle denselben Wert, und die Aktualisierung dauert Sekunden statt Minuten.</p><h2>Wann brauchen Sie ein relationales Datenmodell statt einer großen Tabelle?</h2><p>Ein relationales Datenmodell verteilt die Daten auf mehrere Tabellen, die über Schlüsselspalten verbunden sind. Genau das ist ein Sternschema in Power BI. Die Frage ist also weniger, ob Sie es brauchen, sondern wie streng Sie es ziehen.</p><p>Eine große flache Tabelle reicht, wenn Sie einen kleinen, einmaligen Bericht bauen und die Daten schon sauber auf einer Ebene liegen. Sobald mehr als eine Quelle dazukommt, sobald Sie über Zeiträume vergleichen oder sobald mehrere Personen dieselben Zahlen sehen sollen, brauchen Sie den relationalen Aufbau.</p><p>Ein Sonderfall sind n-zu-n-Beziehungen, etwa wenn ein Produkt zu mehreren Kategorien gehört. Statt die Filter in beide Richtungen zu öffnen, legen Sie eine Brückentabelle an, die jede gültige Kombination einmal enthält. So bleibt die Filterrichtung eindeutig.</p><h2>Wie kommen Sie von einem Excel-Dashboard zu einem echten Datenmodell?</h2><p>Viele Teams starten mit einer Datei, die über Jahre gewachsen ist. Die Suche nach Dashboard KPI Excel führt fast immer zu derselben Ursache: verschachtelte Formeln, verbundene Zellen und kopierte Bereiche, die niemand mehr prüfen kann. Das erklärt, warum 94 Prozent dieser Tabellen Fehler enthalten (Poon et al., 2024).</p><p>Der Weg heraus ist überschaubar und beginnt mit sauberer Datenmodellierung. Sie importieren die Excel-Datei über Power Query in Power BI, trennen die Rohdaten von den Berechnungen und bauen darüber ein Sternschema. Die Formeln, die in Excel über Hunderte Zellen verteilt waren, werden zu wenigen DAX-Measures an einer Stelle. Ändert sich die Definition einer KPI, ändern Sie sie einmal, und der ganze Bericht folgt.</p><p>Die folgende Tabelle zeigt, was sich dabei ändert.</p><table><tr><th>Merkmal</th><th>Große flache Tabelle oder Excel</th><th>Sternschema in Power BI</th></tr><tr><td>Aktualisierung</td><td>manuell, oft fehleranfällig</td><td>automatisch, inkrementell</td></tr><tr><td>Kennzahl-Definition</td><td>in vielen Zellen verstreut</td><td>ein DAX-Measure</td></tr><tr><td>Filter</td><td>mehrdeutig, je nach Reihenfolge</td><td>eindeutig, eine Richtung</td></tr><tr><td>Kundenzahl zählen</td><td>zählt Zeilen doppelt</td><td>zählt jeden Kunden einmal</td></tr><tr><td>Board-Bericht</td><td>wird nachgerechnet</td><td>wird geglaubt</td></tr></table><p>Power BI wird heute von mehr als 375.000 Organisationen genutzt (Microsoft). Der gemeinsame Nenner der Berichte, denen Vorstände vertrauen, ist fast immer ein sauberes Modell darunter.</p><h2>Was passiert, wenn Sie die Datenmodellierung überspringen?</h2><p>Kurzfristig sieht der Bericht fertig aus. Die Kacheln füllen sich, die Farben stimmen, das Dashboard geht raus. Die Rechnung kommt später: bei der ersten Nachfrage im Aufsichtsrat, beim ersten Monatsabschluss, der zwei Zahlen für denselben Umsatz zeigt.</p><p>Dann beginnt die teure Phase. Jemand baut Prüftabellen in Excel, um dem eigenen Bericht zu misstrauen. Meetings drehen sich um die Frage, welche Zahl gilt, statt um die Entscheidung dahinter. Wer die Datenmodellierung von Anfang an ernst nimmt, spart sich genau diese Runden.</p><h2>Häufige Fragen</h2><p>Wie hängen Datenmodell und Bericht zusammen?
+Das Datenmodell ist der Aufbau darunter: die Tabellen, Beziehungen und Kennzahlen. Der Bericht ist die sichtbare Seite mit den Diagrammen. Ein guter Bericht auf einem schlechten Modell zeigt trotzdem falsche Zahlen, deshalb ist die Datenmodellierung der wichtigere Teil der Arbeit.</p><p>Brauche ich für ein Sternschema eine Datenbank?
+Nein. Sie bauen das Sternschema direkt in Power BI mit Power Query und der Modellansicht. Für sehr große Datenmengen lohnt sich später eine Quelle wie ein Data Warehouse oder Microsoft Fabric, das Grundprinzip bleibt gleich.</p><p>Wie viele Tabellen sollte ein Modell haben?
+So wenige wie möglich, so viele wie nötig. Eine Faktentabelle und drei bis sechs Dimensionen decken die meisten Berichte ab. Zu viele Tabellen machen das Modell unübersichtlich, eine einzige flache Tabelle macht die Kennzahlen unzuverlässig.</p><p>Kann ich mein bestehendes Excel-Modell weiterverwenden?
+Ja, als Startpunkt. Verbinden Sie die Datei über Power Query, trennen Sie Rohdaten von Berechnungen und bauen Sie das relationale Datenmodell darüber neu auf. Die alte Datei bleibt als Referenz erhalten.</p><p>Was ist eine gute Reihenfolge zum Lernen?
+Erst das Sternschema verstehen, dann Beziehungen und Filterrichtung, dann DAX-Measures. Wer diese drei Punkte sicher beherrscht, baut Berichte, die im Aufsichtsrat standhalten.</p><p>Weiterlesen: [KPI-Dashboard: ein echtes Beispiel](/blog/blog-kpi-dashboard) und [Sternschema: Grundlagen](/blog/blog-sternschema).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">datenmodellierung</span><span class="c">relationale datenmodell</span><span class="c">sternschema</span><span class="c">dashboard kpi excel</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+</body></html>
