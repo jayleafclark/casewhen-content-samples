@@ -126,6 +126,7 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 /* post cards */
 .days{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;padding:24px 0 60px}
 .card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column}
+.card.full{grid-column:1/-1}
 .card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
 .day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
 .lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
@@ -142,6 +143,28 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 .done .close{margin-top:10px;color:var(--dark);font-weight:500}
 .done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
 .foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
 @media(max-width:760px){
  .cad{grid-template-columns:repeat(2,1fr)}
@@ -169,6 +192,63 @@ finished post clears the ship gate (plain language, a concrete specific, externa
 per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
 </body></html>"""
 
+CONTENT = Path(r"J:\Claude Code\casewhen-research\content\w-batch02-presentation")
+
+def md_to_html(md):
+    """Light markdown -> HTML for a finished blog article (front-matter already handled)."""
+    # split front-matter (KEY: value before first '---')
+    fm = {}
+    if "---" in md:
+        head, _, md = md.partition("---")
+        for ln in head.splitlines():
+            m = re.match(r"^([A-Za-z][\w ()',.&/-]*?):\s*(.*)$", ln)
+            if m: fm[re.sub(r"\s*\(.*?\)", "", m.group(1)).strip().upper()] = m.group(2).strip()
+    out = []
+    fmbar = f'<div class="fm"><b>{esc(fm.get("BYLINE",""))}</b><span>{esc(fm.get("KEYWORD","").split("|")[0])}</span><span>{esc(fm.get("SCHEMA",""))}</span></div>'
+    out.append(fmbar)
+    out.append(f'<h1>{esc(fm.get("H1", fm.get("META_TITLE","")))}</h1>')
+    blocks = re.split(r"\n\s*\n", md.strip())
+    tbl = []
+    for blk in blocks:
+        b = blk.strip()
+        if not b or b == "---":
+            continue
+        if b.upper().startswith("QUICK ANSWER"):
+            txt = b.split(":", 1)[1].strip() if ":" in b else b
+            out.append(f'<div class="qa"><b>Quick answer.</b> {esc(txt)}</div>'); continue
+        if b.startswith("## "):
+            out.append(f'<h2>{esc(b[3:].strip())}</h2>'); continue
+        if b.startswith("|"):  # table
+            rows = [r for r in b.splitlines() if r.strip().startswith("|")]
+            rows = [r for r in rows if not re.match(r"^\s*\|[\s|:-]+\|\s*$", r)]
+            cells = [[c.strip() for c in r.strip().strip("|").split("|")] for r in rows]
+            if cells:
+                h = "".join(f"<th>{esc(x)}</th>" for x in cells[0])
+                body = "".join("<tr>"+"".join(f"<td>{esc(x)}</td>" for x in row)+"</tr>" for row in cells[1:])
+                out.append(f'<table><tr>{h}</tr>{body}</table>')
+            continue
+        if re.match(r"^\d+\.\s", b):
+            items = "".join(f"<li>{esc(re.sub(r'^\d+\.\s','',x))}</li>" for x in b.splitlines() if x.strip())
+            out.append(f"<ol>{items}</ol>"); continue
+        if b.startswith("- "):
+            items = "".join(f"<li>{esc(x[2:])}</li>" for x in b.splitlines() if x.strip().startswith("- "))
+            out.append(f"<ul>{items}</ul>"); continue
+        # paragraph (strip bold markers for plain render)
+        out.append(f'<p>{esc(re.sub(r"\*\*(.+?)\*\*", r"\1", b))}</p>')
+    return f'<div class="body article">{"".join(out)}</div>'
+
+def render_script(c):
+    beats = ""
+    for bt in c.get("beats", []):
+        beats += (f'<div class="beat"><div class="t">{esc(bt.get("t"))}</div><div>'
+                  f'<div class="sp">{esc(bt.get("spoken"))}</div>'
+                  f'<div class="os"><b>on-screen</b> {esc(bt.get("screen"))}</div>'
+                  f'<div class="pr">{esc(bt.get("prod"))}</div></div></div>')
+    cap = (f'<div class="cap"><b>caption</b>{esc(c.get("caption",""))}</div>' if c.get("caption") else "")
+    return (f'<div class="body script"><div class="sk-hook">{esc(c["hook"])}</div>'
+            f'<span class="sk-os">frame 1: {esc(c.get("onscreen",""))}</span>{beats}{cap}'
+            f'<div class="meta"><span class="ship">SHIP ✓ gated</span><span>{esc(c.get("note",""))}</span></div></div>')
+
 def card(platform, idx, lang, day, r):
     key = f"{platform}:{idx}"
     c = COPY.get(key)
@@ -177,7 +257,12 @@ def card(platform, idx, lang, day, r):
     bar = (f'<div class="bar"><span class="day">Day {day} · {WD_NAME[wd(day)]}</span>'
            f'<span class="lang {lang.lower()}">{lang}</span>'
            f'<span class="who">{who}</span><span class="kw">{kw}</span></div>')
-    if c:  # finished, gated copy
+    if c and c.get("article_file"):  # full blog article
+        md = (CONTENT / c["article_file"]).read_text(encoding="utf-8")
+        body = md_to_html(md)
+    elif c and c.get("format") == "script":  # short-form script
+        body = render_script(c)
+    elif c:  # finished short text (LinkedIn / X / blog summary)
         body = f'<div class="body done"><span class="hook">{esc(c["hook"])}</span>' \
                f'<div class="txt">{esc(c["body"])}</div>'
         if c.get("close"): body += f'<div class="close">{esc(c["close"])}</div>'
@@ -191,7 +276,8 @@ def card(platform, idx, lang, day, r):
                 f'<div class="row"><b>Format</b><span>{esc(r.get("format"))}</span></div>'
                 f'<div class="row"><b>Hook</b><span>{esc(r.get("hook_type"))}</span></div>'
                 '<div class="state">Scheduled · finished copy being written through the ship gate</div></div>')
-    return f'<article class="card">{bar}{body}</article>'
+    full = " full" if (c and c.get("article_file")) else ""
+    return f'<article class="card{full}">{bar}{body}</article>'
 
 def platform_page(k, cfg):
     slots = sorted(cfg["slots"], key=lambda s: (s[1], s[0]))

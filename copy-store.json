@@ -6,10 +6,11 @@
     "note": "kw 'bedeutung kpi' in H1 + erstem Satz · Article+FAQPage · Saju"
   },
   "blog:1": {
-    "hook": "Power BI certification: what it proves to an employer, and what it leaves out.",
-    "body": "A Power BI certification, the PL-300 Data Analyst exam, shows you can build a data model and write DAX. What it leaves out is the judgment a board trusts: deciding what a number means, and keeping a report right after launch. That judgment comes from real reporting work on real data.",
-    "close": "Read the full guide: which Power BI certification actually gets you hired in 2026.",
-    "note": "kw 'power bi certification' in H1 + first sentence · Article+FAQPage · Austin"
+    "article_file": "blog-power-bi-certification.md",
+    "hook": "Power BI certification: which one gets you hired, and what it leaves out.",
+    "body": "Full article below. A hiring manager reads the certifications line in about six seconds; this guide names the one exam worth taking (the PL-300), what it tests, and the skills it leaves out that actually decide who gets hired.",
+    "close": "",
+    "note": "kw 'power bi certification' in H1 + first 100 words · Article+FAQPage · Austin · full article, gated SHIP"
   },
   "blog:2": {
     "hook": "Most Power BI training teaches the buttons, not the data model your board numbers rest on.",
@@ -19,13 +20,13 @@
   },
   "linkedin:0": {
     "hook": "Everyone argues about the KPI formula. Almost no one writes down the KPI definition.",
-    "body": "The formula is usually correct. The disagreement starts because two teams each decided what the number includes, and both wrote a correct formula for a different definition. Sales counts a signed order. Finance counts an invoiced one. Both are right, and the two reports disagree every month. A KPI definition on one page (name, formula, source, and owner) settles it.",
+    "body": "If your monthly numbers never quite reconcile between two teams, this is usually the reason, and it is worth a minute to explain.\n\nThe formula is almost always correct. The disagreement starts because two teams each decided what the number includes, and both wrote a correct formula for a different definition. Sales counts a signed order. Finance counts an invoiced one. Both are right, and the two reports disagree every month. A KPI definition on one page (name, formula, source, and owner) settles it for good.",
     "close": "Which number in your company do two teams define two different ways?",
     "note": "kw 'kpi definition' · declarative hook 84c · question close · link in first comment"
   },
   "linkedin:1": {
     "hook": "Die Bedeutung einer KPI haengt an ihrer Definition und an einem Besitzer, der sie entscheidet.",
-    "body": "In fast jedem Review stimmt die Formel. Es fehlt eine geschriebene Definition und ein Besitzer. Der Umsatz wird brutto, netto oder nach Lieferdatum gerechnet, und alle drei Zahlen sind fuer sich richtig. In Deutschland ist eine falsche Zahl im Aufsichtsrat am Ende eine Haftungsfrage.",
+    "body": "Kurz vorab, warum das mehr ist als Wortklauberei: eine Kennzahl ohne Besitzer wird in jedem Meeting neu ausgelegt.\n\nIn fast jedem Review stimmt die Formel. Es fehlt eine geschriebene Definition und ein Besitzer. Der Umsatz wird brutto, netto oder nach Lieferdatum gerechnet, und alle drei Zahlen sind fuer sich richtig. In Deutschland ist eine falsche Zahl im Aufsichtsrat am Ende eine Haftungsfrage.",
     "close": "Wer entscheidet bei Ihnen, was eine Kennzahl genau bedeutet?",
     "note": "kw 'bedeutung kpi' · Saju · deklarativer Hook · Frage am Ende"
   },
@@ -36,9 +37,29 @@
     "note": "kw 'kpi definition' · declarative + one claim · link"
   },
   "shortform:1": {
-    "hook": "Most people study the whole PL-300 exam. The Power BI Data Analyst Associate exam rewards three skills.",
-    "body": "On screen: PL-300, three skills. The exam leans on preparing data in Power Query, modeling with DAX, and building a report people can read. Practice those three on a real dataset and the rest of the syllabus takes care of itself. Caption line: Microsoft certified Power BI Data Analyst Associate exam, the three skills that carry it.",
-    "close": "Three skills, one real dataset. The full path is on casewhen.co.",
-    "note": "kw exact in caption · spoken hook carries the term · payoff in 2s"
+    "format": "script",
+    "hook": "The Microsoft Certified Power BI Data Analyst Associate exam rewards three skills, and most people study everything else.",
+    "onscreen": "PL-300: the 3 skills that pass it",
+    "beats": [
+      {"t": "0-2s", "spoken": "The Microsoft Certified Power BI Data Analyst Associate exam rewards three skills, and most people study everything else.", "screen": "PL-300: the 3 skills that pass it", "prod": "Talking head, tight. Hard cut on 'everything else'."},
+      {"t": "2-6s", "spoken": "Miss these three and the syllabus feels twice as big as it is.", "screen": "3 skills, not 40 topics", "prod": "Cut to screen: the exam outline, cursor circling. Ding on '40 topics'."},
+      {"t": "6-26s", "spoken": "One, prepare the data in Power Query. Two, model it and write DAX. Three, build a report a person can actually read. Practice those three on one real dataset and the rest of the outline falls into place.", "screen": "1 Power Query / 2 Model + DAX / 3 Readable report", "prod": "Numbered overlays appear one line at a time (the save engine). Screen-rec of each step. Zoom on the DAX bar."},
+      {"t": "26-36s", "spoken": "Three skills, one dataset, and the exam stops feeling like a memory test. Save this before you book the PL-300.", "screen": "Save before you book", "prod": "Back to talking head. One line, no outro."}
+    ],
+    "caption": "The Microsoft Certified Power BI Data Analyst Associate exam comes down to three skills. #powerbi #pl300 #powerbicertification #dataanalyst #microsoftcertified",
+    "note": "kw verbatim in hook + caption · save CTA · one idea · 3 numbered steps = save engine · ~36s"
+  },
+  "shortform:3": {
+    "format": "script",
+    "hook": "Most Power BI course tutorial videos start with the charts. The part that decides if your numbers are right comes before the first chart.",
+    "onscreen": "POWER BI COURSE: start here, not the charts",
+    "beats": [
+      {"t": "0-2s", "spoken": "Most Power BI course tutorial videos start with the charts. The part that decides if your numbers are right comes before the first chart.", "screen": "POWER BI COURSE: not charts first", "prod": "Talking head. Cut on 'first chart'."},
+      {"t": "2-6s", "spoken": "The chart is the last ten percent. The model underneath is where a wrong total starts.", "screen": "model before chart", "prod": "Cut to screen: a chart, then the model view behind it. Ding on 'wrong total'."},
+      {"t": "6-26s", "spoken": "Three steps before you touch a visual. One, clean the data in Power Query. Two, connect your tables into a model. Three, write one measure and check it against a number you already trust.", "screen": "1 Clean / 2 Model / 3 One checked measure", "prod": "Numbered overlays. Live click-through of Power Query then the model canvas."},
+      {"t": "26-36s", "spoken": "Get those three right and every chart after is easy. Follow for the rest of the course.", "screen": "Follow for the course", "prod": "Talking head. One line."}
+    ],
+    "caption": "A Power BI course tutorial that starts where the numbers actually break, not with the charts. #powerbi #powerbitutorial #powerbicourse #dataanalytics #learnpowerbi",
+    "note": "kw 'power bi course tutorial' in hook + caption · follow CTA · one idea · 3 steps · ~36s"
   }
 }

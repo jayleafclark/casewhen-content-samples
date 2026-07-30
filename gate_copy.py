@@ -34,11 +34,51 @@ def scan(text, script, drleaf):
         os.unlink(p)
     return ok, ev
 
+DEAD_INTRO = re.compile(r"(?i)^\s*(hey guys|hi everyone|hello everyone|welcome back|in this video|today we|let'?s dive|what'?s up)")
+CONTENT = Path(r"J:\Claude Code\casewhen-research\content\w-batch02-presentation")
+
 fails = 0
 for key, c in store.items():
     platform = key.split(":")[0]
-    text = " ".join(x for x in (c.get("hook"), c.get("body"), c.get("close")) if x)
     problems = []
+
+    # full blog article: gate the actual .md through the blog ship gate
+    if c.get("article_file"):
+        r = subprocess.run([sys.executable, str(SKILL / "ship_check.py"),
+                            str(CONTENT / c["article_file"]), "--type", "blog"],
+                           capture_output=True, text=True, encoding="utf-8", errors="replace", env=env)
+        if ">>> SHIP" not in (r.stdout + r.stderr):
+            problems.append("full blog article does NOT pass the blog ship gate")
+        print(f"[{'PASS' if not problems else 'FAIL'}] {key:14} full article · {'blog gate SHIP' if not problems else problems[-1]}")
+        if problems: fails += 1
+        continue
+
+    # short-form script: reel rules
+    if c.get("format") == "script":
+        beats_text = " ".join(b.get("spoken","") for b in c.get("beats", []))
+        text = " ".join(x for x in (c.get("hook"), beats_text, c.get("caption")) if x)
+        kw = KW.get(key, "")
+        hook = c.get("hook","")
+        if DEAD_INTRO.search(hook): problems.append("dead intro (hey guys / in this video...)")
+        if sc.slogan_issue(hook): problems.append(sc.slogan_issue(hook))
+        if "—" in text: problems.append("em dash")
+        if kw:
+            if kw.lower() not in c.get("caption","").lower(): problems.append(f"SEO: keyword '{kw}' not verbatim in caption")
+            if kw.lower() not in hook.lower() and kw.lower() not in c.get("onscreen","").lower():
+                problems.append(f"SEO: keyword '{kw}' not in spoken hook or on-screen text")
+        cta = (c.get("beats",[{}])[-1].get("spoken","") + " " + c.get("caption","")).lower()
+        if not any(w in cta for w in ("save this","follow for","save it","save before")):
+            problems.append("no save/follow CTA in the final beat")
+        okm, evm = scan(text, sc.MY_GATE, False)
+        if okm is False: problems.append(f"check_banned: {evm}")
+        okd, evd = scan(text, sc.DRLEAF, True)
+        if okd is False: problems.append(f"dr-leaf: {evd}")
+        mark = "PASS" if not problems else "FAIL"
+        if problems: fails += 1
+        print(f"[{mark}] {key:14} script · {'; '.join(problems) if problems else 'clean · SEO placed · save CTA · no dead intro'}")
+        continue
+
+    text = " ".join(x for x in (c.get("hook"), c.get("body"), c.get("close")) if x)
     # em dash
     if "—" in text or " - " in text and "—" in text: problems.append("em dash")
     if "—" in text: problems.append("em dash")
