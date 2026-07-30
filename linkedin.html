@@ -85,6 +85,18 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 .article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
 .article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
 .article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
 .foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
 @media(max-width:760px){
  .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -95,7 +107,7 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 }
 </style></head><body>
 <header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
-<nav class="nav"><a href="index.html" class="">Home</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="on">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a></nav></div></header>
+<nav class="nav"><a href="index.html" class="">Home</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="on">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a></nav></div></header>
 <section class="ph"><div class="wrap"><div class="eb">30-day plan</div>
 <h2>LinkedIn</h2><p>Austin posts in English on Monday, Wednesday, Friday. Saju posts in German on a different rhythm (Tuesday, Thursday, Saturday). A flat declarative hook, one real number, a question that pulls a reply. Link goes in the first comment.</p>
 <div class="count">26 posts scheduled over 30 days · 2 finished and gated · Austin (EN) · Saju (DE)</div></div></section>

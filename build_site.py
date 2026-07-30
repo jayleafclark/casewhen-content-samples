@@ -166,6 +166,18 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 .article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
 .article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
 .article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
 .foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
 @media(max-width:760px){
  .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -177,7 +189,7 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 """
 
 def nav(active):
-    items = [("index.html","Home")] + [(f"{k}.html", v["title"]) for k, v in PLATFORMS.items()]
+    items = [("index.html","Home")] + [(f"{k}.html", v["title"]) for k, v in PLATFORMS.items()] + [("visuals.html","Visuals")]
     return "".join(f'<a href="{h}" class="{"on" if h==active else ""}">{esc(t)}</a>' for h, t in items)
 
 def shell(active, title, inner):
@@ -292,6 +304,37 @@ def platform_page(k, cfg):
     (OUT / f"{k}.html").write_text(shell(f"{k}.html", cfg["title"], inner), encoding="utf-8")
     return len(slots), done
 
+def visuals_page():
+    T = "img/tpl/"
+    def gal(files, cls="vgal"):
+        imgs = "".join(f'<img src="{T}{f}.png" loading="lazy" alt="">' for f in files)
+        return f'<div class="{cls}">{imgs}</div>'
+    def strip(files):
+        imgs = "".join(f'<img src="{T}{f}.png" loading="lazy" alt="">' for f in files)
+        return f'<div class="vstrip">{imgs}</div><div class="vhint">← swipe to see all {len(files)} slides →</div>'
+    C = "-".join  # noop helper
+    myth = ["04-carousel-comparison-migrations-cover-split-"+k for k in ["teal-white","green-mint","dark-mint","green-white"]]
+    checklist = ["02-carousel-checklist-governance-"+s+"-dark-teal" for s in ["cover","slide2","slide3","slide4","slide5","slide6"]]
+    stat = ["03-carousel-stat-reveal-azure-cover-"+k for k in ["dark-teal","base-teal","pale-mint","near-white"]]
+    framework = ["05-carousel-framework-fabric-cover-"+k for k in ["dark-teal","base-teal","pale-mint","near-white"]]
+    info = ["06-infographic-9x16-governance-"+k for k in ["dark-teal","base-teal","pale-mint","near-white"]]
+    quotes = ["07-quote-card-a-refresh-can-dark-teal","07-quote-card-nobody-can-actually-base-teal",
+              "07-quote-card-every-change-ships-pale-mint","07-quote-card-most-calculations-transfer-near-white"]
+    body = f"""<section class="ph"><div class="wrap"><div class="eb">Visuals</div>
+<h2>Carousels and cards</h2>
+<p>The visual templates that carry the posts on LinkedIn and Instagram. Each template is one design
+rendered in four brand colours that rotate across the week. Carousels are shown slide by slide. Every
+line of copy on them passed the same language checks as the written posts.</p></div></section>
+<div class="wrap">
+ <div class="vsec"><div class="vname">Myth vs reality carousel <span>· the four colour pairings</span></div>{gal(myth)}</div>
+ <div class="vsec"><div class="vname">Checklist carousel <span>· the full six-slide swipe (5 signs your numbers will not survive a board review)</span></div>{strip(checklist)}</div>
+ <div class="vsec"><div class="vname">Stat carousel <span>· one number, four colours</span></div>{gal(stat)}</div>
+ <div class="vsec"><div class="vname">Framework carousel <span>· Microsoft Fabric, four colours</span></div>{gal(framework)}</div>
+ <div class="vsec"><div class="vname">9:16 infographic <span>· vertical, for reels and stories</span></div>{gal(info)}</div>
+ <div class="vsec"><div class="vname">Quote cards <span>· four founder lines, one per colour</span></div>{gal(quotes)}</div>
+</div>"""
+    (OUT / "visuals.html").write_text(shell("visuals.html", "Visuals", body), encoding="utf-8")
+
 def home():
     cards = ""
     for k, cfg in PLATFORMS.items():
@@ -308,6 +351,7 @@ X. Every finished one is written plainly and passes the language and SEO checks 
     (OUT / "index.html").write_text(shell("index.html", "30-day content plan", inner), encoding="utf-8")
 
 home()
+visuals_page()
 tot = don = 0
 for k, cfg in PLATFORMS.items():
     n, d = platform_page(k, cfg); tot += n; don += d
