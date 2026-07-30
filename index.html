@@ -99,7 +99,27 @@ section{padding:52px 0;border-bottom:1px solid var(--line)}
 /* foot */
 .foot{padding:34px 0 46px;color:var(--mut);font-size:13px}
 .foot img{height:22px;opacity:.7;margin-bottom:10px;display:block}
-@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+/* real template galleries */
+.tset{margin-top:38px}
+.tset:first-of-type{margin-top:2px}
+.tname{font-weight:600;font-size:16px;margin:0 0 3px;color:var(--ink)}
+.tname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.gal{display:grid;gap:18px;margin-top:16px}
+.gal.p4{grid-template-columns:repeat(4,1fr)}
+.gal.w2{grid-template-columns:repeat(2,1fr)}
+.gal.t3{grid-template-columns:repeat(3,1fr)}
+.gal img{width:100%;height:auto;display:block;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13)}
+.strip{display:flex;gap:16px;overflow-x:auto;margin-top:16px;padding-bottom:10px;scroll-snap-type:x mandatory}
+.strip img{flex:none;width:210px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vlabel{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;font-size:11px;color:var(--faint)}
+.vlabel span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:11px;height:11px;border-radius:3px;display:inline-block;border:1px solid rgba(0,0,0,.08)}
+@media(max-width:800px){
+ .grid2{grid-template-columns:1fr}
+ .gal.p4{grid-template-columns:repeat(2,1fr)}
+ .gal.t3{grid-template-columns:repeat(2,1fr)}
+ .gal.w2{grid-template-columns:1fr}
+}
 </style></head>
 <body>
 
@@ -129,7 +149,7 @@ section{padding:52px 0;border-bottom:1px solid var(--line)}
   <div class="body">
    <div class="qa"><b>Quick answer.</b> A data governance framework is a short set of written rules for your company's numbers. For each important number, the rules say what it means, who is in charge of it, where the meaning is written down, and how someone is allowed to change it. When these rules exist, everyone who looks up that number gets the same answer. When they do not, two people can look up the same number and get two different answers, and both of them are technically correct.</div>
    <p>Most people think a wrong number in a board report is a formula error. In almost every review we run, the formula is correct. The problem is that nobody agreed on what the number is supposed to mean, and nobody was put in charge of deciding.</p>
-   <p>Here is what that looks like in practice. Sales reports last month's revenue as one figure. Finance reports a smaller figure because they took out returns and credit notes. Operations reports a third figure because they counted orders by the date they shipped instead of the date they were invoiced. All three teams did their maths correctly, and the three numbers still do not match, because nobody told them which definition of revenue is the official one.</p>
+   <p>Here is what that looks like in practice. Sales reports last month's revenue as one figure. Finance reports a smaller figure because they took out returns and credit notes. Operations reports a third figure because they counted orders by the date they shipped instead of the date they were invoiced. All three teams did the math correctly, and the three numbers still do not match, because nobody told them which definition of revenue is the official one.</p>
    <div class="q">Why does the same number come out two different ways?</div>
    <p><b>Because two people defined it differently and nobody wrote down which definition is correct.</b> Once two versions are live in Power BI, the reports will disagree until someone decides which version is the correct one and writes it down. When two of those numbers reach the same meeting, the more senior person's version usually wins.</p>
    <div class="q">Do you need Microsoft Fabric to get governance right?</div>
@@ -168,7 +188,7 @@ section{padding:52px 0;border-bottom:1px solid var(--line)}
  <div class="grid2">
 
   <div class="li"><div class="h"><img src="img/austin.jpg" alt=""><div><div class="n">Austin Levine</div><div class="t">Power BI that leaders trust · Co-Founder, CaseWhen</div></div></div>
-   <div class="b"><span class="hk">Most people think a wrong number in a board report is a formula error.</span>When two teams report the same number and it comes out different, people assume someone made a mistake in the maths. In almost every review we run, the maths is fine. What actually happened is that nobody agreed on what the number means. One team takes out returns and the other one does not, so both are correct and neither matches. You fix it by writing down, on one page, what each number means and who is in charge of it. After that, when someone asks which revenue figure is the real one, there is an answer.
+   <div class="b"><span class="hk">Most people think a wrong number in a board report is a formula error.</span>When two teams report the same number and it comes out different, people assume someone made a mistake in the math. In almost every review we run, the math is fine. What happened is that nobody agreed on what the number means. One team takes out returns and the other one does not, so both are correct and neither matches. You fix it by writing down, on one page, what each number means and who is in charge of it. After that, when someone asks which revenue figure is the real one, there is an answer.
 
 Could someone on your team say who owns the revenue number, in one sentence?</div>
    <div class="f"><span class="tag t-gov">Governance</span><span>"data governance" · hook bank #1</span></div></div>
@@ -231,51 +251,93 @@ Wer bei Ihnen findet zuerst heraus, dass eine Board-Zahl falsch war: Sie oder de
  <h2 class="sh">Twelve templates, so the audience is everyone · not only the buyer who searches.</h2>
  <p class="sd">SEO reaches the person already searching. The bigger reach comes from framing the same expertise so anyone who reports a number can watch it. The four colour variants rotate across the week so the feed reads as one brand. Real gated copy in each.</p>
 
- <div class="tplname">Quote cards <span>· a founder line, fans out to four platforms · the cheapest reach you have</span></div>
- <div class="row">
-  <div class="frame p45 v-mint"><div class="in"><div class="eb">Governance</div><div class="qmark">"</div><div class="qtext">Two people pulled "revenue" from Power BI and got different numbers. Both were right.</div><div class="qattr"><img src="img/austin.jpg" alt=""><div><div class="an">Austin Levine</div><div class="al">Co-Founder, CaseWhen</div></div></div></div></div>
-  <div class="frame p45 v-dark"><div class="in"><div class="eb">Controlling · DE</div><div class="qmark">"</div><div class="qtext">Eine falsche Zahl im Aufsichtsrat ist eine Haftungsfrage, keine IT-Frage.</div><div class="qattr"><img src="img/saju.jpg" alt=""><div><div class="an">Sajagan Thirugnanam</div><div class="al">Gründer, CaseWhen</div></div></div></div></div>
-  <div class="frame p45 v-base"><div class="in"><div class="eb">Pricing</div><div class="qmark">"</div><div class="qtext">Ten euros a user is the price that gets a rollout approved, then blown past.</div><div class="qattr"><img src="img/austin.jpg" alt=""><div><div class="an">Austin Levine</div><div class="al">Co-Founder, CaseWhen</div></div></div></div></div>
-  <div class="frame p45 v-white"><div class="in"><div class="eb">Governance</div><div class="qmark">"</div><div class="qtext">A green checkmark means the refresh ran. Whether the number is right is a separate question.</div><div class="qattr"><img src="img/austin.jpg" alt=""><div><div class="an">Austin Levine</div><div class="al">Co-Founder, CaseWhen</div></div></div></div></div>
+ <div class="vlabel">Four colour variants on every template, rotated across the week:
+  <span><i class="sw" style="background:#11493F"></i>dark teal</span>
+  <span><i class="sw" style="background:#1D967C"></i>base teal</span>
+  <span><i class="sw" style="background:#D8F3EE"></i>pale mint</span>
+  <span><i class="sw" style="background:#E9ECE8"></i>near white</span>
  </div>
 
- <div class="tplname">Checklist carousel <span>· "5 signs…", the save-and-share format</span></div>
- <div class="row">
-  <div class="frame p45 v-dark"><div class="in"><div class="eb">Governance</div><div class="cover-h">5 signs your Power BI numbers won't survive a board review</div><div class="cwm"><img src="img/icon.png" alt="">swipe →</div></div></div>
-  <div class="frame p45 v-white"><div class="in"><div class="chk"><div class="cn">1</div><div class="ci">Nobody can name the owner of the board dataset.</div></div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
-  <div class="frame p45 v-mint"><div class="in"><div class="chk"><div class="cn">2</div><div class="ci">The same metric shows two numbers in two reports.</div></div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
-  <div class="frame p45 v-white"><div class="in"><div class="chk"><div class="cn">4</div><div class="ci">Row-level security has not been re-tested since the rollout.</div></div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
+ <div class="tset">
+  <div class="tname">Myth vs reality carousel <span>· the signature template · a hard split, one colour pairing each</span></div>
+  <div class="gal p4">
+   <img src="img/templates/04-carousel-comparison/04-carousel-comparison-migrations-cover-split-teal-white.png" alt="Myth vs reality carousel, teal and white" loading="lazy">
+   <img src="img/templates/04-carousel-comparison/04-carousel-comparison-migrations-cover-split-green-mint.png" alt="Myth vs reality carousel, green and mint" loading="lazy">
+   <img src="img/templates/04-carousel-comparison/04-carousel-comparison-migrations-cover-split-dark-mint.png" alt="Myth vs reality carousel, dark and mint" loading="lazy">
+   <img src="img/templates/04-carousel-comparison/04-carousel-comparison-migrations-cover-split-green-white.png" alt="Myth vs reality carousel, green and white" loading="lazy">
+  </div>
  </div>
 
- <div class="tplname">Stat-reveal &amp; comparison <span>· one number, or myth vs reality</span></div>
- <div class="row">
-  <div class="frame p45 v-dark"><div class="in"><div class="eb">Search demand</div><div class="big" style="margin-top:auto">1,900</div><div class="stat-l">people a month search "data governance framework". The top results name zero owners.</div><div class="cwm"><img src="img/icon.png" alt="">swipe →</div></div></div>
-  <div class="frame p45 v-base"><div class="in"><div class="eb">KPI &amp; modeling</div><div class="big" style="margin-top:auto">8,100</div><div class="stat-l">people a month search what a KPI actually means. Most results never say who owns the number.</div><div class="cwm"><img src="img/icon.png" alt="">swipe →</div></div></div>
-  <div class="frame p45 v-split"><div class="in" style="color:#fff"><div class="sph" style="color:#eafaf5">Myth</div><div class="spt" style="color:#eafaf5;max-width:44%">A Tableau migration means rebuilding from zero.</div><div class="sph" style="color:var(--dark);position:absolute;right:16px;top:17px;text-align:right;width:44%">Reality</div><div class="spt" style="color:var(--dark);position:absolute;right:16px;top:42px;width:44%">Most calculations transfer. The row-level security does not, and nobody checks.</div></div></div>
-  <div class="frame p45 v-split"><div class="in" style="color:#fff"><div class="sph" style="color:#eafaf5">Myth</div><div class="spt" style="color:#eafaf5;max-width:44%">Fabric is a Power BI upgrade.</div><div class="sph" style="color:var(--dark);position:absolute;right:16px;top:17px;text-align:right;width:44%">Reality</div><div class="spt" style="color:var(--dark);position:absolute;right:16px;top:42px;width:44%">Fabric is the compute layer. Your reports are only as good as the model under them.</div></div></div>
+ <div class="tset">
+  <div class="tname">Quote cards <span>· a founder line in all four colours · the cheapest reach you have</span></div>
+  <div class="gal p4">
+   <img src="img/templates/07-quote-card/07-quote-card-when-it-breaks-dark-teal.png" alt="Quote card, dark teal" loading="lazy">
+   <img src="img/templates/07-quote-card/07-quote-card-nobody-can-actually-base-teal.png" alt="Quote card, base teal" loading="lazy">
+   <img src="img/templates/07-quote-card/07-quote-card-every-change-ships-pale-mint.png" alt="Quote card, pale mint" loading="lazy">
+   <img src="img/templates/07-quote-card/07-quote-card-most-calculations-transfer-near-white.png" alt="Quote card, near white" loading="lazy">
+  </div>
  </div>
 
- <div class="tplname">Framework &amp; news alert <span>· the explainer, and a Microsoft release reacted to same-day</span></div>
- <div class="row">
-  <div class="frame p45 v-dark"><div class="in"><div class="cover-h" style="margin-top:0">A <span class="kw">governed metric</span>, in 4 steps</div>
-   <div class="step"><span class="sn">1</span><span>One written definition: name, formula, source.</span></div>
-   <div class="step"><span class="sn">2</span><span>One named owner.</span></div>
-   <div class="step"><span class="sn">3</span><span>One place the definition lives.</span></div>
-   <div class="step"><span class="sn">4</span><span>One approval path before a change goes live.</span></div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
-  <div class="frame land v-white" style="height:298px"><span class="alert-tab">CaseWhen alert</span><div class="in"><div class="alert-h" style="margin-top:24px">Microsoft is raising Power BI Pro to fourteen dollars a seat.</div><div class="alert-b">A 400-seat estate just moved 19,200 dollars a year, and most of those seats only ever open two reports. Pull your usage metrics before the renewal, not after.</div><div class="cwm"><img src="img/icon.png" alt="">Source: casewhen.co/blog</div></div></div>
-  <div class="frame p45 v-mint"><div class="in"><div class="cover-h" style="margin-top:0">Microsoft <span class="kw">Fabric</span>, in 4 layers</div>
-   <div class="step"><span class="sn">1</span><span>OneLake · one copy of the data.</span></div>
-   <div class="step"><span class="sn">2</span><span>Lakehouse and Warehouse · how you query it.</span></div>
-   <div class="step"><span class="sn">3</span><span>Direct Lake · reports read data without an import.</span></div>
-   <div class="step"><span class="sn">4</span><span>Capacity and governance · the part that sets your bill.</span></div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
+ <div class="tset">
+  <div class="tname">Stat-reveal carousel <span>· one big number, four colours</span></div>
+  <div class="gal p4">
+   <img src="img/templates/03-carousel-stat-reveal/03-carousel-stat-reveal-azure-cover-dark-teal.png" alt="Stat reveal, dark teal" loading="lazy">
+   <img src="img/templates/03-carousel-stat-reveal/03-carousel-stat-reveal-azure-cover-base-teal.png" alt="Stat reveal, base teal" loading="lazy">
+   <img src="img/templates/03-carousel-stat-reveal/03-carousel-stat-reveal-azure-cover-pale-mint.png" alt="Stat reveal, pale mint" loading="lazy">
+   <img src="img/templates/03-carousel-stat-reveal/03-carousel-stat-reveal-azure-cover-near-white.png" alt="Stat reveal, near white" loading="lazy">
+  </div>
  </div>
 
- <div class="tplname">Blog covers <span>· the header on every article · 1200 by 630</span></div>
- <div class="row">
-  <div class="frame land v-dark"><div class="in"><div class="eb">Governance</div><div class="cover-h">The same metric shows two numbers. That is a <span class="kw">governance problem</span>.</div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
-  <div class="frame land v-mint"><div class="in"><div class="eb">Pricing</div><div class="cover-h">Power BI Pro cost: <span class="kw">the real number</span> nobody publishes.</div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
+ <div class="tset">
+  <div class="tname">Framework carousel <span>· the explainer, four colours</span></div>
+  <div class="gal p4">
+   <img src="img/templates/05-carousel-framework/05-carousel-framework-fabric-cover-dark-teal.png" alt="Framework carousel, dark teal" loading="lazy">
+   <img src="img/templates/05-carousel-framework/05-carousel-framework-fabric-cover-base-teal.png" alt="Framework carousel, base teal" loading="lazy">
+   <img src="img/templates/05-carousel-framework/05-carousel-framework-fabric-cover-pale-mint.png" alt="Framework carousel, pale mint" loading="lazy">
+   <img src="img/templates/05-carousel-framework/05-carousel-framework-fabric-cover-near-white.png" alt="Framework carousel, near white" loading="lazy">
+  </div>
  </div>
- <p class="fade">Also built, not shown here: the stat-reveal and framework body slides, the 9:16 infographic, digest, story and meme frames, profile banners for all seven platforms, and the Clutch award banners. Display type is Sharp Sans No. 2; everything else is Neue Montreal, the fonts shown on this page.</p>
+
+ <div class="tset">
+  <div class="tname">Checklist carousel <span>· the full six-slide swipe · "5 signs…", the save-and-share format</span></div>
+  <div class="strip">
+   <img src="img/templates/02-carousel-checklist/02-carousel-checklist-governance-cover-dark-teal.png" alt="Checklist cover" loading="lazy">
+   <img src="img/templates/02-carousel-checklist/02-carousel-checklist-governance-slide2-dark-teal.png" alt="Checklist slide 1" loading="lazy">
+   <img src="img/templates/02-carousel-checklist/02-carousel-checklist-governance-slide3-dark-teal.png" alt="Checklist slide 2" loading="lazy">
+   <img src="img/templates/02-carousel-checklist/02-carousel-checklist-governance-slide4-dark-teal.png" alt="Checklist slide 3" loading="lazy">
+   <img src="img/templates/02-carousel-checklist/02-carousel-checklist-governance-slide5-dark-teal.png" alt="Checklist slide 4" loading="lazy">
+   <img src="img/templates/02-carousel-checklist/02-carousel-checklist-governance-slide6-dark-teal.png" alt="Checklist slide 5" loading="lazy">
+  </div>
+ </div>
+
+ <div class="tset">
+  <div class="tname">Blog cover / header <span>· the header on every article · 1200 by 630</span></div>
+  <div class="gal w2">
+   <img src="img/templates/01-blog-cover/01-blog-cover-pricing-power-bi-pro-cost-dark-teal.png" alt="Blog cover, dark teal" loading="lazy">
+   <img src="img/templates/01-blog-cover/01-blog-cover-pricing-power-bi-pro-cost-near-white.png" alt="Blog cover, near white" loading="lazy">
+  </div>
+ </div>
+
+ <div class="tset">
+  <div class="tname">9:16 infographic <span>· vertical, built for video · four colours</span></div>
+  <div class="gal p4">
+   <img src="img/templates/06-infographic-9x16/06-infographic-9x16-governance-dark-teal.png" alt="Infographic, dark teal" loading="lazy">
+   <img src="img/templates/06-infographic-9x16/06-infographic-9x16-governance-base-teal.png" alt="Infographic, base teal" loading="lazy">
+   <img src="img/templates/06-infographic-9x16/06-infographic-9x16-governance-pale-mint.png" alt="Infographic, pale mint" loading="lazy">
+   <img src="img/templates/06-infographic-9x16/06-infographic-9x16-governance-near-white.png" alt="Infographic, near white" loading="lazy">
+  </div>
+ </div>
+
+ <div class="tset">
+  <div class="tname">News alert · digest · story teaser <span>· three more, shown in one colour each</span></div>
+  <div class="gal t3">
+   <img src="img/templates/08-news-alert/08-news-alert-fabric-pricing-dark-teal.png" alt="News alert" loading="lazy">
+   <img src="img/templates/09-digest-teaser/09-digest-teaser-this-week-in-bi-near-white.png" alt="Digest teaser" loading="lazy">
+   <img src="img/templates/10-story-teaser/10-story-teaser-fabric-adoption-base-teal.png" alt="Story teaser" loading="lazy">
+  </div>
+ </div>
+
+ <p class="fade">These are the actual rendered files from the template system, not mockups. Each is produced by a script so the brand colour, logo, and type stay exact. Also built: the meme frame, profile banners for all seven platforms, and the Clutch award banners. Display type is Sharp Sans No. 2; everything else is Neue Montreal, the fonts on this page.</p>
 </div></section>
 
 <footer class="foot"><div class="wrap">
