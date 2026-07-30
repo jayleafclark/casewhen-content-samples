@@ -554,7 +554,7 @@ def seo_page():
     def cov(f):
         md=(CONTENT/f).read_text(encoding="utf-8"); fm,body=parse_blog(md)
         kw=(fm.get("KEYWORD","").split("|")[0]).strip().lower()
-        title=fm.get("META_TITLE",fm.get("TITLE","")); h1=fm.get("H1",""); desc=fm.get("META_DESC",fm.get("META","")); slug=fm.get("SLUG","")
+        title=fm.get("META_TITLE",fm.get("TITLE","")); h1=fm.get("H1","") or fm.get("TITLE","") or title; desc=fm.get("META_DESC",fm.get("META","")); slug=fm.get("SLUG","")
         bl=body.lower(); words=_re.findall(r"[a-z0-9']+",bl); first100=" ".join(words[:100])
         h2s=[l for l in body.splitlines() if l.strip().startswith("## ")]
         qh2=sum(1 for l in h2s if l.strip().rstrip().endswith("?"))
@@ -572,6 +572,10 @@ def seo_page():
             ("Schema markup", bool(fm.get("SCHEMA"))),
             ("Named byline", bool(fm.get("BYLINE"))),
             (f"{len(words)} words", len(words)>=1000),
+            ("FAQPage schema", "faqpage" in fm.get("SCHEMA","").lower()),
+            ("FAQ block", any(h in bl for h in ["häufige fragen","frequently asked","## faq"]) or bl.count("?")>=4),
+            ("Comparison table", "|---" in body or "|-" in body.replace(" ","")),
+            ("Internal links", any(x in bl for x in ["read next","weiterlesen","pillar-seite","pillar page"])),
         ]
         return kw,title,h1,checks,secs,bl
     blogs=[("blog-governance-framework.md","Governance"),("blog-power-bi-certification.md","Training"),("blog-bedeutung-kpi.md","KPI · DE")]
@@ -606,8 +610,9 @@ def seo_page():
 <section class="hero"><div class="wrap"><div class="eb">CaseWhen · SEO</div>
 <h1>Proof every post hits its keywords.</h1>
 <p>Two things here: proof that each post we write places its keyword everywhere Google and AI answers
-look, and the plan to re-optimize the existing blog. Green means placed. This is how you get confidence
-a post is optimized, not just written.</p></div></section>
+look and clears the same audit we run on the existing blog, and the plan to re-optimize that existing
+blog. Note that every post we make already carries FAQPage schema, an FAQ block, a comparison table,
+and internal links, the exact gaps the live blog is missing. Green means it is there.</p></div></section>
 <div class="wrap seo">{blocks}{reopt}
 <div class="funnel" style="font-size:14px;color:#33372f;background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;margin:18px 0 40px">
 <b>How this is enforced:</b> every article runs through the ship gate before it appears here. The gate
