@@ -312,26 +312,24 @@ def visuals_page():
     def strip(files):
         imgs = "".join(f'<img src="{T}{f}.png" loading="lazy" alt="">' for f in files)
         return f'<div class="vstrip">{imgs}</div><div class="vhint">← swipe to see all {len(files)} slides →</div>'
-    C = "-".join  # noop helper
-    myth = ["04-carousel-comparison-migrations-cover-split-"+k for k in ["teal-white","green-mint","dark-mint","green-white"]]
+    def one(f):
+        return f'<div class="vgal wide"><img src="{T}{f}.png" loading="lazy" alt=""></div>'
     checklist = ["02-carousel-checklist-governance-"+s+"-dark-teal" for s in ["cover","slide2","slide3","slide4","slide5","slide6"]]
-    stat = ["03-carousel-stat-reveal-azure-cover-"+k for k in ["dark-teal","base-teal","pale-mint","near-white"]]
-    framework = ["05-carousel-framework-fabric-cover-"+k for k in ["dark-teal","base-teal","pale-mint","near-white"]]
-    info = ["06-infographic-9x16-governance-"+k for k in ["dark-teal","base-teal","pale-mint","near-white"]]
     quotes = ["07-quote-card-a-refresh-can-dark-teal","07-quote-card-nobody-can-actually-base-teal",
               "07-quote-card-every-change-ships-pale-mint","07-quote-card-most-calculations-transfer-near-white"]
     body = f"""<section class="ph"><div class="wrap"><div class="eb">Visuals</div>
 <h2>Carousels and cards</h2>
-<p>The visual templates that carry the posts on LinkedIn and Instagram. Each template is one design
-rendered in four brand colours that rotate across the week. Carousels are shown slide by slide. Every
-line of copy on them passed the same language checks as the written posts.</p></div></section>
+<p>The visual templates that carry the posts on LinkedIn and Instagram. Each is shown once here with
+its real copy. Every template also renders in four brand colours (dark teal, base teal, pale mint,
+near white) that rotate across the week. Every line on them passed the same language checks as the
+written posts.</p></div></section>
 <div class="wrap">
- <div class="vsec"><div class="vname">Myth vs reality carousel <span>· the four colour pairings</span></div>{gal(myth)}</div>
- <div class="vsec"><div class="vname">Checklist carousel <span>· the full six-slide swipe (5 signs your numbers will not survive a board review)</span></div>{strip(checklist)}</div>
- <div class="vsec"><div class="vname">Stat carousel <span>· one number, four colours</span></div>{gal(stat)}</div>
- <div class="vsec"><div class="vname">Framework carousel <span>· Microsoft Fabric, four colours</span></div>{gal(framework)}</div>
- <div class="vsec"><div class="vname">9:16 infographic <span>· vertical, for reels and stories</span></div>{gal(info)}</div>
- <div class="vsec"><div class="vname">Quote cards <span>· four founder lines, one per colour</span></div>{gal(quotes)}</div>
+ <div class="vsec"><div class="vname">Checklist carousel <span>· the full six-slide swipe: 5 signs your numbers will not survive a board review</span></div>{strip(checklist)}</div>
+ <div class="vsec"><div class="vname">Myth vs reality carousel <span>· a Tableau-to-Power-BI migration myth, answered</span></div>{one("04-carousel-comparison-migrations-cover-split-teal-white")}</div>
+ <div class="vsec"><div class="vname">Stat carousel <span>· one number that anchors the post</span></div>{one("03-carousel-stat-reveal-azure-cover-dark-teal")}</div>
+ <div class="vsec"><div class="vname">Framework carousel <span>· Microsoft Fabric, layer by layer</span></div>{one("05-carousel-framework-fabric-cover-dark-teal")}</div>
+ <div class="vsec"><div class="vname">9:16 infographic <span>· vertical, for reels and stories</span></div>{one("06-infographic-9x16-governance-dark-teal")}</div>
+ <div class="vsec"><div class="vname">Quote cards <span>· four different founder lines, each in its own colour</span></div>{gal(quotes)}</div>
 </div>"""
     (OUT / "visuals.html").write_text(shell("visuals.html", "Visuals", body), encoding="utf-8")
 
