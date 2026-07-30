@@ -762,16 +762,12 @@ ARTCSS = """
 .geo .plc .p{font-size:12px;color:var(--dark)}
 .geo .plc .p::before{content:"\\2713 ";color:var(--brand);font-weight:700}
 .geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
-/* blog grid cover cards */
-.bgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding:24px 0 60px}
-.bcov{display:block;text-decoration:none;border-radius:14px;overflow:hidden;background:var(--dark);color:#eafaf5;min-height:200px;padding:20px;position:relative;transition:transform .14s,box-shadow .14s}
-.bcov:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(17,73,63,.18)}
-.bcov .eb{font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--mid)}
-.bcov h3{font-size:19px;line-height:1.15;margin:8px 0 0;color:#fff;letter-spacing:-.01em}
-.bcov h3 .kw{color:var(--mid)}
-.bcov .rd{position:absolute;bottom:16px;left:20px;font-size:11.5px;color:#9fc2b8}
-@media(max-width:820px){.bgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:520px){.bgrid{grid-template-columns:1fr}}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
 """
 
 def blog_articles_and_grid():
@@ -808,9 +804,7 @@ def blog_articles_and_grid():
                f'it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div>')
         inner = f'<section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">\u2190 all articles</a></div></section><div class="wrap article-wrap">{art}{chart if False else ""}{geo}</div>'
         (OUT / f"{f.stem}.html").write_text(shell(f"{f.stem}.html", h1[:60], f"<style>{ARTCSS}</style>{inner}"), encoding="utf-8")
-        two = h1.split(":", 1)
-        htitle = (f'{esc(two[0])}<span class="kw">{esc(":"+two[1]) if len(two)>1 else ""}</span>') if two else esc(h1)
-        cards.append(f'<a class="bcov" href="{f.stem}.html"><div class="eb">{esc(cluster)}</div><h3>{htitle}</h3><div class="rd">Read the full article \u2192</div></a>')
+        cards.append(f'<a class="bcard" href="{f.stem}.html"><img src="img/blogcovers/{f.stem}.png" loading="lazy" alt="{esc(h1)}"></a>')
     grid = f'<section class="ph"><div class="wrap"><div class="eb">Blog</div><h2>{len(files)} full articles, written and gated</h2><p style="color:var(--mut);font-size:15px;margin:10px 0 0">One English article a day plus three German a week. Click any cover to read the finished, SEO-optimized article, each with a chart and the keywords it targets.</p></div></section><div class="wrap"><div class="bgrid">{"".join(cards)}</div></div>'
     (OUT / "blog.html").write_text(shell("blog.html", "Blog", f"<style>{ARTCSS}</style>{grid}"), encoding="utf-8")
     return len(files)
