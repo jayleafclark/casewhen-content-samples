@@ -74,7 +74,7 @@ document.querySelectorAll('.opt').forEach(o=>o.addEventListener('click',()=>{
 }));
 function render(){
   const ks=Object.keys(ans); if(!ks.length)return;
-  let s=0; ks.forEach(k=>s+=ans[k]); const max=Object.keys(ans).length*2;
+  let's=0; ks.forEach(k=>s+=ans[k]); const max=Object.keys(ans).length*2;
   const pct=Math.round(s/ (4*2) *100);
   document.getElementById('needle').style.left=Math.max(4,Math.min(96,pct))+'%';
   const t=document.getElementById('tier');
