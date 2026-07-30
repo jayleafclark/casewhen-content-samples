@@ -299,11 +299,11 @@ def home():
         cards += (f'<a href="{k}.html"><div class="n">{n}</div>'
                   f'<div class="l">{esc(cfg["title"])}</div><div class="s">{esc(cfg["tag"])}</div></a>')
     inner = f"""<section class="hero"><div class="wrap">
-<div class="eb">CaseWhen · 30-day content plan</div>
-<h1>Two people pull the same number and get two different answers.</h1>
-<p>That is the problem CaseWhen fixes, and it is what every post here is about: Power BI reporting a
-board can actually trust. Below is a full 30 days of content across every platform, in English and
-German, built from the real keyword calendar. Every finished post clears the ship gate first.</p>
+<div class="eb">CaseWhen · 30-day content sample</div>
+<h1>A 30-day sample of CaseWhen content.</h1>
+<p>Thirty days of posts for every platform, in English and German, built from the real keyword plan.
+Pick a platform below to see the posts: blog articles, LinkedIn posts, short-form video scripts, and
+X. Every finished one is written plainly and passes the language and SEO checks before it appears.</p>
 <div class="cad">{cards}</div></div></section>"""
     (OUT / "index.html").write_text(shell("index.html", "30-day content plan", inner), encoding="utf-8")
 

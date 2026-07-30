@@ -38,28 +38,30 @@
   },
   "shortform:1": {
     "format": "script",
-    "hook": "The Microsoft Certified Power BI Data Analyst Associate exam rewards three skills, and most people study everything else.",
+    "hook": "The Microsoft Certified Power BI Data Analyst Associate exam rewards three skills. Learn these and you skip half the study.",
     "onscreen": "PL-300: the 3 skills that pass it",
     "beats": [
-      {"t": "0-2s", "spoken": "The Microsoft Certified Power BI Data Analyst Associate exam rewards three skills, and most people study everything else.", "screen": "PL-300: the 3 skills that pass it", "prod": "Talking head, tight. Hard cut on 'everything else'."},
-      {"t": "2-6s", "spoken": "Miss these three and the syllabus feels twice as big as it is.", "screen": "3 skills, not 40 topics", "prod": "Cut to screen: the exam outline, cursor circling. Ding on '40 topics'."},
-      {"t": "6-26s", "spoken": "One, prepare the data in Power Query. Two, model it and write DAX. Three, build a report a person can actually read. Practice those three on one real dataset and the rest of the outline falls into place.", "screen": "1 Power Query / 2 Model + DAX / 3 Readable report", "prod": "Numbered overlays appear one line at a time (the save engine). Screen-rec of each step. Zoom on the DAX bar."},
-      {"t": "26-36s", "spoken": "Three skills, one dataset, and the exam stops feeling like a memory test. Save this before you book the PL-300.", "screen": "Save before you book", "prod": "Back to talking head. One line, no outro."}
+      {"t": "0-3s", "spoken": "The Microsoft Certified Power BI Data Analyst Associate exam rewards three skills. Learn these and you skip half the study.", "screen": "PL-300: the 3 skills that pass it", "prod": "Talking head, tight. Cut on 'half the study'."},
+      {"t": "3-15s", "spoken": "One, Power Query. Learn how to unpivot a wide table into rows. It comes up on almost every exam, and it is two clicks once you have seen it.", "screen": "1. Power Query: unpivot a wide table", "prod": "Screen-rec: select columns, right-click, Unpivot. Slow enough to copy."},
+      {"t": "15-27s", "spoken": "Two, DAX filter context. Just understand why one measure changes when you click a slicer. That single idea explains most of the DAX questions.", "screen": "2. DAX: why a measure changes with a slicer", "prod": "Screen-rec: click a slicer, watch the number change. Zoom in."},
+      {"t": "27-36s", "spoken": "Three, build one clean report page on a real dataset. One good page teaches more than ten half-finished ones.", "screen": "3. One clean report page", "prod": "Show a single tidy report page."},
+      {"t": "36-43s", "spoken": "That is the whole plan, and it is free. Follow for a filter-context example you can copy next.", "screen": "Follow for the DAX example", "prod": "Back to talking head. One line."}
     ],
-    "caption": "The Microsoft Certified Power BI Data Analyst Associate exam comes down to three skills. #powerbi #pl300 #powerbicertification #dataanalyst #microsoftcertified",
-    "note": "kw verbatim in hook + caption · save CTA · one idea · 3 numbered steps = save engine · ~36s"
+    "caption": "The Microsoft Certified Power BI Data Analyst Associate exam comes down to three skills. Here they are, free. #powerbi #pl300 #powerbicertification #dataanalyst #microsoftcertified",
+    "note": "teaches all 3 skills free · realistic ~43s pace · follow CTA · kw verbatim in hook + caption"
   },
   "shortform:3": {
     "format": "script",
-    "hook": "Most Power BI course tutorial videos start with the charts. The part that decides if your numbers are right comes before the first chart.",
-    "onscreen": "POWER BI COURSE: start here, not the charts",
+    "hook": "Most Power BI course tutorial videos start with the charts. Do these three steps first and your numbers come out right.",
+    "onscreen": "POWER BI COURSE: do this before any chart",
     "beats": [
-      {"t": "0-2s", "spoken": "Most Power BI course tutorial videos start with the charts. The part that decides if your numbers are right comes before the first chart.", "screen": "POWER BI COURSE: not charts first", "prod": "Talking head. Cut on 'first chart'."},
-      {"t": "2-6s", "spoken": "The chart is the last ten percent. The model underneath is where a wrong total starts.", "screen": "model before chart", "prod": "Cut to screen: a chart, then the model view behind it. Ding on 'wrong total'."},
-      {"t": "6-26s", "spoken": "Three steps before you touch a visual. One, clean the data in Power Query. Two, connect your tables into a model. Three, write one measure and check it against a number you already trust.", "screen": "1 Clean / 2 Model / 3 One checked measure", "prod": "Numbered overlays. Live click-through of Power Query then the model canvas."},
-      {"t": "26-36s", "spoken": "Get those three right and every chart after is easy. Follow for the rest of the course.", "screen": "Follow for the course", "prod": "Talking head. One line."}
+      {"t": "0-3s", "spoken": "Most Power BI course tutorial videos start with the charts. Do these three steps first and your numbers come out right.", "screen": "POWER BI COURSE: do this before any chart", "prod": "Talking head. Cut on 'come out right'."},
+      {"t": "3-15s", "spoken": "One, in Power Query, delete the columns you will never use. A lighter model is faster and easier to trust.", "screen": "1. Delete columns you will not use", "prod": "Screen-rec: multi-select columns, Remove. Slow and clear."},
+      {"t": "15-27s", "spoken": "Two, connect customers to orders on the customer ID. One clean relationship, not a copy of the data in each table.", "screen": "2. One relationship on the customer ID", "prod": "Screen-rec: drag the field, one line between two tables."},
+      {"t": "27-37s", "spoken": "Three, write one measure, total sales, and check it against a number you already trust. If it matches, the model is sound.", "screen": "3. Check one measure against a known number", "prod": "Type the measure, compare to a known figure."},
+      {"t": "37-44s", "spoken": "That is the whole foundation, free. Follow for the first charts built on top of it.", "screen": "Follow for the charts", "prod": "Talking head. One line."}
     ],
-    "caption": "A Power BI course tutorial that starts where the numbers actually break, not with the charts. #powerbi #powerbitutorial #powerbicourse #dataanalytics #learnpowerbi",
-    "note": "kw 'power bi course tutorial' in hook + caption · follow CTA · one idea · 3 steps · ~36s"
+    "caption": "A Power BI course tutorial that starts where the numbers actually break, not with the charts. The 3-step foundation, free. #powerbi #powerbitutorial #powerbicourse #dataanalytics #learnpowerbi",
+    "note": "teaches the 3-step model foundation free · realistic ~44s · follow CTA · kw in hook + caption"
   }
 }
