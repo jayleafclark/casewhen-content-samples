@@ -312,7 +312,7 @@ def visuals_page():
     def qgal(slugs):
         imgs = "".join(f'<img src="{D}quote-{s}.png" loading="lazy" alt="quote">' for s in slugs)
         return f'<div class="vgal">{imgs}</div>'
-    quotes = ["board-revenue","pricing-census","migration-scope","licensing-350"]
+    quotes = ["rls-viewas","incremental-refresh","deployment-pipelines","onelake-shortcut","power-query","training-starschema"]
     body = f"""<section class="ph"><div class="wrap"><div class="eb">Visuals</div>
 <h2>Carousels and cards</h2>
 <p>The carousels that carry the posts on LinkedIn and Instagram. Each is a full seven-slide deck:
