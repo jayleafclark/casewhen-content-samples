@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Financial Reporting Automation: What Actually Gets Automated</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>financial reporting automation</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>Financial Reporting Automation: What Actually Gets Automated (and What Shouldn&#x27;t)</h1><figure class="achart"><figcaption>Organizations that fully trust their data</figcaption><div class="cbar"><span class="cl">Trust it</span><div class="ctrack"><div class="cfill" style="width:49%"></div></div><span class="cv">33%</span></div><div class="cbar"><span class="cl">Do not</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">67%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><p>Financial reporting automation uses tools like Power BI, Power Query, and Azure Data Factory to pull numbers from your source platforms, apply your rules, and rebuild the same report every period without manual copy-paste. It speeds up month-end close and cuts spreadsheet errors, though the judgment calls still stay with your finance team.
+---</p><p>Most teams get financial reporting automation wrong, and it shows up on the last Friday of the month. The close runs three days longer than it should because someone is still exporting figures from four platforms and pasting them into one master spreadsheet by hand.</p><p>That master spreadsheet is also where the mistakes start. About 94% of business spreadsheets used in decision making contain errors (Poon et al., 2024). When your board pack is built on one of them, every figure in that meeting carries a question mark no one wants to raise.</p><p>Here is the good news. Most of that manual work can run on its own using tools you may already pay for. Let&#x27;s go through why the close drags, what reporting automation can actually handle, the exact steps to build it, and the parts you should keep in human hands.</p><h2>Why does month-end close still take a full week?</h2><p>Your numbers live in several places. The general ledger sits in your ERP. Sales sit in a CRM. Bank data comes from statements. Payroll runs on its own platform. None of them talk to each other in the format finance needs.</p><p>So every month a person becomes the connector. They log into each platform, export a CSV, and paste it into a workbook. Then they map account codes, reconcile totals, fix a formula that stopped working last month, and reformat everything so it prints cleanly for the board.</p><p>Each of those steps repeats every single period, and each one is a chance for a typo or a stale copy. Version confusion makes it worse. By day three there are five files named &quot;final,&quot; and no one is sure which one the CFO actually signed off. This is the exact problem reporting automation was built to remove.</p><h2>What does financial reporting automation actually automate?</h2><p>It takes over the mechanical, repeatable parts of building a report. There are four of them, and it helps to see them as separate jobs.</p><ul><li>Collection. Power Query connectors and Power BI dataflows reach into your ERP, CRM, and databases and pull the data directly, so nobody exports a CSV again.</li><li>Transformation. The cleaning and mapping you do by hand (matching account codes, converting currencies, tagging cost centers) gets written once as query steps and reruns the same way every time.</li><li>Calculation. Your metrics (net revenue, gross margin, budget variance) live as DAX measures inside one model, so a definition is written once and used everywhere.</li><li>Distribution. A scheduled refresh in the Power BI service rebuilds the report on a timer, and subscriptions email the finished pack to the right people on the right morning.</li></ul><p>The pattern is simple. Anything that follows the same rule every month is a good candidate for financial reporting automation. Anything that needs a fresh decision is not.</p><h2>How do you set up financial reporting automation step by step?</h2><p>Here is the order we use with finance teams. You build most of this in Power BI Desktop, then publish to the service.</p><ol><li>Connect your sources in Power Query. Use the native connector for your ERP or SQL database instead of a manual export. Point it at the ledger, the sub-ledgers, and any budget file.</li><li>Build a clean data model. Arrange your tables in a star schema with a proper date table. One fact table for transactions, dimension tables for accounts, cost centers, and periods. This keeps your measures accurate and quick.</li><li>Write your metrics as DAX measures once. Define net revenue, margin, and variance a single time. Now every visual and every report uses the same definition, so two dashboards can never disagree on what &quot;revenue&quot; means.</li><li>Turn on incremental refresh for large ledgers. If your transaction table keeps years of history, set RangeStart and RangeEnd and reload only the recent months. The refresh stays fast even as the ledger grows.</li><li>Schedule the refresh in the Power BI service. Set it to run early on close morning. The report rebuilds itself before anyone sits down.</li><li>Apply row-level security. Give each regional manager a role so they see only their own cost center. The finance lead still sees everything. This is how you share one report widely without leaking sensitive lines.</li><li>Use Power BI Report Builder for formal statements. When you need a pixel-perfect P&amp;L or a paginated statement for auditors, build it once as a paginated report and let it fill in fresh numbers each period.</li><li>Move changes through deployment pipelines. Test a change in a development workspace, check it, then promote it to production. Your live board report never breaks because someone edited it directly.</li></ol><p>Once this is running, the close stops depending on one person being at their desk. Here is how the two ways of working compare.</p><table><tr><th>Step</th><th>Manual close</th><th>Automated close</th></tr><tr><td>Gather data from 4 platforms</td><td>1 to 2 days of exports and paste</td><td>Automatic on refresh</td></tr><tr><td>Reconcile and map accounts</td><td>Redone by hand each month</td><td>Written once, reruns every time</td></tr><tr><td>Metric definitions</td><td>Live in scattered formulas</td><td>One DAX measure, used everywhere</td></tr><tr><td>Refresh the board pack</td><td>Rebuild the file manually</td><td>Scheduled, runs before 8am</td></tr><tr><td>Who can produce it</td><td>One trained person</td><td>Anyone with access</td></tr><tr><td>Typical error rate</td><td>High (94% of spreadsheets carry errors)</td><td>Bounded by tested rules</td></tr></table><h2>What should you never automate in financial reporting?</h2><p>This is the part vendors skip, and it matters more than the setup. Some parts of the close need a person because they need a decision, not a rule.</p><ul><li>Estimates and accruals. Deciding how much to accrue for a bonus pool or a warranty claim is a judgment about the future. A machine cannot make that call for you.</li><li>One-off adjustments. Unusual transactions, restructuring costs, or a correction for a prior error need someone to look, think, and document why.</li><li>Materiality calls. Whether a variance is worth explaining depends on context. Your controller decides that, every time.</li><li>The narrative. The commentary that tells the board why margin moved is analysis, and it belongs to a human who understands the business.</li><li>Final sign-off. Someone with authority reviews the pack and puts their name to it. Automation prepares the numbers, and a person approves them.</li></ul><p>A good rule: automate the plumbing, keep the thinking. When you get this split right, your team spends the close explaining the business instead of assembling a spreadsheet.</p><h2>How do you keep an automated report trustworthy?</h2><p>Automation is only worth it if people believe the output, so build in a few checks from day one.</p><p>Start with a control total. Add a card to the report that shows the ledger balance straight from the ERP next to the total your model calculates. If the two ever differ, the report tells you before the board does. Then lean on the refresh history in the Power BI service, which logs every run and whether it finished, so a stale number has a clear paper trail.</p><p>Name one owner for the model, and write down every metric definition in plain language next to the report. The audit log records who changed the model and when, which means a tweak to a revenue rule leaves a trace someone can review. These controls are why an automated pack ends up more reliable than the hand-built version it replaced.</p><h2>Frequently asked questions</h2><p>Do I need Power BI Premium for financial reporting automation?
+No. A Power BI Pro license covers scheduled refresh, dataflows, and row-level security. Premium and Premium Per User add larger models, more frequent refreshes, and paginated report publishing, which help once your data or your audience grows.</p><p>How long does it take to automate a monthly close?
+For one report with a handful of clean sources, a first working version takes a few days. A full close across many platforms with reconciliation checks usually runs a few weeks, because the mapping and testing take real care.</p><p>Will reporting automation replace my finance team?
+No. It removes the copy-paste and the reformatting so your team spends the close on analysis and judgment. The estimates, the commentary, and the sign-off all stay with people.</p><p>What if our source data is messy?
+Then you clean it in Power Query as a written step, once. Bad account mappings and duplicate rows get fixed in the query, so the same fix reruns every period instead of being redone by hand.</p><p>Can auditors trust an automated report?
+Yes, and often more than a manual one. The refresh history, the audit log, and a documented set of measures give auditors a clear record of where each number came from and who changed the rules.</p><p>How do we start without breaking the current process?
+Run both in parallel for a month. Build the automated version, refresh it alongside your manual close, and compare the two. When the numbers match for two periods in a row, retire the spreadsheet.</p><p>Read next: [Reporting automation](/blog/blog-reporting-automation) for the wider walkthrough, and [Power BI incremental refresh](/blog/blog-power-bi-incremental-refresh) for the refresh setup that keeps big ledgers fast.</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">financial reporting automation</span><span class="c">reporting automation</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+</body></html>

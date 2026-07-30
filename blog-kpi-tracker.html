@@ -1,0 +1,146 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Why Your KPI Tracker Shows Two Numbers for the Same Thing</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>kpi tracker</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Organizations that fully trust their data</figcaption><div class="cbar"><span class="cl">Trust it</span><div class="ctrack"><div class="cfill" style="width:49%"></div></div><span class="cv">33%</span></div><div class="cbar"><span class="cl">Do not</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">67%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><h1>Why Your KPI Tracker Shows Two Numbers for the Same Thing</h1><div class="qa"><b>Quick answer.</b> A KPI tracker is a Power BI report that pulls your core metrics from one clean data model and refreshes on a schedule. A good KPI tracker shows five to nine numbers, each defined as a single DAX measure, so every figure reads the same for everyone and can be checked on the spot.
+---
+Most teams get their KPI tracker wrong, and it shows up in the first board meeting of the quarter. Two managers open the same view, see two different revenue numbers, and the rest of the meeting turns into an argument about which figure counts. Nobody talks about the business anymore. They talk about the data.</div><p>The problem is almost never the colors or the chart types. It sits underneath, in the data model. This article walks through why the numbers drift apart and the exact steps in Power BI that fix it, using a simple sales example you can copy today.</p><h2>Why does your KPI tracker show different numbers to different people?</h2><p>The usual cause is a flat table. A lot of trackers start life as one big Excel export where revenue, region, product, and date all live in the same wide sheet. The moment you filter it, Power BI counts some rows twice, because the same order shows up on several lines. Your totals jump around depending on which slicer someone clicked.</p><p>The second cause is a missing definition. When &quot;revenue&quot; means the gross value on one tile and the after-discount value on another, every card calculates something slightly different. That gap matters more than it looks. About 94% of business spreadsheets used in decision-making contain errors (Poon et al., 2024). A tracker built straight on top of those sheets inherits every one of them.</p><p>The third cause is trust. 67% of organizations do not fully trust the data they use to make decisions (Precisely and Drexel LeBow, 2025). Once your board has corrected the number on the first tile, they stop believing the second tile too.</p><h2>What is actually going wrong under the hood?</h2><p>Take a sales team with an orders export. Each row is one order line: order ID, customer, product, region, order date, ship date, and amount. When you drop &quot;amount&quot; onto a card, you get the right grand total. Then someone adds a customer filter, and the number changes in a way nobody can explain.</p><p>Here is the mechanism. Because customer and region sit in the same table as the amount, Power BI has no separate list of customers to filter cleanly against. It scans the fact rows directly, and any repeated value throws the count off. You need a proper structure so the filtering flows one way, from a short list of customers into the long list of order lines.</p><h2>How do you build the measures behind a KPI tracker?</h2><p>Start by splitting that one wide table into a star schema: a fact table for the order lines, and dimension tables for Customer, Product, Region, and Date. The fact table stores the events with numbers. The dimensions store the descriptive fields. You connect them with one-to-many relationships, so one customer points to many order lines.</p><p>Then define every number as a measure in DAX rather than a calculated column. A measure recalculates the instant it is shown and adapts to whatever filter is applied. People often type &quot;PowerBI create measure&quot; into a search box hoping for a shortcut, and the actual shortcut is this: write revenue once as `Revenue = SUM(Orders[Amount])`, then build margin on top of it as its own measure. One definition per number, stored in the model, visible to anyone who asks.</p><p>Three things matter here: how you write each measure, when you use relationship DAX for date comparisons, and how it all rolls up into a business KPI dashboard your board can read in ten seconds.</p><h2>How do you compare against last year without breaking the numbers?</h2><p>Most trackers need &quot;this period versus the same period last year.&quot; That comparison depends on a real calendar table, not the date column buried in your orders. Build a dedicated Date dimension, set it as the report&#x27;s date table, and connect it to your fact table.</p><p>A tricky case comes up when your fact table carries two dates, like order date and ship date. You can only have one active relationship to the calendar at a time. For the second one, you keep an inactive relationship and switch it on inside a specific measure with the USERELATIONSHIP function. So revenue by order date uses the active link, and revenue by ship date calls `CALCULATE(SUM(Orders[Amount]), USERELATIONSHIP(Orders[ShipDate], &#x27;Date&#x27;[Date]))`. Same fact table, two clean views, no duplicated data.</p><h2>How do you keep a KPI tracker fast and trustworthy?</h2><p>A tracker that was right yesterday is worthless today if nobody refreshes it. In Power BI you schedule the refresh: up to eight times a day on a Pro license, far more on capacity.</p><p>For large fact tables, turn on incremental refresh. You set two parameters, RangeStart and RangeEnd, and Power BI loads only the new rows instead of pulling the whole history every time. A refresh that took an hour can drop to a couple of minutes.</p><p>To keep people from seeing numbers that are not theirs, set up row-level security. A regional manager then sees only her region. Before you publish, test it with the &quot;View As&quot; feature so no figure lands in front of the wrong person. And separate your environments with deployment pipelines, which move changes from development to test to production without touching the live version. Poor data quality already costs organizations $12.9M per year on average (Gartner), and most of that comes from numbers nobody can trace.</p><h2>How do you build your first KPI tracker, step by step?</h2><p>You can do all of this today:</p><ol><li>Split your wide table into a fact table plus dimensions for Customer, Product, Date, and Region.</li><li>Build a dedicated calendar table and connect it through one-to-many relationships, then mark it as the date table.</li><li>In Power Query, add your cleanup steps so the raw data corrects itself on every refresh.</li><li>Write each number as a DAX measure with one documented definition, and use USERELATIONSHIP for any second date.</li><li>Pick at most nine numbers for the main view and turn on incremental refresh with RangeStart and RangeEnd.</li><li>Test with &quot;View As,&quot; set row-level security, and publish through a deployment pipeline.</li></ol><h2>Spreadsheet tracker or a real KPI tracker: what changes</h2><table><tr><th>Feature</th><th>Spreadsheet tracker</th><th>KPI tracker in Power BI</th></tr><tr><td>Data source</td><td>one wide table</td><td>star schema of facts and dimensions</td></tr><tr><td>Number definition</td><td>a formula per cell, often duplicated</td><td>one DAX measure per number</td></tr><tr><td>Refresh</td><td>by hand</td><td>scheduled, up to 8x per day</td></tr><tr><td>Large data</td><td>slows down and breaks</td><td>incremental refresh on new rows only</td></tr><tr><td>Access control</td><td>whole file or nothing</td><td>row-level security per person</td></tr><tr><td>Traceability</td><td>hard to check</td><td>every number provable through its measure</td></tr></table><p>The work in the model layer pays off in the first meeting where nobody asks which number to believe.</p><h2>Frequently asked questions</h2><p>What is a KPI tracker, exactly?
+A KPI tracker is a report that pulls your most important numbers from a checked data model and refreshes them automatically. Each number has one fixed definition, so everyone in the room is talking about the same metric.</p><p>Do I need a star schema, or is one table enough?
+For two or three numbers, one table is fine. As soon as you filter by region, product, and time, you need a star schema, or Power BI double-counts rows and your totals jump.</p><p>Why use a measure instead of a calculated column?
+Because a measure calculates at the moment of display and respects every filter, so it stays correct in any slice. A calculated column is fixed when the data loads and cannot react to a slicer.</p><p>How do I compare this year to last year in a KPI tracker?
+Build a real calendar table and use time functions in DAX. When you have two dates like order and ship, keep the second relationship inactive and switch it on with USERELATIONSHIP inside the measure.</p><p>How often should a KPI tracker refresh?
+It depends on the decision. A board report is often fine on a daily refresh, while sales might want hourly. A Pro license allows up to eight scheduled refreshes a day.</p><p>Who should define the numbers?
+The business team decides what a number should mean, and the model locks that one definition in place. That turns a gut figure into something you can prove.</p><p>Read next: [KPIs and dashboards, explained in plain English](/blog/blog-kpis-and-dashboards) and [What makes a business KPI dashboard trustworthy](/blog/blog-kpi-business-dashboard).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">kpi tracker</span><span class="c">powerbi create measure</span><span class="c">use relationship dax</span><span class="c">business kpi dashboard</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+</body></html>

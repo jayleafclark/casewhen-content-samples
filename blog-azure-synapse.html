@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Azure Synapse in Plain English: What It Does and Whether You</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>azure synapse</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Organizations with data good enough to use for AI</figcaption><div class="cbar"><span class="cl">Ready</span><div class="ctrack"><div class="cfill" style="width:13%"></div></div><span class="cv">12%</span></div><div class="cbar"><span class="cl">Not ready</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">88%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><h1>Azure Synapse in Plain English: What It Does and Whether You Still Need It</h1><div class="qa"><b>Quick answer.</b> Azure Synapse is Microsoft&#x27;s cloud workspace for running big SQL and Spark analytics over data in one place. It combines a data warehouse, Spark, and pipelines. In 2026, it still runs existing workloads well, but Microsoft now points new projects toward Microsoft Fabric and OneLake.
+---</div><p>Most teams reach for Azure Synapse before they have a reason to, and the cost shows up on the next monthly bill. Someone read that it does everything: warehousing, Spark, pipelines, dashboards. So they spin up a dedicated pool, load a few million rows, and a month later finance asks why the Azure invoice jumped. The tool is fine. The setup usually is not.</p><p>Here&#x27;s the plain version of what Azure Synapse is, what it&#x27;s good at, and how to size it so you&#x27;re paying for what you use.</p><h2>What is Azure Synapse, in plain terms?</h2><p>Azure Synapse Analytics is one workspace that bundles three things you would otherwise run separately: a SQL data warehouse, an Apache Spark engine, and a pipeline tool for moving data around. You open Synapse Studio in the browser and get to all three from the same screen.</p><p>Think of a large retailer with 400 million sales rows. A plain database chokes when you ask it to sum revenue by region across five years. Synapse spreads that query across many machines at once, so an answer that took ten minutes comes back in twenty seconds. That splitting-the-work trick is the whole point. It&#x27;s built for questions over big tables, not for storing your app&#x27;s day-to-day records.</p><p>Two flavors matter. A dedicated SQL pool reserves compute you pay for by the hour, priced in units called DWUs. A serverless SQL pool bills only per query, based on the terabytes it reads. Most overspending traces back to leaving a dedicated pool running overnight when nobody&#x27;s querying it.</p><h2>Why does Azure Synapse confuse people?</h2><p>The confusion is mostly naming. Synapse grew out of the old Azure SQL Data Warehouse, absorbed a pipeline engine that is really Azure Data Factory under the hood, and bolted on Spark. So one product carries three histories, and every tutorial describes a different slice of it.</p><p>The pipeline part trips people up the most. Inside Synapse, &quot;pipelines&quot; are the same technology as standalone Azure Data Factory. If you already read the Azure Data Factory docs to learn the copy activity, Synapse pipelines will feel familiar on day one. You&#x27;ll sometimes see the tool written as Microsoft Data Factory in older posts, but the product name is Azure Data Factory, and the two share the same runtime.</p><p>The second snag is storage. Synapse doesn&#x27;t store your files by itself. It reads ADLS data (Azure Data Lake Storage) sitting in a linked account. Your Parquet and CSV files live in the lake, and Synapse queries them where they are. When a query runs slowly, the problem is often the file layout in the lake, not the compute.</p><h2>When should you use Azure Synapse, and when should you skip it?</h2><p>Reach for Azure Synapse when three things are true at once: your data is large (tens of millions of rows and up), you need heavy SQL analytics, and you want warehousing plus pipelines living together instead of stitched across tools.</p><p>Skip it when your data is small. A few hundred thousand rows belongs in an Azure SQL Database, which costs a fraction of a dedicated pool and answers just as fast at that size. That is the split most teams get wrong, and it shows up as a warehouse bill for a spreadsheet-sized table. Poor data-quality decisions already cost organizations $12.9M per year on average (Gartner), and paying warehouse prices to query a spreadsheet-sized table is money spent for no gain.</p><p>There&#x27;s a bigger timing question for 2026. Microsoft still supports Synapse and keeps existing workloads running, but new data-warehouse projects are being steered toward Microsoft Fabric, which passed 28,000 customers and is the fastest-growing analytics product in Microsoft history (Microsoft, Ignite 2025). If you&#x27;re starting a warehouse from scratch this year, look hard at Fabric before you commit to a fresh Synapse dedicated pool. If you already run Synapse and it works, there&#x27;s no reason to rush a move.</p><h2>How does Azure Synapse compare to Data Factory and Fabric?</h2><p>People search all three names together because Microsoft overlapped them on purpose. Here is the honest split.</p><table><tr><th>Tool</th><th>What it&#x27;s for</th><th>Pick it when</th></tr><tr><td>Azure Data Factory</td><td>Moving and scheduling data with pipelines</td><td>You only need to copy and reshape data on a timer</td></tr><tr><td>Azure Synapse</td><td>SQL and Spark analytics over big datasets in one workspace</td><td>You have large data and want querying and pipelines together</td></tr><tr><td>Microsoft Fabric</td><td>The newer all-in-one analytics platform built on OneLake</td><td>You&#x27;re starting fresh in 2026 and want the current path Microsoft recommends</td></tr></table><p>The short read: Data Factory moves data, Synapse analyzes big data, and Fabric is where Microsoft is putting its new work. Fabric stores everything in OneLake, a single lake shared across the whole platform, so the copying between tools that Synapse setups often need goes away. That one difference is why new builds increasingly start in Fabric.</p><h2>How do you set up Azure Synapse without overspending?</h2><p>Cost surprises come from a handful of settings. These are the ones we check first on every Synapse account we inherit.</p><ol><li>Turn off the dedicated pool on a schedule. A dedicated SQL pool bills whether or not you query it. Set a trigger in Synapse pipelines to suspend it outside working hours, say 8pm to 6am. On a mid-size pool that one change can cut the monthly bill by more than a third.</li></ol><ol><li>Use serverless for exploration. When analysts are poking around and running ad-hoc queries, point them at a serverless pool that bills per terabyte scanned, so an idle analyst costs nothing. Save the dedicated pool for the scheduled, heavy reports.</li></ol><ol><li>Store files as Parquet, partitioned by date. Synapse reads ADLS data far faster from columnar Parquet than from row-based CSV, and partitioning by year and month means a query for March 2026 scans one folder rather than the whole lake. This alone often halves both query time and cost.</li></ol><ol><li>Set a spending alert in Azure Cost Management. Put a budget on the Synapse resource group with an email alert at 80 percent. It won&#x27;t stop spending on its own, but it means finance hears about a runaway pool on day three, not on the invoice.</li></ol><ol><li>Right-size the DWUs, then leave them. Start a dedicated pool small (DW100c or DW200c), watch the query times for a week, and step up only if reports run long. Most teams provision three sizes too big out of caution and pay for headroom they never touch.</li></ol><p>Do these five and a Synapse account behaves. Skip them and it runs up a bill nobody signed off on. If you want a second pair of eyes on a setup before it goes to production, that&#x27;s the kind of review we run in a day.</p><h2>Frequently asked questions</h2><p>Is Azure Synapse being retired?
+No. Microsoft still supports Azure Synapse and keeps existing workloads running. What changed is direction: new data-warehouse and lakehouse projects are pointed at Microsoft Fabric now. Running Synapse is fine, but check Fabric before starting anything new in 2026.</p><p>What&#x27;s the difference between Azure Synapse and Azure SQL Database?
+Azure SQL Database is a single database for regular records and smaller datasets. Azure Synapse spreads big analytical queries across many machines for tables with tens of millions of rows or more. At small data sizes, SQL Database is cheaper and just as quick.</p><p>Does Azure Synapse include Azure Data Factory?
+The pipeline feature inside Synapse runs on the same engine as standalone Data Factory, so those skills carry straight over. You can run pipelines inside Synapse without a separate Data Factory resource.</p><p>How is Azure Synapse priced?
+Two ways. A dedicated SQL pool charges by the hour based on DWUs you reserve, so it costs money even when idle. A serverless pool bills only for the data each query reads. Turning off dedicated pools and using serverless for exploration are the two biggest cost savers.</p><p>Do I need Azure Synapse if I have Power BI?
+Not always. Power BI can connect straight to your data sources and model smaller datasets on its own. Synapse earns its place when the data is too big for Power BI to handle comfortably and you need a warehouse layer underneath the reports.</p><p>Where does Azure Synapse store its data?
+Synapse queries files that live in Azure Data Lake Storage, linked to the workspace. Your Parquet and CSV files stay in the lake, and Synapse reads them there. It doesn&#x27;t keep a separate copy, which is why the file layout in the lake affects query speed.</p><p>Read next: [Azure Data Factory, explained for people who aren&#x27;t data engineers](/blog/blog-azure-data-factory) (the pillar), and [Azure Synapse Analytics: what it actually does in plain English](/blog/blog-azure-synapse-analytics).</p><p>If you&#x27;re weighing Synapse against Fabric for a new build, that decision is worth an hour with someone who has made it before. That&#x27;s the conversation we have with CaseWhen clients most weeks.</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">azure synapse</span><span class="c">azure data factory docs</span><span class="c">adls data</span><span class="c">microsoft data factory</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+</body></html>

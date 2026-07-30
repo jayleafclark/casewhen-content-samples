@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Power BI Migration: was wirklich kaputtgeht und wie Sie es v</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article"><div class="fm"><b>Sajagan Thirugnanam, CaseWhen</b><span>power bi migration</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Organizations with data good enough to use for AI</figcaption><div class="cbar"><span class="cl">Ready</span><div class="ctrack"><div class="cfill" style="width:13%"></div></div><span class="cv">12%</span></div><div class="cbar"><span class="cl">Not ready</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">88%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><h1>Power BI Migration: was wirklich kaputtgeht und wie Sie es verhindern</h1><div class="qa"><b>Quick answer.</b> Eine Power BI Migration verschiebt Berichte, semantische Modelle und Datenquellen in eine neue Power-BI-Umgebung, etwa von Tableau, vom lokalen Report Server oder in eine Fabric-Kapazität. Anmeldedaten, Gateways und Row-Level-Security ziehen dabei nicht automatisch mit. Wer diese drei Dinge vor dem Umschalten prüft, vermeidet falsche Zahlen im ersten Monatsabschluss nach dem Umzug.
+---</div><p>Die meisten Teams planen eine Power BI Migration wie einen einfachen Datei-Umzug, und das zeigt sich zwei Wochen später im Monatsabschluss, wenn der Umsatz im neuen Bericht plötzlich um sieben Prozent daneben liegt. Die Berichte sehen gut aus. Die Datei ist da. Und trotzdem stimmen die Zahlen nicht. Das Problem sitzt fast nie in den Visuals, sondern in den Dingen, die eine .pbix-Datei gar nicht mitnimmt: gespeicherte Anmeldedaten, die Anbindung an lokale Datenbanken und die Rollen, die steuern, wer welche Zeilen sehen darf. Dieser Artikel zeigt, was bei einer Power BI Migration konkret bricht, warum das passiert und in welcher Reihenfolge Sie vorgehen, damit am Ende die Zahlen halten.</p><h2>Was bedeutet eine Power BI Migration eigentlich?</h2><p>Der Begriff meint vier ziemlich unterschiedliche Vorhaben, und die Verwechslung kostet oft die ersten Tage.</p><p>Erstens der Wechsel von einem anderen Werkzeug wie Tableau, QlikView oder Cognos zu Power BI. Hier bauen Sie das Datenmodell und die Berichte neu, weil sich Formeln und Struktur nicht eins zu eins übertragen lassen.</p><p>Zweitens der Umzug vom lokalen Power BI Report Server in den Power BI Service in der Cloud. Die .pbix-Dateien lassen sich hochladen, aber die geplante Aktualisierung und die Anbindung an Ihre Quellen richten Sie neu ein.</p><p>Drittens der Wechsel von Power BI Pro auf eine Premium- oder Fabric-Kapazität, meist wegen größerer Modelle oder häufigerer Aktualisierung.</p><p>Viertens der Umzug zwischen zwei Microsoft-Mandanten, etwa nach einer Fusion. Das ist der heikelste Fall, weil Benutzer, Berechtigungen und Arbeitsbereiche komplett neu aufgebaut werden.</p><p>In allen vier Fällen bewegen Sie dieselben Bausteine: semantische Modelle (früher Datasets genannt), Berichte, Dataflows und die Arbeitsbereiche drumherum. Wer diese Bausteine vorher auflistet, weiß, wie groß der Umzug wirklich ist.</p><h2>Warum gehen so viele Migrationen beim ersten Refresh schief?</h2><p>Weil eine .pbix-Datei bewusst keine Zugangsdaten speichert. Sie enthält das Modell und die Abfragen, aber sobald die Datei in der neuen Umgebung liegt, kennt sie kein Passwort mehr. Bei der ersten geplanten Aktualisierung meldet Power BI dann schlicht einen Anmeldefehler, und der Bericht zeigt bis dahin die alten, eingefrorenen Zahlen an.</p><p>Der zweite Bruch entsteht am Gateway. Jede Quelle, die nicht in der Cloud liegt (ein SQL Server im eigenen Rechenzentrum, eine Excel-Datei auf einem Netzlaufwerk), braucht ein lokales Datengateway. Nach dem Umzug zeigt das Modell noch auf das alte Gateway oder auf gar keins. Sie müssen die Datenquelle im neuen Arbeitsbereich erneut an das richtige Gateway binden.</p><p>Der dritte Bruch betrifft die Aktualisierung selbst. Der Verlauf und die Partitionen einer inkrementellen Aktualisierung wandern nicht mit. Wenn Sie eine große Tabelle mit fünf Jahren Historie umziehen, lädt die erste Aktualisierung unter Umständen alles neu und läuft in ein Limit der Quelldatenbank.</p><p>Und genau hier entsteht das eigentliche Risiko: 67 Prozent der Organisationen vertrauen den Daten nicht vollständig, mit denen sie Entscheidungen treffen (Precisely und Drexel LeBow, 2025 Data Integrity Trends, über 550 befragte Fachleute). Ein Umzug, bei dem die Zahlen kurz abweichen und niemand es prüft, verbrennt genau dieses Vertrauen.</p><h2>Wie planen Sie eine Power BI Migration Schritt für Schritt?</h2><p>Die Reihenfolge entscheidet, ob der Umzug an einem Nachmittag oder über drei Wochen läuft.</p><ol><li>Inventar aufnehmen. Listen Sie jeden Bericht, jedes semantische Modell, jede Datenquelle, jeden Aktualisierungsplan und jede RLS-Rolle. Ohne diese Liste übersehen Sie fast garantiert einen Bericht.</li><li>Ziel festlegen. Neuer Arbeitsbereich im selben Mandanten, neuer Mandant oder Fabric-Kapazität. Davon hängt ab, ob Benutzer und Berechtigungen mitkommen.</li><li>Modelle zuerst umziehen, dann Berichte. Ein Bericht ohne sein Modell zeigt nur Fehler. Verschieben Sie das semantische Modell, verbinden Sie danach die Berichte damit.</li><li>Anmeldedaten neu eintragen. Öffnen Sie in den Einstellungen des Modells jede Datenquelle und geben Sie die Zugangsdaten erneut ein.</li><li>Gateway binden. Ordnen Sie jede lokale Quelle dem richtigen Datengateway zu und testen Sie die Verbindung einmal manuell.</li><li>Inkrementelle Aktualisierung prüfen. Kontrollieren Sie die Parameter RangeStart und RangeEnd und starten Sie die erste Aktualisierung außerhalb der Geschäftszeiten.</li><li>Bereitstellungspipelines aufsetzen. Legen Sie Entwicklung, Test und Produktion an, damit spätere Änderungen nicht direkt in den Live-Bericht laufen.</li><li>Vertraulichkeitskennzeichen und Zugriff neu setzen. App-Zielgruppen und Kennzeichen ziehen nicht automatisch mit.</li></ol><p>Nach diesen acht Schritten steht die neue Umgebung technisch. Was jetzt noch fehlt, ist der Beweis, dass die Zahlen stimmen.</p><h2>Welche Migrationsart passt zu Ihrem Fall?</h2><p>Die vier Vorhaben unterscheiden sich vor allem darin, was von selbst mitkommt und wo das größte Risiko liegt. Diese Übersicht hilft bei der ersten Einschätzung.</p><table><tr><th>Ausgangspunkt</th><th>Was neu gebaut wird</th><th>Was mitkommt</th><th>Hauptrisiko</th></tr><tr><td>Tableau zu Power BI</td><td>Datenmodell und Berichte komplett</td><td>Nur die Rohdatenquellen</td><td>Formeln lassen sich nicht 1:1 übersetzen</td></tr><tr><td>Report Server zur Cloud</td><td>Aktualisierung und Anbindung</td><td>.pbix-Dateien und Layout</td><td>Anmeldedaten und Gateway fehlen</td></tr><tr><td>Pro zu Fabric-Kapazität</td><td>Kapazitätszuweisung</td><td>Modelle, Berichte, Benutzer</td><td>Kosten und Größenlimits</td></tr><tr><td>Mandant zu Mandant</td><td>Benutzer, Rollen, Arbeitsbereiche</td><td>Fast nichts automatisch</td><td>Berechtigungen und RLS neu aufbauen</td></tr></table><p>Für die ersten drei Fälle reicht meist ein Team von innen mit einem klaren Plan. Der Mandantenwechsel ist der Fall, bei dem sich externe Begleitung am schnellsten bezahlt macht, weil hier gleichzeitig Sicherheit, Zugriff und Datenanbindung neu entstehen.</p><h2>Was passiert mit Row-Level Security und Berechtigungen?</h2><p>Das ist der Teil, der am häufigsten still danebengeht, weil ein Bericht mit kaputter Sicherheit trotzdem lädt und Zahlen zeigt. Nur eben die falschen für die falschen Leute.</p><p>Die RLS-Rollen selbst wandern zwar im Modell mit, aber die Zuordnung von Personen zu Rollen tut das im neuen Arbeitsbereich nicht immer. Prüfen Sie nach dem Umzug jede Rolle mit der Funktion &quot;Als anzeigen&quot; (View As) direkt in Power BI Desktop oder im Service. Melden Sie sich testweise als eine Person aus einer Region an und kontrollieren Sie, dass wirklich nur deren Zeilen erscheinen.</p><p>Zweitens die Arbeitsbereichsrollen. Wer war Betrachter, wer Mitwirkender, wer Administrator? Diese Zuordnung bauen Sie im neuen Arbeitsbereich neu auf. Drittens die App-Zielgruppen: Wenn Sie Berichte als App verteilen, legen Sie die Zielgruppen erneut an, sonst sehen entweder alle alles oder niemand etwas. Und viertens die Vertraulichkeitskennzeichen aus Microsoft Purview, die Sie pro Bericht erneut vergeben.</p><p>Kurz gesagt: Sicherheit ist bei einer Power BI Migration kein Nebenschritt, sondern ein eigener Testlauf.</p><h2>Wie prüfen Sie die Zahlen nach der Migration?</h2><p>Mit einem Parallelbetrieb, bevor Sie die alte Umgebung abschalten. Lassen Sie beide Berichte für ein paar Tage nebeneinander laufen und vergleichen Sie dieselben Kennzahlen für denselben Zeitraum.</p><p>Wählen Sie drei bis fünf zentrale Kennzahlen aus, zum Beispiel Umsatz, Anzahl Bestellungen und Marge, und prüfen Sie sie für einen abgeschlossenen Monat auf den Cent genau. Weicht eine Zahl ab, liegt es fast immer an einer der drei bekannten Ursachen: eine Datenquelle zeigt noch auf die alte Datenbank, die inkrementelle Aktualisierung hat einen Zeitraum ausgelassen, oder eine RLS-Rolle filtert anders als vorher.</p><p>Kontrollieren Sie zusätzlich den Zeitpunkt der letzten Aktualisierung. Ein Bericht, der aussieht wie erwartet, aber seit drei Tagen keine neuen Daten gezogen hat, ist gefährlicher als ein sichtbar leerer Bericht. Erst wenn die Zahlen an mehreren Tagen übereinstimmen und die Aktualisierung sauber durchläuft, schalten Sie die alte Umgebung ab. Dieser Beweis ist der eigentliche Abschluss des Projekts.</p><h2>Häufige Fragen</h2><p>Wie lange dauert eine Power BI Migration?
+Für einen einzelnen Arbeitsbereich mit einer Handvoll Berichten reichen oft ein bis zwei Tage. Ein Wechsel zwischen zwei Mandanten mit hundert Berichten und dutzenden Rollen zieht sich über zwei bis vier Wochen, weil Sicherheit und Zugriff dort komplett neu entstehen.</p><p>Ziehen die Anmeldedaten mit der .pbix-Datei um?
+Nein. Eine .pbix-Datei speichert bewusst keine Passwörter. Sie tragen die Zugangsdaten für jede Datenquelle im neuen Arbeitsbereich erneut ein, sonst bleibt die geplante Aktualisierung stehen.</p><p>Was passiert mit der inkrementellen Aktualisierung?
+Der Aktualisierungsverlauf und die Partitionen wandern nicht mit. Prüfen Sie die Parameter RangeStart und RangeEnd und planen Sie die erste, vollständige Aktualisierung außerhalb der Stoßzeiten Ihrer Quelldatenbank.</p><p>Muss ich Berichte aus Tableau neu bauen?
+Meist ja. Das Datenmodell und die Berechnungen lassen sich nicht direkt übersetzen, weil Tableau und Power BI Kennzahlen unterschiedlich aufbauen. Die Rohdatenquellen können Sie dagegen weiterverwenden.</p><p>Wann lohnt sich externe Begleitung?
+Beim Mandantenwechsel und immer dann, wenn Row-Level-Security, Vertraulichkeitskennzeichen und mehrere Gateways gleichzeitig neu entstehen. In diesen Fällen ist ein übersehener Fehler teuer, weil er erst im Monatsabschluss auffällt.</p><p>Kann ich während der Migration weiterarbeiten?
+Ja, wenn Sie einen Parallelbetrieb einrichten. Die alte Umgebung bleibt aktiv, bis die Zahlen in der neuen an mehreren Tagen übereinstimmen. Erst dann schalten Sie um.</p><p>Weiterlesen: [Migrationen zu Power BI und Azure im Überblick](/blog/power-bi-migration-guide) (Pillar) und [Tableau zu Power BI migrieren](/blog/tableau-to-power-bi-migration).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">power bi migration</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+</body></html>

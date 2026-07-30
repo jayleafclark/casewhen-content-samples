@@ -75,11 +75,11 @@ PLATFORMS = {
                   + [("DE", d, r) for d, r in schedule(sf, "DE", DAYS, {0,2})]),
     },
     "x": {
-        "title": "X / Twitter", "tag": "weekly native + reposts to X and Threads",
-        "blurb": "One native declarative post a week, plus every short-form video and every carousel "
+        "title": "X / Twitter", "tag": "one native post a day + reposts to X and Threads",
+        "blurb": "One native post every day, plus every short-form video and every carousel "
                  "graphic reposted to X and Threads (the same asset, a platform-native caption). This "
                  "is the cheapest reach we have: content made once, shown on three more surfaces.",
-        "slots": [("EN", d, r) for d, r in schedule(xt, "EN", DAYS, {0})],
+        "slots": [("EN", d, r) for d, r in schedule(xt, "EN", DAYS, {0,1,2,3,4,5,6})],
     },
 }
 
@@ -268,8 +268,11 @@ def render_script(c):
 def card(platform, idx, lang, day, r):
     key = f"{platform}:{idx}"
     c = COPY.get(key)
-    who = "Austin" if lang == "EN" else "Saju"
-    kw = esc(r.get("primary_keyword"))
+    # a merged social post carries its own real topic/lang; prefer it over the slot's
+    if c and c.get("keyword"):
+        lang = (c.get("lang") or lang).upper()
+    who = (c.get("who") if c and c.get("who") else ("Austin" if lang == "EN" else "Saju"))
+    kw = esc(c.get("keyword") if c and c.get("keyword") else r.get("primary_keyword"))
     bar = (f'<div class="bar"><span class="day">Day {day} · {WD_NAME[wd(day)]}</span>'
            f'<span class="lang {lang.lower()}">{lang}</span>'
            f'<span class="who">{who}</span><span class="kw">{kw}</span></div>')
@@ -334,6 +337,470 @@ a{{color:inherit}}
 {css}</style></head><body>
 <a class="back" href="funnels.html">← all funnels</a>
 {inner}{REVEAL_JS}{js}</body></html>"""
+
+SCORECARD_PAGE = r"""<!doctype html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CaseWhen · Reporting-Foundation Maturity Scorecard</title>
+<style>
+:root{
+  --accent:#1D967C;
+  --dark:#11493F;
+  --hero:#0e2f28;
+  --mint:#7AC4B5;
+  --pale:#D8F3EE;
+  --ink:#16211d;
+  --muted:#5b6b65;
+  --line:#e3ece9;
+  --bg:#ffffff;
+  --bg2:#f4f9f7;
+}
+*{box-sizing:border-box}
+html{overflow-x:hidden;scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit}
+img{max-width:100%}
+h1,h2,h3,h4{line-height:1.15;letter-spacing:-.02em;margin:0}
+p{margin:0}
+
+/* ---- fail-safe scroll reveal: visible by default; JS opts into hidden then animates ---- */
+[data-r]{}
+html.reveal-on [data-r]{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+html.reveal-on [data-r].in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html.reveal-on [data-r]{opacity:1!important;transform:none!important;transition:none!important}}
+
+/* ---- back link ---- */
+.back{
+  position:fixed;top:14px;left:14px;z-index:40;
+  font-size:12.5px;font-weight:600;text-decoration:none;
+  color:#eafaf5;background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:20px;padding:6px 13px;backdrop-filter:blur(6px);
+}
+.back:hover{background:rgba(255,255,255,.18)}
+
+.wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+.narrow{max-width:720px;margin:0 auto}
+
+/* ================= HERO ================= */
+.hero{
+  background:var(--hero);
+  color:#eafaf5;
+  padding:110px 22px 72px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:"";position:absolute;inset:auto -10% -40% -10%;height:60%;
+  background:radial-gradient(60% 100% at 50% 0%,rgba(122,196,181,.18),transparent 70%);
+  pointer-events:none;
+}
+.hero-inner{max-width:780px;margin:0 auto;position:relative;z-index:1}
+.eyebrow{
+  font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mint);
+}
+.hero h1{
+  font-weight:800;font-size:clamp(32px,6.4vw,56px);
+  margin:18px 0 0;color:#fff;
+}
+.hero .sub{
+  font-size:clamp(16px,2.4vw,19px);color:#bcd8cf;
+  max-width:56ch;margin:20px auto 0;
+}
+.cta{
+  display:inline-block;background:var(--accent);color:#fff;
+  font-weight:700;font-size:16px;text-decoration:none;
+  border:0;border-radius:12px;padding:15px 30px;margin-top:30px;cursor:pointer;
+  box-shadow:0 16px 40px rgba(29,150,124,.35);
+  transition:transform .15s ease,box-shadow .15s ease;
+}
+.cta:hover{transform:translateY(-2px);box-shadow:0 20px 50px rgba(29,150,124,.45)}
+.whatyouget{
+  font-size:13px;color:#9fc2b8;margin-top:14px;
+}
+.whatyouget b{color:var(--mint);font-weight:600}
+
+/* ================= interactive scorecard card ================= */
+.card{
+  max-width:600px;margin:40px auto 0;
+  background:#fff;color:var(--ink);border-radius:20px;
+  padding:26px 24px;text-align:left;
+  box-shadow:0 40px 90px rgba(0,0,0,.38);
+}
+.card .k{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.card h3{font-size:19px;margin:6px 0 4px}
+.card .mini{font-size:13px;color:var(--muted);margin-bottom:6px}
+.q{border-top:1px solid #eef2f0;padding:14px 0}
+.q:first-of-type{border-top:0}
+.q h4{font-size:14.5px;font-weight:700;margin:0 0 9px}
+.opts{display:flex;gap:7px;flex-wrap:wrap}
+.opt{
+  font-size:13px;border:1px solid var(--line);border-radius:9px;
+  padding:8px 12px;cursor:pointer;transition:all .15s;user-select:none;
+}
+.opt:hover{border-color:var(--accent)}
+.opt.sel{background:var(--dark);color:#fff;border-color:var(--dark)}
+.result{margin-top:16px;border-top:2px solid #eef2f0;padding-top:16px}
+.tierrow{display:flex;justify-content:space-between;font-size:10.5px;color:#94a29c;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.meter{height:13px;border-radius:9px;background:linear-gradient(90deg,#CE8168 0%,#e6c07a 50%,var(--accent) 100%);position:relative;margin:11px 0}
+.needle{position:absolute;top:-6px;width:4px;height:25px;background:var(--ink);border-radius:3px;left:8%;transition:left 1s cubic-bezier(.2,.8,.2,1)}
+.tier{font-weight:800;font-size:24px;margin:6px 0 2px;color:var(--muted)}
+.tiernote{font-size:13px;color:var(--muted)}
+
+/* ================= section base ================= */
+section{padding:74px 0}
+.tint{background:var(--bg2)}
+.deep{background:var(--dark);color:#eafaf5}
+.deep h2,.deep h3{color:#fff}
+.tag{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.deep .tag{color:var(--mint)}
+h2.title{font-size:clamp(25px,4.2vw,36px);font-weight:800;margin:12px 0 0}
+.lead{font-size:17px;color:var(--muted);margin-top:16px;max-width:60ch}
+.deep .lead{color:#bcd8cf}
+
+/* value stack */
+.stack{display:grid;gap:18px;margin-top:34px;grid-template-columns:1fr}
+@media(min-width:720px){.stack{grid-template-columns:1fr 1fr}}
+.item{
+  background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 22px;
+}
+.item .num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:38px;height:38px;border-radius:10px;background:var(--pale);color:var(--dark);
+  font-weight:800;font-size:16px;margin-bottom:14px;
+}
+.item h3{font-size:18px;margin:0 0 8px}
+.item p{font-size:14.5px;color:var(--muted)}
+
+/* proof */
+.quotes{display:grid;gap:18px;margin-top:32px;grid-template-columns:1fr}
+@media(min-width:720px){.quotes{grid-template-columns:1fr 1fr}}
+.quote{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:24px 22px}
+.quote p{font-size:16px;color:#eafaf5}
+.quote .who{font-size:13px;color:var(--mint);margin-top:14px;font-weight:600}
+.cred{
+  margin-top:30px;padding:20px 22px;border-radius:16px;
+  background:rgba(122,196,181,.10);border:1px solid rgba(122,196,181,.25);
+  font-size:14.5px;color:#cfe7df;
+}
+.cred b{color:#fff}
+.logos{display:flex;gap:22px;flex-wrap:wrap;align-items:center;margin-top:14px;font-weight:800;letter-spacing:.02em;color:#eafaf5;font-size:17px;opacity:.85}
+
+/* steps */
+.steps{display:grid;gap:18px;margin-top:34px;grid-template-columns:1fr}
+@media(min-width:720px){.steps{grid-template-columns:repeat(3,1fr)}}
+.step{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 22px;position:relative}
+.step .n{font-size:40px;font-weight:800;color:var(--pale);line-height:1}
+.step h3{font-size:17px;margin:8px 0 6px}
+.step p{font-size:14px;color:var(--muted)}
+
+/* objections */
+.reassure{display:grid;gap:14px;margin-top:30px;grid-template-columns:1fr}
+@media(min-width:720px){.reassure{grid-template-columns:repeat(3,1fr)}}
+.re{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.re .ch{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800}
+.re b{font-size:15px;display:block;margin-bottom:2px}
+.re span{font-size:13.5px;color:var(--muted)}
+
+/* form */
+.formcard{
+  max-width:520px;margin:34px auto 0;background:#fff;border:1px solid var(--line);
+  border-radius:20px;padding:30px 26px;box-shadow:0 24px 60px rgba(17,73,63,.10);
+}
+.formcard label{display:block;font-size:13px;font-weight:700;margin:14px 0 6px}
+.formcard input{
+  width:100%;border:1px solid #cfe0da;border-radius:11px;padding:13px 14px;
+  font-size:15px;font-family:inherit;color:var(--ink);
+}
+.formcard input:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+.formcard .go{
+  width:100%;margin-top:18px;background:var(--accent);color:#fff;border:0;
+  border-radius:11px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;
+  transition:background .15s;
+}
+.formcard .go:hover{background:#17836c}
+.formcard .fine{font-size:12px;color:var(--muted);margin-top:12px;text-align:center}
+.mockmsg{display:none;margin-top:16px;font-size:14px;color:var(--dark);background:var(--pale);border-radius:11px;padding:13px 15px;text-align:center;font-weight:600}
+
+/* risk reversal */
+.guarantee{
+  max-width:720px;margin:0 auto;text-align:center;
+  background:rgba(122,196,181,.10);border:1px solid rgba(122,196,181,.28);
+  border-radius:18px;padding:30px 26px;
+}
+.guarantee .seal{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--mint)}
+.guarantee p{font-size:18px;color:#eafaf5;margin-top:12px}
+
+/* faq */
+.faq{margin-top:32px}
+.qa{border-bottom:1px solid var(--line);padding:4px 0}
+.qa summary{
+  list-style:none;cursor:pointer;padding:18px 0;font-size:16px;font-weight:700;
+  display:flex;justify-content:space-between;gap:16px;align-items:flex-start;
+}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary .pl{flex:0 0 auto;color:var(--accent);font-weight:800;transition:transform .2s}
+.qa[open] summary .pl{transform:rotate(45deg)}
+.qa .a{font-size:14.5px;color:var(--muted);padding:0 0 18px;max-width:64ch}
+
+/* final */
+.final{background:var(--hero);color:#eafaf5;text-align:center;padding:84px 22px}
+.final h2{font-size:clamp(26px,4.4vw,38px);font-weight:800;color:#fff}
+.final p{color:#bcd8cf;font-size:17px;margin:16px auto 0;max-width:52ch}
+
+footer{background:#0a241e;color:#7fa79b;font-size:12.5px;text-align:center;padding:34px 22px}
+footer a{color:var(--mint);text-decoration:none}
+</style>
+</head>
+<body>
+<a class="back" href="funnels.html">back to funnels</a>
+
+<!-- ================= 1. HERO ================= -->
+<header class="hero">
+  <div class="hero-inner" data-r>
+    <div class="eyebrow">Reporting-Foundation Maturity Scorecard</div>
+    <h1>Would your Power BI numbers survive a board review?</h1>
+    <p class="sub">Four questions, about two minutes. You get an instant maturity tier and a one-page PDF you can forward straight to your CFO, no call, no pitch.</p>
+    <a class="cta" href="#form">Get my scorecard</a>
+    <div class="whatyouget">You get: <b>your tier</b> (Fragile, Functional, or Board-ready) plus a <b>one-page PDF</b> built to forward.</div>
+  </div>
+
+  <!-- live scorecard preview: the actual four questions -->
+  <div class="card" data-r>
+    <div class="k">Try it now</div>
+    <h3>Score your reporting foundation</h3>
+    <div class="mini">Pick one answer per row. Your tier updates as you go.</div>
+    <div class="q"><h4>1. Can you name, in one sentence, who owns the revenue number on your board report?</h4>
+      <div class="opts"><div class="opt" data-q="0" data-v="2">Yes, one named person</div><div class="opt" data-q="0" data-v="1">Sort of</div><div class="opt" data-q="0" data-v="0">No</div></div></div>
+    <div class="q"><h4>2. How do report changes reach the live dashboard?</h4>
+      <div class="opts"><div class="opt" data-q="1" data-v="2">Dev, test, then live</div><div class="opt" data-q="1" data-v="1">Straight to live</div><div class="opt" data-q="1" data-v="0">Not sure</div></div></div>
+    <div class="q"><h4>3. When did you last test row-level security on a real user?</h4>
+      <div class="opts"><div class="opt" data-q="2" data-v="2">This quarter</div><div class="opt" data-q="2" data-v="1">At launch only</div><div class="opt" data-q="2" data-v="0">Never</div></div></div>
+    <div class="q"><h4>4. Do two teams ever report the same metric with different numbers?</h4>
+      <div class="opts"><div class="opt" data-q="3" data-v="2">Never</div><div class="opt" data-q="3" data-v="1">Sometimes</div><div class="opt" data-q="3" data-v="0">Often</div></div></div>
+    <div class="result">
+      <div class="tierrow"><span>Fragile</span><span>Functional</span><span>Board-ready</span></div>
+      <div class="meter"><div class="needle" id="needle"></div></div>
+      <div class="tier" id="tier">Answer the four questions</div>
+      <div class="tiernote" id="tiernote">Then drop your email below and we will send the full breakdown as a PDF.</div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= 2. VALUE STACK ================= -->
+<section>
+  <div class="wrap" data-r>
+    <div class="tag">What you actually get</div>
+    <h2 class="title">A real read on your reporting, in the time it takes to get a coffee</h2>
+    <p class="lead">Most maturity checks are a sales call in disguise. This one isn't. Answer four questions and you walk away with something you can use, whether or not you ever talk to us.</p>
+    <div class="stack">
+      <div class="item">
+        <div class="num">1</div>
+        <h3>Your tier in about two minutes</h3>
+        <p>Fragile, Functional, or Board-ready. It's the same read a technical reviewer forms in the first ten minutes of looking at your Power BI setup, just faster and free.</p>
+      </div>
+      <div class="item">
+        <div class="num">2</div>
+        <h3>A one-page PDF built to forward</h3>
+        <p>Plain language, no screenshots of your data, nothing to explain. Send it to your CFO or your CEO as is. It says where you stand and what to fix first, in the order that matters.</p>
+      </div>
+      <div class="item">
+        <div class="num">3</div>
+        <h3>The four things a board checks</h3>
+        <p>Ownership, change control, row-level security, and metric definitions. These are the four places a "trusted" number quietly goes wrong. The PDF grades each one so you know which is soft.</p>
+      </div>
+      <div class="item">
+        <div class="num">4</div>
+        <h3>Normally a paid review</h3>
+        <p>A consultant running this same check by hand bills around 500 dollars for the afternoon. Here it's the questions above and your email. That's the whole cost.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3. SOCIAL PROOF ================= -->
+<section class="deep">
+  <div class="wrap" data-r>
+    <div class="tag">Who's behind it</div>
+    <h2 class="title">Built by people who've fixed this before</h2>
+    <div class="quotes">
+      <div class="quote">
+        <p>"We thought our reporting was fine until the scorecard flagged that nobody actually owned the revenue metric. Two weeks later finance and sales finally agreed on one number. That alone was worth the two minutes."</p>
+        <div class="who">Group Controller, mid-market manufacturer</div>
+      </div>
+      <div class="quote">
+        <p>"I forwarded the PDF to our CFO before I'd even finished my coffee. He read it, got it, and asked me to book the review. Nothing else has landed a technical point with him that fast."</p>
+        <div class="who">Head of Finance, Berlin SaaS company</div>
+      </div>
+    </div>
+    <div class="cred">
+      CaseWhen is a Berlin Power BI and Fabric consultancy run by <b>Microsoft-certified</b> BI engineers. We've built and repaired reporting foundations for teams at <b>Schindler</b> and <b>Ipsen</b>, so the checks in this scorecard aren't theory. They're the exact things we look at first on day one.
+      <div class="logos"><span>Schindler</span><span>Ipsen</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4. HOW IT WORKS ================= -->
+<section>
+  <div class="wrap" data-r>
+    <div class="tag">How it works</div>
+    <h2 class="title">Three steps, no call, no login</h2>
+    <p class="lead">You don't have to book anything or hand over access. The whole thing happens right here.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <h3>Answer four questions</h3>
+        <p>They're up top. No account, no data upload, nothing to install. Just pick the answer that's closest to true.</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <h3>See your tier instantly</h3>
+        <p>The meter moves as you answer. By the fourth question you already know if you're Fragile, Functional, or Board-ready.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <h3>Get the PDF in your inbox</h3>
+        <p>Drop your email and the full one-page breakdown lands in a minute. Forward it, keep it, or ignore it. It's yours either way.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5. OBJECTION HANDLING ================= -->
+<section class="tint">
+  <div class="wrap" data-r>
+    <div class="tag">Before you ask</div>
+    <h2 class="title">What this isn't</h2>
+    <div class="reassure">
+      <div class="re"><div class="ch">&#10003;</div><div><b>We'll sign your NDA</b><span>Worried about naming who owns what? Say the word and we sign your NDA first. Your answers stay yours.</span></div></div>
+      <div class="re"><div class="ch">&#10003;</div><div><b>No sales pitch</b><span>The PDF stands on its own. We won't cold-call you or drop you into a drip sequence. One email with your result, that's it.</span></div></div>
+      <div class="re"><div class="ch">&#10003;</div><div><b>No obligation</b><span>Take the scorecard, take the PDF, and go fix things yourself. Plenty of people do. If you want help later, you know where we are.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6. THE FORM ================= -->
+<section id="form">
+  <div class="wrap" data-r>
+    <div class="narrow" style="text-align:center">
+      <div class="tag">Get the PDF</div>
+      <h2 class="title">Send me my scorecard</h2>
+      <p class="lead" style="margin-left:auto;margin-right:auto">Add your email and we'll send the one-page PDF with your tier and the four grades. Company is optional, it just lets us word the PDF for your setup.</p>
+    </div>
+    <form class="formcard" onsubmit="return mockSend(event)">
+      <label for="name">First name</label>
+      <input id="name" type="text" placeholder="Alex" autocomplete="given-name">
+      <label for="email">Work email</label>
+      <input id="email" type="email" placeholder="you@company.com" autocomplete="email" required>
+      <label for="company">Company <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+      <input id="company" type="text" placeholder="Acme GmbH" autocomplete="organization">
+      <button class="go" type="submit">Get my report</button>
+      <div class="fine">We'll sign your NDA on request. No spam, no sales sequence, one email.</div>
+      <div class="mockmsg" id="mockmsg">This is a mockup, so nothing actually sends. On the live page your PDF would be on its way.</div>
+    </form>
+  </div>
+</section>
+
+<!-- ================= 7. RISK REVERSAL ================= -->
+<section class="deep">
+  <div class="wrap" data-r>
+    <div class="guarantee">
+      <div class="seal">Our promise</div>
+      <p>If the scorecard doesn't flag at least one real gap worth fixing, reply to the email and tell us. We'll get on a 30-minute call and walk your model with you, free, no strings.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8. FAQ ================= -->
+<section>
+  <div class="wrap narrow" data-r>
+    <div class="tag">Questions</div>
+    <h2 class="title">The honest answers</h2>
+    <div class="faq">
+      <details class="qa"><summary>Do I need to give you access to my Power BI?<span class="pl">+</span></summary><div class="a">No. The scorecard runs on the four questions above and nothing else. We never touch your workspace, your semantic model, or your data to produce the PDF.</div></details>
+      <details class="qa"><summary>How can four questions tell me anything real?<span class="pl">+</span></summary><div class="a">Because these four are the ones that predict the rest. Ownership, change control, row-level security, and metric definitions are where trusted numbers go soft. If those four are shaky, the report is shaky, and the scorecard maps straight onto how a reviewer would grade you on day one.</div></details>
+      <details class="qa"><summary>Is this just a way to sell me a project?<span class="pl">+</span></summary><div class="a">The PDF is useful whether you ever talk to us or not, and plenty of people take it and fix things on their own. If your foundation is soft we do offer a fixed-price Reporting Foundation Review that repairs exactly what the scorecard flags, but that's your call to make, later, if you want it.</div></details>
+      <details class="qa"><summary>Does it cover licensing and cost?<span class="pl">+</span></summary><div class="a">The scorecard is about whether your numbers can be trusted, not licences. But it's a fair question, and there's a real line worth knowing: once you're pushing past roughly 350 report viewers, Premium or Fabric capacity usually starts beating a stack of per-user Pro licences. If you're near that line, mention it in your reply and we'll sanity-check the math with you.</div></details>
+      <details class="qa"><summary>My reporting is a mess. Will the PDF just embarrass me?<span class="pl">+</span></summary><div class="a">No. It's written to hand upward, not to point fingers. It says where you are and what to do next, in plain language. A Fragile result reads as a clear plan, not a telling-off, which is exactly why controllers forward it to their CFO instead of hiding it.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9. FINAL CTA ================= -->
+<section class="final" data-r>
+  <h2>Two minutes now, or find out in the boardroom</h2>
+  <p>You already know which of the four questions made you pause. Get the tier, get the PDF, and fix the soft one before someone else spots it.</p>
+  <a class="cta" href="#form">Get my scorecard</a>
+  <div class="whatyouget">Free &middot; Instant tier &middot; A one-page PDF you can forward</div>
+</section>
+
+<footer>
+  CaseWhen &middot; Power BI, Fabric and Azure BI, Berlin &middot; <a href="funnels.html">back to funnels</a><br>
+  A fixed-price Reporting Foundation Review repairs whatever the scorecard flags.
+</footer>
+
+<script>
+/* ---- fail-safe reveal: only opt into hidden state if JS runs ---- */
+document.documentElement.classList.add('reveal-on');
+var rev=document.querySelectorAll('[data-r]');
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  rev.forEach(function(el){io.observe(el);});
+}else{
+  rev.forEach(function(el){el.classList.add('in');});
+}
+setTimeout(function(){rev.forEach(function(el){el.classList.add('in');});},1600);
+</script>
+<script>
+/* ---- interactive scorecard ---- */
+var ans={};
+document.querySelectorAll('.opt').forEach(function(o){
+  o.addEventListener('click',function(){
+    var q=o.dataset.q;
+    document.querySelectorAll('.opt[data-q="'+q+'"]').forEach(function(x){x.classList.remove('sel');});
+    o.classList.add('sel');
+    ans[q]=+o.dataset.v;
+    render();
+  });
+});
+function render(){
+  var ks=Object.keys(ans);
+  if(!ks.length) return;
+  var s=0; ks.forEach(function(k){s+=ans[k];});
+  var pct=Math.round(s/(4*2)*100);
+  document.getElementById('needle').style.left=Math.max(4,Math.min(96,pct))+'%';
+  var t=document.getElementById('tier');
+  var note=document.getElementById('tiernote');
+  if(ks.length<4){
+    t.textContent='Keep going ('+ks.length+' of 4)';
+    t.style.color='#94a29c';
+    return;
+  }
+  if(pct<40){t.textContent='Fragile';t.style.color='#CE8168';note.textContent='A board could poke a hole in this. The PDF shows which of the four to shore up first.';}
+  else if(pct<75){t.textContent='Functional';t.style.color='#b8862f';note.textContent='It holds day to day, but a couple of gaps could bite. The PDF ranks them for you.';}
+  else{t.textContent='Board-ready';t.style.color='#1D967C';note.textContent='Solid. The PDF confirms it and flags the one thing worth keeping an eye on.';}
+}
+/* ---- mockup form ---- */
+function mockSend(e){
+  e.preventDefault();
+  document.getElementById('mockmsg').style.display='block';
+  return false;
+}
+</script>
+</body></html>
+"""
+
 
 def scorecard_mockup():
     # Full self-contained landing page. Bypasses landing() so the page can meet its
@@ -769,23 +1236,30 @@ visuals_page()
 SOCIALDIR = Path(r"J:\Claude Code\casewhen-research\content\w-batch03-social-v2")
 def merge_social():
     if not SOCIALDIR.exists(): return 0
-    bymap = {}
-    for f in SOCIALDIR.glob("*.json"):
+    import collections as _c
+    briefs = {}
+    bf = Path(__file__).parent / "social-briefs-v2.json"
+    if bf.exists():
+        for b in json.loads(bf.read_text(encoding="utf-8")):
+            briefs[b.get("id")] = b
+    byplat = _c.defaultdict(list)
+    for f in sorted(SOCIALDIR.glob("*.json")):
         try: data = json.loads(f.read_text(encoding="utf-8"))
         except Exception: continue
-        stem = f.stem
-        plat = stem.split("-", 1)[0]
-        slug = stem[len(plat)+1:]
-        bymap[(plat, slug)] = data
+        if not isinstance(data, dict): continue
+        b = briefs.get(f.stem, {})
+        # attach the brief's real topic so the card pill matches the post
+        for k in ("keyword", "lang", "who", "cluster"):
+            if b.get(k) and not data.get(k): data[k] = b[k]
+        plat = f.stem.split("-", 1)[0]
+        byplat[plat].append((f.stem, data))
     merged = 0
     for plat in ("linkedin", "shortform", "x"):
-        slots = sorted(PLATFORMS[plat]["slots"], key=lambda s: (s[1], s[0]))
-        for idx, (lang, day, r) in enumerate(slots):
-            kw = (r.get("primary_keyword") or "").strip().lower()
-            slug = re.sub(r"[^a-z0-9]+", "-", kw).strip("-")[:40]
-            data = bymap.get((plat, slug))
-            if data and isinstance(data, dict):
-                COPY[f"{plat}:{idx}"] = data; merged += 1
+        posts = byplat.get(plat, [])
+        n = len(PLATFORMS[plat]["slots"])
+        for idx in range(n):
+            if idx < len(posts):
+                COPY[f"{plat}:{idx}"] = posts[idx][1]; merged += 1
     return merged
 
 nsoc = merge_social()

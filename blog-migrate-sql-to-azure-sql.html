@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Migrate SQL to Azure SQL: what breaks, and how to catch it b</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>migrate sql to azure sql</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Organizations with data good enough to use for AI</figcaption><div class="cbar"><span class="cl">Ready</span><div class="ctrack"><div class="cfill" style="width:13%"></div></div><span class="cv">12%</span></div><div class="cbar"><span class="cl">Not ready</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">88%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><h1>Migrate SQL to Azure SQL: what breaks, and how to catch it before go-live</h1><div class="qa"><b>Quick answer.</b> To migrate SQL to Azure SQL, first pick the right target: Azure SQL Database for a self-contained app, or Managed Instance when you need SQL Server Agent, cross-database queries, or linked servers. Run Data Migration Assistant to find blockers, move the data with Azure Database Migration Service, then compare row counts before you cut over.
+---</div><p>If you plan to migrate SQL to Azure SQL, moving the data is the easy part. The hard part is catching what changed during the move. A stored procedure times out at month-end. A nightly load never runs. A report shows half the rows it did last week. None of that shows up while you are copying tables. It shows up three weeks after go-live, in front of the people who trust the numbers.</p><p>Here is the checklist we run on real projects, in order.</p><h2>Why do SQL to Azure SQL migrations break after go-live?</h2><p>Azure SQL runs a trimmed set of the features you get on a SQL Server you host yourself. That is the whole problem in one line.</p><p>Azure SQL Database, the platform-as-a-service option, drops several server-level features. There is no SQL Server Agent. Cross-database queries do not work by default. Linked servers are gone. Database Mail is gone. Azure SQL Managed Instance keeps most of them, which is why the choice of target matters so much.</p><p>Most teams test the tables and forget the jobs and connections. The data lands fine, so the move looks done. Then the first month-end close finds the gap: the scheduled load that used to run at 2 a.m. was never recreated, and no report warns you. The report just goes stale.</p><h2>Which Azure SQL target should you pick?</h2><p>You have three targets. The choice decides how much you rebuild after the move.</p><table><tr><th>Target</th><th>Best for</th><th>Keeps SQL Agent, cross-db, linked servers?</th><th>Change needed</th></tr><tr><td>Azure SQL Database</td><td>One app database, cloud-native scaling</td><td>No</td><td>Higher if the app uses server-level features</td></tr><tr><td>Azure SQL Managed Instance</td><td>Lifting a SQL Server with jobs and dependencies</td><td>Yes</td><td>Lower, near full compatibility</td></tr><tr><td>SQL Server on Azure VM</td><td>Full control and OS access</td><td>Yes, full SQL Server</td><td>Lowest code change, highest upkeep</td></tr></table><p>Most business databases land on one of the first two. Pick Azure SQL Database when the app is self-contained and you want the cloud to handle scaling and patching. It also offers a Hyperscale tier for very large databases. Pick Managed Instance when you rely on SQL Agent jobs, three-part names, or linked servers, since it gives you close to full SQL Server compatibility.</p><p>The VM option is a straight lift. You keep the whole SQL Server, and you also keep every task that comes with running your own server: patching, backups, and OS updates. Most teams use it only when a feature will not run anywhere else.</p><p>Decide this before you migrate to Azure SQL, because changing the target later means redoing the move.</p><h2>How do you migrate SQL to Azure SQL step by step?</h2><ol><li>Assess first. Run Data Migration Assistant, a free Microsoft tool. It reads your database and lists blockers and behavior changes before you touch anything. Read the whole report, not the summary line.</li><li>Pick the target from that report. Database, Managed Instance, or VM. Let the blockers decide, not a preference.</li><li>Right-size the tier. Azure SQL uses vCore or DTU pricing. Start from your current CPU, memory, and storage numbers, not a guess. You can scale up later, so start close and adjust.</li><li>Move the data. For small databases, export a BACPAC with `sqlpackage`. For large databases or near-zero downtime, use Azure Database Migration Service in online mode, which keeps the source running while it syncs.</li><li>Rebuild what does not travel. SQL Agent jobs move to Elastic Jobs or the Managed Instance Agent. Recreate linked servers and Database Mail where you still need them.</li><li>Repoint connection strings. Add retry logic for transient faults, because Azure SQL will drop a connection now and then.</li><li>Validate, then cut over in a low-traffic window.</li></ol><p>Steps 1 and 4 get all the attention. Step 5 is where most surprises come from, because it covers everything that lives outside the tables. Give it a full day of its own and write down each job you rebuild.</p><h2>What breaks that nobody warns you about?</h2><p>Five things trip up almost every first migration.</p><p>SQL Server Agent jobs. Azure SQL Database has no Agent at all. Your nightly load just stops running. Use Elastic Jobs, or move to Managed Instance, which has its own Agent.</p><p>Cross-database queries. Three-part names like `sales.dbo.orders` return an error on Azure SQL Database. Managed Instance supports them, so if your code joins across databases, that alone can decide the target.</p><p>Linked servers. Same story. They work on Managed Instance and on a VM, and they are gone on Azure SQL Database. Replacing them often means rewriting a report or an integration.</p><p>Connection drops. Azure SQL moves your database to a new node during maintenance and failovers. A connection that always worked will now drop sometimes. Apps without retry logic throw errors that look random and waste a day of debugging.</p><p>Collation and compatibility level. Set the compatibility level to match the old server first. Test on that. Then raise it on purpose once you have proof the queries still behave.</p><h2>How do you know the migration really worked?</h2><p>Do not trust a green checkmark. Trust counts.</p><p>Compare row counts table by table, old against new. Run a checksum on the big tables. Replay a real workload and watch Query Store for queries that got slower after the move. Look hard at your ten slowest reports, because those are the ones users notice.</p><p>This step earns its time. A migration that drops rows or slows queries corrupts every report built on that data. Poor data quality costs organizations $12.9M per year on average (Gartner). A small row-count gap after a move is exactly how a bill like that starts, and it hides for weeks because the numbers still look plausible.</p><p>Keep the old database in read-only mode for a rollback window, say two weeks, before you retire it. If your dashboards read from this database, treat your reporting move as a separate track. A Tableau to Power BI migration, for example, should wait until the data layer is stable. Move the data first, prove it, then move the reports on top of it.</p><p>Read next: [Data migration to Azure, start to finish](/blog/data-migration-to-azure) and [Tableau to Power BI migration](/blog/blog-tableau-to-power-bi-migration).</p><h2>Frequently asked questions</h2><p>How long does it take to migrate SQL to Azure SQL?
+Assessment takes a day or two. The data move can take a few hours. Validation and rebuilding jobs take the most time, often one to two weeks for a database with real dependencies. A clean, self-contained database can go faster.</p><p>Do I need Managed Instance or Azure SQL Database?
+If you run Agent jobs, join across databases, or depend on linked servers, choose Managed Instance. If the database stands on its own, Azure SQL Database costs less and scales more easily. When you are unsure, let the Data Migration Assistant report make the call for you.</p><p>Will my apps need code changes?
+Connection strings change, and you should add retry logic for transient faults. On Azure SQL Database, three-part names and linked servers need rework. Managed Instance usually needs the least code change.</p><p>Can I migrate with almost no downtime?
+Yes. Azure Database Migration Service has an online mode. It keeps the source running while it syncs, so cutover is a short switch instead of a long outage.</p><p>What happens to my backups?
+Azure SQL takes automatic backups and supports point-in-time restore, up to 35 days by default. You do not manage the backup schedule yourself, which removes one job you used to own.</p><p>Is Data Migration Assistant free?
+Yes. It is a free Microsoft download, and running it before you plan anything is the cheapest hour in the whole project.</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">migrate sql to azure sql</span><span class="c">tableau to power bi migration</span><span class="c">migrate to azure sql</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+</body></html>
