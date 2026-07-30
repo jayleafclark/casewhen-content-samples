@@ -19,7 +19,21 @@
         "layout": "value",
         "num": "2 of 5",
         "headline": "Two dashboards, two answers",
-        "subtext": "Sales shows one revenue figure and Finance shows another, both on screen in the same meeting. The gap is almost never the chart. It is that nobody agreed what revenue means before anyone measured it."
+        "subtext": "Sales shows one revenue figure and Finance shows another, both on screen in the same board meeting. The gap is almost never the chart. Nobody agreed what revenue means before it was measured.",
+        "viz": {
+          "type": "bars",
+          "title": "Same month, one metric, two numbers (€ thousands)",
+          "data": [
+            [
+              "Sales",
+              1240
+            ],
+            [
+              "Finance",
+              1020
+            ]
+          ]
+        }
       },
       {
         "layout": "bignum",

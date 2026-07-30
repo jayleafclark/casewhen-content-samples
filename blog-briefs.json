@@ -1,0 +1,389 @@
+[
+ {
+  "day": 1,
+  "lang": "DE",
+  "keyword": "bedeutung kpi",
+  "secondary": "kpi definition; kpi dashboard; datenmodell",
+  "title": "Bedeutung KPI einfach erklaert",
+  "cluster": "KPI",
+  "slug": "blog-bedeutung-kpi"
+ },
+ {
+  "day": 1,
+  "lang": "EN",
+  "keyword": "power bi certification",
+  "secondary": "power bi training; power bi classes; power bi course",
+  "title": "Power BI Certification: What Actually Gets You Hired in 2026",
+  "cluster": "Training",
+  "slug": "blog-power-bi-certification"
+ },
+ {
+  "day": 2,
+  "lang": "EN",
+  "keyword": "power bi training",
+  "secondary": "power bi classes; power bi course; course on power bi",
+  "title": "Power BI Training, Explained Without the Sales Pitch",
+  "cluster": "Training",
+  "slug": "blog-power-bi-training"
+ },
+ {
+  "day": 3,
+  "lang": "DE",
+  "keyword": "kpi definition",
+  "secondary": "kpi dashboard; datenmodell; datenmodelle",
+  "title": "KPI Definition: Grundlagen",
+  "cluster": "KPI",
+  "slug": "blog-kpi-definition"
+ },
+ {
+  "day": 3,
+  "lang": "EN",
+  "keyword": "power bi classes",
+  "secondary": "power bi course; course on power bi; courses for power bi",
+  "title": "The Real Guide to Power BI Classes",
+  "cluster": "Training",
+  "slug": "blog-power-bi-classes"
+ },
+ {
+  "day": 4,
+  "lang": "EN",
+  "keyword": "power bi course",
+  "secondary": "course on power bi; courses for power bi; power bi tutorial",
+  "title": "Power BI Course: What It Actually Teaches (and What It Doesn't)",
+  "cluster": "Training",
+  "slug": "blog-power-bi-course"
+ },
+ {
+  "day": 5,
+  "lang": "DE",
+  "keyword": "kpi dashboard",
+  "secondary": "datenmodell; datenmodelle; datenmodellierung",
+  "title": "KPI Dashboard - Ein echtes Beispiel",
+  "cluster": "KPI",
+  "slug": "blog-kpi-dashboard"
+ },
+ {
+  "day": 5,
+  "lang": "EN",
+  "keyword": "course on power bi",
+  "secondary": "courses for power bi; power bi tutorial; tutorial for power bi",
+  "title": "Is Course On Power BI Actually Worth It? A Straight Answer",
+  "cluster": "Training",
+  "slug": "blog-course-on-power-bi"
+ },
+ {
+  "day": 6,
+  "lang": "EN",
+  "keyword": "courses for power bi",
+  "secondary": "power bi tutorial; tutorial for power bi; microsoft certified power bi data analyst associate",
+  "title": "Courses For Power BI: The Path That Skips the Wasted Months",
+  "cluster": "Training",
+  "slug": "blog-courses-for-power-bi"
+ },
+ {
+  "day": 7,
+  "lang": "EN",
+  "keyword": "power bi tutorial",
+  "secondary": "tutorial for power bi; microsoft certified power bi data analyst associate; microsoft certified powerbi data analyst associate",
+  "title": "Power BI Tutorial: What Actually Gets You Hired in 2026",
+  "cluster": "Training",
+  "slug": "blog-power-bi-tutorial"
+ },
+ {
+  "day": 8,
+  "lang": "DE",
+  "keyword": "datenmodell",
+  "secondary": "datenmodelle; datenmodellierung; relationale datenmodell",
+  "title": "Datenmodell einfach erklaert",
+  "cluster": "KPI",
+  "slug": "blog-datenmodell"
+ },
+ {
+  "day": 8,
+  "lang": "EN",
+  "keyword": "tutorial for power bi",
+  "secondary": "microsoft certified power bi data analyst associate; microsoft certified powerbi data analyst associate; microsoft power bi certification",
+  "title": "Tutorial For Power BI, Explained Without the Sales Pitch",
+  "cluster": "Training",
+  "slug": "blog-tutorial-for-power-bi"
+ },
+ {
+  "day": 9,
+  "lang": "EN",
+  "keyword": "microsoft certified power bi data analyst associate",
+  "secondary": "microsoft certified powerbi data analyst associate; microsoft power bi certification; microsoft power bi training",
+  "title": "The Real Guide to Microsoft Certified Power BI Data Analyst Associate",
+  "cluster": "Training",
+  "slug": "blog-microsoft-certified-power-bi-data-analyst-associate"
+ },
+ {
+  "day": 10,
+  "lang": "DE",
+  "keyword": "datenmodelle",
+  "secondary": "datenmodellierung; relationale datenmodell; sternschema",
+  "title": "Datenmodelle: Grundlagen",
+  "cluster": "KPI",
+  "slug": "blog-datenmodelle"
+ },
+ {
+  "day": 10,
+  "lang": "EN",
+  "keyword": "microsoft certified powerbi data analyst associate",
+  "secondary": "microsoft power bi certification; microsoft power bi training; microsoft power bi course",
+  "title": "Microsoft Certified Powerbi Data Analyst Associate: What It Actually Teaches (and What It Doesn't)",
+  "cluster": "Training",
+  "slug": "blog-microsoft-certified-powerbi-data-analyst-associate"
+ },
+ {
+  "day": 11,
+  "lang": "EN",
+  "keyword": "microsoft power bi certification",
+  "secondary": "microsoft power bi training; microsoft power bi course; microsoft power bi classes",
+  "title": "Is Microsoft Power BI Certification Actually Worth It? A Straight Answer",
+  "cluster": "Training",
+  "slug": "blog-microsoft-power-bi-certification"
+ },
+ {
+  "day": 12,
+  "lang": "DE",
+  "keyword": "datenmodellierung",
+  "secondary": "relationale datenmodell; sternschema; dashboard kpi excel",
+  "title": "Datenmodellierung - Ein echtes Beispiel",
+  "cluster": "KPI",
+  "slug": "blog-datenmodellierung"
+ },
+ {
+  "day": 12,
+  "lang": "EN",
+  "keyword": "microsoft power bi training",
+  "secondary": "microsoft power bi course; microsoft power bi classes; microsoft learn power bi",
+  "title": "Microsoft Power BI Training: The Path That Skips the Wasted Months",
+  "cluster": "Training",
+  "slug": "blog-microsoft-power-bi-training"
+ },
+ {
+  "day": 13,
+  "lang": "EN",
+  "keyword": "microsoft power bi course",
+  "secondary": "microsoft power bi classes; microsoft learn power bi; learn power bi",
+  "title": "Microsoft Power BI Course: What Actually Gets You Hired in 2026",
+  "cluster": "Training",
+  "slug": "blog-microsoft-power-bi-course"
+ },
+ {
+  "day": 14,
+  "lang": "EN",
+  "keyword": "microsoft power bi classes",
+  "secondary": "microsoft learn power bi; learn power bi; azure data engineering certification",
+  "title": "Microsoft Power BI Classes, Explained Without the Sales Pitch",
+  "cluster": "Training",
+  "slug": "blog-microsoft-power-bi-classes"
+ },
+ {
+  "day": 15,
+  "lang": "DE",
+  "keyword": "relationale datenmodell",
+  "secondary": "sternschema; dashboard kpi excel; kennzahlen definieren",
+  "title": "Relationale Datenmodell einfach erklaert",
+  "cluster": "KPI",
+  "slug": "blog-relationale-datenmodell"
+ },
+ {
+  "day": 15,
+  "lang": "EN",
+  "keyword": "microsoft learn power bi",
+  "secondary": "learn power bi; azure data engineering certification; power bi training course",
+  "title": "The Real Guide to Microsoft Learn Power BI",
+  "cluster": "Training",
+  "slug": "blog-microsoft-learn-power-bi"
+ },
+ {
+  "day": 16,
+  "lang": "EN",
+  "keyword": "learn power bi",
+  "secondary": "azure data engineering certification; power bi training course; power bi training classes",
+  "title": "Learn Power BI: What It Actually Teaches (and What It Doesn't)",
+  "cluster": "Training",
+  "slug": "blog-learn-power-bi"
+ },
+ {
+  "day": 17,
+  "lang": "DE",
+  "keyword": "sternschema",
+  "secondary": "dashboard kpi excel; kennzahlen definieren; logisches datenmodell",
+  "title": "Sternschema: Grundlagen",
+  "cluster": "KPI",
+  "slug": "blog-sternschema"
+ },
+ {
+  "day": 17,
+  "lang": "EN",
+  "keyword": "azure data engineering certification",
+  "secondary": "power bi training course; power bi training classes; microsoft power bi data analyst associate certification",
+  "title": "Is Azure Data Engineering Certification Actually Worth It? A Straight Answer",
+  "cluster": "Training",
+  "slug": "blog-azure-data-engineering-certification"
+ },
+ {
+  "day": 18,
+  "lang": "EN",
+  "keyword": "power bi training course",
+  "secondary": "power bi training classes; microsoft power bi data analyst associate certification; power bi course online",
+  "title": "Power BI Training Course: The Path That Skips the Wasted Months",
+  "cluster": "Training",
+  "slug": "blog-power-bi-training-course"
+ },
+ {
+  "day": 19,
+  "lang": "DE",
+  "keyword": "dashboard kpi excel",
+  "secondary": "kennzahlen definieren; logisches datenmodell; kpis definieren",
+  "title": "Dashboard KPI Excel - Ein echtes Beispiel",
+  "cluster": "KPI",
+  "slug": "blog-dashboard-kpi-excel"
+ },
+ {
+  "day": 19,
+  "lang": "EN",
+  "keyword": "power bi training classes",
+  "secondary": "microsoft power bi data analyst associate certification; power bi course online; power bi online training",
+  "title": "Power BI Training Classes: What Actually Gets You Hired in 2026",
+  "cluster": "Training",
+  "slug": "blog-power-bi-training-classes"
+ },
+ {
+  "day": 20,
+  "lang": "EN",
+  "keyword": "power bi report builder tutorial",
+  "secondary": "power bi course online; power bi online training; power bi classes online",
+  "title": "Power BI Report Builder Tutorial: What Actually Gets You Hired in 2026",
+  "cluster": "Training",
+  "slug": "blog-power-bi-report-builder-tutorial"
+ },
+ {
+  "day": 21,
+  "lang": "EN",
+  "keyword": "power bi course online",
+  "secondary": "power bi online training; power bi classes online; coursera power bi course",
+  "title": "The Real Guide to Power BI Course Online",
+  "cluster": "Training",
+  "slug": "blog-power-bi-course-online"
+ },
+ {
+  "day": 22,
+  "lang": "DE",
+  "keyword": "kennzahlen definieren",
+  "secondary": "logisches datenmodell; kpis definieren; semantisches datenmodell",
+  "title": "Kennzahlen Definieren einfach erklaert",
+  "cluster": "KPI",
+  "slug": "blog-kennzahlen-definieren"
+ },
+ {
+  "day": 22,
+  "lang": "EN",
+  "keyword": "power bi online training",
+  "secondary": "power bi classes online; coursera power bi course; microsoft power bi tutorial",
+  "title": "Power BI Online Training: What It Actually Teaches (and What It Doesn't)",
+  "cluster": "Training",
+  "slug": "blog-power-bi-online-training"
+ },
+ {
+  "day": 23,
+  "lang": "EN",
+  "keyword": "power bi classes online",
+  "secondary": "coursera power bi course; microsoft power bi tutorial; microsoft bi tutorial",
+  "title": "Is Power BI Classes Online Actually Worth It? A Straight Answer",
+  "cluster": "Training",
+  "slug": "blog-power-bi-classes-online"
+ },
+ {
+  "day": 24,
+  "lang": "DE",
+  "keyword": "logisches datenmodell",
+  "secondary": "kpis definieren; semantisches datenmodell; konzeptionelles datenmodell",
+  "title": "Logisches Datenmodell: Grundlagen",
+  "cluster": "KPI",
+  "slug": "blog-logisches-datenmodell"
+ },
+ {
+  "day": 24,
+  "lang": "EN",
+  "keyword": "coursera power bi course",
+  "secondary": "microsoft power bi tutorial; microsoft bi tutorial; free power bi training",
+  "title": "Coursera Power BI Course: The Path That Skips the Wasted Months",
+  "cluster": "Training",
+  "slug": "blog-coursera-power-bi-course"
+ },
+ {
+  "day": 25,
+  "lang": "EN",
+  "keyword": "microsoft power bi tutorial",
+  "secondary": "microsoft bi tutorial; free power bi training; microsoft certified power bi data analyst associate exam",
+  "title": "Microsoft Power BI Tutorial: What Actually Gets You Hired in 2026",
+  "cluster": "Training",
+  "slug": "blog-microsoft-power-bi-tutorial"
+ },
+ {
+  "day": 26,
+  "lang": "DE",
+  "keyword": "kpis definieren",
+  "secondary": "semantisches datenmodell; konzeptionelles datenmodell; kanonisches datenmodell",
+  "title": "Kpis Definieren - Ein echtes Beispiel",
+  "cluster": "KPI",
+  "slug": "blog-kpis-definieren"
+ },
+ {
+  "day": 26,
+  "lang": "EN",
+  "keyword": "microsoft bi tutorial",
+  "secondary": "free power bi training; microsoft certified power bi data analyst associate exam; power bi certifications microsoft",
+  "title": "Microsoft BI Tutorial, Explained Without the Sales Pitch",
+  "cluster": "Training",
+  "slug": "blog-microsoft-bi-tutorial"
+ },
+ {
+  "day": 27,
+  "lang": "EN",
+  "keyword": "free power bi training",
+  "secondary": "microsoft certified power bi data analyst associate exam; power bi certifications microsoft; power bi certification course",
+  "title": "The Real Guide to Free Power BI Training",
+  "cluster": "Training",
+  "slug": "blog-free-power-bi-training"
+ },
+ {
+  "day": 28,
+  "lang": "EN",
+  "keyword": "power query for beginners",
+  "secondary": "power bi certifications microsoft; power bi certification course; introduction power bi",
+  "title": "Power Query For Beginners, Explained Without the Sales Pitch",
+  "cluster": "Training",
+  "slug": "blog-power-query-for-beginners"
+ },
+ {
+  "day": 29,
+  "lang": "DE",
+  "keyword": "semantisches datenmodell",
+  "secondary": "konzeptionelles datenmodell; kanonisches datenmodell; datenmodell uml",
+  "title": "Semantisches Datenmodell einfach erklaert",
+  "cluster": "KPI",
+  "slug": "blog-semantisches-datenmodell"
+ },
+ {
+  "day": 29,
+  "lang": "EN",
+  "keyword": "power bi certifications microsoft",
+  "secondary": "power bi certification course; introduction power bi; power bi tutorial for beginners",
+  "title": "Is Power BI Certifications Microsoft Actually Worth It? A Straight Answer",
+  "cluster": "Training",
+  "slug": "blog-power-bi-certifications-microsoft"
+ },
+ {
+  "day": 30,
+  "lang": "EN",
+  "keyword": "power bi certification course",
+  "secondary": "introduction power bi; power bi tutorial for beginners; power bi beginner tutorial",
+  "title": "Power BI Certification Course: The Path That Skips the Wasted Months",
+  "cluster": "Training",
+  "slug": "blog-power-bi-certification-course"
+ }
+]
