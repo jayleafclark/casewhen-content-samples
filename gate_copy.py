@@ -3,7 +3,7 @@
 Runs the same rules as ship_check: both language scanners, em dashes, specificity
 (concrete anchor in the hook), external-facing (no internal SEO/pitch data), and the
 per-platform hook/close format. Prints PASS/FAIL per entry with evidence. Exit 1 if any fail."""
-import json, sys, subprocess, tempfile, os, importlib.util
+import json, sys, subprocess, tempfile, os, re, importlib.util
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -13,6 +13,17 @@ sc = importlib.util.module_from_spec(spec); spec.loader.exec_module(sc)
 
 store = json.loads((HERE / "copy-store.json").read_text(encoding="utf-8"))
 env = dict(os.environ, PYTHONIOENCODING="utf-8")
+
+# pull each slot's scheduled keyword so we can verify SEO exact-match in the copy
+import build_site as B
+KW = {}
+for pk, cfg in B.PLATFORMS.items():
+    for idx, (lang, day, r) in enumerate(sorted(cfg["slots"], key=lambda s: (s[1], s[0]))):
+        KW[f"{pk}:{idx}"] = (r.get("primary_keyword") or "").strip().lower()
+
+def ngrams(text, n=5):
+    w = re.findall(r"[a-z0-9']+", (text or "").lower())
+    return {" ".join(w[i:i+n]) for i in range(len(w) - n + 1)}
 
 def scan(text, script, drleaf):
     with tempfile.NamedTemporaryFile("w", suffix=".md", delete=False, encoding="utf-8") as f:
@@ -42,13 +53,51 @@ for key, c in store.items():
     if okm is False: problems.append(f"check_banned: {evm}")
     okd, evd = scan(text, sc.DRLEAF, True)
     if okd is False: problems.append(f"dr-leaf: {evd}")
+    # slogan + full-sentence hook (social)
+    slog = sc.slogan_issue(c.get("hook", ""))
+    if slog: problems.append(slog)
+    if platform in ("linkedin", "x", "shortform"):
+        frag = sc.fragment_issue(c.get("hook", ""))
+        if frag: problems.append(frag)
     # per-platform format
     if platform == "linkedin":
         if len(c.get("hook", "")) > 140: problems.append(f"hook {len(c['hook'])}c > 140")
         if not c.get("close", "").rstrip().endswith("?"): problems.append("close not a question")
+    # SEO exact-match keyword placement (top-notch, 'exactly how it is typed')
+    kw = KW.get(key, "")
+    if kw:
+        hooklow = (c.get("hook", "") or "").lower()
+        alllow = text.lower()
+        if platform == "blog":
+            if kw not in hooklow: problems.append(f"SEO: keyword '{kw}' not in H1/hook")
+            if kw not in alllow[:320]: problems.append(f"SEO: keyword '{kw}' not in first ~100 words")
+        elif platform == "shortform":
+            if kw not in alllow: problems.append(f"SEO: keyword '{kw}' not in script/caption")
+            if "caption" not in alllow: problems.append("shortform missing a caption line")
+        else:  # linkedin / x — every keyword word should anchor the post (not necessarily adjacent)
+            toks = [t for t in re.findall(r"[a-z0-9]+", kw) if len(t) > 2]
+            missing = [t for t in toks if t not in alllow]
+            if missing: problems.append(f"keyword words missing: {missing}")
     mark = "PASS" if not problems else "FAIL"
     if problems: fails += 1
-    print(f"[{mark}] {key:14} {'; '.join(problems) if problems else 'clean · specific · external · in format'}")
+    print(f"[{mark}] {key:14} {'; '.join(problems) if problems else 'clean · specific · external · SEO placed · in format'}")
 
-print(f"\n{len(store)-fails}/{len(store)} finished posts SHIP · {fails} HOLD")
+# cross-post recycling: the same message reused across formats/platforms
+print("\n-- cross-post duplication (same post reused across formats) --")
+keys = list(store.keys())
+dups = 0
+grams = {k: ngrams((store[k].get("hook","")+" "+store[k].get("body","")), 5) for k in keys}
+for a in range(len(keys)):
+    for b in range(a+1, len(keys)):
+        ka, kb = keys[a], keys[b]
+        if not grams[ka] or not grams[kb]: continue
+        shared = grams[ka] & grams[kb]
+        overlap = len(shared) / min(len(grams[ka]), len(grams[kb]))
+        if overlap >= 0.30:
+            dups += 1
+            print(f"[DUP]  {ka} ~ {kb}  ({int(overlap*100)}% shared) e.g. \"{list(shared)[0]}\"")
+if not dups: print("none — every post is a distinct message")
+fails += dups
+
+print(f"\n{len([k for k in store])-0} posts checked · {fails} problems (per-post + duplication)")
 sys.exit(1 if fails else 0)
