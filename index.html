@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>CaseWhen — content samples</title>
+<title>CaseWhen · content samples</title>
 <style>
 @font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
@@ -125,22 +125,23 @@ section{padding:52px 0;border-bottom:1px solid var(--line)}
  <p class="sd">A "quick answer" box the AI engine lifts, People-Also-Ask questions as headings, a real table, and a named byline. The opener names the exact problem, not a vague claim.</p>
 
  <div class="blog">
-  <div class="cover"><div class="eb">Governance · Austin Levine</div><h3>Two people ask Power BI for "last month's revenue" and get two different numbers</h3></div>
+  <div class="cover"><div class="eb">Governance · Austin Levine</div><h3>Why two people can pull the same number in Power BI and get two different answers</h3></div>
   <div class="body">
-   <div class="qa"><b>Quick answer.</b> A data governance framework is the written set of rules that gives every metric one definition, one owner, one place that definition lives, and one path a change takes before it reaches a live report. It stops the same metric from returning two different numbers to two people.</div>
-   <p>Here is the exact problem, with no wrapping. Two people on your finance team can open Power BI right now, both ask for last month's revenue, and get different numbers. One report counts returns and credit notes. The other does not. Both are correct. The board sees one of them, and nobody wrote down which is the reported figure. This has nothing to do with the formula, and nobody can fix it in DAX.</p>
-   <div class="q">Why does the same metric show two numbers?</div>
-   <p><b>Because two people defined it differently and nobody wrote down the correct version.</b> "Revenue last month" gets booked gross in the sales report, net of returns in finance, and by delivery date in operations. Three numbers, all calculated correctly, none agreed. When two of them reach a board meeting, the more senior person's version wins. Seniority decides the number.</p>
+   <div class="qa"><b>Quick answer.</b> A data governance framework is a short set of written rules for your company's numbers. For each important number, the rules say what it means, who is in charge of it, where the meaning is written down, and how someone is allowed to change it. When these rules exist, everyone who looks up that number gets the same answer. When they do not, two people can look up the same number and get two different answers, and both of them are technically correct.</div>
+   <p>Most people think a wrong number in a board report is a formula error. In almost every review we run, the formula is correct. The problem is that nobody agreed on what the number is supposed to mean, and nobody was put in charge of deciding.</p>
+   <p>Here is what that looks like in practice. Sales reports last month's revenue as one figure. Finance reports a smaller figure because they took out returns and credit notes. Operations reports a third figure because they counted orders by the date they shipped instead of the date they were invoiced. All three teams did their maths correctly, and the three numbers still do not match, because nobody told them which definition of revenue is the official one.</p>
+   <div class="q">Why does the same number come out two different ways?</div>
+   <p><b>Because two people defined it differently and nobody wrote down which definition is correct.</b> Once two versions are live in Power BI, the reports will disagree until someone decides which version is the correct one and writes it down. When two of those numbers reach the same meeting, the more senior person's version usually wins.</p>
    <div class="q">Do you need Microsoft Fabric to get governance right?</div>
-   <p><b>No. Fabric changes what you pay Microsoft for compute. It has no bearing on whether "revenue" has an owner.</b> Any firm that tells you the fix is a platform upgrade is selling you the upgrade.</p>
-   <div class="q">How do you know which governance stage you are at?</div>
+   <p><b>No. Fabric changes what you pay Microsoft for computing power. It has nothing to do with whether your numbers have owners and definitions.</b> If a consultant tells you the answer is a platform upgrade, they are selling you the upgrade.</p>
+   <div class="q">How do you know how good your governance is?</div>
    <table class="tbl"><tr><th>Stage</th><th>What it looks like</th><th>The test</th></tr>
     <tr><td>Fragile</td><td>No named owners, changes go straight to the live report</td><td>Nobody can name the owner of the board dataset</td></tr>
     <tr><td>Functional</td><td>Owners assigned, definitions written down</td><td>A change still breaks a report nobody expected</td></tr>
     <tr><td>Board-ready</td><td>Dev, test and live reports, versioned changes, RLS re-tested</td><td>A wrong number is caught before the board sees it</td></tr></table>
    <p>A green status light on a report means the data loaded on schedule. It says nothing about whether the number itself is correct. We watched a board approve a cash balance three times too high under a green checkmark.</p>
    <a class="cta" href="#">Book a fixed-price Reporting Foundation Review →</a>
-   <div class="prov"><span class="kw">🔍 "data governance framework" · 1,900 / mo · low difficulty</span><span>📈 modeled on <b>Reporting Hub</b> (ranks #1 for "governance") — question-headings, bold one-line answers</span><span>✓ Article + FAQPage schema</span></div>
+   <div class="prov"><span class="kw">"data governance framework" · 1,900 / mo · low difficulty</span><span>modeled on <b>Reporting Hub</b> (ranks #1 for "governance") · question-headings, bold one-line answers</span><span>Article + FAQPage schema</span></div>
   </div>
  </div>
 
@@ -154,7 +155,7 @@ section{padding:52px 0;border-bottom:1px solid var(--line)}
    <div class="q">Wie definiert man eine KPI, die standhält?</div>
    <p>Auf einer Seite, in fünf Feldern: Name, Formel, Quelle, Besitzer, Stand. Diese Seite ist das eigentliche Produkt. In Power BI gehört die Definition ins zentrale Datenmodell als Measure, damit jeder Bericht denselben Wert zeigt.</p>
    <a class="cta" href="#">Reporting-Review buchen →</a>
-   <div class="prov"><span class="kw">🔍 "bedeutung kpi" · 8,100 / mo · das größte deutsche Keyword</span><span>📈 modeled on <b>Klipfolio</b>'s "What is a KPI" (definition-first, owns the term)</span><span>✓ Sie-Register · Article + FAQPage</span></div>
+   <div class="prov"><span class="kw">"bedeutung kpi" · 8,100 / mo · das größte deutsche Keyword</span><span>modeled on <b>Klipfolio</b>'s "What is a KPI" (definition-first, owns the term)</span><span>Sie-Register · Article + FAQPage</span></div>
   </div>
  </div>
 </div></section>
@@ -163,36 +164,26 @@ section{padding:52px 0;border-bottom:1px solid var(--line)}
 <section><div class="wrap">
  <div class="slab">LinkedIn posts</div>
  <h2 class="sh">A flat declarative hook, one real number, one question that pulls a reply.</h2>
- <p class="sd">The structure 63% of the outlier posts in the research used. No link in the body — that cuts reach by a third — the link goes in the first comment.</p>
+ <p class="sd">The structure 63% of the outlier posts in the research used. No link in the body · that cuts reach by a third · the link goes in the first comment.</p>
  <div class="grid2">
 
   <div class="li"><div class="h"><img src="img/austin.jpg" alt=""><div><div class="n">Austin Levine</div><div class="t">Power BI that leaders trust · Co-Founder, CaseWhen</div></div></div>
-   <div class="b"><span class="hk">Two people pulled "revenue" from Power BI last week and got different numbers.</span>One report counted returns. The other did not. Both were correct.
-The board saw one of them, and nobody had decided which one is the reported figure.
-This has nothing to do with the formula. You cannot fix it in DAX.
-The metric has no single written definition and no owner, so two people built it two ways.
-The fix is one page per metric, and one person who decides.
+   <div class="b"><span class="hk">Most people think a wrong number in a board report is a formula error.</span>When two teams report the same number and it comes out different, people assume someone made a mistake in the maths. In almost every review we run, the maths is fine. What actually happened is that nobody agreed on what the number means. One team takes out returns and the other one does not, so both are correct and neither matches. You fix it by writing down, on one page, what each number means and who is in charge of it. After that, when someone asks which revenue figure is the real one, there is an answer.
 
-Open two of your reports and ask both for last month's revenue. Do the numbers match?</div>
-   <div class="f"><span class="tag t-gov">Governance</span><span>🔍 data governance · 📈 David Langer 9.4×</span></div></div>
+Could someone on your team say who owns the revenue number, in one sentence?</div>
+   <div class="f"><span class="tag t-gov">Governance</span><span>"data governance" · hook bank #1</span></div></div>
 
   <div class="li"><div class="h"><img src="img/austin.jpg" alt=""><div><div class="n">Austin Levine</div><div class="t">Power BI that leaders trust · Co-Founder, CaseWhen</div></div></div>
-   <div class="b"><span class="hk">Nineteen DACH Power BI firms publish zero prices. We publish ours.</span>Not banded ranges. Not a starting number. We checked.
-We publish our day rate, our fixed-project bands, and the price of the entry workshop.
-We do it because we have no reason to hide the number.
-A Controller who can see the number before the call spends the call on the work.
+   <div class="b"><span class="hk">Row-level security gets set once when a report launches and then never tested again.</span>Row-level security is the setting that controls who can see which rows of data. Teams turn it on at launch and move on. Six months later someone has renamed a role or changed how two tables connect, the filter has stopped working, and nothing warned anyone. Here is the test, and it takes about thirty seconds. Sign in as a restricted user with the "View as" button, open the report, and check one number that person should not be allowed to see. Put that check in your monthly routine.
 
-Would a published price make you more likely to shortlist a consultancy, or less?</div>
-   <div class="f"><span class="tag t-pri">Pricing</span><span>🔍 pricing transparency · 📈 highest-comment topic</span></div></div>
+When did you last test who can actually see your salary data?</div>
+   <div class="f"><span class="tag t-gov">Governance</span><span>"row level security power bi" · hook bank #21</span></div></div>
 
   <div class="li"><div class="h"><img src="img/austin.jpg" alt=""><div><div class="n">Austin Levine</div><div class="t">Power BI that leaders trust · Co-Founder, CaseWhen</div></div></div>
-   <div class="b"><span class="hk">A global manufacturer's reporting ran on legacy SSIS nobody had touched in years.</span>We rebuilt it on Azure in two fixed-price projects.
-The first, the Customer Success report: roughly ten to twelve and a half days.
-The second, the modular Azure architecture and a Power BI MVP: eighteen to twenty-two days.
-Moving the data took a few days.
-The hard part was the assumptions inside the old reports.
-You see the shape of the work before you commit.</div>
-   <div class="f"><span class="tag t-mig">Schindler · real, won</span><span>🔍 azure migration · 📈 case-study-as-pattern</span></div></div>
+   <div class="b"><span class="hk">A global manufacturer had its reporting stuck on old SSIS jobs nobody had opened in years.</span>We moved it onto Azure in two fixed-price projects, about ten to twelve and a half days for the first and eighteen to twenty-two for the second. Moving the data was the quick part. Most of the time went into the definitions those old reports had set by accident, which nobody had ever chosen on purpose. Because the work was fixed-price and split into phases, they could see the shape of each step before committing to the next one.
+
+If your reporting runs on something nobody has opened in two years, would you find out before it broke?</div>
+   <div class="f"><span class="tag t-mig">Schindler · real, won</span><span>"azure migration" · hook bank #16</span></div></div>
 
   <div class="li"><div class="h"><img src="img/saju.jpg" alt=""><div><div class="n">Sajagan Thirugnanam</div><div class="t">Gründer, CaseWhen · Power BI für Controlling</div></div></div>
    <div class="b"><span class="hk">Die falsche Zahl im Aufsichtsrat ist kein Formelfehler.</span>In fast jedem Review stimmt die Formel.
@@ -201,7 +192,7 @@ In Deutschland ist das keine IT-Frage. Es ist eine Haftungsfrage.
 Ein Besitzer pro Kennzahl. Eine schriftliche Definition. Ein Ort, an dem sie steht.
 
 Wer bei Ihnen findet zuerst heraus, dass eine Board-Zahl falsch war: Sie oder der Vorstand?</div>
-   <div class="f"><span class="tag t-gov">Governance · DE</span><span>🔍 datengovernance · 📈 Reza Rad 5.6×</span></div></div>
+   <div class="f"><span class="tag t-gov">Governance · DE</span><span>"datengovernance" · hook bank #37</span></div></div>
 
  </div>
 </div></section>
@@ -212,35 +203,35 @@ Wer bei Ihnen findet zuerst heraus, dass eine Board-Zahl falsch war: Sie oder de
  <h2 class="sh">Every script opens with a misconception that carries the search term.</h2>
  <p class="sd">The structure that nearly doubled recall in the Veritasium study. Payoff shown in the first two seconds, one A-plot and one real client B-plot. The topic is always the reporting foundation, never a visual makeover.</p>
 
- <div class="reel"><div class="rh">EN · "power bi licenses" — the single highest-frequency query</div>
+ <div class="reel"><div class="rh">EN · "power bi licenses" · the single highest-frequency query</div>
   <div class="rl"><b>Hook</b><span>Most people think a Power BI license is ten euros a user. For a real deployment, that is the number that gets you approved and then blown past.</span></div>
   <div class="rl"><b>A-plot</b><span>Pro is ten euros. The moment you need shared capacity for refresh and scale, you move off the per-user plan onto a capacity, which is a separate invoice.</span></div>
   <div class="rl"><b>B-plot</b><span>We watched a rollout get signed off on the ten-euro math, then hit a five-figure capacity in month three that nobody had budgeted.</span></div>
   <div class="rl"><b>Close</b><span>Price the capacity before the rollout, not after.</span></div>
-  <div class="prov"><span class="kw">🔍 "power bi licenses"</span><span>📈 how.to.power.bi mistake-callout format (239k views on "ARE YOU STILL DOING THIS")</span></div></div>
+  <div class="prov"><span class="kw">"power bi licenses"</span><span>how.to.power.bi mistake-callout format (239k views on "ARE YOU STILL DOING THIS")</span></div></div>
 
- <div class="reel"><div class="rh">EN · "data governance" — the no-owner gap</div>
+ <div class="reel"><div class="rh">EN · "data governance" · the no-owner gap</div>
   <div class="rl"><b>Hook</b><span>Most teams think governance means locking down who can publish. The most common gap we find is a dataset with no owner at all.</span></div>
   <div class="rl"><b>A-plot</b><span>Open your workspace settings. If the dataset owner is blank, nobody is responsible when the number is wrong, and nobody gets the alert when the refresh stops.</span></div>
   <div class="rl"><b>B-plot</b><span>In a first audit this year, the no-owner dataset showed up before anything else, every single time.</span></div>
   <div class="rl"><b>Close</b><span>Two-minute fix, and almost nobody does it.</span></div>
-  <div class="prov"><span class="kw">🔍 "data governance"</span><span>📈 mistake-callout — the practitioner-correction driver</span></div></div>
+  <div class="prov"><span class="kw">"data governance"</span><span>mistake-callout · the practitioner-correction driver</span></div></div>
 
- <div class="reel"><div class="rh">DE · "power bi grundlagen" — the single highest-frequency German query</div>
+ <div class="reel"><div class="rh">DE · "power bi grundlagen" · the single highest-frequency German query</div>
   <div class="rl"><b>Hook</b><span>Die meisten fangen bei Power BI mit dem Bericht an. Der Schritt, den fast alle überspringen, ist das Modell, und genau dort entsteht später die falsche Zahl.</span></div>
   <div class="rl"><b>A-plot</b><span>Power BI hat drei Ebenen: Datenquelle, Modell, Bericht. Der Bericht ist nur so gut wie das Modell darunter.</span></div>
   <div class="rl"><b>B-plot</b><span>Ein schöner Bericht auf einem Modell mit drei Umsatzdefinitionen. Alle drei erscheinen, je nach Filter.</span></div>
   <div class="rl"><b>Close</b><span>Erst das Modell, dann der Bericht.</span></div>
-  <div class="prov"><span class="kw">🔍 "power bi grundlagen"</span><span>📈 DE "einfach erklärt" comprehension format · money-framed, no comment-to-DM</span></div></div>
+  <div class="prov"><span class="kw">"power bi grundlagen"</span><span>DE "einfach erklärt" comprehension format · money-framed, no comment-to-DM</span></div></div>
 </div></section>
 
 <!-- TEMPLATES -->
 <section><div class="wrap">
  <div class="slab">Visual templates</div>
- <h2 class="sh">Twelve templates, so the audience is everyone — not only the buyer who searches.</h2>
+ <h2 class="sh">Twelve templates, so the audience is everyone · not only the buyer who searches.</h2>
  <p class="sd">SEO reaches the person already searching. The bigger reach comes from framing the same expertise so anyone who reports a number can watch it. The four colour variants rotate across the week so the feed reads as one brand. Real gated copy in each.</p>
 
- <div class="tplname">Quote cards <span>· a founder line, fans out to four platforms — the cheapest reach you have</span></div>
+ <div class="tplname">Quote cards <span>· a founder line, fans out to four platforms · the cheapest reach you have</span></div>
  <div class="row">
   <div class="frame p45 v-mint"><div class="in"><div class="eb">Governance</div><div class="qmark">"</div><div class="qtext">Two people pulled "revenue" from Power BI and got different numbers. Both were right.</div><div class="qattr"><img src="img/austin.jpg" alt=""><div><div class="an">Austin Levine</div><div class="al">Co-Founder, CaseWhen</div></div></div></div></div>
   <div class="frame p45 v-dark"><div class="in"><div class="eb">Controlling · DE</div><div class="qmark">"</div><div class="qtext">Eine falsche Zahl im Aufsichtsrat ist eine Haftungsfrage, keine IT-Frage.</div><div class="qattr"><img src="img/saju.jpg" alt=""><div><div class="an">Sajagan Thirugnanam</div><div class="al">Gründer, CaseWhen</div></div></div></div></div>
@@ -259,7 +250,7 @@ Wer bei Ihnen findet zuerst heraus, dass eine Board-Zahl falsch war: Sie oder de
  <div class="tplname">Stat-reveal &amp; comparison <span>· one number, or myth vs reality</span></div>
  <div class="row">
   <div class="frame p45 v-dark"><div class="in"><div class="eb">Search demand</div><div class="big" style="margin-top:auto">1,900</div><div class="stat-l">people a month search "data governance framework". The top results name zero owners.</div><div class="cwm"><img src="img/icon.png" alt="">swipe →</div></div></div>
-  <div class="frame p45 v-base"><div class="in"><div class="eb">Pricing</div><div class="big" style="margin-top:auto">0 of 19</div><div class="stat-l">DACH Power BI firms publish a price. We publish ours.</div><div class="cwm"><img src="img/icon.png" alt="">swipe →</div></div></div>
+  <div class="frame p45 v-base"><div class="in"><div class="eb">KPI &amp; modeling</div><div class="big" style="margin-top:auto">8,100</div><div class="stat-l">people a month search what a KPI actually means. Most results never say who owns the number.</div><div class="cwm"><img src="img/icon.png" alt="">swipe →</div></div></div>
   <div class="frame p45 v-split"><div class="in" style="color:#fff"><div class="sph" style="color:#eafaf5">Myth</div><div class="spt" style="color:#eafaf5;max-width:44%">A Tableau migration means rebuilding from zero.</div><div class="sph" style="color:var(--dark);position:absolute;right:16px;top:17px;text-align:right;width:44%">Reality</div><div class="spt" style="color:var(--dark);position:absolute;right:16px;top:42px;width:44%">Most calculations transfer. The row-level security does not, and nobody checks.</div></div></div>
   <div class="frame p45 v-split"><div class="in" style="color:#fff"><div class="sph" style="color:#eafaf5">Myth</div><div class="spt" style="color:#eafaf5;max-width:44%">Fabric is a Power BI upgrade.</div><div class="sph" style="color:var(--dark);position:absolute;right:16px;top:17px;text-align:right;width:44%">Reality</div><div class="spt" style="color:var(--dark);position:absolute;right:16px;top:42px;width:44%">Fabric is the compute layer. Your reports are only as good as the model under them.</div></div></div>
  </div>
@@ -273,13 +264,13 @@ Wer bei Ihnen findet zuerst heraus, dass eine Board-Zahl falsch war: Sie oder de
    <div class="step"><span class="sn">4</span><span>One approval path before a change goes live.</span></div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
   <div class="frame land v-white" style="height:298px"><span class="alert-tab">CaseWhen alert</span><div class="in"><div class="alert-h" style="margin-top:24px">Microsoft is raising Power BI Pro to fourteen dollars a seat.</div><div class="alert-b">A 400-seat estate just moved 19,200 dollars a year, and most of those seats only ever open two reports. Pull your usage metrics before the renewal, not after.</div><div class="cwm"><img src="img/icon.png" alt="">Source: casewhen.co/blog</div></div></div>
   <div class="frame p45 v-mint"><div class="in"><div class="cover-h" style="margin-top:0">Microsoft <span class="kw">Fabric</span>, in 4 layers</div>
-   <div class="step"><span class="sn">1</span><span>OneLake — one copy of the data.</span></div>
-   <div class="step"><span class="sn">2</span><span>Lakehouse and Warehouse — how you query it.</span></div>
-   <div class="step"><span class="sn">3</span><span>Direct Lake — reports read data without an import.</span></div>
-   <div class="step"><span class="sn">4</span><span>Capacity and governance — the part that sets your bill.</span></div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
+   <div class="step"><span class="sn">1</span><span>OneLake · one copy of the data.</span></div>
+   <div class="step"><span class="sn">2</span><span>Lakehouse and Warehouse · how you query it.</span></div>
+   <div class="step"><span class="sn">3</span><span>Direct Lake · reports read data without an import.</span></div>
+   <div class="step"><span class="sn">4</span><span>Capacity and governance · the part that sets your bill.</span></div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
  </div>
 
- <div class="tplname">Blog covers <span>· the header on every article · 1200 × 630</span></div>
+ <div class="tplname">Blog covers <span>· the header on every article · 1200 by 630</span></div>
  <div class="row">
   <div class="frame land v-dark"><div class="in"><div class="eb">Governance</div><div class="cover-h">The same metric shows two numbers. That is a <span class="kw">governance problem</span>.</div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
   <div class="frame land v-mint"><div class="in"><div class="eb">Pricing</div><div class="cover-h">Power BI Pro cost: <span class="kw">the real number</span> nobody publishes.</div><div class="cwm"><img src="img/icon.png" alt="">casewhen.co</div></div></div>
