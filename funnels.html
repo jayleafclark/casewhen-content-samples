@@ -110,35 +110,36 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 <nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="on">Funnels</a></nav></div></header>
 <style>
 .fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:22px}
-.fcard{display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s}
+.fcard{display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s}
 .fcard::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--ac)}
 .fcard:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(17,73,63,.12)}
-.fcard .tag{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ac);margin-top:4px}
-.fcard h3{font-size:19px;margin:6px 0 8px;letter-spacing:-.01em}
+.fcard .tag{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ac);margin-top:4px}
+.fcard .pr{position:absolute;top:20px;right:20px;font-size:13px;font-weight:700;color:var(--dark);background:var(--pale);border-radius:20px;padding:4px 12px}
+.fcard h3{font-size:20px;margin:6px 0 8px;letter-spacing:-.01em;max-width:20ch}
 .fcard p{font-size:14px;color:var(--mut);margin:0}
 .fcard .who{font-size:12px;color:var(--faint);margin-top:12px}
 .fcard .cta{font-size:13px;font-weight:700;color:var(--dark);margin-top:8px}
 [data-r]{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}[data-r].in{opacity:1;transform:none}
 @media(max-width:760px){.fgrid{grid-template-columns:1fr}}
 </style>
-<section class="hero"><div class="wrap"><div class="eb">CaseWhen · funnels</div>
-<h1>The lead magnets that turn reach into emails.</h1>
-<p>Six free tools and downloads, each traded for an email, each pointed at a booked fixed-price review.
-All six are built as full landing-page mockups. Open any of them. Every one shares the brand and each
-looks distinct.</p>
-<div class="fgrid"><a class="fcard" href="healthcheck.html" data-r style="--ac:#11493F">
-        <div class="tag">Flagship offer · highest intent</div><h3>Free Power BI Health Check</h3><p>Send us your slowest report and we tell you exactly why it is slow: a Performance Analyzer read, a data-model check, the top DAX offenders, as a prioritized report plus a call. Paid versions run about 500 dollars.</p>
-        <div class="who">Controller / BI lead with a slow report</div><div class="cta">open the mockup →</div></a><a class="fcard" href="calculator.html" data-r style="--ac:#1D967C">
-        <div class="tag">Buyer-intent (BOFU)</div><h3>Power BI Cost Calculator</h3><p>Enter viewers, builders, and capacity. See Pro vs Premium-Per-User vs Fabric F-SKU on current 2025 pricing, and the ~350-viewer line where a capacity gets cheaper.</p>
-        <div class="who">Budget holder</div><div class="cta">open the mockup →</div></a><a class="fcard" href="scorecard.html" data-r style="--ac:#7AC4B5">
-        <div class="tag">Self-diagnosis capture</div><h3>Reporting-Foundation Maturity Scorecard</h3><p>A 4-question quiz returns an instant tier (Fragile / Functional / Board-ready) and a one-page PDF the controller forwards to their CFO.</p>
-        <div class="who">Controller, not ready to book</div><div class="cta">open the mockup →</div></a><a class="fcard" href="buyin.html" data-r style="--ac:#6F93AC">
-        <div class="tag">De-risking template</div><h3>The Internal Buy-In Briefing</h3><p>A one-page brief that frames a reporting review as a proactive governance move, with the exact points to put in front of a CFO so it reads as risk reduction.</p>
-        <div class="who">Champion selling it upward</div><div class="cta">open the mockup →</div></a><a class="fcard" href="casestudy.html" data-r style="--ac:#CE8168">
-        <div class="tag">Evaluation proof</div><h3>10 DACH Reporting Rebuilds</h3><p>A curated bundle of real before-and-after rebuilds (Schindler, Ipsen, WellBeauty), each with the problem, the fix, and the measured result.</p>
-        <div class="who">Buyer in active evaluation</div><div class="cta">open the mockup →</div></a><a class="fcard" href="governance-scorecard.html" data-r style="--ac:#132630">
-        <div class="tag">Strategic capture</div><h3>Fabric Governance Scorecard</h3><p>A 10-question scored assessment across workspace structure, RLS, OneLake architecture, and lineage, returning a maturity score and your top three gaps.</p>
-        <div class="who">Team moving to Microsoft Fabric</div><div class="cta">open the mockup →</div></a></div></div></section>
+<section class="hero"><div class="wrap"><div class="eb">CaseWhen &middot; funnel ladder</div>
+<h1>The value ladder, one landing page per rung.</h1>
+<p>Six full landing pages, from a free scorecard to a managed retainer, each branded the same and each
+built to move a buyer to the next rung. Open any of them. Every page shares the CaseWhen wordmark, the
+Neue Montreal type, and the brand colours, and ends in the right call to action for its rung.</p>
+<div class="fgrid"><a class="fcard" href="scorecard.html" data-r style="--ac:#11493F">
+        <div class="tag">Rung 0 &middot; Free lead magnet</div><div class="pr">Free</div><h3>Governance &amp; Cost Scorecard</h3><p>A five-minute assessment returns a score out of 100, a peer benchmark, and your top three risks. Email-only capture. The primary lead magnet everything points to.</p>
+        <div class="who">Controller or BI lead, not ready to book</div><div class="cta">open the landing page &rarr;</div></a><a class="fcard" href="fix-kit.html" data-r style="--ac:#1D967C">
+        <div class="tag">Rung 1 &middot; &euro;49 tripwire</div><div class="pr">&euro;49</div><h3>Star Schema Fix Kit</h3><p>A 45-minute walkthrough, a .pbix template, 25 tested DAX measures, and a governance checklist, plus a &euro;19 DAX Performance Pack order bump. The buyer-filter.</p>
+        <div class="who">Analyst with a slow, tangled model</div><div class="cta">open the landing page &rarr;</div></a><a class="fcard" href="course.html" data-r style="--ac:#7AC4B5">
+        <div class="tag">Rung 2 &middot; &euro;299 course</div><div class="pr">&euro;199</div><h3>Foundations-to-Fabric Course</h3><p>Self-paced across the three pillars: modeling, performant DAX, and governance plus a first Fabric look. Intro &euro;199, with &euro;79 and &euro;149 order bumps. The pipeline engine.</p>
+        <div class="who">Self-taught analyst going pro</div><div class="cta">open the landing page &rarr;</div></a><a class="fcard" href="dashboard-in-a-day.html" data-r style="--ac:#6F93AC">
+        <div class="tag">Rung 3 &middot; &euro;1,500 workshop</div><div class="pr">&euro;1,500</div><h3>Dashboard-in-a-Day</h3><p>A live, done-with-your-team day on your own data, up to 10 seats. Microsoft co-funds Copilot enablement. The bridge from course to services.</p>
+        <div class="who">Team lead who wants it to land</div><div class="cta">open the landing page &rarr;</div></a><a class="fcard" href="team-enablement.html" data-r style="--ac:#CE8168">
+        <div class="tag">Rung 4 &middot; &euro;4,500 and up</div><div class="pr">&euro;4,500</div><h3>Team Enablement &amp; Packages</h3><p>Three tiers: a &euro;4,500 enablement program, a fixed-scope bounded-entry project, and a &euro;2,500 to 4,500 a month managed retainer. Book a scoping call.</p>
+        <div class="who">Buyer ready to commit</div><div class="cta">open the landing page &rarr;</div></a><a class="fcard" href="calculator.html" data-r style="--ac:#132630">
+        <div class="tag">Free tool &middot; buyer-intent</div><div class="pr">Free</div><h3>Cost &amp; Licensing Calculator</h3><p>Interactive Pro-vs-capacity math on real Microsoft pricing, showing the ~350-viewer crossover. Routes budget holders to a licensing scoping call.</p>
+        <div class="who">Budget holder sizing the spend</div><div class="cta">open the landing page &rarr;</div></a></div></div></section>
 <script>
 document.documentElement.classList.add('janim');
 const _els=document.querySelectorAll('[data-r]');

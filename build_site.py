@@ -323,588 +323,1134 @@ _els.forEach(el=>io.observe(el));
 setTimeout(()=>_els.forEach(el=>el.classList.add('in')),1400);
 </script>"""
 
-def landing(title, favicon, css, inner, js=""):
-    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
-<title>CaseWhen · {esc(title)}</title><style>{FONTFACE}
-*{{box-sizing:border-box}}html{{overflow-x:hidden}}
-body{{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}}
-a{{color:inherit}}
-[data-r]{{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}}
-[data-r].in{{opacity:1;transform:none}}
-@media(prefers-reduced-motion:reduce){{[data-r]{{opacity:1;transform:none;transition:none}}}}
-.back{{position:fixed;top:14px;left:14px;z-index:30;font-size:12.5px;background:rgba(255,255,255,.9);backdrop-filter:blur(6px);border:1px solid #dfe6e3;border-radius:20px;padding:6px 13px;text-decoration:none;color:#11493F;font-weight:600}}
-{css}</style></head><body>
-<a class="back" href="funnels.html">← all funnels</a>
-{inner}{REVEAL_JS}{js}</body></html>"""
+# ============================================================================
+# FUNNEL LADDER  ·  six fully-branded landing pages mapped to the value ladder
+# Neue Montreal everywhere · brand ramp · CaseWhen wordmark in a sticky header
+# ============================================================================
 
-SCORECARD_PAGE = r"""<!doctype html><html lang="en"><head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
-<title>CaseWhen · Reporting-Foundation Maturity Scorecard</title>
-<style>
+LADDER = [
+    ("scorecard.html",          "Governance &amp; Cost Scorecard", "Free"),
+    ("fix-kit.html",            "Star Schema Fix Kit",             "&euro;49"),
+    ("course.html",             "Foundations to Fabric",           "&euro;299"),
+    ("dashboard-in-a-day.html", "Dashboard-in-a-Day",              "&euro;1,500"),
+    ("team-enablement.html",    "Team Enablement",                 "&euro;4,500"),
+    ("calculator.html",         "Cost Calculator",                 "Free"),
+]
+
+FUNNEL_CSS = r"""
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
 :root{
-  --accent:#1D967C;
-  --dark:#11493F;
-  --hero:#0e2f28;
-  --mint:#7AC4B5;
-  --pale:#D8F3EE;
-  --ink:#16211d;
-  --muted:#5b6b65;
-  --line:#e3ece9;
-  --bg:#ffffff;
-  --bg2:#f4f9f7;
+  --accent:#1D967C;--accent-d:#17836c;
+  --dark:#11493F;--hero:#0e2f28;--hero2:#123c33;
+  --mint:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8;
+  --ink:#1A1615;--muted:#5b6b65;--faint:#93a09c;
+  --line:#e3ece9;--bg:#ffffff;--bg2:#f5faf8;--terra:#CE8168;
 }
 *{box-sizing:border-box}
 html{overflow-x:hidden;scroll-behavior:smooth}
-body{
-  margin:0;
-  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  color:var(--ink);
-  background:var(--bg);
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
-a{color:inherit}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
 img{max-width:100%}
-h1,h2,h3,h4{line-height:1.15;letter-spacing:-.02em;margin:0}
+h1,h2,h3,h4{margin:0;font-family:'NM';font-weight:700;letter-spacing:-.02em;line-height:1.12}
 p{margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.narrow{max-width:768px;margin:0 auto}
 
-/* ---- fail-safe scroll reveal: visible by default; JS opts into hidden then animates ---- */
-[data-r]{}
+/* fail-safe reveal */
 html.reveal-on [data-r]{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
 html.reveal-on [data-r].in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){html.reveal-on [data-r]{opacity:1!important;transform:none!important;transition:none!important}}
 
-/* ---- back link ---- */
-.back{
-  position:fixed;top:14px;left:14px;z-index:40;
-  font-size:12.5px;font-weight:600;text-decoration:none;
-  color:#eafaf5;background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.22);
-  border-radius:20px;padding:6px 13px;backdrop-filter:blur(6px);
-}
-.back:hover{background:rgba(255,255,255,.18)}
+/* sticky header + wordmark + ladder nav */
+.fhead{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.fhead .fwrap{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:11px 24px;flex-wrap:wrap}
+.fhead .brand img{height:26px;display:block}
+.fladder{display:flex;gap:5px;margin-left:auto;overflow-x:auto;scrollbar-width:none;max-width:100%}
+.fladder::-webkit-scrollbar{display:none}
+.fpill{flex:none;font-size:12.5px;color:var(--muted);padding:7px 13px;border-radius:20px;white-space:nowrap;transition:background .15s,color .15s}
+.fpill:hover{background:var(--pale);color:var(--dark)}
+.fpill b{color:var(--faint);font-weight:600;margin-left:6px;font-size:11px}
+.fpill.on{background:var(--dark);color:#fff}
+.fpill.on b{color:var(--mint)}
+@media(max-width:920px){.fladder{width:100%;margin-left:0;order:3;padding-top:2px}}
 
-.wrap{max-width:1000px;margin:0 auto;padding:0 22px}
-.narrow{max-width:720px;margin:0 auto}
+/* hero */
+.hero{background:linear-gradient(158deg,var(--hero),var(--hero2));color:#eafaf5;padding:82px 24px 78px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto -12% -55% 38%;height:85%;background:radial-gradient(55% 100% at 50% 0%,rgba(122,196,181,.16),transparent 72%);pointer-events:none}
+.hwrap{max-width:1080px;margin:0 auto;position:relative;z-index:1}
+.hero.split .hwrap{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:48px;align-items:center}
+.hero.center .hwrap{max-width:800px;text-align:center}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mint)}
+.hero h1{font-size:clamp(32px,5.3vw,53px);color:#fff;margin:16px 0 0}
+.hero .sub{font-size:clamp(16px,2.2vw,19px);color:#c4ddd4;margin:20px 0 0;max-width:52ch}
+.hero.center .sub{margin-left:auto;margin-right:auto}
+.pricetag{display:inline-flex;align-items:baseline;gap:10px;margin-top:22px;background:rgba(122,196,181,.12);border:1px solid rgba(122,196,181,.3);border-radius:14px;padding:11px 18px}
+.pricetag .now{font-family:'NM';font-weight:700;font-size:30px;color:#fff;letter-spacing:-.02em}
+.pricetag .was{font-size:16px;color:#8fb3a8;text-decoration:line-through}
+.pricetag .per{font-size:13px;color:#9fc2b8}
+.btnrow{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.hero.center .btnrow{justify-content:center}
+.cta{display:inline-block;background:var(--accent);color:#fff;font-weight:700;font-size:16px;border:0;border-radius:12px;padding:15px 30px;cursor:pointer;box-shadow:0 16px 40px rgba(29,150,124,.3);transition:transform .15s,box-shadow .15s;font-family:'NM'}
+.cta:hover{transform:translateY(-2px);box-shadow:0 20px 52px rgba(29,150,124,.42)}
+.cta.ghost{background:rgba(255,255,255,.08);box-shadow:none;border:1px solid rgba(255,255,255,.24);color:#eafaf5}
+.cta.ghost:hover{background:rgba(255,255,255,.16)}
+.cta.solid-d{background:var(--dark);box-shadow:0 16px 40px rgba(17,73,63,.25)}
+.heronote{font-size:13px;color:#9fc2b8;margin-top:16px}
+.heronote b{color:var(--mint);font-weight:600}
 
-/* ================= HERO ================= */
-.hero{
-  background:var(--hero);
-  color:#eafaf5;
-  padding:110px 22px 72px;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-}
-.hero::after{
-  content:"";position:absolute;inset:auto -10% -40% -10%;height:60%;
-  background:radial-gradient(60% 100% at 50% 0%,rgba(122,196,181,.18),transparent 70%);
-  pointer-events:none;
-}
-.hero-inner{max-width:780px;margin:0 auto;position:relative;z-index:1}
-.eyebrow{
-  font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--mint);
-}
-.hero h1{
-  font-weight:800;font-size:clamp(32px,6.4vw,56px);
-  margin:18px 0 0;color:#fff;
-}
-.hero .sub{
-  font-size:clamp(16px,2.4vw,19px);color:#bcd8cf;
-  max-width:56ch;margin:20px auto 0;
-}
-.cta{
-  display:inline-block;background:var(--accent);color:#fff;
-  font-weight:700;font-size:16px;text-decoration:none;
-  border:0;border-radius:12px;padding:15px 30px;margin-top:30px;cursor:pointer;
-  box-shadow:0 16px 40px rgba(29,150,124,.35);
-  transition:transform .15s ease,box-shadow .15s ease;
-}
-.cta:hover{transform:translateY(-2px);box-shadow:0 20px 50px rgba(29,150,124,.45)}
-.whatyouget{
-  font-size:13px;color:#9fc2b8;margin-top:14px;
-}
-.whatyouget b{color:var(--mint);font-weight:600}
-
-/* ================= interactive scorecard card ================= */
-.card{
-  max-width:600px;margin:40px auto 0;
-  background:#fff;color:var(--ink);border-radius:20px;
-  padding:26px 24px;text-align:left;
-  box-shadow:0 40px 90px rgba(0,0,0,.38);
-}
-.card .k{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-.card h3{font-size:19px;margin:6px 0 4px}
-.card .mini{font-size:13px;color:var(--muted);margin-bottom:6px}
-.q{border-top:1px solid #eef2f0;padding:14px 0}
-.q:first-of-type{border-top:0}
-.q h4{font-size:14.5px;font-weight:700;margin:0 0 9px}
-.opts{display:flex;gap:7px;flex-wrap:wrap}
-.opt{
-  font-size:13px;border:1px solid var(--line);border-radius:9px;
-  padding:8px 12px;cursor:pointer;transition:all .15s;user-select:none;
-}
-.opt:hover{border-color:var(--accent)}
-.opt.sel{background:var(--dark);color:#fff;border-color:var(--dark)}
-.result{margin-top:16px;border-top:2px solid #eef2f0;padding-top:16px}
-.tierrow{display:flex;justify-content:space-between;font-size:10.5px;color:#94a29c;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
-.meter{height:13px;border-radius:9px;background:linear-gradient(90deg,#CE8168 0%,#e6c07a 50%,var(--accent) 100%);position:relative;margin:11px 0}
-.needle{position:absolute;top:-6px;width:4px;height:25px;background:var(--ink);border-radius:3px;left:8%;transition:left 1s cubic-bezier(.2,.8,.2,1)}
-.tier{font-weight:800;font-size:24px;margin:6px 0 2px;color:var(--muted)}
-.tiernote{font-size:13px;color:var(--muted)}
-
-/* ================= section base ================= */
-section{padding:74px 0}
-.tint{background:var(--bg2)}
+/* section base */
+section{padding:78px 0}
+.band{background:var(--bg2)}
 .deep{background:var(--dark);color:#eafaf5}
 .deep h2,.deep h3{color:#fff}
-.tag{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
-.deep .tag{color:var(--mint)}
-h2.title{font-size:clamp(25px,4.2vw,36px);font-weight:800;margin:12px 0 0}
-.lead{font-size:17px;color:var(--muted);margin-top:16px;max-width:60ch}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent)}
+.deep .kicker{color:var(--mint)}
+h2.h2{font-size:clamp(25px,4vw,37px);margin:12px 0 0}
+.lead{font-size:17px;color:var(--muted);margin-top:16px;max-width:62ch}
 .deep .lead{color:#bcd8cf}
+.center-head{text-align:center}
+.center-head .lead{margin-left:auto;margin-right:auto}
 
-/* value stack */
-.stack{display:grid;gap:18px;margin-top:34px;grid-template-columns:1fr}
-@media(min-width:720px){.stack{grid-template-columns:1fr 1fr}}
-.item{
-  background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 22px;
-}
-.item .num{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:38px;height:38px;border-radius:10px;background:var(--pale);color:var(--dark);
-  font-weight:800;font-size:16px;margin-bottom:14px;
-}
-.item h3{font-size:18px;margin:0 0 8px}
-.item p{font-size:14.5px;color:var(--muted)}
+/* feature grids */
+.grid{display:grid;gap:18px;margin-top:38px}
+.g2{grid-template-columns:1fr}
+.g3{grid-template-columns:1fr}
+.g4{grid-template-columns:1fr 1fr}
+@media(min-width:740px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}}
+.feat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 24px}
+.deep .feat{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)}
+.feat .ic{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:11px;background:var(--pale);color:var(--dark);font-weight:700;font-size:17px;margin-bottom:15px}
+.deep .feat .ic{background:rgba(122,196,181,.16);color:var(--mint)}
+.feat h3{font-size:18px;margin:0 0 8px}
+.feat p{font-size:14.5px;color:var(--muted)}
+.deep .feat p{color:#bcd8cf}
 
-/* proof */
-.quotes{display:grid;gap:18px;margin-top:32px;grid-template-columns:1fr}
-@media(min-width:720px){.quotes{grid-template-columns:1fr 1fr}}
+/* checklist */
+.checks{display:grid;gap:12px;margin-top:30px;grid-template-columns:1fr}
+@media(min-width:740px){.checks{grid-template-columns:1fr 1fr}}
+.chk{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px 18px}
+.chk .cm{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+.chk b{font-size:15px;display:block;margin-bottom:2px}
+.chk span{font-size:13.5px;color:var(--muted)}
+
+/* mock panel wrapper */
+.mock{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 40px 90px rgba(17,73,63,.14);overflow:hidden}
+.mock .mbar{display:flex;align-items:center;gap:7px;padding:12px 16px;background:var(--bg2);border-bottom:1px solid var(--line)}
+.mock .dot{width:10px;height:10px;border-radius:50%;background:#d4ded9}
+.mock .mtitle{font-size:12px;color:var(--faint);margin-left:8px;font-weight:600}
+.mock .mbody{padding:22px}
+
+/* scorecard result mock */
+.dial{text-align:center;margin-bottom:6px}
+.dial .ring{--p:0;width:150px;height:150px;border-radius:50%;margin:0 auto;background:conic-gradient(var(--accent) calc(var(--p)*1%),#eef4f1 0);display:flex;align-items:center;justify-content:center;position:relative}
+.dial .ring::before{content:"";position:absolute;inset:14px;border-radius:50%;background:#fff}
+.dial .ring .val{position:relative;z-index:1;font-family:'NM';font-weight:700;font-size:36px;color:var(--dark);letter-spacing:-.02em}
+.dial .ring .val small{font-size:15px;color:var(--faint);font-weight:500}
+.dial .tier{font-weight:700;font-size:17px;margin-top:12px;color:var(--dark)}
+.bench{margin-top:20px}
+.bench .lbl{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:6px}
+.bench .track{height:10px;border-radius:6px;background:var(--neutral);position:relative}
+.bench .fill{height:100%;border-radius:6px;background:var(--accent)}
+.bench .peer{position:absolute;top:-4px;width:3px;height:18px;background:var(--dark);border-radius:2px}
+.risks{margin-top:20px;border-top:1px solid var(--line);padding-top:16px}
+.risks .rk{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;margin:9px 0}
+.risks .rk .n{flex:0 0 auto;width:22px;height:22px;border-radius:6px;background:var(--terra);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.risks .rk b{color:var(--ink)}
+.risks .rk span{color:var(--muted)}
+
+/* interactive quiz card (hero) */
+.quiz{background:#fff;color:var(--ink);border-radius:20px;padding:24px 22px;box-shadow:0 40px 90px rgba(0,0,0,.34)}
+.quiz .qh{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.quiz h3{font-size:19px;margin:6px 0 2px;color:var(--ink)}
+.quiz .qmini{font-size:13px;color:var(--muted);margin-bottom:8px}
+.q{border-top:1px solid #eef2f0;padding:13px 0}
+.q:first-of-type{border-top:0}
+.q h4{font-size:14px;font-weight:700;margin:0 0 8px;color:var(--ink)}
+.opts{display:flex;gap:7px;flex-wrap:wrap}
+.opt{font-size:12.5px;border:1px solid var(--line);border-radius:9px;padding:8px 12px;cursor:pointer;transition:all .15s;user-select:none}
+.opt:hover{border-color:var(--accent)}
+.opt.sel{background:var(--dark);color:#fff;border-color:var(--dark)}
+.qresult{margin-top:14px;border-top:2px solid #eef2f0;padding-top:14px}
+.qresult .rrow{display:flex;justify-content:space-between;font-size:10.5px;color:var(--faint);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.qmeter{height:12px;border-radius:8px;background:linear-gradient(90deg,var(--terra),#e6c07a 52%,var(--accent));position:relative;margin:10px 0}
+.qneedle{position:absolute;top:-5px;width:4px;height:22px;background:var(--ink);border-radius:3px;left:8%;transition:left 1s cubic-bezier(.2,.8,.2,1)}
+.qtier{font-family:'NM';font-weight:700;font-size:22px;margin:6px 0 2px;color:var(--muted)}
+.qnote{font-size:13px;color:var(--muted)}
+
+/* email capture */
+.formcard{max-width:520px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px 26px;box-shadow:0 24px 60px rgba(17,73,63,.1)}
+.formcard label{display:block;font-size:13px;font-weight:700;margin-bottom:8px}
+.formcard input{width:100%;border:1px solid #cfe0da;border-radius:12px;padding:14px 15px;font-size:15px;font-family:inherit;color:var(--ink)}
+.formcard input:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+.formcard .go{width:100%;margin-top:14px;background:var(--accent);color:#fff;border:0;border-radius:12px;padding:15px;font-size:16px;font-weight:700;cursor:pointer;font-family:'NM';transition:background .15s}
+.formcard .go:hover{background:var(--accent-d)}
+.formcard .fine{font-size:12px;color:var(--muted);margin-top:12px;text-align:center}
+.mockmsg{display:none;margin-top:14px;font-size:14px;color:var(--dark);background:var(--pale);border-radius:11px;padding:13px 15px;text-align:center;font-weight:600}
+
+/* pricing / offer card */
+.buybox{max-width:560px;margin:36px auto 0;background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px 28px;box-shadow:0 30px 70px rgba(17,73,63,.12)}
+.buybox .bprice{display:flex;align-items:baseline;gap:12px}
+.buybox .bprice .n{font-family:'NM';font-weight:700;font-size:44px;color:var(--dark);letter-spacing:-.02em}
+.buybox .bprice .w{font-size:19px;color:var(--faint);text-decoration:line-through}
+.buybox .bprice .per{font-size:14px;color:var(--muted)}
+.buylist{margin:20px 0 0;padding:0;list-style:none}
+.buylist li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:var(--ink);padding:8px 0;border-top:1px solid var(--line)}
+.buylist li:first-child{border-top:0}
+.buylist li::before{content:"\2713";color:var(--accent);font-weight:800;flex:0 0 auto}
+.bump{margin-top:20px;background:#fffdf7;border:1px dashed #e6c07a;border-radius:14px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start}
+.bump .bx{flex:0 0 auto;width:22px;height:22px;border:2px solid var(--accent);border-radius:6px;margin-top:1px;position:relative}
+.bump .bx::after{content:"\2713";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:800;font-size:14px}
+.bump b{font-size:14.5px}
+.bump .bp{font-weight:700;color:var(--dark)}
+.bump p{font-size:13px;color:var(--muted);margin-top:3px}
+.buybox .go{width:100%;margin-top:22px;background:var(--accent);color:#fff;border:0;border-radius:12px;padding:16px;font-size:16px;font-weight:700;cursor:pointer;font-family:'NM';transition:background .15s}
+.buybox .go:hover{background:var(--accent-d)}
+.buybox .guff{font-size:12.5px;color:var(--muted);margin-top:12px;text-align:center}
+
+/* file list mock */
+.filelist{list-style:none;margin:0;padding:0}
+.filelist li{display:flex;gap:12px;align-items:center;padding:12px 4px;border-top:1px solid var(--line);font-size:14px;min-width:0}
+.filelist li:first-child{border-top:0}
+.filelist .fn{min-width:0}
+.filelist .fn b,.filelist .fn span{overflow-wrap:anywhere}
+.filelist .ft{flex:0 0 auto;width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;letter-spacing:.02em}
+.filelist .ft.pbix{background:#f2c811;color:#3a2f00}
+.filelist .ft.pdf{background:var(--terra)}
+.filelist .ft.dax{background:var(--dark)}
+.filelist .ft.xls{background:var(--accent)}
+.filelist .fn b{display:block;font-weight:700;color:var(--ink)}
+.filelist .fn span{font-size:12.5px;color:var(--muted)}
+.filelist .fsz{margin-left:auto;font-size:12px;color:var(--faint)}
+
+/* pillars */
+.pillar{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px 24px;position:relative;overflow:hidden}
+.pillar::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--ac)}
+.pillar .pn{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ac)}
+.pillar h3{font-size:20px;margin:8px 0 8px}
+.pillar p{font-size:14.5px;color:var(--muted)}
+.pillar ul{margin:14px 0 0;padding-left:18px}
+.pillar li{font-size:13.5px;color:var(--ink);margin:5px 0}
+
+/* curriculum / module list */
+.modules{margin-top:34px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}
+.mod{display:flex;gap:16px;padding:20px 22px;border-top:1px solid var(--line)}
+.mod:first-child{border-top:0}
+.mod .mnum{flex:0 0 auto;width:34px;height:34px;border-radius:9px;background:var(--pale);color:var(--dark);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+.mod h4{font-size:16px;margin:0 0 4px}
+.mod p{font-size:13.5px;color:var(--muted)}
+.mod .mlen{margin-left:auto;font-size:12px;color:var(--faint);white-space:nowrap;padding-top:8px}
+
+/* agenda timeline */
+.agenda{margin-top:34px;position:relative}
+.agenda::before{content:"";position:absolute;left:19px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.ag{display:flex;gap:18px;padding:12px 0;position:relative}
+.ag .agt{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;z-index:1;text-align:center;line-height:1.1}
+.ag .agc h4{font-size:16px;margin:6px 0 4px}
+.ag .agc p{font-size:14px;color:var(--muted)}
+
+/* tiers (packages) */
+.tiers{display:grid;gap:20px;margin-top:38px;grid-template-columns:1fr}
+@media(min-width:860px){.tiers{grid-template-columns:repeat(3,1fr);align-items:start}}
+.tier{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px 24px;display:flex;flex-direction:column}
+.tier.feature{border-color:var(--accent);box-shadow:0 24px 60px rgba(29,150,124,.16);position:relative}
+.tier .flag{position:absolute;top:-12px;left:24px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:20px}
+.tier .tn{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.tier h3{font-size:21px;margin:8px 0 8px}
+.tier .tp{font-family:'NM';font-weight:700;font-size:30px;color:var(--dark);letter-spacing:-.02em}
+.tier .tp small{font-size:14px;color:var(--muted);font-weight:500}
+.tier .td{font-size:14px;color:var(--muted);margin:10px 0 16px}
+.tier ul{list-style:none;margin:0 0 22px;padding:0}
+.tier li{display:flex;gap:9px;align-items:flex-start;font-size:14px;padding:7px 0;border-top:1px solid var(--line)}
+.tier li:first-child{border-top:0}
+.tier li::before{content:"\2713";color:var(--accent);font-weight:800;flex:0 0 auto}
+.tier .tcta{margin-top:auto;text-align:center;background:var(--pale);color:var(--dark);border-radius:11px;padding:13px;font-weight:700;font-size:14.5px}
+.tier.feature .tcta{background:var(--accent);color:#fff}
+
+/* calculator */
+.calc{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px 26px;box-shadow:0 30px 70px rgba(17,73,63,.12)}
+.calc .row{margin:20px 0}
+.calc label{font-size:14px;font-weight:600;display:flex;justify-content:space-between}
+.calc label b{color:var(--dark)}
+.calc input[type=range]{width:100%;margin-top:10px;accent-color:var(--accent)}
+.readout{margin-top:22px;background:var(--dark);color:#fff;border-radius:16px;padding:24px;text-align:center}
+.readout .big{font-family:'NM';font-weight:700;font-size:clamp(38px,9vw,64px);letter-spacing:-.03em;line-height:1}
+.readout .rl{color:#9fc2b8;font-size:13px;margin-top:6px}
+.rsplit{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.rsplit .s{flex:1;min-width:130px;background:rgba(255,255,255,.08);border-radius:11px;padding:13px}
+.rsplit .s b{display:block;color:#fff;font-size:19px;font-weight:700}
+.rsplit .s span{font-size:12px;color:#cfe3dc}
+.rrec{margin-top:14px;font-size:14px;color:#eafaf5;background:rgba(122,196,181,.14);border-radius:11px;padding:13px}
+
+/* proof / logos */
+.proof{display:grid;gap:18px;margin-top:34px;grid-template-columns:1fr}
+@media(min-width:740px){.proof{grid-template-columns:1fr 1fr}}
 .quote{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:24px 22px}
 .quote p{font-size:16px;color:#eafaf5}
 .quote .who{font-size:13px;color:var(--mint);margin-top:14px;font-weight:600}
-.cred{
-  margin-top:30px;padding:20px 22px;border-radius:16px;
-  background:rgba(122,196,181,.10);border:1px solid rgba(122,196,181,.25);
-  font-size:14.5px;color:#cfe7df;
-}
+.cred{margin-top:28px;padding:20px 22px;border-radius:16px;background:rgba(122,196,181,.1);border:1px solid rgba(122,196,181,.24);font-size:14.5px;color:#cfe7df}
 .cred b{color:#fff}
-.logos{display:flex;gap:22px;flex-wrap:wrap;align-items:center;margin-top:14px;font-weight:800;letter-spacing:.02em;color:#eafaf5;font-size:17px;opacity:.85}
-
-/* steps */
-.steps{display:grid;gap:18px;margin-top:34px;grid-template-columns:1fr}
-@media(min-width:720px){.steps{grid-template-columns:repeat(3,1fr)}}
-.step{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 22px;position:relative}
-.step .n{font-size:40px;font-weight:800;color:var(--pale);line-height:1}
-.step h3{font-size:17px;margin:8px 0 6px}
-.step p{font-size:14px;color:var(--muted)}
-
-/* objections */
-.reassure{display:grid;gap:14px;margin-top:30px;grid-template-columns:1fr}
-@media(min-width:720px){.reassure{grid-template-columns:repeat(3,1fr)}}
-.re{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
-.re .ch{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800}
-.re b{font-size:15px;display:block;margin-bottom:2px}
-.re span{font-size:13.5px;color:var(--muted)}
-
-/* form */
-.formcard{
-  max-width:520px;margin:34px auto 0;background:#fff;border:1px solid var(--line);
-  border-radius:20px;padding:30px 26px;box-shadow:0 24px 60px rgba(17,73,63,.10);
-}
-.formcard label{display:block;font-size:13px;font-weight:700;margin:14px 0 6px}
-.formcard input{
-  width:100%;border:1px solid #cfe0da;border-radius:11px;padding:13px 14px;
-  font-size:15px;font-family:inherit;color:var(--ink);
-}
-.formcard input:focus{outline:2px solid var(--accent);border-color:var(--accent)}
-.formcard .go{
-  width:100%;margin-top:18px;background:var(--accent);color:#fff;border:0;
-  border-radius:11px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;
-  transition:background .15s;
-}
-.formcard .go:hover{background:#17836c}
-.formcard .fine{font-size:12px;color:var(--muted);margin-top:12px;text-align:center}
-.mockmsg{display:none;margin-top:16px;font-size:14px;color:var(--dark);background:var(--pale);border-radius:11px;padding:13px 15px;text-align:center;font-weight:600}
-
-/* risk reversal */
-.guarantee{
-  max-width:720px;margin:0 auto;text-align:center;
-  background:rgba(122,196,181,.10);border:1px solid rgba(122,196,181,.28);
-  border-radius:18px;padding:30px 26px;
-}
-.guarantee .seal{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--mint)}
-.guarantee p{font-size:18px;color:#eafaf5;margin-top:12px}
+.logos{display:flex;gap:24px;flex-wrap:wrap;align-items:center;margin-top:14px;font-weight:800;color:#eafaf5;font-size:17px;opacity:.85}
 
 /* faq */
-.faq{margin-top:32px}
-.qa{border-bottom:1px solid var(--line);padding:4px 0}
-.qa summary{
-  list-style:none;cursor:pointer;padding:18px 0;font-size:16px;font-weight:700;
-  display:flex;justify-content:space-between;gap:16px;align-items:flex-start;
-}
+.faq{margin-top:30px}
+.qa{border-bottom:1px solid var(--line)}
+.qa summary{list-style:none;cursor:pointer;padding:18px 0;font-size:16px;font-weight:700;display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
 .qa summary::-webkit-details-marker{display:none}
 .qa summary .pl{flex:0 0 auto;color:var(--accent);font-weight:800;transition:transform .2s}
 .qa[open] summary .pl{transform:rotate(45deg)}
-.qa .a{font-size:14.5px;color:var(--muted);padding:0 0 18px;max-width:64ch}
+.qa .a{font-size:14.5px;color:var(--muted);padding:0 0 18px;max-width:66ch}
+
+/* bridge to next rung */
+.bridge{max-width:760px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 26px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;box-shadow:0 20px 50px rgba(17,73,63,.08)}
+.bridge .bt{flex:1;min-width:240px}
+.bridge .bk{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.bridge h3{font-size:20px;margin:6px 0 6px}
+.bridge p{font-size:14px;color:var(--muted)}
+.bridge a{flex:0 0 auto}
 
 /* final */
-.final{background:var(--hero);color:#eafaf5;text-align:center;padding:84px 22px}
-.final h2{font-size:clamp(26px,4.4vw,38px);font-weight:800;color:#fff}
-.final p{color:#bcd8cf;font-size:17px;margin:16px auto 0;max-width:52ch}
+.final{background:linear-gradient(158deg,var(--hero),var(--hero2));color:#eafaf5;text-align:center;padding:88px 24px}
+.final h2{font-size:clamp(26px,4.4vw,40px);color:#fff}
+.final p{color:#c4ddd4;font-size:17px;margin:16px auto 0;max-width:52ch}
 
-footer{background:#0a241e;color:#7fa79b;font-size:12.5px;text-align:center;padding:34px 22px}
-footer a{color:var(--mint);text-decoration:none}
-</style>
-</head>
-<body>
-<a class="back" href="funnels.html">back to funnels</a>
+footer.ffoot{background:#0a241e;color:#7fa79b;font-size:12.5px;text-align:center;padding:34px 24px}
+footer.ffoot a{color:var(--mint)}
+footer.ffoot img{height:20px;opacity:.8;margin-bottom:12px}
 
-<!-- ================= 1. HERO ================= -->
-<header class="hero">
-  <div class="hero-inner" data-r>
-    <div class="eyebrow">Reporting-Foundation Maturity Scorecard</div>
-    <h1>Would your Power BI numbers survive a board review?</h1>
-    <p class="sub">Four questions, about two minutes. You get an instant maturity tier and a one-page PDF you can forward straight to your CFO, no call, no pitch.</p>
-    <a class="cta" href="#form">Get my scorecard</a>
-    <div class="whatyouget">You get: <b>your tier</b> (Fragile, Functional, or Board-ready) plus a <b>one-page PDF</b> built to forward.</div>
-  </div>
+/* ---- responsive ---- */
+@media(max-width:860px){
+  .hero.split .hwrap{grid-template-columns:minmax(0,1fr);gap:32px}
+  .hero{padding:64px 22px 58px}
+  section{padding:60px 0}
+  .mock,.calc,.quiz,.buybox,.formcard{max-width:100%}
+  .hero h1{font-size:clamp(30px,7.6vw,42px)}
+}
+@media(max-width:560px){
+  .grid.g4{grid-template-columns:1fr}
+  .fhead .fwrap{gap:10px;padding:11px 18px}
+  .pricetag{flex-wrap:wrap;row-gap:2px}
+  .bridge{padding:22px 20px}
+  .filelist .fsz{display:none}
+  .wrap{padding:0 20px}
+}
+"""
 
-  <!-- live scorecard preview: the actual four questions -->
-  <div class="card" data-r>
-    <div class="k">Try it now</div>
-    <h3>Score your reporting foundation</h3>
-    <div class="mini">Pick one answer per row. Your tier updates as you go.</div>
-    <div class="q"><h4>1. Can you name, in one sentence, who owns the revenue number on your board report?</h4>
-      <div class="opts"><div class="opt" data-q="0" data-v="2">Yes, one named person</div><div class="opt" data-q="0" data-v="1">Sort of</div><div class="opt" data-q="0" data-v="0">No</div></div></div>
-    <div class="q"><h4>2. How do report changes reach the live dashboard?</h4>
-      <div class="opts"><div class="opt" data-q="1" data-v="2">Dev, test, then live</div><div class="opt" data-q="1" data-v="1">Straight to live</div><div class="opt" data-q="1" data-v="0">Not sure</div></div></div>
-    <div class="q"><h4>3. When did you last test row-level security on a real user?</h4>
-      <div class="opts"><div class="opt" data-q="2" data-v="2">This quarter</div><div class="opt" data-q="2" data-v="1">At launch only</div><div class="opt" data-q="2" data-v="0">Never</div></div></div>
-    <div class="q"><h4>4. Do two teams ever report the same metric with different numbers?</h4>
-      <div class="opts"><div class="opt" data-q="3" data-v="2">Never</div><div class="opt" data-q="3" data-v="1">Sometimes</div><div class="opt" data-q="3" data-v="0">Often</div></div></div>
-    <div class="result">
-      <div class="tierrow"><span>Fragile</span><span>Functional</span><span>Board-ready</span></div>
-      <div class="meter"><div class="needle" id="needle"></div></div>
-      <div class="tier" id="tier">Answer the four questions</div>
-      <div class="tiernote" id="tiernote">Then drop your email below and we will send the full breakdown as a PDF.</div>
-    </div>
-  </div>
-</header>
-
-<!-- ================= 2. VALUE STACK ================= -->
-<section>
-  <div class="wrap" data-r>
-    <div class="tag">What you actually get</div>
-    <h2 class="title">A real read on your reporting, in the time it takes to get a coffee</h2>
-    <p class="lead">Most maturity checks are a sales call in disguise. This one isn't. Answer four questions and you walk away with something you can use, whether or not you ever talk to us.</p>
-    <div class="stack">
-      <div class="item">
-        <div class="num">1</div>
-        <h3>Your tier in about two minutes</h3>
-        <p>Fragile, Functional, or Board-ready. It's the same read a technical reviewer forms in the first ten minutes of looking at your Power BI setup, just faster and free.</p>
-      </div>
-      <div class="item">
-        <div class="num">2</div>
-        <h3>A one-page PDF built to forward</h3>
-        <p>Plain language, no screenshots of your data, nothing to explain. Send it to your CFO or your CEO as is. It says where you stand and what to fix first, in the order that matters.</p>
-      </div>
-      <div class="item">
-        <div class="num">3</div>
-        <h3>The four things a board checks</h3>
-        <p>Ownership, change control, row-level security, and metric definitions. These are the four places a "trusted" number quietly goes wrong. The PDF grades each one so you know which is soft.</p>
-      </div>
-      <div class="item">
-        <div class="num">4</div>
-        <h3>Normally a paid review</h3>
-        <p>A consultant running this same check by hand bills around 500 dollars for the afternoon. Here it's the questions above and your email. That's the whole cost.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 3. SOCIAL PROOF ================= -->
-<section class="deep">
-  <div class="wrap" data-r>
-    <div class="tag">Who's behind it</div>
-    <h2 class="title">Built by people who've fixed this before</h2>
-    <div class="quotes">
-      <div class="quote">
-        <p>"We thought our reporting was fine until the scorecard flagged that nobody actually owned the revenue metric. Two weeks later finance and sales finally agreed on one number. That alone was worth the two minutes."</p>
-        <div class="who">Group Controller, mid-market manufacturer</div>
-      </div>
-      <div class="quote">
-        <p>"I forwarded the PDF to our CFO before I'd even finished my coffee. He read it, got it, and asked me to book the review. Nothing else has landed a technical point with him that fast."</p>
-        <div class="who">Head of Finance, Berlin SaaS company</div>
-      </div>
-    </div>
-    <div class="cred">
-      CaseWhen is a Berlin Power BI and Fabric consultancy run by <b>Microsoft-certified</b> BI engineers. We've built and repaired reporting foundations for teams at <b>Schindler</b> and <b>Ipsen</b>, so the checks in this scorecard aren't theory. They're the exact things we look at first on day one.
-      <div class="logos"><span>Schindler</span><span>Ipsen</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 4. HOW IT WORKS ================= -->
-<section>
-  <div class="wrap" data-r>
-    <div class="tag">How it works</div>
-    <h2 class="title">Three steps, no call, no login</h2>
-    <p class="lead">You don't have to book anything or hand over access. The whole thing happens right here.</p>
-    <div class="steps">
-      <div class="step">
-        <div class="n">1</div>
-        <h3>Answer four questions</h3>
-        <p>They're up top. No account, no data upload, nothing to install. Just pick the answer that's closest to true.</p>
-      </div>
-      <div class="step">
-        <div class="n">2</div>
-        <h3>See your tier instantly</h3>
-        <p>The meter moves as you answer. By the fourth question you already know if you're Fragile, Functional, or Board-ready.</p>
-      </div>
-      <div class="step">
-        <div class="n">3</div>
-        <h3>Get the PDF in your inbox</h3>
-        <p>Drop your email and the full one-page breakdown lands in a minute. Forward it, keep it, or ignore it. It's yours either way.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 5. OBJECTION HANDLING ================= -->
-<section class="tint">
-  <div class="wrap" data-r>
-    <div class="tag">Before you ask</div>
-    <h2 class="title">What this isn't</h2>
-    <div class="reassure">
-      <div class="re"><div class="ch">&#10003;</div><div><b>We'll sign your NDA</b><span>Worried about naming who owns what? Say the word and we sign your NDA first. Your answers stay yours.</span></div></div>
-      <div class="re"><div class="ch">&#10003;</div><div><b>No sales pitch</b><span>The PDF stands on its own. We won't cold-call you or drop you into a drip sequence. One email with your result, that's it.</span></div></div>
-      <div class="re"><div class="ch">&#10003;</div><div><b>No obligation</b><span>Take the scorecard, take the PDF, and go fix things yourself. Plenty of people do. If you want help later, you know where we are.</span></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 6. THE FORM ================= -->
-<section id="form">
-  <div class="wrap" data-r>
-    <div class="narrow" style="text-align:center">
-      <div class="tag">Get the PDF</div>
-      <h2 class="title">Send me my scorecard</h2>
-      <p class="lead" style="margin-left:auto;margin-right:auto">Add your email and we'll send the one-page PDF with your tier and the four grades. Company is optional, it just lets us word the PDF for your setup.</p>
-    </div>
-    <form class="formcard" onsubmit="return mockSend(event)">
-      <label for="name">First name</label>
-      <input id="name" type="text" placeholder="Alex" autocomplete="given-name">
-      <label for="email">Work email</label>
-      <input id="email" type="email" placeholder="you@company.com" autocomplete="email" required>
-      <label for="company">Company <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
-      <input id="company" type="text" placeholder="Acme GmbH" autocomplete="organization">
-      <button class="go" type="submit">Get my report</button>
-      <div class="fine">We'll sign your NDA on request. No spam, no sales sequence, one email.</div>
-      <div class="mockmsg" id="mockmsg">This is a mockup, so nothing actually sends. On the live page your PDF would be on its way.</div>
-    </form>
-  </div>
-</section>
-
-<!-- ================= 7. RISK REVERSAL ================= -->
-<section class="deep">
-  <div class="wrap" data-r>
-    <div class="guarantee">
-      <div class="seal">Our promise</div>
-      <p>If the scorecard doesn't flag at least one real gap worth fixing, reply to the email and tell us. We'll get on a 30-minute call and walk your model with you, free, no strings.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 8. FAQ ================= -->
-<section>
-  <div class="wrap narrow" data-r>
-    <div class="tag">Questions</div>
-    <h2 class="title">The honest answers</h2>
-    <div class="faq">
-      <details class="qa"><summary>Do I need to give you access to my Power BI?<span class="pl">+</span></summary><div class="a">No. The scorecard runs on the four questions above and nothing else. We never touch your workspace, your semantic model, or your data to produce the PDF.</div></details>
-      <details class="qa"><summary>How can four questions tell me anything real?<span class="pl">+</span></summary><div class="a">Because these four are the ones that predict the rest. Ownership, change control, row-level security, and metric definitions are where trusted numbers go soft. If those four are shaky, the report is shaky, and the scorecard maps straight onto how a reviewer would grade you on day one.</div></details>
-      <details class="qa"><summary>Is this just a way to sell me a project?<span class="pl">+</span></summary><div class="a">The PDF is useful whether you ever talk to us or not, and plenty of people take it and fix things on their own. If your foundation is soft we do offer a fixed-price Reporting Foundation Review that repairs exactly what the scorecard flags, but that's your call to make, later, if you want it.</div></details>
-      <details class="qa"><summary>Does it cover licensing and cost?<span class="pl">+</span></summary><div class="a">The scorecard is about whether your numbers can be trusted, not licences. But it's a fair question, and there's a real line worth knowing: once you're pushing past roughly 350 report viewers, Premium or Fabric capacity usually starts beating a stack of per-user Pro licences. If you're near that line, mention it in your reply and we'll sanity-check the math with you.</div></details>
-      <details class="qa"><summary>My reporting is a mess. Will the PDF just embarrass me?<span class="pl">+</span></summary><div class="a">No. It's written to hand upward, not to point fingers. It says where you are and what to do next, in plain language. A Fragile result reads as a clear plan, not a telling-off, which is exactly why controllers forward it to their CFO instead of hiding it.</div></details>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 9. FINAL CTA ================= -->
-<section class="final" data-r>
-  <h2>Two minutes now, or find out in the boardroom</h2>
-  <p>You already know which of the four questions made you pause. Get the tier, get the PDF, and fix the soft one before someone else spots it.</p>
-  <a class="cta" href="#form">Get my scorecard</a>
-  <div class="whatyouget">Free &middot; Instant tier &middot; A one-page PDF you can forward</div>
-</section>
-
-<footer>
-  CaseWhen &middot; Power BI, Fabric and Azure BI, Berlin &middot; <a href="funnels.html">back to funnels</a><br>
-  A fixed-price Reporting Foundation Review repairs whatever the scorecard flags.
-</footer>
-
-<script>
-/* ---- fail-safe reveal: only opt into hidden state if JS runs ---- */
+REVEAL_SCRIPT = """<script>
 document.documentElement.classList.add('reveal-on');
-var rev=document.querySelectorAll('[data-r]');
+var _r=[].slice.call(document.querySelectorAll('[data-r]'));
+function _show(el){el.classList.add('in');}
+var _vh=window.innerHeight||800;
+// reveal anything already in (or just below) the viewport synchronously — no hero flash
+_r.forEach(function(el){if(el.getBoundingClientRect().top < _vh*1.15)_show(el);});
 if('IntersectionObserver' in window){
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
-  rev.forEach(function(el){io.observe(el);});
-}else{
-  rev.forEach(function(el){el.classList.add('in');});
-}
-setTimeout(function(){rev.forEach(function(el){el.classList.add('in');});},1600);
-</script>
-<script>
-/* ---- interactive scorecard ---- */
-var ans={};
-document.querySelectorAll('.opt').forEach(function(o){
-  o.addEventListener('click',function(){
-    var q=o.dataset.q;
-    document.querySelectorAll('.opt[data-q="'+q+'"]').forEach(function(x){x.classList.remove('sel');});
-    o.classList.add('sel');
-    ans[q]=+o.dataset.v;
-    render();
-  });
-});
-function render(){
-  var ks=Object.keys(ans);
-  if(!ks.length) return;
-  var s=0; ks.forEach(function(k){s+=ans[k];});
-  var pct=Math.round(s/(4*2)*100);
-  document.getElementById('needle').style.left=Math.max(4,Math.min(96,pct))+'%';
-  var t=document.getElementById('tier');
-  var note=document.getElementById('tiernote');
-  if(ks.length<4){
-    t.textContent='Keep going ('+ks.length+' of 4)';
-    t.style.color='#94a29c';
-    return;
-  }
-  if(pct<40){t.textContent='Fragile';t.style.color='#CE8168';note.textContent='A board could poke a hole in this. The PDF shows which of the four to shore up first.';}
-  else if(pct<75){t.textContent='Functional';t.style.color='#b8862f';note.textContent='It holds day to day, but a couple of gaps could bite. The PDF ranks them for you.';}
-  else{t.textContent='Board-ready';t.style.color='#1D967C';note.textContent='Solid. The PDF confirms it and flags the one thing worth keeping an eye on.';}
-}
-/* ---- mockup form ---- */
-function mockSend(e){
-  e.preventDefault();
-  document.getElementById('mockmsg').style.display='block';
-  return false;
-}
-</script>
-</body></html>
-"""
+ var _io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){_show(e.target);_io.unobserve(e.target);}});},{threshold:.12});
+ _r.forEach(function(el){if(el.className.indexOf('in')<0)_io.observe(el);});
+}else{_r.forEach(_show);}
+setTimeout(function(){_r.forEach(_show);},1000);
+</script>"""
 
+def _fav(emoji):
+    return ("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>"
+            "<text y='.9em' font-size='90'>" + emoji + "</text></svg>")
 
-def scorecard_mockup():
-    # Full self-contained landing page. Bypasses landing() so the page can meet its
-    # own spec: ui-sans-serif font, "back to funnels" link, and a FAIL-SAFE reveal
-    # (content visible by default; JS opts into the hidden-then-animate state).
-    page = SCORECARD_PAGE
-    (OUT/"scorecard.html").write_text(page, encoding="utf-8")
+def fhead(active):
+    pills = "".join(
+        f'<a class="fpill {"on" if href==active else ""}" href="{href}">{name}<b>{price}</b></a>'
+        for href, name, price in LADDER)
+    return (f'<header class="fhead"><div class="fwrap">'
+            f'<a class="brand" href="funnels.html"><img src="img/wordmark.png" alt="CaseWhen"></a>'
+            f'<nav class="fladder">{pills}</nav></div></header>')
 
-def calculator_mockup():
-    css = """
-body{background:#E9ECE8;color:#1a1615}
-.wrap2{max-width:720px;margin:0 auto;padding:92px 22px 60px}
-.eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#1D967C}
-h1{font-family:'NM';font-weight:700;font-size:clamp(28px,5.4vw,46px);letter-spacing:-.02em;line-height:1.1;margin:12px 0 0}
-.sub{font-size:17px;color:#5c6866;margin:14px 0 0;max-width:56ch}
-.panel{margin-top:24px;background:#fff;border-radius:20px;padding:26px 24px;box-shadow:0 24px 60px rgba(17,73,63,.12)}
-.row{margin:18px 0}
-.row label{font-size:14px;font-weight:600;display:flex;justify-content:space-between}
-.row label b{color:#11493F}
-input[type=range]{width:100%;margin-top:10px;accent-color:#1D967C}
-.readout{margin-top:22px;background:#11493F;color:#fff;border-radius:16px;padding:22px;text-align:center}
-.readout .big{font-family:'NM';font-weight:700;font-size:clamp(40px,10vw,72px);letter-spacing:-.03em;line-height:1}
-.readout .lbl{color:#9fc2b8;font-size:13px;margin-top:6px}
-.split{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
-.split .s{flex:1;min-width:120px;background:rgba(255,255,255,.08);border-radius:10px;padding:12px;font-size:12.5px;color:#cfe3dc}
-.split .s b{display:block;color:#fff;font-size:18px;font-weight:700}
-.rec{margin-top:14px;font-size:14px;color:#eafaf5;background:rgba(122,196,181,.14);border-radius:10px;padding:12px}
-.gate{margin-top:16px;background:#f3fbfa;border:1px solid #d8f3ed;border-radius:14px;padding:16px}
-.gate input{width:100%;border:1px solid #cfe3dc;border-radius:10px;padding:12px 14px;font-size:15px;font-family:inherit;margin-top:8px}
-.gate button{width:100%;margin-top:10px;background:#1D967C;color:#fff;border:0;border-radius:10px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
-.gate small{color:#787a76;font-size:11.5px}
-.badge{display:inline-block;font-size:11px;background:#d8f3ed;color:#11493F;border-radius:20px;padding:4px 12px;font-weight:600}
-"""
-    inner = """
-<div class="wrap2">
- <span class="badge" data-r>Mockup · Lead magnet</span>
- <div class="eyebrow" data-r>Power BI cost calculator</div>
- <h1 data-r>What your Power BI setup actually costs.</h1>
- <p class="sub" data-r>Move the sliders. See the yearly number, the licence-vs-capacity crossover, and which side you're on. Real Microsoft pricing.</p>
- <div class="panel" data-r>
-  <div class="row"><label>Report viewers <b id="vv">120</b></label><input id="viewers" type="range" min="10" max="1200" value="120"></div>
-  <div class="row"><label>Report builders <b id="bb">6</b></label><input id="builders" type="range" min="1" max="60" value="6"></div>
-  <div class="readout">
-   <div class="big" id="cost">$0</div><div class="lbl">estimated per year</div>
-   <div class="split">
-    <div class="s"><b id="model">Per-user</b>cheaper model</div>
-    <div class="s"><b id="cross">~350</b>viewer crossover</div>
-   </div>
-   <div class="rec" id="rec">Adjust the sliders to see your recommendation.</div>
-  </div>
-  <div class="gate">
-   <b style="font-size:14px">Email me this estimate as a one-page PDF</b>
-   <input type="email" placeholder="you@company.com" aria-label="email">
-   <button type="button">Send my estimate</button>
-   <small>Mockup only — nothing is sent. Real page uses live Microsoft pricing.</small>
+def funnel_page(slug, title, emoji, hero, body, extra_css="", extra_js=""):
+    foot = ('<footer class="ffoot"><img src="img/wordmark.png" alt="CaseWhen"><br>'
+            'CaseWhen &middot; Power BI, Fabric and Azure BI, Berlin &middot; '
+            '<a href="funnels.html">back to the funnel</a></footer>')
+    html_doc = f"""<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="{_fav(emoji)}">
+<title>CaseWhen &middot; {esc(title)}</title>
+<style>{FUNNEL_CSS}{extra_css}</style></head><body>
+{fhead(slug)}
+{hero}
+{body}
+{foot}
+{REVEAL_SCRIPT}{extra_js}
+</body></html>"""
+    (OUT/slug).write_text(html_doc, encoding="utf-8")
+
+# ---------- shared content blocks ----------
+
+def proof_block(kicker="Who's behind it", head="Built by people who've fixed this before",
+                q1=None, q2=None):
+    q1 = q1 or ("\"We thought our reporting was fine until CaseWhen flagged that nobody actually owned "
+                "the revenue number. Two weeks later finance and sales finally agreed on one figure.\"",
+                "Group Controller, mid-market manufacturer")
+    q2 = q2 or ("\"I forwarded their one-pager to our CFO before I'd finished my coffee. He read it, got "
+                "it, and asked me to book the review. Nothing has landed a technical point that fast.\"",
+                "Head of Finance, Berlin SaaS company")
+    return f"""<section class="deep"><div class="wrap" data-r>
+<div class="kicker">{esc(kicker)}</div><h2 class="h2">{esc(head)}</h2>
+<div class="proof">
+ <div class="quote"><p>{q1[0]}</p><div class="who">{esc(q1[1])}</div></div>
+ <div class="quote"><p>{q2[0]}</p><div class="who">{esc(q2[1])}</div></div>
+</div>
+<div class="cred">CaseWhen is a Berlin Power BI and Fabric consultancy run by <b>Microsoft-certified</b>
+BI engineers. We've built and repaired reporting foundations for teams at <b>Schindler</b> and
+<b>Ipsen</b>, so the checks and templates here aren't theory. They're what we reach for on day one.
+<div class="logos"><span>Schindler</span><span>Ipsen</span><span>WellBeauty</span></div></div>
+</div></section>"""
+
+def bridge_block(kicker, head, text, href, label):
+    return f"""<section class="band"><div class="wrap" data-r>
+<div class="bridge"><div class="bt"><div class="bk">{esc(kicker)}</div>
+<h3>{esc(head)}</h3><p>{esc(text)}</p></div>
+<a class="cta solid-d" href="{href}">{esc(label)}</a></div></div></section>"""
+
+def faq_block(items):
+    qa = "".join(
+        f'<details class="qa"><summary>{esc(q)}<span class="pl">+</span></summary>'
+        f'<div class="a">{esc(a)}</div></details>' for q, a in items)
+    return f"""<section><div class="wrap narrow" data-r>
+<div class="center-head"><div class="kicker">Questions</div>
+<h2 class="h2">The honest answers</h2></div>
+<div class="faq">{qa}</div></div></section>"""
+
+def final_cta(head, sub, href, label, note):
+    return f"""<section class="final" data-r>
+<h2>{esc(head)}</h2><p>{esc(sub)}</p>
+<div class="btnrow" style="justify-content:center"><a class="cta" href="{href}">{esc(label)}</a></div>
+<div class="heronote" style="color:#9fc2b8">{esc(note)}</div></section>"""
+
+# ============================================================================
+# RUNG 0  ·  Governance & Cost Scorecard  (free, email capture)
+# ============================================================================
+def scorecard_page():
+    hero = """<section class="hero split"><div class="hwrap">
+ <div data-r>
+  <div class="eyebrow">Free &middot; Governance &amp; Cost Scorecard</div>
+  <h1>Score your Power BI on governance and cost in five minutes.</h1>
+  <p class="sub">Answer a short set of questions and get an instant score out of 100, how you compare
+  to peers, and the top three risks in your setup. It's email only, and the one-page result is built
+  to forward straight to your CFO.</p>
+  <div class="btnrow"><a class="cta" href="#capture">Get my score</a>
+  <a class="cta ghost" href="#what">See what's in it</a></div>
+  <div class="heronote">You get: <b>a score out of 100</b>, a <b>peer benchmark</b>, and your
+  <b>top three risks</b>. No call, no pitch.</div>
+ </div>
+ <div class="quiz" data-r>
+  <div class="qh">Try it now</div>
+  <h3>Rate your reporting foundation</h3>
+  <div class="qmini">Pick one answer per row. Your score updates as you go.</div>
+  <div class="q"><h4>1. Can you name the one person who owns the revenue number on your board report?</h4>
+   <div class="opts"><div class="opt" data-q="0" data-v="2">Yes, one named owner</div><div class="opt" data-q="0" data-v="1">Sort of</div><div class="opt" data-q="0" data-v="0">No</div></div></div>
+  <div class="q"><h4>2. How do report changes reach the live dashboard?</h4>
+   <div class="opts"><div class="opt" data-q="1" data-v="2">Dev, test, then live</div><div class="opt" data-q="1" data-v="1">Straight to live</div><div class="opt" data-q="1" data-v="0">Not sure</div></div></div>
+  <div class="q"><h4>3. When did you last test row-level security on a real user?</h4>
+   <div class="opts"><div class="opt" data-q="2" data-v="2">This quarter</div><div class="opt" data-q="2" data-v="1">At launch only</div><div class="opt" data-q="2" data-v="0">Never</div></div></div>
+  <div class="q"><h4>4. Do you know if a Fabric capacity would be cheaper than your per-user licences?</h4>
+   <div class="opts"><div class="opt" data-q="3" data-v="2">Yes, we've run the math</div><div class="opt" data-q="3" data-v="1">Roughly</div><div class="opt" data-q="3" data-v="0">No idea</div></div></div>
+  <div class="qresult">
+   <div class="rrow"><span>At risk</span><span>Functional</span><span>Board-ready</span></div>
+   <div class="qmeter"><div class="qneedle" id="qneedle"></div></div>
+   <div class="qtier" id="qtier">Answer the four questions</div>
+   <div class="qnote" id="qnote">Then drop your email below for the full score and your top three risks.</div>
   </div>
  </div>
-</div>"""
+</div></section>"""
+
+    body = f"""
+<section id="what"><div class="wrap" data-r>
+ <div class="center-head"><div class="kicker">What you actually get</div>
+ <h2 class="h2">A real read on your reporting, in the time it takes to get a coffee</h2>
+ <p class="lead">Most maturity checks are a sales call in disguise. This one isn't. You walk away with
+ something you can use, whether or not you ever talk to us.</p></div>
+ <div class="grid g3">
+  <div class="feat"><div class="ic">/100</div><h3>A score out of 100</h3>
+   <p>One number that grades your setup across ownership, change control, security, and licensing cost.
+   It's the same read a technical reviewer forms in their first ten minutes, just faster and free.</p></div>
+  <div class="feat"><div class="ic">vs</div><h3>A peer benchmark</h3>
+   <p>See where you land against other Power BI teams of your size. Above the line, at it, or below it,
+   so you know whether this is urgent or just worth a note.</p></div>
+  <div class="feat"><div class="ic">3</div><h3>Your top three risks</h3>
+   <p>The three places your numbers are most likely to go wrong, named and ranked. The one-page result
+   spells out what to fix first, in the order that matters.</p></div>
+ </div>
+</div></section>
+
+<section class="band"><div class="wrap" data-r>
+ <div class="center-head"><div class="kicker">The result</div>
+ <h2 class="h2">What lands in your inbox</h2>
+ <p class="lead">A single page you can read in a minute and forward without explaining. No screenshots of
+ your data, no jargon.</p></div>
+ <div style="max-width:560px;margin:38px auto 0">
+  <div class="mock">
+   <div class="mbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    <span class="mtitle">CaseWhen &middot; Governance &amp; Cost Scorecard</span></div>
+   <div class="mbody">
+    <div class="dial"><div class="ring" style="--p:62"><span class="val">62<small>/100</small></span></div>
+     <div class="tier">Functional, with two soft spots</div></div>
+    <div class="bench"><div class="lbl"><span>Your score</span><span>Peer median 71</span></div>
+     <div class="track"><div class="fill" style="width:62%"></div><div class="peer" style="left:71%"></div></div></div>
+    <div class="risks">
+     <div class="rk"><span class="n">1</span><div><b>No named owner for the revenue metric.</b>
+      <span>Finance and sales can reconcile to different numbers.</span></div></div>
+     <div class="rk"><span class="n">2</span><div><b>Changes ship straight to live.</b>
+      <span>No dev or test step means a broken measure reaches the board.</span></div></div>
+     <div class="rk"><span class="n">3</span><div><b>Licensing past the crossover.</b>
+      <span>At 400+ viewers a Fabric capacity likely beats your per-user Pro spend.</span></div></div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div></section>
+
+{proof_block()}
+
+<section id="capture"><div class="wrap" data-r>
+ <div class="center-head"><div class="kicker">Get your score</div>
+ <h2 class="h2">Send me my scorecard</h2>
+ <p class="lead">Email only. Your score, your peer benchmark, and your top three risks land in about a
+ minute. That's the whole cost.</p></div>
+ <form class="formcard" style="margin-top:34px" onsubmit="return mockSend(event)">
+  <label for="email">Work email</label>
+  <input id="email" type="email" placeholder="you@company.com" autocomplete="email" required>
+  <button class="go" type="submit">Get my score</button>
+  <div class="fine">We'll sign your NDA on request. No spam, no sales sequence, one email.</div>
+  <div class="mockmsg" id="mockmsg">This is a mockup, so nothing actually sends. On the live page your
+  scorecard would be on its way.</div>
+ </form>
+</div></section>
+
+{faq_block([
+ ("Do I need to give you access to my Power BI?","No. The scorecard runs on your answers and nothing else. We never touch your workspace, your semantic model, or your data to produce the result."),
+ ("How can a short quiz tell me anything real?","Because these questions map to where trusted numbers actually go soft: ownership, change control, security, and licensing cost. If those are shaky, the reporting is shaky, and the score maps straight onto how a reviewer would grade you on day one."),
+ ("Is this just a way to sell me a project?","The result is useful whether you ever talk to us or not, and plenty of people take it and fix things on their own. If your foundation is soft we do offer a fixed-price review, but that's your call to make later."),
+ ("Does it really cover cost?","Yes. One of the four checks is licensing, because past roughly 350 viewers a Fabric capacity usually starts beating a stack of per-user Pro licences. If you're near that line the result flags it, and the cost calculator does the exact math."),
+])}
+
+{bridge_block("Next rung", "Scored low on the model? Start with the Fix Kit.",
+   "If the scorecard flags your data model, the 49 euro Star Schema Fix Kit gives you the template, the measures, and the checklist to repair it yourself this week.",
+   "fix-kit.html", "See the Fix Kit")}
+
+{final_cta("Two minutes now, or find out in the boardroom",
+   "You already know which question made you pause. Get the score, get your top three risks, and fix the soft one before someone else spots it.",
+   "#capture", "Get my score", "Free · Instant score · A one-page result you can forward")}
+"""
+    js = """<script>
+var ans={};
+document.querySelectorAll('.opt').forEach(function(o){o.addEventListener('click',function(){
+ var q=o.dataset.q;document.querySelectorAll('.opt[data-q="'+q+'"]').forEach(function(x){x.classList.remove('sel');});
+ o.classList.add('sel');ans[q]=+o.dataset.v;render();});});
+function render(){var ks=Object.keys(ans);if(!ks.length)return;var s=0;ks.forEach(function(k){s+=ans[k];});
+ var pct=Math.round(s/8*100);document.getElementById('qneedle').style.left=Math.max(4,Math.min(96,pct))+'%';
+ var t=document.getElementById('qtier'),n=document.getElementById('qnote');
+ if(ks.length<4){t.textContent='Keep going ('+ks.length+' of 4)';t.style.color='#94a29c';return;}
+ if(pct<40){t.textContent='At risk';t.style.color='#CE8168';n.textContent='A board could poke a hole in this. Your result ranks which risk to shore up first.';}
+ else if(pct<75){t.textContent='Functional';t.style.color='#b8862f';n.textContent='It holds day to day, but a couple of gaps could bite. Your result ranks them.';}
+ else{t.textContent='Board-ready';t.style.color='#1D967C';n.textContent='Solid. Your result confirms it and flags the one thing worth watching.';}}
+function mockSend(e){e.preventDefault();document.getElementById('mockmsg').style.display='block';return false;}
+</script>"""
+    funnel_page("scorecard.html", "Governance & Cost Scorecard", "\U0001F4CA", hero, body, extra_js=js)
+
+# ============================================================================
+# RUNG 1  ·  Star Schema Fix Kit  (49 euro tripwire, +19 euro DAX bump)
+# ============================================================================
+def fixkit_page():
+    hero = """<section class="hero split"><div class="hwrap">
+ <div data-r>
+  <div class="eyebrow">Tripwire &middot; Star Schema Fix Kit</div>
+  <h1>Rebuild your Power BI model the right way, this week.</h1>
+  <p class="sub">A done-for-you starter kit that turns a tangled, slow model into a clean star schema.
+  A 45-minute walkthrough, a ready .pbix template, 25 tested DAX measures, and a governance checklist.
+  You copy the pattern into your own report and the numbers start behaving.</p>
+  <div class="pricetag"><span class="now">&euro;49</span><span class="per">one-off, yours to keep</span></div>
+  <div class="btnrow"><a class="cta" href="#buy">Get the Fix Kit</a>
+  <a class="cta ghost" href="#inside">See what's inside</a></div>
+ </div>
+ <div class="mock" data-r>
+  <div class="mbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+   <span class="mtitle">star-schema-fix-kit.zip</span></div>
+  <div class="mbody"><ul class="filelist">
+   <li><span class="ft pbix">PBIX</span><span class="fn"><b>star-schema-template.pbix</b><span>Fact + dimensions, a proper date table, relationships done right</span></span><span class="fsz">1 file</span></li>
+   <li><span class="ft dax">DAX</span><span class="fn"><b>25-measures.dax</b><span>Time intelligence, ratios, running totals, all tested</span></span><span class="fsz">25</span></li>
+   <li><span class="ft pdf">PDF</span><span class="fn"><b>governance-checklist.pdf</b><span>The 12 things to lock before anyone trusts the report</span></span><span class="fsz">2 pp</span></li>
+   <li><span class="ft xls">MP4</span><span class="fn"><b>walkthrough.mp4</b><span>45 minutes, screen by screen, no filler</span></span><span class="fsz">45m</span></li>
+  </ul></div>
+ </div>
+</div></section>"""
+
+    body = f"""
+<section id="inside"><div class="wrap" data-r>
+ <div class="center-head"><div class="kicker">What's in the kit</div>
+ <h2 class="h2">Everything you need to fix the model, in one download</h2>
+ <p class="lead">No theory, no long course. Four things you can put to work the same afternoon you buy them.</p></div>
+ <div class="grid g4">
+  <div class="feat"><div class="ic">1</div><h3>45-minute walkthrough</h3>
+   <p>Screen by screen, we rebuild a messy model into a star schema and explain every move, so you can
+   repeat it on your own report.</p></div>
+  <div class="feat"><div class="ic">2</div><h3>.pbix template</h3>
+   <p>A ready Power BI file with the fact table, dimensions, a proper date table, and relationships set
+   up the way they should be. Open it and copy the pattern.</p></div>
+  <div class="feat"><div class="ic">3</div><h3>25 DAX measures</h3>
+   <p>Time intelligence, ratios, running totals, and the ones people always get wrong, all written and
+   tested. Paste them in and adjust the column names.</p></div>
+  <div class="feat"><div class="ic">4</div><h3>Governance checklist</h3>
+   <p>The twelve things to lock down before anyone trusts the report: ownership, security, refresh, and
+   naming. One page, plain language.</p></div>
+ </div>
+</div></section>
+
+<section class="band"><div class="wrap narrow" data-r>
+ <div class="center-head"><div class="kicker">Why it works</div>
+ <h2 class="h2">A star schema is the fix behind most "slow, wrong" reports</h2>
+ <p class="lead">When a model is flat and tangled, DAX gets slow, totals stop reconciling, and Copilot
+ returns nonsense. The star schema is the shape that fixes all three at once. This kit hands you the
+ shape, the measures that assume it, and the checklist that keeps it clean.</p></div>
+ <div class="checks">
+  <div class="chk"><div class="cm">&#10003;</div><div><b>Reports get faster</b><span>Measures fold and evaluate against a clean model instead of fighting a flat one.</span></div></div>
+  <div class="chk"><div class="cm">&#10003;</div><div><b>Numbers reconcile</b><span>One fact table and clear dimensions mean two teams stop getting two answers.</span></div></div>
+  <div class="chk"><div class="cm">&#10003;</div><div><b>Copilot behaves</b><span>A well-named star schema is what AI needs to return the one correct number.</span></div></div>
+  <div class="chk"><div class="cm">&#10003;</div><div><b>You keep the skill</b><span>You don't rent a fix, you learn the pattern and reuse it on every future report.</span></div></div>
+ </div>
+</div></section>
+
+<section id="buy"><div class="wrap" data-r>
+ <div class="center-head"><div class="kicker">Get it now</div>
+ <h2 class="h2">One download, 49 euro, yours to keep</h2></div>
+ <div class="buybox">
+  <div class="bprice"><span class="n">&euro;49</span><span class="per">one-off &middot; instant download</span></div>
+  <ul class="buylist">
+   <li>45-minute step-by-step walkthrough</li>
+   <li>.pbix star schema template with a date table</li>
+   <li>25 tested DAX measures</li>
+   <li>12-point governance checklist</li>
+  </ul>
+  <div class="bump"><div class="bx"></div><div>
+   <b>Add the <span class="bp">DAX Performance Pack</span> for +&euro;19</b>
+   <p>15 optimized measure patterns and a query-folding cheat sheet, for when the model is clean but the
+   report still drags. Most people add this.</p></div></div>
+  <button class="go" type="button" onclick="alert('Mockup only — the live page takes payment and delivers the download.')">Get the Fix Kit · &euro;49</button>
+  <div class="guff">Instant download. If it doesn't save you an afternoon, reply and we'll refund you, no questions.</div>
+ </div>
+</div></section>
+
+{bridge_block("Next rung", "Want the whole method, not just the model?",
+   "The Fix Kit repairs one report. The Foundations-to-Fabric course teaches the full method across modeling, DAX, and governance, so you can do it on any report you own.",
+   "course.html", "See the course")}
+
+{faq_block([
+ ("What version of Power BI do I need?","Power BI Desktop, any current version. The template and measures work in the free Desktop app; you don't need a paid licence to open and learn from them."),
+ ("Is this a subscription?","No. It's a one-off 49 euro purchase and the files are yours to keep and reuse on as many reports as you like."),
+ ("I'm not a DAX expert. Will I keep up?","Yes. The walkthrough assumes you can build a basic report but explains every model and measure decision as it goes. The 25 measures are copy-paste ready."),
+ ("What's the difference between this and the course?","The Fix Kit is a focused template to repair one model fast. The course is the full method with more depth on DAX and governance plus the Fabric look. Buy the kit if you need a fix this week."),
+])}
+
+{final_cta("Stop fighting a flat model",
+   "For the price of a decent lunch, get the template, the measures, and the checklist, and rebuild your report the right way this week.",
+   "#buy", "Get the Fix Kit · €49", "One-off · Instant download · Refund if it doesn't save you time")}
+"""
+    funnel_page("fix-kit.html", "Star Schema Fix Kit", "\U0001F527", hero, body)
+
+# ============================================================================
+# RUNG 2  ·  Foundations-to-Fabric Course  (299 euro, intro 199 euro)
+# ============================================================================
+def course_page():
+    hero = """<section class="hero split"><div class="hwrap">
+ <div data-r>
+  <div class="eyebrow">Course &middot; Foundations to Fabric</div>
+  <h1>Model it, measure it, govern it. The full Power BI method.</h1>
+  <p class="sub">A self-paced course on the three things that decide whether a Power BI report can be
+  trusted: a clean star-schema model, DAX that performs, and governance that holds. It ends with a first
+  look at Microsoft Fabric, so you're ready for what's next.</p>
+  <div class="pricetag"><span class="now">&euro;199</span><span class="was">&euro;299</span>
+   <span class="per">intro price, lifetime access</span></div>
+  <div class="btnrow"><a class="cta" href="#enroll">Enroll now</a>
+  <a class="cta ghost" href="#curriculum">See the curriculum</a></div>
+  <div class="heronote"><b>~6 to 8 hours</b>, watch at your own pace, keep it for good.</div>
+ </div>
+ <div class="mock" data-r>
+  <div class="mbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+   <span class="mtitle">Foundations to Fabric &middot; curriculum</span></div>
+  <div class="mbody"><ul class="filelist">
+   <li><span class="ft dax">01</span><span class="fn"><b>Modeling &amp; star schema</b><span>Power Query, fact and dimension design, date tables</span></span><span class="fsz">2h</span></li>
+   <li><span class="ft pbix">02</span><span class="fn"><b>Performant DAX</b><span>Context, iterators, time intelligence, tuning</span></span><span class="fsz">2h</span></li>
+   <li><span class="ft pdf">03</span><span class="fn"><b>Governance</b><span>RLS, certified datasets, deployment pipelines</span></span><span class="fsz">1.5h</span></li>
+   <li><span class="ft xls">04</span><span class="fn"><b>First Fabric look</b><span>Lakehouse, OneLake, when it's worth turning on</span></span><span class="fsz">1h</span></li>
+  </ul></div>
+ </div>
+</div></section>"""
+
+    body = f"""
+<section><div class="wrap" data-r>
+ <div class="center-head"><div class="kicker">The three pillars</div>
+ <h2 class="h2">The three skills that separate a trusted report from a pretty one</h2>
+ <p class="lead">Most Power BI training teaches buttons. This teaches the three decisions that actually
+ decide whether people believe the number on the screen.</p></div>
+ <div class="grid g3">
+  <div class="pillar" style="--ac:#1D967C"><div class="pn">Pillar one</div>
+   <h3>Modeling &amp; star schema</h3>
+   <p>Shape the data so everything downstream gets easier. Power Query, a proper star schema, and a real
+   date table.</p>
+   <ul><li>Clean, foldable Power Query</li><li>Fact and dimension design</li><li>Date tables and relationships</li></ul></div>
+  <div class="pillar" style="--ac:#11493F"><div class="pn">Pillar two</div>
+   <h3>Performant DAX</h3>
+   <p>Write measures that are correct and fast. Understand context, stop guessing, and tune the slow ones.</p>
+   <ul><li>Row and filter context, made clear</li><li>Time intelligence that holds up</li><li>Finding and fixing slow measures</li></ul></div>
+  <div class="pillar" style="--ac:#7AC4B5"><div class="pn">Pillar three</div>
+   <h3>Governance + Fabric</h3>
+   <p>Make the report trustworthy and ready for what's next. Security, certified datasets, and a first
+   real look at Fabric.</p>
+   <ul><li>Row-level security and RLS testing</li><li>Certified datasets and pipelines</li><li>Lakehouse and OneLake basics</li></ul></div>
+ </div>
+</div></section>
+
+<section class="band"><div class="wrap" data-r>
+ <div class="center-head"><div class="kicker">Curriculum</div>
+ <h2 class="h2">Four modules, about seven hours, at your own pace</h2>
+ <p class="lead">Every module ends with a real exercise on a sample dataset, so you leave having done it,
+ not just watched it.</p></div>
+ <div class="modules">
+  <div class="mod"><span class="mnum">1</span><div><h4>Modeling and the star schema</h4>
+   <p>Power Query cleanup, fact and dimension tables, a proper date table, and relationships that don't
+   fight you. The foundation everything else sits on.</p></div><span class="mlen">~2h</span></div>
+  <div class="mod"><span class="mnum">2</span><div><h4>DAX that performs</h4>
+   <p>Row and filter context explained so it finally clicks, then time intelligence, ratios, and how to
+   find and fix the measures that drag your report.</p></div><span class="mlen">~2h</span></div>
+  <div class="mod"><span class="mnum">3</span><div><h4>Governance that holds</h4>
+   <p>Row-level security and how to test it, certified datasets, workspace roles, and deployment
+   pipelines, so changes ship safely and numbers stay trusted.</p></div><span class="mlen">~1.5h</span></div>
+  <div class="mod"><span class="mnum">4</span><div><h4>A first look at Fabric</h4>
+   <p>What a lakehouse and OneLake actually are, how Direct Lake changes things, and an honest read on
+   when Fabric is worth turning on for a team your size.</p></div><span class="mlen">~1h</span></div>
+ </div>
+</div></section>
+
+<section id="enroll"><div class="wrap" data-r>
+ <div class="center-head"><div class="kicker">Enroll</div>
+ <h2 class="h2">Lifetime access, intro price for now</h2></div>
+ <div class="buybox">
+  <div class="bprice"><span class="n">&euro;199</span><span class="w">&euro;299</span><span class="per">intro price &middot; lifetime access</span></div>
+  <ul class="buylist">
+   <li>All four modules, ~6 to 8 hours of video</li>
+   <li>Sample datasets and exercise files</li>
+   <li>The 25-measure DAX library</li>
+   <li>Free updates as Fabric changes</li>
+  </ul>
+  <div class="bump"><div class="bx"></div><div>
+   <b>Add <span class="bp">Governance Starter Templates</span> for +&euro;79</b>
+   <p>RLS templates, a workspace-role matrix, a certified-dataset SOP, and a deployment-pipeline checklist.
+   The paperwork done for you.</p></div></div>
+  <div class="bump"><div class="bx"></div><div>
+   <b>Add the <span class="bp">Fabric Readiness Track</span> for +&euro;149</b>
+   <p>Lakehouse and Direct Lake migration patterns, for when you're ready to actually move.</p></div></div>
+  <button class="go" type="button" onclick="alert('Mockup only — the live page enrolls you and unlocks the modules.')">Enroll now · &euro;199</button>
+  <div class="guff">Seven-day money-back guarantee. Watch the first module; if it's not for you, we refund you.</div>
+ </div>
+</div></section>
+
+{proof_block(head="Taught by engineers who fix this for a living",
+  q1=("\"I'd used Power BI for two years and never really understood filter context. Module two fixed "
+      "that in an afternoon. My month-end refresh went from nine minutes to under two.\"",
+      "BI Analyst, logistics company"),
+  q2=("\"We put three of our team through it before a Fabric decision. It paid for itself in the first "
+      "meeting, because we finally asked the right questions.\"","Data lead, DACH retailer"))}
+
+{bridge_block("Next rung", "Ready to do it on your own data, with your team in the room?",
+   "The course teaches the method. Dashboard-in-a-Day brings us to your team for a live day on your own reports, so it lands for real.",
+   "dashboard-in-a-day.html", "See Dashboard-in-a-Day")}
+
+{faq_block([
+ ("Is this live or self-paced?","Self-paced. You get lifetime access and watch on your own schedule. If you want a live day with your team on your own data, that's Dashboard-in-a-Day, the next rung up."),
+ ("What level is it for?","Anyone who can build a basic Power BI report and wants to do it properly. It starts at modeling fundamentals and goes deep on DAX and governance, so beginners and self-taught analysts both get a lot from it."),
+ ("Do I need a Fabric licence?","No. The Fabric module is a guided look at concepts and a readiness view; you don't need a capacity to follow along. The first three pillars work entirely in Power BI Desktop."),
+ ("Can my company pay for the team?","Yes. Team seats and invoicing are available. For a whole team a custom workshop is often better value, and Microsoft co-funds Copilot enablement, so ask us before you buy in bulk."),
+])}
+
+{final_cta("Learn the method once, use it on every report",
+   "Modeling, DAX, and governance are the three skills that make Power BI trustworthy. Get all three at the intro price while it lasts.",
+   "#enroll", "Enroll now · €199", "Lifetime access · Seven-day guarantee · Free Fabric updates")}
+"""
+    funnel_page("course.html", "Foundations-to-Fabric Course", "\U0001F393", hero, body)
+
+# ============================================================================
+# RUNG 3  ·  Dashboard-in-a-Day  (~1,500 euro custom team training)
+# ============================================================================
+def dashboard_page():
+    hero = """<section class="hero split"><div class="hwrap">
+ <div data-r>
+  <div class="eyebrow">Custom team training &middot; Dashboard-in-a-Day</div>
+  <h1>One day, your team, your data, a dashboard you actually keep.</h1>
+  <p class="sub">We come to your team for a live, hands-on day and build a real dashboard on your own
+  data, not a demo dataset. Everyone leaves having done it, with a report you can put to work on Monday
+  and the habits to keep it clean.</p>
+  <div class="pricetag"><span class="now">&euro;1,500</span><span class="per">per day &middot; up to 10 seats</span></div>
+  <div class="btnrow"><a class="cta" href="#book">Book a workshop</a>
+  <a class="cta ghost" href="#agenda">See the agenda</a></div>
+  <div class="heronote"><b>On your own data.</b> Microsoft co-funds Copilot enablement, so ask us about
+  bringing the cost down.</div>
+ </div>
+ <div class="mock" data-r>
+  <div class="mbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+   <span class="mtitle">The day, at a glance</span></div>
+  <div class="mbody"><ul class="filelist">
+   <li><span class="ft dax">AM</span><span class="fn"><b>Model your data</b><span>Connect a real source, shape it into a star schema together</span></span><span class="fsz">9–12</span></li>
+   <li><span class="ft pbix">PM</span><span class="fn"><b>Build the dashboard</b><span>Measures, visuals, and a report on your own numbers</span></span><span class="fsz">1–4</span></li>
+   <li><span class="ft pdf">END</span><span class="fn"><b>Ship &amp; govern</b><span>Publish, secure, and set the rules to keep it trusted</span></span><span class="fsz">4–5</span></li>
+   <li><span class="ft xls">+30d</span><span class="fn"><b>Follow-up</b><span>A recap pack and a checkpoint call after the day</span></span><span class="fsz">async</span></li>
+  </ul></div>
+ </div>
+</div></section>"""
+
+    body = f"""
+<section id="outcome"><div class="wrap" data-r>
+ <div class="center-head"><div class="kicker">The outcome</div>
+ <h2 class="h2">Your team leaves with a working dashboard and the skill to build the next one</h2>
+ <p class="lead">This isn't a slideshow. By the end of the day there's a real report on your real data,
+ and the people who'll own it built it with their own hands.</p></div>
+ <div class="grid g3">
+  <div class="feat"><div class="ic">&#9632;</div><h3>A real dashboard</h3>
+   <p>Built live on a source you use every day, not a sample. It's yours to keep and extend the moment
+   the day ends.</p></div>
+  <div class="feat"><div class="ic">&#9679;</div><h3>Skills that stick</h3>
+   <p>Your team does the modeling and the measures themselves, guided step by step, so the ability stays
+   in the building after we leave.</p></div>
+  <div class="feat"><div class="ic">&#9650;</div><h3>Trusted from day one</h3>
+   <p>We set up security, ownership, and refresh before we go, so the report is one people can rely on,
+   not another orphaned file.</p></div>
+ </div>
+</div></section>
+
+<section class="band"><div class="wrap" data-r>
+ <div class="center-head"><div class="kicker">The agenda</div>
+ <h2 class="h2">How the day runs</h2>
+ <p class="lead">One facilitator, up to ten of your people, one shared screen and everyone building along.
+ We adapt the pace to the room.</p></div>
+ <div class="agenda" style="max-width:760px;margin-left:auto;margin-right:auto">
+  <div class="ag"><div class="agt">9–12</div><div class="agc"><h4>Model your data</h4>
+   <p>We connect one of your real sources, clean it in Power Query, and shape it into a star schema as a
+   group. Everyone sees why the shape matters on their own numbers.</p></div></div>
+  <div class="ag"><div class="agt">12–1</div><div class="agc"><h4>Lunch and questions</h4>
+   <p>An informal hour to ask the awkward questions about your specific setup, licensing, or Fabric plans.</p></div></div>
+  <div class="ag"><div class="agt">1–4</div><div class="agc"><h4>Build the dashboard</h4>
+   <p>Measures, visuals, and layout, built live. By mid-afternoon each person has a working report on the
+   data they actually care about.</p></div></div>
+  <div class="ag"><div class="agt">4–5</div><div class="agc"><h4>Ship and govern</h4>
+   <p>We publish, set row-level security, assign ownership, and agree the rules that keep the report
+   trusted. You leave with something live, not a draft.</p></div></div>
+ </div>
+</div></section>
+
+<section><div class="wrap narrow" data-r>
+ <div class="center-head"><div class="kicker">Good to know</div>
+ <h2 class="h2">The practical details</h2></div>
+ <div class="checks">
+  <div class="chk"><div class="cm">&#10003;</div><div><b>Up to 10 seats</b><span>Small enough that everyone builds, not just watches. Ideal for one team or a mixed group of report owners.</span></div></div>
+  <div class="chk"><div class="cm">&#10003;</div><div><b>On your own data</b><span>We work on a real source you bring, so the output is useful the next morning, not a throwaway.</span></div></div>
+  <div class="chk"><div class="cm">&#10003;</div><div><b>On-site or remote</b><span>We run it in your office or over a call, whichever suits the team. Same hands-on format either way.</span></div></div>
+  <div class="chk"><div class="cm">&#10003;</div><div><b>Microsoft co-funding</b><span>For Copilot enablement, Microsoft co-funds training up to a set amount per customer. We'll help you check if you qualify.</span></div></div>
+ </div>
+</div></section>
+
+{proof_block(head="Teams that did the day, not the demo",
+  q1=("\"Our finance team had sat through two vendor demos and built nothing. In one day with CaseWhen "
+      "they shipped a live margin dashboard on our own ERP data. It's still in use.\"",
+      "CFO, manufacturing group"),
+  q2=("\"The best part was watching our own analysts do it. A week later they'd built two more reports "
+      "the same way, with no help from us.\"","Head of Data, DACH services firm"))}
+
+<section id="book"><div class="wrap" data-r>
+ <div class="center-head"><div class="kicker">Book it</div>
+ <h2 class="h2">Bring Dashboard-in-a-Day to your team</h2>
+ <p class="lead">Tell us your data source and roughly how many people, and we'll propose a date and check
+ whether Microsoft co-funding can bring the cost down.</p></div>
+ <div style="max-width:560px;margin:34px auto 0">
+  <div class="buybox" style="margin-top:0">
+   <div class="bprice"><span class="n">&euro;1,500</span><span class="per">per day &middot; up to 10 seats</span></div>
+   <ul class="buylist">
+    <li>A full facilitated day on your own data</li>
+    <li>A working dashboard your team builds and keeps</li>
+    <li>Security, ownership, and refresh set up before we leave</li>
+    <li>A 30-day recap pack and a checkpoint call</li>
+   </ul>
+   <button class="go" type="button" onclick="alert('Mockup only — the live page opens a booking form.')">Book a workshop</button>
+   <div class="guff">We'll reply within a day with dates and a co-funding check. No obligation to proceed.</div>
+  </div>
+ </div>
+</div></section>
+
+{bridge_block("Next rung", "One day isn't enough? Enable the whole team.",
+   "If a single day whets the appetite, the Team Enablement package runs three sessions with a model and governance review and a month of async support.",
+   "team-enablement.html", "See Team Enablement")}
+
+{faq_block([
+ ("What do we need to prepare?","Access to one real data source and a room, physical or virtual, with your people and their laptops. We handle the rest and send a short prep note a week ahead."),
+ ("Is 1,500 euro the final price?","It's the standard day rate for up to ten seats. For Copilot enablement Microsoft co-funds training up to a set amount per customer, which can offset a large part of it. We'll help you check eligibility before you commit."),
+ ("Can it be remote?","Yes. We run the same hands-on format over a call. Most teams find on-site slightly better for the energy, but remote works well and widens who can join."),
+ ("What if our data is messy?","That's the point. We shape a real, imperfect source into a star schema live, so your team learns on the mess they actually have rather than a tidy sample."),
+])}
+
+{final_cta("Stop watching demos. Build the real thing.",
+   "One day, your data, your team, a dashboard that's still in use next quarter. Tell us the source and we'll find a date.",
+   "#book", "Book a workshop", "Up to 10 seats · On your own data · Microsoft co-funding available")}
+"""
+    funnel_page("dashboard-in-a-day.html", "Dashboard-in-a-Day", "\U0001F5A5", hero, body)
+
+# ============================================================================
+# RUNG 4  ·  Team Enablement & Packages  (4,500 euro + project + retainer)
+# ============================================================================
+def team_page():
+    hero = """<section class="hero center"><div class="hwrap" data-r>
+  <div class="eyebrow">Packages &middot; Team Enablement</div>
+  <h1>Three ways to make Power BI stick across your whole team.</h1>
+  <p class="sub">When one workshop isn't enough, these are the packages that build lasting capability:
+  a multi-session enablement program, a fixed-scope first project, or an ongoing hand on the tiller.
+  Pick the one that matches where your team is.</p>
+  <div class="btnrow"><a class="cta" href="#tiers">See the packages</a>
+  <a class="cta ghost" href="#book">Book a scoping call</a></div>
+</div></section>"""
+
+    body = f"""
+<section id="tiers"><div class="wrap" data-r>
+ <div class="center-head"><div class="kicker">The three packages</div>
+ <h2 class="h2">From a focused program to an ongoing partnership</h2>
+ <p class="lead">Every one starts with a scoping call, so what you buy is shaped around your team, your
+ data, and the outcome you're after.</p></div>
+ <div class="tiers">
+  <div class="tier feature"><span class="flag">Most popular</span>
+   <div class="tn">Enablement program</div><h3>Team Enablement</h3>
+   <div class="tp">&euro;4,500</div>
+   <div class="td">A structured program to level up a whole team over a few weeks.</div>
+   <ul><li>Three live sessions, built around your reports</li><li>A full model and governance review</li>
+   <li>30 days of async support after</li><li>A recorded library your team keeps</li></ul>
+   <div class="tcta">Book a scoping call</div></div>
+  <div class="tier"><div class="tn">Fixed-scope project</div><h3>Bounded-Entry Project</h3>
+   <div class="tp">Fixed quote</div>
+   <div class="td">A defined first project with a clear scope, price, and end date. The low-risk way to
+   start working together.</div>
+   <ul><li>One agreed outcome, quoted up front</li><li>Fixed price, fixed timeline</li>
+   <li>Built with your team, not around them</li><li>A natural on-ramp to a retainer</li></ul>
+   <div class="tcta">Scope a project</div></div>
+  <div class="tier"><div class="tn">Ongoing</div><h3>Managed Retainer</h3>
+   <div class="tp">&euro;2,500&#8211;4,500<small> / mo</small></div>
+   <div class="td">A steady hand on your BI and governance, month to month, with a six-month minimum.</div>
+   <ul><li>Ongoing model and report work</li><li>Governance and capacity oversight</li>
+   <li>Priority access to our engineers</li><li>Six-month minimum, then rolling</li></ul>
+   <div class="tcta">Talk about a retainer</div></div>
+ </div>
+</div></section>
+
+<section class="band"><div class="wrap" data-r>
+ <div class="center-head"><div class="kicker">What each includes</div>
+ <h2 class="h2">Enough detail to know which one fits</h2></div>
+ <div class="grid g3">
+  <div class="feat"><div class="ic">1</div><h3>Team Enablement, in detail</h3>
+   <p>Three live sessions spaced over a few weeks, each on your own reports. Between them we run a full
+   review of your model and governance and write up what to fix. For 30 days after, your team can send
+   questions and get real answers. The sessions are recorded and yours to keep.</p></div>
+  <div class="feat"><div class="ic">2</div><h3>Bounded-Entry Project, in detail</h3>
+   <p>We agree one specific outcome, a rebuilt model, a migrated report, a governance framework, and
+   quote it up front with a fixed price and date. You get the result without signing up to an open-ended
+   engagement, and both sides learn how the other works.</p></div>
+  <div class="feat"><div class="ic">3</div><h3>Managed Retainer, in detail</h3>
+   <p>An ongoing block of our time each month for BI development, governance, and capacity oversight, so
+   your reporting keeps improving without you hiring for it. Six-month minimum so the work compounds,
+   then it rolls month to month.</p></div>
+ </div>
+</div></section>
+
+{proof_block(head="Teams we've enabled and kept",
+  q1=("\"The bounded-entry project was the smart way in. Fixed price, clear outcome, no big commitment. "
+      "Six weeks later we moved onto a retainer without a second thought.\"",
+      "COO, Ipsen"),
+  q2=("\"Having CaseWhen on a retainer is like having a senior BI engineer we don't have to recruit. The "
+      "governance review alone caught two things that would have bitten us at year end.\"",
+      "Finance Director, Schindler"))}
+
+<section id="book" class="deep"><div class="wrap narrow center-head" data-r>
+ <div class="kicker">Start here</div>
+ <h2 class="h2">Book a scoping call</h2>
+ <p class="lead" style="margin-left:auto;margin-right:auto">Every package starts the same way: a short
+ call where we understand your team and your data, then recommend the one that fits and quote it clearly.
+ No pressure, no generic proposal.</p>
+ <div class="btnrow" style="justify-content:center;margin-top:28px">
+  <a class="cta" href="javascript:void(0)" onclick="alert('Mockup only — the live page opens a scheduling link.')">Book a scoping call</a></div>
+ <div class="heronote" style="color:#9fc2b8">30 minutes · We recommend the right package, or tell you if
+ none of them fit yet.</div>
+</div></section>
+
+{faq_block([
+ ("Which package should we start with?","Most teams start with either the Team Enablement program, if the goal is skill, or a Bounded-Entry Project, if there's a specific thing to fix. The retainer usually follows once we've worked together once. The scoping call is there to make this call with you."),
+ ("How is the bounded-entry project priced?","It's quoted up front once we've scoped one clear outcome, so there are no surprises. The point of it is a fixed price and a fixed end date, which is why it's the low-risk way to start."),
+ ("What does the retainer minimum mean?","Six months, because governance and BI improvements compound rather than land overnight. After the minimum it rolls month to month and you can stop with notice."),
+ ("Can Microsoft co-funding apply here?","For the training and Copilot-enablement parts, often yes. Microsoft co-funds Copilot enablement up to a set amount per customer. We'll flag where it applies during scoping."),
+])}
+
+{final_cta("Make it stick across the team",
+   "Whether you need a program, a first project, or a steady hand, it starts with one short scoping call. We'll point you to the right package or tell you honestly if it's not time yet.",
+   "#book", "Book a scoping call", "30 minutes · A clear recommendation · A price you can plan around")}
+"""
+    funnel_page("team-enablement.html", "Team Enablement & Packages", "\U0001F91D", hero, body)
+
+# ============================================================================
+# RUNG 6  ·  Power BI Cost & Licensing Calculator  (free lead magnet -> call)
+# ============================================================================
+def calculator_page():
+    hero = """<section class="hero split"><div class="hwrap">
+ <div data-r>
+  <div class="eyebrow">Free tool &middot; Cost &amp; Licensing Calculator</div>
+  <h1>What your Power BI setup actually costs, on real Microsoft pricing.</h1>
+  <p class="sub">Move two sliders and see the yearly number, the point where a Fabric capacity gets
+  cheaper than per-user licences, and which side of that line you're on. Then, if the math looks off,
+  book a call and we'll run it on your real setup.</p>
+  <div class="btnrow"><a class="cta" href="#tool">Run the numbers</a>
+  <a class="cta ghost" href="#call">Book a licensing call</a></div>
+  <div class="heronote">Uses current <b>Power BI Pro</b> and <b>Fabric F-SKU</b> list pricing. No email to try it.</div>
+ </div>
+ <div id="tool" class="calc" data-r>
+  <div class="row"><label>Report viewers <b id="vv">120</b></label>
+   <input id="viewers" type="range" min="10" max="1200" value="120"></div>
+  <div class="row"><label>Report builders <b id="bb">6</b></label>
+   <input id="builders" type="range" min="1" max="60" value="6"></div>
+  <div class="readout">
+   <div class="big" id="cost">$0</div><div class="rl">estimated per year</div>
+   <div class="rsplit">
+    <div class="s"><b id="model">Per-user</b><span>cheaper model</span></div>
+    <div class="s"><b id="cross">~350</b><span>viewer crossover</span></div>
+   </div>
+   <div class="rrec" id="rec">Move the sliders to see your recommendation.</div>
+  </div>
+ </div>
+</div></section>"""
+
+    body = f"""
+<section><div class="wrap" data-r>
+ <div class="center-head"><div class="kicker">What it tells you</div>
+ <h2 class="h2">Three answers most teams are guessing at</h2>
+ <p class="lead">Power BI licensing has one big fork in it, and getting it wrong costs real money every
+ year. This calculator settles it in seconds.</p></div>
+ <div class="grid g3">
+  <div class="feat"><div class="ic">&euro;</div><h3>Your yearly number</h3>
+   <p>The all-in annual cost for your mix of viewers and builders, on current list pricing. No more
+   back-of-envelope guessing in a budget meeting.</p></div>
+  <div class="feat"><div class="ic">&#8644;</div><h3>The crossover point</h3>
+   <p>The viewer count where a Fabric capacity gets cheaper than paying per user. For most teams it sits
+   around 350 viewers. See exactly where yours is.</p></div>
+  <div class="feat"><div class="ic">&#8730;</div><h3>Which side you're on</h3>
+   <p>A plain recommendation: stay per-user, or move to a capacity. With the two numbers side by side so
+   you can defend the call.</p></div>
+ </div>
+</div></section>
+
+<section class="band"><div class="wrap narrow" data-r>
+ <div class="center-head"><div class="kicker">A word of honesty</div>
+ <h2 class="h2">The list price is the easy part</h2>
+ <p class="lead">This tool uses clean list pricing, which is enough to know which side of the line you're
+ on. Your real bill depends on things a slider can't see: how many builders truly need Pro, whether
+ you're overpaying for idle capacity, Premium-Per-User edge cases, and the 2026 and 2028 P-SKU to Fabric
+ deadlines. That's the conversation worth having.</p></div>
+ <div class="checks">
+  <div class="chk"><div class="cm">&#10003;</div><div><b>Capacity right-sizing</b><span>An F64 you barely use is money burning. We check the size against your actual load.</span></div></div>
+  <div class="chk"><div class="cm">&#10003;</div><div><b>Who really needs Pro</b><span>Often fewer builders need a paid seat than you think. That alone can shift the math.</span></div></div>
+  <div class="chk"><div class="cm">&#10003;</div><div><b>The P-SKU deadlines</b><span>Premium P-SKUs are being retired. We map your migration before it's forced.</span></div></div>
+  <div class="chk"><div class="cm">&#10003;</div><div><b>Copilot co-funding</b><span>If Copilot enablement is on the table, Microsoft co-funds the training. We factor that in.</span></div></div>
+ </div>
+</div></section>
+
+{proof_block(head="We've done this math for teams like yours",
+  q1=("\"The calculator said we were 40k a year past the crossover. The call confirmed it and mapped the "
+      "move to a capacity. That's a real line item we got back.\"","Finance Director, DACH retailer"),
+  q2=("\"We thought we needed Premium. Turned out we needed six fewer Pro seats and a right-sized "
+      "capacity. CaseWhen found it in half an hour.\"","IT Manager, services company"))}
+
+<section id="call" class="deep"><div class="wrap narrow center-head" data-r>
+ <div class="kicker">Book it</div>
+ <h2 class="h2">Get the licensing math done on your real setup</h2>
+ <p class="lead" style="margin-left:auto;margin-right:auto">Bring your viewer and builder counts and your
+ current bill. In 30 minutes we'll tell you whether you're on the right licence model, what a move would
+ save, and how the P-SKU deadlines affect you.</p>
+ <div class="btnrow" style="justify-content:center;margin-top:28px">
+  <a class="cta" href="javascript:void(0)" onclick="alert('Mockup only — the live page opens a scheduling link.')">Book a licensing call</a></div>
+ <div class="heronote" style="color:#9fc2b8">30 minutes · Real pricing on your real setup · No obligation</div>
+</div></section>
+
+{bridge_block("Not sure where to start?", "Score your whole setup, not just the cost.",
+   "Cost is one of four things that decide whether your Power BI can be trusted. The free Governance and Cost Scorecard grades all four and sends your top three risks.",
+   "scorecard.html", "Take the scorecard")}
+
+{faq_block([
+ ("Where does the pricing come from?","Current Microsoft list prices for Power BI Pro (per user) and Fabric F-SKU capacity. It's enough to see which side of the crossover you're on; the call refines it with your real usage."),
+ ("Why is the crossover around 350 viewers?","Because a capacity is a fixed yearly cost while per-user scales with headcount. Below roughly 350 viewers, paying per user is usually cheaper; above it, the fixed capacity wins. Your exact line depends on your builder count."),
+ ("Do I have to give you my email to use it?","No. The calculator runs entirely in your browser. The call is there if you want the real math on your setup, but the tool is yours to play with, no strings."),
+ ("What about Premium-Per-User?","It's a real option between the two, and it matters in edge cases. The slider keeps things to the main fork, and we cover PPU properly on the call if it's relevant to you."),
+])}
+
+{final_cta("Stop guessing at the licensing bill",
+   "Run the sliders now for the quick answer, then book a call to get the real math on your own setup before the next budget cycle.",
+   "#call", "Book a licensing call", "Free tool · Real Microsoft pricing · No email to try it")}
+"""
     js = """<script>
 const PRO=14*12, F64=5000*12;
 const v=document.getElementById('viewers'),b=document.getElementById('builders');
 function fmt(n){return '$'+Math.round(n).toLocaleString();}
 function animate(el,to){const from=+(el.dataset.v||0);const t0=performance.now();
  function f(t){const k=Math.min(1,(t-t0)/500);const val=from+(to-from)*(1-Math.pow(1-k,3));el.textContent=fmt(val);if(k<1)requestAnimationFrame(f);else el.dataset.v=to;}requestAnimationFrame(f);}
-function calc(){
- const viewers=+v.value,builders=+b.value;
+function calc(){const viewers=+v.value,builders=+b.value;
  document.getElementById('vv').textContent=viewers;document.getElementById('bb').textContent=builders;
- const perUser=(viewers+builders)*PRO;
- const capacity=F64+builders*PRO;
- const best=Math.min(perUser,capacity);
- animate(document.getElementById('cost'),best);
- const cap=capacity<perUser;
+ const perUser=(viewers+builders)*PRO;const capacity=F64+builders*PRO;const best=Math.min(perUser,capacity);
+ animate(document.getElementById('cost'),best);const cap=capacity<perUser;
  document.getElementById('model').textContent=cap?'Capacity':'Per-user';
  document.getElementById('rec').textContent=cap
   ? 'At '+viewers+' viewers, a Fabric F64 capacity ('+fmt(capacity)+'/yr) beats per-user Pro ('+fmt(perUser)+'/yr). Buy capacity.'
-  : 'At '+viewers+' viewers, per-user Pro ('+fmt(perUser)+'/yr) beats a capacity ('+fmt(capacity)+'/yr). Stay per-user.';
-}
+  : 'At '+viewers+' viewers, per-user Pro ('+fmt(perUser)+'/yr) beats a capacity ('+fmt(capacity)+'/yr). Stay per-user.';}
 v.addEventListener('input',calc);b.addEventListener('input',calc);calc();
 </script>"""
-    (OUT/"calculator.html").write_text(landing("Cost calculator","🧮",css,inner,js),encoding="utf-8")
+    funnel_page("calculator.html", "Cost & Licensing Calculator", "\U0001F9EE", hero, body, extra_js=js)
 
+# ---------- funnels index ----------
 def funnels_page():
-    scorecard_mockup(); calculator_mockup()
-    mags=[
-     ("Free Power BI Health Check","Flagship offer · highest intent","Send us your slowest report and we tell you exactly why it is slow: a Performance Analyzer read, a data-model check, the top DAX offenders, as a prioritized report plus a call. Paid versions run about 500 dollars.","Controller / BI lead with a slow report","healthcheck.html","open the mockup","#11493F"),
-     ("Power BI Cost Calculator","Buyer-intent (BOFU)","Enter viewers, builders, and capacity. See Pro vs Premium-Per-User vs Fabric F-SKU on current 2025 pricing, and the ~350-viewer line where a capacity gets cheaper.","Budget holder","calculator.html","open the mockup","#1D967C"),
-     ("Reporting-Foundation Maturity Scorecard","Self-diagnosis capture","A 4-question quiz returns an instant tier (Fragile / Functional / Board-ready) and a one-page PDF the controller forwards to their CFO.","Controller, not ready to book","scorecard.html","open the mockup","#7AC4B5"),
-     ("The Internal Buy-In Briefing","De-risking template","A one-page brief that frames a reporting review as a proactive governance move, with the exact points to put in front of a CFO so it reads as risk reduction.","Champion selling it upward","buyin.html","open the mockup","#6F93AC"),
-     ("10 DACH Reporting Rebuilds","Evaluation proof","A curated bundle of real before-and-after rebuilds (Schindler, Ipsen, WellBeauty), each with the problem, the fix, and the measured result.","Buyer in active evaluation","casestudy.html","open the mockup","#CE8168"),
-     ("Fabric Governance Scorecard","Strategic capture","A 10-question scored assessment across workspace structure, RLS, OneLake architecture, and lineage, returning a maturity score and your top three gaps.","Team moving to Microsoft Fabric","governance-scorecard.html","open the mockup","#132630"),
+    scorecard_page(); fixkit_page(); course_page(); dashboard_page(); team_page(); calculator_page()
+    # remove superseded static funnel files so nothing generic lingers
+    for old in ("healthcheck.html","buyin.html","casestudy.html","governance-scorecard.html"):
+        p = OUT/old
+        if p.exists():
+            try: p.unlink()
+            except Exception: pass
+    rungs=[
+     ("Rung 0 &middot; Free lead magnet","Governance &amp; Cost Scorecard",
+      "A five-minute assessment returns a score out of 100, a peer benchmark, and your top three risks. Email-only capture. The primary lead magnet everything points to.",
+      "Controller or BI lead, not ready to book","scorecard.html","Free","#11493F"),
+     ("Rung 1 &middot; &euro;49 tripwire","Star Schema Fix Kit",
+      "A 45-minute walkthrough, a .pbix template, 25 tested DAX measures, and a governance checklist, plus a &euro;19 DAX Performance Pack order bump. The buyer-filter.",
+      "Analyst with a slow, tangled model","fix-kit.html","&euro;49","#1D967C"),
+     ("Rung 2 &middot; &euro;299 course","Foundations-to-Fabric Course",
+      "Self-paced across the three pillars: modeling, performant DAX, and governance plus a first Fabric look. Intro &euro;199, with &euro;79 and &euro;149 order bumps. The pipeline engine.",
+      "Self-taught analyst going pro","course.html","&euro;199","#7AC4B5"),
+     ("Rung 3 &middot; &euro;1,500 workshop","Dashboard-in-a-Day",
+      "A live, done-with-your-team day on your own data, up to 10 seats. Microsoft co-funds Copilot enablement. The bridge from course to services.",
+      "Team lead who wants it to land","dashboard-in-a-day.html","&euro;1,500","#6F93AC"),
+     ("Rung 4 &middot; &euro;4,500 and up","Team Enablement &amp; Packages",
+      "Three tiers: a &euro;4,500 enablement program, a fixed-scope bounded-entry project, and a &euro;2,500 to 4,500 a month managed retainer. Book a scoping call.",
+      "Buyer ready to commit","team-enablement.html","&euro;4,500","#CE8168"),
+     ("Free tool &middot; buyer-intent","Cost &amp; Licensing Calculator",
+      "Interactive Pro-vs-capacity math on real Microsoft pricing, showing the ~350-viewer crossover. Routes budget holders to a licensing scoping call.",
+      "Budget holder sizing the spend","calculator.html","Free","#132630"),
     ]
     cards=""
-    for name,tag,desc,persona,href,cta,color in mags:
-        link=f'href="{href}"' if href else 'href="javascript:void(0)" style="cursor:default"'
-        cards+=f"""<a class="fcard" {link} data-r style="--ac:{color}">
-        <div class="tag">{esc(tag)}</div><h3>{esc(name)}</h3><p>{esc(desc)}</p>
-        <div class="who">{esc(persona)}</div><div class="cta">{esc(cta)} →</div></a>"""
+    for tag,name,desc,persona,href,price,color in rungs:
+        cards+=f"""<a class="fcard" href="{href}" data-r style="--ac:{color}">
+        <div class="tag">{tag}</div><div class="pr">{price}</div><h3>{name}</h3><p>{desc}</p>
+        <div class="who">{esc(persona)}</div><div class="cta">open the landing page &rarr;</div></a>"""
     st="""
 .fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:22px}
-.fcard{display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s}
+.fcard{display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s}
 .fcard::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--ac)}
 .fcard:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(17,73,63,.12)}
-.fcard .tag{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ac);margin-top:4px}
-.fcard h3{font-size:19px;margin:6px 0 8px;letter-spacing:-.01em}
+.fcard .tag{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ac);margin-top:4px}
+.fcard .pr{position:absolute;top:20px;right:20px;font-size:13px;font-weight:700;color:var(--dark);background:var(--pale);border-radius:20px;padding:4px 12px}
+.fcard h3{font-size:20px;margin:6px 0 8px;letter-spacing:-.01em;max-width:20ch}
 .fcard p{font-size:14px;color:var(--mut);margin:0}
 .fcard .who{font-size:12px;color:var(--faint);margin-top:12px}
 .fcard .cta{font-size:13px;font-weight:700;color:var(--dark);margin-top:8px}
@@ -912,11 +1458,11 @@ def funnels_page():
 @media(max-width:760px){.fgrid{grid-template-columns:1fr}}
 """
     body=f"""<style>{st}</style>
-<section class="hero"><div class="wrap"><div class="eb">CaseWhen · funnels</div>
-<h1>The lead magnets that turn reach into emails.</h1>
-<p>Six free tools and downloads, each traded for an email, each pointed at a booked fixed-price review.
-All six are built as full landing-page mockups. Open any of them. Every one shares the brand and each
-looks distinct.</p>
+<section class="hero"><div class="wrap"><div class="eb">CaseWhen &middot; funnel ladder</div>
+<h1>The value ladder, one landing page per rung.</h1>
+<p>Six full landing pages, from a free scorecard to a managed retainer, each branded the same and each
+built to move a buyer to the next rung. Open any of them. Every page shares the CaseWhen wordmark, the
+Neue Montreal type, and the brand colours, and ends in the right call to action for its rung.</p>
 <div class="fgrid">{cards}</div></div></section>{REVEAL_JS}"""
     (OUT/"funnels.html").write_text(shell("funnels.html","Funnels",body),encoding="utf-8")
 
