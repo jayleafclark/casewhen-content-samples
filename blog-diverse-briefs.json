@@ -1,0 +1,306 @@
+[
+ {
+  "lang": "EN",
+  "keyword": "power bi license cost",
+  "secondary": "power bi premium price; power bi certification cost; power bi desktop cost",
+  "cluster": "Pricing",
+  "title": "What Power BI License Cost Actually Costs in 2026",
+  "slug": "blog-power-bi-license-cost"
+ },
+ {
+  "lang": "EN",
+  "keyword": "cost of power bi license",
+  "secondary": "power bi certification cost; power bi desktop cost; power bi desktop price",
+  "cluster": "Pricing",
+  "title": "Cost Of Power BI License: No Sales Pitch, Just the Math",
+  "slug": "blog-cost-of-power-bi-license"
+ },
+ {
+  "lang": "EN",
+  "keyword": "power bi pro license cost",
+  "secondary": "power bi desktop cost; power bi desktop price; microsoft power bi pro price",
+  "cluster": "Pricing",
+  "title": "Power BI Pro License Cost Compared: What You're Actually Paying For",
+  "slug": "blog-power-bi-pro-license-cost"
+ },
+ {
+  "lang": "EN",
+  "keyword": "power bi premium capacity pricing",
+  "secondary": "power bi pro costs; powerbi pro pricing; power bi fees",
+  "cluster": "Pricing",
+  "title": "Power BI Premium Capacity Pricing: No Sales Pitch, Just the Math",
+  "slug": "blog-power-bi-premium-capacity-pricing"
+ },
+ {
+  "lang": "EN",
+  "keyword": "power bi license types and cost",
+  "secondary": "cost of power bi license; power bi pro license cost; power bi pro licence cost",
+  "cluster": "Pricing",
+  "title": "Power BI License Types And Cost: No Sales Pitch, Just the Math",
+  "slug": "blog-power-bi-license-types-and-cost"
+ },
+ {
+  "lang": "EN",
+  "keyword": "data governance framework",
+  "secondary": "data governance maturity model; maturity model data governance; powerbi pipelines",
+  "cluster": "Governance",
+  "title": "Data Governance Framework: The Governance Win Nobody Markets",
+  "slug": "blog-data-governance-framework"
+ },
+ {
+  "lang": "EN",
+  "keyword": "fabric capacity",
+  "secondary": "onelake com; fabric implementation partner; when to use microsoft fabric",
+  "cluster": "Fabric",
+  "title": "Fabric Capacity, Explained Without the Marketing",
+  "slug": "blog-fabric-capacity"
+ },
+ {
+  "lang": "EN",
+  "keyword": "microsoft fabric consultant",
+  "secondary": "direct lake vs import; onelake; fabric capacity",
+  "cluster": "Fabric",
+  "title": "Microsoft Fabric Consultant, Explained Without the Marketing",
+  "slug": "blog-microsoft-fabric-consultant"
+ },
+ {
+  "lang": "EN",
+  "keyword": "power bi vs fabric",
+  "secondary": "onelake; fabric capacity; fabric data warehouse",
+  "cluster": "Fabric",
+  "title": "Power BI vs. Fabric: What Actually Changes for Your Team",
+  "slug": "blog-power-bi-vs-fabric"
+ },
+ {
+  "lang": "EN",
+  "keyword": "data warehouse consultant",
+  "secondary": "azure data factory adf; data warehouse consulting services; adf microsoft",
+  "cluster": "Azure",
+  "title": "Data Warehouse Consultant: What Changed and Why It Matters",
+  "slug": "blog-data-warehouse-consultant"
+ },
+ {
+  "lang": "EN",
+  "keyword": "cloud data warehouse consultant",
+  "secondary": "azure synapse; azure data lake; azure data factory meaning",
+  "cluster": "Azure",
+  "title": "Cloud Data Warehouse Consultant: What It Actually Does (Plain English)",
+  "slug": "blog-cloud-data-warehouse-consultant"
+ },
+ {
+  "lang": "EN",
+  "keyword": "incremental refresh power bi",
+  "secondary": "maturity model data governance; powerbi pipelines; power bi security",
+  "cluster": "Governance",
+  "title": "Incremental Refresh Power BI, Explained With a Real Example",
+  "slug": "blog-incremental-refresh-power-bi"
+ },
+ {
+  "lang": "EN",
+  "keyword": "row level security power bi",
+  "secondary": "powerbi pipelines; power bi security; security power bi",
+  "cluster": "Governance",
+  "title": "Row Level Security Power BI: What Actually Breaks Trust in Your Reports",
+  "slug": "blog-row-level-security-power-bi"
+ },
+ {
+  "lang": "EN",
+  "keyword": "power bi incremental refresh",
+  "secondary": "power bi security; security power bi; data governance structure",
+  "cluster": "Governance",
+  "title": "A Real Look at Power BI Incremental Refresh (Not a Checklist)",
+  "slug": "blog-power-bi-incremental-refresh"
+ },
+ {
+  "lang": "EN",
+  "keyword": "power bi row level security",
+  "secondary": "security power bi; data governance structure; power bi audit log",
+  "cluster": "Governance",
+  "title": "Power BI Row Level Security: Why Nobody's Written This Yet",
+  "slug": "blog-power-bi-row-level-security"
+ },
+ {
+  "lang": "EN",
+  "keyword": "onelake",
+  "secondary": "power bi premium retirement; onelake com; fabric implementation partner",
+  "cluster": "Fabric",
+  "title": "Onelake: A Straight Answer on What's Actually New",
+  "slug": "blog-onelake"
+ },
+ {
+  "lang": "EN",
+  "keyword": "power bi consultant",
+  "secondary": "bi consulting company; bi consulting firm; business intelligence consulting",
+  "cluster": "Power BI Flagship",
+  "title": "Power BI Consultant: What They Actually Do (Real Scope, Real Cost)",
+  "slug": "blog-power-bi-consultant"
+ },
+ {
+  "lang": "EN",
+  "keyword": "bi consultant",
+  "secondary": "business intelligence consulting services; bi consulting services; power bi consultant",
+  "cluster": "Power BI Flagship",
+  "title": "BI Consultant: The Questions Nobody Asks Before Hiring One",
+  "slug": "blog-bi-consultant"
+ },
+ {
+  "lang": "EN",
+  "keyword": "consultant business intelligence",
+  "secondary": "power bi consultant; power bi consulting; power bi consulting services",
+  "cluster": "Power BI Flagship",
+  "title": "Consultant Business Intelligence: How to Actually Evaluate One",
+  "slug": "blog-consultant-business-intelligence"
+ },
+ {
+  "lang": "EN",
+  "keyword": "tableau to power bi migration",
+  "secondary": "migrate to azure sql; migrate sql to azure sql",
+  "cluster": "Migrations",
+  "title": "Tableau To Power BI Migration: What Actually Transfers to the New Platform",
+  "slug": "blog-tableau-to-power-bi-migration"
+ },
+ {
+  "lang": "DE",
+  "keyword": "power bi migration",
+  "secondary": "",
+  "cluster": "Migrations",
+  "title": "Power BI Migration einfach erklaert",
+  "slug": "blog-power-bi-migration"
+ },
+ {
+  "lang": "EN",
+  "keyword": "kpis and dashboards",
+  "secondary": "kpi visual power bi; power bi calculate function; powerbi create measure",
+  "cluster": "KPI",
+  "title": "Kpis And Dashboards, Explained for People Who Aren't Data Engineers",
+  "slug": "blog-kpis-and-dashboards"
+ },
+ {
+  "lang": "EN",
+  "keyword": "kpi business dashboard",
+  "secondary": "power bi calculate function; powerbi create measure; use relationship dax",
+  "cluster": "KPI",
+  "title": "What Makes KPI Business Dashboard Actually Trustworthy",
+  "slug": "blog-kpi-business-dashboard"
+ },
+ {
+  "lang": "EN",
+  "keyword": "kpi tracker",
+  "secondary": "powerbi create measure; use relationship dax; business kpi dashboard",
+  "cluster": "KPI",
+  "title": "KPI Tracker: A Real Example, Not a Textbook Definition",
+  "slug": "blog-kpi-tracker"
+ },
+ {
+  "lang": "EN",
+  "keyword": "azure data factory",
+  "secondary": "adls storage; microsoft azure data factory; azure data factory docs",
+  "cluster": "Azure",
+  "title": "Azure Data Factory, Explained for People Who Aren't Data Engineers",
+  "slug": "blog-azure-data-factory"
+ },
+ {
+  "lang": "EN",
+  "keyword": "azure synapse analytics",
+  "secondary": "microsoft azure data factory; azure data factory docs; adls data",
+  "cluster": "Azure",
+  "title": "Azure Synapse Analytics: What It Actually Does (Plain English)",
+  "slug": "blog-azure-synapse-analytics"
+ },
+ {
+  "lang": "EN",
+  "keyword": "azure synapse",
+  "secondary": "azure data factory docs; adls data; microsoft data factory",
+  "cluster": "Azure",
+  "title": "Azure Synapse in 10 Minutes: The Real Use Case",
+  "slug": "blog-azure-synapse"
+ },
+ {
+  "lang": "EN",
+  "keyword": "power bi consulting",
+  "secondary": "bi consulting firm; business intelligence consulting; business intelligence consulting services",
+  "cluster": "Power BI Flagship",
+  "title": "Power BI Consulting: How to Actually Evaluate One",
+  "slug": "blog-power-bi-consulting"
+ },
+ {
+  "lang": "EN",
+  "keyword": "power bi consulting services",
+  "secondary": "business intelligence consulting; business intelligence consulting services; bi consulting services",
+  "cluster": "Power BI Flagship",
+  "title": "Power BI Consulting Services vs. Big Consultancies: What's Actually Different",
+  "slug": "blog-power-bi-consulting-services"
+ },
+ {
+  "lang": "EN",
+  "keyword": "migrate to azure sql",
+  "secondary": "migrate sql to azure sql; tableau to power bi migration",
+  "cluster": "Migrations",
+  "title": "Migrate To Azure SQL: What Actually Breaks (and How to Avoid It)",
+  "slug": "blog-migrate-to-azure-sql"
+ },
+ {
+  "lang": "EN",
+  "keyword": "migrate sql to azure sql",
+  "secondary": "tableau to power bi migration; migrate to azure sql",
+  "cluster": "Migrations",
+  "title": "Migrate SQL To Azure SQL: The Real Checklist",
+  "slug": "blog-migrate-sql-to-azure-sql"
+ },
+ {
+  "lang": "EN",
+  "keyword": "financial reporting automation",
+  "secondary": "reporting automation",
+  "cluster": "Automation",
+  "title": "Financial Reporting Automation: What Actually Gets Automated (and What Shouldn't)",
+  "slug": "blog-financial-reporting-automation"
+ },
+ {
+  "lang": "EN",
+  "keyword": "reporting automation",
+  "secondary": "financial reporting automation",
+  "cluster": "Automation",
+  "title": "Reporting Automation: A Real Walkthrough",
+  "slug": "blog-reporting-automation"
+ },
+ {
+  "lang": "DE",
+  "keyword": "reporting automatisierung",
+  "secondary": "controlling reporting automatisieren; reporting automatisierung beratung",
+  "cluster": "Automation",
+  "title": "Reporting Automatisierung einfach erklaert",
+  "slug": "blog-reporting-automatisierung"
+ },
+ {
+  "lang": "EN",
+  "keyword": "power bi vs tableau",
+  "secondary": "",
+  "cluster": "Buyer",
+  "title": "",
+  "slug": "blog-power-bi-vs-tableau"
+ },
+ {
+  "lang": "EN",
+  "keyword": "how to choose a power bi consultant",
+  "secondary": "",
+  "cluster": "Buyer",
+  "title": "",
+  "slug": "blog-how-to-choose-a-power-bi-consultant"
+ },
+ {
+  "lang": "EN",
+  "keyword": "power bi consulting cost",
+  "secondary": "",
+  "cluster": "Buyer",
+  "title": "",
+  "slug": "blog-power-bi-consulting-cost"
+ },
+ {
+  "lang": "EN",
+  "keyword": "microsoft fabric vs power bi",
+  "secondary": "",
+  "cluster": "Buyer",
+  "title": "",
+  "slug": "blog-microsoft-fabric-vs-power-bi"
+ }
+]

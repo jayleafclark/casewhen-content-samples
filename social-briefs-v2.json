@@ -1,0 +1,626 @@
+[
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "data governance framework",
+  "cluster": "Governance",
+  "who": "Austin",
+  "id": "linkedin-data-governance-framework-0"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "power bi pro cost",
+  "cluster": "Pricing",
+  "who": "Austin",
+  "id": "linkedin-power-bi-pro-cost-1"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "DE",
+  "keyword": "kpi dashboard",
+  "cluster": "KPI",
+  "who": "Saju",
+  "id": "linkedin-kpi-dashboard-2"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "azure data factory",
+  "cluster": "Azure",
+  "who": "Austin",
+  "id": "linkedin-azure-data-factory-3"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "onelake",
+  "cluster": "Fabric",
+  "who": "Austin",
+  "id": "linkedin-onelake-4"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "DE",
+  "keyword": "migrate to azure sql",
+  "cluster": "Migrations",
+  "who": "Saju",
+  "id": "linkedin-migrate-to-azure-sql-5"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "power bi consultant",
+  "cluster": "Power BI Flagship",
+  "who": "Austin",
+  "id": "linkedin-power-bi-consultant-6"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "power bi certification",
+  "cluster": "Training",
+  "who": "Austin",
+  "id": "linkedin-power-bi-certification-7"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "DE",
+  "keyword": "financial reporting automation",
+  "cluster": "Automation",
+  "who": "Saju",
+  "id": "linkedin-financial-reporting-automation-8"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "incremental refresh power bi",
+  "cluster": "Governance",
+  "who": "Austin",
+  "id": "linkedin-incremental-refresh-power-bi-9"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "power bi pro price",
+  "cluster": "Pricing",
+  "who": "Austin",
+  "id": "linkedin-power-bi-pro-price-10"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "DE",
+  "keyword": "kpis and dashboards",
+  "cluster": "KPI",
+  "who": "Saju",
+  "id": "linkedin-kpis-and-dashboards-11"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "azure synapse analytics",
+  "cluster": "Azure",
+  "who": "Austin",
+  "id": "linkedin-azure-synapse-analytics-12"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "fabric capacity",
+  "cluster": "Fabric",
+  "who": "Austin",
+  "id": "linkedin-fabric-capacity-13"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "DE",
+  "keyword": "migrate sql to azure sql",
+  "cluster": "Migrations",
+  "who": "Saju",
+  "id": "linkedin-migrate-sql-to-azure-sql-14"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "power bi consulting",
+  "cluster": "Power BI Flagship",
+  "who": "Austin",
+  "id": "linkedin-power-bi-consulting-15"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "power bi training",
+  "cluster": "Training",
+  "who": "Austin",
+  "id": "linkedin-power-bi-training-16"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "DE",
+  "keyword": "reporting automation",
+  "cluster": "Automation",
+  "who": "Saju",
+  "id": "linkedin-reporting-automation-17"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "row level security power bi",
+  "cluster": "Governance",
+  "who": "Austin",
+  "id": "linkedin-row-level-security-power-bi-18"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "cost of power bi pro",
+  "cluster": "Pricing",
+  "who": "Austin",
+  "id": "linkedin-cost-of-power-bi-pro-19"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "DE",
+  "keyword": "kpi business dashboard",
+  "cluster": "KPI",
+  "who": "Saju",
+  "id": "linkedin-kpi-business-dashboard-20"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "azure synapse",
+  "cluster": "Azure",
+  "who": "Austin",
+  "id": "linkedin-azure-synapse-21"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "fabric data warehouse",
+  "cluster": "Fabric",
+  "who": "Austin",
+  "id": "linkedin-fabric-data-warehouse-22"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "DE",
+  "keyword": "tableau to power bi migration",
+  "cluster": "Migrations",
+  "who": "Saju",
+  "id": "linkedin-tableau-to-power-bi-migration-23"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "power bi consulting services",
+  "cluster": "Power BI Flagship",
+  "who": "Austin",
+  "id": "linkedin-power-bi-consulting-services-24"
+ },
+ {
+  "platform": "linkedin",
+  "lang": "EN",
+  "keyword": "power bi classes",
+  "cluster": "Training",
+  "who": "Austin",
+  "id": "linkedin-power-bi-classes-25"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "data governance framework",
+  "cluster": "Governance",
+  "who": "Austin",
+  "id": "x-data-governance-framework-0"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "power bi pro cost",
+  "cluster": "Pricing",
+  "who": "Austin",
+  "id": "x-power-bi-pro-cost-1"
+ },
+ {
+  "platform": "x",
+  "lang": "DE",
+  "keyword": "kpi dashboard",
+  "cluster": "KPI",
+  "who": "Saju",
+  "id": "x-kpi-dashboard-2"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "azure data factory",
+  "cluster": "Azure",
+  "who": "Austin",
+  "id": "x-azure-data-factory-3"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "onelake",
+  "cluster": "Fabric",
+  "who": "Austin",
+  "id": "x-onelake-4"
+ },
+ {
+  "platform": "x",
+  "lang": "DE",
+  "keyword": "migrate to azure sql",
+  "cluster": "Migrations",
+  "who": "Saju",
+  "id": "x-migrate-to-azure-sql-5"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "power bi consultant",
+  "cluster": "Power BI Flagship",
+  "who": "Austin",
+  "id": "x-power-bi-consultant-6"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "power bi certification",
+  "cluster": "Training",
+  "who": "Austin",
+  "id": "x-power-bi-certification-7"
+ },
+ {
+  "platform": "x",
+  "lang": "DE",
+  "keyword": "financial reporting automation",
+  "cluster": "Automation",
+  "who": "Saju",
+  "id": "x-financial-reporting-automation-8"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "incremental refresh power bi",
+  "cluster": "Governance",
+  "who": "Austin",
+  "id": "x-incremental-refresh-power-bi-9"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "power bi pro price",
+  "cluster": "Pricing",
+  "who": "Austin",
+  "id": "x-power-bi-pro-price-10"
+ },
+ {
+  "platform": "x",
+  "lang": "DE",
+  "keyword": "kpis and dashboards",
+  "cluster": "KPI",
+  "who": "Saju",
+  "id": "x-kpis-and-dashboards-11"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "azure synapse analytics",
+  "cluster": "Azure",
+  "who": "Austin",
+  "id": "x-azure-synapse-analytics-12"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "fabric capacity",
+  "cluster": "Fabric",
+  "who": "Austin",
+  "id": "x-fabric-capacity-13"
+ },
+ {
+  "platform": "x",
+  "lang": "DE",
+  "keyword": "migrate sql to azure sql",
+  "cluster": "Migrations",
+  "who": "Saju",
+  "id": "x-migrate-sql-to-azure-sql-14"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "power bi consulting",
+  "cluster": "Power BI Flagship",
+  "who": "Austin",
+  "id": "x-power-bi-consulting-15"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "power bi training",
+  "cluster": "Training",
+  "who": "Austin",
+  "id": "x-power-bi-training-16"
+ },
+ {
+  "platform": "x",
+  "lang": "DE",
+  "keyword": "reporting automation",
+  "cluster": "Automation",
+  "who": "Saju",
+  "id": "x-reporting-automation-17"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "row level security power bi",
+  "cluster": "Governance",
+  "who": "Austin",
+  "id": "x-row-level-security-power-bi-18"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "cost of power bi pro",
+  "cluster": "Pricing",
+  "who": "Austin",
+  "id": "x-cost-of-power-bi-pro-19"
+ },
+ {
+  "platform": "x",
+  "lang": "DE",
+  "keyword": "kpi business dashboard",
+  "cluster": "KPI",
+  "who": "Saju",
+  "id": "x-kpi-business-dashboard-20"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "azure synapse",
+  "cluster": "Azure",
+  "who": "Austin",
+  "id": "x-azure-synapse-21"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "fabric data warehouse",
+  "cluster": "Fabric",
+  "who": "Austin",
+  "id": "x-fabric-data-warehouse-22"
+ },
+ {
+  "platform": "x",
+  "lang": "DE",
+  "keyword": "tableau to power bi migration",
+  "cluster": "Migrations",
+  "who": "Saju",
+  "id": "x-tableau-to-power-bi-migration-23"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "power bi consulting services",
+  "cluster": "Power BI Flagship",
+  "who": "Austin",
+  "id": "x-power-bi-consulting-services-24"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "power bi classes",
+  "cluster": "Training",
+  "who": "Austin",
+  "id": "x-power-bi-classes-25"
+ },
+ {
+  "platform": "x",
+  "lang": "DE",
+  "keyword": "reporting automatisierung",
+  "cluster": "Automation",
+  "who": "Saju",
+  "id": "x-reporting-automatisierung-26"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "power bi incremental refresh",
+  "cluster": "Governance",
+  "who": "Austin",
+  "id": "x-power-bi-incremental-refresh-27"
+ },
+ {
+  "platform": "x",
+  "lang": "EN",
+  "keyword": "power bi pro costs",
+  "cluster": "Pricing",
+  "who": "Austin",
+  "id": "x-power-bi-pro-costs-28"
+ },
+ {
+  "platform": "x",
+  "lang": "DE",
+  "keyword": "kpi tracker",
+  "cluster": "KPI",
+  "who": "Saju",
+  "id": "x-kpi-tracker-29"
+ },
+ {
+  "platform": "shortform",
+  "lang": "EN",
+  "keyword": "data governance framework",
+  "cluster": "Governance",
+  "who": "Austin",
+  "id": "shortform-data-governance-framework-0"
+ },
+ {
+  "platform": "shortform",
+  "lang": "EN",
+  "keyword": "power bi pro cost",
+  "cluster": "Pricing",
+  "who": "Austin",
+  "id": "shortform-power-bi-pro-cost-1"
+ },
+ {
+  "platform": "shortform",
+  "lang": "DE",
+  "keyword": "kpi dashboard",
+  "cluster": "KPI",
+  "who": "Saju",
+  "id": "shortform-kpi-dashboard-2"
+ },
+ {
+  "platform": "shortform",
+  "lang": "EN",
+  "keyword": "azure data factory",
+  "cluster": "Azure",
+  "who": "Austin",
+  "id": "shortform-azure-data-factory-3"
+ },
+ {
+  "platform": "shortform",
+  "lang": "EN",
+  "keyword": "onelake",
+  "cluster": "Fabric",
+  "who": "Austin",
+  "id": "shortform-onelake-4"
+ },
+ {
+  "platform": "shortform",
+  "lang": "DE",
+  "keyword": "migrate to azure sql",
+  "cluster": "Migrations",
+  "who": "Saju",
+  "id": "shortform-migrate-to-azure-sql-5"
+ },
+ {
+  "platform": "shortform",
+  "lang": "EN",
+  "keyword": "power bi consultant",
+  "cluster": "Power BI Flagship",
+  "who": "Austin",
+  "id": "shortform-power-bi-consultant-6"
+ },
+ {
+  "platform": "shortform",
+  "lang": "EN",
+  "keyword": "power bi certification",
+  "cluster": "Training",
+  "who": "Austin",
+  "id": "shortform-power-bi-certification-7"
+ },
+ {
+  "platform": "shortform",
+  "lang": "DE",
+  "keyword": "financial reporting automation",
+  "cluster": "Automation",
+  "who": "Saju",
+  "id": "shortform-financial-reporting-automation-8"
+ },
+ {
+  "platform": "shortform",
+  "lang": "EN",
+  "keyword": "incremental refresh power bi",
+  "cluster": "Governance",
+  "who": "Austin",
+  "id": "shortform-incremental-refresh-power-bi-9"
+ },
+ {
+  "platform": "shortform",
+  "lang": "EN",
+  "keyword": "power bi pro price",
+  "cluster": "Pricing",
+  "who": "Austin",
+  "id": "shortform-power-bi-pro-price-10"
+ },
+ {
+  "platform": "shortform",
+  "lang": "DE",
+  "keyword": "kpis and dashboards",
+  "cluster": "KPI",
+  "who": "Saju",
+  "id": "shortform-kpis-and-dashboards-11"
+ },
+ {
+  "platform": "shortform",
+  "lang": "EN",
+  "keyword": "azure synapse analytics",
+  "cluster": "Azure",
+  "who": "Austin",
+  "id": "shortform-azure-synapse-analytics-12"
+ },
+ {
+  "platform": "shortform",
+  "lang": "EN",
+  "keyword": "fabric capacity",
+  "cluster": "Fabric",
+  "who": "Austin",
+  "id": "shortform-fabric-capacity-13"
+ },
+ {
+  "platform": "shortform",
+  "lang": "DE",
+  "keyword": "migrate sql to azure sql",
+  "cluster": "Migrations",
+  "who": "Saju",
+  "id": "shortform-migrate-sql-to-azure-sql-14"
+ },
+ {
+  "platform": "shortform",
+  "lang": "EN",
+  "keyword": "power bi consulting",
+  "cluster": "Power BI Flagship",
+  "who": "Austin",
+  "id": "shortform-power-bi-consulting-15"
+ },
+ {
+  "platform": "shortform",
+  "lang": "EN",
+  "keyword": "power bi training",
+  "cluster": "Training",
+  "who": "Austin",
+  "id": "shortform-power-bi-training-16"
+ },
+ {
+  "platform": "shortform",
+  "lang": "DE",
+  "keyword": "reporting automation",
+  "cluster": "Automation",
+  "who": "Saju",
+  "id": "shortform-reporting-automation-17"
+ },
+ {
+  "platform": "shortform",
+  "lang": "EN",
+  "keyword": "row level security power bi",
+  "cluster": "Governance",
+  "who": "Austin",
+  "id": "shortform-row-level-security-power-bi-18"
+ },
+ {
+  "platform": "shortform",
+  "lang": "EN",
+  "keyword": "cost of power bi pro",
+  "cluster": "Pricing",
+  "who": "Austin",
+  "id": "shortform-cost-of-power-bi-pro-19"
+ },
+ {
+  "platform": "shortform",
+  "lang": "DE",
+  "keyword": "kpi business dashboard",
+  "cluster": "KPI",
+  "who": "Saju",
+  "id": "shortform-kpi-business-dashboard-20"
+ },
+ {
+  "platform": "shortform",
+  "lang": "EN",
+  "keyword": "azure synapse",
+  "cluster": "Azure",
+  "who": "Austin",
+  "id": "shortform-azure-synapse-21"
+ }
+]
