@@ -1,0 +1,86 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>CaseWhen · Maturity Scorecard</title><style>
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700}
+
+*{box-sizing:border-box}html{overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+[data-r]{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+[data-r].in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){[data-r]{opacity:1;transform:none;transition:none}}
+.back{position:fixed;top:14px;left:14px;z-index:30;font-size:12.5px;background:rgba(255,255,255,.9);backdrop-filter:blur(6px);border:1px solid #dfe6e3;border-radius:20px;padding:6px 13px;text-decoration:none;color:#11493F;font-weight:600}
+
+body{background:#0e2f28;color:#eafaf5}
+.hero{max-width:760px;margin:0 auto;padding:96px 22px 30px;text-align:center}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7AC4B5}
+h1{font-family:'NM';font-weight:700;font-size:clamp(30px,6vw,52px);letter-spacing:-.02em;line-height:1.08;margin:16px 0 0}
+.hero p{font-size:18px;color:#bcd8cf;max-width:56ch;margin:16px auto 0}
+.card{max-width:640px;margin:26px auto 0;background:#fff;color:#1a1615;border-radius:20px;padding:26px 24px;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.q{border-top:1px solid #eef1ef;padding:16px 0}.q:first-child{border-top:0;padding-top:2px}
+.q h4{font-size:15.5px;margin:0 0 10px;font-weight:700}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opt{font-size:13.5px;border:1px solid #dfe6e3;border-radius:10px;padding:8px 13px;cursor:pointer;transition:all .15s;user-select:none}
+.opt:hover{border-color:#1D967C}
+.opt.sel{background:#11493F;color:#fff;border-color:#11493F}
+.result{margin-top:20px;border-top:2px solid #f0f2f6;padding-top:18px}
+.meter{height:14px;border-radius:10px;background:linear-gradient(90deg,#CE8168 0%,#e6c07a 50%,#1D967C 100%);position:relative;margin:12px 0}
+.needle{position:absolute;top:-6px;width:4px;height:26px;background:#1a1615;border-radius:3px;left:8%;transition:left 1s cubic-bezier(.2,.8,.2,1)}
+.tier{font-family:'NM';font-weight:700;font-size:26px;margin:6px 0 2px}
+.tierrow{display:flex;justify-content:space-between;font-size:11px;color:#787a76;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.gate{margin-top:18px;background:#f3fbfa;border:1px solid #d8f3ed;border-radius:14px;padding:16px}
+.gate input{width:100%;border:1px solid #cfe3dc;border-radius:10px;padding:12px 14px;font-size:15px;font-family:inherit;margin-top:8px}
+.gate button{width:100%;margin-top:10px;background:#1D967C;color:#fff;border:0;border-radius:10px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.gate small{color:#787a76;font-size:11.5px}
+.foot{max-width:640px;margin:22px auto 60px;text-align:center;color:#9fc2b8;font-size:12.5px}
+.badge{display:inline-block;font-size:11px;background:rgba(122,196,181,.16);color:#7AC4B5;border-radius:20px;padding:4px 12px;font-weight:600;margin-bottom:10px}
+</style></head><body>
+<a class="back" href="funnels.html">← all funnels</a>
+
+<div class="hero" data-r>
+ <span class="badge">Mockup · Lead magnet</span>
+ <div class="eyebrow">Reporting-Foundation Maturity Scorecard</div>
+ <h1>Would your Power BI numbers survive a board review?</h1>
+ <p>Answer four questions. Get an instant maturity tier and a one-page PDF you can forward to your CFO.</p>
+</div>
+<div class="card" data-r>
+ <div class="q"><h4>1. Can you name, in one sentence, who owns the revenue number on your board report?</h4><div class="opts"><div class="opt" data-q="0" data-v="2">Yes, one person</div><div class="opt" data-q="0" data-v="1">Sort of</div><div class="opt" data-q="0" data-v="0">No</div></div></div><div class="q"><h4>2. How do report changes reach the live dashboard?</h4><div class="opts"><div class="opt" data-q="1" data-v="2">Dev, test, then live</div><div class="opt" data-q="1" data-v="1">Straight to live</div><div class="opt" data-q="1" data-v="0">Not sure</div></div></div><div class="q"><h4>3. When did you last test row-level security?</h4><div class="opts"><div class="opt" data-q="2" data-v="2">This quarter</div><div class="opt" data-q="2" data-v="1">At launch only</div><div class="opt" data-q="2" data-v="0">Never</div></div></div><div class="q"><h4>4. Do two teams ever report the same metric differently?</h4><div class="opts"><div class="opt" data-q="3" data-v="2">Never</div><div class="opt" data-q="3" data-v="1">Sometimes</div><div class="opt" data-q="3" data-v="0">Often</div></div></div>
+ <div class="result">
+  <div class="tierrow"><span>Fragile</span><span>Functional</span><span>Board-ready</span></div>
+  <div class="meter"><div class="needle" id="needle"></div></div>
+  <div class="tier" id="tier">Answer the four questions</div>
+  <div class="gate">
+   <b style="font-size:14px">Get your full scorecard + the forwardable PDF</b>
+   <input type="email" placeholder="you@company.com" aria-label="email">
+   <button type="button">Email me my scorecard</button>
+   <small>No spam. One email with your result and the PDF. Mockup only — nothing is sent.</small>
+  </div>
+ </div>
+</div>
+<div class="foot" data-r>CaseWhen · a fixed-price Reporting Foundation Review fixes whatever the scorecard flags.</div>
+<script>
+document.documentElement.classList.add('janim');
+const _els=document.querySelectorAll('[data-r]');
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+_els.forEach(el=>io.observe(el));
+setTimeout(()=>_els.forEach(el=>el.classList.add('in')),1400);
+</script><script>
+let ans={};
+document.querySelectorAll('.opt').forEach(o=>o.addEventListener('click',()=>{
+  const q=o.dataset.q; document.querySelectorAll('.opt[data-q="'+q+'"]').forEach(x=>x.classList.remove('sel'));
+  o.classList.add('sel'); ans[q]=+o.dataset.v; render();
+}));
+function render(){
+  const ks=Object.keys(ans); if(!ks.length)return;
+  let s=0; ks.forEach(k=>s+=ans[k]); const max=Object.keys(ans).length*2;
+  const pct=Math.round(s/ (4*2) *100);
+  document.getElementById('needle').style.left=Math.max(4,Math.min(96,pct))+'%';
+  const t=document.getElementById('tier');
+  if(ks.length<4){t.textContent='Keep going ('+ks.length+'/4)';t.style.color='#787a76';return;}
+  if(pct<40){t.textContent='Fragile';t.style.color='#CE8168';}
+  else if(pct<75){t.textContent='Functional';t.style.color='#b8862f';}
+  else {t.textContent='Board-ready';t.style.color='#1D967C';}
+}
+</script></body></html>

@@ -189,7 +189,7 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 """
 
 def nav(active):
-    items = [("index.html","Home"),("strategy.html","Strategy")] + [(f"{k}.html", v["title"]) for k, v in PLATFORMS.items()] + [("visuals.html","Visuals")]
+    items = [("index.html","Home"),("strategy.html","Strategy")] + [(f"{k}.html", v["title"]) for k, v in PLATFORMS.items()] + [("visuals.html","Visuals"),("seo.html","SEO"),("funnels.html","Funnels")]
     return "".join(f'<a href="{h}" class="{"on" if h==active else ""}">{esc(t)}</a>' for h, t in items)
 
 def shell(active, title, inner):
@@ -304,6 +304,318 @@ def platform_page(k, cfg):
     (OUT / f"{k}.html").write_text(shell(f"{k}.html", cfg["title"], inner), encoding="utf-8")
     return len(slots), done
 
+FONTFACE = """
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700}
+"""
+REVEAL_JS = """
+<script>
+document.documentElement.classList.add('janim');
+const _els=document.querySelectorAll('[data-r]');
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+_els.forEach(el=>io.observe(el));
+setTimeout(()=>_els.forEach(el=>el.classList.add('in')),1400);
+</script>"""
+
+def landing(title, favicon, css, inner, js=""):
+    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>CaseWhen · {esc(title)}</title><style>{FONTFACE}
+*{{box-sizing:border-box}}html{{overflow-x:hidden}}
+body{{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}}
+a{{color:inherit}}
+[data-r]{{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}}
+[data-r].in{{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){{[data-r]{{opacity:1;transform:none;transition:none}}}}
+.back{{position:fixed;top:14px;left:14px;z-index:30;font-size:12.5px;background:rgba(255,255,255,.9);backdrop-filter:blur(6px);border:1px solid #dfe6e3;border-radius:20px;padding:6px 13px;text-decoration:none;color:#11493F;font-weight:600}}
+{css}</style></head><body>
+<a class="back" href="funnels.html">← all funnels</a>
+{inner}{REVEAL_JS}{js}</body></html>"""
+
+def scorecard_mockup():
+    css = """
+body{background:#0e2f28;color:#eafaf5}
+.hero{max-width:760px;margin:0 auto;padding:96px 22px 30px;text-align:center}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7AC4B5}
+h1{font-family:'NM';font-weight:700;font-size:clamp(30px,6vw,52px);letter-spacing:-.02em;line-height:1.08;margin:16px 0 0}
+.hero p{font-size:18px;color:#bcd8cf;max-width:56ch;margin:16px auto 0}
+.card{max-width:640px;margin:26px auto 0;background:#fff;color:#1a1615;border-radius:20px;padding:26px 24px;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.q{border-top:1px solid #eef1ef;padding:16px 0}.q:first-child{border-top:0;padding-top:2px}
+.q h4{font-size:15.5px;margin:0 0 10px;font-weight:700}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opt{font-size:13.5px;border:1px solid #dfe6e3;border-radius:10px;padding:8px 13px;cursor:pointer;transition:all .15s;user-select:none}
+.opt:hover{border-color:#1D967C}
+.opt.sel{background:#11493F;color:#fff;border-color:#11493F}
+.result{margin-top:20px;border-top:2px solid #f0f2f6;padding-top:18px}
+.meter{height:14px;border-radius:10px;background:linear-gradient(90deg,#CE8168 0%,#e6c07a 50%,#1D967C 100%);position:relative;margin:12px 0}
+.needle{position:absolute;top:-6px;width:4px;height:26px;background:#1a1615;border-radius:3px;left:8%;transition:left 1s cubic-bezier(.2,.8,.2,1)}
+.tier{font-family:'NM';font-weight:700;font-size:26px;margin:6px 0 2px}
+.tierrow{display:flex;justify-content:space-between;font-size:11px;color:#787a76;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.gate{margin-top:18px;background:#f3fbfa;border:1px solid #d8f3ed;border-radius:14px;padding:16px}
+.gate input{width:100%;border:1px solid #cfe3dc;border-radius:10px;padding:12px 14px;font-size:15px;font-family:inherit;margin-top:8px}
+.gate button{width:100%;margin-top:10px;background:#1D967C;color:#fff;border:0;border-radius:10px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.gate small{color:#787a76;font-size:11.5px}
+.foot{max-width:640px;margin:22px auto 60px;text-align:center;color:#9fc2b8;font-size:12.5px}
+.badge{display:inline-block;font-size:11px;background:rgba(122,196,181,.16);color:#7AC4B5;border-radius:20px;padding:4px 12px;font-weight:600;margin-bottom:10px}
+"""
+    quiz = ""
+    Q = [("Can you name, in one sentence, who owns the revenue number on your board report?",["Yes, one person","Sort of","No"]),
+         ("How do report changes reach the live dashboard?",["Dev, test, then live","Straight to live","Not sure"]),
+         ("When did you last test row-level security?",["This quarter","At launch only","Never"]),
+         ("Do two teams ever report the same metric differently?",["Never","Sometimes","Often"])]
+    for i,(q,opts) in enumerate(Q):
+        os_="".join(f'<div class="opt" data-q="{i}" data-v="{2-j}">{esc(o)}</div>' for j,o in enumerate(opts))
+        quiz += f'<div class="q"><h4>{i+1}. {esc(q)}</h4><div class="opts">{os_}</div></div>'
+    inner = f"""
+<div class="hero" data-r>
+ <span class="badge">Mockup · Lead magnet</span>
+ <div class="eyebrow">Reporting-Foundation Maturity Scorecard</div>
+ <h1>Would your Power BI numbers survive a board review?</h1>
+ <p>Answer four questions. Get an instant maturity tier and a one-page PDF you can forward to your CFO.</p>
+</div>
+<div class="card" data-r>
+ {quiz}
+ <div class="result">
+  <div class="tierrow"><span>Fragile</span><span>Functional</span><span>Board-ready</span></div>
+  <div class="meter"><div class="needle" id="needle"></div></div>
+  <div class="tier" id="tier">Answer the four questions</div>
+  <div class="gate">
+   <b style="font-size:14px">Get your full scorecard + the forwardable PDF</b>
+   <input type="email" placeholder="you@company.com" aria-label="email">
+   <button type="button">Email me my scorecard</button>
+   <small>No spam. One email with your result and the PDF. Mockup only — nothing is sent.</small>
+  </div>
+ </div>
+</div>
+<div class="foot" data-r>CaseWhen · a fixed-price Reporting Foundation Review fixes whatever the scorecard flags.</div>"""
+    js = """<script>
+let ans={};
+document.querySelectorAll('.opt').forEach(o=>o.addEventListener('click',()=>{
+  const q=o.dataset.q; document.querySelectorAll('.opt[data-q="'+q+'"]').forEach(x=>x.classList.remove('sel'));
+  o.classList.add('sel'); ans[q]=+o.dataset.v; render();
+}));
+function render(){
+  const ks=Object.keys(ans); if(!ks.length)return;
+  let s=0; ks.forEach(k=>s+=ans[k]); const max=Object.keys(ans).length*2;
+  const pct=Math.round(s/ (4*2) *100);
+  document.getElementById('needle').style.left=Math.max(4,Math.min(96,pct))+'%';
+  const t=document.getElementById('tier');
+  if(ks.length<4){t.textContent='Keep going ('+ks.length+'/4)';t.style.color='#787a76';return;}
+  if(pct<40){t.textContent='Fragile';t.style.color='#CE8168';}
+  else if(pct<75){t.textContent='Functional';t.style.color='#b8862f';}
+  else {t.textContent='Board-ready';t.style.color='#1D967C';}
+}
+</script>"""
+    (OUT/"scorecard.html").write_text(landing("Maturity Scorecard","🎯",css,inner,js),encoding="utf-8")
+
+def calculator_mockup():
+    css = """
+body{background:#E9ECE8;color:#1a1615}
+.wrap2{max-width:720px;margin:0 auto;padding:92px 22px 60px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#1D967C}
+h1{font-family:'NM';font-weight:700;font-size:clamp(28px,5.4vw,46px);letter-spacing:-.02em;line-height:1.1;margin:12px 0 0}
+.sub{font-size:17px;color:#5c6866;margin:14px 0 0;max-width:56ch}
+.panel{margin-top:24px;background:#fff;border-radius:20px;padding:26px 24px;box-shadow:0 24px 60px rgba(17,73,63,.12)}
+.row{margin:18px 0}
+.row label{font-size:14px;font-weight:600;display:flex;justify-content:space-between}
+.row label b{color:#11493F}
+input[type=range]{width:100%;margin-top:10px;accent-color:#1D967C}
+.readout{margin-top:22px;background:#11493F;color:#fff;border-radius:16px;padding:22px;text-align:center}
+.readout .big{font-family:'NM';font-weight:700;font-size:clamp(40px,10vw,72px);letter-spacing:-.03em;line-height:1}
+.readout .lbl{color:#9fc2b8;font-size:13px;margin-top:6px}
+.split{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.split .s{flex:1;min-width:120px;background:rgba(255,255,255,.08);border-radius:10px;padding:12px;font-size:12.5px;color:#cfe3dc}
+.split .s b{display:block;color:#fff;font-size:18px;font-weight:700}
+.rec{margin-top:14px;font-size:14px;color:#eafaf5;background:rgba(122,196,181,.14);border-radius:10px;padding:12px}
+.gate{margin-top:16px;background:#f3fbfa;border:1px solid #d8f3ed;border-radius:14px;padding:16px}
+.gate input{width:100%;border:1px solid #cfe3dc;border-radius:10px;padding:12px 14px;font-size:15px;font-family:inherit;margin-top:8px}
+.gate button{width:100%;margin-top:10px;background:#1D967C;color:#fff;border:0;border-radius:10px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.gate small{color:#787a76;font-size:11.5px}
+.badge{display:inline-block;font-size:11px;background:#d8f3ed;color:#11493F;border-radius:20px;padding:4px 12px;font-weight:600}
+"""
+    inner = """
+<div class="wrap2">
+ <span class="badge" data-r>Mockup · Lead magnet</span>
+ <div class="eyebrow" data-r>Power BI cost calculator</div>
+ <h1 data-r>What your Power BI setup actually costs.</h1>
+ <p class="sub" data-r>Move the sliders. See the yearly number, the licence-vs-capacity crossover, and which side you're on. Real Microsoft pricing.</p>
+ <div class="panel" data-r>
+  <div class="row"><label>Report viewers <b id="vv">120</b></label><input id="viewers" type="range" min="10" max="1200" value="120"></div>
+  <div class="row"><label>Report builders <b id="bb">6</b></label><input id="builders" type="range" min="1" max="60" value="6"></div>
+  <div class="readout">
+   <div class="big" id="cost">$0</div><div class="lbl">estimated per year</div>
+   <div class="split">
+    <div class="s"><b id="model">Per-user</b>cheaper model</div>
+    <div class="s"><b id="cross">~350</b>viewer crossover</div>
+   </div>
+   <div class="rec" id="rec">Adjust the sliders to see your recommendation.</div>
+  </div>
+  <div class="gate">
+   <b style="font-size:14px">Email me this estimate as a one-page PDF</b>
+   <input type="email" placeholder="you@company.com" aria-label="email">
+   <button type="button">Send my estimate</button>
+   <small>Mockup only — nothing is sent. Real page uses live Microsoft pricing.</small>
+  </div>
+ </div>
+</div>"""
+    js = """<script>
+const PRO=14*12, F64=5000*12;
+const v=document.getElementById('viewers'),b=document.getElementById('builders');
+function fmt(n){return '$'+Math.round(n).toLocaleString();}
+function animate(el,to){const from=+(el.dataset.v||0);const t0=performance.now();
+ function f(t){const k=Math.min(1,(t-t0)/500);const val=from+(to-from)*(1-Math.pow(1-k,3));el.textContent=fmt(val);if(k<1)requestAnimationFrame(f);else el.dataset.v=to;}requestAnimationFrame(f);}
+function calc(){
+ const viewers=+v.value,builders=+b.value;
+ document.getElementById('vv').textContent=viewers;document.getElementById('bb').textContent=builders;
+ const perUser=(viewers+builders)*PRO;
+ const capacity=F64+builders*PRO;
+ const best=Math.min(perUser,capacity);
+ animate(document.getElementById('cost'),best);
+ const cap=capacity<perUser;
+ document.getElementById('model').textContent=cap?'Capacity':'Per-user';
+ document.getElementById('rec').textContent=cap
+  ? 'At '+viewers+' viewers, a Fabric F64 capacity ('+fmt(capacity)+'/yr) beats per-user Pro ('+fmt(perUser)+'/yr). Buy capacity.'
+  : 'At '+viewers+' viewers, per-user Pro ('+fmt(perUser)+'/yr) beats a capacity ('+fmt(capacity)+'/yr). Stay per-user.';
+}
+v.addEventListener('input',calc);b.addEventListener('input',calc);calc();
+</script>"""
+    (OUT/"calculator.html").write_text(landing("Cost calculator","🧮",css,inner,js),encoding="utf-8")
+
+def funnels_page():
+    scorecard_mockup(); calculator_mockup()
+    mags=[
+     ("Reporting-Foundation Maturity Scorecard","Flagship capture atom","A 4-question quiz returns an instant tier (Fragile / Functional / Board-ready) and emails a one-page PDF the controller forwards to their CFO.","Foundation-checker · top-mid funnel","scorecard.html","open the mockup","#11493F"),
+     ("Power BI cost calculator","Buyer-intent (BOFU)","Sliders return a real yearly cost and the per-user-vs-capacity crossover, with email capture on the result.","Foundation-checker · decision","calculator.html","open the mockup","#1D967C"),
+     ("Internal buy-in briefing","De-risking template","A one-page PDF: how to present a reporting review to your CFO or board as a proactive governance move.","Foundation-checker · consideration","","spec — mockup next","#7AC4B5"),
+     ("Case-study bundle","Evaluation proof","A curated set: 10 DACH reporting rebuilds (Schindler, Ipsen, WellBeauty), before and after, as one downloadable research artifact.","In active evaluation","","spec — mockup next","#6F93AC"),
+     ("Governance whitepaper","Authority capture","A gated governance / manufacturing whitepaper structured to the AI-Overview governance outline.","Buyer-authority","","spec — mockup next","#CE8168"),
+     ("German scorecard + briefing","DACH parity","The scorecard and buy-in briefing localised into German — Saju's track capture entry point.","DACH foundation-checker","","spec — mockup next","#132630"),
+    ]
+    cards=""
+    for name,tag,desc,persona,href,cta,color in mags:
+        link=f'href="{href}"' if href else 'href="javascript:void(0)" style="cursor:default"'
+        cards+=f"""<a class="fcard" {link} data-r style="--ac:{color}">
+        <div class="tag">{esc(tag)}</div><h3>{esc(name)}</h3><p>{esc(desc)}</p>
+        <div class="who">{esc(persona)}</div><div class="cta">{esc(cta)} →</div></a>"""
+    st="""
+.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:22px}
+.fcard{display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s}
+.fcard::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--ac)}
+.fcard:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(17,73,63,.12)}
+.fcard .tag{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ac);margin-top:4px}
+.fcard h3{font-size:19px;margin:6px 0 8px;letter-spacing:-.01em}
+.fcard p{font-size:14px;color:var(--mut);margin:0}
+.fcard .who{font-size:12px;color:var(--faint);margin-top:12px}
+.fcard .cta{font-size:13px;font-weight:700;color:var(--dark);margin-top:8px}
+[data-r]{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}[data-r].in{opacity:1;transform:none}
+@media(max-width:760px){.fgrid{grid-template-columns:1fr}}
+"""
+    body=f"""<style>{st}</style>
+<section class="hero"><div class="wrap"><div class="eb">CaseWhen · funnels</div>
+<h1>The lead magnets that turn reach into emails.</h1>
+<p>Six free tools and downloads, each traded for an email, each pointed at a booked fixed-price review.
+Two are built as live mockups below — open them. The rest are specced and get the same treatment next.
+Every one shares the brand, and each looks distinct.</p>
+<div class="fgrid">{cards}</div></div></section>{REVEAL_JS}"""
+    (OUT/"funnels.html").write_text(shell("funnels.html","Funnels",body),encoding="utf-8")
+
+def seo_page():
+    st = """
+.seo .blk{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:18px;margin-top:16px}
+.seo .kw{font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:4px 11px;display:inline-block}
+.seo h3{font-size:17px;margin:10px 0 2px}
+.seo .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:12px}
+.seo .chk{display:flex;align-items:center;gap:8px;font-size:13px;padding:7px 10px;border-radius:8px;background:#f4f8f6}
+.seo .chk .m{width:18px;height:18px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff}
+.seo .ok .m{background:var(--brand)}.seo .no .m{background:#c96a4f}
+.seo .no{background:#faeee9}
+.seo .meta{font-size:12.5px;color:var(--faint);margin-top:10px}
+.seo .sec{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.seo .sec .s{font-size:11.5px;border-radius:20px;padding:3px 10px;border:1px solid var(--line)}
+.seo .sec .yes{background:var(--pale);color:var(--dark);border-color:var(--mid)}
+.seo .sec .miss{background:#faeee9;color:#8a4a37}
+.score{font-size:12px;font-weight:700;border-radius:20px;padding:3px 11px;float:right}
+.score.full{background:var(--dark);color:#fff}.score.part{background:#f4d9cd;color:#8a4a37}
+.stab{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px}
+.stab th{text-align:left;background:var(--dark);color:#fff;padding:9px 11px;font-size:12px;font-weight:600}
+.stab td{border-top:1px solid var(--line);padding:9px 11px;vertical-align:top}
+"""
+    import re as _re
+    def parse_blog(md):
+        fm={}; body=md
+        if "---" in md:
+            head,_,rest=md.partition("---")
+            for ln in head.splitlines():
+                m=_re.match(r"^([A-Za-z][\w ()',.&/-]*?):\s*(.*)$",ln)
+                if m: fm[_re.sub(r"\s*\(.*?\)","",m.group(1)).strip().upper()]=m.group(2).strip()
+            body=rest
+        return fm,body
+    def cov(f):
+        md=(CONTENT/f).read_text(encoding="utf-8"); fm,body=parse_blog(md)
+        kw=(fm.get("KEYWORD","").split("|")[0]).strip().lower()
+        title=fm.get("META_TITLE",fm.get("TITLE","")); h1=fm.get("H1",""); desc=fm.get("META_DESC",fm.get("META","")); slug=fm.get("SLUG","")
+        bl=body.lower(); words=_re.findall(r"[a-z0-9']+",bl); first100=" ".join(words[:100])
+        h2s=[l for l in body.splitlines() if l.strip().startswith("## ")]
+        qh2=sum(1 for l in h2s if l.strip().rstrip().endswith("?"))
+        dens=round(bl.count(kw)/max(1,len(words))*100,2) if kw else 0
+        secs=[s.strip() for s in _re.split(r"·|\|",fm.get("SECONDARY","")) if s.strip()]
+        checks=[
+            ("Keyword in meta title", kw in title.lower()),
+            ("Keyword in H1", kw in h1.lower()),
+            ("Keyword in first 100 words", kw in first100),
+            ("Keyword in an H2 heading", any(kw in l.lower() for l in h2s)),
+            ("Keyword in meta description", kw in desc.lower()),
+            ("Keyword in URL slug", kw.replace(" ","-") in slug.lower()),
+            (f"Density in range ({dens}%)", 0.4<=dens<=3.0),
+            (f"{qh2} question-format H2s", qh2>=4),
+            ("Schema markup", bool(fm.get("SCHEMA"))),
+            ("Named byline", bool(fm.get("BYLINE"))),
+            (f"{len(words)} words", len(words)>=1000),
+        ]
+        return kw,title,h1,checks,secs,bl
+    blogs=[("blog-governance-framework.md","Governance"),("blog-power-bi-certification.md","Training"),("blog-bedeutung-kpi.md","KPI · DE")]
+    blocks=""
+    for f,cluster in blogs:
+        try: kw,title,h1,checks,secs,bl=cov(f)
+        except Exception: continue
+        passed=sum(1 for _,ok in checks if ok); total=len(checks)
+        full="full" if passed==total else "part"
+        grid="".join(f'<div class="chk {"ok" if ok else "no"}"><span class="m">{"✓" if ok else "!"}</span>{esc(lbl)}</div>' for lbl,ok in checks)
+        secchips="".join(f'<span class="s {"yes" if s.lower() in bl else "miss"}">{esc(s)} {"✓" if s.lower() in bl else "add"}</span>' for s in secs)
+        blocks+=f"""<div class="blk"><span class="score {full}">{passed}/{total} placed</span>
+<span class="kw">{esc(kw)}</span> · <span style="color:var(--faint);font-size:12px">{esc(cluster)}</span>
+<h3>{esc(h1 or title)}</h3>
+<div class="grid">{grid}</div>
+<div class="meta">Secondary keyword varieties (the related terms Google clusters):</div>
+<div class="sec">{secchips or '<span class="s miss">none listed</span>'}</div></div>"""
+    reopt = """
+<section class="ph" style="margin-top:30px"><div class="wrap"><div class="eb">Existing blog · re-optimization</div>
+<h2>What we'd attack on the 44 live posts</h2>
+<p style="color:var(--mut);font-size:15px;margin:10px 0 0;max-width:66ch">A read-only audit of every live post on casewhen.co. Nothing in production was changed. The good news: titles, URLs, schema, length, and bylines are already solid, so we don't touch those. The wins are a few high-leverage gaps repeated across the whole blog.</p>
+<table class="stab" style="margin-top:16px"><tr><th>Gap</th><th>Where</th><th>Why it matters</th></tr>
+<tr><td><b>No FAQPage schema</b></td><td>0 of 44 — even the ~9 with a visible FAQ</td><td>Free rich-result + AI-citation win; content already there, only the markup is missing</td></tr>
+<tr><td><b>No FAQ block</b></td><td>~35 posts</td><td>Misses People-Also-Ask real estate and long-tail questions</td></tr>
+<tr><td><b>Almost no internal linking</b></td><td>1-2 in-body links per post; no pillar/cluster structure</td><td>The biggest structural gap — link equity isn't flowing, topical authority isn't signalled</td></tr>
+<tr><td><b>Missing comparison tables</b></td><td>Pricing, certification, performance posts</td><td>Tables win the featured snippet for "vs / cost / pricing" searches</td></tr>
+<tr><td><b>Duplicate pages</b></td><td>two Premium-capacity URLs</td><td>Splits ranking signal — consolidate + 301 redirect</td></tr>
+<tr><td><b>Stale 2024 cohort</b></td><td>14 strategy/reporting posts</td><td>2026 pricing/Fabric facts likely outdated — refresh and genuinely re-date</td></tr></table>
+<div class="funnel" style="font-size:14px;color:#33372f;background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:16px"><b>The order of attack:</b> (1) two template fixes that touch every post — a reusable FAQPage schema block + flip og:type to article; (2) fix the duplicate with a 301; (3) add FAQ blocks tier by tier, starting with the BOFU money pages (vs / pricing / certification); (4) build three internal-link clusters (pricing-comparison, strategy-governance, DAX) each pointing to a pillar; (5) add the missing tables; (6) refresh the 2024 cohort last. Steps 1 and 3 alone touch all 44 posts for the least work.</div>
+</div></section>"""
+    body=f"""<style>{st}</style>
+<section class="hero"><div class="wrap"><div class="eb">CaseWhen · SEO</div>
+<h1>Proof every post hits its keywords.</h1>
+<p>Two things here: proof that each post we write places its keyword everywhere Google and AI answers
+look, and the plan to re-optimize the existing blog. Green means placed. This is how you get confidence
+a post is optimized, not just written.</p></div></section>
+<div class="wrap seo">{blocks}{reopt}
+<div class="funnel" style="font-size:14px;color:#33372f;background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;margin:18px 0 40px">
+<b>How this is enforced:</b> every article runs through the ship gate before it appears here. The gate
+hard-fails any post missing the keyword in the H1, the first 100 words, a question H2, the meta
+description, the slug, or the schema, so a post cannot ship under-optimized. The grid above is that
+gate's output, made visible.</div></div>"""
+    (OUT/"seo.html").write_text(shell("seo.html","SEO coverage",body),encoding="utf-8")
+
 def strategy_page():
     st = """
 .goal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
@@ -407,6 +719,8 @@ X. Every finished one is written plainly and passes the language and SEO checks 
 
 home()
 strategy_page()
+seo_page()
+funnels_page()
 visuals_page()
 tot = don = 0
 for k, cfg in PLATFORMS.items():

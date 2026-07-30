@@ -1,0 +1,91 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>CaseWhen · Cost calculator</title><style>
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700}
+
+*{box-sizing:border-box}html{overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+[data-r]{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+[data-r].in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){[data-r]{opacity:1;transform:none;transition:none}}
+.back{position:fixed;top:14px;left:14px;z-index:30;font-size:12.5px;background:rgba(255,255,255,.9);backdrop-filter:blur(6px);border:1px solid #dfe6e3;border-radius:20px;padding:6px 13px;text-decoration:none;color:#11493F;font-weight:600}
+
+body{background:#E9ECE8;color:#1a1615}
+.wrap2{max-width:720px;margin:0 auto;padding:92px 22px 60px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#1D967C}
+h1{font-family:'NM';font-weight:700;font-size:clamp(28px,5.4vw,46px);letter-spacing:-.02em;line-height:1.1;margin:12px 0 0}
+.sub{font-size:17px;color:#5c6866;margin:14px 0 0;max-width:56ch}
+.panel{margin-top:24px;background:#fff;border-radius:20px;padding:26px 24px;box-shadow:0 24px 60px rgba(17,73,63,.12)}
+.row{margin:18px 0}
+.row label{font-size:14px;font-weight:600;display:flex;justify-content:space-between}
+.row label b{color:#11493F}
+input[type=range]{width:100%;margin-top:10px;accent-color:#1D967C}
+.readout{margin-top:22px;background:#11493F;color:#fff;border-radius:16px;padding:22px;text-align:center}
+.readout .big{font-family:'NM';font-weight:700;font-size:clamp(40px,10vw,72px);letter-spacing:-.03em;line-height:1}
+.readout .lbl{color:#9fc2b8;font-size:13px;margin-top:6px}
+.split{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.split .s{flex:1;min-width:120px;background:rgba(255,255,255,.08);border-radius:10px;padding:12px;font-size:12.5px;color:#cfe3dc}
+.split .s b{display:block;color:#fff;font-size:18px;font-weight:700}
+.rec{margin-top:14px;font-size:14px;color:#eafaf5;background:rgba(122,196,181,.14);border-radius:10px;padding:12px}
+.gate{margin-top:16px;background:#f3fbfa;border:1px solid #d8f3ed;border-radius:14px;padding:16px}
+.gate input{width:100%;border:1px solid #cfe3dc;border-radius:10px;padding:12px 14px;font-size:15px;font-family:inherit;margin-top:8px}
+.gate button{width:100%;margin-top:10px;background:#1D967C;color:#fff;border:0;border-radius:10px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.gate small{color:#787a76;font-size:11.5px}
+.badge{display:inline-block;font-size:11px;background:#d8f3ed;color:#11493F;border-radius:20px;padding:4px 12px;font-weight:600}
+</style></head><body>
+<a class="back" href="funnels.html">← all funnels</a>
+
+<div class="wrap2">
+ <span class="badge" data-r>Mockup · Lead magnet</span>
+ <div class="eyebrow" data-r>Power BI cost calculator</div>
+ <h1 data-r>What your Power BI setup actually costs.</h1>
+ <p class="sub" data-r>Move the sliders. See the yearly number, the licence-vs-capacity crossover, and which side you're on. Real Microsoft pricing.</p>
+ <div class="panel" data-r>
+  <div class="row"><label>Report viewers <b id="vv">120</b></label><input id="viewers" type="range" min="10" max="1200" value="120"></div>
+  <div class="row"><label>Report builders <b id="bb">6</b></label><input id="builders" type="range" min="1" max="60" value="6"></div>
+  <div class="readout">
+   <div class="big" id="cost">$0</div><div class="lbl">estimated per year</div>
+   <div class="split">
+    <div class="s"><b id="model">Per-user</b>cheaper model</div>
+    <div class="s"><b id="cross">~350</b>viewer crossover</div>
+   </div>
+   <div class="rec" id="rec">Adjust the sliders to see your recommendation.</div>
+  </div>
+  <div class="gate">
+   <b style="font-size:14px">Email me this estimate as a one-page PDF</b>
+   <input type="email" placeholder="you@company.com" aria-label="email">
+   <button type="button">Send my estimate</button>
+   <small>Mockup only — nothing is sent. Real page uses live Microsoft pricing.</small>
+  </div>
+ </div>
+</div>
+<script>
+document.documentElement.classList.add('janim');
+const _els=document.querySelectorAll('[data-r]');
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+_els.forEach(el=>io.observe(el));
+setTimeout(()=>_els.forEach(el=>el.classList.add('in')),1400);
+</script><script>
+const PRO=14*12, F64=5000*12;
+const v=document.getElementById('viewers'),b=document.getElementById('builders');
+function fmt(n){return '$'+Math.round(n).toLocaleString();}
+function animate(el,to){const from=+(el.dataset.v||0);const t0=performance.now();
+ function f(t){const k=Math.min(1,(t-t0)/500);const val=from+(to-from)*(1-Math.pow(1-k,3));el.textContent=fmt(val);if(k<1)requestAnimationFrame(f);else el.dataset.v=to;}requestAnimationFrame(f);}
+function calc(){
+ const viewers=+v.value,builders=+b.value;
+ document.getElementById('vv').textContent=viewers;document.getElementById('bb').textContent=builders;
+ const perUser=(viewers+builders)*PRO;
+ const capacity=F64+builders*PRO;
+ const best=Math.min(perUser,capacity);
+ animate(document.getElementById('cost'),best);
+ const cap=capacity<perUser;
+ document.getElementById('model').textContent=cap?'Capacity':'Per-user';
+ document.getElementById('rec').textContent=cap
+  ? 'At '+viewers+' viewers, a Fabric F64 capacity ('+fmt(capacity)+'/yr) beats per-user Pro ('+fmt(perUser)+'/yr). Buy capacity.'
+  : 'At '+viewers+' viewers, per-user Pro ('+fmt(perUser)+'/yr) beats a capacity ('+fmt(capacity)+'/yr). Stay per-user.';
+}
+v.addEventListener('input',calc);b.addEventListener('input',calc);calc();
+</script></body></html>

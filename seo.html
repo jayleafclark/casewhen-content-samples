@@ -1,0 +1,172 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · SEO coverage</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="on">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.seo .blk{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:18px;margin-top:16px}
+.seo .kw{font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:4px 11px;display:inline-block}
+.seo h3{font-size:17px;margin:10px 0 2px}
+.seo .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:12px}
+.seo .chk{display:flex;align-items:center;gap:8px;font-size:13px;padding:7px 10px;border-radius:8px;background:#f4f8f6}
+.seo .chk .m{width:18px;height:18px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff}
+.seo .ok .m{background:var(--brand)}.seo .no .m{background:#c96a4f}
+.seo .no{background:#faeee9}
+.seo .meta{font-size:12.5px;color:var(--faint);margin-top:10px}
+.seo .sec{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.seo .sec .s{font-size:11.5px;border-radius:20px;padding:3px 10px;border:1px solid var(--line)}
+.seo .sec .yes{background:var(--pale);color:var(--dark);border-color:var(--mid)}
+.seo .sec .miss{background:#faeee9;color:#8a4a37}
+.score{font-size:12px;font-weight:700;border-radius:20px;padding:3px 11px;float:right}
+.score.full{background:var(--dark);color:#fff}.score.part{background:#f4d9cd;color:#8a4a37}
+.stab{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px}
+.stab th{text-align:left;background:var(--dark);color:#fff;padding:9px 11px;font-size:12px;font-weight:600}
+.stab td{border-top:1px solid var(--line);padding:9px 11px;vertical-align:top}
+</style>
+<section class="hero"><div class="wrap"><div class="eb">CaseWhen · SEO</div>
+<h1>Proof every post hits its keywords.</h1>
+<p>Two things here: proof that each post we write places its keyword everywhere Google and AI answers
+look, and the plan to re-optimize the existing blog. Green means placed. This is how you get confidence
+a post is optimized, not just written.</p></div></section>
+<div class="wrap seo"><div class="blk"><span class="score part">10/11 placed</span>
+<span class="kw">data governance framework</span> · <span style="color:var(--faint);font-size:12px">Governance</span>
+<h3>Data governance framework: why two people pull the same number and get two different answers</h3>
+<div class="grid"><div class="chk ok"><span class="m">✓</span>Keyword in meta title</div><div class="chk ok"><span class="m">✓</span>Keyword in H1</div><div class="chk ok"><span class="m">✓</span>Keyword in first 100 words</div><div class="chk ok"><span class="m">✓</span>Keyword in an H2 heading</div><div class="chk ok"><span class="m">✓</span>Keyword in meta description</div><div class="chk ok"><span class="m">✓</span>Keyword in URL slug</div><div class="chk no"><span class="m">!</span>Density in range (0.39%)</div><div class="chk ok"><span class="m">✓</span>5 question-format H2s</div><div class="chk ok"><span class="m">✓</span>Schema markup</div><div class="chk ok"><span class="m">✓</span>Named byline</div><div class="chk ok"><span class="m">✓</span>1266 words</div></div>
+<div class="meta">Secondary keyword varieties (the related terms Google clusters):</div>
+<div class="sec"><span class="s miss">data governance maturity model add</span><span class="s yes">row-level security ✓</span><span class="s miss">power bi governance add</span></div></div><div class="blk"><span class="score full">11/11 placed</span>
+<span class="kw">power bi certification</span> · <span style="color:var(--faint);font-size:12px">Training</span>
+<h3>Power BI certification: which one gets you hired, and what it leaves out</h3>
+<div class="grid"><div class="chk ok"><span class="m">✓</span>Keyword in meta title</div><div class="chk ok"><span class="m">✓</span>Keyword in H1</div><div class="chk ok"><span class="m">✓</span>Keyword in first 100 words</div><div class="chk ok"><span class="m">✓</span>Keyword in an H2 heading</div><div class="chk ok"><span class="m">✓</span>Keyword in meta description</div><div class="chk ok"><span class="m">✓</span>Keyword in URL slug</div><div class="chk ok"><span class="m">✓</span>Density in range (0.93%)</div><div class="chk ok"><span class="m">✓</span>5 question-format H2s</div><div class="chk ok"><span class="m">✓</span>Schema markup</div><div class="chk ok"><span class="m">✓</span>Named byline</div><div class="chk ok"><span class="m">✓</span>1292 words</div></div>
+<div class="meta">Secondary keyword varieties (the related terms Google clusters):</div>
+<div class="sec"><span class="s yes">pl-300 ✓</span><span class="s yes">power bi data analyst associate ✓</span><span class="s yes">power bi training ✓</span></div></div><div class="blk"><span class="score part">6/11 placed</span>
+<span class="kw">bedeutung kpi</span> · <span style="color:var(--faint);font-size:12px">KPI · DE</span>
+<h3>Bedeutung KPI: einfach erklärt (mit klarer Definition)</h3>
+<div class="grid"><div class="chk ok"><span class="m">✓</span>Keyword in meta title</div><div class="chk no"><span class="m">!</span>Keyword in H1</div><div class="chk ok"><span class="m">✓</span>Keyword in first 100 words</div><div class="chk no"><span class="m">!</span>Keyword in an H2 heading</div><div class="chk ok"><span class="m">✓</span>Keyword in meta description</div><div class="chk ok"><span class="m">✓</span>Keyword in URL slug</div><div class="chk no"><span class="m">!</span>Density in range (0.35%)</div><div class="chk no"><span class="m">!</span>3 question-format H2s</div><div class="chk ok"><span class="m">✓</span>Schema markup</div><div class="chk ok"><span class="m">✓</span>Named byline</div><div class="chk no"><span class="m">!</span>568 words</div></div>
+<div class="meta">Secondary keyword varieties (the related terms Google clusters):</div>
+<div class="sec"><span class="s miss">kpi definition add</span><span class="s miss">kpi dashboard add</span><span class="s yes">datenmodell ✓</span></div></div>
+<section class="ph" style="margin-top:30px"><div class="wrap"><div class="eb">Existing blog · re-optimization</div>
+<h2>What we'd attack on the 44 live posts</h2>
+<p style="color:var(--mut);font-size:15px;margin:10px 0 0;max-width:66ch">A read-only audit of every live post on casewhen.co. Nothing in production was changed. The good news: titles, URLs, schema, length, and bylines are already solid, so we don't touch those. The wins are a few high-leverage gaps repeated across the whole blog.</p>
+<table class="stab" style="margin-top:16px"><tr><th>Gap</th><th>Where</th><th>Why it matters</th></tr>
+<tr><td><b>No FAQPage schema</b></td><td>0 of 44 — even the ~9 with a visible FAQ</td><td>Free rich-result + AI-citation win; content already there, only the markup is missing</td></tr>
+<tr><td><b>No FAQ block</b></td><td>~35 posts</td><td>Misses People-Also-Ask real estate and long-tail questions</td></tr>
+<tr><td><b>Almost no internal linking</b></td><td>1-2 in-body links per post; no pillar/cluster structure</td><td>The biggest structural gap — link equity isn't flowing, topical authority isn't signalled</td></tr>
+<tr><td><b>Missing comparison tables</b></td><td>Pricing, certification, performance posts</td><td>Tables win the featured snippet for "vs / cost / pricing" searches</td></tr>
+<tr><td><b>Duplicate pages</b></td><td>two Premium-capacity URLs</td><td>Splits ranking signal — consolidate + 301 redirect</td></tr>
+<tr><td><b>Stale 2024 cohort</b></td><td>14 strategy/reporting posts</td><td>2026 pricing/Fabric facts likely outdated — refresh and genuinely re-date</td></tr></table>
+<div class="funnel" style="font-size:14px;color:#33372f;background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:16px"><b>The order of attack:</b> (1) two template fixes that touch every post — a reusable FAQPage schema block + flip og:type to article; (2) fix the duplicate with a 301; (3) add FAQ blocks tier by tier, starting with the BOFU money pages (vs / pricing / certification); (4) build three internal-link clusters (pricing-comparison, strategy-governance, DAX) each pointing to a pillar; (5) add the missing tables; (6) refresh the 2024 cohort last. Steps 1 and 3 alone touch all 44 posts for the least work.</div>
+</div></section>
+<div class="funnel" style="font-size:14px;color:#33372f;background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;margin:18px 0 40px">
+<b>How this is enforced:</b> every article runs through the ship gate before it appears here. The gate
+hard-fails any post missing the keyword in the H1, the first 100 words, a question H2, the meta
+description, the slug, or the schema, so a post cannot ship under-optimized. The grid above is that
+gate's output, made visible.</div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+</body></html>
