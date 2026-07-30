@@ -86,9 +86,10 @@ CSS = """
 :root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
 --brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
 body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
-background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
 @font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
 @font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
@@ -101,7 +102,7 @@ border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
 .top img{height:24px}
 .nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
-.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
 .nav a:hover{background:var(--pale);color:var(--dark)}
 .nav a.on{background:var(--dark);color:#fff}
 /* hero */
@@ -110,7 +111,7 @@ border-bottom:1px solid var(--line)}
 .hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
 .hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
 /* cadence cards on home */
-.cad{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
 .cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
 padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 .cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
@@ -124,15 +125,15 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 .ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
 .count{font-size:12.5px;color:var(--faint);margin-top:10px}
 /* post cards */
-.days{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;padding:24px 0 60px}
-.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column}
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
 .card.full{grid-column:1/-1}
-.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
 .day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
 .lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
 .lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
 .who{font-size:12px;color:var(--faint)}
-.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
 .card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
 .plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
 .plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
@@ -146,7 +147,7 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 /* short-form script */
 .script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
 .script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
-.beat{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
 .beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
 .beat .sp{font-size:13.5px;color:#2d3330}
 .beat .os{font-size:11px;color:var(--dark);margin-top:4px}
@@ -167,10 +168,10 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 .article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
 .foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
 @media(max-width:760px){
- .cad{grid-template-columns:repeat(2,1fr)}
- .days{grid-template-columns:1fr}
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
  .top .wrap{gap:8px}
- .nav{width:100%;margin-left:0;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
  .hero{padding:40px 0 26px}
 }
 """
@@ -227,11 +228,12 @@ def md_to_html(md):
                 body = "".join("<tr>"+"".join(f"<td>{esc(x)}</td>" for x in row)+"</tr>" for row in cells[1:])
                 out.append(f'<table><tr>{h}</tr>{body}</table>')
             continue
+        debold = lambda s: re.sub(r"\*\*(.+?)\*\*", r"\1", s)
         if re.match(r"^\d+\.\s", b):
-            items = "".join(f"<li>{esc(re.sub(r'^\d+\.\s','',x))}</li>" for x in b.splitlines() if x.strip())
+            items = "".join("<li>%s</li>" % esc(debold(re.sub(r"^\d+\.\s", "", x))) for x in b.splitlines() if x.strip())
             out.append(f"<ol>{items}</ol>"); continue
         if b.startswith("- "):
-            items = "".join(f"<li>{esc(x[2:])}</li>" for x in b.splitlines() if x.strip().startswith("- "))
+            items = "".join("<li>%s</li>" % esc(debold(x[2:])) for x in b.splitlines() if x.strip().startswith("- "))
             out.append(f"<ul>{items}</ul>"); continue
         # paragraph (strip bold markers for plain render)
         out.append(f'<p>{esc(re.sub(r"\*\*(.+?)\*\*", r"\1", b))}</p>')
