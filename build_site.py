@@ -189,7 +189,7 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 """
 
 def nav(active):
-    items = [("index.html","Home")] + [(f"{k}.html", v["title"]) for k, v in PLATFORMS.items()] + [("visuals.html","Visuals")]
+    items = [("index.html","Home"),("strategy.html","Strategy")] + [(f"{k}.html", v["title"]) for k, v in PLATFORMS.items()] + [("visuals.html","Visuals")]
     return "".join(f'<a href="{h}" class="{"on" if h==active else ""}">{esc(t)}</a>' for h, t in items)
 
 def shell(active, title, inner):
@@ -304,6 +304,69 @@ def platform_page(k, cfg):
     (OUT / f"{k}.html").write_text(shell(f"{k}.html", cfg["title"], inner), encoding="utf-8")
     return len(slots), done
 
+def strategy_page():
+    st = """
+.goal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
+.goal .g{border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--card)}
+.goal .g .n{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand)}
+.goal .g h3{font-size:18px;margin:6px 0 6px}
+.goal .g p{font-size:13.5px;color:var(--mut);margin:0}
+.stab{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px}
+.stab th{text-align:left;background:var(--dark);color:#fff;padding:9px 11px;font-size:12px;font-weight:600}
+.stab td{border-top:1px solid var(--line);padding:9px 11px;vertical-align:top}
+.stab td.pct{font-weight:700;color:var(--dark);white-space:nowrap}
+.bar{height:8px;background:var(--pale);border-radius:6px;overflow:hidden;margin-top:5px;max-width:220px}
+.bar span{display:block;height:100%;background:var(--brand)}
+.funnel{font-size:14px;color:#33372f;background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px}
+@media(max-width:760px){.goal{grid-template-columns:1fr}}
+"""
+    def barrow(label, pct, note=""):
+        return f'<tr><td>{esc(label)}</td><td class="pct">{pct}%</td><td><div class="bar"><span style="width:{pct}%"></span></div>{("<div style=\"font-size:12px;color:var(--faint);margin-top:4px\">"+esc(note)+"</div>") if note else ""}</td></tr>'
+    blog_topics = [("KPI & data modeling",30),("Training & certification",28),("Azure & data engineering",12),("Pricing & licensing",11),("Governance",7),("Power BI flagship",6),("Fabric",3),("Migrations / automation",3)]
+    li_topics = [("KPI",19),("Training",17),("Governance",15),("Azure",13),("Pricing",12),("Fabric",10),("Migrations",8),("Automation",6)]
+    sf_topics = [("KPI",31),("Training",26),("Pricing",11),("Azure",11),("Governance",8),("Power BI flagship",7),("Fabric",4),("Migrations / automation",2)]
+    body = f"""<style>{st}</style>
+<section class="hero"><div class="wrap"><div class="eb">CaseWhen · content strategy</div>
+<h1>The split, the volumes, and the goal.</h1>
+<p>What we publish, how much of each, and why. Every number below comes from the keyword and cadence
+plan; the format mix comes from what actually drives engagement, saves, and search rankings for a
+Power BI audience.</p></div></section>
+
+<section class="ph"><div class="wrap"><div class="eb">The goal</div><h2>Three jobs, one funnel</h2>
+<div class="goal">
+<div class="g"><div class="n">1 · Get found</div><h3>Rank on Google and get cited by AI</h3><p>Blog articles answer a real search term in the first lines, with a table and FAQ, so we win the snippet and get quoted by ChatGPT, Claude, and Perplexity. This is the discovery engine.</p></div>
+<div class="g"><div class="n">2 · Build authority</div><h3>Founders BI leaders trust</h3><p>Austin and Saju post opinion and real-release reactions on LinkedIn, backed by YouTube and case studies. This is the layer a referred buyer checks before they call.</p></div>
+<div class="g"><div class="n">3 · Reach & saves</div><h3>Be seen by everyone who reports a number</h3><p>Short-form video and carousels reach far beyond people already searching, and earn saves that compound. This is top of funnel.</p></div>
+</div>
+<div class="funnel"><b>The funnel:</b> short-form reach → LinkedIn and YouTube authority → blog gets found and converts buyer-intent searches → a booked, fixed-price Reporting Foundation Review.</div>
+</div></section>
+
+<section class="ph"><div class="wrap"><div class="eb">At a glance</div><h2>What we publish each month</h2>
+<table class="stab"><tr><th>Channel</th><th>Volume / month</th><th>Lead formats</th><th>Primary goal</th></tr>
+<tr><td><b>Blog</b> (casewhen.co)</td><td>~43 (30 EN daily + 13 DE, 3×/wk)</td><td>Direct-answer + table + FAQ · how-to · "X vs Y"</td><td>Get found (SEO + AI citation)</td></tr>
+<tr><td><b>LinkedIn</b></td><td>~26 (Austin EN + Saju DE, ~3×/wk each)</td><td>Contrarian opinion · numbered carousel · case study</td><td>Authority + reach</td></tr>
+<tr><td><b>Short-form video</b></td><td>~30 (script + captions; EN + DE)</td><td>Numbered countdown · mistake-callout · before/after</td><td>Reach + saves</td></tr>
+<tr><td><b>YouTube</b></td><td>~8 (2×/wk, EN + DE)</td><td>Outcome-led tutorial · contrarian thesis</td><td>Deep authority + evergreen search</td></tr>
+<tr><td><b>X / Twitter</b></td><td>~4 native + repurposed</td><td>Numbered roadmap · same-day release newsjack</td><td>Timeliness + repurpose</td></tr>
+</table></div></section>
+
+<section class="ph"><div class="wrap"><div class="eb">Blog</div><h2>~43 articles a month · what they're about</h2>
+<p class="sd" style="color:var(--mut);font-size:15px;margin:8px 0 0">Format mix: ~70% practitioner how-to and direct-answer (the search-harvest base), ~20% buyer-intent money pages (cost, licensing, "vs"), ~10% flagship authority (the governance framework and pillars). English daily to build the search footprint; German three times a week, where a named-author byline is the one thing no local competitor does.</p>
+<table class="stab"><tr><th>Topic</th><th>Share</th><th></th></tr>{''.join(barrow(t,p) for t,p in blog_topics)}</table>
+<div class="funnel"><b>Why this split:</b> KPI and training are the highest-volume searches, so they harvest the most organic traffic. Pricing and Azure are lower volume but higher buyer-intent, so they convert. Governance is small in volume but is the flagship authority piece everything links back to.</div></div></section>
+
+<section class="ph"><div class="wrap"><div class="eb">LinkedIn</div><h2>~26 founder posts a month</h2>
+<p class="sd" style="color:var(--mut);font-size:15px;margin:8px 0 0">Format mix: ~40% plain-text contrarian / opinion (our highest-reach format), ~30% numbered carousel (the save-and-reference engine), ~20% story and real-release reaction, ~10% stat or quote card. Austin posts in English, Saju in German on a different rhythm, so the combined founder feed shows up 5-6× a week.</p>
+<table class="stab"><tr><th>Topic</th><th>Share</th><th></th></tr>{''.join(barrow(t,p) for t,p in li_topics)}</table>
+<div class="funnel"><b>Why this split:</b> a defensible contrarian take on a real Microsoft release is the single highest-engagement post we can make, so opinion leads. Carousels earn the saves. The mix spans every cluster so the founders read as broad Power BI authorities, not one-note.</div></div></section>
+
+<section class="ph"><div class="wrap"><div class="eb">Short-form video</div><h2>~30 scripts a month</h2>
+<p class="sd" style="color:var(--mut);font-size:15px;margin:8px 0 0">Format mix: ~40% numbered countdown carousels (built for saves), ~35% mistake-callouts ("are you still doing this?", built for saves and shares), ~25% before/after and relatable moments (built for reach). Each script is built for one job — saves, shares, or reach — because on short-form those come from different content.</p>
+<table class="stab"><tr><th>Topic</th><th>Share</th><th></th></tr>{''.join(barrow(t,p) for t,p in sf_topics)}</table>
+<div class="funnel"><b>Why this split:</b> KPI and training are the broadest, most-searched topics, so they carry reach at the top of the funnel; pricing and Azure bring in the buyers. Numbered countdowns keep viewers to the payoff, and the callouts get the saves that the algorithm rewards.</div></div></section>
+"""
+    (OUT / "strategy.html").write_text(shell("strategy.html", "Strategy", body), encoding="utf-8")
+
 def visuals_page():
     D = "img/decks/"
     def deck_strip(prefix, n):
@@ -343,6 +406,7 @@ X. Every finished one is written plainly and passes the language and SEO checks 
     (OUT / "index.html").write_text(shell("index.html", "30-day content plan", inner), encoding="utf-8")
 
 home()
+strategy_page()
 visuals_page()
 tot = don = 0
 for k, cfg in PLATFORMS.items():
