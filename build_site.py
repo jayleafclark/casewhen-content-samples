@@ -69,14 +69,16 @@ PLATFORMS = {
         "title": "Short-form scripts", "tag": "script · caption · on-screen text",
         "blurb": "We can't render the video here, so each card is the full script: the spoken hook "
                  "that carries the search term, the on-screen text, and the platform caption with the "
-                 "keyword. Payoff in the first two seconds, one idea.",
+                 "keyword. Payoff in the first two seconds, one idea. Every one is reposted to X and "
+                 "Threads as well as YouTube Shorts, TikTok, and Reels.",
         "slots": ([("EN", d, r) for d, r in schedule(sf, "EN", DAYS, {1,3,5})]
                   + [("DE", d, r) for d, r in schedule(sf, "DE", DAYS, {0,2})]),
     },
     "x": {
-        "title": "X / Twitter", "tag": "weekly + repurposed",
-        "blurb": "One native declarative post a week, plus the short-form and LinkedIn lines trimmed "
-                 "to a single claim and a number. Keyword in the first line.",
+        "title": "X / Twitter", "tag": "weekly native + reposts to X and Threads",
+        "blurb": "One native declarative post a week, plus every short-form video and every carousel "
+                 "graphic reposted to X and Threads (the same asset, a platform-native caption). This "
+                 "is the cheapest reach we have: content made once, shown on three more surfaces.",
         "slots": [("EN", d, r) for d, r in schedule(xt, "EN", DAYS, {0})],
     },
 }
@@ -662,10 +664,11 @@ Power BI audience.</p></div></section>
 <table class="stab"><tr><th>Channel</th><th>Volume / month</th><th>Lead formats</th><th>Primary goal</th></tr>
 <tr><td><b>Blog</b> (casewhen.co)</td><td>~43 (30 EN daily + 13 DE, 3×/wk)</td><td>Direct-answer + table + FAQ · how-to · "X vs Y"</td><td>Get found (SEO + AI citation)</td></tr>
 <tr><td><b>LinkedIn</b></td><td>~26 (Austin EN + Saju DE, ~3×/wk each)</td><td>Contrarian opinion · numbered carousel · case study</td><td>Authority + reach</td></tr>
-<tr><td><b>Short-form video</b></td><td>~30 (script + captions; EN + DE)</td><td>Numbered countdown · mistake-callout · before/after</td><td>Reach + saves</td></tr>
+<tr><td><b>Short-form video</b></td><td>~30 (script + captions; EN + DE) · <b>reposted to X + Threads</b></td><td>Numbered countdown · mistake-callout · before/after</td><td>Reach + saves</td></tr>
 <tr><td><b>YouTube</b></td><td>~8 (2×/wk, EN + DE)</td><td>Outcome-led tutorial · contrarian thesis</td><td>Deep authority + evergreen search</td></tr>
-<tr><td><b>X / Twitter</b></td><td>~4 native + repurposed</td><td>Numbered roadmap · same-day release newsjack</td><td>Timeliness + repurpose</td></tr>
-</table></div></section>
+<tr><td><b>X / Twitter + Threads</b></td><td>~4 native/wk + <b>every short-form and carousel reposted</b></td><td>Numbered roadmap · newsjack · reposted video + carousels</td><td>Timeliness + free extra reach</td></tr>
+</table>
+<div class="funnel" style="margin-top:14px"><b>Reposting (made once, shown four times):</b> every short-form video and every carousel graphic is reposted to X and Threads with a platform-native caption, on top of its home platform. LinkedIn carousels also cross-post to Instagram. One asset, several surfaces, almost no extra work.</div></div></section>
 
 <section class="ph"><div class="wrap"><div class="eb">Blog</div><h2>~43 articles a month · what they're about</h2>
 <p class="sd" style="color:var(--mut);font-size:15px;margin:8px 0 0">Format mix: ~70% practitioner how-to and direct-answer (the search-harvest base), ~20% buyer-intent money pages (cost, licensing, "vs"), ~10% flagship authority (the governance framework and pillars). English daily to build the search footprint; German three times a week, where a named-author byline is the one thing no local competitor does.</p>
