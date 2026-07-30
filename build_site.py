@@ -487,12 +487,12 @@ v.addEventListener('input',calc);b.addEventListener('input',calc);calc();
 def funnels_page():
     scorecard_mockup(); calculator_mockup()
     mags=[
-     ("Reporting-Foundation Maturity Scorecard","Flagship capture atom","A 4-question quiz returns an instant tier (Fragile / Functional / Board-ready) and emails a one-page PDF the controller forwards to their CFO.","Foundation-checker · top-mid funnel","scorecard.html","open the mockup","#11493F"),
-     ("Power BI cost calculator","Buyer-intent (BOFU)","Sliders return a real yearly cost and the per-user-vs-capacity crossover, with email capture on the result.","Foundation-checker · decision","calculator.html","open the mockup","#1D967C"),
-     ("Internal buy-in briefing","De-risking template","A one-page PDF: how to present a reporting review to your CFO or board as a proactive governance move.","Foundation-checker · consideration","","spec — mockup next","#7AC4B5"),
-     ("Case-study bundle","Evaluation proof","A curated set: 10 DACH reporting rebuilds (Schindler, Ipsen, WellBeauty), before and after, as one downloadable research artifact.","In active evaluation","","spec — mockup next","#6F93AC"),
-     ("Governance whitepaper","Authority capture","A gated governance / manufacturing whitepaper structured to the AI-Overview governance outline.","Buyer-authority","","spec — mockup next","#CE8168"),
-     ("German scorecard + briefing","DACH parity","The scorecard and buy-in briefing localised into German — Saju's track capture entry point.","DACH foundation-checker","","spec — mockup next","#132630"),
+     ("Free Power BI Health Check","Flagship offer · highest intent","Send us your slowest report and we tell you exactly why it is slow: a Performance Analyzer read, a data-model check, the top DAX offenders, as a prioritized report plus a call. Paid versions run about 500 dollars.","Controller / BI lead with a slow report","healthcheck.html","open the mockup","#11493F"),
+     ("Power BI Cost Calculator","Buyer-intent (BOFU)","Enter viewers, builders, and capacity. See Pro vs Premium-Per-User vs Fabric F-SKU on current 2025 pricing, and the ~350-viewer line where a capacity gets cheaper.","Budget holder","calculator.html","open the mockup","#1D967C"),
+     ("Reporting-Foundation Maturity Scorecard","Self-diagnosis capture","A 4-question quiz returns an instant tier (Fragile / Functional / Board-ready) and a one-page PDF the controller forwards to their CFO.","Controller, not ready to book","scorecard.html","open the mockup","#7AC4B5"),
+     ("The Internal Buy-In Briefing","De-risking template","A one-page brief that frames a reporting review as a proactive governance move, with the exact points to put in front of a CFO so it reads as risk reduction.","Champion selling it upward","buyin.html","open the mockup","#6F93AC"),
+     ("10 DACH Reporting Rebuilds","Evaluation proof","A curated bundle of real before-and-after rebuilds (Schindler, Ipsen, WellBeauty), each with the problem, the fix, and the measured result.","Buyer in active evaluation","casestudy.html","open the mockup","#CE8168"),
+     ("Fabric Governance Scorecard","Strategic capture","A 10-question scored assessment across workspace structure, RLS, OneLake architecture, and lineage, returning a maturity score and your top three gaps.","Team moving to Microsoft Fabric","governance-scorecard.html","open the mockup","#132630"),
     ]
     cards=""
     for name,tag,desc,persona,href,cta,color in mags:
@@ -517,8 +517,8 @@ def funnels_page():
 <section class="hero"><div class="wrap"><div class="eb">CaseWhen · funnels</div>
 <h1>The lead magnets that turn reach into emails.</h1>
 <p>Six free tools and downloads, each traded for an email, each pointed at a booked fixed-price review.
-Two are built as live mockups below — open them. The rest are specced and get the same treatment next.
-Every one shares the brand, and each looks distinct.</p>
+All six are built as full landing-page mockups. Open any of them. Every one shares the brand and each
+looks distinct.</p>
 <div class="fgrid">{cards}</div></div></section>{REVEAL_JS}"""
     (OUT/"funnels.html").write_text(shell("funnels.html","Funnels",body),encoding="utf-8")
 

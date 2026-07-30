@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · A Real Look at Power BI Incremental Refresh (Not a Checklist</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>power bi incremental refresh</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>A Real Look at Power BI Incremental Refresh (Not a Checklist)</h1><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><p>Power BI incremental refresh is a setting that reloads only the newest rows of a large table instead of the whole thing every time. You define two parameters, RangeStart and RangeEnd, set a policy for how far back to store data and how recent to refresh, and Power BI splits the table into date partitions so the daily refresh stays small and quick.
+---</p><p>Most teams set up a big dataset once, forget about the Power BI incremental refresh option, and then wonder why the morning refresh crawls while everyone waits for the sales report to load.</p><p>If your refresh started at two minutes and now takes forty, this is almost always the cause. The table grew, and Power BI is reloading all of it, every single day, even the rows that have not moved in three years.</p><p>Here is the good news. The fix is a built-in feature, it works on a Power BI Pro plan (not just Premium), and you can set it up this afternoon. Let&#x27;s walk through what it does, why refreshes get slow in the first place, and the exact steps to turn it on.</p><h2>Why does your morning refresh keep getting slower?</h2><p>By default, every scheduled refresh does a full reload. Say your sales table has five years of orders and grows by 50,000 rows a day. On a full reload, Power BI throws away all 90 million rows and pulls every one of them back from the source. Only yesterday&#x27;s data is new. The other five years are identical to what you had before.</p><p>That waste is the whole problem. As the table grows, the refresh window grows with it. A dataset that refreshed in two minutes last year now needs forty, and if it crosses your capacity&#x27;s time limit, it stops before it finishes.</p><p>There is a second reason this bites hard, and it has nothing to do with size. When a report takes too long to open, people stop opening it. They go back to the spreadsheet on their desktop. That matters, because 67% of organizations already don&#x27;t fully trust the data they use to make decisions (Drexel LeBow and Precisely, 2025). A report that is slow or stale feeds that distrust.</p><h2>How does power bi incremental refresh really work?</h2><p>The idea is simple. Instead of one giant table, Power BI stores your data in dated slices called partitions, usually one per day or one per month. A refresh only touches the recent partitions. The old ones sit untouched.</p><p>Two parameters draw the boundary. RangeStart marks the earliest date in the window you want to load, and RangeEnd marks the latest. You filter your date column to keep only rows between them. Power BI reads that filter and uses it to build and refresh each partition.</p><p>Then you set two windows in the policy:</p><ul><li>Store rows from the past: how much history to keep. For example, 5 years.</li><li>Refresh rows from the past: how recent a slice to reload each time. For example, 10 days.</li></ul><p>With those numbers, Power BI keeps five years of orders but only reloads the last ten days on each refresh. Everything older is frozen. The refresh that took forty minutes now takes under two, because it is pulling ten days of rows instead of five years.</p><h2>How do you set up incremental refresh step by step?</h2><p>Here are the exact steps. You do all of this in Power BI Desktop, then publish.</p><ol><li>Open Power Query (Transform data) and create two parameters named exactly RangeStart and RangeEnd. Set both to the Date/Time type. The names matter and are case sensitive.</li><li>On your fact table, filter the date column to keep rows where the date is after or equal to RangeStart and before RangeEnd. This is the filter Power BI uses to slice the table.</li><li>Close Power Query. In report view, right-click the table in the Data pane and choose Incremental refresh.</li><li>Toggle it on, then set Store rows from the past (say, 5 years) and Refresh rows from the past (say, 10 days).</li><li>Turn on Only refresh complete days so a half-finished day never loads mid-way and shows wrong totals.</li><li>Turn on Detect data changes and point it at a &quot;last modified&quot; column if your source has one. Power BI then reloads a day only when a row in it changed, which shrinks the refresh even more.</li><li>Publish to the Power BI service. The first cloud refresh builds all the partitions and runs long once. Every refresh after that is small and fast.</li></ol><p>One catch that trips people up: this only helps if the query folds. Query folding means Power BI can push your date filter down to the source database as a WHERE clause. If your source is a folder of CSV files or a step that breaks folding, Power BI cannot ask for &quot;just the last ten days,&quot; so it reads everything anyway. Check folding by right-clicking your last query step and looking for View Native Query. If that option is greyed out, fix the folding before you count on incremental refresh.</p><p>Here is how the two approaches compare on a five-year table:</p><table><tr><th>What happens</th><th>Full refresh</th><th>Power BI incremental refresh</th></tr><tr><td>Rows pulled each day</td><td>All 90 million</td><td>~500,000 (last 10 days)</td></tr><tr><td>Typical refresh time</td><td>40 minutes</td><td>Under 2 minutes</td></tr><tr><td>Load on source database</td><td>Heavy, every day</td><td>Light, bounded window</td></tr><tr><td>License needed</td><td>Pro or Premium</td><td>Pro or Premium (Pro since 2020)</td></tr><tr><td>Risk of hitting the time limit</td><td>High and rising</td><td>Low</td></tr><tr><td>History kept</td><td>Full, but reloaded</td><td>Full, stored in partitions</td></tr></table><h2>What does incremental refresh have to do with power bi security?</h2><p>More than most people expect, because both live inside the same semantic model. Once you have partitions, you want to know who can trigger a refresh, whose credentials the scheduled refresh uses, and whether a change to the policy got reviewed. This is where power bi security and refresh design meet.</p><p>A few practical points. The security Power BI applies through row-level roles still runs on top of your partitions, so filtering data by region or client works the same before and after you turn on incremental refresh. The refresh history in the service shows every run, its duration, and whether it finished, which is your first stop when a number looks stale. And the audit log records who published a new model version, so a change to the &quot;store 5 years&quot; number leaves a trace someone can review.</p><p>The point is to write this down. A short data governance structure that names the dataset owner, the refresh schedule, the store and refresh windows, and who signs off on changes turns a fragile setup into one your team can maintain without you. When the person who built the model leaves, the next person reads the doc instead of guessing.</p><h2>When should you not use incremental refresh?</h2><p>Setting this up takes effort, so skip it when the payoff is small.</p><ul><li>Tiny tables. If a table has under a million rows and refreshes in seconds, the setup work is not worth it. Leave it on full refresh.</li><li>Sources that cannot fold. If your date filter cannot reach the source as a real query, Power BI reads the whole table anyway, and you get the complexity with none of the speed.</li><li>Data that changes deep in history. If someone edits orders from two years ago and you must catch every edit, frozen partitions will miss them unless you use Detect data changes carefully or reload manually.</li><li>Real-time needs. If people need data that is seconds old, incremental refresh on an import model is the wrong tool. Look at DirectQuery or a Direct Lake model on Fabric instead.</li></ul><p>For everything else, a fact table that grows every day and carries years of history, this is the single change that keeps refreshes fast for years.</p><h2>Frequently asked questions</h2><p>Does power bi incremental refresh need Premium?
+No. It has worked on a Power BI Pro license since February 2020. Premium and Premium Per User add extras like larger models and XMLA endpoint access, but the core feature runs on Pro.</p><p>Why did my refresh time not improve after I turned it on?
+Almost always query folding. If Power BI cannot push the RangeStart and RangeEnd filter to the source, it reads the full table regardless of the policy. Right-click your final query step and confirm View Native Query is available.</p><p>Will I lose my old data?
+No. The &quot;store rows from the past&quot; window controls how much history stays in the model. Set it to five years and you keep five years. Only the &quot;refresh rows from the past&quot; window is reloaded each run.</p><p>Can I refresh a single old partition after a data fix?
+Yes, through the XMLA endpoint with a tool like SQL Server Management Studio or Tabular Editor, which lets you refresh one partition on demand. This needs Premium or Premium Per User.</p><p>How does this affect row-level security?
+It does not change it. Your row-level roles filter the same way across all partitions, so power bi security behaves identically whether the table uses full or incremental refresh.</p><p>Should the refresh policy live in our governance docs?
+Yes. Record the owner, the store and refresh windows, and the review step in your data governance structure so the setup survives staff changes and stays auditable.</p><p>Read next: [Data governance framework](/blog/blog-data-governance-framework) for the wider picture, and [Power BI row level security](/blog/blog-row-level-security-power-bi) for the security side of the same model.</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">power bi incremental refresh</span><span class="c">power bi security</span><span class="c">security power bi</span><span class="c">data governance structure</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+</body></html>

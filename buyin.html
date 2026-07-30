@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>The Internal Buy-In Briefing | CaseWhen</title>
+<style>
+  :root{
+    --accent:#1D967C;
+    --dark:#11493F;
+    --mint:#7AC4B5;
+    --pale:#D8F3EE;
+    --bg:#E9ECE8;
+    --white:#ffffff;
+    --ink:#16211E;
+    --muted:#4a5a55;
+    --line:#cdd6d0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 20px}
+  a{color:inherit}
+
+  /* back link */
+  .backbar{padding:16px 0}
+  .back{
+    display:inline-block;font-size:13px;color:var(--muted);
+    text-decoration:none;border-bottom:1px solid transparent;
+  }
+  .back:hover{border-bottom-color:var(--muted)}
+
+  /* hero */
+  .hero{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:48px 32px 40px;
+    margin-top:8px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero:before{
+    content:"";position:absolute;top:-80px;right:-80px;
+    width:260px;height:260px;border-radius:50%;
+    background:radial-gradient(circle at center,var(--pale),transparent 70%);
+  }
+  .kicker{
+    display:inline-block;font-size:12px;font-weight:600;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--accent);
+    background:var(--pale);padding:6px 12px;border-radius:100px;margin-bottom:20px;
+    position:relative;
+  }
+  h1{
+    font-size:clamp(28px,7vw,44px);line-height:1.12;letter-spacing:-.02em;
+    color:var(--dark);font-weight:800;max-width:15ch;position:relative;
+  }
+  .subhead{
+    margin-top:18px;font-size:clamp(16px,4.4vw,19px);color:var(--muted);
+    max-width:52ch;position:relative;
+  }
+  .cta{
+    display:inline-block;background:var(--accent);color:#fff;font-weight:700;
+    font-size:16px;text-decoration:none;padding:15px 28px;border-radius:12px;
+    margin-top:28px;position:relative;
+    box-shadow:0 8px 20px -8px rgba(29,150,124,.7);
+    transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .cta:hover{transform:translateY(-2px);box-shadow:0 14px 26px -10px rgba(29,150,124,.8)}
+  .whatnote{
+    margin-top:16px;font-size:13.5px;color:var(--muted);position:relative;
+    display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  }
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--mint);display:inline-block}
+
+  /* section shell */
+  section{padding:44px 0}
+  .eyebrow{
+    font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:12px;
+  }
+  h2{
+    font-size:clamp(22px,5.2vw,30px);line-height:1.2;letter-spacing:-.015em;
+    color:var(--dark);font-weight:800;max-width:22ch;
+  }
+  .lead{margin-top:14px;font-size:16.5px;color:var(--muted);max-width:60ch}
+
+  /* value stack */
+  .stack{display:grid;gap:16px;margin-top:26px}
+  .card{
+    background:var(--white);border:1px solid var(--line);border-radius:16px;
+    padding:24px;display:flex;gap:16px;align-items:flex-start;
+  }
+  .num{
+    flex:0 0 auto;width:38px;height:38px;border-radius:10px;
+    background:var(--dark);color:#fff;font-weight:700;font-size:15px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .card h3{font-size:17px;color:var(--dark);font-weight:700;margin-bottom:6px}
+  .card p{font-size:15px;color:var(--muted)}
+
+  /* proof */
+  .proof{background:var(--dark);border-radius:22px;padding:40px 32px;color:#eaf3f0}
+  .proof .eyebrow{color:var(--mint)}
+  .proof h2{color:#fff}
+  .quotes{display:grid;gap:18px;margin-top:26px}
+  blockquote{
+    background:rgba(255,255,255,.06);border-left:3px solid var(--mint);
+    padding:20px 22px;border-radius:12px;font-size:16px;color:#eef6f3;
+  }
+  blockquote cite{
+    display:block;margin-top:12px;font-style:normal;font-size:13.5px;
+    color:var(--mint);font-weight:600;
+  }
+  .founder{
+    margin-top:24px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14);
+    font-size:14.5px;color:#cfe4de;
+  }
+  .founder strong{color:#fff}
+
+  /* how it works */
+  .steps{display:grid;gap:14px;margin-top:26px}
+  .step{
+    background:var(--white);border:1px solid var(--line);border-radius:16px;
+    padding:22px 24px;display:flex;gap:16px;align-items:flex-start;
+  }
+  .stepn{
+    flex:0 0 auto;width:32px;height:32px;border-radius:50%;
+    border:2px solid var(--accent);color:var(--accent);font-weight:700;font-size:14px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .step h3{font-size:16px;color:var(--dark);font-weight:700;margin-bottom:4px}
+  .step p{font-size:14.5px;color:var(--muted)}
+
+  /* objections */
+  .reassure{display:grid;gap:12px;margin-top:24px}
+  .r{
+    display:flex;gap:12px;align-items:flex-start;
+    background:var(--pale);border-radius:12px;padding:16px 18px;
+  }
+  .check{
+    flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--accent);
+    color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:1px;
+  }
+  .r p{font-size:15px;color:var(--ink)}
+  .r strong{color:var(--dark)}
+
+  /* form */
+  .formbox{
+    background:var(--white);border:1px solid var(--line);border-radius:22px;
+    padding:36px 30px;margin-top:8px;
+  }
+  .formbox h2{max-width:24ch}
+  form{margin-top:22px;display:grid;gap:14px;max-width:460px}
+  label{font-size:13px;font-weight:600;color:var(--dark);margin-bottom:-6px}
+  input{
+    font:inherit;font-size:16px;padding:13px 15px;border:1px solid var(--line);
+    border-radius:11px;background:#fbfcfb;color:var(--ink);
+  }
+  input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--pale)}
+  .submit{
+    background:var(--accent);color:#fff;font-weight:700;font-size:16px;border:none;
+    padding:15px;border-radius:11px;cursor:pointer;margin-top:4px;
+    transition:transform .15s ease;
+  }
+  .submit:hover{transform:translateY(-1px)}
+  .formfoot{font-size:12.5px;color:var(--muted);margin-top:4px}
+
+  /* risk reversal */
+  .risk{
+    background:var(--white);border:2px solid var(--accent);border-radius:18px;
+    padding:26px 28px;margin-top:8px;display:flex;gap:16px;align-items:flex-start;
+  }
+  .riskicon{font-size:26px;line-height:1}
+  .risk p{font-size:16px;color:var(--ink)}
+  .risk strong{color:var(--dark)}
+
+  /* faq */
+  details{
+    background:var(--white);border:1px solid var(--line);border-radius:14px;
+    padding:4px 20px;margin-top:12px;
+  }
+  summary{
+    list-style:none;cursor:pointer;padding:16px 0;font-weight:700;color:var(--dark);
+    font-size:16px;display:flex;justify-content:space-between;align-items:center;gap:12px;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary:after{content:"+";color:var(--accent);font-size:22px;font-weight:400;flex:0 0 auto}
+  details[open] summary:after{content:"\2013"}
+  details p{padding:0 0 18px;font-size:15px;color:var(--muted)}
+
+  /* final cta */
+  .final{
+    background:linear-gradient(160deg,var(--dark),#0c332c);
+    border-radius:22px;padding:48px 32px;text-align:center;color:#fff;margin-bottom:56px;
+  }
+  .final h2{color:#fff;margin:0 auto;max-width:20ch}
+  .final p{color:#cfe4de;margin:14px auto 0;max-width:48ch;font-size:16px}
+  .final .cta{background:var(--mint);color:var(--dark);box-shadow:none;margin-top:26px}
+  .final .cta:hover{background:#8fd0c3}
+  .finalnote{margin-top:14px;font-size:13px;color:#9cc4bb}
+
+  footer{padding:0 0 40px;text-align:center;font-size:12.5px;color:var(--muted)}
+
+  /* scroll reveal: default VISIBLE, JS adds motion */
+  .reveal{opacity:1;transform:none}
+  .js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .js .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .js .reveal{opacity:1;transform:none;transition:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="backbar">
+    <a class="back" href="funnels.html">back to funnels</a>
+  </div>
+
+  <!-- 1. HERO -->
+  <header class="hero reveal">
+    <span class="kicker">Free template for internal champions</span>
+    <h1>Get the brief your CFO says yes to.</h1>
+    <p class="subhead">You know the reporting needs fixing. This is the one-page brief that gets the review approved upstairs, framed as governance, not another line of spend.</p>
+    <a class="cta" href="#form">Get the one-page brief</a>
+    <div class="whatnote"><span class="dot"></span> One editable page. Fill in your numbers, send it up, done in about 15 minutes.</div>
+  </header>
+
+  <!-- 2. VALUE STACK -->
+  <section>
+    <div class="eyebrow">What you get</div>
+    <h2>Everything you need to make the case for you.</h2>
+    <p class="lead">You believe in the fix. The problem was never the idea, it was walking into a budget conversation without the words a finance person actually responds to. This gives you those words.</p>
+
+    <div class="stack">
+      <div class="card reveal">
+        <div class="num">1</div>
+        <div>
+          <h3>The one-page brief template</h3>
+          <p>An editable page that frames a Power BI reporting review as a proactive governance move. You drop in your own numbers and context, and it reads as controlled and deliberate instead of a personal complaint about the current setup.</p>
+        </div>
+      </div>
+      <div class="card reveal">
+        <div class="num">2</div>
+        <div>
+          <h3>The exact points to put in front of a CFO</h3>
+          <p>The specific risk-reduction language finance leaders sign off on, written out for you. Think numbers that don't reconcile between reports, decisions being made on figures nobody can trace, and the cost of one wrong board number.</p>
+        </div>
+      </div>
+      <div class="card reveal">
+        <div class="num">3</div>
+        <div>
+          <h3>The board-safe framing</h3>
+          <p>Wording that positions the review as risk reduction rather than a rebuild. It gives your CFO something they can repeat to the board in one sentence without having to understand Power BI datasets, row-level security or refresh schedules.</p>
+        </div>
+      </div>
+      <div class="card reveal">
+        <div class="num">4</div>
+        <div>
+          <h3>The numbers that make it land</h3>
+          <p>Prompts that turn vague pain into a figure a CFO can weigh. If 350 people open a report every morning and it's ten minutes off, that's real hours and real trust on the line, and the brief helps you say so in their language.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. SOCIAL PROOF -->
+  <section>
+    <div class="proof reveal">
+      <div class="eyebrow">Why trust this</div>
+      <h2>Written by people who've sat on your side of the table.</h2>
+      <div class="quotes">
+        <blockquote>
+          "I'd been sitting on the reporting problem for months. I sent the brief to our CFO on a Tuesday and had a yes by Friday. It reframed the whole thing from me complaining to us being responsible."
+          <cite>Head of FP&amp;A, mid-market manufacturer</cite>
+        </blockquote>
+        <blockquote>
+          "The governance angle was the unlock. My CFO doesn't care about dashboards, but he cares a lot about a number being wrong in front of the board. That's the sentence that got it approved."
+          <cite>Finance systems lead, logistics group</cite>
+        </blockquote>
+      </div>
+      <div class="founder">
+        <strong>Built by CaseWhen, Berlin.</strong> Microsoft-certified in Power BI and Fabric, and the team behind reporting work for clients like Schindler and Ipsen. We spend our days turning messy reporting into numbers people actually trust, so we wrote down exactly how the internal case gets made.
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. HOW IT WORKS -->
+  <section>
+    <div class="eyebrow">How it works</div>
+    <h2>Three steps. No call, no wait.</h2>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="stepn">1</div>
+        <div>
+          <h3>Tell us where to send it</h3>
+          <p>Your name and work email. That's the whole ask. The template lands in your inbox straight away, no waiting on a human to email you back.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="stepn">2</div>
+        <div>
+          <h3>Drop in your numbers</h3>
+          <p>Open the page, replace the placeholders with your own figures and the report everyone relies on. The framing and the CFO points are already written, so you're editing, not starting from a blank page.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="stepn">3</div>
+        <div>
+          <h3>Send it up</h3>
+          <p>Forward the finished page to your CFO or drop it into the next leadership meeting. It's one page, so it actually gets read, and it does the persuading for you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. OBJECTION HANDLING -->
+  <section>
+    <div class="eyebrow">Before you ask</div>
+    <h2>No catch, no pitch, no strings.</h2>
+    <div class="reassure">
+      <div class="r reveal"><div class="check">&#10003;</div><p><strong>We'll sign your NDA.</strong> If your reporting details are sensitive, say the word and we'll sign your NDA before any conversation. Nothing you share goes anywhere.</p></div>
+      <div class="r reveal"><div class="check">&#10003;</div><p><strong>No sales pitch.</strong> Downloading this doesn't put you in a sequence of pushy emails. It's a template you can use whether or not you ever talk to us.</p></div>
+      <div class="r reveal"><div class="check">&#10003;</div><p><strong>No obligation.</strong> Use the brief, get your review approved, and never speak to CaseWhen again. That's a completely fine outcome for us.</p></div>
+    </div>
+  </section>
+
+  <!-- 6. FORM -->
+  <section id="form">
+    <div class="formbox reveal">
+      <div class="eyebrow">Get it now</div>
+      <h2>Send me the Internal Buy-In Briefing.</h2>
+      <p class="lead">Two fields. It's in your inbox in under a minute, ready to edit and send up the same day.</p>
+      <form onsubmit="return false;">
+        <label for="name">First name</label>
+        <input id="name" name="name" type="text" placeholder="Alex" autocomplete="given-name">
+        <label for="email">Work email</label>
+        <input id="email" name="email" type="email" placeholder="alex@company.com" autocomplete="email">
+        <button class="submit" type="submit">Get my one-page brief</button>
+        <p class="formfoot">We'll only use this to send you the template. Unsubscribe anytime, one click.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- 7. RISK REVERSAL -->
+  <section>
+    <div class="risk reveal">
+      <div class="riskicon">&#128274;</div>
+      <p><strong>Our promise:</strong> if the brief doesn't give you a cleaner, more confident way to make the case internally, reply and tell us. We'll rewrite the framing around your exact situation, for free, or you never hear from us again. Your call.</p>
+    </div>
+  </section>
+
+  <!-- 8. FAQ -->
+  <section>
+    <div class="eyebrow">Questions</div>
+    <h2>The things people ask before they grab it.</h2>
+
+    <details class="reveal">
+      <summary>Is this actually free?</summary>
+      <p>Yes. The template is something we'd normally build inside a paid engagement, worth about 500 dollars of our time to put together for a client. We're giving the page away because the people who use it well tend to have exactly the reporting problems we're good at fixing.</p>
+    </details>
+    <details class="reveal">
+      <summary>Do I need to be technical to use it?</summary>
+      <p>No. The whole point is to translate a technical problem into a business case. You don't need to explain Power BI datasets or refresh schedules. You fill in plain-language numbers and the brief handles the framing.</p>
+    </details>
+    <details class="reveal">
+      <summary>What if my CFO asks follow-up questions I can't answer?</summary>
+      <p>The brief is written to pre-answer the usual ones, cost, risk and scope. If something technical comes back, reply to the email we send and we'll help you shape a straight answer. No obligation to hire us for that.</p>
+    </details>
+    <details class="reveal">
+      <summary>Will this drop me into a barrage of sales emails?</summary>
+      <p>No. You'll get the template, and later a short note or two you can ignore or unsubscribe from in one click. We're not going to chase you. If you want to talk, you'll reach out.</p>
+    </details>
+    <details class="reveal">
+      <summary>Who's behind CaseWhen?</summary>
+      <p>We're a Berlin consultancy focused on Microsoft Power BI, Fabric and Azure reporting, Microsoft-certified, with reporting work behind clients like Schindler and Ipsen. We spend our days making numbers trustworthy, which is why we know how the internal case gets won.</p>
+    </details>
+  </section>
+
+  <!-- 9. FINAL CTA -->
+  <section>
+    <div class="final reveal">
+      <h2>You've got the fix. Now get the yes.</h2>
+      <p>Grab the one-page brief, put your numbers in, and walk into that budget conversation with the words a CFO signs off on.</p>
+      <a class="cta" href="#form">Get the one-page brief</a>
+      <div class="finalnote">Free. Two fields. In your inbox in under a minute.</div>
+    </div>
+  </section>
+
+  <footer>CaseWhen Consulting GmbH, Berlin. Microsoft Power BI, Fabric and Azure.</footer>
+
+</div>
+
+<script>
+  // Progressive enhancement: mark JS on, then animate. Content is visible without this.
+  document.documentElement.classList.add('js');
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){
+      els.forEach(function(el){el.classList.add('in');});
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  })();
+</script>
+</body>
+</html>

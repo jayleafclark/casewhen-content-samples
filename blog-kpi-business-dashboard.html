@@ -1,0 +1,151 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Most Teams Break Their KPI Business Dashboard in One Spot</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>kpi business dashboard</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>Most Teams Break Their KPI Business Dashboard in One Spot</h1><figure class="achart"><figcaption>Organizations that fully trust their data</figcaption><div class="cbar"><span class="cl">Trust it</span><div class="ctrack"><div class="cfill" style="width:49%"></div></div><span class="cv">33%</span></div><div class="cbar"><span class="cl">Do not</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">67%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><p>Quick answer: A KPI business dashboard earns trust when every number matches finance, the filters behave honestly, and each metric is defined once as an explicit measure. Build the numbers on a single date table, test them with real user roles, and reconcile the totals against the source before anyone presents them.
+---
+Most teams get their KPI business dashboard wrong in one specific spot, and it shows up the moment two people compare the same number in a Monday meeting. The sales lead sees 4.1 million. The finance lead sees 3.9 million. Both are looking at &quot;Revenue.&quot; Now the room is arguing about the data instead of the business, and the dashboard has lost the one thing it was built for: being the number nobody has to double-check.</p><p>This happens more than anyone admits. 67% of organizations don&#x27;t fully trust the data they use to make decisions (Precisely and Drexel LeBow, 2025). And when the numbers are off, the cost is real. Gartner puts the average price of poor data quality at 12.9 million dollars per year. So let&#x27;s walk through where a dashboard picks up these cracks and, more useful, the exact steps to close them.</p><h2>What is a KPI business dashboard supposed to do?</h2><p>A KPI business dashboard is one screen that shows the handful of numbers a team steers by, refreshed on a schedule so people stop pulling their own spreadsheets. Revenue, gross margin, active customers, churn, days sales outstanding. Pick the six to ten metrics that actually change a decision, and leave the rest off.</p><p>The screen is the easy part. The trust lives underneath it, in the Power BI semantic model: the tables, the relationships between them, and the measures that do the math. A good dashboard is boring to look at and airtight below the surface. When people stop asking &quot;is this right?&quot; and start asking &quot;what do we do about it?&quot;, you&#x27;ve built the right thing.</p><h2>Why does the same number look different in two places?</h2><p>Here&#x27;s the mechanism most people never see. Every visual in Power BI runs its math inside a filter context. Slice by region, and the number recalculates for that region. Two cards can show different &quot;Revenue&quot; totals because they sit under different filters, use different date columns, or pull from measures that were written two different ways.</p><p>The most common cause is implicit aggregation. Someone drags a raw column like `Amount` onto a card, and Power BI sums it on the fly. Someone else writes a proper measure that filters out returns and credit notes first. Same field name, different math, and neither person knows the other did something different. Multiply that across twenty visuals and you get a dashboard where half the numbers are quietly built on a different rule than the other half.</p><p>Date columns cause the second wave of confusion. If one visual counts sales by order date and another counts by ship date, month-end totals will never line up. This is exactly the sort of gap that keeps 67% of teams from fully trusting their reports, and it&#x27;s fixable with a few deliberate choices.</p><h2>How do you build a measure people can trust?</h2><p>The fix is to make every number an explicit, named measure with one definition. When you create a measure instead of dragging a raw column, the math lives in one place, and every visual that uses it gets the same answer. Here are the steps we use on every build:</p><ol><li>Write a base measure for each core number. Start with `Total Revenue = SUM(Sales[Amount])`. Reference this measure everywhere else so the definition never forks.</li><li>Control filters with the Power BI CALCULATE function. CALCULATE is the one DAX function that changes filter context on purpose. `Net Revenue = CALCULATE([Total Revenue], Sales[Type] &lt;&gt; &quot;Return&quot;)` removes returns for every visual, every time, with no chance of someone forgetting.</li><li>Divide safely. Use `DIVIDE([Net Revenue], [Total Revenue])` rather than a slash. DIVIDE returns a blank instead of an error when the denominator is zero, so a card never shows a broken value in a board meeting.</li><li>Name measures so a non-engineer can read them. &quot;Net Revenue (excl. returns)&quot; tells the reader the rule. &quot;Measure 7&quot; tells them nothing.</li><li>Put the definitions where people can see them. Add a short &quot;how these numbers are calculated&quot; page to the report. Half of all trust problems disappear once the rules are written down.</li></ol><p>Do this and your KPI business dashboard stops being a collection of one-off calculations. Every number traces back to a single measure you can point to and explain.</p><h2>What does USERELATIONSHIP fix that a filter can&#x27;t?</h2><p>Here&#x27;s a real situation. You have one Date table, and your Sales table has two dates on it: order date and ship date. Power BI only lets one relationship between two tables be active at a time. So your date slicer filters by order date, and there&#x27;s no clean way to also report shipped revenue by month. People solve this the messy way, with a second date table, and now the two never reconcile.</p><p>USERELATIONSHIP handles it inside a single measure. You keep one Date table, mark the order-date relationship active and the ship-date one inactive, then switch on the inactive one only where you need it:</p><p>```
+Shipped Revenue =
+CALCULATE(
+    [Total Revenue],
+    USERELATIONSHIP(Sales[ShipDate], &#x27;Date&#x27;[Date])
+)
+```</p><p>Now `Total Revenue` reports by order date and `Shipped Revenue` reports by ship date, both from the same calendar, both matching finance. This is the kind of DAX pattern that keeps a dashboard honest without bolting on extra tables that drift apart over time.</p><h2>How do you keep the dashboard matching finance every month?</h2><p>Building the numbers right is step one. Keeping them right as data changes is where dashboards slowly go wrong. Three settings do most of the work here.</p><p>Row-level security, tested with View As. A regional manager should see their region and not the whole company. Set up row-level security roles, then use View As in Power BI Desktop to see the report exactly as that role sees it. Skip this test and someone eventually spots numbers they shouldn&#x27;t, and trust is gone that day.</p><p>Incremental refresh, so history stops moving. By default a dataset can reprocess everything on each refresh, which means old months can shift if the source changes. Turn on incremental refresh with RangeStart and RangeEnd parameters, and closed periods lock in place. January stays January.</p><p>A named owner and a monthly reconciliation. Once a month, one person checks the dashboard&#x27;s headline totals against the finance close. When they match, note it. When they don&#x27;t, fix the measure before anyone presents it.</p><p>Here&#x27;s how the common weak spots map to their fix:</p><table><tr><th>Weak spot</th><th>What causes it</th><th>The fix</th></tr><tr><td>Two numbers for one metric</td><td>Raw column summed instead of a measure</td><td>Create one explicit measure, reference it everywhere</td></tr><tr><td>Month-end totals never line up</td><td>Order date and ship date mixed</td><td>One Date table plus USERELATIONSHIP</td></tr><tr><td>Users see the wrong slice of data</td><td>No security roles, or roles never tested</td><td>Row-level security checked with View As</td></tr><tr><td>Last quarter&#x27;s numbers keep shifting</td><td>Full refresh reprocesses old data</td><td>Incremental refresh with RangeStart and RangeEnd</td></tr><tr><td>Nobody agrees on a definition</td><td>Rules live in people&#x27;s heads</td><td>A definitions page in the report</td></tr></table><p>Work through that list and the dashboard becomes the number people quote without checking. That&#x27;s the whole job.</p><h2>Frequently asked questions</h2><p>What makes a KPI business dashboard trustworthy?
+Three things: every metric is one explicit measure with a single definition, the whole model runs on one date table, and the headline totals reconcile against finance each month. Test security roles with View As before anyone outside the team opens it.</p><p>Why do my Power BI totals not match my spreadsheet?
+Usually a filter or date mismatch. A visual might sum a raw column while another uses a measure that removes returns, or two visuals use different date fields. Rebuild both on the same named measures and the same date table.</p><p>When should I use the CALCULATE function?
+Whenever a number needs a filter that the visual itself won&#x27;t provide. The Power BI CALCULATE function changes filter context on purpose, which is how you build things like net revenue, year-to-date totals, or a metric that ignores the page slicer.</p><p>What is USERELATIONSHIP used for?
+Reporting on a second date without a second date table. If Sales has both an order date and a ship date, USERELATIONSHIP lets one measure report by ship date while the rest of the model stays on order date, all from one calendar.</p><p>How many KPIs should one dashboard show?
+Six to ten. Pick the numbers that change a decision and move everything else to a detail page. A screen with thirty metrics gets scanned and ignored.</p><p>Read next: [KPIs and dashboards](/blog/blog-kpis-and-dashboards) and [KPI tracker](/blog/blog-kpi-tracker).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">kpi business dashboard</span><span class="c">power bi calculate function</span><span class="c">powerbi create measure</span><span class="c">use relationship dax</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+</body></html>

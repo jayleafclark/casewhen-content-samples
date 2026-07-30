@@ -1,0 +1,144 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · What a Power BI Consultant Actually Does (and What You&#x27;re Re</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>power bi consultant</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><h1>What a Power BI Consultant Actually Does (and What You&#x27;re Really Paying For)</h1><div class="qa"><b>Quick answer.</b> A Power BI consultant is a specialist who builds the data model, writes the DAX measures, sets up refresh and row-level security, and turns raw tables into reports people trust. Good ones fix the data model and measures behind the report, not just the visuals on screen. Day rates usually run from about 700 to 1,800 euros.
+---</div><p>Most teams hire a Power BI consultant to make the dashboard look better, and the problem shows up six months later as a Monday refresh that runs for two hours and a revenue number nobody in the room believes. A Power BI consultant who earns the fee spends most of the time on the parts you never see: the data model, the measures, the refresh schedule, and who is allowed to see which rows.</p><p>This piece walks through what the job really is, how to tell a strong hire from someone who just recolors charts, and what it should cost you in 2026.</p><h2>Why does hiring a Power BI consultant go sideways so often?</h2><p>This plays out in real board meetings. The head of sales pulls up a slide that says last month brought in 4.1 million euros. The finance lead has 3.8 million on the same line. Both numbers came from Power BI. Both look correct inside the report that produced them.</p><p>Here&#x27;s the mechanism. Those two reports were built on separate imports of the same source data, and the monthly total was written a different way in each file. One counts credit notes, the other doesn&#x27;t. Nothing crashed. The math is just defined twice, so it lands twice.</p><p>This is common because most Power BI files start as a copy of a spreadsheet, and about 94% of business spreadsheets used in decision-making contain errors (Poon et al., 2024). When a consultant imports that spreadsheet without rebuilding the model underneath, the errors move straight into the report and pick up a nicer font. The wider cost is trust: 67% of organizations don&#x27;t fully trust the data they use to make decisions (Precisely and Drexel LeBow, 2025). A pretty chart on a shaky model makes that worse.</p><h2>What does a Power BI consultant actually do all day?</h2><p>The visuals are the last 10% of the job. Here&#x27;s where a good Power BI consultant spends real hours.</p><ul><li>Data model. They shape your tables into a star schema: one fact table for events like sales, small dimension tables for products, dates, and regions. This is what lets one filter drive every chart at once.</li><li>DAX measures. They write each metric once, as a measure, so &quot;revenue&quot; means the same thing on every page. One definition, one number.</li><li>Power Query. They clean the incoming data (fixing dates, splitting columns, removing duplicate rows) before it ever reaches a chart.</li><li>Incremental refresh. For a big sales table, they set RangeStart and RangeEnd so Power BI only reloads the last few days instead of ten years of history every morning. That two-hour refresh drops to a couple of minutes.</li><li>Row-level security. They set roles so the Berlin sales lead sees only Berlin rows, and they prove it with the View As button before handoff.</li><li>Deployment pipelines. They move a report from development to test to production without editing the live version by hand, so a Tuesday fix doesn&#x27;t break the Wednesday board pack.</li></ul><p>None of that shows up in a demo. All of it decides whether the report still works next quarter.</p><h2>How do you tell a good Power BI consultant from someone who just decorates reports?</h2><p>A decorator ships beautiful visuals sitting on a model with errors. It looks great in the pitch and starts drifting the week after they leave. Here&#x27;s how to catch it before you sign.</p><p>Ask to see the model view from a past project, not the dashboard. A serious consultant will show you a clean star schema with a few connected tables. A decorator will show you one giant flat table, or change the subject.</p><p>Ask how they&#x27;d define a single shared measure, say net revenue, so every report reads the same. If the answer names credit notes, returns, and a date table, that&#x27;s a real Power BI consultant. If the answer is &quot;we&#x27;ll build a visual for it,&quot; keep looking.</p><p>This is where general business intelligence consulting and hands-on Power BI work split apart. Strategy decks are useful, but the number on your board slide is decided by the DAX, the model, and the refresh. You want someone who touches all three.</p><h2>What should a Power BI consultant cost?</h2><p>Rates depend on scope and seniority, so treat these as planning ranges for 2026, not a quote. Keep one thing separate in your head: the consultant&#x27;s fee is the build. The Power BI Pro license (about 10 euros per user per month) is what Microsoft charges to publish and view. Those are two different bills.</p><table><tr><th>Engagement</th><th>Typical 2026 range</th><th>Best for</th><th>Watch out for</th></tr><tr><td>Freelance day rate</td><td>700 to 1,200 euros/day</td><td>A defined fix or one report rebuild</td><td>One person, no cover if they&#x27;re sick</td></tr><tr><td>Senior or agency day rate</td><td>1,200 to 1,800 euros/day</td><td>Model rebuild plus governance setup</td><td>Make sure the senior name does the work</td></tr><tr><td>Fixed-scope project</td><td>8,000 to 40,000 euros</td><td>A full dashboard from raw data to handoff</td><td>Vague scope turns into change fees</td></tr><tr><td>Monthly retainer</td><td>2,000 to 6,000 euros/month</td><td>Ongoing changes and support after launch</td><td>Paying for hours you don&#x27;t use</td></tr></table><p>A small, well-scoped project (one clean data model, three reports, refresh and security done right) usually lands in the low tens of thousands. That&#x27;s the work that pays back, since insights-driven companies are 8.5x more likely to report 20%-plus yearly revenue growth (Forrester). Poor data quality runs the other way, costing organizations an average of 12.9 million dollars a year (Gartner).</p><h2>How is a solo Power BI consultant different from a bi consulting company or a bi consulting firm?</h2><p>A freelancer and a firm solve the same problem with different trade-offs.</p><p>A solo Power BI consultant gives you a direct line to the person doing the work, a lower rate, and fast decisions. The risk is coverage. If they&#x27;re on holiday during month-end close, you wait.</p><p>A bi consulting company or a bi consulting firm brings a bench, so someone always answers, plus documented process and a second reviewer on your model. You pay more per day for that continuity, and you sometimes get a junior on the keyboard while a senior name is on the invoice. Ask directly who writes the DAX.</p><p>For a one-off rebuild, a strong freelancer is often the better value. For a platform several teams depend on every day, a firm&#x27;s continuity earns its rate. CaseWhen sits in the middle: a small senior team, so you get the direct line of a freelancer with the cover of a firm.</p><h2>How do you hire and brief a Power BI consultant without guessing?</h2><p>You don&#x27;t need to understand DAX to run a sharp hiring process. Do these five things in order.</p><ol><li>Write down the one report that hurts. Say which one. &quot;Our monthly sales pack takes a day to reconcile and two people disagree on the total.&quot; That single sentence scopes the job better than a feature list.</li><li>Ask for a model-view screenshot from real past work. You&#x27;re checking for a clean star schema, not judging the art.</li><li>Buy a paid scoping day before any big commitment. Give read-only access to real data and ask them to define one metric with you. You learn more in that day than in three sales calls.</li><li>Agree who owns refresh after handoff. A report that no one can refresh in month two is a slow way to waste the fee.</li><li>Get the model documented. Ask for a short note on the tables, the key measures, and the security roles, so the next person isn&#x27;t starting from zero.</li></ol><p>Run that process and the difference between a real Power BI consultant and a report decorator shows up fast, usually on the scoping day, long before it can cost you a board meeting.</p><h2>Frequently asked questions</h2><p>Do I need a Power BI consultant, or can my in-house analyst do it?
+If your analyst already builds star schemas and writes clean DAX, you may only need a consultant for a focused review. If your reports live in one flat table and refresh slowly, a consultant to rebuild the model is usually cheaper than another year of manual reconciliation.</p><p>How long does a typical Power BI project take?
+A single-report rebuild with a proper data model, refresh, and security is often four to eight weeks. A platform serving several teams runs longer. The data cleanup, not the charts, is what sets the timeline.</p><p>What&#x27;s the difference between a Power BI consultant and a business intelligence consulting firm?
+A Power BI consultant works hands-on in the tool: model, measures, refresh, reports. A business intelligence consulting firm may add strategy, other platforms, and a larger team. You want the hands-on skills either way, so ask who actually writes the DAX.</p><p>Does the consultant&#x27;s fee include Power BI licenses?
+No. The fee covers the build. Power BI Pro is a separate Microsoft charge (about 10 euros per user per month) for publishing and viewing. Confirm license count during scoping so it doesn&#x27;t surprise you at launch.</p><p>How do I know the work is good after the consultant leaves?
+Check three things: the refresh runs on schedule without hand-holding, two teams pulling the same metric get the same number, and row-level security shows each user only their rows. If all three hold a month later, you hired well.</p><p>Read next: [Power BI consulting: how to evaluate a partner](/blog/blog-power-bi-consulting) and [how to choose a Power BI consultant](/blog/blog-how-to-choose-a-power-bi-consultant).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">power bi consultant</span><span class="c">bi consulting company</span><span class="c">bi consulting firm</span><span class="c">business intelligence consulting</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+</body></html>

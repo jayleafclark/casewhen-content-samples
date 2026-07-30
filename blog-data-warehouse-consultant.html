@@ -1,0 +1,144 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Data warehouse consultant: what changed, and why your old se</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>data warehouse consultant</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><h1>Data warehouse consultant: what changed, and why your old setup costs more now</h1><div class="qa"><b>Quick answer.</b> A data warehouse consultant designs and builds the central database that feeds your reports, then keeps it fast and correct. In 2026 most of that work sits on Azure, using Azure Data Factory to load data and a cloud warehouse to store it. You pay for what you use instead of a fixed server.
+---</div><p>Most teams hire a data warehouse consultant too late, and it shows up in a month-end close that runs three days long. The report that looked right on Monday shows a different revenue number on Wednesday, and nobody can say which one to trust. By the time someone calls for help, the cleanup is bigger than it needed to be.</p><p>This happens more than you would think. In one 2025 survey, 67% of organizations said they don&#x27;t fully trust the data they use to make decisions (Drexel LeBow and Precisely, 2025). That distrust almost always traces back to how the data is stored and combined, which is exactly the job a data warehouse consultant owns.</p><p>Below is a plain walkthrough of what the role covers, what changed when warehouses moved to the cloud, and the concrete steps to get a slow or unreliable warehouse back to being trustworthy.</p><h2>What does a data warehouse consultant actually do?</h2><p>A data warehouse is one central database that pulls numbers from all your other places (your accounting tool, your CRM, your web store) and stores them in a shape built for reporting. Your Power BI dashboards read from that one place, so every team sees the same figure.</p><p>A data warehouse consultant builds and looks after that central database. Day to day, the work covers four things:</p><ul><li>Loading data. Getting numbers out of each source app on a schedule, cleaning them, and writing them into the warehouse.</li><li>Modeling data. Arranging tables so a report about &quot;revenue by region last quarter&quot; runs in a second, not a minute. The common design is a star schema, with one fact table (the sales) linked to small lookup tables (dates, products, customers).</li><li>Keeping it correct. Adding checks so a bad load gets caught before a board pack goes out with the wrong total.</li><li>Keeping it fast and affordable. Tuning how data refreshes so you are not paying for compute you don&#x27;t use.</li></ul><p>Good data warehouse consulting services do all four, not just the first one. Plenty of setups load data fine and then produce numbers no one believes, because the modeling and the checks were skipped.</p><h2>Why does an old on-premise warehouse slow your month-end close down?</h2><p>Older warehouses ran on a server sitting in your office or a rented rack. That design has two problems that show up right at month-end, when everyone queries at once.</p><p>First, the server has a fixed size. It was bought for an average Tuesday, so when finance, sales, and the board all pull reports on the same morning, queries line up and wait. Your close gets slower in the one week it needs to be fast.</p><p>Second, the loads often run overnight in one big batch. If Tuesday night&#x27;s load breaks at 2am, Wednesday&#x27;s reports are a day old and nobody notices until a number looks off in a meeting. That is how the same report ends up showing two different revenue figures on two different days.</p><p>There is a money angle too. Poor data quality costs organizations an average of $12.9M per year, by Gartner&#x27;s estimate. A slow, error-prone warehouse is a large part of that bill, paid in re-run reports, manual spreadsheet fixes, and decisions made on stale numbers.</p><h2>What changed when the warehouse moved to Azure?</h2><p>The main change is that the storage and the compute are now separate, and you rent both by the hour instead of buying a fixed server.</p><p>On Azure, the loading job runs in Azure Data Factory (ADF), Microsoft&#x27;s tool for moving and cleaning data between sources. You build a pipeline once, point it at your accounting app and your CRM, and it runs on a schedule. When you have twice the data next year, ADF from Microsoft scales up for that run and back down after, so you pay for the busy hour and nothing more.</p><p>The warehouse itself (options include Azure SQL, Azure Synapse, and Microsoft Fabric) can grow for the busy month-end morning and shrink the rest of the month. The overnight-batch problem eases as well, because these tools can load smaller chunks through the day instead of one heavy nightly job.</p><p>For a Power BI team, the payoff is direct. Reports read from a warehouse that is sized for the moment people are actually looking, and the numbers behind them are hours old, not a full day.</p><p>Here is the difference laid out side by side.</p><table><tr><th>What you deal with</th><th>Old on-premise warehouse</th><th>Azure cloud warehouse</th></tr><tr><td>Cost model</td><td>Fixed server bought up front</td><td>Pay for the compute and storage you use</td></tr><tr><td>Busy month-end</td><td>Queries queue and stall</td><td>Scales up for the morning, down after</td></tr><tr><td>Data freshness</td><td>One overnight batch</td><td>Smaller loads through the day</td></tr><tr><td>Load stops at 2am</td><td>Found in a meeting next day</td><td>Alert fires the same night</td></tr><tr><td>Who keeps it running</td><td>Your own hardware and patching</td><td>Microsoft runs the servers</td></tr></table><h2>How do you fix a slow or wrong warehouse in the next 30 days?</h2><p>You don&#x27;t need a full rebuild to see progress. Here is the order a data warehouse consultant would work in, and you can start most of it this month.</p><ol><li>Write down the numbers people argue about. List the five reports where two teams get different answers. That tells you which tables to check first.</li><li>Trace one number to its source. Pick &quot;total revenue,&quot; follow it from the report back through the warehouse to the source app, and find where it changes. Usually a duplicate load or a wrong join is the cause.</li><li>Turn on incremental refresh in Power BI. Instead of reloading every row every night, set RangeStart and RangeEnd parameters so only the last few days refresh. A load that took 40 minutes can drop to under 5, and the server does far less work.</li><li>Move the heavy loads into Azure Data Factory. Rebuild the worst overnight job as an ADF pipeline that runs a few times a day. Add a step that emails the team if a load doesn&#x27;t finish, so a 2am break gets caught at 2am.</li><li>Model the top reports as a star schema. For the five reports from step one, split each into one fact table and small lookup tables. Queries speed up and the numbers stop drifting because there is one place each value lives.</li><li>Add three data checks. Confirm row counts match the source, confirm no revenue value is negative, and confirm today&#x27;s load actually ran. These three catch most of the errors that reach a board pack.</li></ol><p>Do these in order and the reports people distrust get faster and start matching within a few weeks.</p><h2>What does a good data warehouse consultant charge and deliver?</h2><p>Rates in Europe usually run somewhere between 800 and 1,400 euros per day for senior warehouse work, and a focused fix like the six steps above is often a two to four week engagement rather than a six-month program.</p><p>What you want to see in a proposal is a named outcome, not just hours. A strong one reads like &quot;your month-end close runs same-day, and the top ten reports match, within four weeks.&quot; Ask for that in writing. Ask who does the work day to day, and ask what you own at the end (the ADF pipelines, the warehouse design, the documentation) so you are not locked to one person.</p><p>A consultant who quotes a flat day rate with no outcome, or who can&#x27;t explain incremental refresh in plain words, is a poor bet for money-critical reporting.</p><h2>Frequently asked questions</h2><p>What is the difference between a data warehouse consultant and a Power BI consultant?
+A Power BI consultant builds the reports and dashboards people look at. A data warehouse consultant builds the central database those reports read from. On small projects one person does both. On larger ones you want the warehouse specialist for the storage and loading, and the Power BI specialist for the reports.</p><p>Do I need Azure Data Factory, or can I load data another way?
+You have options, but Azure Data Factory (ADF) is the standard Microsoft tool for scheduled loads on Azure, and it works cleanly with Power BI and the Azure warehouses. If your loads are small and simple, Power Query inside Power BI can be enough. Once you have several sources and a daily schedule, ADF pays off.</p><p>How long does it take to move an on-premise warehouse to Azure?
+A focused migration of the reports that matter most takes four to eight weeks. A full move of every historical table takes longer, often three to six months. Most teams start with the reports the business relies on and move the rest later.</p><p>Will moving to the cloud lower my costs?
+Often, but only if the setup is tuned. The saving comes from paying for compute per hour rather than owning an idle server. A consultant who sets up scaling and incremental refresh correctly keeps the bill low. A lift-and-shift with no tuning can cost more.</p><p>What does data warehouse consulting services actually include beyond the build?
+Beyond building the warehouse, it covers the loading schedule, the data checks, the documentation, and a handover so your team can run it. The build is a few weeks. The value is a warehouse your reports can trust for years.</p><p>Read next: [Cloud data warehouse consultant: what it actually does](/blog/blog-cloud-data-warehouse-consultant) and [Azure Data Factory, explained for people who aren&#x27;t data engineers](/blog/blog-azure-data-factory).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">data warehouse consultant</span><span class="c">azure data factory adf</span><span class="c">data warehouse consulting services</span><span class="c">adf microsoft</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+</body></html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>10 DACH Reporting Rebuilds, Before and After | CaseWhen</title>
+<style>
+  :root{
+    --accent:#1D967C;
+    --dark:#11493F;
+    --hero:#0e2f28;
+    --mint:#7AC4B5;
+    --pale:#D8F3EE;
+    --ink:#1a2320;
+    --body:#3d4a46;
+    --line:#e3e9e7;
+    --bg:#ffffff;
+    --soft:#f4f8f6;
+    --radius:16px;
+    --font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:var(--font);
+    color:var(--body);
+    background:var(--bg);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{color:var(--ink);line-height:1.15;margin:0 0 .4em}
+  h1{font-size:2rem;font-weight:800;letter-spacing:-.02em}
+  h2{font-size:1.5rem;font-weight:750;letter-spacing:-.01em}
+  h3{font-size:1.1rem;font-weight:700}
+  p{margin:0 0 1rem}
+  a{color:var(--accent)}
+  .wrap{max-width:640px;margin:0 auto;padding:0 22px}
+  .backlink{
+    position:absolute;top:16px;left:16px;z-index:10;
+    font-size:.82rem;color:var(--pale);opacity:.85;text-decoration:none;
+  }
+  .backlink:hover{opacity:1;text-decoration:underline}
+
+  /* HERO */
+  .hero{
+    background:var(--hero);
+    color:#eaf6f2;
+    padding:76px 0 56px;
+    position:relative;
+  }
+  .hero .wrap{position:relative}
+  .eyebrow{
+    display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--mint);
+    border:1px solid rgba(122,196,181,.35);border-radius:999px;
+    padding:6px 13px;margin-bottom:22px;
+  }
+  .hero h1{color:#ffffff;font-size:2.15rem;max-width:15ch}
+  .hero .sub{color:#bfe0d7;font-size:1.08rem;max-width:44ch;margin-top:14px}
+  .cta{
+    display:inline-block;background:var(--accent);color:#fff;font-weight:700;
+    font-size:1rem;text-decoration:none;padding:15px 28px;border-radius:12px;
+    margin-top:26px;box-shadow:0 8px 22px rgba(29,150,124,.28);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .cta:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(29,150,124,.36)}
+  .whatnote{
+    margin-top:16px;font-size:.86rem;color:#9dccbf;display:flex;gap:8px;
+    align-items:flex-start;max-width:40ch;
+  }
+  .whatnote span{color:var(--mint);font-weight:700}
+
+  /* SECTIONS */
+  section{padding:52px 0}
+  .soft{background:var(--soft)}
+  .kicker{
+    font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:10px;
+  }
+  .lead{font-size:1.02rem;color:var(--body);max-width:52ch}
+
+  /* VALUE STACK */
+  .stack{margin-top:26px;display:grid;gap:16px}
+  .item{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 22px;
+  }
+  .soft .item{background:#fff}
+  .item .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:34px;height:34px;border-radius:9px;background:var(--pale);
+    color:var(--dark);font-weight:800;font-size:.95rem;margin-bottom:12px;
+  }
+  .item h3{margin-bottom:6px}
+  .item p{margin:0;font-size:.95rem}
+
+  /* SOCIAL PROOF */
+  .quote{
+    background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:12px;padding:20px 22px;margin-bottom:16px;
+  }
+  .quote p{font-size:1.02rem;color:var(--ink);margin:0 0 10px;font-weight:500}
+  .quote .who{font-size:.85rem;color:var(--body);margin:0}
+  .cred{
+    display:flex;gap:14px;align-items:flex-start;margin-top:22px;
+    background:var(--dark);color:#dff0eb;border-radius:14px;padding:20px 22px;
+  }
+  .cred .badge{
+    flex:0 0 auto;width:44px;height:44px;border-radius:11px;background:var(--mint);
+    color:var(--dark);font-weight:800;display:flex;align-items:center;justify-content:center;
+    font-size:1.05rem;
+  }
+  .cred p{margin:0;font-size:.92rem;color:#cfe8e1}
+  .cred strong{color:#fff}
+
+  /* HOW IT WORKS */
+  .steps{margin-top:26px;display:grid;gap:14px;counter-reset:step}
+  .step{
+    display:flex;gap:16px;align-items:flex-start;
+    background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;
+  }
+  .step .n{
+    flex:0 0 auto;width:36px;height:36px;border-radius:50%;
+    background:var(--accent);color:#fff;font-weight:800;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .step h3{margin:0 0 4px;font-size:1.02rem}
+  .step p{margin:0;font-size:.92rem}
+
+  /* OBJECTIONS */
+  .reassure{margin-top:24px;display:grid;gap:12px}
+  .re{
+    display:flex;gap:12px;align-items:flex-start;font-size:.95rem;color:var(--ink);
+  }
+  .re .tick{
+    flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--pale);
+    color:var(--dark);font-weight:800;display:flex;align-items:center;justify-content:center;
+    font-size:.85rem;margin-top:1px;
+  }
+  .re strong{color:var(--ink)}
+
+  /* FORM */
+  .formcard{
+    background:var(--hero);color:#eaf6f2;border-radius:20px;padding:34px 26px;
+    margin-top:8px;
+  }
+  .formcard .kicker{color:var(--mint)}
+  .formcard h2{color:#fff}
+  .formcard p.small{color:#a9d1c7;font-size:.9rem;max-width:40ch}
+  form{margin-top:20px;display:grid;gap:14px}
+  label{font-size:.82rem;font-weight:600;color:#c7e5dc;display:block;margin-bottom:6px}
+  input{
+    width:100%;padding:13px 14px;border-radius:11px;border:1px solid rgba(255,255,255,.16);
+    background:rgba(255,255,255,.06);color:#fff;font-size:1rem;font-family:var(--font);
+  }
+  input::placeholder{color:#88b3a8}
+  input:focus{outline:2px solid var(--mint);outline-offset:1px;background:rgba(255,255,255,.1)}
+  .formbtn{
+    background:var(--accent);color:#fff;border:0;font-family:var(--font);
+    font-weight:700;font-size:1.02rem;padding:15px;border-radius:12px;cursor:pointer;
+    transition:transform .15s ease;
+  }
+  .formbtn:hover{transform:translateY(-2px)}
+  .formmini{font-size:.8rem;color:#9dccbf;margin:4px 0 0;text-align:center}
+
+  /* RISK REVERSAL */
+  .guarantee{
+    display:flex;gap:16px;align-items:flex-start;
+    border:2px dashed var(--mint);border-radius:16px;padding:22px 22px;background:var(--pale);
+  }
+  .guarantee .seal{
+    flex:0 0 auto;width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;
+  }
+  .guarantee h3{margin:0 0 6px;color:var(--dark)}
+  .guarantee p{margin:0;font-size:.95rem;color:var(--ink)}
+
+  /* FAQ */
+  .faq{margin-top:24px;display:grid;gap:12px}
+  details{
+    background:#fff;border:1px solid var(--line);border-radius:12px;padding:4px 18px;
+  }
+  summary{
+    cursor:pointer;font-weight:700;color:var(--ink);padding:14px 0;list-style:none;
+    display:flex;justify-content:space-between;gap:14px;align-items:center;font-size:.98rem;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--accent);font-weight:800;font-size:1.3rem}
+  details[open] summary::after{content:"\2013"}
+  details p{margin:0 0 16px;font-size:.93rem}
+
+  /* FINAL CTA */
+  .final{background:var(--hero);color:#eaf6f2;text-align:center;padding:60px 0}
+  .final h2{color:#fff;max-width:20ch;margin:0 auto .5em}
+  .final p{color:#bfe0d7;max-width:42ch;margin:0 auto 8px}
+  footer{background:var(--hero);color:#6f9c90;text-align:center;padding:0 0 40px;font-size:.8rem}
+
+  /* SCROLL REVEAL: fail-safe. Default visible. JS opts in to motion. */
+  .js-motion [data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .55s ease, transform .55s ease}
+  .js-motion [data-reveal].seen{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .js-motion [data-reveal]{opacity:1;transform:none;transition:none}
+  }
+
+  @media(min-width:560px){
+    h1{font-size:2.4rem}
+    .hero h1{font-size:2.6rem}
+    .stack{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<a class="backlink" href="funnels.html">back to funnels</a>
+
+<!-- 1. HERO -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>10 real rebuilds</span>
+    <h1 data-reveal>See exactly how ten real reporting rebuilds went, before and after</h1>
+    <p class="sub" data-reveal>Ten reports we rebuilt for real DACH companies, with the mess we started from, the fix we shipped, and the number it moved. Read them before you shortlist a single consultancy.</p>
+    <a class="cta" href="#get" data-reveal>Get the report</a>
+    <p class="whatnote" data-reveal><span>What you get</span> One PDF, ten case studies, real client names, no gate beyond your email.</p>
+  </div>
+</header>
+
+<!-- 2. VALUE STACK -->
+<section>
+  <div class="wrap">
+    <p class="kicker" data-reveal>What is inside</p>
+    <h2 data-reveal>Ten rebuilds you can actually learn from</h2>
+    <p class="lead" data-reveal>Most case studies are a logo and a happy quote. This isn't that. Each one walks the same three beats, so you can compare the work and not the marketing.</p>
+    <div class="stack">
+      <div class="item" data-reveal>
+        <span class="num">1</span>
+        <h3>The problem, written plainly</h3>
+        <p>What the report looked like before we touched it. Slow refreshes, numbers that didn't tie out, a model bolted together over three years by four people who'd since left.</p>
+      </div>
+      <div class="item" data-reveal>
+        <span class="num">2</span>
+        <h3>The fix, in real terms</h3>
+        <p>The actual moves we made in Power BI. Where we rebuilt the data model, which DAX we ripped out, when we pushed logic back into Fabric, and why we chose incremental refresh over a nightly full load.</p>
+      </div>
+      <div class="item" data-reveal>
+        <span class="num">3</span>
+        <h3>The result, measured</h3>
+        <p>The one number that changed. A 40 minute refresh that dropped to under two. A finance board that went from 350 monthly viewers waiting on it to a report they trust the same morning.</p>
+      </div>
+      <div class="item" data-reveal>
+        <span class="num">4</span>
+        <h3>Named clients, not anonymous logos</h3>
+        <p>Schindler, Ipsen, WellBeauty and more, by name, because we're allowed to. If a consultancy can't tell you who they've done this for, that's the tell you're looking for.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. SOCIAL PROOF -->
+<section class="soft">
+  <div class="wrap">
+    <p class="kicker" data-reveal>Why trust these</p>
+    <h2 data-reveal>The people who lived through the rebuild</h2>
+    <div class="quote" data-reveal>
+      <p>"We'd been told our reporting was fine three times before. CaseWhen was the first to open the model and show us exactly where it was breaking. The rebuild paid for itself inside a quarter."</p>
+      <p class="who">Head of Finance, industrials group (in the report as case 04)</p>
+    </div>
+    <div class="quote" data-reveal>
+      <p>"They didn't sell us a platform. They fixed the report we already had, then taught our two analysts how to keep it running without them."</p>
+      <p class="who">BI Lead, consumer brand (case 07)</p>
+    </div>
+    <div class="cred" data-reveal>
+      <div class="badge">CW</div>
+      <p><strong>CaseWhen, Berlin.</strong> Microsoft-certified in Power BI and Fabric, working with names like Schindler and Ipsen. Every rebuild in this report was built and shipped by the same people who'll pick up the phone if you call.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. HOW IT WORKS -->
+<section>
+  <div class="wrap">
+    <p class="kicker" data-reveal>How to get it</p>
+    <h2 data-reveal>Three steps, about ninety seconds</h2>
+    <p class="lead" data-reveal>There's no call to book and no form to negotiate. Here's the whole thing.</p>
+    <div class="steps">
+      <div class="step" data-reveal>
+        <div class="n">1</div>
+        <div>
+          <h3>Drop your email</h3>
+          <p>Work email is fine. That's the only field that matters, and it's the only one we'll act on.</p>
+        </div>
+      </div>
+      <div class="step" data-reveal>
+        <div class="n">2</div>
+        <div>
+          <h3>The PDF lands in your inbox</h3>
+          <p>Straight away, no waiting on a sales rep to approve you. Open it on your phone in the taxi if you want.</p>
+        </div>
+      </div>
+      <div class="step" data-reveal>
+        <div class="n">3</div>
+        <div>
+          <h3>Read the ten, then decide</h3>
+          <p>Bring it to your shortlist meeting. If one of the ten looks like your report, you'll know who to call. If not, you've still got a checklist for grading anyone else.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. OBJECTION HANDLING -->
+<section class="soft">
+  <div class="wrap">
+    <p class="kicker" data-reveal>Before you hesitate</p>
+    <h2 data-reveal>The usual worries, handled</h2>
+    <div class="reassure">
+      <div class="re" data-reveal><span class="tick">&#10003;</span><p><strong>We'll sign your NDA.</strong> If you want to share your own report back to us after reading, we'll paper it properly first. That's normal for us.</p></div>
+      <div class="re" data-reveal><span class="tick">&#10003;</span><p><strong>No sales pitch attached.</strong> You get the PDF and nothing else. We won't drop you into a five email sequence or book a "quick call" you didn't ask for.</p></div>
+      <div class="re" data-reveal><span class="tick">&#10003;</span><p><strong>No obligation, ever.</strong> Read it, use the checklist, hire someone else entirely. The report is worth having on its own, and it stays yours.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. FORM -->
+<section id="get">
+  <div class="wrap">
+    <div class="formcard" data-reveal>
+      <p class="kicker">Send it over</p>
+      <h2>Get the ten rebuilds</h2>
+      <p class="small">Roughly 500 dollars of work packaged into one read. One email, one PDF, then it's yours.</p>
+      <form onsubmit="return false">
+        <div>
+          <label for="name">First name</label>
+          <input id="name" name="name" type="text" placeholder="Anna" autocomplete="given-name">
+        </div>
+        <div>
+          <label for="email">Work email</label>
+          <input id="email" name="email" type="email" placeholder="anna@company.com" autocomplete="email">
+        </div>
+        <button class="formbtn" type="submit">Get my report</button>
+        <p class="formmini">Lands in your inbox in under a minute. No spam, unsubscribe anytime.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- 7. RISK REVERSAL -->
+<section class="soft">
+  <div class="wrap">
+    <div class="guarantee" data-reveal>
+      <div class="seal">&#10003;</div>
+      <div>
+        <h3>Worth your inbox, or tell us it wasn't</h3>
+        <p>If the report doesn't give you at least one thing you can use in your next shortlist meeting, reply to the email and say so. We'll send you a 30 minute review of your own reporting, free, no strings.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. FAQ -->
+<section>
+  <div class="wrap">
+    <p class="kicker" data-reveal>Questions</p>
+    <h2 data-reveal>Fair things to ask first</h2>
+    <div class="faq">
+      <details data-reveal>
+        <summary>Are these real clients or made-up examples?</summary>
+        <p>Real. Schindler, Ipsen and WellBeauty are named with permission. A few sensitive ones sit behind a role and an industry, but the numbers and the work are exactly as they happened.</p>
+      </details>
+      <details data-reveal>
+        <summary>Is this actually free, or is email the catch?</summary>
+        <p>It's free. Your email is how we send the PDF, that's the whole exchange. We don't sell lists and we don't run you through a sales machine afterwards.</p>
+      </details>
+      <details data-reveal>
+        <summary>I'm technical. Will this be too shallow?</summary>
+        <p>No. Each rebuild names the Power BI and Fabric moves specifically, down to model changes, DAX we removed, and refresh strategy. It's written for a buyer who can tell real work from a slide deck.</p>
+      </details>
+      <details data-reveal>
+        <summary>We're mid-evaluation with other firms. Does this help?</summary>
+        <p>That's exactly who it's for. Use the three-beat format as a scorecard. Ask every firm on your shortlist to show you the problem, the fix, and the measured result the way we do here.</p>
+      </details>
+      <details data-reveal>
+        <summary>What happens to my details after I download?</summary>
+        <p>They sit with us so we can send the report and honour the free review if you claim it. No third parties, and you can ask us to delete them whenever you like.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 9. FINAL CTA -->
+<section class="final">
+  <div class="wrap">
+    <h2 data-reveal>Ten rebuilds, one email away</h2>
+    <p data-reveal>Read exactly how ten real reporting rebuilds went before you trust anyone with yours.</p>
+    <a class="cta" href="#get" data-reveal>Get the report</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">CaseWhen, Berlin. Power BI, Fabric and Azure reporting.</div>
+</footer>
+
+<script>
+  // Fail-safe reveal: content is visible by default in CSS.
+  // We only add the motion class when JS runs, then reveal on scroll.
+  (function(){
+    try{
+      document.body.classList.add('js-motion');
+      var els = document.querySelectorAll('[data-reveal]');
+      if(!('IntersectionObserver' in window)){
+        els.forEach(function(el){el.classList.add('seen')});
+        return;
+      }
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ e.target.classList.add('seen'); io.unobserve(e.target); }
+        });
+      },{rootMargin:'0px 0px -8% 0px',threshold:0.08});
+      els.forEach(function(el){io.observe(el)});
+    }catch(err){
+      document.querySelectorAll('[data-reveal]').forEach(function(el){el.classList.add('seen')});
+    }
+  })();
+</script>
+
+</body>
+</html>

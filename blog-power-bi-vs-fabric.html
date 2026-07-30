@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Power BI vs Fabric: A Straight Answer Before You Pay for Bot</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>power bi vs fabric</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>Power BI vs Fabric: A Straight Answer Before You Pay for Both</h1><figure class="achart"><figcaption>Organizations with data good enough to use for AI</figcaption><div class="cbar"><span class="cl">Ready</span><div class="ctrack"><div class="cfill" style="width:13%"></div></div><span class="cv">12%</span></div><div class="cbar"><span class="cl">Not ready</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">88%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><p>Quick answer: Power BI vs Fabric comes down to scope. Power BI is the reporting tool your team uses to build charts, dashboards, and semantic models, while Microsoft Fabric is the wider platform that stores, cleans, and serves the data behind them. Power BI now runs inside Fabric, so both are billed and managed together on one capacity.
+---</p><p>Most teams treat Power BI vs Fabric as a straight either-or choice, and it shows up three months later as a jump on the Azure bill nobody planned for. The two words get used like competitors, so people assume they&#x27;re picking one. You&#x27;re not picking. Power BI is one part of Fabric now, and understanding how they fit together is what keeps your reporting fast and your invoice predictable.</p><p>Here&#x27;s what each one really is, why the naming trips people up, and how to decide what your team needs today.</p><h2>What is the difference between Power BI vs Fabric?</h2><p>Power BI is the layer your business users see. It&#x27;s where someone opens a report, filters by region, and reads a sales number off a card. Under the hood it stores semantic models, Power Query steps, and DAX measures. That part hasn&#x27;t changed in years, and most companies use it well without ever touching anything deeper.</p><p>Microsoft Fabric is the platform underneath and around it. Fabric bundles a data warehouse, a lakehouse, a data pipeline tool called Data Factory, real-time analytics, and Power BI itself into one product that runs on shared compute. Think of Fabric as everything from raw data landing in storage all the way to the finished chart, sold as a single service.</p><p>The short version: Power BI shows the answer. Fabric is where the data gets ready to be answered. Since 2023, Power BI is a workload inside Fabric rather than a separate purchase.</p><h2>Why does the Power BI vs Fabric confusion happen?</h2><p>The confusion is Microsoft&#x27;s own doing, and it&#x27;s fair to be annoyed by it. In late 2023 Microsoft folded Power BI Premium into Fabric. The old Power BI Premium per capacity plan stopped being sold to new customers, and the replacement is a range of Fabric capacities named F2 through F2048.</p><p>So the same admin button that used to say &quot;buy Premium capacity&quot; now opens a product that does ten more things. Nothing you built broke. Your reports, workspaces, and models all carried over. But the label on the box changed, and a lot of buyers heard &quot;Fabric&quot; and assumed they had to migrate to something new or rebuild their reports. You don&#x27;t.</p><p>This matters because 67% of organizations don&#x27;t fully trust the data they use to make decisions (Precisely and Drexel LeBow, 2025 Data Integrity report). When the platform name changes and nobody explains it, that distrust grows. Fabric passed 28,000 customers within two years of launch (Microsoft, Ignite 2025), so the shift is real, but real doesn&#x27;t mean urgent for every team.</p><h2>How does Fabric capacity change what you pay?</h2><p>Fabric capacity is a pool of compute you rent, measured in capacity units, or CU. Every Fabric task pulls from that pool: a report refresh, a warehouse query, a pipeline run. You pick a size, and that size sets both the speed and the price.</p><p>The number that matters most is F64. At F64 and above, people who only view reports skip the per-user Power BI Pro license. Below F64, every viewer still needs Pro at about 14 US dollars per user per month. So the math flips depending on headcount. A team with 300 report readers often pays less on an F64 capacity than on 300 Pro seats, while a team of 20 is usually cheaper staying on Pro.</p><p>Two more things save real money on fabric capacity:</p><ul><li>Switch it off. You can turn a capacity off when nobody&#x27;s working, and billing stops for those hours. A capacity used only during business hours can cost roughly half of one left running all week.</li><li>Reserve it. A one-year reserved capacity runs about 40% cheaper than the pay-as-you-go rate for the same size.</li></ul><p>Here&#x27;s how the two buying models compare at a glance.</p><table><tr><th>What you&#x27;re buying</th><th>Power BI Pro (per user)</th><th>Fabric capacity (F64+)</th></tr><tr><td>Who pays</td><td>Every user, monthly</td><td>The organization, per capacity</td></tr><tr><td>Rough price</td><td>~14 USD per user / month</td><td>~5,000+ USD / month at F64</td></tr><tr><td>Report viewers</td><td>Need a paid seat each</td><td>View for free</td></tr><tr><td>Data warehouse, pipelines, OneLake</td><td>Not included</td><td>Included</td></tr><tr><td>Can you stop billing</td><td>No</td><td>Yes, by the hour</td></tr><tr><td>Best fit</td><td>Small teams, few viewers</td><td>Many viewers, heavier data work</td></tr></table><h2>What is OneLake and why does it matter?</h2><p>OneLake is the storage layer under all of Fabric, and there&#x27;s exactly one per organization. Every warehouse, lakehouse, and dataset writes to the same OneLake, in the same open Parquet format. That means you stop keeping five copies of the same sales table in five tools.</p><p>The feature that makes OneLake worth knowing about is the shortcut. A shortcut points to data sitting somewhere else, like Azure Data Lake Storage or Amazon S3, and makes it show up in Fabric without copying a single row. Your data stays where it lives, and Fabric reads it in place.</p><p>OneLake also enables Direct Lake mode. In older setups, Power BI either imported data into a model or queried the source live, and each option had a cost in speed or freshness. Direct Lake lets a report read Parquet files straight from OneLake, so you get import-level speed on data that&#x27;s always current. For a team fighting slow refreshes, that one change is often the reason to look at Fabric at all.</p><h2>When is a Fabric data warehouse worth it over plain Power BI?</h2><p>Most teams don&#x27;t need a fabric data warehouse. If you have a handful of reports built on one clean source, Power Query inside Power BI does the job, and adding a warehouse just adds cost and people to maintain it.</p><p>You&#x27;re ready for a fabric data warehouse when you hit these signs:</p><ol><li>Power Query is doing too much. Your data prep steps have grown into a tangle that runs slowly and breaks when a source changes.</li><li>You&#x27;re merging many sources. Three or more systems feed one report, and joining them inside Power Query is fragile.</li><li>You need real SQL. Analysts want to write T-SQL against your data, schedule transformations, and hand clean tables to Power BI.</li><li>Models are hitting limits. Refresh times climb and model sizes push against what a Pro workspace allows.</li></ol><p>A Fabric warehouse gives you a proper SQL endpoint, so heavy transformations happen once, in one place, before Power BI ever sees the data. That keeps your reports fast because the tool isn&#x27;t doing cleanup work at view time.</p><h2>How do you decide between Power BI vs Fabric, step by step?</h2><p>You can settle this in an afternoon. Work through it in order.</p><ol><li>Count your viewers. Under about 100 report readers, price out Power BI Pro seats first. Over a few hundred, price an F64 capacity. The break-even usually lands somewhere in between.</li><li>Check your refresh pain. If reports are current enough and refreshes finish on time, you don&#x27;t need Direct Lake or a warehouse yet.</li><li>Count your sources. One or two clean sources means Power Query is fine. Many sources, or messy ones, point toward a Fabric warehouse.</li><li>Look at who maintains it. A warehouse and pipelines need someone to own them. If you have no data engineer, start small and grow into Fabric rather than buying all of it up front.</li><li>Model the bill both ways. Put per-user Pro pricing next to an F64 capacity you switch off overnight, for a full month. The cheaper, faster option is your answer.</li></ol><p>If most of your checks point to &quot;small and simple,&quot; stay on Power BI Pro. If they point to &quot;many viewers, many sources, slow refreshes,&quot; Fabric earns its price. There&#x27;s no prize for buying the bigger platform before you need it.</p><h2>Frequently asked questions</h2><p>Is Power BI part of Microsoft Fabric now?
+Yes. Since 2023, Power BI is one workload inside Fabric. You can still buy Power BI Pro on its own for smaller teams, but Premium capacity was replaced by Fabric capacities.</p><p>Do I have to migrate to Fabric?
+No. Your existing Power BI reports, workspaces, and models keep working. Fabric adds options like a data warehouse and OneLake. You adopt them when a real need shows up, rather than when the name changes.</p><p>What is the cheapest way to view Power BI reports for a large team?
+An F64 Fabric capacity or higher. At F64 and above, report viewers don&#x27;t need a per-user Pro license, which often costs less than buying hundreds of Pro seats.</p><p>What does OneLake actually store?
+One copy of your organization&#x27;s Fabric data, in open Parquet format, with one OneLake per tenant. Shortcuts let it read outside data, such as Azure Data Lake or Amazon S3, without copying it.</p><p>When should a small company skip Fabric?
+When you have a few reports on one clean source and under about 100 viewers. Power BI Pro handles that well, and Fabric capacity would cost more than it returns.</p><p>Does Fabric make Power BI faster?
+It can. Direct Lake mode reads data straight from OneLake, which gives fast, current reports without the usual import-versus-live trade-off. That speed gain is a common reason teams move.</p><p>Read next: [Microsoft Fabric consultant, explained without the marketing](/blog/blog-microsoft-fabric-consultant) and [OneLake: a straight answer on what&#x27;s new](/blog/blog-onelake).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">power bi vs fabric</span><span class="c">onelake</span><span class="c">fabric capacity</span><span class="c">fabric data warehouse</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+</body></html>

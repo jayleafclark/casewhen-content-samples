@@ -1,0 +1,144 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · What a Microsoft Fabric Consultant Actually Does (and When t</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>microsoft fabric consultant</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Organizations with data good enough to use for AI</figcaption><div class="cbar"><span class="cl">Ready</span><div class="ctrack"><div class="cfill" style="width:13%"></div></div><span class="cv">12%</span></div><div class="cbar"><span class="cl">Not ready</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">88%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><h1>What a Microsoft Fabric Consultant Actually Does (and When to Hire One)</h1><div class="qa"><b>Quick answer.</b> A Microsoft Fabric consultant helps you set up and run Microsoft Fabric. They size Fabric capacity, choose between Direct Lake and import, wire up OneLake, and move your Power BI reports across without breaking them. Most of the work is planning capacity and data structure, not clicking around inside the tool.
+---</div><p>Most teams hire a Microsoft Fabric consultant expecting a slicker version of Power BI, and the surprise shows up on the first Fabric capacity bill. Fabric is one platform that ties together your data storage, your pipelines, and your reports, all billed against a shared pool of compute. A good consultant spends more time on how that pool is sized and shared than on any single chart. Here is what the role covers, why the money questions catch people out, and how to tell if you need one at all.</p><h2>What does a Microsoft Fabric consultant actually do?</h2><p>It is Monday morning. The finance team opens the weekly board pack in Power BI, and the visuals load for 40 seconds before anything appears. Nobody changed the report. What changed is that three other teams scheduled heavy data refreshes at 8am, and they all draw from the same Fabric capacity. That contention is the problem a Microsoft Fabric consultant is hired to prevent.</p><p>The work splits into a few concrete jobs:</p><ul><li>Size the Fabric capacity to the real workload, and set rules for who runs what, and when.</li><li>Decide how each dataset connects to its data: Direct Lake, import, or DirectQuery.</li><li>Set up OneLake, the single storage layer for your tenant, so teams share one copy of the data instead of five.</li><li>Move existing Power BI and older warehouse content onto Fabric without breaking report links or security.</li><li>Put controls in place: workspace roles, deployment pipelines, and refresh schedules that don&#x27;t collide.</li></ul><p>Only one of those touches the report canvas. Most of a Fabric consultant&#x27;s value sits in the setup you never see on screen.</p><h2>Why does a Fabric capacity bill surprise so many teams?</h2><p>Fabric sells compute as capacity units, or CUs, packaged into sizes called F SKUs: F2, F4, F8, on up to F64 and higher. You pick one number for the whole tenant, or one per capacity, and every query, pipeline run, and refresh draws from that pool. Two things trip people up.</p><p>First, Fabric smooths bursty work across a 24 hour window, so a heavy job at 8am can still be charging you at noon. When demand runs past what your SKU allows, Fabric throttles the slow queries, and the board pack that used to open in 4 seconds now takes 40. The Capacity Metrics app shows exactly which workload caused it, and reading that app is half of a consultant&#x27;s job in the first month.</p><p>Second, F64 is a threshold with real license consequences. At F64 and above, anyone in your organization can view Power BI reports without a per-user Pro license, which changes the license math for a big viewer audience. Below F64, every viewer still needs a license. A consultant models this before you buy, because the wrong side of that line can cost more than the capacity itself.</p><p>There is also a lever most teams miss. Pay-as-you-go capacity can be switched off overnight and on weekends to stop billing, while reserved capacity costs less per hour but runs around the clock. Getting that one choice right is often worth more than the whole engagement.</p><h2>What is the Direct Lake vs import decision, in plain terms?</h2><p>Every dataset in Fabric reaches its data one of three ways, and the Direct Lake vs import question decides whether a report feels instant or sluggish.</p><ul><li>Import copies the data into the model. Queries are quickest because everything sits in memory, though you pay for a scheduled refresh and the model can only grow as large as the memory allows.</li><li>DirectQuery leaves the data in the source and queries it live. Always current, though every click waits on the source database.</li><li>Direct Lake is the option built for Fabric. The model reads Delta and Parquet files straight from OneLake, so you get import-like speed with no refresh step. Under heavy load or certain query shapes, it can fall back to DirectQuery.</li></ul><p>Here is the short version:</p><table><tr><th>Connection</th><th>Speed</th><th>Data freshness</th><th>Refresh needed</th><th>Best for</th></tr><tr><td>Import</td><td>Fastest</td><td>As of last refresh</td><td>Yes</td><td>Stable models that fit in memory</td></tr><tr><td>DirectQuery</td><td>Slowest</td><td>Live</td><td>No</td><td>Data that must be current to the second</td></tr><tr><td>Direct Lake</td><td>Near import</td><td>Near live</td><td>No</td><td>Large Fabric models sitting on OneLake</td></tr></table><p>A consultant does not pick one mode for everything. A near-real-time operations report might use DirectQuery, a big sales model on OneLake uses Direct Lake, and a small reference table stays on import. The skill is matching each model to the right mode, then testing that Direct Lake stays fast under real load rather than dropping to DirectQuery at the worst moment.</p><h2>How do you know if you need a Microsoft Fabric consultant?</h2><p>You do not need one to build a single report. You probably do when one of these is true:</p><ol><li>You are moving off Power BI Premium onto Fabric and want the capacity sized right the first time.</li><li>Several teams share one capacity and keep slowing each other down.</li><li>You are standing up OneLake and want shortcuts to existing storage, such as ADLS Gen2 or Amazon S3, instead of copying the data in.</li><li>Your refreshes overrun and you cannot tell which workload is the cause.</li><li>You need row-level security and deployment pipelines set up before more people get access.</li></ol><p>A short engagement to plan Fabric capacity and data structure usually costs less than one quarter of an oversized SKU. That is the honest test: if the planning saves more than it costs, hire one, and if your setup is one workspace and two reports, you can wait.</p><h2>How much does a Microsoft Fabric consultant cost, and is it worth it?</h2><p>Day rates vary by market and scope, so treat any single number with care. Where the money goes matters more than the rate. A week of planning that lands you on an F SKU one size smaller, switched off on weekends, can save more each month than the engagement cost, every month after. The reverse is common too. Teams that skip the planning often run an oversized capacity for a year before anyone opens the Capacity Metrics app.</p><p>Only 12% of organizations say their data is good enough in quality and access to use for AI (Drexel LeBow and Precisely, 2025), and Fabric is frequently bought for exactly that reason. A consultant keeps the spend pointed at the data foundation and at right-sized Fabric capacity, rather than at compute sitting idle overnight. For scale, Microsoft Fabric passed 28,000 customers within about two years of launch (Microsoft, Ignite 2025), so the ways teams overspend on it are well understood by now.</p><p>The best engagements are short and specific: size the capacity, choose the connection modes, set up OneLake and security, then hand it back with the numbers written down. You want a Microsoft Fabric consultant who leaves you able to run it yourself, with a Capacity Metrics dashboard you check once a week.</p><h2>Frequently asked questions</h2><p>Is a Microsoft Fabric consultant the same as a Power BI consultant?
+There is overlap, though the scope is wider. A Power BI consultant works mostly at the report and model level. A Fabric consultant also handles capacity sizing, OneLake storage, pipelines, and the warehouse or lakehouse underneath, so the whole platform runs within budget.</p><p>Do I need Microsoft Fabric if I already have Power BI?
+Not always. If you run a handful of reports on Pro licenses and refreshes finish on time, Power BI on its own is fine. Fabric earns its place when you need shared storage, larger models, or one capacity that several teams draw from.</p><p>What is OneLake in one sentence?
+OneLake is one storage area shared across your entire Fabric tenant, so every team reads and writes the same data, and shortcuts let you point at outside storage without copying it in.</p><p>How long does a Fabric engagement take?
+A focused capacity-and-structure engagement often runs two to four weeks. Larger moves off Premium, with many reports and strict security, run longer, though the planning still happens up front.</p><p>Can we switch Fabric capacity off to save money?
+Yes, on pay-as-you-go F SKUs. You can switch it off overnight and on weekends, which stops billing while it is off. Reserved capacity is cheaper per hour but cannot be switched off, so the right pick depends on how many hours you truly need.</p><p>Read next: [Power BI vs. Fabric: what actually changes for your team](/blog/blog-power-bi-vs-fabric) and [Fabric capacity, explained without the marketing](/blog/blog-fabric-capacity).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">microsoft fabric consultant</span><span class="c">direct lake vs import</span><span class="c">onelake</span><span class="c">fabric capacity</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+</body></html>

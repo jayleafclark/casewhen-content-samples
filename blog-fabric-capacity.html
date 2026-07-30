@@ -1,0 +1,144 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Fabric Capacity: What You Actually Pay to Run It</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>fabric capacity</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Power BI Pro list price, per user per month</figcaption><div class="cbar"><span class="cl">2024</span><div class="ctrack"><div class="cfill" style="width:71%"></div></div><span class="cv">$10</span></div><div class="cbar"><span class="cl">2025</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">$14</span></div><div class="csrc">Source: Microsoft, 2025 price update</div></figure><h1>Fabric Capacity: What You Actually Pay to Run It</h1><div class="qa"><b>Quick answer.</b> </div><p>Fabric capacity is the shared pool of compute you buy to run everything inside Microsoft Fabric: Power BI, data pipelines, warehouses, lakehouses, and notebooks. You pick a size, called an F SKU, from F2 up to F2048. Every workload draws from that one pool, and Fabric capacity is billed per capacity unit, hourly or reserved.</p><p>Most teams buy Fabric capacity the wrong way, and it shows up on the invoice inside the first month. They pick a big number to feel safe, or a small number to feel cheap. Neither choice matches how the platform charges. Here&#x27;s how Fabric capacity works, what it costs, and how to size it so you&#x27;re not paying for compute nobody touches.</p><p>Microsoft Fabric passed 28,000 customers within its first two years (Microsoft, Ignite 2025). A lot of those buyers signed a capacity before anyone worked out what they needed. You can do better with about ten minutes of math.</p><h2>What is Fabric capacity, in plain terms?</h2><p>Microsoft Fabric is one product that bundles the tools a data team uses. Power BI for reports. Data Factory for pipelines. A warehouse and a lakehouse for storage and queries. Notebooks for code. Fabric capacity is the compute that runs all of it. You buy one capacity, and every tool shares it.</p><p>Two ideas do most of the work here.</p><p>The first is the capacity unit, or CU. It&#x27;s how Fabric measures compute. An F64 capacity gives you 64 CUs to spread across every job you run. Bigger F number, more CUs, higher price.</p><p>The second is OneLake. OneLake is the single storage layer under Fabric, and it keeps all your data in one place. Storage is billed on its own, apart from compute. So your Fabric capacity pays for the processing, and OneLake pays for the data sitting at rest. Keeping those two costs separate in your head stops a lot of budget confusion later.</p><h2>Why does your Fabric capacity bill jump when nothing changed?</h2><p>Here&#x27;s a surprise a lot of teams hit. Your reports run fine for weeks. Then one Monday everything slows down, and the next invoice is higher. Your data didn&#x27;t change. What changed is how much compute your jobs asked for.</p><p>Fabric smooths compute over time. When a heavy job runs, Fabric lets it borrow compute above your limit for a short spike. That feature is called bursting. Fabric then spreads the cost of that spike over the following hours, up to 24 of them. Small bursts stay invisible on the bill.</p><p>The trouble starts when your team keeps running more than the capacity provides. The smoothing runs out. Fabric then throttles you. First, interactive reports wait a few extra seconds. Then longer. Eventually background refreshes get delayed. A refresh that used to finish at 6 a.m. now lands at 9 a.m., right when the board opens the report.</p><p>This matters because trust is fragile. Sixty-seven percent of organizations don&#x27;t fully trust the data they use to make decisions (Precisely and Drexel LeBow, 2025). A report that&#x27;s late or throttled feeds that doubt. So a capacity that&#x27;s slightly too small doesn&#x27;t just cost speed. It costs confidence in the numbers.</p><h2>How do you size Fabric capacity without overpaying?</h2><p>You size it from real usage, not from headcount or a gut number. Here are the steps we run for clients.</p><ol><li>Measure your real peak. Install the free Microsoft Fabric Capacity Metrics app. Let it collect two to four weeks of data. Look at your busiest hour, not your average. That peak CU number is what you size against.</li><li>Match an F SKU to that peak. Round up to the next size that covers your peak with a little headroom. Use the table below.</li><li>Choose pay-as-you-go or reserved. Pay-as-you-go bills per second and can be switched off. A one-year reservation costs about 41 percent less for steady, all-day workloads. Run production on reserved, and keep dev on pay-as-you-go.</li><li>Switch off what you don&#x27;t need overnight. A pay-as-you-go capacity used only for development can be turned off after hours. That stops the meter and cuts the bill for the time nobody&#x27;s working.</li><li>Watch the F64 line. At F64 and above, anyone can view a Power BI report for free. Below F64, every viewer needs their own Power BI Pro license at about $14 per user per month.</li></ol><p>Here is how the common sizes compare, using list pay-as-you-go pricing (US region, subject to change).</p><table><tr><th>Capacity SKU</th><th>Capacity units (CU)</th><th>Pay-as-you-go per month (approx)</th><th>Power BI report viewing</th></tr><tr><td>F2</td><td>2</td><td>~$263</td><td>Each viewer needs a Pro license</td></tr><tr><td>F8</td><td>8</td><td>~$1,051</td><td>Each viewer needs a Pro license</td></tr><tr><td>F32</td><td>32</td><td>~$4,205</td><td>Each viewer needs a Pro license</td></tr><tr><td>F64</td><td>64</td><td>~$8,410</td><td>Free viewing for all report consumers</td></tr><tr><td>F128</td><td>128</td><td>~$16,819</td><td>Free viewing for all report consumers</td></tr></table><p>Read the F64 row carefully. If you have 60 report viewers, F64 at about $8,410 a month replaces 60 Pro licenses. If you have 12 viewers, those 12 Pro seats cost roughly $168 a month, and a small capacity plus those seats beats an F64 by a wide margin. The right answer swings entirely on how many people read your reports.</p><h2>When should you use Microsoft Fabric, and when should you wait?</h2><p>Knowing when to use Microsoft Fabric comes down to two things: what you already run, and how many workloads you want under one roof. Fabric earns its price when you want Power BI, pipelines, and a warehouse sharing one bill and one storage layer, OneLake. That single-platform setup removes the copies of data that pile up across separate tools.</p><p>Fabric earns it less when all you need is a handful of Power BI reports for a small team. In that case, Power BI Pro at about $14 per user per month often costs far less than the smallest F2 capacity. There&#x27;s no rule that says you must move. Plenty of teams run Power BI Pro for years and never need a capacity.</p><p>So the honest test is workload, not hype. Count your workloads. One reporting tool for ten people points to Pro. Pipelines, a warehouse, data science, and reporting for the whole company point to Fabric.</p><h2>What does a Fabric implementation partner actually do here?</h2><p>A Fabric implementation partner earns its fee in the sizing and the guardrails, long before any dashboard gets built. The value shows up in three places.</p><p>First, right-sizing. A partner reads your Capacity Metrics data and picks the SKU that fits your real peak, so you skip both the oversized capacity and the throttled one.</p><p>Second, cost control. A partner sets up the pay-as-you-go and reserved split, turns off idle capacities, and puts an alert on CU use so a runaway job gets caught the same day, not on the invoice.</p><p>Third, governance. That means row-level security, workspace roles, and clear owners for every semantic model in OneLake, so the reports people read can be trusted.</p><p>Sizing Fabric capacity well is a small, repeatable calculation. The steps above get most teams to the right number on their own. A partner is worth it when the workloads are mixed, the data is large, or the cost of a slow month-end close is high enough that guessing isn&#x27;t an option.</p><h2>Frequently asked questions</h2><p>What is the smallest Fabric capacity you can buy?
+The smallest is F2, with 2 capacity units, at roughly $263 a month on pay-as-you-go. It suits development and small workloads, though report viewers below F64 still need Power BI Pro licenses.</p><p>Do I still need Power BI Pro licenses with Fabric capacity?
+It depends on the size. On F64 and above, report consumers view content for free. Below F64, every viewer needs a Pro license. Report authors and publishers need a Pro license at any size.</p><p>Can I turn Fabric capacity off to save money?
+Yes, on pay-as-you-go. You can switch a capacity off outside work hours and stop the meter, which is handy for development capacities. A reserved capacity bills at a flat rate whether it&#x27;s running or idle, so you keep it on.</p><p>How is Fabric capacity different from Power BI Premium?
+Fabric F SKUs replace the old Premium per-capacity plan for most buyers. An F64 lines up with the old P1 capacity, including free report viewing, but an F SKU also runs pipelines, warehouses, and notebooks, not just Power BI.</p><p>What is a capacity unit?
+A capacity unit, or CU, is how Fabric measures compute. Your F SKU number is your CU count, so an F16 gives you 16 CUs. Every job you run, from a refresh to a query, draws CUs from that shared pool.</p><p>How do I know if my capacity is too small?
+Open the Fabric Capacity Metrics app and look for throttling. If interactive reports are waiting or refreshes are getting delayed during your busy hours, your peak use is above what the capacity provides, and you should size up.</p><p>Read next: [Microsoft Fabric consultant, explained without the marketing](/blog/blog-microsoft-fabric-consultant) and [Onelake: a straight answer on what&#x27;s actually new](/blog/blog-onelake).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">fabric capacity</span><span class="c">onelake com</span><span class="c">fabric implementation partner</span><span class="c">when to use microsoft fabric</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+</body></html>
