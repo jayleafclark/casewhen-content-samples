@@ -835,6 +835,30 @@ strategy_page()
 seo_page()
 funnels_page()
 visuals_page()
+SOCIALDIR = Path(r"J:\Claude Code\casewhen-research\content\w-batch03-social")
+def merge_social():
+    if not SOCIALDIR.exists(): return 0
+    bymap = {}
+    for f in SOCIALDIR.glob("*.json"):
+        try: data = json.loads(f.read_text(encoding="utf-8"))
+        except Exception: continue
+        stem = f.stem
+        plat = stem.split("-", 1)[0]
+        slug = stem[len(plat)+1:]
+        bymap[(plat, slug)] = data
+    merged = 0
+    for plat in ("linkedin", "shortform", "x"):
+        slots = sorted(PLATFORMS[plat]["slots"], key=lambda s: (s[1], s[0]))
+        for idx, (lang, day, r) in enumerate(slots):
+            kw = (r.get("primary_keyword") or "").strip().lower()
+            slug = re.sub(r"[^a-z0-9]+", "-", kw).strip("-")[:40]
+            data = bymap.get((plat, slug))
+            if data and isinstance(data, dict):
+                COPY[f"{plat}:{idx}"] = data; merged += 1
+    return merged
+
+nsoc = merge_social()
+print(f"social merged: {nsoc}")
 tot = don = 0
 for k, cfg in PLATFORMS.items():
     n, d = platform_page(k, cfg); tot += n; don += d
