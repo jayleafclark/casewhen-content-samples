@@ -305,31 +305,25 @@ def platform_page(k, cfg):
     return len(slots), done
 
 def visuals_page():
-    T = "img/tpl/"
-    def gal(files, cls="vgal"):
-        imgs = "".join(f'<img src="{T}{f}.png" loading="lazy" alt="">' for f in files)
-        return f'<div class="{cls}">{imgs}</div>'
-    def strip(files):
-        imgs = "".join(f'<img src="{T}{f}.png" loading="lazy" alt="">' for f in files)
-        return f'<div class="vstrip">{imgs}</div><div class="vhint">← swipe to see all {len(files)} slides →</div>'
-    def one(f):
-        return f'<div class="vgal wide"><img src="{T}{f}.png" loading="lazy" alt=""></div>'
-    checklist = ["02-carousel-checklist-governance-"+s+"-dark-teal" for s in ["cover","slide2","slide3","slide4","slide5","slide6"]]
-    quotes = ["07-quote-card-a-refresh-can-dark-teal","07-quote-card-nobody-can-actually-base-teal",
-              "07-quote-card-every-change-ships-pale-mint","07-quote-card-most-calculations-transfer-near-white"]
+    D = "img/decks/"
+    def deck_strip(prefix, n):
+        imgs = "".join(f'<img src="{D}{prefix}-{i}.png" loading="lazy" alt="{prefix} slide {i}">' for i in range(1, n+1))
+        return f'<div class="vstrip">{imgs}</div><div class="vhint">← swipe through all {n} slides →</div>'
+    def qgal(slugs):
+        imgs = "".join(f'<img src="{D}quote-{s}.png" loading="lazy" alt="quote">' for s in slugs)
+        return f'<div class="vgal">{imgs}</div>'
+    quotes = ["board-revenue","pricing-census","migration-scope","licensing-350"]
     body = f"""<section class="ph"><div class="wrap"><div class="eb">Visuals</div>
 <h2>Carousels and cards</h2>
-<p>The visual templates that carry the posts on LinkedIn and Instagram. Each is shown once here with
-its real copy. Every template also renders in four brand colours (dark teal, base teal, pale mint,
-near white) that rotate across the week. Every line on them passed the same language checks as the
-written posts.</p></div></section>
+<p>The carousels that carry the posts on LinkedIn and Instagram. Each is a full seven-slide deck:
+a cover that states the payoff, five slides that each teach one idea with a headline and an
+explanation, and a save slide. Swipe each one. Every line passed the same language checks as the
+written posts, and each slide carries one real, concrete specific.</p></div></section>
 <div class="wrap">
- <div class="vsec"><div class="vname">Checklist carousel <span>· the full six-slide swipe: 5 signs your numbers will not survive a board review</span></div>{strip(checklist)}</div>
- <div class="vsec"><div class="vname">Myth vs reality carousel <span>· a Tableau-to-Power-BI migration myth, answered</span></div>{one("04-carousel-comparison-migrations-cover-split-teal-white")}</div>
- <div class="vsec"><div class="vname">Stat carousel <span>· one number that anchors the post</span></div>{one("03-carousel-stat-reveal-azure-cover-dark-teal")}</div>
- <div class="vsec"><div class="vname">Framework carousel <span>· Microsoft Fabric, layer by layer</span></div>{one("05-carousel-framework-fabric-cover-dark-teal")}</div>
- <div class="vsec"><div class="vname">9:16 infographic <span>· vertical, for reels and stories</span></div>{one("06-infographic-9x16-governance-dark-teal")}</div>
- <div class="vsec"><div class="vname">Quote cards <span>· four different founder lines, each in its own colour</span></div>{gal(quotes)}</div>
+ <div class="vsec"><div class="vname">Governance checklist <span>· 5 signs your Power BI numbers won't survive a board review</span></div>{deck_strip("governance", 7)}</div>
+ <div class="vsec"><div class="vname">Migration: myth vs reality <span>· what actually transfers from Tableau to Power BI</span></div>{deck_strip("migration", 7)}</div>
+ <div class="vsec"><div class="vname">Power BI licensing <span>· the 350-viewer line where a Fabric capacity beats per-user pricing</span></div>{deck_strip("pricing", 7)}</div>
+ <div class="vsec"><div class="vname">Quote cards <span>· four self-contained founder insights, one topic each</span></div>{qgal(quotes)}</div>
 </div>"""
     (OUT / "visuals.html").write_text(shell("visuals.html", "Visuals", body), encoding="utf-8")
 

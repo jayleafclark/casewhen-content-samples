@@ -1,0 +1,79 @@
+{
+  "governance": {
+    "eyebrow": "GOVERNANCE", "byline": "Austin, CaseWhen", "kw": "power bi governance",
+    "slides": [
+      {"layout": "cover", "headline": "5 signs your Power BI numbers won't survive a board review",
+       "promise": "The five things a controller checks before a dashboard number reaches the board pack."},
+      {"layout": "value", "num": "1 of 5", "headline": "No one owns the number",
+       "subtext": "When a board asks who signs off that revenue figure, the honest answer is a report, and reports do not sign anything. With no named owner to defend how it was calculated, the number becomes your exposure the moment someone questions it."},
+      {"layout": "value", "num": "2 of 5", "headline": "Two dashboards, two answers",
+       "subtext": "Sales shows one revenue figure and Finance shows another, both on screen in the same meeting. The gap is almost never the chart. It is that nobody agreed what revenue means before anyone measured it."},
+      {"layout": "bignum", "num": "3 of 5", "big": "3", "headline": "One KPI, three definitions",
+       "subtext": "Active customer, margin, and on-time each carry three different meanings across departments. When the definition lives only inside one analyst's DAX, the board is trusting a formula nobody else in the room can read."},
+      {"layout": "value", "num": "4 of 5", "headline": "Everyone sees everything",
+       "subtext": "With row-level security switched off, a regional manager opens the report and sees every other region's salaries and margins. In front of a board that is a data-protection incident, not a settings preference."},
+      {"layout": "value", "num": "5 of 5", "headline": "The refresh lags without warning",
+       "subtext": "The board reads Tuesday's number believing it is today's, because the scheduled refresh last ran three days ago and nothing raised a flag. A wrong-as-of number is far harder to defend than an obviously old one."},
+      {"layout": "cta", "headline": "Save this before your next board pack.",
+       "cta": "Each sign has one fix: a scoped Reporting Foundation Review. Fixed price, one week, and you keep the written findings either way.",
+       "link": "Full checklist and the fix for each sign on the blog (link in the caption)."}
+    ]
+  },
+  "migration": {
+    "eyebrow": "MIGRATION", "byline": "Austin, CaseWhen", "kw": "tableau to power bi migration",
+    "slides": [
+      {"layout": "cover", "headline": "Tableau to Power BI: what actually transfers",
+       "promise": "Five things teams assume they will rebuild, and the one thing they truly have to."},
+      {"layout": "twocol", "num": "1 of 5", "headline": "\"We start from zero\"",
+       "left": "MYTH", "leftbody": "You rebuild every calculation by hand.",
+       "right": "REALITY", "rightbody": "Most of your logic converts. Tableau calculated fields map onto DAX measures with limited rework, so the arithmetic is rarely where the time goes. Budget for translation, and move on."},
+      {"layout": "twocol", "num": "2 of 5", "headline": "\"The visuals come across\"",
+       "left": "MYTH", "leftbody": "A dashboard looks the same after the move.",
+       "right": "REALITY", "rightbody": "Layout does not port one to one. Power BI arranges visuals its own way, so plan a deliberate page-design pass. It is a one-time cost, done once at the start."},
+      {"layout": "twocol", "num": "3 of 5", "headline": "Governance is the real rebuild",
+       "left": "MYTH", "leftbody": "Permissions and definitions come along for free.",
+       "right": "REALITY", "rightbody": "Row-level security, workspace access, and the certified dataset all get rebuilt in Power BI. This is the part nobody scopes, and it is where a migration overruns. Scope it first."},
+      {"layout": "twocol", "num": "4 of 5", "headline": "\"One report, one dataset\"",
+       "left": "MYTH", "leftbody": "Each Tableau workbook becomes one Power BI file.",
+       "right": "REALITY", "rightbody": "The win is the opposite. You consolidate many workbooks onto one shared model, so revenue is defined once and reused. That single move prevents the two-dashboards-two-answers problem later."},
+      {"layout": "twocol", "num": "5 of 5", "headline": "\"Licensing is a like-for-like swap\"",
+       "left": "MYTH", "leftbody": "You pay the same per user as before.",
+       "right": "REALITY", "rightbody": "Power BI licensing changes the math. Above a certain viewer count a Fabric capacity beats per-user licences. Model the viewer count before you sign, or Finance meets the bill by surprise."},
+      {"layout": "cta", "headline": "Save this before you scope a migration.",
+       "cta": "We rebuilt a global manufacturer's legacy reporting on Azure in two fixed-price projects, roughly 10 to 22 days each. The governance layer was the real work.",
+       "link": "The full what-transfers table is on the blog (link in the caption)."}
+    ]
+  },
+  "pricing": {
+    "eyebrow": "POWER BI LICENSING", "byline": "Austin, CaseWhen", "kw": "power bi pro cost",
+    "slides": [
+      {"layout": "cover", "headline": "The 350-viewer line that changes your Power BI bill",
+       "promise": "The number Microsoft leaves off the pricing page, and the point where it flips in your favour."},
+      {"layout": "twocol", "num": "1 of 5", "headline": "Two per-user licences",
+       "left": "PRO", "leftbody": "14 dollars per user, per month.",
+       "right": "PREMIUM PER USER", "rightbody": "24 dollars per user, per month. In a per-user model, every single person who opens the report needs one of these, viewers included."},
+      {"layout": "bignum", "num": "2 of 5", "big": "$5,000", "headline": "Then there is capacity",
+       "subtext": "A Fabric F64 capacity is a flat fee of roughly 5,000 dollars a month. Its one defining feature: at F64 and above, viewers open your reports without a paid licence of their own."},
+      {"layout": "bignum", "num": "3 of 5", "big": "350", "headline": "Where the two lines cross",
+       "subtext": "Five thousand dollars divided by fourteen is about 357. So near 350 viewers, one F64 capacity costs less than a Pro licence for every viewer. This is the number that decides your model."},
+      {"layout": "twocol", "num": "4 of 5", "headline": "Which side are you on",
+       "left": "UNDER ~350", "leftbody": "Per-user Pro is usually cheaper and simpler.",
+       "right": "OVER ~350", "rightbody": "Capacity wins, and keeps winning as you add people. Most teams guess wrong here because they count report authors, when the reader count is what moves the line."},
+      {"layout": "value", "num": "5 of 5", "headline": "Count viewers before you buy",
+       "subtext": "List everyone who only reads reports, then everyone who builds them. The reader count is what carries you across the 350 line. Buying capacity for 40 viewers, or 900 Pro seats, is the common and costly mistake."},
+      {"layout": "cta", "headline": "Save this before your next licence renewal.",
+       "cta": "We publish real numbers because almost no one in our market does. Our day rate is 1,500 dollars, with fixed-price bands from a one-week review to a full rebuild.",
+       "link": "Live pricing, checked this month, and the cost calculator on the blog (link in the caption)."}
+    ]
+  },
+  "quotes": [
+    {"slug": "pricing-census", "eyebrow": "PRICING", "who": "Saju", "photo": "saju",
+     "quote": "We checked 19 Power BI firms in our market. None publish a price. So we published ours: 1,500 dollars a day, fixed-price bands from a one-week review to a full rebuild."},
+    {"slug": "migration-scope", "eyebrow": "MIGRATION", "who": "Austin", "photo": "austin",
+     "quote": "In a Tableau to Power BI move, your calculations mostly convert. What you rebuild is who can see which rows, and which dataset is certified. Scope that first."},
+    {"slug": "board-revenue", "eyebrow": "GOVERNANCE", "who": "Austin", "photo": "austin",
+     "quote": "If two dashboards show different revenue in the same board meeting, look past the chart. Nobody agreed what revenue means before anyone measured it."},
+    {"slug": "licensing-350", "eyebrow": "LICENSING", "who": "Austin", "photo": "austin",
+     "quote": "Near 350 viewers, a Fabric F64 capacity costs less than a 14-dollar Pro licence for each of them. Below that, per-user is cheaper. Count viewers before you buy."}
+  ]
+}
