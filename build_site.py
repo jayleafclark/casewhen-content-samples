@@ -336,80 +336,11 @@ a{{color:inherit}}
 {inner}{REVEAL_JS}{js}</body></html>"""
 
 def scorecard_mockup():
-    css = """
-body{background:#0e2f28;color:#eafaf5}
-.hero{max-width:760px;margin:0 auto;padding:96px 22px 30px;text-align:center}
-.eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7AC4B5}
-h1{font-family:'NM';font-weight:700;font-size:clamp(30px,6vw,52px);letter-spacing:-.02em;line-height:1.08;margin:16px 0 0}
-.hero p{font-size:18px;color:#bcd8cf;max-width:56ch;margin:16px auto 0}
-.card{max-width:640px;margin:26px auto 0;background:#fff;color:#1a1615;border-radius:20px;padding:26px 24px;box-shadow:0 30px 80px rgba(0,0,0,.35)}
-.q{border-top:1px solid #eef1ef;padding:16px 0}.q:first-child{border-top:0;padding-top:2px}
-.q h4{font-size:15.5px;margin:0 0 10px;font-weight:700}
-.opts{display:flex;gap:8px;flex-wrap:wrap}
-.opt{font-size:13.5px;border:1px solid #dfe6e3;border-radius:10px;padding:8px 13px;cursor:pointer;transition:all .15s;user-select:none}
-.opt:hover{border-color:#1D967C}
-.opt.sel{background:#11493F;color:#fff;border-color:#11493F}
-.result{margin-top:20px;border-top:2px solid #f0f2f6;padding-top:18px}
-.meter{height:14px;border-radius:10px;background:linear-gradient(90deg,#CE8168 0%,#e6c07a 50%,#1D967C 100%);position:relative;margin:12px 0}
-.needle{position:absolute;top:-6px;width:4px;height:26px;background:#1a1615;border-radius:3px;left:8%;transition:left 1s cubic-bezier(.2,.8,.2,1)}
-.tier{font-family:'NM';font-weight:700;font-size:26px;margin:6px 0 2px}
-.tierrow{display:flex;justify-content:space-between;font-size:11px;color:#787a76;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
-.gate{margin-top:18px;background:#f3fbfa;border:1px solid #d8f3ed;border-radius:14px;padding:16px}
-.gate input{width:100%;border:1px solid #cfe3dc;border-radius:10px;padding:12px 14px;font-size:15px;font-family:inherit;margin-top:8px}
-.gate button{width:100%;margin-top:10px;background:#1D967C;color:#fff;border:0;border-radius:10px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
-.gate small{color:#787a76;font-size:11.5px}
-.foot{max-width:640px;margin:22px auto 60px;text-align:center;color:#9fc2b8;font-size:12.5px}
-.badge{display:inline-block;font-size:11px;background:rgba(122,196,181,.16);color:#7AC4B5;border-radius:20px;padding:4px 12px;font-weight:600;margin-bottom:10px}
-"""
-    quiz = ""
-    Q = [("Can you name, in one sentence, who owns the revenue number on your board report?",["Yes, one person","Sort of","No"]),
-         ("How do report changes reach the live dashboard?",["Dev, test, then live","Straight to live","Not sure"]),
-         ("When did you last test row-level security?",["This quarter","At launch only","Never"]),
-         ("Do two teams ever report the same metric differently?",["Never","Sometimes","Often"])]
-    for i,(q,opts) in enumerate(Q):
-        os_="".join(f'<div class="opt" data-q="{i}" data-v="{2-j}">{esc(o)}</div>' for j,o in enumerate(opts))
-        quiz += f'<div class="q"><h4>{i+1}. {esc(q)}</h4><div class="opts">{os_}</div></div>'
-    inner = f"""
-<div class="hero" data-r>
- <span class="badge">Mockup · Lead magnet</span>
- <div class="eyebrow">Reporting-Foundation Maturity Scorecard</div>
- <h1>Would your Power BI numbers survive a board review?</h1>
- <p>Answer four questions. Get an instant maturity tier and a one-page PDF you can forward to your CFO.</p>
-</div>
-<div class="card" data-r>
- {quiz}
- <div class="result">
-  <div class="tierrow"><span>Fragile</span><span>Functional</span><span>Board-ready</span></div>
-  <div class="meter"><div class="needle" id="needle"></div></div>
-  <div class="tier" id="tier">Answer the four questions</div>
-  <div class="gate">
-   <b style="font-size:14px">Get your full scorecard + the forwardable PDF</b>
-   <input type="email" placeholder="you@company.com" aria-label="email">
-   <button type="button">Email me my scorecard</button>
-   <small>No spam. One email with your result and the PDF. Mockup only — nothing is sent.</small>
-  </div>
- </div>
-</div>
-<div class="foot" data-r>CaseWhen · a fixed-price Reporting Foundation Review fixes whatever the scorecard flags.</div>"""
-    js = """<script>
-let ans={};
-document.querySelectorAll('.opt').forEach(o=>o.addEventListener('click',()=>{
-  const q=o.dataset.q; document.querySelectorAll('.opt[data-q="'+q+'"]').forEach(x=>x.classList.remove('sel'));
-  o.classList.add('sel'); ans[q]=+o.dataset.v; render();
-}));
-function render(){
-  const ks=Object.keys(ans); if(!ks.length)return;
-  let s=0; ks.forEach(k=>s+=ans[k]); const max=Object.keys(ans).length*2;
-  const pct=Math.round(s/ (4*2) *100);
-  document.getElementById('needle').style.left=Math.max(4,Math.min(96,pct))+'%';
-  const t=document.getElementById('tier');
-  if(ks.length<4){t.textContent='Keep going ('+ks.length+'/4)';t.style.color='#787a76';return;}
-  if(pct<40){t.textContent='Fragile';t.style.color='#CE8168';}
-  else if(pct<75){t.textContent='Functional';t.style.color='#b8862f';}
-  else {t.textContent='Board-ready';t.style.color='#1D967C';}
-}
-</script>"""
-    (OUT/"scorecard.html").write_text(landing("Maturity Scorecard","🎯",css,inner,js),encoding="utf-8")
+    # Full self-contained landing page. Bypasses landing() so the page can meet its
+    # own spec: ui-sans-serif font, "back to funnels" link, and a FAIL-SAFE reveal
+    # (content visible by default; JS opts into the hidden-then-animate state).
+    page = SCORECARD_PAGE
+    (OUT/"scorecard.html").write_text(page, encoding="utf-8")
 
 def calculator_mockup():
     css = """
@@ -771,7 +702,13 @@ ARTCSS = """
 """
 
 def blog_articles_and_grid():
-    files = sorted(BLOGDIR.glob("*.md"))
+    allf = sorted(BLOGDIR.glob("*.md"))
+    def is_training(f):
+        k = f.stem.lower()
+        return any(w in k for w in ["cert","train","course","class","tutorial","learn","exam","analyst","schulung","coursera"])
+    training = [f for f in allf if is_training(f)]
+    other = [f for f in allf if not is_training(f)]
+    files = other + training[:8]   # keep the diverse set, cap training so it stops dominating
     cards = []
     for f in files:
         md = f.read_text(encoding="utf-8"); fm, body = _fm_body(md)
@@ -829,7 +766,7 @@ strategy_page()
 seo_page()
 funnels_page()
 visuals_page()
-SOCIALDIR = Path(r"J:\Claude Code\casewhen-research\content\w-batch03-social")
+SOCIALDIR = Path(r"J:\Claude Code\casewhen-research\content\w-batch03-social-v2")
 def merge_social():
     if not SOCIALDIR.exists(): return 0
     bymap = {}
