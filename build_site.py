@@ -198,13 +198,14 @@ def shell(active, title, inner):
     return f"""<!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow"><title>CaseWhen · {esc(title)}</title>
-<style>{CSS}</style></head><body>
+<style>{CSS}</style><link rel="stylesheet" href="annotate.css"></head><body>
 <header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
 <nav class="nav">{nav(active)}</nav></div></header>
 {inner}
 <footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
 finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
 per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
 </body></html>"""
 
 CONTENT = Path(r"J:\Claude Code\casewhen-research\content\w-batch02-presentation")
@@ -251,7 +252,7 @@ def md_to_html(md):
             out.append(f"<ul>{items}</ul>"); continue
         # paragraph (strip bold markers for plain render)
         out.append(f'<p>{esc(re.sub(r"\*\*(.+?)\*\*", r"\1", b))}</p>')
-    return f'<div class="body article">{"".join(out)}</div>'
+    return f'<div class="body article annotatable">{"".join(out)}</div>'
 
 def render_script(c):
     beats = ""
@@ -261,7 +262,7 @@ def render_script(c):
                   f'<div class="os"><b>on-screen</b> {esc(bt.get("screen"))}</div>'
                   f'<div class="pr">{esc(bt.get("prod"))}</div></div></div>')
     cap = (f'<div class="cap"><b>caption</b>{esc(c.get("caption",""))}</div>' if c.get("caption") else "")
-    return (f'<div class="body script"><div class="sk-hook">{esc(c["hook"])}</div>'
+    return (f'<div class="body script annotatable"><div class="sk-hook">{esc(c["hook"])}</div>'
             f'<span class="sk-os">frame 1: {esc(c.get("onscreen",""))}</span>{beats}{cap}'
             f'<div class="meta"><span class="ship">SHIP ✓ gated</span><span>{esc(c.get("note",""))}</span></div></div>')
 
@@ -282,7 +283,7 @@ def card(platform, idx, lang, day, r):
     elif c and c.get("format") == "script":  # short-form script
         body = render_script(c)
     elif c:  # finished short text (LinkedIn / X / blog summary)
-        body = f'<div class="body done"><span class="hook">{esc(c["hook"])}</span>' \
+        body = f'<div class="body done annotatable"><span class="hook">{esc(c["hook"])}</span>' \
                f'<div class="txt">{esc(c["body"])}</div>'
         if c.get("close"): body += f'<div class="close">{esc(c["close"])}</div>'
         body += f'<div class="meta"><span class="ship">SHIP ✓ gated</span>' \
@@ -1655,6 +1656,7 @@ written posts, and each slide carries one real, concrete specific.</p></div></se
     (OUT / "visuals.html").write_text(shell("visuals.html", "Visuals", body), encoding="utf-8")
 
 BLOGDIR = Path(r"J:\Claude Code\casewhen-research\content\w-batch03-blogs")
+BUYERBLOG = Path(r"J:\Claude Code\casewhen-research\content\w-buyer-blogs")
 
 def _fm_body(md):
     fm = {}; body = md
@@ -1715,13 +1717,15 @@ ARTCSS = """
 """
 
 def blog_articles_and_grid():
-    allf = sorted(BLOGDIR.glob("*.md"))
+    buyer = sorted(BUYERBLOG.glob("**/*.md")) if BUYERBLOG.exists() else []
+    rest = sorted(BLOGDIR.glob("*.md"))
     def is_training(f):
         k = f.stem.lower()
         return any(w in k for w in ["cert","train","course","class","tutorial","learn","exam","analyst","schulung","coursera"])
-    training = [f for f in allf if is_training(f)]
-    other = [f for f in allf if not is_training(f)]
-    files = other + training[:8]   # keep the diverse set, cap training so it stops dominating
+    training = [f for f in rest if is_training(f)]
+    other = [f for f in rest if not is_training(f)]
+    # BUYER-WEIGHTED grid: buyer/business-side articles first, then practitioner, training capped
+    files = buyer + other + training[:8]
     cards = []
     for f in files:
         md = f.read_text(encoding="utf-8"); fm, body = _fm_body(md)
@@ -1780,35 +1784,61 @@ seo_page()
 funnels_page()
 visuals_page()
 SOCIALDIR = Path(r"J:\Claude Code\casewhen-research\content\w-batch03-social-v2")
-def merge_social():
-    if not SOCIALDIR.exists(): return 0
+BUYER_LI = Path(r"J:\Claude Code\casewhen-research\content\w-buyer-linkedin")
+BUYER_REEL = Path(r"J:\Claude Code\casewhen-research\content\w-buyer-reels")
+def _load_json(f):
+    try:
+        d = json.loads(f.read_text(encoding="utf-8"))
+        return d if isinstance(d, dict) else None
+    except Exception:
+        return None
+def build_social():
+    """Show ALL posts per platform, BUYER-FIRST: the buyer-weighted posts fill the
+    early slots, the existing practitioner posts follow. Every post carries its own
+    lang/who/keyword so the card renders it directly."""
     import collections as _c
     briefs = {}
     bf = Path(__file__).parent / "social-briefs-v2.json"
     if bf.exists():
         for b in json.loads(bf.read_text(encoding="utf-8")):
             briefs[b.get("id")] = b
-    byplat = _c.defaultdict(list)
-    for f in sorted(SOCIALDIR.glob("*.json")):
-        try: data = json.loads(f.read_text(encoding="utf-8"))
-        except Exception: continue
-        if not isinstance(data, dict): continue
-        b = briefs.get(f.stem, {})
-        # attach the brief's real topic so the card pill matches the post
-        for k in ("keyword", "lang", "who", "cluster"):
-            if b.get(k) and not data.get(k): data[k] = b[k]
-        plat = f.stem.split("-", 1)[0]
-        byplat[plat].append((f.stem, data))
-    merged = 0
-    for plat in ("linkedin", "shortform", "x"):
-        posts = byplat.get(plat, [])
-        n = len(PLATFORMS[plat]["slots"])
-        for idx in range(n):
-            if idx < len(posts):
-                COPY[f"{plat}:{idx}"] = posts[idx][1]; merged += 1
-    return merged
+    existing = _c.defaultdict(list)
+    if SOCIALDIR.exists():
+        for f in sorted(SOCIALDIR.glob("*.json")):
+            d = _load_json(f)
+            if not d: continue
+            b = briefs.get(f.stem, {})
+            for k in ("keyword", "lang", "who", "cluster"):
+                if b.get(k) and not d.get(k): d[k] = b[k]
+            existing[f.stem.split("-", 1)[0]].append(d)
+    def _buyer(dirp, kw_from_note=False):
+        out = []
+        if dirp.exists():
+            for f in sorted(dirp.glob("**/*.json")):
+                d = _load_json(f)
+                if not d: continue
+                if not d.get("keyword") and kw_from_note:
+                    d["keyword"] = (d.get("note", "").split(",")[-1].strip() or "Buyer post")
+                d["buyer"] = True
+                out.append(d)
+        return out
+    merged = {
+        "linkedin": _buyer(BUYER_LI, kw_from_note=True) + existing.get("linkedin", []),
+        "shortform": _buyer(BUYER_REEL) + existing.get("shortform", []),
+        "x": existing.get("x", []),
+    }
+    total = 0
+    for plat, posts in merged.items():
+        slots = []
+        for i, p in enumerate(posts):
+            lang = (p.get("lang") or "EN").upper()
+            slots.append((lang, i % 30 + 1, {"primary_keyword": p.get("keyword") or ""}))
+            COPY[f"{plat}:{i}"] = p
+        PLATFORMS[plat]["slots"] = slots
+        total += len(posts)
+    return total
 
-nsoc = merge_social()
+nsoc = build_social()
 print(f"social merged: {nsoc}")
 tot = don = 0
 for k, cfg in PLATFORMS.items():

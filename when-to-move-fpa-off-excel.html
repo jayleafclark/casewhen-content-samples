@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · When to move finance off Excel (and what waiting is costing</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>when to move finance off excel</span><span>Article, FAQPage, BreadcrumbList</span></div><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><h1>When to move finance off Excel (and what waiting is costing you)</h1><div class="qa"><b>Quick answer.</b> When to move finance off Excel comes down to three signals. Reconciliation and rework eat more hours every close. More than one person needs the same file at once. And the numbers in your board pack stop matching each other. When any two of those show up together, a spreadsheet is no longer the right home for FP&amp;A.</div><p>If you&#x27;re asking when to move finance off Excel, part of you already knows the answer is close. You feel it every month. The last three days before the board meeting disappear into copy, paste, and check. One person owns the master file, and if they&#x27;re on leave the close slips. Two reports quote the same revenue and land on two different numbers. None of that is a spreadsheet problem you can fix with one more tab.</p><p>This piece is for the controller or CFO who keeps patching the model and keeps ending up in the same spot. We&#x27;ll name the pain, explain why it happens in plain terms, describe what good looks like, and give you a short list of what to ask for and what to fix first.</p><h2>How do you know when to move finance off Excel?</h2><p>Here&#x27;s the honest test. Add up the hours your team spends each month getting to a number, versus the hours they spend deciding what to do about it. When the first number is bigger than the second, the tool is now working against you.</p><p>A few concrete signs, in the order they usually show up:</p><ul><li>The close is slower than it was a year ago, and manual steps are the reason, even though the business hasn&#x27;t gotten more complex.</li><li>The same file gets emailed around, and people work on different copies at the same time.</li><li>Someone asks &quot;which version is current?&quot; in a finance meeting, and nobody&#x27;s sure.</li><li>A number on slide 3 doesn&#x27;t match the same number on slide 9, and you find out in the room.</li></ul><p>One of these is normal. Two of these at once is a signal. Three is a standing risk to the numbers your board trusts.</p><h2>Why does finance stay on Excel so long?</h2><p>Because Excel is good, and because leaving feels expensive. The model works. Everyone knows it. It&#x27;s been refined for years, and it carries logic that sits in one person&#x27;s head. Replacing it reads as a project with no clear end, so it gets pushed to next quarter, every quarter.</p><p>There&#x27;s also a quieter reason. The pain is spread out. Ten minutes of reconciliation here, an hour of version-checking there, a late night before the board pack. No single moment is bad enough to force a decision, so the total cost never lands on one page where a CFO can see it. That&#x27;s exactly why manual reconciliation and rework get underestimated. They scale with the business, and nobody&#x27;s counting them.</p><h2>What does staying on Excel cost you?</h2><p>Start with error rate. In peer-reviewed research, 94% of business spreadsheets used in decision making contained errors (Poon et al., 2024). Most are small. Some move a number enough to change a call. When your reporting runs on spreadsheets, you&#x27;re carrying that risk into every meeting whether you see it or not.</p><p>Then there&#x27;s trust. Only 40% of executives say they always trust their organization&#x27;s data (Talend). If the person presenting isn&#x27;t fully sure the number is right, the room can feel it, and the meeting turns into a debate about the data instead of a decision about the business.</p><p>The dollar figure is real too. Gartner puts the average cost of poor data quality at $12.9 million a year. You won&#x27;t recognize it as a line item. It shows up as slow closes, reruns, and decisions made on a stale copy.</p><p>And the calendar cost is measurable. High performers finish month-end in under three days. Eight days is common. If your close runs long and the reason is manual work, that gap is time your finance team isn&#x27;t spending on the questions the business actually needs answered.</p><h2>What are the signs to move FP&amp;A off Excel?</h2><p>The signs to move FP&amp;A off Excel are the ones you can point at without a debate. Group them into three buckets, because two buckets lighting up at once is the real trigger.</p><p>Scale. The model has grown past what one file can carry cleanly. Refreshes take longer. Formulas break when someone inserts a row. The workbook opens slowly, and the person who knows why is the only person who knows why.</p><p>Concurrency. More than one person needs the same numbers at the same time, and Excel can&#x27;t give them that without copies. Every copy is a new version of the truth, and 82% of companies say data silos disrupt their workflows (ZoomInfo). Your silos are the copies.</p><p>Reconciliation. The cost of manual reconciliation keeps climbing, and you&#x27;re paying it in your best people&#x27;s hours. When your senior analysts spend more of the month tying numbers together than explaining them, the tool has become the job.</p><h2>FP&amp;A software vs Excel, side by side</h2><p>Here&#x27;s fp&amp;a software vs Excel on the things a controller cares about. This isn&#x27;t about features. It&#x27;s about where the risk sits.</p><table><tr><th>What matters</th><th>Finance on Excel</th><th>Finance on a modeled BI setup</th></tr><tr><td>Who can work at once</td><td>One master file, copies for everyone else</td><td>Many people, one shared source</td></tr><tr><td>Where the logic lives</td><td>In one person&#x27;s head and formulas</td><td>In a defined model, documented and owned</td></tr><tr><td>Reconciliation</td><td>Manual, repeated every close</td><td>Built once, runs on refresh</td></tr><tr><td>Versions of a number</td><td>As many as there are copies</td><td>One number, one definition</td></tr><tr><td>Audit trail</td><td>Hard to reconstruct after the fact</td><td>Tracked by design</td></tr><tr><td>Time to close</td><td>Grows with the business</td><td>Steady as the business grows</td></tr><tr><td>A board pack that ties out</td><td>You check it by hand at 11 PM</td><td>It ties out because the source is shared</td></tr></table><p>Excel still wins for a fast one-off model or a personal scratchpad. That&#x27;s not the question. The question is whether the numbers your company runs on should live there.</p><h2>What does good look like after you move?</h2><p>Good is quiet. The close finishes on the same day every month because the manual steps are gone. When a number changes, it changes in one place, and every report that uses it updates. There&#x27;s one definition of revenue, one of margin, one of churn, and people stop arguing about whose version is right.</p><p>Your team spends its month on analysis, not assembly. The board pack ties out because it reads from the same source as everything else, so you&#x27;re not checking it line by line the night before. And when a tool like Copilot answers a finance question, it returns the same number your team would, because the model underneath is defined and governed.</p><p>That last part matters more every quarter. A shared, well-built model is what lets you trust an automated answer. Without it, every new tool just adds another number to reconcile.</p><h2>What should you fix first?</h2><p>Don&#x27;t rebuild everything at once. That&#x27;s how these projects stall. Fix in this order.</p><ol><li>Pin the definitions. Agree, in writing, what revenue, margin, and your core measures mean. This is cheap and it removes most &quot;whose number is right&quot; arguments on its own.</li><li>Pick the one report that hurts most. Usually it&#x27;s the board pack or the monthly close. Move that first, so the value is visible fast.</li><li>Build the model once, properly. Get the data into a shared, structured model with clear ownership, so reconciliation runs on refresh instead of by hand.</li><li>Govern access. Decide who sees what, and make one number the number. This is where trust comes from.</li></ol><p>You don&#x27;t need a giant platform on day one. You need one report moved off the spreadsheet and onto a source your team believes. The rest follows.</p><h2>Frequently asked questions</h2><p>Is Excel bad for finance?
+No. Excel is excellent for quick models and personal analysis. The problem starts when the numbers your whole company depends on live in a file only one person fully understands, and other people work off copies.</p><p>What do we move finance to?
+Most mid-sized companies move to a modeled BI setup on Power BI or Microsoft Fabric, sitting on a shared data source. The point isn&#x27;t the logo. It&#x27;s a single, governed model that returns one number and updates everywhere at once.</p><p>How long does it take to move FP&amp;A off Excel?
+The first painful report can move in weeks, not months, if you scope it to one thing. A full move is a series of small steps, each one delivering a report your team trusts before you touch the next.</p><p>Won&#x27;t we lose the logic built into our spreadsheets?
+No. The logic gets rebuilt in a defined model where it&#x27;s documented and owned, instead of living in formulas one person maintains. You keep the thinking and lose the single point of risk.</p><p>How do we know the new numbers are right?
+You reconcile the new model against the spreadsheet during the move, number by number, until they match. After that, the model becomes the source and the checking stops being a monthly job.</p><p>What does it cost?
+Less than a slow close and a board pack you can&#x27;t fully trust. The bigger cost is usually waiting, because manual reconciliation and rework grow every month you stay.</p><h2>The five-minute first step</h2><p>Before you scope a project, get an outside read on where your reporting stands today. Run the free Power BI Governance and Cost Scorecard. It takes about five minutes and shows you your top risks and how you compare to peers, with no call required.</p><p>If the scorecard confirms what you suspect, and your close still runs on manual exports, book a scoping call with us. We&#x27;ll look at your real reports and tell you what to move first and what it takes. You get the plan either way.</p><h2>Read next</h2><ul><li>Pillar: [What a single source of truth really means for a mid-sized business](/blog/single-source-of-truth)</li><li>[What data governance actually buys a business, in plain terms](/blog/data-governance-framework)</li></ul><p>*By Austin Levine, Co-Founder, CaseWhen. We&#x27;re a Berlin team that builds trusted Power BI, Microsoft Fabric, and Azure reporting for finance and operations.*</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">when to move finance off excel</span><span class="c">signs to move fp&amp;a off excel</span><span class="c">cost of manual reconciliation</span><span class="c">fp&amp;a software vs excel</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>
