@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Power BI Premium Per User: The Real Number Nobody Publishes</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>power bi premium per user</span><span>Article, FAQPage, BreadcrumbList</span></div><figure class="achart"><figcaption>Power BI Pro list price, per user per month</figcaption><div class="cbar"><span class="cl">2024</span><div class="ctrack"><div class="cfill" style="width:71%"></div></div><span class="cv">$10</span></div><div class="cbar"><span class="cl">2025</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">$14</span></div><div class="csrc">Source: Microsoft, 2025 price update</div></figure><h1>Power BI Premium Per User: The Real Number Nobody Publishes</h1><div class="qa"><b>Quick answer.</b> Power BI Premium Per User costs $24 per seat each month at Microsoft&#x27;s list price, up from $20 in April 2025. That&#x27;s the number the pricing page shows. The number nobody publishes is what the seat costs you once you add the build that makes those reports worth trusting.</div><p>Power BI Premium Per User costs $24 per seat each month at Microsoft&#x27;s current list price, and that figure went up from $20 in April 2025. So there&#x27;s your headline number, front and center, before any feature grid buries it. If you&#x27;re a controller, a CFO, or a head of data signing off on licences, that $24 is where the quote starts. It&#x27;s also the least of what you should be thinking about.</p><p>Here&#x27;s the part the pricing page won&#x27;t say plainly. The seat fee is the easy line on the invoice. What the seat actually buys, when it&#x27;s the right plan to pick, and what you end up paying to make the reports underneath it trustworthy is where the money that hurts really sits. This piece gives you the per-seat figures, tells you when Premium Per User is the right call, and names the costs that never show up next to your Microsoft subscription.</p><h2>What is the Power BI Premium Per User price right now?</h2><p>A Power BI Premium Per User seat is $24 per person, per month, billed annually. There&#x27;s no minimum seat count from Microsoft, so five people on Premium Per User comes to $120 a month, and twenty people comes to $480 a month. It&#x27;s often written as PPU, and it&#x27;s the per-seat step up from standard Power BI.</p><p>What the extra money buys you over a standard seat is a bigger engine. Larger datasets, faster and more frequent refreshes, longer data history, and deployment controls that a plain seat doesn&#x27;t carry. Everyone on Premium Per User needs their own paid seat, the same as any other Power BI plan. If someone only reads the reports, they still need a seat to open shared content, which is the rule that pushes seat counts higher than most buyers expect.</p><p>For a buyer, the useful thing is to see all three ways to pay for Power BI side by side, because the per-seat rate is rarely the number that decides your bill.</p><table><tr><th>Option</th><th>Price</th><th>Who it fits</th></tr><tr><td>Power BI Pro</td><td>$14 per user / month</td><td>Small to mid teams where everyone gets a named seat</td></tr><tr><td>Power BI Premium Per User</td><td>$24 per user / month</td><td>A few power users who need big models and fast refresh</td></tr><tr><td>Fabric capacity (F64 and up)</td><td>From roughly $5,000 / month</td><td>Large view-only audiences, readers see reports for free</td></tr></table><p>The Power BI Pro price rose from $10 to $14 in the same April 2025 change, so the gap between Pro and Premium Per User is $10 a seat. That $10 is the whole decision for most companies. You put the higher plan on the handful of people who really need the bigger engine, and you keep everyone else on Pro.</p><h2>Why won&#x27;t Microsoft publish the number that actually matters?</h2><p>Because the seat price is the only cost Microsoft can put on a page. The number that decides whether the spend was worth it lives in your setup, and no vendor can price that for you.</p><p>Look at where the money really goes once the seats are bought. Around 70% of dashboard work goes unused, according to RevealBI&#x27;s work on BI adoption. You paid to build those reports, you paid for the seats to open them, and most of that effort sits idle. That waste is far bigger than the difference between a $14 seat and a $24 one.</p><p>Then there&#x27;s the trust gap. Only 40% of executives say they always trust their organisation&#x27;s data (Talend). When the person presenting the board pack isn&#x27;t sure the number is right, the meeting turns into a debate about the data instead of a decision about the business. That&#x27;s an hour of expensive people, gone, and it repeats every month.</p><p>And bad data carries a hard price. Gartner puts the average cost of poor data quality at $12.9 million a year. You won&#x27;t find that as a line item next to your Power BI subscription. It shows up as a slow month-end close, a report that has to be rerun, and a decision made on a stale copy. Set that against a few hundred dollars a month in seats and you can see where the attention belongs. The seat is the entry ticket. The build behind it decides whether the ticket bought you anything.</p><h2>When is Power BI Premium Per User the right seat to buy?</h2><p>There are three signals, and you usually feel them before you can name them.</p><p>Your models are getting big or slow. If refreshes drag or your datasets bump into the size limit on a standard seat, Premium Per User gives you the headroom. Paying for a slow report in your team&#x27;s waiting time costs more than the $10 seat difference.</p><p>A few people need features the standard seat lacks. More frequent refresh, longer history on your data, and deployment pipelines all live on the higher tier. If your finance close depends on any of them, the upgrade pays for itself in reliability.</p><p>You&#x27;re not yet big enough for a Fabric capacity. Premium Per User is the middle option. It gives you Premium-grade features on a per-seat basis without committing to a fixed monthly capacity bill. Once your view-only audience gets large, that math changes, which is the next question.</p><p>The mistake to avoid is putting a whole team on Premium Per User when only two or three people need it. That&#x27;s paying $24 a head for an engine most of them will never use. Match the plan to the person, not to the department.</p><h2>How does it compare to Power BI Pro cost and Fabric capacity?</h2><p>The Power BI Pro cost is $14 per user a month, and for a small team where most people both build and read reports, Pro is the right start. Premium Per User sits above it at $24 for the users who need the bigger engine. Fabric capacity sits above both, and it changes the shape of the bill entirely.</p><p>Here&#x27;s the tipping point in plain math. Fabric capacity, starting around $5,000 a month at the F64 tier, lets an unlimited number of viewers read reports on a free licence. Divide $5,000 by a $24 Premium Per User seat and you get roughly 200 seats. Divide it by a $14 Pro seat and you get closer to 350. So once your view-only audience climbs past a few hundred people, a fixed capacity fee can cost less than buying that many per-seat licences, and it lets you add readers without the bill tracking every new hire.</p><p>Below that line, per-seat is almost always cheaper. Above it, run the capacity math before you renew. The point is that the cost of Power BI Pro, the Premium Per User rate, and Fabric capacity are three different shapes, and the cheapest one depends entirely on how many people build versus how many only look.</p><h2>What should you check before you sign off on the seats?</h2><p>Don&#x27;t start with the licence count. Start with the reports, in this order.</p><ol><li>Count builders and heavy users separately from viewers. Only a few people usually need the Premium Per User engine. Most of your seats are readers, and readers may be cheaper on Pro, or free on a Fabric capacity if the audience is large.</li><li>Find the reports people actually use. If most of your dashboards sit idle, you&#x27;re paying for seats to open work that isn&#x27;t landing. Fix the report before you scale the seats.</li><li>Pin your definitions. Agree, in writing, what revenue, margin, and your core numbers mean. This is cheap, and it removes most of the arguments that make people distrust the reports in the first place.</li><li>Model the year, not the month. Seats grow and audiences grow. The plan that&#x27;s cheapest at ten people is rarely cheapest at eighty. Run it forward before you commit.</li></ol><p>Do those four and the licensing decision makes itself. Skip them and you&#x27;ll pay for an engine you don&#x27;t need, sitting on a build that never earns its keep.</p><h2>Frequently asked questions</h2><p>How much is Power BI Premium Per User?
+$24 per user, per month, at Microsoft&#x27;s list price, billed annually. It rose from $20 in April 2025. Every user needs their own seat, including people who only read reports. Pricing can change, so confirm the current figure on Microsoft&#x27;s site before you budget.</p><p>What&#x27;s the difference between Power BI Pro and Premium Per User?
+Power BI Pro is $14 a seat and covers standard reporting. Premium Per User is $24 a seat and adds bigger models, faster refresh, more history on your data, and deployment controls. Most companies put Premium Per User on a few power users and keep everyone else on Pro. The gap between the two plans is $10 a seat.</p><p>Is Premium Per User worth the extra money over the Power BI Pro price?
+For most people, no. The Power BI Pro price of $14 covers standard reporting fine. Premium Per User is worth it for the handful of users running large models or needing more frequent refresh. A common setup is a few Premium Per User seats and the rest of the company on Pro.</p><p>When does Fabric capacity beat Premium Per User?
+When you have a large view-only audience. At the F64 capacity tier, from roughly $5,000 a month, an unlimited number of viewers can read reports on a free licence. Past a couple of hundred readers, a fixed capacity fee often costs less than buying that many per-seat licences.</p><p>Do report viewers need their own Premium Per User seat?
+Yes. Under per-seat plans, anyone who opens a shared report needs a paid licence, even if they never build anything. The one exception is content hosted on a Fabric capacity at F64 or above, where viewers can read for free.</p><p>What&#x27;s the real cost of Power BI over a year?
+The seat fees are the small part. The larger cost is the build behind the reports and the time lost to numbers people don&#x27;t trust. When you compare the cost of Power BI Pro, Premium Per User, and Fabric capacity, budget for the setup and governance too, not just the seat.</p><h2>Read next</h2><ul><li>Pillar: [Power BI, Fabric, and Azure pricing, explained for buyers](/pricing)</li><li>[Power BI Pro price, line by line with real numbers](/blog/power-bi-pro-price)</li></ul><h2>The five-minute first step</h2><p>Before you commit to a seat count, get an outside read on where your reporting stands. Run the free Power BI Governance and Cost Scorecard. It takes about five minutes and shows you your top risks and how you compare to peers, with no call required.</p><p>If the scorecard confirms you&#x27;re paying for seats on reports people don&#x27;t trust, book a scoping call with us. We&#x27;ll do the licensing math on your real setup and tell you which plan fits, what to fix first, and what it should cost. You get the plan either way.</p><p>*By Austin Levine, Co-Founder, CaseWhen. We&#x27;re a Berlin team that builds trusted Power BI, Microsoft Fabric, and Azure reporting for finance and operations.*</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">power bi premium per user</span><span class="c">power bi pro cost; power bi pro price; cost of power bi pro</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

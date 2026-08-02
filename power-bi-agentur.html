@@ -1,0 +1,146 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Power BI Agentur: Was wirklich dazugehört</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Sajagan Thirugnanam, CaseWhen</b><span>power bi agentur</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><h1>Power BI Agentur: Was wirklich dazugehört</h1><div class="qa"><b>Quick answer.</b> Eine Power BI Agentur baut Ihre Berichte so auf, dass alle im Unternehmen mit einer Zahl arbeiten, der sie trauen. Eine gute Agentur liefert ein sauberes Datenmodell, klar definierte Kennzahlen, geregelte Aktualisierung und eine Übergabe, mit der Ihr Team allein weiterkommt. Alles andere ist Beiwerk, das Sie teuer bezahlen.
+---
+Ein Monatsabschluss frisst in vielen Firmen bis zu 10 Tage, Monat für Monat, und stockt, sobald die eine Person mit den richtigen Excel-Dateien im Urlaub ist. Spitzenreiter schließen denselben Abschluss in unter drei Tagen ab (solvexia). Der Unterschied liegt selten an mehr Personal. Er liegt an einem sauberen Datenmodell und an Berichten, denen alle trauen. Genau das ist die Aufgabe einer Power BI Agentur.</div><p>Und genau hier trennt sich eine gute Agentur von einer, die Ihnen ein hübsches Dashboard hinstellt und danach jeden Monat wieder gebucht werden muss. Dieser Text zeigt Ihnen in klarer Sprache, was dazugehört, woran Sie eine gute Agentur erkennen und was der Spaß kostet. Lesen Sie ihn, bevor Sie unterschreiben. Er erspart Ihnen einen zweiten Aufbau.</p><h2>Was macht eine Power BI Agentur wirklich aus?</h2><p>Eine Power BI Agentur macht aus verstreuten Rohdaten Berichte, die Ihre Leute lesen und denen sie vertrauen. Die guten tun das in einer festen Reihenfolge, und diese Reihenfolge verrät Ihnen mehr über die Qualität als jede Referenzliste.</p><p>Zuerst kommt das Datenmodell. Die Agentur bringt Ihre Tabellen in eine klare Form mit sauberen Beziehungen, damit eine Kennzahl wie &quot;Umsatz&quot; überall dasselbe bedeutet. In Power BI ist das die zentrale Grundlage, auf die jeder Bericht zugreift. Ist dieser Schritt schlampig, erbt jede Grafik danach denselben Fehler.</p><p>Danach kommt die Logik. Zahlen wie Marge, Kundenbindung oder rollierender Zwölf-Monats-Umsatz werden als Kennzahlen im Modell festgeschrieben, nicht von Hand in eine Kachel getippt. Wenn eine Agentur einen Wert fest verdrahtet, statt ihn rechnen zu lassen, haben Sie das erste Warnsignal gefunden.</p><p>Dann folgen Aktualisierung und Zugriff. Dazu zählen geplante Aktualisierung, inkrementelle Aktualisierung für große Tabellen und zeilenbasierte Sicherheit, damit ein Regionalleiter nur seine Region sieht.</p><p>Und zuletzt, der Teil, den viele überspringen, die Übergabe. Eine Power BI Agentur, die Ihrem Analysten das Modell nicht an einem Nachmittag erklären kann, hat Ihnen eine Abhängigkeit gebaut, kein Werkzeug, das Ihnen gehört.</p><h2>Woran erkennen Sie eine gute Agentur?</h2><p>Der häufigste Fehler beim Einkauf: Sie bewerten die Demo. Die Demo ist hübsch, also nicken Sie sie ab. Hübsch ist einfach. Die schweren Teile sieht man in einer Demo nicht.</p><p>Unsichtbar ist zum Beispiel die Aktualisierung. Braucht sie vier Minuten oder vierzig? Eine große Faktentabelle kann eine geplante Aktualisierung sprengen. Die Antwort darauf ist inkrementelle Aktualisierung, bei der nur die letzten Tage neu geladen werden statt der ganzen Historie. Ob das gebaut wurde, sehen Sie nicht an den Grafiken. Sie sehen es am ersten Monatsende, an dem die Aktualisierung hängen bleibt.</p><p>Der zweite unsichtbare Teil ist Vertrauen. Das ist keine Kleinigkeit: 67 Prozent der Unternehmen trauen den Daten nicht voll, mit denen sie Entscheidungen treffen (Drexel LeBow und Precisely, 2025). Nur 40 Prozent der Führungskräfte vertrauen ihren Daten immer (Talend). Ein Bericht, dem niemand traut, wird gegen eine Tabelle gegengeprüft, und schon zahlen Sie für zwei Versionen der Wahrheit. Eine gute Agentur baut Vertrauen mit Absicht: eine Definition pro Kennzahl, ein sichtbarer Zeitstempel der letzten Aktualisierung und Zahlen, die sich am ersten Tag mit den Quelldaten decken.</p><p>Der dritte Teil ist Nutzung. Rund 70 Prozent der Dashboard-Arbeit landet ungenutzt (revealbi). Fragen Sie also nicht nur, ob die Agentur bauen kann, sondern wie sie dafür sorgt, dass Ihre Leute den Bericht danach auch öffnen.</p><h2>Agentur, Freelancer oder eigenes Team, was passt?</h2><p>Nicht jede Firma braucht eine Agentur. Ein Power BI Freelancer kann für einen klar umrissenen Auftrag günstiger sein, und ein eigenes Team lohnt sich, sobald sich Berichte ständig ändern. Der Haken ist die Bandbreite: Ein einzelner Power BI Freelancer ist genau der Einzelfall, den Sie eigentlich vermeiden wollen, wenn er als Einziger das Modell versteht.</p><p>Die folgende Übersicht zeigt, wann welche Wahl passt.</p><table><tr><th>Kriterium</th><th>Power BI Freelancer</th><th>Power BI Agentur</th><th>Eigenes Team</th></tr><tr><td>Bester Fall</td><td>klar umrissener Einzelauftrag</td><td>erster solider Aufbau plus Übergabe</td><td>Berichte, die sich oft ändern</td></tr><tr><td>Bandbreite</td><td>eine Person, ein Kalender</td><td>mehrere Rollen, Vertretung geregelt</td><td>wächst mit Ihnen</td></tr><tr><td>Risiko</td><td>Wissen hängt an einer Person</td><td>Vertrag und Übergabe klären, wem was gehört</td><td>Aufbau von Grund auf dauert</td></tr><tr><td>Laufende Kosten</td><td>pro Tag oder Auftrag</td><td>Projekt plus optionaler Betrieb</td><td>Gehalt und Weiterbildung</td></tr><tr><td>Übergabe</td><td>oft nicht vereinbart</td><td>schriftlich, Teil des Auftrags</td><td>bleibt im Haus</td></tr></table><p>Ein ehrlicher Anbieter sagt Ihnen selbst, wann ein Power BI Freelancer reicht und wann sich eine Agentur rechnet. Wer Ihnen für ein Fünf-Personen-Team eine große Datenplattform verkaufen will, verkauft Ihnen Kapazität, die Sie nicht nutzen.</p><h2>Wie läuft eine saubere Power BI Einführung ab?</h2><p>Wer nach &quot;Einführung Power BI&quot; sucht, findet vor allem Videokurse. Die zeigen Ihnen, wie man Grafiken baut. Sie zeigen nicht, wie eine Power BI Einführung im Unternehmen wirklich abläuft, wenn am Ende der Vorstand der Zahl trauen soll. Eine gute Agentur geht in vier Schritten vor.</p><ol><li>Zuerst das Ziel. Welche Frage soll der Bericht am Ende beantworten, und wer entscheidet damit? Ohne diese Frage bauen Sie hübsche Grafiken ohne Zweck.</li></ol><ol><li>Dann das Datenmodell. Die Rohdaten kommen in ein Sternschema: eine Faktentabelle mit den Ereignissen in der Mitte, umgeben von Dimensionstabellen für Kunde, Datum und Produkt. Erst danach wird gerechnet.</li></ol><ol><li>Dann die Kennzahlen und der Zugriff. Jede wichtige Zahl wird einmal als Kennzahl im Modell festgelegt. Die zeilenbasierte Sicherheit sorgt dafür, dass jeder nur seine erlaubten Daten sieht, und mit der Funktion &quot;Als anzeigen&quot; prüft die Agentur das, bevor der Bericht live geht.</li></ol><ol><li>Zuletzt die Übergabe. Ihr Team bekommt die Dateien, eine Dokumentation und Zugriff auf die Arbeitsumgebung. Fehlt dieser Schritt, mieten Sie Ihre eigenen Berichte.</li></ol><p>Eine Power BI Einführung, die so aufgebaut ist, überlebt einen Personalwechsel und den nächsten Monatsabschluss. Eine, die mit der schönen Grafik beginnt und beim Modell spart, tut das nicht.</p><p>Weiterlesen: Wie eine [Power BI Beratung](/power-bi-consulting) Schritt für Schritt vorgeht, steht in unserem Überblick.</p><h2>Was kostet eine Power BI Agentur?</h2><p>Die Tagessätze schwanken, doch die Form der Rechnung ist vorhersehbar. Drei Dinge treiben den Preis: den Umfang des ersten Aufbaus, den laufenden Betrieb danach und die Lizenzen darunter.</p><p>Die Lizenz ist von der Gebühr der Agentur getrennt. Power BI Pro liegt bei rund 14 Dollar pro Nutzer und Monat, Premium Per User bei rund 24 Dollar, eine größere Kapazität wird nach Rechenleistung abgerechnet, nicht pro Kopf. Eine Agentur, die Lizenzen im ersten Gespräch nicht erwähnt, überrascht Sie später auf der Rechnung.</p><p>Die eigentliche Kostenfrage ist aber nicht der Tagessatz. Es ist, was Ihnen am Ende gehört. Eine günstige Agentur, die Ihnen ein undokumentiertes Modell hinterlässt, das nur sie versteht, ist die teure Wahl, sobald sie weg ist. Weniger als die Hälfte der Daten-Teams liefert dem Unternehmen echten Wert (Gartner, 2023), und ein großer Grund dafür ist Wissen, das zur Tür hinausgegangen ist. Rechnen Sie den Preis also über drei Jahre, mit Betrieb und Übergabe, nicht nur über den ersten Aufbau.</p><p>Bevor Sie eine Power BI Agentur beauftragen, prüfen Sie Ihren eigenen Aufbau mit unserer kostenlosen Power BI Governance und Cost Scorecard. Sie brauchen fünf Minuten und bekommen Ihre drei größten Risiken benannt. Passen Ihre Zahlen danach noch nicht zusammen, buchen Sie ein kurzes Scoping-Gespräch mit uns.</p><h2>Häufige Fragen</h2><p>Was ist der Unterschied zwischen einer Power BI Agentur und einem Power BI Freelancer?
+Ein Power BI Freelancer ist eine Person mit einem Kalender und einem Fachgebiet. Eine Agentur bringt mehrere Rollen mit, regelt Vertretung und schreibt die Übergabe in den Vertrag. Für einen kleinen, klar umrissenen Auftrag reicht oft ein Freelancer. Für den ersten soliden Aufbau mit sauberer Übergabe ist eine Agentur meist die ruhigere Wahl.</p><p>Brauche ich eine Agentur, wenn wir Power BI schon haben?
+Power BI zu besitzen ist wie ein Tabellenprogramm zu besitzen. Das Werkzeug ist da, die verlässliche Grundlage und die Zahlen, denen alle trauen, sind die Arbeit. Die meisten Firmen holen sich für den ersten sauberen Aufbau und die Übergabe Hilfe und führen die Berichte danach selbst.</p><p>Wie lange dauert eine Power BI Einführung?
+Ein erster Bericht mit sauberem Modell und geplanter Aktualisierung dauert meist vier bis acht Wochen. Wer Ihnen einen belastbaren, unternehmensweiten Aufbau in einer Woche verspricht, verspricht eine Demo, keine Grundlage, auf die Sie sich verlassen können.</p><p>Woran erkenne ich, dass ich die falsche Agentur habe?
+Am Betrieb. Wenn jede kleine Änderung nur über die Agentur läuft und Ihr Team das Modell nie erklärt bekommt, wurde eine Abhängigkeit gebaut. Fragen Sie am ersten Tag schriftlich, was Sie behalten, wenn die Zusammenarbeit morgen endet.</p><p>Warum zeigen zwei Berichte für dieselbe Zahl verschiedene Werte?
+Meist rechnen sie mit unterschiedlichen Formeln oder unterschiedlichen Quellen. Genau das behebt eine Power BI Agentur, indem sie die Zahl einmal zentral im Datenmodell festlegt, sodass jeder Bericht dieselbe Berechnung nutzt.</p><p>Weiterlesen: [Power BI Beratung](/power-bi-consulting) (Überblick) und [BI Beratung: die richtigen Fragen vor der Beauftragung](/blog/blog-bi-consultant) (Schwesterartikel).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">power bi agentur</span><span class="c">power bi einführung</span><span class="c">einführung power bi</span><span class="c">power bi freelancer</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

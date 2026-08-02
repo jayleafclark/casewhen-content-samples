@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Manufacturing KPI Dashboard, Explained for People Who Aren&#x27;t</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>manufacturing kpi dashboard</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Organizations that fully trust their data</figcaption><div class="cbar"><span class="cl">Trust it</span><div class="ctrack"><div class="cfill" style="width:49%"></div></div><span class="cv">33%</span></div><div class="cbar"><span class="cl">Do not</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">67%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><h1>Manufacturing KPI Dashboard, Explained for People Who Aren&#x27;t Data Engineers</h1><div class="qa"><b>Quick answer.</b> A manufacturing KPI dashboard is a live report that tracks plant metrics like OEE, downtime, scrap, and on-time delivery against targets from one governed data model instead of shift spreadsheets. A good one shows the floor and finance the same number, refreshes on schedule, and ties every KPI back to a single definition you can audit.
+---</div><p>A manufacturing KPI dashboard is the one report your plant floor and your finance team are supposed to agree on, and most of the time they don&#x27;t. Precisely and Drexel LeBow found 67% of organizations don&#x27;t fully trust the data they use to make decisions, and Gartner puts the cost of poor data quality at $12.9M a year for the average company. On a factory floor that shows up as two people staring at two different OEE numbers for the same line, both sure they&#x27;re right, both pulling from a different spreadsheet.</p><p>So this is the practitioner version, written for the person who actually builds the thing. It covers what has to be true underneath a manufacturing KPI dashboard before anyone believes the number on it: the model, the KPIs worth showing, the DAX that calculates them, and the plumbing that keeps it fast and current. The tools here are Power BI, since that&#x27;s what most plants build on. If you&#x27;re the one who gets asked &quot;why doesn&#x27;t this match the MES,&quot; this is for you.</p><h2>Why does a manufacturing KPI dashboard stop matching the floor?</h2><p>It&#x27;s almost never the charts. A manufacturing KPI dashboard loses trust because the same word means two things in two systems.</p><p>Take availability. Maintenance counts a line as down from the second it stops. Production only counts it as down after a five-minute grace window, because short jams don&#x27;t count as a stoppage in their book. Both are correct by their own rule, and the two availability numbers never agree. Nobody did anything wrong, and the whole dashboard still falls apart on that one gap. Once an operator catches a single mismatch, they stop believing the rest of the report and go back to the clipboard.</p><p>So the work that matters is agreeing on one definition per KPI, writing it down, and making the dashboard the only place that definition lives. A peer-reviewed study by Poon and colleagues found 94% of business spreadsheets used in decisions contain errors, which is exactly why &quot;we&#x27;ll keep a shift log on the side to check the dashboard&quot; makes things worse. Two sources of one number is one too many.</p><h2>What KPIs belong on a manufacturing KPI dashboard?</h2><p>Fewer than you think. The floor needs KPIs it can act on inside a shift, not a wall of every metric the plant can produce.</p><p>For most plants the core set is short:</p><ul><li>OEE (Overall Equipment Effectiveness), and its three parts split out: availability, performance, and quality. One blended OEE number hides which of the three is dragging.</li><li>Downtime, split by reason code, so a supervisor sees whether it&#x27;s changeovers, stoppages, or material starvation.</li><li>Scrap and first-pass yield, because quality problems that don&#x27;t show up until finance closes the month are quality problems you found too late.</li><li>Throughput against takt or target rate, so a line running &quot;fine&quot; but behind plan is visible now.</li><li>On-time delivery, the one KPI that ties the floor back to the customer and the finance view.</li></ul><p>Put five to nine of these on the first page, tied to targets, with the detail a click away. Picking what goes on a manufacturing KPI dashboard is mostly about leaving things off. If a KPI won&#x27;t change what someone does before the end of the shift, it belongs on a drill-through page, not the front.</p><h2>How do you calculate OEE and downtime in Power BI?</h2><p>With measures, and where the math needs its own context, with the CALCULATE function. This is the part people search for and get wrong, so it&#x27;s worth doing slowly.</p><p>In Power BI, a measure is a formula that recalculates in the filter context of whatever the user is looking at. Write OEE once and every visual, page, and export reads the same logic. Two DAX phrases come up constantly here: calculate function power bi and calculate table dax, also written calculate table power bi. They sound like separate tricks. They&#x27;re the same idea, which is controlling exactly which rows a number is measured over.</p><p>The CALCULATE function is the one that changes filter context on the fly. Availability is downtime against planned run time, and CALCULATE lets you measure planned time while ignoring unplanned reason codes:</p><ul><li>`Planned Runtime = CALCULATE( SUM( Events[Minutes] ), Events[Category] = &quot;Planned&quot; )`</li><li>`Availability = DIVIDE( [Planned Runtime] - [Unplanned Downtime], [Planned Runtime] )`</li></ul><p>That&#x27;s the whole reason the CALCULATE function in Power BI exists: it re-scopes the number without you building a separate table for every cut.</p><p>Sometimes you do want a separate table, and that&#x27;s the calculated-table job. A calculated table is a DAX query that materializes a new table in the model, the calculate table power bi pattern people ask about. A common one on a manufacturing KPI dashboard is a shift calendar or a reason-code lookup built with the calculate table dax approach, so `SUMMARIZECOLUMNS` or `CALCULATETABLE` produces a clean grain your fact table can join to. Rule of thumb: reach for a measure first. Build a calculated table only when you need a new grain to join against, not just a different number.</p><h2>How do you keep a manufacturing KPI dashboard fast when data never stops?</h2><p>Two problems arrive as the plant runs: refresh gets slow, and the numbers go stale between runs. Incremental refresh handles both.</p><p>Instead of reloading years of machine events every night, incremental refresh only reprocesses the recent slice that changed. You set it up with two Power Query parameters, RangeStart and RangeEnd, which filter your source query to a date window. Power BI then partitions the fact table by date, keeps the old partitions untouched, and refreshes only the last few days on each run.</p><p>The practical shape of it:</p><ol><li>Create the `RangeStart` and `RangeEnd` datetime parameters in Power Query.</li><li>Filter your machine-event fact table to pull only rows between those two parameters.</li><li>In the table&#x27;s incremental refresh settings, store three years of history and refresh the last seven days.</li><li>Publish. The first refresh loads everything once; every run after that touches only the recent window.</li></ol><p>A nightly refresh that took two hours drops to a few minutes, and it&#x27;s more reliable because there&#x27;s less to move. On Microsoft Fabric you get another option: Direct Lake mode reads straight from data sitting in OneLake, so the report queries stored data without a separate import step. For plants pushing millions of sensor rows a day, that takes the refresh window off the table as a bottleneck.</p><h2>How do you ship changes without breaking the number?</h2><p>You edit in a copy, not on the live report the shift is watching.</p><p>Deployment pipelines in the Power BI service give you three linked stages: Development, Test, and Production. You build in Development, promote to Test where a colleague checks it, then promote to Production where the plant sees it. Each stage is its own workspace, so a half-finished OEE measure never lands on the floor&#x27;s screen mid-edit.</p><p>Two habits keep it clean:</p><ul><li>Point each stage at the right data. Deployment rules let Test read a test database and Production read live, so promoting a report doesn&#x27;t drag a developer connection into production.</li><li>Test Row-Level Security with View As before you publish. RLS lets a line lead see their line and the plant manager see everything from the same model. In Power BI Desktop, View As previews the report as a specific role, so you catch an access gap before an operator does.</li></ul><p>This turns a dashboard change into something closer to a normal software release, with a review step and a way back, instead of a live edit everyone hopes went fine.</p><h2>Manufacturing KPI dashboard vs a shift spreadsheet</h2><p>Most plants start with a shift spreadsheet, and it works right up until more than one person needs the same numbers. Here&#x27;s where the two split.</p><table><tr><th>Where it counts</th><th>Shift spreadsheet</th><th>Manufacturing KPI dashboard</th></tr><tr><td>Single definition</td><td>Each copy drifts as people edit</td><td>One measure in one shared model</td></tr><tr><td>OEE math</td><td>Retyped per tab, easy to fudge</td><td>CALCULATE measures, one source</td></tr><tr><td>Refresh</td><td>Manual export at end of shift</td><td>Scheduled, incremental refresh</td></tr><tr><td>Access control</td><td>All-or-nothing file sharing</td><td>Row-Level Security per line or role</td></tr><tr><td>Change safety</td><td>Overwrite and hope</td><td>Deployment pipeline with a test stage</td></tr><tr><td>Audit trail</td><td>Whatever the last editor did</td><td>Model history you can trace</td></tr><tr><td>Who can trust it</td><td>The person who built it</td><td>Everyone reading the same source</td></tr></table><p>A shift spreadsheet is fine for a quick check at one line. The move to a manufacturing KPI dashboard pays off the moment the same numbers drive a target, a bonus, or a call with a customer, because at that point &quot;which version is right&quot; costs more time than the dashboard does to build.</p><h2>Frequently asked questions</h2><p>What&#x27;s the difference between a KPI and a metric on a plant dashboard?
+A metric is anything you can measure, like cycle time or units produced. A KPI is a metric tied to a target because it tracks something the plant cares about, like OEE against goal. A good manufacturing KPI dashboard shows KPIs against their targets, not a wall of raw metrics.</p><p>Do I need the CALCULATE function for OEE?
+Usually yes. Availability, performance, and quality each measure over a different slice of your event data, and CALCULATE is how you re-scope a measure to the right rows without splitting the model. It&#x27;s the core tool behind most of the numbers on the dashboard.</p><p>When should I build a calculated table instead of a measure?
+Default to a measure. Only add a calculated table when a new grain has to exist for something to join against, such as a shift calendar the fact table joins to. That&#x27;s the calculate table dax pattern, and if a plain measure gives the number you want, you don&#x27;t need the extra table.</p><p>Why does my dashboard show a different OEE than the MES?
+Almost always a definition gap: a different downtime rule, a grace window one side applies, or planned time counted differently. Trace both back to a single measure in one semantic model, agree the rule once, and the two numbers line up.</p><p>Do I need Microsoft Fabric for a manufacturing KPI dashboard?
+No. A well-modeled Power BI report with a clean semantic model, RLS, and incremental refresh covers most plants. Fabric and OneLake help when sensor volumes get large or you want Direct Lake to skip the refresh step, but the modeling discipline matters more than the platform.</p><h2>Read next</h2><ul><li>[KPI and data modeling: the full picture](/kpi-and-data-modeling) for how the semantic model, definitions, and governance fit together.</li><li>[Software KPI dashboard, explained](/blog/software-kpi-dashboard) for the same discipline applied to product and revenue metrics.</li></ul><p>If your OEE still won&#x27;t reconcile across reports, that&#x27;s the exact problem we fix at CaseWhen. Grab the free 20-Point Power BI Model Review Checklist below, and if you want a second set of eyes, book a semantic-model and AI-readiness review with us.</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">manufacturing kpi dashboard</span><span class="c">calculate function power bi, calculate table dax, calculate table power bi</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

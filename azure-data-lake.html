@@ -1,0 +1,144 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Azure Data Lake: What Changed and Why It Matters</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>azure data lake</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>Azure Data Lake: What Changed and Why It Matters</h1><figure class="achart"><figcaption>Organizations with data good enough to use for AI</figcaption><div class="cbar"><span class="cl">Ready</span><div class="ctrack"><div class="cfill" style="width:13%"></div></div><span class="cv">12%</span></div><div class="cbar"><span class="cl">Not ready</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">88%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><h2>Quick answer</h2><p>An Azure data lake is a single, cheap storage layer in Azure where you keep raw and prepared data of any shape, then run analytics and Power BI on top of it. The shift worth knowing: it now runs on ADLS Gen2 and OneLake, so one copy of your data can feed every tool without a fresh export each time.</p><p>If your Power BI reports read from a dozen manual exports and still show different totals, an Azure data lake is usually the first thing a data team sets up to stop the mess. It is one storage account that keeps every raw file and every cleaned table in one place, so every report reads from the same copy. That sounds dull. It is also the difference between a number you can defend in a board meeting and one you have to apologize for later.</p><p>Below is what changed, why it matters for the totals you publish, and how the pieces (ADLS, OneLake, and Microsoft Data Factory) fit together.</p><h2>What is an Azure data lake?</h2><p>An Azure data lake is a storage account in Azure built for analytics. You drop files into it in any format: CSV, JSON, Parquet, images, logs, whatever the source sends. Storage is cheap, so you keep the raw data and the cleaned data side by side. Nothing gets thrown away, and you never have to guess which export was the good one.</p><p>Two things make it a lake and not just a folder of files. First, it separates storage from compute, so you pay for the disk space and the processing on their own meters and scale each one on its own. Second, it uses a hierarchical namespace, which means real folders and file-level security instead of a flat container. That is what ADLS Gen2 added, and it is why your ADLS data can carry proper access rules for each team.</p><h2>What changed, and why does it matter now?</h2><p>For years an Azure data lake was a staging area. You landed data in it, cleaned it, then loaded it into a separate warehouse for reporting. In 2023 Microsoft launched OneLake as part of Fabric, and that setup changed.</p><p>OneLake is one lake for the whole tenant. Every Fabric workspace writes to it, and Power BI can read straight from it in a mode called Direct Lake, with no import and no scheduled copy. Your ADLS Gen2 accounts link in through shortcuts, so data you already have shows up in OneLake without moving a byte.</p><p>Why does this matter for the numbers you report? Because most reporting problems start with copies. Every export, every extra load, every stale refresh is another chance for two reports to disagree. Gartner puts the average cost of poor data quality at $12.9 million per year. Precisely found that 67 percent of organizations do not fully trust the data they use to make decisions. One governed copy in the lake removes a whole class of those errors before they ever reach a dashboard.</p><h2>How is ADLS Gen2 different from the old data lake?</h2><table><tr><th>Point</th><th>ADLS Gen1</th><th>ADLS Gen2</th><th>OneLake in Fabric</th></tr><tr><td>Status</td><td>Retired 29 Feb 2024</td><td>Current standard</td><td>Current, tenant-wide</td></tr><tr><td>Sits on</td><td>Its own service</td><td>Blob storage</td><td>ADLS Gen2 under the hood</td></tr><tr><td>Power BI access</td><td>Copy or import</td><td>Copy or import</td><td>Direct Lake, no copy</td></tr><tr><td>Best for</td><td>Nothing new</td><td>Custom Azure builds</td><td>Fabric-first teams</td></tr></table><p>Gen1 is gone. Microsoft retired it on 29 February 2024, so any pipeline still pointing at it needs to move. Gen2 is the current standard for a raw Azure data lake, and it sits on top of Blob storage with a hierarchical namespace switched on. OneLake does not replace Gen2. It sits over it. You can keep your ADLS Gen2 accounts and surface them in OneLake through a shortcut, which means one folder can be read by Fabric, Databricks, and Power BI at once.</p><h2>Where does Microsoft Data Factory fit into all of this?</h2><p>Storage on its own does not move data. Microsoft Data Factory is the service that copies data from your sources into the lake and runs the steps that clean it. You will see it written both ways, Microsoft Data Factory and Data Factory Microsoft, and inside Fabric it shows up as Data Factory pipelines and dataflows. Same idea, one home.</p><p>A normal setup looks like this. Data Factory pulls from your SQL databases, SaaS apps, and files on a schedule. It lands the raw data in the lake, runs a cleaning step, and writes tidy tables back. Power BI reads those tables. If a source changes shape, you fix one pipeline in Data Factory instead of ten reports.</p><h2>Do you still need a warehouse if you have a lake?</h2><p>Sometimes yes. A lake is great for cheap storage, big files, and data science. A warehouse still wins for fast, concurrent SQL queries and strict table structure. Many teams run both and call it a lakehouse: lake storage underneath, warehouse-style tables and governance on top. Fabric packages that pattern directly, with a Lakehouse item and a Warehouse item that both write to OneLake.</p><p>The practical rule: if your questions are known and your users need sub-second dashboards, keep a modeled warehouse or a semantic model in front. If your data is large, messy, or changing shape, land it in the lake first and shape it there. Most real setups need both, and the lake is the shared storage they read from.</p><h2>How do you set one up without regret?</h2><p>Start with the model, not the storage. Decide the tables and the numbers you need to report, then design the lake folders around them: raw, cleaned, and curated. Name those three zones the same way in every workspace, so a new engineer can find the trusted layer in seconds. Put access rules and row-level security on the ADLS data from day one, because retrofitting them later is painful. Pick one tool to load data, usually Microsoft Data Factory, and route everything through it so you have one place to look when a number moves. Store your cleaned tables as Parquet or Delta, since that is the format Direct Lake reads fastest.</p><p>Our free Azure data platform checklist is linked below. If you are standing up an Azure data foundation, book a call and we will pressure-test the design with you before you build.</p><p>Read next: [Azure data engineering, the full picture](/azure-data-engineering) and [How OneLake changes your Power BI refresh](/blog/onelake-direct-lake).</p><h2>Frequently asked questions</h2><p>Is an Azure data lake the same as OneLake?
+No. OneLake is the single lake built into Microsoft Fabric, and it stores its files as ADLS Gen2 underneath. A classic Azure data lake is one you set up and manage yourself. You can connect your own ADLS accounts to OneLake with a shortcut.</p><p>What replaced Azure Data Lake Storage Gen1?
+ADLS Gen2 replaced it. Microsoft retired Gen1 on 29 February 2024, so any workload still on Gen1 needs to move to Gen2 or OneLake.</p><p>Do I need Microsoft Data Factory to use a data lake?
+You need something to move and shape data, and Microsoft Data Factory is the standard choice in Azure. It is built into Fabric as pipelines and dataflows, so most teams use it there.</p><p>Can Power BI read from a data lake without importing the data?
+Yes, with Direct Lake mode in Fabric, Power BI reads Parquet files straight from OneLake, so there is no import step and nothing to refresh on a timer. A classic ADLS Gen2 lake still uses import or DirectQuery.</p><p>Lake, warehouse, or lakehouse, which do I pick?
+Pick a lakehouse if you want one home for both raw files and modeled tables. Pick a plain warehouse if all you need is fast SQL on clean, structured data. Most teams end up with a lake underneath and warehouse-style tables on top.</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">azure data lake</span><span class="c">adls data; microsoft data factory; data factory microsoft</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

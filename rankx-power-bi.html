@@ -1,0 +1,154 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Rankx Power BI: The Foundation Everyone Skips</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>rankx power bi</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>Rankx Power BI: The Foundation Everyone Skips</h1><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><p>Quick answer</p><p>The RANKX Power BI function ranks rows by a measure, like top products or top regions, and updates live as users filter. You write it as a measure, point it at the right table with ALL or ALLSELECTED, and set DESC and DENSE so the top value is rank 1 with no gaps on ties.</p><p>The RANKX Power BI function is where a lot of &quot;top 10&quot; dashboards go wrong, and that is a business problem before it is a technical one. In a 2025 Drexel LeBow and Precisely survey of 550-plus data professionals, 67% of organizations said they don&#x27;t fully trust the data they use to make decisions. A ranking that flips when someone clicks a slicer is exactly the kind of thing that feeds that distrust. Gartner puts the cost of poor data quality at 12.9 million dollars a year for the average organization. So when a manager asks &quot;who are our top five customers&quot; and gets a different answer on two reports, that is not a cosmetic bug. It decides whether people believe the dashboard at all.</p><p>Below is the practitioner version: what RANKX actually does, how to write it so the numbers stay correct, the settings that trip people up, and how to keep the ranking fast and correct once real users depend on it.</p><h2>What does RANKX do in Power BI?</h2><p>RANKX is a DAX function that assigns a rank number to each row based on a value you give it. You hand it a table to rank over and an expression to rank by, and it returns 1 for the highest, 2 for the next, and so on.</p><p>Here is the smallest useful version:</p><p>```dax
+Product Rank =
+RANKX(
+    ALL(Product[Name]),
+    [Total Sales]
+)
+```</p><p>That measure ranks every product by total sales. Drop it in a table next to your product names and each product gets its position. The important part is that it recalculates for the exact slice a user is looking at. Filter to one region and, depending on how you scope it, the ranks can recompute for just that region. That live behavior is the whole reason a ranking belongs in a measure instead of a frozen column.</p><h2>Why does a bad rankx power bi measure lose trust so fast?</h2><p>Because ranking is the most public number on a dashboard. A &quot;top 5 customers&quot; tile ends up in a board pack, and if it disagrees with the number someone pulled last week, the whole report gets questioned. In a 2024 peer-reviewed study by Poon and colleagues, 94% of business spreadsheets used in decision-making contained errors. A ranking rebuilt by hand in Excel every month inherits every one of those errors, plus a new one each time someone copies the wrong range.</p><p>A clean RANKX measure fixes that. The ranking logic lives in one place, defined once, and every report that uses it returns the same order. Nobody re-sorts anything by hand. It also makes the model ready for Copilot, because Copilot answers &quot;who are our top accounts&quot; from the measure you defined rather than guessing at a column.</p><h2>How do you write a rankx power bi measure that stays correct?</h2><p>The setting that decides everything is the first argument, the table you rank across. Get that wrong and the rank looks random. Here is a fuller version with the settings named:</p><p>```dax
+Product Rank =
+RANKX(
+    ALL(Product[Name]),
+    [Total Sales],
+    ,
+    DESC,
+    DENSE
+)
+```</p><p>Three choices are doing the work here:</p><ul><li>ALL(Product[Name]) tells RANKX to rank across every product, ignoring the current row&#x27;s filter. Without it, RANKX ranks each row against only itself and every product comes back as rank 1.</li><li>DESC puts the biggest seller at rank 1. Use ASC when smaller should win, like fastest response time.</li><li>DENSE stops gaps when two products tie. With DENSE, a tie for second is followed by third. Without it, the next rank jumps to fourth.</li></ul><p>That is the core of the rankx dax pattern. One base measure for the value, one RANKX measure that references it, and the three arguments set on purpose instead of by accident.</p><h2>ALL or ALLSELECTED: which one does your rank need?</h2><p>This is the single most common reason a rank looks off, so it is worth being blunt about. The choice between ALL and ALLSELECTED decides whether the ranking respects the user&#x27;s slicer.</p><table><tr><th></th><th>ALL</th><th>ALLSELECTED</th></tr><tr><td>What it ranks over</td><td>Every row, ignores all filters</td><td>Every row inside the user&#x27;s current slicer</td></tr><tr><td>Rank when a region is selected</td><td>Ranks against all regions</td><td>Ranks only within that region</td></tr><tr><td>Good for</td><td>A fixed global leaderboard</td><td>&quot;Top within what I picked&quot;</td></tr><tr><td>Common surprise</td><td>Ranks don&#x27;t change on slice</td><td>Ranks shift as the slicer changes</td></tr></table><p>If a manager filters to one region and expects to see the top products in that region, you want ALLSELECTED. If they want each product&#x27;s standing across the whole company no matter what they filter, you want ALL. Test both against a real slicer before you ship, because they look identical until someone clicks something.</p><h2>How do you move a ranking out of a KPI Excel sheet?</h2><p>Plenty of teams still run their leaderboards in a KPI Excel workbook: a big table, a manual sort, and a copy-paste into the deck every month. It works until the source data grows or two people keep separate versions. That is when a KPI tracker Excel file starts producing two different &quot;top 10&quot; lists in the same week.</p><p>Moving it into Power BI is mostly a modeling job, not a rewrite. Load the same fact table, build one Total Sales measure, then write the RANKX measure above on top of it. Now the ranking sorts itself live, updates on refresh, and every viewer sees the same order. The manual sort and the monthly copy-paste both go away, and so does the argument about whose spreadsheet is right.</p><h2>How do you keep a ranking fast once the data grows?</h2><p>RANKX over millions of rows can get slow if the underlying table is huge and refreshed in full every morning. Incremental refresh fixes the refresh side. You create two Power Query parameters named exactly `RangeStart` and `RangeEnd`, filter the fact table by a date column between them, then set an incremental refresh policy on the table. A common policy stores 5 years of rows and refreshes only the last 10 days, so Power BI partitions by date and touches just the recent rows. A refresh that took 40 minutes can drop to a couple of minutes. `RangeStart` and `RangeEnd` are case-sensitive, so type them precisely or the policy will not apply.</p><p>Two more features keep the ranking safe once people rely on it. Use View As in Power BI Desktop to test row-level security before you publish, so a regional manager only ranks the accounts they are allowed to see. Use deployment pipelines in the Power BI Service to move the model through Development, Test, and Production instead of editing the live report on a Friday afternoon.</p><h2>Where do Fabric and OneLake fit in?</h2><p>Microsoft Fabric adds a storage mode called Direct Lake, where the model reads Parquet files straight from OneLake, the storage layer under Fabric, with no import step. You get close to Import speed on large tables without the refresh wait, and your RANKX measure works exactly the same on top of it. Fabric passed 28,000 customers by Ignite 2025, so more teams are choosing between these modes each quarter. For most business dashboards an Import model is still the right default, and the RANKX measure you write does not change when you move to Direct Lake later.</p><h2>Where to go from here</h2><p>A ranking people trust comes down to a few habits. Write RANKX as a measure, not a column. Set the first argument on purpose, ALL for a global leaderboard and ALLSELECTED for &quot;top within my slice.&quot; Add DESC and DENSE so rank 1 is the top value with no gaps on ties. Keep refresh fast with `RangeStart` and `RangeEnd`, and gate changes through View As and deployment pipelines.</p><p>Want to check your own model? Grab our free 20-Point Power BI Model Review Checklist below and run it against your setup. If your top-10 tiles still won&#x27;t reconcile after that, book a semantic-model and AI-readiness review with us and we&#x27;ll walk your measures with you.</p><p>Read next</p><ul><li>[KPI and data modeling: the full guide](/kpi-and-data-modeling) (pillar)</li><li>[How to calculate DAX so every KPI reports one number](/blog/calculate-dax)</li></ul><h2>Frequently asked questions</h2><p>### What is RANKX in Power BI in one sentence?</p><p>RANKX is a DAX function that ranks rows by a value and returns a rank number, 1 for the top spot. Written as a measure, the ranking recalculates for the exact slice a user is viewing, which is what keeps a &quot;top 10&quot; tile correct when someone filters.</p><p>### Why is every row showing rank 1?</p><p>Almost always the first argument is wrong. If you rank over the current row instead of the whole table, RANKX has nothing to compare against and returns 1 everywhere. Wrap the column in ALL or ALLSELECTED so RANKX ranks across all the rows you mean.</p><p>### What is the difference between ALL and ALLSELECTED in RANKX?</p><p>ALL ignores every filter and ranks across the whole table, giving a fixed global leaderboard. ALLSELECTED respects the user&#x27;s slicer and ranks only within what they picked. Use ALLSELECTED when a manager filters to a region and expects the top products in that region.</p><p>### How do I handle ties in a RANKX result?</p><p>Add DENSE as the last argument. With DENSE, two products tied for second are both rank 2 and the next one is rank 3, with no gap. Without it, the rank after a tie jumps ahead, which looks wrong to anyone reading the tile.</p><p>### Do I need Microsoft Fabric to use RANKX?</p><p>No. RANKX runs on Power BI Pro and Premium without Fabric. Fabric adds Direct Lake mode and OneLake storage, which help with very large or very fresh tables, but the measure you write is the same. For most company dashboards an Import model on Pro is plenty.</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">rankx power bi</span><span class="c">rankx dax; kpi excel; kpi tracker excel</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

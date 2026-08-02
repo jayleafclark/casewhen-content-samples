@@ -1,0 +1,144 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Power BI Health Check: Was wirklich dazugehört</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Sajagan Thirugnanam, CaseWhen</b><span>power bi health check</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><h1>Power BI Health Check: Was wirklich dazugehört</h1><div class="qa"><b>Quick answer.</b> QUICK ANSWER</div><p>Ein Power BI Health Check prüft, ob Ihre Berichte, Ihr Datenmodell und Ihre Berechtigungen sauber aufgebaut sind und ob der Zahl im Board-Pack zu trauen ist. Ein guter Check nennt am Ende die drei größten Risiken und sagt Ihnen, was zuerst zu reparieren ist. Er kostet wenig und spart oft einen langen Monatsabschluss.</p><p>Rund 10 Mal im Monat sucht im deutschsprachigen Raum jemand nach einem Power BI Health Check, fast immer weil eine Zahl im Board-Pack nicht mehr stimmt oder der Monatsabschluss jeden Monat länger dauert. Ein Power BI Health Check ist die strukturierte Antwort darauf: eine Prüfung, die zeigt, wo Ihr Aufbau kippt, bevor er in einer wichtigen Sitzung kippt.</p><p>Genau da wird es teuer. Die Umsatzzahl auf der Aufsichtsrats-Folie passt nicht zur Zahl aus dem Vorsystem, und die halbe Sitzung geht dafür drauf, zu klären, welche stimmt. Das ist der Regelfall, nicht die Ausnahme. Über 550 befragte Fachleute hinweg sagen 67 Prozent der Organisationen, dass sie den Daten, mit denen sie entscheiden, nicht voll vertrauen (Precisely und Drexel LeBow, 2025). Ein Health Check findet die Ursache dafür in Ihrem Aufbau, nicht in der Sitzung.</p><p>Dieser Text zeigt, was ein Power BI Health Check konkret prüft, warum die Zahlen so oft auseinanderlaufen, und wie Sie entscheiden, ob Sie selbst prüfen oder einen Business Intelligence Berater dazuholen.</p><h2>Was ist ein Power BI Health Check, und was bringt er?</h2><p>Ein Power BI Health Check ist eine geordnete Durchsicht Ihrer Power BI Umgebung durch jemanden, der weiß, wo solche Aufbauten reißen. Er schaut nicht auf Farben und Kacheln, sondern auf das, was darunter liegt: das Datenmodell, die Berechnungen, die Aktualisierung und die Berechtigungen.</p><p>Der Nutzen zeigt sich nicht in einem hübscheren Bericht, sondern in drei Dingen, die Ihnen ein Board-Meeting retten:</p><ol><li>Sie erfahren, ob Ihre Kennzahlen eine gemeinsame Definition haben. Bedeutet &quot;Umsatz&quot; auf jeder Seite dasselbe, oder rechnet jeder Bericht anders?</li><li>Sie erfahren, wo das Risiko liegt. Hängt der ganze Aufbau an einer einzigen Person, die den Bericht gebaut hat und irgendwann wechselt?</li><li>Sie bekommen eine Reihenfolge. Ein guter Check nennt die drei größten Baustellen und sagt, welche zuerst dran ist.</li></ol><p>Das klingt schlicht, und das ist der Punkt. Am Ende halten Sie ein kurzes Dokument in der Hand, das Ihnen sagt, ob Sie Ihren Zahlen trauen können und wo nicht. Diese eine Antwort ist mehr wert als jedes zusätzliche Diagramm.</p><h2>Warum liefern zwei Berichte dieselbe Zahl unterschiedlich?</h2><p>Weil sie nie dafür gebaut wurden, dieselbe Zahl zu liefern. Der Vertriebsbericht zählt einen Auftrag ab Bestellung, die Finanz zählt ihn ab Rechnung, und beide nennen das Ergebnis &quot;Umsatz&quot;. Beide Zahlen sind für sich richtig. Genau das macht den Streit so zäh.</p><p>Der Mechanismus dahinter ist fast immer der gleiche. Jede Abteilung baut ihren eigenen Export, mit eigenen Filtern und eigener Logik. Solange alles in getrennten Dateien liegt, fällt der Widerspruch nicht auf. Erst wenn zwei dieser Zahlen im selben Board-Pack nebeneinanderstehen, sieht ihn jeder. Und dann ist es zu spät, ihn ruhig zu klären. 82 Prozent der Befragten sagen, dass Datensilos ihre Abläufe stören (ZoomInfo).</p><p>Die Kosten sind nicht nur die verlorene Sitzung. 94 Prozent der Tabellen, die in Entscheidungen einfließen, enthalten Fehler (Poon et al., 2024). Schlechte Datenqualität kostet Organisationen im Schnitt 12,9 Millionen Dollar pro Jahr (Gartner). Ein Power BI Health Check deckt genau diese Stellen auf: Er zeigt, wo dieselbe Kennzahl an mehreren Orten unterschiedlich gerechnet wird, und markiert, was in eine gemeinsame Definition gehört. Das ist der eigentliche Sinn hinter dem Bild der einen belastbaren Zahl.</p><h2>Was gehört in einen Power BI Health Check?</h2><p>Sie müssen dafür kein Datenmodell lesen können. Es reicht, die fünf Bereiche zu kennen, die ein ernsthafter Check abklopft, und zu prüfen, ob Ihr Prüfer sie alle anfasst.</p><p>Zuerst das Datenmodell. Laufen die Quellen in einer sauberen Struktur zusammen, oder hängt alles an einer breiten Tabelle, die niemand mehr versteht? Zweitens die Kennzahlen. Ist jede wichtige Zahl einmal zentral definiert, oder steckt die Logik in verstreuten Formeln? Drittens die Aktualisierung. Lädt der Bericht morgens zuverlässig nach, oder bricht der Lauf regelmäßig ab und keiner merkt es? Viertens die Berechtigungen. Ist geregelt und geprüft, wer welche Zahlen sieht? Fünftens die Übergabe. Können zwei Ihrer Leute den Bericht pflegen, oder wäre eine Kündigung ein Notfall?</p><p>Fehlt der fünfte Punkt, haben Sie ein Risiko gekauft. Ein halbes Jahr später hat die Person, die alles gebaut hat, gewechselt, und niemand traut sich, einen Filter zu ändern. Ein langsamer Monatsabschluss ist oft das erste sichtbare Warnzeichen. Acht Tage gelten als akzeptabel, die besten Teams schließen in unter drei (Solvexia). Wenn Ihr Abschluss stockt, sobald eine Person im Urlaub ist, liegt das selten am Werkzeug und meist am Aufbau. Ein Health Check macht diese stille Abhängigkeit sichtbar, bevor sie zum Problem wird.</p><p>Gerade im Power BI Controlling zahlt sich diese Prüfung schnell aus, weil hier jeder Fehler direkt in eine Zahl fließt, über die die Geschäftsführung entscheidet.</p><h2>Selbst prüfen oder mit einem Power BI Dienstleister?</h2><p>Beides ist möglich, und die richtige Wahl hängt an Ihrem Aufbau, nicht an Ihrem Budget. Ist Ihr Bericht klein und haben Sie jemanden mit echter Power BI Erfahrung im Haus, kommen Sie mit einer eigenen Durchsicht weit. Ziehen Ihre Zahlen aus mehreren Systemen mit unterschiedlichen Kunden-IDs, oder traut sich niemand mehr an das Modell, ist ein externer Blick meist die schnellere und günstigere Wahl.</p><p>Die folgende Übersicht hilft bei der Entscheidung.</p><table><tr><th>Frage</th><th>Selbst im Team</th><th>Mit einem Dienstleister</th></tr><tr><td>Aufbau</td><td>Ein überschaubarer Bericht</td><td>Modell über mehrere Systeme</td></tr><tr><td>Erfahrung im Haus</td><td>Jemand kennt Modell und DAX</td><td>Niemand hat je ein Modell gebaut</td></tr><tr><td>Vertrauen in die Zahlen</td><td>Grundsätzlich stabil</td><td>Regelmäßig strittig im Meeting</td></tr><tr><td>Risiko bei Ausfall</td><td>Mehrere Leute kennen den Aufbau</td><td>Alles hängt an einer Person</td></tr><tr><td>Ziel</td><td>Eine schnelle Sichtprüfung</td><td>Ein belastbares Urteil mit Plan</td></tr></table><p>Steht Ihre Antwort meist in der rechten Spalte, spart ein Power BI Dienstleister Ihnen Wochen. Ein Spezialist sieht in wenigen Stunden, wofür ein Allrounder Tage braucht, und übergibt Ihnen am Ende eine klare Liste statt eines Bauchgefühls. Steht Ihre Antwort links, prüfen Sie es intern und holen sich einen Business Intelligence Berater erst, wenn der Check etwas findet, das Sie nicht selbst lösen können.</p><h2>Was kostet ein Health Check, und wann lohnt er sich?</h2><p>Ein Power BI Health Check ist der kleinste sinnvolle Schritt, den Sie gehen können, und genau das ist sein Wert. Sie zahlen für ein paar Tage Durchsicht, nicht für ein Projekt. Am Ende wissen Sie, ob Ihr Aufbau trägt oder ob Sie Geld in eine Umgebung stecken, die von innen bröckelt.</p><p>Der Check lohnt sich vor allem in drei Lagen:</p><ul><li>Ihre Zahlen widersprechen sich. Wenn zwei Berichte dieselbe Kennzahl anders zeigen, findet der Check die Stelle, an der die Definitionen auseinanderlaufen.</li><li>Ein Termin steht bevor. Vor einem Board-Meeting, einem Audit oder einer Finanzierungsrunde wollen Sie wissen, dass die Zahlen halten.</li><li>Sie planen den nächsten Schritt. Bevor Sie in KI oder Copilot investieren, muss das Fundament stimmen. Nur 12 Prozent der Organisationen halten ihre Daten für gut genug für KI (Precisely und Drexel LeBow, 2025). Was Sie hier auslassen, zahlen Sie später doppelt.</li></ul><p>Ein guter Business Intelligence Berater sagt Ihnen nach dem Check ehrlich, ob eine kleine Korrektur reicht oder ob sich ein Neuaufbau lohnt. Beides ist ein gültiges Ergebnis. Ein Check, der immer denselben teuren Umbau empfiehlt, hat nicht wirklich geprüft.</p><h2>Häufige Fragen</h2><p>Wie lange dauert ein Power BI Health Check?
+Für eine überschaubare Umgebung sind es zwei bis vier Tage. Bei einem Modell über mehrere Systeme mit vielen Berichten planen Sie eine bis zwei Wochen, bis das Urteil und die Prioritätenliste stehen.</p><p>Was bekomme ich am Ende in die Hand?
+Ein kurzes, lesbares Dokument, kein technisches Protokoll. Es nennt die größten Risiken, sagt, ob Sie Ihren Zahlen trauen können, und stellt die Reparaturen in eine Reihenfolge nach Wirkung und Aufwand.</p><p>Müssen wir dafür unseren Bericht offenlegen?
+Ja, der Prüfer braucht Einblick in das Modell und die Berechnungen, denn die Fehler stecken unter der Oberfläche. Der Zugriff lässt sich auf eine Lesekopie oder eine begrenzte Rolle beschränken, sodass niemand Ihre Live-Daten verändert.</p><p>Ersetzt ein Health Check ein neues Dashboard?
+Nein, er kommt davor. Ein Check sagt Ihnen, ob ein Neuaufbau überhaupt nötig ist oder ob eine gezielte Korrektur reicht. Oft ist die günstige Reparatur die richtige Antwort, und das erfahren Sie nur, wenn zuerst jemand ehrlich prüft.</p><p>Woran erkennen wir einen guten Prüfer?
+Wenn das erste Gespräch um Ihre echten Daten und die eine Frage geht, die der Bericht beantworten soll, statt um Kacheln und Farben. Wer eine KI-Schicht verspricht, bevor die Grundlagen sauber sind, überspringt den Teil, der sich am Ende auszahlt.</p><p>Prüfen Sie zuerst kostenlos, wo Sie stehen: Die Power BI Governance und Kosten Scorecard bewertet Ihre Umgebung in fünf Minuten und nennt Ihre drei größten Risiken. Wollen Sie danach ein vollständiges Urteil zu Ihrem echten Aufbau, buchen Sie ein Scoping-Gespräch mit uns.</p><p>Weiterlesen: [Power BI Consulting: der Überblick](/power-bi-consulting) und [Power BI Controlling einfach erklärt](/blog/power-bi-controlling).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">power bi health check</span><span class="c">power bi controlling</span><span class="c">power bi dienstleister</span><span class="c">business intelligence berater</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Power BI Fees: The Real Number Nobody Publishes</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>power bi fees</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><h1>Power BI Fees: The Real Number Nobody Publishes</h1><div class="qa"><b>Quick answer.</b> Power bi fees start at about $14 per user each month for Power BI Pro, but the license is the smallest part of the bill. The bigger costs are capacity, the Azure plumbing underneath, and the build work that makes the numbers trustworthy. Most buyers underestimate the total by a wide margin.
+---</div><p>Power bi fees start at around $14 per user per month, and that number is almost never the one you actually pay. That figure is the Power BI Pro license, the one every sales page leads with. It&#x27;s a genuine price, and it&#x27;s also the smallest line in the whole bill. By the time your reports are trusted and running, the total looks nothing like $14 a head.</p><p>This piece gives you the full picture before you sign anything. What Microsoft charges, what sits underneath it, and where the money actually goes. No pitch. Just the numbers a controller or CFO needs to budget without a surprise showing up two quarters later.</p><h2>What are the real power bi fees you&#x27;ll actually pay?</h2><p>There are three layers, and only the first one is on the pricing page.</p><p>The first layer is the license. Power BI Pro is about $14 per user per month. If everyone who touches a report needs to see it, you multiply that by your headcount. For a hundred people, that&#x27;s roughly $1,400 a month before anything else. Simple, visible, and the part most people think is the whole answer.</p><p>The second layer is capacity. Once you have a lot of users, or big datasets, or you want people to view reports without giving each one a paid license, you move to a capacity plan. That&#x27;s where the price jumps. A capacity that serves a mid-sized company runs into the thousands of dollars a month, often around $5,000 for a Premium or Fabric capacity at list price. Microsoft changes these numbers often, so treat them as a starting point rather than a quote.</p><p>The third layer is the one nobody puts on a page: the build. The work to connect your systems, define your numbers once, and make the reports something the board will trust. That&#x27;s usually the largest cost in year one, and it&#x27;s the one that decides whether the first two layers were worth paying at all.</p><h2>Why is the sticker price so misleading?</h2><p>Because the cheap number and the useful number are two different things.</p><p>The $14 license buys you the software, and the software on its own won&#x27;t hand you a working report that reconciles. Plenty of companies pay for Power BI, roll it out, and still watch finance export everything back to Excel. Only 40% of executives say they always trust their organization&#x27;s data (Talend). A license doesn&#x27;t move that number. The setup underneath it does.</p><p>Here&#x27;s the part that costs real money and never appears in the fee schedule. Around 70% of dashboard work is wasted because people don&#x27;t trust or use what gets built (RevealBI). The bigger risk is spending on all three layers and landing in that 70%, with reports the team ignores and rebuilds in Excel anyway. When that happens, every dollar across all three layers bought you reports the team walks past.</p><p>That&#x27;s why the honest way to read power bi fees is total cost to a trusted result, not the line item on the license.</p><h2>What does Power BI Embedded pricing cost?</h2><p>If you want reports inside your own product or customer portal, you&#x27;re looking at a different model.</p><p>Power BI Embedded pricing is capacity-based rather than per user. You buy a block of compute that serves your reports to outside viewers, and you pay for the size of that block whether ten people or ten thousand look at it. The smallest capacity starts at a few hundred dollars a month and scales up fast as usage grows. You pay for the size of the block, and the number of people who open a report doesn&#x27;t change the fee.</p><p>This matters for one type of buyer in particular: software companies putting analytics in front of their own customers. For an internal finance or operations team, embedded is usually the wrong plan and per-user or shared capacity is cheaper. Picking the wrong one here is a common way a Power BI bill comes in two or three times higher than it needed to.</p><h2>Is Power BI Premium Per User worth it?</h2><p>For some teams, yes. For most, it&#x27;s a middle step.</p><p>Power BI Premium Per User sits between the basic Pro license and a full capacity. It&#x27;s about $24 per user per month at list price, and it unlocks the heavier features, bigger datasets, faster refresh, and more advanced modeling, without committing to a full capacity plan that costs thousands. If you have a small group of analysts who need the heavy features while your whole company doesn&#x27;t need shared capacity, Power BI Premium Per User is often the right fit.</p><p>The trap is buying it for everyone. If most of your users only view reports, paying $24 a head for the premium features they never touch is money gone. The math flips at scale: once you have enough heavy users, a shared capacity becomes cheaper than paying premium per person. Knowing where that line sits for your headcount is a five-minute calculation that saves real money, and it&#x27;s one most buyers never run.</p><h2>What about the Azure bill underneath?</h2><p>This is the layer that catches people, because it doesn&#x27;t arrive as a Power BI charge at all.</p><p>Most trusted Power BI setups pull data from somewhere, and moving that data is an Azure cost. Azure Data Factory pricing is usage-based, charged by how many times your pipelines run and how much data they move. It starts small, a few dollars, and it&#x27;s easy to ignore at first. Then the pipelines run every hour across more sources, and the Azure bill grows into a real line on the budget. Because it appears under Azure and separate from Power BI, finance often doesn&#x27;t connect it to the reporting project until it&#x27;s already large.</p><p>None of this is a reason to avoid it. Clean, automated data movement is exactly what stops your team from fixing spreadsheets by hand. The point is that azure data factory pricing belongs in your Power BI budget from day one, even though Microsoft bills it separately. Leave it out and your forecast is wrong before you start.</p><h2>So what&#x27;s the honest total?</h2><p>Line the layers up and the real shape of the bill becomes clear.</p><table><tr><th>What you&#x27;re paying for</th><th>Rough list price</th><th>What it actually buys</th></tr><tr><td>Power BI Pro license</td><td>~$14 per user / month</td><td>The right to view and build reports</td></tr><tr><td>Power BI Premium Per User</td><td>~$24 per user / month</td><td>Heavier features for a small group of analysts</td></tr><tr><td>Shared or Fabric capacity</td><td>thousands / month, often ~$5,000</td><td>Serving reports at scale without per-seat licensing</td></tr><tr><td>Power BI Embedded pricing</td><td>from a few hundred / month</td><td>Reports inside your own product for outside viewers</td></tr><tr><td>Azure Data Factory pricing</td><td>usage-based, grows with sources</td><td>Moving and refreshing the data underneath</td></tr><tr><td>The build (year one)</td><td>usually the biggest cost</td><td>Numbers defined once, reports the board trusts</td></tr></table><p>Read that table top to bottom and the lesson is plain. The license everyone quotes is the smallest row. Poor data quality already costs organizations $12.9M a year on average (Gartner), and most of that comes from reports that were never built right in the first place. Spending a little more to get the bottom two rows correct is what keeps you out of that number.</p><p>### How to size your own bill in an afternoon</p><p>One level deeper, and this is the part worth doing before you talk to anyone. Count three things. How many people only view reports versus how many actually build them, because that splits your Pro from your Premium Per User spend. How much data you move and how often, because that sets your Azure floor. And whether the numbers you have today reconcile, because that decides whether the build is a small tidy-up or a real project. Those three counts turn a vague fear about cost into a budget you can defend in a meeting. Everything else is detail on top of that.</p><h2>What you can do this week</h2><p>Before you commit to any plan, get a free read on where your setup stands and what it should cost you. Our Power BI Governance &amp; Cost Scorecard is a five-minute assessment that scores how exposed you are to overspending and conflicting numbers, and shows your top three risks. Run it, and you&#x27;ll know whether you&#x27;re facing a light setup or a real build. If you&#x27;d rather have the licensing math done on your actual numbers, book a scoping call with our team. That&#x27;s the session where we look at your headcount, your data sources, and your reports, and tell you straight what your power bi fees will really be.</p><h2>Frequently asked questions</h2><p>How much does Power BI cost per user?
+Power BI Pro is about $14 per user per month, and Power BI Premium Per User is about $24 per user per month at list price. Pro covers viewing and basic building. Premium Per User adds heavier features and bigger datasets for a small group of analysts. Most companies mix the two rather than putting everyone on the same plan.</p><p>Why is my Power BI bill higher than the license price?
+Because the license is only one of three layers. On top of the per-user fee you&#x27;re often paying for a shared capacity, for Azure data movement underneath, and for the build work that makes reports trustworthy. The license is the smallest of these. Total cost to a working result is the number that matters.</p><p>What is Power BI Embedded pricing based on?
+Capacity, not users. Power BI Embedded pricing charges for a block of compute that serves reports to outside viewers, so you pay for the size of the block regardless of how many people look at it. It fits software companies embedding analytics in their own product, and it&#x27;s usually the wrong plan for an internal finance team.</p><p>Does a Power BI project need Azure too?
+Often, yes. Moving and refreshing data usually runs through Azure, and azure data factory pricing is charged by usage, separate from your Power BI license. It starts small and grows as you add sources and run pipelines more often. Put it in your budget from the start, because it won&#x27;t show up as a Power BI charge.</p><p>What&#x27;s the real cost of a Power BI setup in year one?
+The build is usually the largest line, bigger than any license. It&#x27;s the work to connect your systems, define each number once, and make reports the board will trust. Get that right and the license and capacity fees are money well spent. Get it wrong and you join the 70% of dashboard work that&#x27;s wasted (RevealBI).</p><p>Read next: [How we price our work, in plain numbers](/pricing) and [Power BI consultant vs in-house: when each actually wins](/blog/power-bi-consultant-vs-in-house).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">power bi fees</span><span class="c">power bi embedded pricing</span><span class="c">power bi premium per user</span><span class="c">azure data factory pricing</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

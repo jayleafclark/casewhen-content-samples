@@ -1,0 +1,140 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Kosten Power BI Premium: Die echte Zahl</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Sajagan Thirugnanam, CaseWhen</b><span>kosten power bi premium</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Power BI Pro list price, per user per month</figcaption><div class="cbar"><span class="cl">2024</span><div class="ctrack"><div class="cfill" style="width:71%"></div></div><span class="cv">$10</span></div><div class="cbar"><span class="cl">2025</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">$14</span></div><div class="csrc">Source: Microsoft, 2025 price update</div></figure><h1>Kosten Power BI Premium: Die echte Zahl</h1><div class="qa"><b>Quick answer.</b> Die Kosten Power BI Premium hängen an der Lizenzstufe. Premium pro Benutzer kostet rund 20 Euro pro Nutzer und Monat. Die meisten Teams brauchen aber kein Premium: Power BI Pro liegt bei rund 10 Euro pro Nutzer und Monat. Die frühere Premium-Kapazität steckt heute in Microsoft Fabric, ab etwa 5.000 Euro im Monat.
+---</div><p>Die meisten Käufer stellen die Frage nach Premium und meinen eine ganz andere Rechnung. Auf der Microsoft-Preisseite steht Premium pro Benutzer bei rund 20 Euro im Monat, und viele buchen genau das für alle. Für die meisten Teams ist das die falsche Zahl. Unten steht die klare Rechnung, Stufe für Stufe, mit Zahlen, die Sie gegen jedes Angebot prüfen können.</p><h2>Kosten Power BI Premium: was zahlen Sie wirklich?</h2><p>Es gibt zwei Dinge, die Microsoft Premium nennt, und genau da beginnt die Verwirrung.</p><p>Das Erste ist Premium pro Benutzer. Diese Lizenz kostet rund 20 Euro pro Nutzer und Monat. Dafür bekommt eine Person größere Datenmodelle, häufigere Aktualisierungen und paginierte Berichte, alles zu einem festen Preis pro Kopf.</p><p>Das Zweite ist die frühere Premium-Kapazität, die heute in Microsoft Fabric steckt. Dazu weiter unten mehr. Wenn eine Controllerin nach den Kosten Power BI Premium fragt, meint sie fast immer eine dieser beiden Zahlen. Welche zählt, hängt daran, wie viele Leute Berichte bauen und wie viele nur lesen.</p><table><tr><th>Stufe</th><th>Preis pro Monat</th><th>Wer braucht sie</th><th>Worauf Sie achten</th></tr><tr><td>Power BI Desktop</td><td>kostenlos</td><td>Berichtsbauer unter Windows</td><td>Teilt allein nichts online</td></tr><tr><td>Power BI Pro</td><td>rund 10 Euro pro Nutzer</td><td>Jeder, der Berichte teilt oder geteilte Berichte öffnet</td><td>Modell bis 1 GB, 8 Aktualisierungen am Tag</td></tr><tr><td>Premium pro Benutzer</td><td>rund 20 Euro pro Nutzer</td><td>Analysten mit großen Modellen oder paginierten Berichten</td><td>Wird weiter pro Kopf berechnet</td></tr><tr><td>Fabric F64-Kapazität</td><td>ab etwa 5.000 Euro</td><td>Teams mit vielen reinen Betrachtern</td><td>Feste Gebühr, nicht pro Sitz</td></tr></table><p>Der reine Power BI Preis pro Kopf ist also 10 Euro für Pro und 20 Euro für Premium pro Benutzer. Die dritte Zeile, die Kapazität, ändert die Rechnung komplett, sobald Sie viele Betrachter haben.</p><h2>Warum landet Premium bei Leuten, die es nie brauchen?</h2><p>Premium pro Benutzer ist für Menschen gedacht, die schwere Modelle bauen. Nicht für Kollegen, die einmal im Monat auf einen Bericht schauen. Trotzdem landet genau diese Lizenz oft bei allen im Verzeichnis, weil das Einkaufen so am schnellsten geht.</p><p>Rechnen Sie das einmal durch. 100 Gelegenheitsbetrachter auf Premium pro Benutzer sind rund 24.000 Euro im Jahr, für Sitze, die den meisten Monat brachliegen. Dieselben Betrachter brauchen fast nie ein großes Modell. Sie brauchen eine Zahl, der sie trauen.</p><p>Und genau da liegt das eigentliche Geld. In einer Erhebung von 2025 gaben 67 Prozent der Organisationen an, dass sie den Daten für ihre Entscheidungen nicht voll vertrauen (Drexel LeBow und Precisely, 2025). Eine teurere Lizenz ändert diese Zahl nicht. Ein sauberes Datenmodell und klare Verantwortung ändern sie, und das kostet weit weniger als eine zusätzliche Lizenzstufe für jeden Kopf.</p><h2>Was wurde aus der Premium-Kapazität unter Microsoft Fabric?</h2><p>Die alte Premium-Kapazität hieß P1, P2 und P3 und wurde nach Kapazität abgerechnet. Microsoft hat diese Pläne eingestellt und die Kapazität in Microsoft Fabric verschoben. Neue Käufer buchen jetzt sogenannte F-SKUs.</p><p>Fabric-Kapazität wird pro Stunde abgerechnet und pro Monat reserviert. Ein F2, der kleinste, liegt bei etwa 260 Euro im Monat. Die eine Zahl, die für die meisten Käufer zählt, ist F64. Ab einer F64-Reservierung, rund 5.000 Euro im Monat, lesen Ihre Betrachter veröffentlichte Berichte, ohne dass jeder eine eigene Pro-Lizenz braucht. Diese Regel macht aus der Frage nach den Kosten Power BI Premium fast immer eine Frage nach der Kopfzahl.</p><p>Kapazität bringt außerdem die inkrementelle Aktualisierung. Statt eine große Tabelle jede Nacht komplett neu zu laden, laden Sie nur die neuesten Zeilen. Eine Verkaufstabelle über zehn Jahre, die vorher 40 Minuten brauchte, ist danach in unter einer Minute fertig. Wenn Ihr Monatsabschluss heute acht bis zehn Tage dauert, während starke Teams unter drei Tagen bleiben (Solvexia), ist genau diese Ladezeit oft ein Teil des Problems.</p><h2>Was kostet eine Fehlentscheidung im Vorstand?</h2><p>Die Lizenzstufe ist die kleine Zahl. Die große Zahl steht in der Vorstandssitzung, wenn zwei Berichte denselben Umsatz unterschiedlich ausweisen und die Runde 20 Minuten darüber streitet, welche Folie stimmt.</p><p>Kein größeres Lizenzpaket löst das. Premium pro Benutzer liefert schnellere Berichte, aber keine gemeinsame Definition von Umsatz. Wenn Ihr Datenmodell zwei Antworten auf dieselbe Frage zulässt, bekommen Sie zwei Antworten, egal wie teuer die Lizenz ist. Deshalb ist die erste Frage vor jedem Kauf nicht Premium oder Pro, sondern: Liefert unser Modell eine Zahl, hinter der alle stehen?</p><p>Wer die Power BI Lizenz Kosten sauber durchrechnet und dabei das Datenmodell übergeht, spart am falschen Ende. Die Lizenz kostet ein paar Tausend Euro im Jahr. Eine falsche Entscheidung auf Basis widersprüchlicher Zahlen kostet mehr, und sie kostet Glaubwürdigkeit, die Sie in einer einzigen Sitzung verlieren.</p><h2>Welche Lizenz braucht Ihr Team wirklich?</h2><p>Hier ist die Reihenfolge, die wir mit Kunden gehen, bevor jemand etwas kauft.</p><ol><li>Zählen Sie Bauer gegen Betrachter. Jeder, der Berichte veröffentlicht oder bearbeitet, braucht Pro oder Premium pro Benutzer. Reine Betrachter oft nicht, wenn Sie auf Kapazität gehen.</li><li>Addieren Sie die Sitze. Multiplizieren Sie Ihre Betrachterzahl mit rund 10 Euro für Pro. Kommen Sie über etwa 500 Betrachter, stellen Sie diese Summe gegen eine F64-Reservierung von rund 5.000 Euro im Monat.</li><li>Prüfen Sie die Berechtigungen vor dem breiten Zugang. Mit der Ansicht als Rolle in Power BI Desktop testen Sie Ihre Sicherheit auf Zeilenebene, damit kein Kunde die falschen Zahlen sieht.</li><li>Schalten Sie die inkrementelle Aktualisierung früh ein. Das hält einen Pro-Arbeitsbereich unter der 1-GB-Grenze und erspart Ihnen den zu frühen Sprung auf Premium pro Benutzer.</li></ol><p>Die Break-even-Rechnung machen Sie am besten von Hand. Rund 5.000 Euro für F64, geteilt durch 10 Euro pro Sitz, ergibt etwa 500 Betrachter. Darunter ist Pro pro Kopf meist günstiger. Darüber gewinnt die Kapazität, und jeder weitere Betrachter kostet dann fast nichts. Viele Teams zahlen zu viel, weil sie diese eine Division nie rechnen.</p><h2>Wo bekommen Sie Power BI Schulung kostenlos?</h2><p>Bevor Sie in Lizenzen investieren, lohnt sich ein kurzer Blick auf die Basics. Es gibt Power BI Schulung kostenlos direkt bei Microsoft Learn, mit geführten Modulen zu Datenmodell, Aktualisierung und Berechtigungen. Für ein Team, das die Grundlagen sauber lernt, spart das später echte Lizenzkosten, weil weniger falsche Sitze gebucht werden.</p><p>Das reicht für die ersten Schritte. Wenn es an Ihre echten Berichte und Ihre eigene Kopfzahl geht, wird die Rechnung individuell, und dann lohnt sich ein Blick von außen.</p><p>Die kostenlose Governance und Cost Scorecard unten gibt Ihnen in fünf Minuten Ihren Stand plus die drei größten Kostenrisiken. Wenn Ihre Zahlen danach noch nicht zueinander passen, buchen Sie ein Gespräch, und wir rechnen die Lizenzmathematik an Ihrem echten Aufbau durch.</p><h2>Häufige Fragen</h2><p>### Was kostet Power BI Premium pro Benutzer im Monat?</p><p>Rund 20 Euro pro Nutzer und Monat. Diese Lizenz deckt größere Datenmodelle, häufigere Aktualisierungen und paginierte Berichte, alles pro Kopf abgerechnet.</p><p>### Brauche ich für reine Betrachter überhaupt Premium?</p><p>Meist nicht. Reine Betrachter kommen oft mit einem Pro-Sitz zu rund 10 Euro aus. Ab etwa 500 Betrachtern lohnt sich eine Fabric F64-Kapazität, unter der Betrachter ohne eigene Lizenz lesen.</p><p>### Was kostet die Power BI Premium Kapazität heute?</p><p>Die Kapazität steckt jetzt in Microsoft Fabric. Ein F2 liegt bei etwa 260 Euro im Monat, eine reservierte F64 bei rund 5.000 Euro. Ab F64 lesen Betrachter ohne eigene Pro-Lizenz.</p><p>### Ab wann schlägt Fabric-Kapazität die Lizenz pro Nutzer?</p><p>Etwa ab 500 Betrachtern. Bei rund 10 Euro pro Pro-Sitz kosten 500 Betrachter ungefähr so viel wie eine F64-Reservierung, und jeder Betrachter darüber ist auf Kapazität günstiger.</p><p>### Wo finde ich den aktuellen Power BI Preis?</p><p>Der aktuelle Power BI Preis steht offen auf der Microsoft-Preisseite, getrennt nach Pro, Premium pro Benutzer und Fabric-Kapazität. Prüfen Sie jedes Angebot gegen diese Liste.</p><p>### Gibt es Power BI Schulung kostenlos?</p><p>Ja. Microsoft Learn bietet geführte Module kostenlos an. Das deckt die Grundlagen zu Modell, Aktualisierung und Berechtigungen ab, bevor Sie über bezahlte Lizenzen entscheiden.</p><p>Weiterlesen: unser [Überblick zu den Power BI Preisen](/pricing) für die volle Stufenkarte, und [Power BI Lizenzkosten im Detail](/blog/power-bi-lizenzkosten) für einen genaueren Blick auf einen einzelnen Sitz.</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">kosten power bi premium</span><span class="c">power bi preis; power bi lizenz kosten; power bi schulung kostenlos</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

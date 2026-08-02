@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Azure Data Factory Services: What It Actually Does (Plain En</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>azure data factory services</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Organizations with data good enough to use for AI</figcaption><div class="cbar"><span class="cl">Ready</span><div class="ctrack"><div class="cfill" style="width:13%"></div></div><span class="cv">12%</span></div><div class="cbar"><span class="cl">Not ready</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">88%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><h1>Azure Data Factory Services: What It Actually Does (Plain English)</h1><div class="qa"><b>Quick answer.</b> Azure data factory services are the part of Microsoft&#x27;s cloud that pulls your data out of every app you run, cleans it, and loads it somewhere your reports can read. It is the plumbing under your dashboards, and it is separate from the dashboard. You pay by usage, and when it works, the numbers show up on time and match.
+---</div><p>Azure data factory services are the part of Microsoft&#x27;s cloud that collects your data from the tools you already run, cleans it, and loads it somewhere your reports can read. It is the plumbing under the dashboard, and it is a layer below what your people open. Most buyers meet it as a line on a project quote with no fixed price, just a meter, and they sign off without a clear picture of what they are buying. Here is the number that should frame the call. Gartner puts the cost of poor data quality at $12.9M a year for the average organization. This is the tool that decides which side of that number you land on.</p><p>You run the company or you own the reporting. You approve the spend. Someone hands you an Azure line with no price on it and a promise that it will fix your data, and you have no plain way to judge whether that is true. So the decision stalls, or you approve it and watch the bill drift with no clear reason why.</p><p>The cost you actually feel sits away from the tool. It shows up in the board meeting where sales quotes one revenue figure and finance quotes another, and twenty minutes go to arguing about whose number is right. It shows up in a close that drags past a week because the data lands late or lands wrong. That is the job this tool is meant to prevent, and it is worth knowing what it does before you pay for it.</p><h2>What do azure data factory services actually do?</h2><p>The job is plain. It reaches into each source where your data lives, copies what you need, fixes it on the way, and drops it into one place your reports point at. It runs on a clock, so this happens every night, or every hour, without a person doing it by hand.</p><p>That last part is the point. Right now, someone on your team probably exports a file, pastes it into a spreadsheet, cleans it, and emails it around. That person is the single choke point, and their work is where errors creep in. About 94% of business spreadsheets used in decisions contain errors (Poon et al., 2024). This tool takes that manual job and makes it run the same way every time, without the copy-paste.</p><table><tr><th>The job</th><th>In plain terms</th><th>What you feel when it is missing</th></tr><tr><td>Ingest</td><td>Pulls data out of each source</td><td>Reports built on one source, blind to the rest</td></tr><tr><td>Clean</td><td>Fixes formats, removes duplicates, aligns fields</td><td>Two reports that disagree on the same number</td></tr><tr><td>Load</td><td>Drops the result into one central store</td><td>Everyone pulls from a different place</td></tr><tr><td>Schedule</td><td>Runs the whole thing on a clock</td><td>A person exports files by hand, and errors slip in</td></tr></table><p>When those four run well, the board pack reconciles and the close speeds up. When they do not, you pay for the compute anyway and still get late, mismatched reports.</p><h2>What can azure data factory services connect to?</h2><p>Most of the value is in the reach. It ships with built-in connectors to about a hundred sources, so it does not care whether your data sits in a modern cloud app or an old box in a back room. This matters because your data is scattered. Around 82% of companies say data silos disrupt their workflows (ZoomInfo), and the whole reason silos hurt is that no single tool can see across them. This one is built to.</p><p>Here is the one part that goes a level deeper, kept short. Say your finance or billing data runs on Oracle. Azure Data Factory has a native connector for it, which is why azure data factory oracle setups are common in mid-sized companies that never fully left their old stack. On the other end, it usually lands the cleaned data into a warehouse built for reporting, often a Synapse database, so your dashboards read from one fast, trusted store instead of hammering the live tools your business runs on. You do not need to know how either connection is wired. You need to know that your Oracle data and your reporting store are both on the supported list, so nobody can tell you your data is trapped.</p><h2>Where does the real cost of azure data factory services show up?</h2><p>The meter itself is small. You pay a little over a dollar per 1,000 pipeline runs, some hourly compute while data is moving, and a small monthly charge per pipeline. For a mid-sized company on a daily schedule, that lands in the tens to low hundreds of dollars a month. The meter is the small, predictable part of the story.</p><p>The real cost sits in what happens when the data underneath is wrong. If sales and finance pull from different places with different definitions, no amount of Azure compute makes them agree, and you keep paying for a reporting setup people do not trust. About 67% of companies say they do not fully trust the data they use to make decisions (Drexel LeBow and Precisely, 2025). Roughly 70% of the dashboards teams build go unused (RevealBI), usually because someone keeps a private spreadsheet on the side. Every one of those is real money that a bigger meter does not fix.</p><p>So the spend that matters sits well past the dollar per 1,000 runs. It lands in the wasted licenses, the slow close, and the meeting where two right-looking numbers disagree and a decision gets made on the wrong one.</p><h2>What does good look like?</h2><p>You can judge whether this is set up well without opening a single report. Good looks like four plain things.</p><p>The close gets shorter. High performers close their books in under three days, while a week or more is common everywhere else (Solvexia). If your data lands on time and clean, the close speeds up, and that is the outcome you can measure.</p><p>The board pack reconciles. Cash on one slide matches the balance sheet on another, because both trace back to one central store instead of two spreadsheets.</p><p>People stop asking IT for numbers. When the trusted data sits in one place and refreshes on a schedule, teams read it themselves instead of waiting in a queue.</p><p>Nobody keeps a private spreadsheet. That is the real test. If your best people still maintain their own version on the side, they do not trust the central one yet, and the setup is not finished.</p><h2>How do you make the decision?</h2><p>You do not need to design the pipes. You need to make four calls at the business level and let the build follow them.</p><ol><li>Name what it must connect to. List the sources that carry your real numbers, including the old ones. Your finance app, your sales app, your operations data. If a quote skips one, your reports will be blind to it.</li><li>Decide the cadence honestly. Refreshing every hour when once a day would do multiplies the bill for no business gain. Ask whether the number really needs to move hourly, or whether each morning is fine.</li><li>Ask for the data bill as its own line. The Azure meter should sit separate from the license seats, because the seat cost is fixed and the data cost is the one that drifts. A blended quote hides which is which.</li><li>Give one person the numbers. One owner in finance or operations who protects a single definition per metric. It is the cheapest control you have, and it is the one most companies skip.</li></ol><p>If you want a quick read on where you stand, run our free Power BI Governance and Cost Scorecard. It takes about five minutes and shows where your risk and your spend sit today. And if you are standing up an Azure data foundation and want the plan sized against your real setup, book a scoping call and we will map it with you.</p><h2>Frequently asked questions</h2><p>What are Azure Data Factory services in plain terms?
+Azure data factory services are Microsoft&#x27;s cloud tool for moving data. They pull data out of the apps you run, clean it, and load it into one central store your reports read from. It runs on a schedule, so the work that a person does by hand today happens on its own instead. It is the plumbing beneath your dashboards, a layer below what people open.</p><p>How much does Azure Data Factory cost?
+It is usage based, not a flat subscription. You pay a little over a dollar per 1,000 pipeline runs, hourly compute while data moves, and a small monthly charge per pipeline. For a mid-sized company on a daily schedule, that usually lands in the tens to low hundreds of dollars a month. Running things hourly instead of nightly is what pushes it higher.</p><p>Can Azure Data Factory connect to Oracle?
+Yes. It ships with a native Oracle connector, which is common in companies still running part of their stack on Oracle. It reads from that source and loads the cleaned data into a reporting store, so your dashboards do not have to hit the live Oracle instance directly.</p><p>Where does Azure Data Factory put the data it processes?
+It loads the cleaned result into a central store built for reporting, often a Synapse database or another warehouse. The point is that all your reports read from one fast, trusted place instead of pulling from several live sources with different definitions.</p><p>Do Azure Data Factory services fix untrusted numbers on their own?
+Not by themselves. The tool moves and cleans data reliably, but if two sources define revenue differently, someone still has to agree one definition. That is why the setup that works pairs the plumbing with one owner who protects a single meaning per metric.</p><h2>Read next</h2><ul><li>[Azure data engineering, what it buys a business](/azure-data-engineering)</li><li>[Azure Data Factory pricing, line by line, with real numbers](/blog/azure-data-factory-pricing)</li><li>[Single source of truth, what it really means for a mid-sized business](/blog/single-source-of-truth-for-business)</li></ul></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">azure data factory services</span><span class="c">azure data</span><span class="c">azure data factory oracle</span><span class="c">synapse database</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

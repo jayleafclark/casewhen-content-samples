@@ -1,0 +1,139 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Sap Business Partner Datenmodell: Grundlagen</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Sajagan Thirugnanam, CaseWhen</b><span>sap business partner datenmodell</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Organizations with data good enough to use for AI</figcaption><div class="cbar"><span class="cl">Ready</span><div class="ctrack"><div class="cfill" style="width:13%"></div></div><span class="cv">12%</span></div><div class="cbar"><span class="cl">Not ready</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">88%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><h1>Sap Business Partner Datenmodell: Grundlagen</h1><div class="qa"><b>Quick answer.</b> Das Sap Business Partner Datenmodell ist die zentrale Stammdatenstruktur in SAP S/4HANA, in der Kunde, Lieferant und jeder Geschäftspartner als ein einziger Datensatz geführt werden. Statt getrennter Kunden- und Lieferantenstämme gibt es einen geprüften Datensatz pro Partner. Für Ihre Berichte heißt das: Umsätze, Forderungen und Ausgaben lassen sich sauber einer Firma zuordnen, und die Zahlen im Abschluss passen zusammen.</div><p>Das Sap Business Partner Datenmodell ist die Struktur, auf der in SAP S/4HANA alle Ihre Kunden- und Lieferantenzahlen aufsetzen. Wenn Ihr Finanzteam jeden Monat zehn Berichte aus SAP zieht und die Umsätze trotzdem nicht zum Abschluss passen, liegt die Ursache selten in der Auswertung. Sie liegt eine Ebene tiefer, in den Stammdaten. Genau dort entscheidet sich, ob eine Firma, die zugleich Kunde und Lieferant ist, als ein Partner oder als drei getrennte Datensätze in Ihren Zahlen auftaucht.</p><p>Für Sie auf Leitungsebene ist das keine technische Randnotiz. Es entscheidet darüber, ob der Umsatz je Kunde stimmt, ob die Forderungsliste sauber ist und ob die Zahl im Aufsichtsratspaket standhält, wenn jemand nachfragt. Dieser Beitrag erklärt in einfacher Sprache, was das Datenmodell ist, warum Ihre Kennzahlen daran hängen und was Sie zuerst verlangen sollten. Wir schreiben aus der Arbeit an echten SAP-Berichten mittelständischer Firmen.</p><h2>Was ist das Sap Business Partner Datenmodell?</h2><p>Es ist die Art, wie SAP S/4HANA jeden Geschäftspartner speichert. In den älteren SAP-Versionen gab es getrennte Stämme: einen für Kunden, einen für Lieferanten. Eine Firma, die bei Ihnen kauft und zugleich liefert, stand zweimal im Haus, mit zwei Nummern und oft zwei Adressen. Das neue Modell führt beide unter einem einzigen Geschäftspartner zusammen. Ob diese Firma Kunde, Lieferant oder beides ist, wird über sogenannte Rollen am selben Datensatz hinterlegt.</p><p>Der praktische Kern ist einfach. Jede reale Firma hat genau einen Datensatz. Daran hängen ihre Adresse, ihre Bankverbindung, ihre steuerlichen Angaben und ihre Rollen. Kauft und liefert dieselbe Firma, sehen Sie beide Seiten an einer Stelle. Das ist die Grundlage dafür, dass eine Auswertung den Umsatz und die offenen Forderungen derselben Firma korrekt gegenüberstellt.</p><p>Wichtig ist, was das Modell nicht leistet. Es ordnet Ihre Daten nur, wenn beim Umzug oder im Tagesgeschäft sauber gearbeitet wird. Wenn dieselbe Firma versehentlich zweimal angelegt wird, entstehen wieder zwei Wahrheiten, diesmal im neuen Modell. Die Struktur allein sorgt für Ordnung, gepflegt werden muss sie trotzdem.</p><h2>Warum hängen Ihre Kennzahlen am Datenmodell?</h2><p>Weil jede Kennzahl, die einen Kunden oder Lieferanten betrifft, aus diesen Stammdaten kommt. Umsatz je Kunde, Forderungsdauer, Lieferantenausgaben, Konzentrationsrisiko: all das setzt voraus, dass eine Firma im Bestand genau einmal existiert. Steht sie doppelt, wird ihr Umsatz auf zwei Datensätze verteilt, und Ihr größter Kunde sieht in der Auswertung kleiner aus, als er ist. Eine falsche Zahl im Bericht ist dann keine Rechenfehler, sie ist ein Stammdatenfehler.</p><p>Das trifft auch das Vertrauen in die Zahlen. Laut Talend vertrauen nur 40 Prozent der Führungskräfte ihren Daten immer. Wer einmal erlebt hat, dass die Kundenliste doppelte Einträge enthielt, prüft danach jede Zahl von Hand nach und exportiert sie sicherheitshalber nach Excel. Genau so entsteht die nächste Version der Wahrheit, und der Kreis dreht sich weiter.</p><p>Dazu kommen Silos. Vertrieb, Einkauf und Finanzen pflegen ihre Partner oft getrennt, weil die Zuständigkeit nie klar geregelt wurde. Laut ZoomInfo sagen 82 Prozent der Unternehmen, dass solche Silos den Arbeitsablauf stören. Beim Geschäftspartner zeigt sich das sofort: Der Vertrieb legt einen neuen Kunden an, den der Einkauf längst als Lieferant führt, und schon steht dieselbe Firma doppelt in Ihren Zahlen.</p><h2>Was kostet ein unsauberes Business-Partner-Modell im Abschluss?</h2><p>Am deutlichsten wird es beim Monatsabschluss. Wenn Forderungen und Umsätze erst über doppelte oder unvollständige Partner abgeglichen werden müssen, zieht sich der Abschluss hin. Laut Solvexia gelten rund acht Tage bis zum fertigen Abschluss als akzeptabel, während die stärksten Teams ihn in unter drei Tagen schaffen. Der Unterschied liegt selten an fleißigeren Leuten. Er liegt daran, dass saubere Stammdaten das Nacharbeiten überflüssig machen.</p><p>Dann ist da der Aufsichtsrat. Wenn im Bericht ein Kunde als zwei erscheint oder eine Forderung keinem klaren Partner zugeordnet ist, kostet Sie das Glaubwürdigkeit, und die verliert man in einer einzigen Sitzung. Steht die Geschäftsführung vor der Frage, warum der Umsatz des größten Kunden nicht stimmt, steht nicht die Zahl in Frage, sondern die Leitung.</p><p>Es gibt auch einen nüchternen Preis. Gartner beziffert die Kosten schlechter Datenqualität auf durchschnittlich 12,9 Millionen Dollar pro Jahr über alle Betriebsgrößen. Im Mittelstand steckt der Schaden vor allem in doppelter Arbeit und späten Berichten. Passend dazu enthalten laut einer Studie von Poon et al. aus dem Jahr 2024 rund 94 Prozent der geschäftlich genutzten Tabellenkalkulationen Fehler. Wenn Kennzahlen aus solchen Exporten stammen, weil dem SAP-Bericht keiner traut, wandern diese Fehler direkt in die Sitzung.</p><h2>Was haben SAP IS-U, CMDB und eine SLA-KPI damit zu tun?</h2><p>Mehr, als es zunächst wirkt, denn dahinter steckt dasselbe Prinzip. Wer als Versorger arbeitet, kennt das SAP IS U Datenmodell, das auf dem Geschäftspartner die Vertragskonten aufsetzt. Auch dort gilt: Ein Partner, sauber angelegt, trägt alle Verträge und Abrechnungen. Ist der Partner doppelt, sind es Verbrauch und Abrechnung ebenfalls.</p><p>Wer aus der IT kommt, kennt den gleichen Gedanken vom CMDB Datenmodell. Auch eine CMDB führt jede reale Sache genau einmal und hängt die Beziehungen daran. Und jede Kennzahl braucht eine feste Bedeutung, sonst rechnet jeder anders. Eine SLA KPI Definition muss genauso eindeutig sein wie die Definition von Umsatz. Ist die SLA-Kennzahl nicht klar definiert, streiten zwei Berichte über die Einhaltung, obwohl beide für sich richtig rechnen.</p><p>Der rote Faden ist immer derselbe. Eine gepflegte Struktur mit einem Datensatz je realer Sache und eine schriftlich vereinbarte Definition je Kennzahl. Ob Geschäftspartner, Vertragskonto oder IT-Objekt, die Ordnung darunter entscheidet, ob Ihre Zahlen zusammenpassen.</p><h2>Wie sieht ein sauberes Datenmodell in der Praxis aus?</h2><p>Es sieht ruhig aus. Jede Firma steht einmal im Bestand, mit klarer Rolle und benanntem Verantwortlichen. Umsatz und Forderungen lassen sich derselben Firma zuordnen, und wenn jemand fragt, woher eine Zahl kommt, gibt es eine klare Antwort. Der folgende Vergleich zeigt den Alltag mit und ohne sauberes Modell.</p><table><tr><th>Merkmal</th><th>Unsauberes Modell</th><th>Sauberes Modell</th></tr><tr><td>Firma im Bestand</td><td>Mehrfach angelegt</td><td>Genau einmal, mit Rollen</td></tr><tr><td>Umsatz je Kunde</td><td>Auf Dubletten verteilt</td><td>Vollständig und korrekt</td></tr><tr><td>Zuständigkeit</td><td>Ungeklärt zwischen Teams</td><td>Ein benannter Verantwortlicher</td></tr><tr><td>Monatsabschluss</td><td>Acht Tage und mehr</td><td>Unter drei Tagen erreichbar</td></tr><tr><td>Aufsichtsratssitzung</td><td>Diskussion über Zahlen</td><td>Gespräch über Entscheidungen</td></tr><tr><td>Vertrauen ins Reporting</td><td>Zahlen werden nachgeprüft</td><td>Zahlen werden genutzt</td></tr></table><p>Der Punkt am rechten Rand ist immer derselbe: eine Firma, ein Datensatz, eine geprüfte Zahl. Das ist kein Programm über zwei Jahre. Für die meisten Firmen ist es eine Ordnungsaufgabe, die man abschnittsweise angeht, angefangen bei den Kunden und Lieferanten, die im Abschluss wirklich zählen.</p><h2>Was sollten Sie auf Leitungsebene zuerst verlangen?</h2><p>Sie brauchen die technischen Schritte nicht zu kennen. Sie brauchen die richtigen Fragen. Verlangen Sie als Erstes eine Prüfung auf Dubletten: Wie viele Firmen stehen mehrfach im Bestand? Wenn Ihr Team diese Zahl nicht in wenigen Tagen liefern kann, haben Sie schon die erste Baustelle gefunden.</p><p>Fragen Sie dann für die wichtigsten Partner, wer sie verantwortet. Ein Geschäftspartner ohne benannten Besitzer ist ein Datensatz, den niemand pflegt. Klären Sie, welches Team einen neuen Partner anlegen darf und wie Dubletten verhindert werden. Und lassen Sie sich zeigen, wo heute noch von Hand aus SAP nach Excel exportiert wird, denn jeder dieser Schritte ist eine Stelle, an der die nächste Version entsteht.</p><p>Beheben Sie zuerst die Partner, die im Abschluss und im Aufsichtsrat auftauchen. Datenqualität verbessert man nicht überall auf einmal, sondern dort, wo eine falsche Zahl am teuersten wird. Die größten Kunden und Lieferanten sind meist die richtige Reihenfolge. Der Rest kann warten. Laut Precisely trauen 67 Prozent der Unternehmen den eigenen Daten nicht voll, mit denen sie entscheiden, und genau dieses Vertrauen holen Sie sich mit sauberen Stammdaten zurück.</p><p>### Was Ihr Team dafür im Hintergrund tut</p><p>Eine Ebene tiefer, kurz und ohne Fachchinesisch: Ihr Team räumt die doppelten Partner zusammen, legt klare Regeln fürs Anlegen fest und baut auf dem Geschäftspartner ein sauberes Datenmodell für die Berichte. Die Kennzahlen werden dort einmal zentral gerechnet, mit vereinbarten Definitionen, sodass jeder Bericht dieselbe Zahl zieht. Dazu kommen klare Zugriffsrechte und eine Herkunftsverfolgung, die für jede Zahl zeigt, woher sie stammt. Das ist die eigentliche Arbeit hinter verlässlichen Zahlen, und sie gehört in erfahrene Hände.</p><h2>So arbeitet CaseWhen daran</h2><p>Wir verkaufen keinen Kurs von der Stange. Wenn ein Unternehmen verlässliche Zahlen aus SAP braucht, arbeiten wir zu einem festen Preis an Ihren echten Berichten. Wir prüfen die Stammdaten, räumen die Dubletten, vereinbaren die Definitionen und bauen das Datenmodell für die Auswertung. Am Ende haben Sie Zahlen, die im Abschluss standhalten, und die Notizen, um sie selbst weiterzupflegen.</p><p>Ein guter erster Schritt ist unsere kostenlose Governance- und Kosten-Scorecard. In etwa fünf Minuten sehen Sie, wo Ihre Zahlen heute auseinanderlaufen und welche drei Bereiche das größte Risiko tragen. Wenn Ihre Zahlen danach immer noch nicht zusammenpassen, buchen Sie ein Erstgespräch, und wir schauen uns Ihr Datenmodell gemeinsam an.</p><h2>Häufige Fragen</h2><p>Was ist das Sap Business Partner Datenmodell einfach erklärt? Es ist die Art, wie SAP S/4HANA jede Firma speichert: als einen Geschäftspartner. Ob Kunde, Lieferant oder beides, wird über Rollen am selben Datensatz hinterlegt.</p><p>Warum wurden Kunde und Lieferant zusammengelegt? Weil eine Firma oft beides ist. Ein Datensatz je Firma verhindert doppelte Pflege und sorgt dafür, dass Umsatz und Forderungen derselben Firma korrekt zusammenkommen.</p><p>Macht das neue Modell meine Daten automatisch sauber? Nein. Die Struktur ordnet die Daten, gepflegt werden müssen sie trotzdem. Wird dieselbe Firma zweimal angelegt, entstehen auch im neuen Modell wieder zwei Datensätze.</p><p>Woran merke ich, dass unser Modell Probleme hat? An doppelten Firmen in der Kundenliste, an Umsätzen, die nicht zum Abschluss passen, und an Forderungen ohne klaren Partner. Eine Dublettenprüfung zeigt das Ausmaß in wenigen Tagen.</p><p>Gilt das auch für Versorger mit SAP IS-U? Ja. Das SAP IS U Datenmodell setzt die Vertragskonten auf denselben Geschäftspartner. Ein sauberer Partner trägt dort alle Verträge und Abrechnungen korrekt.</p><p>Ist das nur für große Konzerne wichtig? Nein. Gerade im Mittelstand macht ein sauberer Bestand den größten Unterschied, weil hier oft eine Person den Abschluss trägt und doppelte Partner die ganze Auswertung ins Stocken bringen.</p><p>Weiterlesen: unser Leitfaden zu Kennzahlen und Datenmodellierung unter /kpi-and-data-modeling, der Beitrag zur gemeinsamen Zahl unter /blog/single-source-of-truth-mittelstand und die Erklärung, warum Berichte unterschiedliche Zahlen zeigen, unter /blog/warum-berichte-unterschiedliche-zahlen. Oder starten Sie mit der kostenlosen Governance- und Kosten-Scorecard.</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">sap business partner datenmodell</span><span class="c">sap is u datenmodell</span><span class="c">sla kpi definition</span><span class="c">cmdb datenmodell</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

@@ -1657,6 +1657,7 @@ written posts, and each slide carries one real, concrete specific.</p></div></se
 
 BLOGDIR = Path(r"J:\Claude Code\casewhen-research\content\w-batch03-blogs")
 BUYERBLOG = Path(r"J:\Claude Code\casewhen-research\content\w-buyer-blogs")
+CADENCEBLOG = Path(r"J:\Claude Code\casewhen-research\content\w-cadence-blogs")
 
 def _fm_body(md):
     fm = {}; body = md
@@ -1718,7 +1719,8 @@ ARTCSS = """
 
 def blog_articles_and_grid():
     buyer = sorted(BUYERBLOG.glob("**/*.md")) if BUYERBLOG.exists() else []
-    rest = sorted(BLOGDIR.glob("*.md"))
+    cadence = sorted(CADENCEBLOG.glob("**/*.md")) if CADENCEBLOG.exists() else []
+    rest = cadence + sorted(BLOGDIR.glob("*.md"))
     def is_training(f):
         k = f.stem.lower()
         return any(w in k for w in ["cert","train","course","class","tutorial","learn","exam","analyst","schulung","coursera"])

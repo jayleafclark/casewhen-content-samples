@@ -1,0 +1,161 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · DAX Formulas: What It Actually Means for Your Dashboard</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>dax formulas</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>DAX Formulas: What It Actually Means for Your Dashboard</h1><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><p>Quick answer</p><p>Dax formulas are the measures and calculations you write in Power BI to turn raw columns into a KPI. A good DAX formula recalculates inside each visual&#x27;s filter context, so one definition stays correct when users slice by month or region. Write them as measures and every report shows the same number.</p><p>When your dax formulas are written cleanly, the revenue figure on your dashboard is one number instead of five, and that starts as a business problem before it&#x27;s a technical one. In a 2025 Drexel LeBow and Precisely survey of 550-plus data professionals, 67% of organizations said they don&#x27;t fully trust the data they use to make decisions. Gartner puts the cost of poor data quality at 12.9 million dollars a year for the average organization. Most of that distrust begins in the formula layer, where the same KPI gets written three different ways across three reports.</p><p>Here&#x27;s the practitioner version: what DAX formulas actually do, where you write them, how to rank with RANKX, how to handle two date columns, and the named settings that keep the numbers correct once real users depend on them.</p><h2>What does it mean to build with DAX formulas?</h2><p>DAX stands for Data Analysis Expressions, the formula language behind Power BI, Analysis Services, and Power Pivot. DAX formulas return a value, and Power BI recomputes that value for the exact slice a user is looking at. That slice is the filter context.</p><p>Here&#x27;s the smallest useful example:</p><p>```dax
+Total Sales = SUM(Sales[Amount])
+```</p><p>That one line is a measure. Drop it on a card and it shows the grand total. Put it in a matrix by month and Power BI runs the same SUM once per month, filtered to that month&#x27;s rows. You wrote the logic once and it answered every question about sales. That reuse is the whole point of the engine.</p><h2>Why do your DAX formulas decide whether a KPI is trusted?</h2><p>Because the math lives in the measure, not in the visual. When one author writes SUM(Sales[Amount]) and another writes a version that drops returns, you get two revenue numbers and a meeting about which one is right. In a 2024 peer-reviewed study by Poon and colleagues, 94% of business spreadsheets used in decision-making contained errors. Every time someone exports to Excel and rebuilds the math by hand, that error rate walks back into your dashboard.</p><p>A clean set of DAX formulas gives you one agreed number. Revenue is defined once. Margin is defined once. Every report inherits those definitions, so the finance dashboard and the sales dashboard show the same figure. It also makes the model ready for Copilot, since Copilot answers from the measures you defined rather than a guess.</p><h2>How do you write DAX formulas that stay correct?</h2><p>The habit that saves the most pain: build one base measure, then reference it everywhere else. Don&#x27;t repeat a raw SUM in every KPI.</p><p>```dax
+Total Sales = SUM(Sales[Amount])</p><p>Sales YoY % =
+VAR ThisYear = [Total Sales]
+VAR LastYear =
+    CALCULATE([Total Sales], SAMEPERIODLASTYEAR(&#x27;Date&#x27;[Date]))
+RETURN
+    DIVIDE(ThisYear - LastYear, LastYear)
+```</p><p>Sales YoY % calls [Total Sales] instead of writing SUM again. Change the base once and every KPI that references it updates. CALCULATE changes the filter context, and DIVIDE returns a blank instead of an error when the denominator is zero. Those habits, plus a properly marked Date table, cover most of what a business dashboard needs.</p><h2>How do DAX formulas compare to Excel?</h2><p>If you know Excel, you already know functions like SUMIF, and DAX borrows that thinking. The difference is what each one works on. An Excel formula points at cells. A DAX formula works on whole columns and tables and recalculates in the filter context of each visual.</p><table><tr><th></th><th>DAX formula</th><th>Excel formula</th></tr><tr><td>Works on</td><td>Whole columns and tables</td><td>Individual cells</td></tr><tr><td>Recalculates</td><td>Per visual, in filter context</td><td>Per cell, on the sheet</td></tr><tr><td>Reused across reports</td><td>One shared definition</td><td>Copied into each file</td></tr><tr><td>Reacts to slicers</td><td>Yes</td><td>No</td></tr><tr><td>Right for a shared KPI</td><td>Yes</td><td>Risky at scale</td></tr></table><p>Plenty of teams still build every KPI Excel-first, rebuilding the math by hand each month, and that habit is where the 94% error rate comes from. Move the KPI into a DAX measure and the math gets fixed in one place.</p><h2>What is the RANKX DAX function for ranking?</h2><p>Ranking is one of the most common KPI requests, like top products or top regions, and the RANKX DAX function handles it. Write it as a measure so the ranking updates when a user filters:</p><p>```dax
+Product Rank =
+RANKX(
+    ALL(Product[Name]),
+    [Total Sales],
+    , DESC, DENSE
+)
+```</p><p>ALL(Product[Name]) tells RANKX to rank across every product, not the current row alone. DESC puts the biggest seller at rank 1, and DENSE avoids gaps when two products tie. Swap ALL for ALLSELECTED when the rank should respect a slicer the user already set, like ranking within a chosen region. Testing both is worth the minute, since that swap is the most common reason a rank looks off.</p><h2>How does a DAX use relationship pattern handle two date columns?</h2><p>A fact table often carries two dates, such as an order date and a ship date, but a model keeps only one active relationship to the Date table at a time. The DAX use relationship pattern solves this. You leave the order-date relationship active, mark the ship-date relationship inactive, then switch it on inside a single measure with USERELATIONSHIP:</p><p>```dax
+Sales by Ship Date =
+CALCULATE(
+    [Total Sales],
+    USERELATIONSHIP(&#x27;Date&#x27;[Date], Sales[ShipDate])
+)
+```</p><p>CALCULATE turns on the inactive relationship just for this measure, so [Total Sales] now counts by ship date while the rest of your report keeps using order date. You get both views from one model with no duplicate Date table.</p><h2>How do you keep DAX formulas fast without breaking the numbers?</h2><p>If your fact table stores years of history, a full refresh every morning is slow. Incremental refresh fixes that. You create two Power Query parameters named exactly RangeStart and RangeEnd, filter the fact table by a date column between them, then set an incremental refresh policy on the table. A common policy keeps 5 years of rows and refreshes only the last 10 days, so Power BI partitions by date and touches just the recent rows. A refresh that ran 40 minutes can drop to a couple of minutes. RangeStart and RangeEnd are case-sensitive, so type them exactly or the policy won&#x27;t apply.</p><p>Two more features protect your measures once people depend on them. Use View As in Power BI Desktop to test row-level security before you publish, so a regional manager never sees another region&#x27;s numbers. Use deployment pipelines in the Power BI Service to move a model through Development, Test, and Production instead of editing the live report on a Friday afternoon.</p><h2>Where do Fabric and OneLake fit in?</h2><p>Microsoft Fabric adds a storage mode called Direct Lake, where the model reads Parquet files straight from OneLake, the storage layer under Fabric, with no import step. You get close to Import speed on large tables without the refresh wait, and your DAX formulas work the same way on top of it. Fabric passed 28,000 customers by Ignite 2025, so more teams weigh these modes every quarter. For most business dashboards an Import model is still the right default, and your measures don&#x27;t change when you move to Direct Lake later.</p><h2>Where to go from here</h2><p>Good DAX formulas come down to a few habits. Write KPIs as measures, not calculated columns. Build one base measure and reference it. Reach for RANKX when you need a rank, and pick ALL or ALLSELECTED on purpose. Use USERELATIONSHIP for a second date column. Set incremental refresh with RangeStart and RangeEnd, and gate changes through View As and deployment pipelines. That covers most of the distance to numbers people trust.</p><p>Want to check your own model? Grab our free 20-Point Power BI Model Review Checklist below and run it against your setup. If your KPIs still won&#x27;t reconcile after that, book a semantic-model and AI-readiness review with us and we&#x27;ll walk your measures with you.</p><p>Read next</p><ul><li>[KPI and data modeling: the full guide](/kpi-and-data-modeling) (pillar)</li><li>[Calculate DAX: the foundation everyone skips](/blog/calculate-dax)</li></ul><h2>Frequently asked questions</h2><p>### Are DAX formulas the same as Excel formulas?</p><p>They look alike and both use functions, though they behave differently. An Excel formula points at cells. A DAX measure works on whole columns and tables and recalculates in the filter context of each visual. If you know SUMIF, then CALCULATE does a similar job with far more control.</p><p>### Should I write a KPI as a measure or a calculated column?</p><p>A measure, almost always. A measure recalculates for whatever slice the user selects, so it stays correct when they filter by month or region. A calculated column is frozen at refresh and will mislead the moment someone slices it. Keep calculated columns for fixed labels and buckets.</p><p>### What is the DAX function for ranking?</p><p>RANKX. Write it as a measure, pass ALL or ALLSELECTED to set the rank scope, and add DESC and DENSE so the top value lands at rank 1 with no gaps on ties. Use ALLSELECTED when the rank should respect a slicer the user already set.</p><p>### How do I handle two date columns in DAX?</p><p>Keep one relationship active, mark the second one inactive, and switch it on inside a measure with USERELATIONSHIP wrapped in CALCULATE. That gives you sales by order date and sales by ship date from a single model, with no second Date table.</p><p>### Do I need Microsoft Fabric to write DAX formulas?</p><p>No. DAX runs on Power BI Pro and Premium without Fabric. Fabric adds Direct Lake mode and OneLake storage, which help with very large or very fresh tables, but the measures you write stay the same. For most company dashboards, an Import model on Pro is plenty.</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">dax formulas</span><span class="c">dax use relationship; rankx dax; kpi excel</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

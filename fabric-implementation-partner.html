@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Fabric Implementation Partner: What It Actually Means for Yo</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>fabric implementation partner</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Organizations with data good enough to use for AI</figcaption><div class="cbar"><span class="cl">Ready</span><div class="ctrack"><div class="cfill" style="width:13%"></div></div><span class="cv">12%</span></div><div class="cbar"><span class="cl">Not ready</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">88%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><h1>Fabric Implementation Partner: What It Actually Means for Your Power BI Setup</h1><div class="qa"><b>Quick answer.</b> A fabric implementation partner is a consultancy you hire to stand up Microsoft Fabric, move your existing Power BI work onto it, and set the governance so your numbers stay trusted. Good ones size the capacity, migrate in stages, and hand the setup back documented. You end up owning the reporting platform instead of renting it.
+---</div><p>A fabric implementation partner is the outside team you bring in to set up Microsoft Fabric properly, migrate your Power BI reports onto it, and leave you with something your own people can run. Fabric passed 28,000 customers in its first two years (Microsoft, Ignite 2025), so plenty of companies are turning it on faster than they can staff it. That gap is the whole reason this role exists. Someone has to make the platform decisions before your reporting gets built on top of guesses.</p><p>This guide is for the person signing the invoice. You feel the reporting pain. You don&#x27;t build the reports. So here&#x27;s what a fabric implementation partner does, when you actually need one, and what good looks like at the end.</p><h2>What does a fabric implementation partner actually do?</h2><p>Four things, in order.</p><p>First, they size the capacity. Fabric bills by a compute unit called a capacity rather than per person, and picking the wrong size is where the money leaks. Too small and reports throttle at month-end. Too big and you pay for headroom you never touch. A good partner measures your real workload first, then picks an F-SKU that fits it.</p><p>Second, they migrate what you already have. Most teams come to Fabric with years of Power BI reports and a warehouse or two. The partner moves those in stages so nothing goes dark during the switch. They don&#x27;t rebuild everything from scratch and bill you for the privilege.</p><p>Third, they set the governance. That means one definition per metric, row-level security so people see only their own numbers, and a named owner for every report. This is the part that keeps the numbers trusted after go-live.</p><p>Fourth, they hand it over. A partner who can&#x27;t teach your analyst to run the setup in an afternoon has sold you a dependency. Good microsoft fabric consulting ends with documentation and your team in control.</p><h2>Power BI vs Fabric: what actually changes for you?</h2><p>If you already run Power BI, the honest power bi vs fabric answer is that Fabric is the bigger platform Power BI now lives inside. Power BI is still how people see the reports. Fabric adds the storage, the data engineering, and a shared layer called OneLake so your engineers and analysts read the same tables without copying them around.</p><p>Here&#x27;s the plain version of what moves and what stays.</p><table><tr><th>Question</th><th>Power BI on its own</th><th>Microsoft Fabric</th></tr><tr><td>Who is it for</td><td>Report builders and viewers</td><td>Engineers, analysts, and viewers on one platform</td></tr><tr><td>How you pay</td><td>Per user, per month</td><td>By capacity (compute), not per head</td></tr><tr><td>Where the data lives</td><td>Imported into each model</td><td>One shared store (OneLake) everyone reads</td></tr><tr><td>Best fit</td><td>Reporting on data that&#x27;s already clean</td><td>Teams that also move and prep the data</td></tr><tr><td>What can go wrong</td><td>Model size caps, scattered copies</td><td>Wrong capacity size, cost surprises</td></tr></table><p>You don&#x27;t need Fabric to make a dashboard. You need it when your team is also moving and cleaning the data, and when you&#x27;re tired of five copies of the same table drifting apart.</p><h2>When do you actually need a fabric implementation partner?</h2><p>Not every company does. Bring one in when you hit a real trigger.</p><p>You&#x27;re facing a deadline. Power BI Premium P-SKUs are being retired, and if you&#x27;re on one, you have a migration to plan before the clock runs out. A partner who has done it before saves you the fire drill.</p><p>Your data team is the bottleneck, and it isn&#x27;t a headcount problem. 82% of organizations say data silos disrupt their workflows (ZoomInfo). If every number goes through two people and a manual export, more staff won&#x27;t fix a setup problem.</p><p>You don&#x27;t trust the numbers. 67% of organizations don&#x27;t fully trust the data they use to make decisions (Drexel LeBow and Precisely, 2025). If your board pack and your finance sheet disagree, a platform move is your chance to fix the definitions once.</p><p>If none of those are true, you might just need a Power BI cleanup rather than a Fabric project. An honest microsoft fabric consultant will tell you that instead of selling you capacity you won&#x27;t use.</p><h2>What should you ask before you hire one?</h2><p>Ask these five directly and listen for specifics rather than comfort.</p><ol><li>How will you size our capacity, and how do we control the cost after go-live? You want a real method, not &quot;we&#x27;ll figure it out.&quot;</li><li>What&#x27;s your migration plan, and what stays live while you work? The answer should be staged, with nothing going dark.</li><li>How do you keep our numbers trusted? Listen for one definition per metric and row-level security by name.</li><li>What do we own when you leave? You want the workspace, the documentation, and the ability to run it without you.</li><li>When would you tell us not to move to Fabric? A partner who can&#x27;t answer this is selling rather than advising.</li></ol><h2>How much does this cost, and what do you own at the end?</h2><p>Two bills sit under a Fabric project, and a good partner separates them for you on day one.</p><p>The first is the platform. Fabric capacity is billed by compute, starting small and scaling with use. This comes from Microsoft rather than the partner.</p><p>The second is the work. Most partners price a Fabric setup as a fixed-scope project with a defined handover, and that&#x27;s the shape you want. Watch for two things: a vague deliverable with no documentation clause, and a plan that later turns into a monthly retainer for work that&#x27;s already finished.</p><p>The real cost isn&#x27;t the day rate. It&#x27;s what you&#x27;re left with once they go. A cheaper partner who leaves an undocumented setup only they understand becomes the expensive one when they&#x27;re gone. Poor data quality already costs organizations $12.9M a year on average (Gartner), and a big share of that is knowledge that walked out the door.</p><p>What good looks like: a right-sized capacity, your reports migrated with nothing lost, numbers that reconcile on day one, and your own team running the thing. That&#x27;s the finish line worth paying for.</p><h2>Frequently asked questions</h2><p>Is a fabric implementation partner the same as a Power BI consultant?
+They overlap. A Power BI consultant builds reports and models. A fabric implementation partner does that plus the platform work: capacity, migration, and the shared data layer. On a small job one person covers both.</p><p>Do we have to leave Power BI to move to Fabric?
+No. Power BI is part of Fabric. Your reports keep working, and people see them the same way. What changes is what sits underneath them.</p><p>How long does a Fabric implementation take?
+A focused first phase, with capacity sized, a core set of reports migrated, and governance in place, usually runs a few weeks to a couple of months. Anyone promising a full company-wide move in a week is describing a demo.</p><p>Will Fabric cost more than our current Power BI setup?
+It can, because you&#x27;re paying for a bigger platform. Whether it&#x27;s worth it depends on whether you actually need the data engineering and shared storage. A straight microsoft fabric consultant will run that math with you before you commit.</p><p>What&#x27;s the biggest mistake buyers make?
+Approving on a slick demo and skipping the two questions that matter: how the capacity cost gets controlled, and what you own once they leave. Ask both in writing.</p><p>Run the free Power BI Governance and Cost Scorecard below to see where your setup stands in five minutes. If you&#x27;re weighing Fabric, book a scoping call and we&#x27;ll tell you straight whether it&#x27;s worth turning on for your data.</p><p>Read next: [Microsoft Fabric: what it is and whether you need it](/microsoft-fabric) and [Power BI vs Fabric: which one you actually need](/blog/power-bi-vs-fabric).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">fabric implementation partner</span><span class="c">microsoft fabric consulting</span><span class="c">microsoft fabric consultant</span><span class="c">power bi vs fabric</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

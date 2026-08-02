@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Azure Data Factory Pricing, Line by Line, With Real Numbers</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>azure data factory pricing</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Power BI Pro list price, per user per month</figcaption><div class="cbar"><span class="cl">2024</span><div class="ctrack"><div class="cfill" style="width:71%"></div></div><span class="cv">$10</span></div><div class="cbar"><span class="cl">2025</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">$14</span></div><div class="csrc">Source: Microsoft, 2025 price update</div></figure><h1>Azure Data Factory Pricing, Line by Line, With Real Numbers</h1><div class="qa"><b>Quick answer.</b> Azure Data Factory pricing is usage based, not per seat. You pay about a dollar per 1,000 pipeline activity runs, plus hourly compute for moving data and a small monthly charge per pipeline. For a mid-sized company on a daily schedule, that lands in the tens to low hundreds of dollars a month.
+---</div><p>Azure Data Factory pricing is usage based, and for a mid-sized company it usually runs from the tens to the low hundreds of dollars a month. There is no per-seat license here. You pay for how much data you move, how often you move it, and how many pipelines you keep running. That is the whole shape of it, and most of it you can sanity-check yourself before anyone quotes you a project.</p><p>You run the company. You sign off on the spend. Someone hands you a data project quote with a Power BI seat number that looks small and an Azure line that has no fixed price at all, just a meter. So the decision stalls, or you approve it and then watch the Azure bill drift every month with no clear reason why.</p><p>The cost you feel sits away from the tool. It shows up in the board meeting where sales quotes one revenue figure and finance quotes another, and twenty minutes go to arguing about whose number is right. It shows up in a month-end close that drags past a week because the data arrives late or arrives wrong. Azure Data Factory is the part that collects your data, cleans it, and loads it somewhere your reports can read. When it is set up well, the numbers show up on time and match. When it is not, you pay for the compute anyway and still get late, mismatched reports.</p><h2>What does azure data factory pricing include?</h2><p>Azure Data Factory bills you in a few separate ways, and none of them is a flat monthly subscription. Here is the meter without the sales deck.</p><table><tr><th>Cost line</th><th>How Microsoft bills it</th><th>Rough number</th><th>What drives it up</th></tr><tr><td>Pipeline activity runs</td><td>Per 1,000 runs</td><td>About $1 per 1,000 runs</td><td>How many steps run, and how often</td></tr><tr><td>Data movement (copy)</td><td>Per compute-hour while it runs</td><td>Cents to a few dollars an hour</td><td>Volume of data you move</td></tr><tr><td>Data flows (transforms)</td><td>Per compute-hour while they run</td><td>A few dollars an hour</td><td>Heavy cleaning and reshaping</td></tr><tr><td>Active pipelines</td><td>Small flat monthly fee</td><td>Under a dollar per pipeline a month</td><td>How many pipelines you keep</td></tr></table><p>Two things catch buyers off guard. First, the meter never stops on its own. An active pipeline charges a small amount every month whether it does much work or not, so old pipelines nobody uses still show up on the bill. Second, the compute is the swing factor. Moving a gigabyte on a nightly schedule costs almost nothing. Moving a lot of data every hour, with heavy cleaning on the way, is where the number climbs.</p><h2>How much will azure data factory pricing cost you each month?</h2><p>For a normal mid-sized company loading its sales, finance, and operations data once a day, azure data factory pricing tends to land somewhere in the tens to low hundreds of dollars a month. A few thousand activity runs a day is a couple of dollars. The nightly compute to move and clean the data is usually the biggest slice, and even that is modest on a daily cadence.</p><p>The bill grows in two directions you can predict. More data moved per run pushes the compute hours up. More frequent runs, say every hour instead of once a night, multiply the whole thing. So before anyone commits you to real-time everything, ask a plain question: does the business need the number refreshed every hour, or is once a day fine? That single answer moves the Azure bill more than any tuning a consultant can do later.</p><h2>What does power bi pro cost on top of that?</h2><p>Azure Data Factory is the plumbing. Power BI is what your people actually open to read the numbers, and it has its own price. The power bi pro price is $14 per user a month, and that is the seat almost every team lands on, because the free tier does not let people share reports with each other.</p><p>The cost of power bi pro is easy to size. Take the number of people who open dashboards and multiply by $14. For 40 people that is about $560 a month, which is a rounding error next to payroll. Power BI Pro costs the same whether those people look once a week or all day, so the seat count is the only lever. There is a heavier tier, Premium Per User at $24 a month, but you only put that on the handful of people who build reports, not on everyone who reads them.</p><p>Put the two bills side by side and the picture is clear. The Power BI seats are a small, fixed, easy number. The Azure Data Factory line is the one that moves, and it is the one worth watching.</p><h2>Why is the data bill bigger than the license?</h2><p>The expensive part is almost never the tool. It is the data underneath and what happens when it is wrong. If sales and finance pull from different places with different definitions, no amount of Azure compute or Power BI seats makes them agree, and you end up paying for a reporting setup people still do not trust.</p><p>The numbers back this up. Gartner puts the average cost of poor data quality at $12.9M a year per organization. About 67% of companies say they do not fully trust the data they use to make decisions (Drexel LeBow and Precisely, 2025). And roughly 70% of the dashboards teams build go unused (RevealBI), usually because people keep a private spreadsheet on the side. High performers close their books in under three days, while a week or more is common for everyone else (Solvexia). Every one of those is real money that a bigger Azure meter does not fix.</p><p>So the spend that matters sits well past the $1 per 1,000 runs and the $14 seat. The weight lands in the wasted licenses, the slow close, and the meeting where two right-looking numbers disagree and a decision gets made on the wrong one.</p><h2>How do you keep the whole cost under control?</h2><p>You keep it in check with four decisions, and not one of them needs you to open a report.</p><ol><li>Ask for both bills as separate lines. The Power BI seats are one number and the Azure Data Factory meter is another. If a quote blends them, ask for them split, because the seat cost is fixed and the Azure cost is the one that drifts.</li><li>Match the schedule to the need. Refreshing every hour when once a day would do can multiply the Azure bill for no business gain. Decide the cadence at the business level, then let the build follow it.</li><li>Split builders from viewers on Power BI. Keep the people who only read on the $14 Pro seat and put the few who build on the heavier tier. Do not buy the expensive seat for people who never open the editor.</li><li>Give one person the numbers. One owner in finance or operations who protects a single definition per metric. This is the cheapest control you have, and it is the one most companies skip.</li></ol><p>Here is the one part that goes a level deeper, kept short. The Azure Data Factory bill is mostly a function of two dials: how much data each run moves, and how often runs fire. Cut either one and the compute cost drops with it. A lot of companies pay for hourly refreshes on data the business only looks at each morning. You do not need to tune this yourself. You need to know the two dials exist and ask whoever is quoting you to show you the monthly number at a daily cadence versus an hourly one.</p><p>If you want a quick read on where you stand, run our free Power BI Governance and Cost Scorecard. It takes about five minutes and shows where your risk and your spend sit today. And if you want the Azure and licensing math done on your real setup, book a scoping call and we will run the numbers with you.</p><h2>Frequently asked questions</h2><p>How is Azure Data Factory priced?
+Azure Data Factory pricing is usage based, not per seat. You pay about a dollar per 1,000 pipeline activity runs, hourly compute while data is moving or being cleaned, and a small monthly charge for each active pipeline. There is no fixed subscription, so the bill tracks how much data you move and how often.</p><p>How much does Azure Data Factory cost per month for a mid-sized company?
+For a company loading its data once a day, it usually runs from the tens to the low hundreds of dollars a month. The nightly compute to move and clean the data is normally the largest slice. Running things every hour instead of once a night is what pushes the number higher.</p><p>What is the difference between Azure Data Factory pricing and Power BI pricing?
+They are two separate bills. Azure Data Factory is usage based and charges for moving and preparing data. Power BI charges per person, and the power bi pro price is $14 per user a month. Ask for both as separate lines on any quote.</p><p>How much does Power BI Pro cost?
+The cost of power bi pro is $14 per user a month, which lets people publish and open shared reports. The free tier is $0 but does not allow sharing between people, so any real team lands on Pro. Power BI Pro costs the same regardless of how heavily each person uses it.</p><p>Why does my Azure Data Factory bill keep changing?
+Because it is a meter, not a subscription. The two things that move it are how much data each run moves and how often the runs fire. Old pipelines nobody uses also keep charging a small monthly fee, so a bill that drifts up often means more frequent refreshes or pipelines left running.</p><h2>Read next</h2><ul><li>[Power BI pricing and licensing, the full breakdown](/pricing)</li><li>[Power BI pricing, line by line, with real numbers](/blog/power-bi-pricing)</li><li>[You spent money on BI and still get Excel exports. Here is the fix](/blog/spent-money-on-bi-still-get-excel)</li></ul></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">azure data factory pricing</span><span class="c">power bi pro price</span><span class="c">cost of power bi pro</span><span class="c">power bi pro costs</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

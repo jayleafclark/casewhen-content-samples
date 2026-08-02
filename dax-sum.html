@@ -1,0 +1,158 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · The DAX Sum Mistake Everyone Makes</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>dax sum</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>The DAX Sum Mistake Everyone Makes</h1><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><p>Quick answer</p><p>The DAX sum mistake most people make is building a calculated column, then summing it. That bloats the model and gives you a number that ignores the filters on your report. The fix is a measure with SUM or SUMX, which recalculates in the filter context of each visual and stays correct when a user slices by date or region.</p><p>A single DAX sum can put the wrong revenue figure on a board pack. In a 2025 Drexel LeBow and Precisely survey of 550-plus data professionals, 67% of organizations said they don&#x27;t fully trust the data they use to make decisions. A measure that double-counts or ignores a filter is one reason why. Gartner puts the cost of poor data quality at 12.9 million dollars a year for the average organization. Get one core measure wrong and every KPI built on it inherits the same error.</p><p>Here is the practitioner version: what a DAX sum really does, the habit that breaks it, and the named functions that keep the total honest.</p><h2>What does a DAX sum actually calculate?</h2><p>`SUM(Sales[Amount])` adds up one column, but only for the rows the current visual lets through. That last part is the whole game. When you drop that measure on a chart sliced by month, DAX filters the Sales table to that month first, then sums what&#x27;s left. Filter context does the filtering; SUM does the adding.</p><p>So a DAX sum is never just a total. It&#x27;s a total inside whatever slicers, rows, and columns surround it. Write it as a measure and it adapts to each cell. Freeze it in the wrong place and it stops adapting, which is where the trouble starts.</p><h2>Why is the calculated-column sum the mistake everyone makes?</h2><p>The mistake is reaching for a calculated column when you want a total. Say you need revenue and your table has Quantity and Price. It feels natural to add a calculated column `Line = Sales[Quantity] * Sales[Price]`, then sum it. It works in the preview, so it ships.</p><p>Two things go wrong. First, that column is stored on disk for every row, so a million-row table now carries a million extra values it did not need. The model gets bigger and refresh gets slower. Second, the column is calculated once at refresh and then frozen. It cannot react to a slicer, so any logic you wanted to apply per visual is baked in at the wrong time.</p><p>This is the same problem that lives in spreadsheets. In a 2024 peer-reviewed study by Poon and colleagues, 94% of business spreadsheets used in decision-making contained errors. Every time someone exports a report and rebuilds the math by hand in Excel, that error rate walks straight into your dashboard. A measure keeps the math in one place, in the model, where every report reads the same definition.</p><h2>When should you use SUM and when SUMX?</h2><p>Use `SUM` when the number you want already sits in a single column. Use `SUMX` when you need to do row-by-row math first, like Quantity times Price, and then add up the results. SUMX iterates the table, calculates the expression for each row in memory, and totals it, with no stored column required.</p><p>```dax
+Total Revenue =
+SUMX ( Sales, Sales[Quantity] * Sales[Price] )
+```</p><p>That one measure replaces the calculated column and the naive SUM on top of it. Here is how the three approaches compare on a real fact table.</p><table><tr><th>Approach</th><th>What it does</th><th>Use it when</th></tr><tr><td>Calculated column + SUM</td><td>Stores a value per row at refresh, then adds it</td><td>Almost never for KPIs. It bloats the model and ignores filters</td></tr><tr><td>SUM(column)</td><td>Adds one existing column in filter context</td><td>The value you want is already a single column</td></tr><tr><td>SUMX(table, expression)</td><td>Calculates per row in memory, then totals</td><td>You need row-level math like price times quantity before summing</td></tr></table><p>Reach for SUM when the column exists. Reach for SUMX when it doesn&#x27;t. Skip the calculated-column habit for anything you plan to slice.</p><h2>How does filter context change your sum?</h2><p>Filter context is the set of filters acting on a measure at the moment it runs. Slicers, the rows and columns of a matrix, and the page filters all contribute. Your DAX sum reads all of that before it adds a single number.</p><p>`CALCULATE` is how you change that context on purpose. Want a total that ignores the region slicer? `CALCULATE([Total Revenue], ALL(Sales[Region]))`. Want it for one product only? `CALCULATE([Total Revenue], Sales[Product] = &quot;Widget&quot;)`. The base sum stays the same, and CALCULATE decides which rows it sees. Learn this one function and most of your harder totals become short and readable.</p><h2>How do you sum the right period with time intelligence?</h2><p>A month-to-date total or a same-period-last-year total is still a sum, just over a shifted set of dates. The time intelligence Power BI ships with does that date math for you, as long as you mark a real Date table first.</p><p>```dax
+Revenue YoY % =
+VAR ThisYear = [Total Revenue]
+VAR LastYear =
+    CALCULATE ( [Total Revenue], SAMEPERIODLASTYEAR ( &#x27;Date&#x27;[Date] ) )
+RETURN
+    DIVIDE ( ThisYear - LastYear, LastYear )
+```</p><p>Notice the year-over-year measure calls `[Total Revenue]` instead of repeating the SUMX. Build one base sum, then reference it everywhere. Change the base once and every KPI that depends on it updates in step. That reuse is what stops the same metric drifting apart across a report over six months.</p><h2>Can DAX use relationship logic for a second date?</h2><p>Orders have an order date and a ship date, but a model can keep only one active relationship to the Date table at a time. The second one sits inactive. When you want a sum by ship date instead of order date, you tell the measure to use that inactive path. The DAX use relationship function, `USERELATIONSHIP`, switches it on for that one calculation.</p><p>```dax
+Revenue by Ship Date =
+CALCULATE (
+    [Total Revenue],
+    USERELATIONSHIP ( Sales[ShipDate], &#x27;Date&#x27;[Date] )
+)
+```</p><p>The active relationship stays untouched for every other measure. This one total swaps to the ship-date path, sums against it, and leaves the rest of the report alone.</p><h2>How do you rank your sums with the RANKX DAX pattern?</h2><p>Once your sum is correct, you often want to rank by it, like top products by revenue. The RANKX DAX function walks a table, evaluates your measure for each row, and hands back a position.</p><p>```dax
+Product Rank =
+RANKX ( ALL ( Sales[Product] ), [Total Revenue], , DESC )
+```</p><p>The `ALL(Sales[Product])` part gives RANKX the full product list to rank against, so the ranking doesn&#x27;t drop to 1 for every row. Feed it a clean base measure and the rank stays right even as users filter by date or region, because the underlying sum respects filter context.</p><h2>Where to go from here</h2><p>The pattern is short. Write totals as measures, not calculated columns. Use SUM when the column exists and SUMX when you need row-level math first. Shape the context with CALCULATE, shift the dates with time intelligence, swap relationships with USERELATIONSHIP, and rank with RANKX. Do that and your numbers stay right when someone slices them in a meeting.</p><p>It pays off twice, because Copilot answers from the measures you define. A clean base sum gives Copilot a correct number to work from. A pile of calculated columns gives it the same confusion your team has.</p><p>Want to pressure-test your own model? Grab our free 20-Point Power BI Model Review Checklist below and run it against your measures. If your KPIs still won&#x27;t reconcile after that, book a semantic-model and AI-readiness review with us and we&#x27;ll walk the model with you.</p><p>Read next</p><ul><li>[KPI and data modeling: the full guide](/kpi-and-data-modeling) (pillar)</li><li>[Power BI semantic model: what it means for your dashboard](/blog/power-bi-semantic-model)</li><li>[Snowflake schema, and when to avoid it](/blog/snowflake-schema)</li></ul><h2>Frequently asked questions</h2><p>### Is SUM or SUMX faster in DAX?</p><p>For a plain column total they perform the same, since SUM is shorthand for a simple SUMX. SUMX wins when it saves you a calculated column, because it does the row math in memory instead of storing a value per row. A smaller model refreshes and queries faster.</p><p>### Why is my DAX sum ignoring the slicer?</p><p>Almost always because the total lives in a calculated column, which is frozen at refresh and cannot see a slicer. Move the logic into a measure instead. A measure is evaluated in each visual&#x27;s own filter context, so it reacts to the slicer the way you expect.</p><p>### Can I sum a calculated column in Power BI?</p><p>You can, but for a KPI you usually shouldn&#x27;t. The column costs storage on every row and cannot respond to filters. Write a measure instead, using SUM or SUMX, so the math stays in the model and adapts to each report.</p><p>### Do I need a Date table for a running or year-over-year sum?</p><p>Yes. Time intelligence functions like SAMEPERIODLASTYEAR need a real, marked Date table with a continuous run of dates. Mark it as the date table for the model, then your period sums calculate correctly.</p><p>### Where should I write a DAX sum, in Desktop or the service?</p><p>Either. You can add a measure in Power BI Desktop or in the web modeling view. Because the measure sits in the semantic model, every report connected to that model reads the same definition and shows the same number.</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">dax sum</span><span class="c">time intelligence power bi; dax use relationship; rankx dax</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

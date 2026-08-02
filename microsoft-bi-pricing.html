@@ -1,0 +1,140 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Microsoft BI Pricing, Explained With Real Numbers</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>microsoft bi pricing</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Power BI Pro list price, per user per month</figcaption><div class="cbar"><span class="cl">2024</span><div class="ctrack"><div class="cfill" style="width:71%"></div></div><span class="cv">$10</span></div><div class="cbar"><span class="cl">2025</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">$14</span></div><div class="csrc">Source: Microsoft, 2025 price update</div></figure><h1>Microsoft BI Pricing, Explained With Real Numbers</h1><div class="qa"><b>Quick answer.</b> Microsoft BI pricing has three parts: Power BI Pro is $14 per user a month, Premium Per User is $24 per user a month, and larger teams buy Fabric capacity, where a reserved F64 runs about $5,000 a month and lets viewers read reports without a paid seat. Power BI Desktop is free.
+---</div><p>Microsoft BI pricing starts at $14 per user a month for a Power BI Pro seat, and that one number is where most budgets go wrong. The line items look simple on the Microsoft page. What catches finance teams out is who needs which tier, and when a per-seat plan turns out more expensive than buying capacity. This piece lays out the real numbers, so you can check any quote against them before you sign.</p><p>You do not need to build a single report to read this. If you sign off the spend, or you sit in the meeting where the BI bill gets questioned, this is the plain version.</p><h2>What does Microsoft BI pricing actually look like in 2026?</h2><p>Microsoft sells its BI stack in three layers, and your bill is the sum of all three.</p><ul><li>Power BI Desktop is free. It&#x27;s the app your analysts build reports in. Nobody pays Microsoft to design a dashboard.</li><li>Power BI Pro is $14 per user a month. Anyone who publishes a report, or opens one shared in a standard workspace, needs a Pro seat.</li><li>Power BI Premium Per User is $24 per user a month. It adds bigger data models, more frequent refreshes, and paginated reports, still billed one person at a time.</li><li>Fabric capacity is the shared engine larger teams buy instead of stacking seats. A reserved F64 runs about $5,000 a month, and it lets viewers read published reports without each one needing a Pro license.</li></ul><p>Microsoft raised these prices in April 2025, the first increase since Power BI launched. Pro went from $10 to $14, and Premium Per User went from $20 to $24. If your budget was built on an older quote, your real Microsoft BI pricing today is roughly 40% higher.</p><table><tr><th>Layer</th><th>Price a month</th><th>Who it&#x27;s for</th><th>Watch out for</th></tr><tr><td>Power BI Desktop</td><td>Free</td><td>Report builders</td><td>Can&#x27;t share online on its own</td></tr><tr><td>Power BI Pro</td><td>$14 per user</td><td>Anyone publishing or viewing shared reports</td><td>1 GB model cap, 8 refreshes a day</td></tr><tr><td>Premium Per User</td><td>$24 per user</td><td>Analysts needing big models or paginated reports</td><td>Still charged per person</td></tr><tr><td>Fabric F64 capacity</td><td>~$5,000 reserved</td><td>Teams with many viewers</td><td>Flat monthly fee, not per seat</td></tr></table><h2>Why does the same setup cost two companies wildly different amounts?</h2><p>Because the price is driven by head count and by how you split builders from viewers, not by the software itself. Two firms of the same size can pay very different bills depending on that one split.</p><p>A company that hands a $14 Pro seat to every name in the directory, including people who glance at one dashboard a month, pays for a lot of idle licenses. At $14 each, 200 casual viewers is $33,600 a year for seats that mostly sit unused. A company that moves those viewers onto Fabric capacity pays a flat fee instead and stops counting seats at all.</p><p>The deeper cost sits underneath the license, and it rarely shows up on the invoice. In one 2025 survey, 67% of organizations said they don&#x27;t fully trust the data they use to make decisions (Drexel LeBow and Precisely, 2025). Gartner puts the average cost of poor data quality at $12.9M a year per organization. A bigger license does nothing for either figure. When two reports disagree in a board meeting, the fix is a cleaner data model and clear ownership, and those cost far less than another tier of seats.</p><h2>What is the Power BI Premium cost now that Fabric took over?</h2><p>The old Power BI Premium price was a per-capacity plan called P1, P2, and P3. Microsoft retired those names and folded the capacity into Microsoft Fabric, so new buyers now purchase F-SKUs instead.</p><p>Fabric capacity is sold by the hour and reserved by the month. The smallest, an F2, runs about $263 a month pay-as-you-go. The number that matters for most buyers is F64. At a reserved F64, roughly $5,000 a month, your viewers can read published reports without each needing a Pro seat. That single rule is why the Power BI Premium cost question almost always turns into a head-count question.</p><p>So the Power BI Premium price splits into two very different things. Premium Per User at $24 a month is a personal upgrade for one analyst who needs bigger models. Fabric capacity is a shared bill for the whole audience. Mixing those two up is one of the most common ways a Microsoft BI pricing estimate ends up wrong by thousands a month.</p><p>Capacity also unlocks incremental refresh. Instead of reloading a large table from scratch every night, the load only touches the newest rows. A ten-year sales table that took 40 minutes to refresh can drop to under a minute. That saved time is part of what you&#x27;re paying for at the higher tier.</p><h2>Do you actually pay for people who only look at reports?</h2><p>In a Pro workspace, yes. Every viewer needs a $14 seat, even someone who opens one chart a week. On an F64 capacity or higher, free users can read published reports without a paid license. That&#x27;s the whole reason the F64 line exists.</p><p>The break-even is worth doing by hand, because it decides your entire bill. A $5,000 F64 reservation divided by $14 a seat is about 357 viewers. Below that head count, per-user Pro is usually cheaper. Above it, capacity wins, and every extra viewer past that line is basically free. Most teams overspend because they never run that one division.</p><p>This matters more than a licensing footnote. When 82% of companies say data silos disrupt their workflows (ZoomInfo), the cost of people waiting on a report they can&#x27;t open is real, and it doesn&#x27;t appear on any invoice. Pricing the audience correctly is partly a governance decision, not only a finance one.</p><h2>What about the Power BI certification cost?</h2><p>People fold two very different numbers together here, so let me separate them.</p><p>The Power BI certification cost is a personal exam fee. The PL-300 exam, officially the Microsoft Power BI Data Analyst Associate, runs about $165 in the United States and a little less in some countries. It proves one person knows the platform. It changes nothing about what your reports cost to run each month.</p><p>Keep the Power BI certification cost out of your platform budget. It&#x27;s a one-time training charge for an individual, not a running license fee. One or two certified people is plenty for most teams, and that spend sits in your training line, not your BI subscription.</p><h2>Which Microsoft BI pricing path fits your team?</h2><p>Spending more on licenses rarely fixes a reporting problem. Here&#x27;s the order we walk clients through before anyone buys a thing.</p><ol><li>Count builders versus viewers. Everyone who publishes or edits needs Pro. Pure viewers might not, once you&#x27;re on capacity.</li><li>Add up the Pro seats. Multiply your viewer count by $14. If you&#x27;re paying for more than about 350 Pro viewers, run that total against a $5,000 F64 reservation. Near that head count, capacity gets cheaper per person.</li><li>Check who trusts the number first. Only 40% of executives always trust their data (Talend). If leadership doesn&#x27;t believe the report, a bigger license won&#x27;t move that. Fix the model before you widen access.</li><li>Test security before you scale. Confirm your row-level security roles show each viewer only their own numbers, so you never pay for seats on a report that leaks data.</li><li>Budget the certification apart. The PL-300 fee is a training cost, not a platform charge.</li></ol><p>Good looks like this: one price you can defend in the board meeting, one number everyone agrees on, and no seats sitting idle. Most teams get there by running the head-count math once, honestly, before renewal.</p><h2>Frequently asked questions</h2><p>### How much is Microsoft BI pricing per user?</p><p>A Power BI Pro seat is $14 per user a month as of 2026. Premium Per User is $24 per user a month. Power BI Desktop is free to build in, and larger teams often move viewers onto Fabric capacity instead of paying per seat.</p><p>### What is the Power BI Premium cost in 2026?</p><p>The Power BI Premium cost splits in two. Premium Per User is $24 a month for one analyst. The old capacity plans moved into Fabric, where a reserved F64 runs about $5,000 a month and covers many viewers at once.</p><p>### What is the current Power BI Premium price for a whole team?</p><p>For a team, the Power BI Premium price is now a Fabric capacity fee, not a per-seat charge. Capacity starts around $263 a month for an F2 and about $5,000 for a reserved F64 that lets viewers read reports without their own license.</p><p>### How much is the Power BI certification cost?</p><p>The PL-300 exam is about $165 in the United States. The Power BI certification cost is a personal training fee for one person, separate from any product license your reports need to run.</p><p>### When does Fabric capacity beat paying per user?</p><p>Roughly past 350 viewers. At $14 a seat, about 357 Pro viewers cost the same as a $5,000 F64 reservation, and every viewer above that line is cheaper on capacity.</p><p>### Do report viewers need a paid license?</p><p>In a Pro workspace, yes, every viewer needs a $14 seat. On an F64 capacity or higher, free users can read published reports without one.</p><p>Want the licensing math done on your real setup? Run the free [Power BI Governance and Cost Scorecard](/pricing) to see your top cost risks in five minutes, then book a scoping call and we&#x27;ll price it against your actual head count.</p><p>Read next: our full [pricing guide](/pricing) for the tier-by-tier map, and [Power BI license cost, explained](/blog/blog-power-bi-license-cost) for a closer look at what a single seat buys.</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">microsoft bi pricing</span><span class="c">power bi premium cost</span><span class="c">power bi premium price</span><span class="c">power bi certification cost</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

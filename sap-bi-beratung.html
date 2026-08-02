@@ -1,0 +1,139 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Sap BI Beratung einfach erklärt</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Sajagan Thirugnanam, CaseWhen</b><span>sap bi beratung</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><h1>Sap BI Beratung einfach erklärt</h1><div class="qa"><b>Quick answer.</b> Eine SAP BI Beratung holt einen externen Spezialisten ins Haus, der Ihre Zahlen sauber aus SAP herauszieht und in Berichte verwandelt, denen Ihr Vorstand glaubt. Der schwierige Teil ist selten das Werkzeug. Er liegt davor: Belege, Buchungen und Stammdaten so aus SAP zu ziehen, dass sie zu Ihren anderen Quellen passen und am Monatsende eine Zahl ergeben.</div><p>Eine SAP BI Beratung bedeutet, dass Sie sich einen externen Spezialisten holen, der Ihre im SAP entstehenden Zahlen sauber aus der SAP-Umgebung zieht und aufbereitet, dass am Monatsende eine Umsatzzahl steht, der Ihr Aufsichtsrat glaubt. Rund zehn Mal im Monat sucht in Deutschland jemand nach genau diesem Begriff, und fast immer steckt dasselbe Problem dahinter: SAP kennt die richtige Zahl, aber im Bericht auf dem Tisch steht eine andere.</p><p>Das ist kein Einzelfall. 67 Prozent der Unternehmen vertrauen den Daten nicht voll, mit denen sie Entscheidungen treffen (Precisely und Drexel LeBow, 2025). Für Sie sieht das konkret so aus: Die Vorstandssitzung um neun Uhr wird zur Diskussion darüber, wessen Zahl gilt, statt zur Entscheidung. Eine gute SAP BI Beratung schließt genau diese Lücke zwischen dem, was in SAP steht, und dem, was Ihr Team im Bericht sieht.</p><p>Dieser Beitrag erklärt in einfacher Sprache, was die Beratung wirklich leistet, was sie kostet und woran Sie vor der Unterschrift eine gute von einer schwachen unterscheiden. Kein Fachjargon, keine Folien.</p><h2>Was ist eine SAP BI Beratung eigentlich?</h2><p>Der Titel deckt viel ab, deshalb sollten Sie die Arbeit festnageln. Der Kern liegt fast immer an einer Stelle, die man von außen nicht sieht: der Weg aus SAP heraus. Ihre Aufträge, Rechnungen und Stammdaten liegen im SAP sauber, aber verschlossen. Sie in ein Berichtswerkzeug wie Power BI zu bringen, ohne die Freigaben zu verletzen und ohne die Quelle auszubremsen, ist die eigentliche Aufgabe.</p><p>Am starken Ende übernimmt eine SAP BI Beratung vier Dinge. Erstens die Extraktion: Sie holt die richtigen Tabellen und Belege aus SAP, morgens und automatisch, ohne dass jemand von Hand exportiert. Zweitens die Zusammenführung: Sie bringt die SAP-Daten mit Ihren anderen Quellen so zusammen, dass eine Kundennummer überall dieselbe ist. Drittens das Datenmodell: Sie rechnet jede Kennzahl einmal zentral, sodass Umsatz auf jeder Seite dasselbe bedeutet. Viertens die Übergabe: Sie dokumentiert das Ganze und schult zwei Ihrer Leute, damit es weiterläuft, wenn der Berater weg ist.</p><p>Eine schwache Beratung baut ein hübsches Dashboard auf einem einmaligen Excel-Export und verschwindet. Einen Monat später stimmt die Zahl nicht mehr, weil der Export von Hand lief und niemand ihn wiederholt hat. Fragen Sie jeden Anbieter zuerst, wie er die Daten automatisch aus SAP holt, bevor Sie über Design reden. Die Antwort verrät Ihnen, an welchem Ende er steht.</p><h2>Warum zeigen zwei Berichte aus demselben SAP unterschiedliche Zahlen?</h2><p>Fast immer, weil zwischen SAP und dem fertigen Bericht Handarbeit liegt und niemand die Definitionen aufgeschrieben hat. Der Vertrieb exportiert seine Aufträge, die Finanzabteilung ihre Rechnungen, und beide bauen sich in Excel ihre eigene Auswertung. Zwei saubere Rechenwege, zwei Ergebnisse, ein Problem. Laut einer Untersuchung von Poon et al. aus dem Jahr 2024 enthalten 94 Prozent der geschäftlich genutzten Tabellenkalkulationen Fehler. Wenn zentrale Kennzahlen den Umweg über solche Dateien nehmen, wandern die Fehler direkt in die Sitzung.</p><p>Dazu kommt das Vertrauen. Wer einer Zahl nicht traut, exportiert sie lieber noch einmal und prüft sie von Hand, und schon liegt die nächste Version auf dem Tisch. Laut Talend vertrauen nur 40 Prozent der Führungskräfte ihren Daten immer. Das ist keine Sturheit, das ist eine vernünftige Reaktion auf eine Grundlage, die noch nicht geordnet ist.</p><p>Der dritte Grund sind getrennte Datenstände. SAP hält das Rechnungswesen, aber der Vertrieb sitzt in einer anderen Anwendung, und beide wurden nie zusammengeführt. Laut ZoomInfo sagen 82 Prozent der Unternehmen, dass solche Datensilos den Arbeitsablauf stören. Solange die Daten getrennt bleiben und die Kundennummern nicht zusammenpassen, entstehen neue Wahrheiten von selbst.</p><h2>Woran erkennen Sie eine gute SAP BI Beratung?</h2><p>Weniger am Portfolio, mehr an dem, was schriftlich im Angebot steht. Ein loser Leistungsumfang ist der Ort, an dem Budgets abdriften, und bei SAP steht die teure Arbeit meist genau in den Zeilen, die ein dünnes Angebot auslässt. Vergleichen Sie, was ein dünnes und ein starkes Angebot festhalten.</p><table><tr><th>Was Sie prüfen</th><th>Dünnes Angebot (riskant)</th><th>Starkes Angebot (unterschreiben)</th></tr><tr><td>Datenzugang</td><td>&quot;Wir nutzen einen Export&quot;</td><td>Automatische Extraktion aus SAP, morgens, ohne Handarbeit</td></tr><tr><td>Zusammenführung</td><td>Nicht erwähnt</td><td>SAP plus weitere Quellen, Kundennummern abgeglichen</td></tr><tr><td>Kennzahl</td><td>&quot;Umsatz-Dashboard&quot;</td><td>Umsatz einmal zentral gerechnet, über alle Quellen gleich</td></tr><tr><td>Freigaben</td><td>&quot;Zugriff wird geregelt&quot;</td><td>Rollen gelistet, vor dem Start mit &quot;Anzeigen als&quot; getestet</td></tr><tr><td>Übergabe</td><td>&quot;Dokumentation&quot;</td><td>Zwei Mitarbeiter geschult, Handbuch, 30 Tage Support</td></tr></table><p>Wenn ein Angebot die rechte Spalte auslässt, verlangen Sie sie schriftlich, bevor Sie unterschreiben. Ein Anbieter, der SAP kennt, spricht früh über die Extraktion und die Kundennummern, die zwischen den Anwendungen selten übereinstimmen. Ein Anbieter, der beim ersten Gespräch nur über Farben und Kacheln redet, hat den teuren Teil noch nicht gesehen. Ein letzter Test, den Sie heute machen können: Geben Sie der engeren Auswahl einen kleinen bezahlten Probeauftrag auf Ihren echten SAP-Daten. Eine Woche echte Arbeit sagt mehr als drei Gesprächsrunden.</p><h2>Was kostet Sie eine fehlende Datengrundlage im Abschluss und im Aufsichtsrat?</h2><p>Am sichtbarsten wird es beim Monatsabschluss. Wenn die Zahlen erst aus SAP gezogen, in Excel abgeglichen und von Hand geprüft werden müssen, zieht sich der Abschluss hin. Laut Solvexia gelten rund acht Tage bis zum fertigen Abschluss als akzeptabel, während die stärksten Teams ihn in unter drei Tagen schaffen. Der Unterschied liegt selten an fleißigeren Leuten. Er liegt daran, dass die schnellen Teams nicht jeden Monat aufs Neue diskutieren, welche Zahl gilt.</p><p>Dann ist da der Aufsichtsrat. Ein Bericht, dessen Zahlen nicht zusammenpassen, kostet Sie Glaubwürdigkeit, und die verliert man in einer einzigen Sitzung. Kann die Geschäftsführung eine Zahl nicht auf Anhieb erklären, steht nicht die Zahl in Frage, sondern die Leitung. Solche Momente wirken lange nach.</p><p>Es gibt auch einen nüchternen Preis. Gartner beziffert die Kosten schlechter Datenqualität auf durchschnittlich 12,9 Millionen Dollar pro Jahr. Im Mittelstand steckt der Schaden weniger in einer großen Summe als in vielen kleinen Reibungsverlusten: doppelte Arbeit, verspätete Berichte, Entscheidungen auf der falschen Zahl. Und selbst gute Berichte helfen nichts, wenn niemand sie öffnet. Rund 70 Prozent der Dashboard-Arbeit verpufft laut RevealBI ungenutzt, meist weil die Zahlen darunter nicht stimmen oder der Bericht nicht sagt, was zu tun ist.</p><h2>SAP BI Beratung, eigenes Team oder Power BI Freelancer: was passt zu Ihnen?</h2><p>Eine spezialisierte Beratung ist sinnvoll, wenn Sie schnell einen verlässlichen Bau brauchen und intern niemanden haben, der SAP-Daten sauber herauszieht und modelliert. Sie bekommen Erfahrung aus vielen Projekten und jemanden, der schon weiß, wo es beim zwölften Monat klemmt. Der Preis dafür ist ein externer Dienstleister, den Sie steuern müssen.</p><p>Ein Power BI Freelancer ist die günstige Mitte für einen klar umrissenen Auftrag. Für einen einzelnen Bericht auf einer sauberen Quelle kann das genau richtig sein. Als dauerhafte Absicherung taugt ein einzelner Power BI Berater schlecht, weil er im Urlaub oder bei Krankheit ausfällt und das Wissen mit ihm. Ein eigenes Team lohnt sich, wenn sich Ihre Berichte oft ändern und das Wissen im Haus bleiben soll, kostet aber Anlaufzeit.</p><p>Die ehrliche Antwort für die meisten mittelständischen Häuser: Holen Sie sich für den ersten soliden Bau, die Zusammenführung und die Übergabe externe Hilfe, und führen Sie den Betrieb danach selbst weiter. So wird die Einführung Power BI im Haus zu einer Fähigkeit statt zu einer Abhängigkeit. Sie bezahlen die Beratung dafür, dass sie sich selbst überflüssig macht.</p><p>### Was Ihr Team dafür im Hintergrund tut</p><p>Eine Ebene tiefer, kurz und ohne Fachchinesisch: Ihr Partner richtet einen automatischen Weg ein, der die richtigen Tabellen morgens aus SAP zieht, ohne die Quelle zu belasten. Diese Daten werden mit Ihren übrigen Quellen zusammengeführt, die Kundennummern abgeglichen und die Kennzahlen einmal zentral als feste Formeln hinterlegt. Dazu kommen abgestufte Freigaben und eine Herkunftsverfolgung, die für jede Zahl zeigt, aus welcher SAP-Tabelle sie stammt. Das ist die Arbeit hinter einer geprüften Zahl, und sie gehört in erfahrene Hände.</p><h2>So arbeitet CaseWhen daran</h2><p>Wir verkaufen keinen Kurs von der Stange. Wenn ein Unternehmen eine verlässliche Zahl aus SAP braucht, arbeiten wir zu einem festen Preis an Ihren echten Berichten. Wir klären mit Ihnen die Definitionen, richten die automatische Extraktion ein, führen die Quellen zusammen, bauen das Modell darunter und halten alles schriftlich fest. Am Ende haben Sie eine Zahl, die im Abschluss standhält, und die Notizen, um sie selbst weiterzupflegen.</p><p>Ein guter erster Schritt ist unsere kostenlose Governance- und Kosten-Scorecard. In etwa fünf Minuten sehen Sie, wo Ihre Zahlen heute auseinanderlaufen und welche drei Bereiche das größte Risiko tragen. Wollen Sie danach an Ihren eigenen Berichten weitermachen, buchen Sie ein Erstgespräch, und wir schauen uns Ihren SAP-Aufbau gemeinsam an.</p><h2>Häufige Fragen</h2><p>Was leistet eine SAP BI Beratung, kurz gesagt? Sie holt Ihre Zahlen automatisch aus SAP heraus und macht daraus Berichte, denen Ihr Team glaubt. Dazu gehören die Extraktion aus SAP, die Zusammenführung mit anderen Quellen, ein gemeinsames Datenmodell und eine kurze Dokumentation, damit Sie die Grundlage selbst pflegen können.</p><p>Brauchen wir eine SAP BI Beratung, wenn wir Power BI schon haben? Die Lizenz gibt Ihnen das Werkzeug. Die Beratung gibt Ihnen den sauberen Weg aus SAP heraus, ein Modell, das richtig bleibt, wenn Ihre Daten wachsen, und ein Team, das es betreiben kann. Der schwierige Teil sitzt vor Power BI, nicht darin.</p><p>Was kostet eine SAP BI Beratung? Das hängt vom Umfang ab. Seriös ist ein fester Preis für ein klar beschriebenes Ergebnis, etwa eine geprüfte Umsatzzahl über SAP und Ihre übrigen Quellen hinweg. Verlangen Sie ein festes Angebot statt eines offenen Stundenkontos, dann bleibt der Preis planbar.</p><p>Wie lange dauert ein erstes Projekt? Ein klar umrissener erster Bericht auf einer sauberen SAP-Quelle dauert zwei bis vier Wochen. Muss über mehrere Anwendungen hinweg abgeglichen und modelliert werden, planen Sie zwei bis drei Monate bis zu einem stabilen Start.</p><p>Woran erkenne ich beim ersten Gespräch eine gute Beratung? Sie fragt nach Ihren echten SAP-Tabellen und nach der einen Frage, die der Bericht beantworten muss. Geht es zuerst um Design und Farben, ist das ein Warnzeichen.</p><p>Weiterlesen: unser Leitfaden zur Power-BI-Beratung unter [Power BI Consulting](/power-bi-consulting), der Beitrag [Business Intelligence Beratung](/blog/business-intelligence-beratung) und der Text dazu, [warum zwei Berichte unterschiedliche Zahlen zeigen](/blog/warum-berichte-unterschiedliche-zahlen). Oder starten Sie mit der kostenlosen Governance- und Kosten-Scorecard und behalten Sie das Ergebnis in jedem Fall.</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">sap bi beratung</span><span class="c">einführung power bi</span><span class="c">power bi freelancer</span><span class="c">power bi berater</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

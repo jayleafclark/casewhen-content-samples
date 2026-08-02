@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Business Intelligence And Consulting vs. Big Consultancies:</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>business intelligence and consulting</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><h1>Business Intelligence And Consulting vs. Big Consultancies: What&#x27;s Actually Different</h1><div class="qa"><b>Quick answer.</b> Business intelligence and consulting means paying an outside firm to turn your messy data into reports your team trusts and acts on. A specialist firm and a big consultancy both sell it, but they price it, staff it, and finish it very differently. For most mid-sized companies, a specialist gets you a trusted setup faster and for less.
+---</div><p>Business intelligence and consulting is where you hire an outside team to get your numbers clean, defined once, and trusted enough that people actually make decisions on them. The reason this keeps coming up is money. Poor data quality costs organizations $12.9M a year on average (Gartner), and 67% of companies say they don&#x27;t fully trust the data they use to make decisions (Precisely). So the market for help is huge, and two very different kinds of firm are selling into it: big brand-name consultancies, and smaller specialists who do one thing.</p><p>This piece is about what&#x27;s actually different between them, in the terms you&#x27;re judged on: cost, speed, who does the work, and whether the thing gets finished. No pitch. Just where each one wins and where each one hurts.</p><h2>What is business intelligence and consulting, really?</h2><p>Strip away the brochure language and it&#x27;s simple. You have data sitting in systems, spreadsheets, and someone&#x27;s inbox, and you can&#x27;t get a straight answer out of it. A firm comes in, builds a proper foundation under your reports, and leaves you with numbers that come out the same way every time.</p><p>The reason it&#x27;s worth paying for is that this is harder than it looks. Around 70% of dashboard work is wasted because people don&#x27;t trust or use what gets built (RevealBI). You can spend real money and still end up with reports the team ignores and rebuilds in Excel. So what you&#x27;re really buying isn&#x27;t a dashboard. It&#x27;s the trust. A number the board believes, a close you can finish on time, a meeting that doesn&#x27;t turn into an argument about whose figure is right.</p><p>Both a big consultancy and a specialist firm will tell you they deliver that. The difference is in how they&#x27;re built.</p><h2>How is a big consultancy different from a specialist?</h2><p>The short version: a big consultancy sells you a brand and a process, and a specialist sells you the people who do the work.</p><p>At a large firm, the partner who wins the deal is rarely the person building your reports. That work usually rolls down to junior staff who rotate on and off projects. You pay senior rates, and a lot of the day-to-day gets done by people early in their careers, learning on your engagement. The methodology is real, but it&#x27;s built for a company ten times your size, so you get process weight you don&#x27;t need.</p><p>A specialist power bi consulting firm is the opposite shape. The person who scopes the job is often the person who builds it, or sits right next to them. There are fewer layers, so less of your money pays for management overhead and slide decks. You lose the big brand name on the invoice. You gain someone who has built the same kind of trusted setup many times and can get you there in weeks.</p><p>Neither is automatically right. It depends on what you&#x27;re buying and how fast you need it.</p><h2>What does a big consultancy actually cost you?</h2><p>More than the rate card, and in ways that show up later.</p><p>The obvious cost is the day rate, which is high because you&#x27;re paying for the brand and the overhead behind it. The less obvious cost is the ramp. A rotating team spends billed time learning your business, your definitions, and your data before they build anything useful. You pay full rates during that stretch, and if the team rotates again mid-project, you pay for parts of it twice.</p><p>Then there&#x27;s the finish problem. Big engagements are good at starting and documenting. They&#x27;re less good at the last mile, where a report has to actually get used every day by a controller who doesn&#x27;t care about the methodology. When the team rolls off, the knowledge can roll off with them, and you&#x27;re left with a handsome deliverable nobody on your side can maintain. That&#x27;s how you end up back where you started: 82% of companies say data silos disrupt their workflows (ZoomInfo), and a half-finished project becomes another silo.</p><p>None of this means a big firm does bad work. It means your total cost is the rate plus the ramp plus the risk that it doesn&#x27;t land, and only the first part shows up in the quote.</p><h2>When does a big firm still make sense?</h2><p>When the job really is enterprise-sized and the brand matters.</p><p>If you&#x27;re a very large organization running a multi-year transformation across dozens of countries and systems, you need the scale, the legal cover, and the sheer headcount a big consultancy brings. A specialist team of a few people can&#x27;t staff that, and shouldn&#x27;t try.</p><p>There&#x27;s also the credibility case. Sometimes a board or a regulator wants a recognized name on the work, and that name is part of what you&#x27;re buying. That&#x27;s a real reason, and it&#x27;s worth being honest about when it applies to you and when it&#x27;s just habit.</p><p>For most mid-sized companies, though, the reporting problem isn&#x27;t enterprise-sized. It&#x27;s a semantic model that was never built right, a close that takes too long, and a board pack that doesn&#x27;t reconcile. That&#x27;s a specialist job, and paying enterprise rates for it is how budgets get burned.</p><h2>How do you choose without guessing?</h2><p>Line the two up on what you&#x27;re actually accountable for. Here&#x27;s the honest comparison.</p><table><tr><th>What you&#x27;re judged on</th><th>Big consultancy</th><th>Specialist BI firm</th></tr><tr><td>Who builds it</td><td>rotating junior staff under a partner</td><td>the people who scoped it</td></tr><tr><td>Time to a trusted setup</td><td>months, with ramp and handoffs</td><td>weeks, they&#x27;ve done it before</td></tr><tr><td>What the rate pays for</td><td>brand, overhead, methodology</td><td>the actual build</td></tr><tr><td>The last mile</td><td>often where it stalls</td><td>the whole point of the engagement</td></tr><tr><td>Knowledge when they leave</td><td>can roll off with the team</td><td>documented and handed to you</td></tr><tr><td>Best fit</td><td>enterprise-scale, multi-year, brand needed</td><td>mid-sized, fix the numbers fast</td></tr></table><p>The pattern that works for most companies your size is to skip the big-firm overhead and hire a specialist to build the trusted foundation fast. You get a working result in weeks instead of a project that ramps for a quarter. If you really do have an enterprise-scale program, that&#x27;s the case where a large consultancy earns its rate.</p><p>### What a specialist actually builds for you</p><p>One level deeper, and this is the part to hand off rather than run yourself. The foundation is a proper data model under your reports: your core numbers defined once as measures so revenue means one thing everywhere, clean structure linking each fact to date, product, and region, row-level security so each manager sees only their slice, and a scheduled refresh so the number on screen is always current. That&#x27;s the heavy work a seasoned bi consultant does quickly because they&#x27;ve built it before. Once it&#x27;s in place, keeping it running is light. Most of what a big engagement charges you for is the scaffolding around that core, not the core itself.</p><h2>What you can do this week</h2><p>Before you sign with anyone, get a free read on where your setup actually stands. Our Power BI Governance &amp; Cost Scorecard is a five-minute assessment that scores how exposed you are to conflicting numbers and manual reporting, and shows your top three risks. Run it and you&#x27;ll walk into any vendor conversation knowing what you&#x27;re really buying. If you&#x27;d rather talk it through, book a scoping call with our team. That&#x27;s the session where we look at your real reports and tell you straight whether this is a quick specialist fix or a true enterprise-scale job, with no push to buy either way.</p><h2>Frequently asked questions</h2><p>What does business intelligence and consulting actually include?
+It covers the outside help that turns raw data into reports your team trusts. In practice that means building a clean data model, defining your core numbers once, setting up security and refresh, and delivering dashboards people actually use. The goal is one agreed number the business can act on, not just a pretty screen.</p><p>Is a specialist firm cheaper than a big consultancy?
+Usually yes, for a mid-sized job. A big firm&#x27;s rate carries brand and overhead, and much of the build gets done by junior staff learning on your project. A specialist has fewer layers, so more of your money goes to the actual work, and they finish in weeks because they&#x27;ve done the same job many times.</p><p>When should we still hire a big consultancy?
+When the job is enterprise-scale, spans many countries and systems, and runs for years, or when a board or regulator insists on a recognized brand for the engagement. For a reporting problem that&#x27;s really about a model that was never built right and a slow close, that scale is more cost than benefit.</p><p>What&#x27;s the risk with power bi consulting services from a large firm?
+The main one is the last mile. Big engagements start and document well but can stall at the point where daily users take over. When the team rotates off, the knowledge can leave too, and you&#x27;re back to silos. Ask upfront who builds it, who maintains it, and what you&#x27;re left with when they go.</p><p>How fast can a specialist fix our reporting?
+For a mid-sized company, the core model is often weeks, sometimes less. Speed is the main thing you&#x27;re paying a specialist for. They&#x27;ve built the same foundation many times, so they skip the long ramp a rotating team needs to learn your business first.</p><p>Read next: [Power BI consulting: what it is and when you need it](/power-bi-consulting) and [Power BI consultant vs in-house: when each actually wins](/blog/power-bi-consultant-vs-in-house).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">business intelligence and consulting</span><span class="c">power bi consulting</span><span class="c">power bi consulting services</span><span class="c">bi consultant</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

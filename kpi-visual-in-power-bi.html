@@ -1,0 +1,151 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · KPI Visual In Power BI: A Real Example, Not a Textbook Defin</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>kpi visual in power bi</span><span>Article, FAQPage, BreadcrumbList</span></div><h1>KPI Visual In Power BI: A Real Example, Not a Textbook Definition</h1><figure class="achart"><figcaption>Organizations that fully trust their data</figcaption><div class="cbar"><span class="cl">Trust it</span><div class="ctrack"><div class="cfill" style="width:49%"></div></div><span class="cv">33%</span></div><div class="cbar"><span class="cl">Do not</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">67%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><p>A KPI visual in Power BI is a built-in tile that shows one number, the target it&#x27;s measured against, and the trend behind it. You set an Indicator measure, a Target value, and a Trend axis, almost always a date. Good ones read one agreed number. A plain card just shows the figure and stops there.
+---</p><p>Every quarter, a sales lead, a finance lead, and a board member pull the same revenue figure and read three different answers. Gartner puts the average cost of poor data quality at 12.9 million dollars a year per organization, and a good slice of that bill is people arguing over whose number is right. A KPI tile is where that argument gets settled, or where it starts.</p><p>For the analyst who has to build the thing, the tile itself takes about a minute. The model underneath it is where the work lives. Here is what actually goes into a KPI visual people trust, and where most builds go sideways.</p><h2>What is a KPI visual in Power BI?</h2><p>The KPI visual in Power BI is one of the default visuals in the Visualizations pane. It takes three inputs. The Indicator is the measure you care about, say revenue this month. The Target is what good looks like, say the monthly goal. The Trend axis is what the number runs across, almost always a date. The tile then shows the current value big, colors it green or red against the target, and draws the trend line behind it.</p><p>A card shows a single number and nothing else. A KPI visual adds the two things a number is meaningless without: what you were aiming for, and which way it&#x27;s headed. That is the whole reason to reach for it instead of a card.</p><h2>Why does the KPI visual keep showing the wrong number?</h2><p>Most of the time the visual is fine and the model underneath it is the problem. Two reports define revenue two different ways, so two KPI tiles show two figures, and trust goes out the window. A peer-reviewed study by Poon and colleagues found that 94 percent of business spreadsheets used in decision making contain errors, which is why moving the math out of scattered workbooks and into one model pays off fast.</p><p>Define each metric once in DAX, the formula language behind Power BI. Write a single measure for revenue and point every KPI tile at it.</p><p>```dax
+Revenue =
+CALCULATE (
+    SUM ( Sales[Amount] ),
+    Sales[Status] = &quot;Booked&quot;
+)
+```</p><p>From there, the same model gives you the extras a KPI tile leans on. A DAX RANKX measure ranks each region or rep, so the tile can show where a number sits against the rest. Power BI time intelligence functions, like SAMEPERIODLASTYEAR or TOTALYTD, give you the year-over-year and year-to-date comparisons a target usually needs. And when your sales table carries two dates, an order date and a ship date, the DAX USERELATIONSHIP function lets one measure count by ship date without you rebuilding anything.</p><p>Get the measures right and every KPI tile in the report reads from the same source of truth, so people and Copilot return the number the same way every time.</p><h2>Which visual should you use, KPI or card?</h2><p>The three single-number visuals look similar and do different jobs. Pick by whether the number has a goal and a direction.</p><table><tr><th>Visual</th><th>What it shows</th><th>Target built in</th><th>Trend built in</th><th>Best for</th></tr><tr><td>KPI</td><td>Value, target, and trend in one tile</td><td>Yes</td><td>Yes</td><td>A metric with a goal you track over time</td></tr><tr><td>Card</td><td>One number on its own</td><td>No</td><td>No</td><td>A headline figure with no target</td></tr><tr><td>Gauge</td><td>Value against a min, max, and target arc</td><td>Yes</td><td>No</td><td>Progress toward a fixed goal such as a quota</td></tr></table><p>If the number has a goal and a direction, use the KPI visual. If you just need the figure on the page, a card is lighter and reads faster.</p><h2>How do you build a KPI visual everyone reads the same way?</h2><p>Three moves keep every KPI tile honest.</p><p>One, control who sees which rows with row-level security, then test it with View As. View As previews the report exactly as a given role or user would see it, so you catch a leaky filter before your sales director does.</p><p>Two, move changes through deployment pipelines instead of editing the live report. A deployment pipeline gives you development, test, and production stages, so every change gets checked before the board ever sees it. No more editing production at 8pm and hoping it lines up.</p><p>Three, agree the definition of each metric in writing before anyone drops a tile on the canvas. Revenue is booked or billed, never counted both ways. The tile can only be as trustworthy as the measure feeding it.</p><h2>How do you keep the KPI visual fast as data grows?</h2><p>The first thing that slows down at scale is refresh. Reloading three years of sales every night gets slow, then it starts timing out, and a KPI tile that won&#x27;t refresh is worse than none.</p><p>The fix is incremental refresh. You add two parameters named RangeStart and RangeEnd, filter your source query on a date column between them, then set a policy on the table, for example keep five years and refresh the last ten days. Power BI partitions the table by date and only reloads the newest rows. Refresh drops from an hour to a couple of minutes.</p><p>On Microsoft Fabric the math changes again. Your data sits once in OneLake, and Direct Lake mode reads it straight from storage with no import step, so the tile stays close to current without a heavy refresh at all. Rule of thumb: if a refresh takes more than ten minutes, incremental refresh is overdue.</p><h2>Frequently asked questions</h2><p>What is the difference between a KPI visual and a card in Power BI?
+A card shows one number on its own. A KPI visual shows the same figure plus its goal and its direction, and it colors the value green or red against that goal. Reach for the KPI visual when the number has a goal and a direction; use a card for a plain headline figure.</p><p>Can a KPI visual show more than one metric?
+No. Each KPI tile carries a single Indicator, one Target, and one Trend axis. For several metrics side by side, drop several KPI tiles on the page, or use a multi-row card or a table when you want them stacked.</p><p>What should I put in the Target field?
+A measure, not a typed-in number. Point the Target at a Budget or Goal measure from your model so it moves with the data and stays consistent across every report. Hard-coding a target means editing the report each time the goal changes.</p><p>Why is my KPI visual trend line flat or empty?
+Almost always the Trend axis. It needs a continuous date from a proper date table, and the Indicator measure has to return a value for each of those dates. A missing date table or a measure that only computes for the current month gives you a flat or blank trend.</p><p>Do I need Power BI Premium or Fabric for the KPI visual?
+No. The KPI visual ships with every Power BI license. You only reach for Fabric or Premium features like Direct Lake, larger models, or deployment pipelines once your data and your team grow past what a shared workspace handles.</p><p>Read next: our pillar guide to [KPI and data modeling](/kpi-and-data-modeling), and [KPI dashboard software, explained for people who aren&#x27;t data engineers](/blog/kpi-dashboard-software).</p><p>If you want to pressure-test your own build, grab our free 20-Point Power BI Model Review Checklist below. And if two reports still won&#x27;t agree on the same number, book a semantic-model and AI-readiness review with us.</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">kpi visual in power bi</span><span class="c">dax rankx; time intelligence power bi; dax use relationship</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>
