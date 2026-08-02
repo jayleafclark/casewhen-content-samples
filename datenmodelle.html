@@ -1,0 +1,148 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Datenmodelle: Grundlagen</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Sajagan Thirugnanam, CaseWhen</b><span>datenmodelle</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Organizations with data good enough to use for AI</figcaption><div class="cbar"><span class="cl">Ready</span><div class="ctrack"><div class="cfill" style="width:13%"></div></div><span class="cv">12%</span></div><div class="cbar"><span class="cl">Not ready</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">88%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><h1>Datenmodelle: Grundlagen</h1><div class="qa"><b>Quick answer.</b> Datenmodelle legen fest, wie Ihre Tabellen in Power BI zusammenhängen, damit jede Kennzahl aus einer einzigen geprüften Logik entsteht. Ein gutes Datenmodell ordnet die Daten in Fakten und Dimensionen, meist als Sternschema. Ohne dieses Fundament rechnet jeder Bericht anders, und dieselbe Zahl bekommt mehrere Werte.
+---
+Schlechte Datenqualität kostet Unternehmen im Schnitt 12,9 Millionen US-Dollar pro Jahr (Gartner). Ein großer Teil dieser Kosten entsteht nicht in der Datenbank, sondern im Modell darüber. Dort, wo Tabellen falsch verbunden sind und dieselbe Kennzahl je nach Bericht anders rechnet.</div><p>In den meisten Power BI Projekten, die wir übernehmen, liegt das Problem genau hier. Die Berichte sehen ordentlich aus, aber die Zahlen stimmen nicht überein. Der Grund ist fast immer ein schwaches Datenmodell. Schwache Datenmodelle sehen aus der Ferne ordentlich aus und fallen erst auf, wenn zwei Zahlen sich widersprechen. Wer das Modell zuerst ordnet, spart sich später viele Stunden Fehlersuche.</p><h2>Was sind Datenmodelle?</h2><p>Datenmodelle beschreiben, wie einzelne Tabellen zusammenhängen und wie aus ihnen eine Kennzahl entsteht. Ein Datenmodell besteht aus drei Dingen: den Tabellen, den Beziehungen zwischen ihnen und den Regeln, nach denen gerechnet wird. Die Arbeit, dieses Modell zu entwerfen, heißt Datenmodellierung.</p><p>Ein Beispiel. Sie haben eine Tabelle mit Bestellungen, eine mit Kunden und eine mit Produkten. Für sich genommen sagt jede Tabelle wenig aus. Erst die Beziehungen machen daraus eine Frage, die Sie beantworten können: Welcher Kunde hat im Juli welches Produkt gekauft? Diese Verbindungen sind das Datenmodell. Der Bericht ist nur die Oberfläche darüber.</p><p>In Power BI treffen Sie vor allem auf zwei Formen. Das relationale Datenmodell stammt aus klassischen Datenbanken und ist auf die Erfassung von Daten ausgelegt. Das Sternschema ist für Analyse und Berichte gebaut. Beide haben ihren Zweck, aber für Power BI ist das Sternschema fast immer die richtige Wahl. Warum, dazu gleich mehr.</p><h2>Warum entscheidet das Datenmodell über jede Kennzahl?</h2><p>Eine Kennzahl ist nur so verlässlich wie das Modell darunter. Wenn die Tabellen falsch verbunden sind, rechnet auch die beste DAX-Formel ein falsches Ergebnis. Der Bericht zeigt dann eine Zahl mit voller Autorität, die schlicht nicht stimmt.</p><p>Das ist kein Randfall. Eine peer-reviewte Studie fand, dass 94% der Tabellen, die in Entscheidungen einfließen, Fehler enthalten (Poon et al., 2024). Solche Fehler wandern direkt in den Bericht, wenn das Modell die Rohdaten nicht ordnet. Und sie erklären, warum 67% der Unternehmen den Daten, mit denen sie entscheiden, nicht voll vertrauen (Precisely, 2025).</p><p>Der teuerste Effekt zeigt sich in der Sitzung. Drei Abteilungen öffnen denselben Bericht und sehen drei verschiedene Umsatzzahlen, weil jede ihre eigene Excel-Datei mit eigener Logik nutzt. Der Monatsabschluss wird dann zur Diskussion über die richtige Zahl, statt über die richtige Handlung. Ein gemeinsames Datenmodell beendet diese Diskussion, weil alle auf dieselbe Faktentabelle und dieselbe Formel zugreifen.</p><h2>Was ist der Unterschied zwischen relationalem Modell und Sternschema?</h2><p>Das relationale Modell verteilt die Daten auf viele Tabellen, die tief miteinander verschachtelt sind. Das ist gut, wenn eine Anwendung tausende Bestellungen pro Sekunde speichert, ohne etwas doppelt abzulegen. Für einen Bericht ist es unpraktisch, weil eine einfache Frage über viele Verknüpfungen laufen muss.</p><p>Das Sternschema dreht das um. In der Mitte steht eine Faktentabelle mit den Ereignissen, etwa den Bestellungen. Darum herum liegen wenige Dimensionstabellen: Kunde, Datum, Produkt. Jede Beziehung läuft sternförmig von der Faktentabelle weg. Für die DAX-Engine in Power BI ist diese Form schnell und leicht zu rechnen, und für den Menschen leicht zu lesen. Die meisten gut laufenden Datenmodelle sehen genau so aus.</p><p>Die folgende Übersicht zeigt den Unterschied auf einen Blick.</p><table><tr><th>Merkmal</th><th>Relationales Datenmodell</th><th>Sternschema</th></tr><tr><td>Herkunft</td><td>Datenbanken für die Erfassung</td><td>Berichte und Analyse</td></tr><tr><td>Aufbau</td><td>viele Tabellen, tief verschachtelt</td><td>eine Faktentabelle, wenige Dimensionen</td></tr><tr><td>Beziehungen</td><td>in mehrere Richtungen</td><td>von der Mitte nach außen</td></tr><tr><td>Rechenlogik</td><td>komplex, langsam bei großen Daten</td><td>schlank, schnell für DAX</td></tr><tr><td>Ziel</td><td>keine doppelten Daten</td><td>klare Kennzahlen in Sekunden</td></tr></table><p>Die Regel für die Praxis ist kurz: Erfassen Sie Ihre Daten gern relational, aber modellieren Sie für den Bericht immer im Sternschema.</p><h2>Wie bauen Sie ein belastbares Datenmodell in Power BI?</h2><p>Hier sind die Schritte, mit denen wir aus verstreuten Tabellen ein Modell machen, dem der Vorstand vertrauen kann. Jeden davon können Sie heute noch anwenden.</p><ol><li>Fakten und Dimensionen trennen. Legen Sie fest, welche Tabelle die Ereignisse enthält (die Faktentabelle) und welche die beschreibenden Werte (die Dimensionen). Bestellungen sind Fakten, der Kunde ist eine Dimension.</li></ol><ol><li>Eine zentrale Datumstabelle bauen. Erstellen Sie eine eigene Datumstabelle und verbinden Sie alle Fakten damit. So rechnen Vergleiche über Monate und Jahre in jedem Bericht identisch.</li></ol><ol><li>Beziehungen sauber setzen. Verbinden Sie jede Dimension mit genau einem Schlüssel in der Faktentabelle. Vermeiden Sie Beziehungen in mehrere Richtungen, weil sie die Kennzahlen unvorhersehbar machen.</li></ol><ol><li>Kennzahlen als DAX-Measure festschreiben. Definieren Sie jede Berechnung genau einmal, nicht in jedem Bericht neu. Ein Beispiel:</li></ol><p>```
+Umsatz = SUMX( Bestellungen, Bestellungen[Menge] * Bestellungen[Preis] )
+```</p><p>Jeder Bericht, der diese Measure nutzt, rechnet danach gleich.</p><ol><li>Zeilenbasierte Sicherheit einrichten. Legen Sie Rollen an, damit ein Regionalleiter nur seine Region sieht. Prüfen Sie das Ergebnis mit der Funktion &quot;Als anzeigen&quot;, bevor Sie den Bericht teilen. So zeigt dieselbe Kennzahl nie versehentlich fremde Daten.</li></ol><ol><li>Namen und Formate aufräumen. Benennen Sie Spalten so, wie der Fachbereich spricht, und blenden Sie technische Schlüsselspalten aus. Ein Modell, das der Nutzer versteht, wird auch richtig genutzt.</li></ol><p>Wenn diese sechs Schritte stehen, hat jede Kennzahl eine feste Grundlage, die in jeder Sitzung gleich bleibt.</p><h2>Wie halten Sie große Datenmodelle schnell und aktuell?</h2><p>Sobald eine Faktentabelle Millionen Zeilen erreicht, wird der tägliche Ladevorgang zum Engpass. Die Lösung heißt inkrementelle Aktualisierung. Sie laden dabei nur die neuen Zeilen, statt jedes Mal die ganze Historie. In Power BI steuern Sie das über zwei Parameter, RangeStart und RangeEnd, die den zu ladenden Zeitraum begrenzen.</p><p>Für den Weg vom Test in den Betrieb nutzen Sie Bereitstellungspipelines. Damit schieben Sie ein geprüftes Modell kontrolliert von der Entwicklung in die Produktion, ohne von Hand Dateien zu kopieren. Jede Stufe behält ihre eigene Datenquelle und ihre eigenen Rechte.</p><p>Wer auf Microsoft Fabric setzt, legt die Daten in OneLake ab, dem gemeinsamen Speicher für alle Werkzeuge. Der Vorteil ist einfach: dieselben Daten stehen für Power BI, für Notebooks und für Berichte bereit, ohne dass Sie sie mehrfach kopieren. Das ist die Grundlage, damit auch Copilot später aus einer geprüften Quelle antwortet statt aus verstreuten Kopien.</p><p>Ein letzter Punkt zur Aktualität. Richten Sie eine geplante Aktualisierung ein, damit niemand Zahlen von Hand nachträgt. Ein Modell, das sich selbst aktuell hält, wird benutzt. Ein Modell, das jemand jeden Morgen von Hand füttern muss, veraltet in der ersten stressigen Woche.</p><h2>Sollten Sie das Modell selbst bauen oder prüfen lassen?</h2><p>Für einen ersten Bericht reicht oft ein einfaches Sternschema, das Sie selbst bauen. Sobald aber mehrere Teams dieselben Zahlen brauchen und Copilot ins Spiel kommt, entscheidet die Qualität Ihrer Datenmodelle über jede Auswertung. Genau hier lohnt ein zweiter Blick von außen.</p><p>Wir haben eine kostenlose 20-Punkte Power BI Modell-Review-Checkliste zusammengestellt, mit der Sie Ihr eigenes Datenmodell in etwa einer halben Stunde prüfen. Sie finden sie unten. Wenn Ihre Zahlen danach noch immer nicht zusammenpassen, sprechen Sie mit uns über eine Prüfung Ihres semantischen Modells und Ihrer AI-Readiness. Wir bauen das Modell so um, dass Menschen und Copilot dieselbe richtige Zahl zurückgeben.</p><h2>Häufige Fragen</h2><p>Wie unterscheidet sich ein Datenmodell von einer Datenbank?
+Eine Datenbank speichert die Rohdaten. Ein Datenmodell legt fest, wie diese Daten zusammenhängen und wie daraus eine Kennzahl entsteht. Sie können dieselbe Datenbank über mehrere Datenmodelle auswerten.</p><p>Brauche ich immer ein Sternschema?
+Für eine einmalige Auswertung nicht. Für einen Bericht, den mehrere Teams über die Zeit nutzen, ja. Das Sternschema sorgt dafür, dass jede Kennzahl aus einer festen Logik entsteht und schnell rechnet.</p><p>Was bedeutet Datenmodellierung genau?
+Datenmodellierung ist die Arbeit, aus verstreuten Tabellen ein klares Modell zu entwerfen: Fakten von Dimensionen trennen, Beziehungen setzen, Kennzahlen als Measure festschreiben. Sie geschieht vor dem ersten Bericht, nicht danach.</p><p>Warum zeigen zwei Berichte für dieselbe Zahl verschiedene Werte?
+Meist rechnen sie mit unterschiedlichen Formeln oder greifen auf getrennte Datenquellen zu. Die Abhilfe ist eine zentrale DAX-Measure auf einem gemeinsamen Datenmodell, sodass jeder Bericht dieselbe Berechnung nutzt.</p><p>Hilft ein gutes Datenmodell auch bei Copilot?
+Ja. Copilot antwortet nur so gut wie das Modell darunter. Ein klares Sternschema mit eindeutigen Measures gibt der AI eine geprüfte Grundlage, statt sie zwischen widersprüchlichen Tabellen raten zu lassen.</p><p>Weiterlesen: [KPI und Datenmodellierung](/kpi-and-data-modeling) (Übersicht) und [Bedeutung KPI](/blog/blog-bedeutung-kpi) (Schwesterartikel).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">datenmodelle</span><span class="c">datenmodellierung</span><span class="c">relationale datenmodell</span><span class="c">sternschema</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

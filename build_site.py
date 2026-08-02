@@ -1811,6 +1811,8 @@ visuals_page()
 SOCIALDIR = Path(r"J:\Claude Code\casewhen-research\content\w-batch03-social-v2")
 BUYER_LI = Path(r"J:\Claude Code\casewhen-research\content\w-buyer-linkedin")
 BUYER_REEL = Path(r"J:\Claude Code\casewhen-research\content\w-buyer-reels")
+CADENCE_REEL = Path(r"J:\Claude Code\casewhen-research\content\w-cadence-reels")
+CADENCE_X = Path(r"J:\Claude Code\casewhen-research\content\w-cadence-x")
 def _load_json(f):
     try:
         d = json.loads(f.read_text(encoding="utf-8"))
@@ -1849,8 +1851,8 @@ def build_social():
         return out
     merged = {
         "linkedin": _buyer(BUYER_LI, kw_from_note=True) + existing.get("linkedin", []),
-        "shortform": _buyer(BUYER_REEL) + existing.get("shortform", []),
-        "x": existing.get("x", []),
+        "shortform": _buyer(BUYER_REEL) + _buyer(CADENCE_REEL) + existing.get("shortform", []),
+        "x": _buyer(CADENCE_X) + existing.get("x", []),
     }
     total = 0
     for plat, posts in merged.items():

@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Power BI Weiterbildung - Was wirklich zählt</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Sajagan Thirugnanam, CaseWhen</b><span>power bi weiterbildung</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><h1>Power BI Weiterbildung - Was wirklich zählt</h1><div class="qa"><b>Quick answer.</b> Power BI Weiterbildung meint die gezielte Schulung Ihres Teams an Power BI, damit aus den Lizenzen verlässliche Berichte werden. Eine gute Weiterbildung übt an Ihren echten Daten, nicht an einem Beispieldatensatz, und deckt Datenmodell, Kennzahlen und Aktualisierung ab. Danach pflegt Ihr Team einen Bericht selbst, statt bei jeder Änderung Hilfe zu brauchen.</div><p>Die meisten Teams buchen eine Power BI Weiterbildung und stehen drei Monate später vor demselben Monatsabschluss wie zuvor. Rund 50 Mal im Monat sucht im deutschsprachigen Raum jemand nach einer solchen Weiterbildung, meist weil der Vorstand zwei Umsatzzahlen für denselben Monat sieht und niemand sagen kann, welche stimmt. Das Werkzeug ist selten das Problem. Das Problem ist, was in der Schulung geübt wird und woran.</p><p>Dieser Text ist für Sie, wenn Sie die Weiterbildung bezahlen und verantworten, nicht selbst die Berichte bauen. Er erklärt, was eine Power BI Weiterbildung wirklich bringt, warum ein Kurs am Abschluss oft nichts ändert, was ein gutes Seminar von einem hübschen unterscheidet und was Sie vor der Buchung prüfen sollten. Wir schreiben aus der Arbeit an echten Kundenberichten, nicht aus einem Kursprospekt.</p><h2>Was bringt eine Power BI Weiterbildung wirklich?</h2><p>Der geschäftliche Nutzen einer Power BI Weiterbildung ist einfach zu benennen: eine Zahl, hinter der alle stehen, und ein Team, das den Bericht ohne fremde Hilfe am Laufen hält. Alles andere ist Beiwerk.</p><p>Genau da liegt die Lücke. 67 Prozent der Unternehmen vertrauen den Daten nicht voll, mit denen sie entscheiden (Precisely und Drexel LeBow, 2025). Eine Weiterbildung, die nur zeigt, wie man ein Balkendiagramm einfärbt, schließt diese Vertrauenslücke nicht. Eine, die Ihrem Team beibringt, eine Kennzahl sauber zu definieren und im Datenmodell zu verankern, schon.</p><p>Der zweite Nutzen ist Tempo im Abschluss. Acht bis zehn Tage gelten in vielen Häusern noch als normal, starke Teams schließen in unter drei Tagen (Solvexia). Ein Team, das nach der Weiterbildung die Aktualisierung selbst überwacht und eine Kennzahl selbst ändert, wartet nicht mehr tagelang auf einen externen Dienstleister. Der dritte Nutzen ist geringere Abhängigkeit von einer einzelnen Person. Wenn nur ein Mitarbeiter versteht, wie ein Bericht rechnet, steht der Abschluss still, sobald diese Person im Urlaub ist.</p><h2>Warum ändert eine Schulung Power BI oft nichts am Monatsabschluss?</h2><p>Weil die falsche Sache geübt wird. Eine typische Schulung Power BI arbeitet mit sauberen Microsoft-Beispieldaten, in denen jede Kennzahl schon stimmt. Ihre Leute klicken die Schritte nach, bekommen ein Zertifikat und kehren an einen Bericht zurück, in dem der Vertrieb eine unterschriebene Bestellung als Umsatz zählt und die Finanzabteilung eine gestellte Rechnung. Beide Zahlen sind für sich richtig, und beide Berichte weichen jeden Monat voneinander ab.</p><p>82 Prozent der Unternehmen sagen, dass Datensilos ihre Arbeitsabläufe stören (ZoomInfo). Solange die Definition von Umsatz nicht festgeschrieben ist, ändert kein Kurs etwas daran, dass die halbe Sitzung darüber streitet, welche Zahl gilt. Das ist keine Wissenslücke im Bedienen der Software. Es ist eine Lücke im Datenmodell darunter, und die wird in einem Standardkurs nie sichtbar.</p><p>Das zweite Muster ist die Aktualisierung. In der Übung sind die Tabellen klein, und ein Neuladevorgang dauert Sekunden. In Ihrem echten Bericht mit Millionen Zeilen läuft der volle Neuladevorgang in einen Timeout, und jemand muss ihn jeden Morgen von Hand neu anstoßen. Wer inkrementelle Aktualisierung nie an einer echten Faktentabelle geübt hat, kennt das Problem erst, wenn es die 9-Uhr-Sitzung verzögert. Das dritte Muster ist das teuerste: Wenn Zahlen sich widersprechen, prüft jeder sie noch einmal in Excel. Schlechte Datenqualität kostet ein Unternehmen im Schnitt 12,9 Millionen US-Dollar pro Jahr (Gartner), und ein großer Teil davon ist Zeit, die Menschen mit Misstrauen gegenüber ihren eigenen Berichten verbringen.</p><h2>Generisches Power BI Seminar oder Training an Ihren echten Daten?</h2><p>Das ist die eine Entscheidung, die den Wert Ihrer Ausgabe bestimmt. Ein offenes power bi seminar mit zwanzig Teilnehmern aus zehn Firmen kann die Grundlagen vermitteln und ist günstig pro Kopf. Es kann aber nie an Ihrem Datenmodell üben, weil es Ihre Daten nicht kennt. Ein Training an Ihren laufenden Berichten kostet mehr pro Tag und ist am Ende oft günstiger, weil Ihr Team an genau dem Fall lernt, der Ihren Abschluss aufhält.</p><table><tr><th>Merkmal</th><th>Generisches Seminar</th><th>Weiterbildung an Ihren Daten</th></tr><tr><td>Datensatz</td><td>Microsoft-Beispieldaten</td><td>Ihre echten Berichte</td></tr><tr><td>Kennzahl</td><td>allgemeines Beispiel</td><td>Ihre Umsatzdefinition, festgeschrieben</td></tr><tr><td>Datenmodell</td><td>kurz gestreift</td><td>Sternschema an Ihrem Fall geübt</td></tr><tr><td>Aktualisierung</td><td>eine Folie zum Thema</td><td>inkrementelle Aktualisierung eingerichtet</td></tr><tr><td>Berechtigungen</td><td>selten behandelt</td><td>Row-Level Security an Ihren Rollen</td></tr><tr><td>Nach dem Kurs</td><td>ein Zertifikat</td><td>Team pflegt den Bericht selbst</td></tr></table><p>Beide Formate haben ihren Platz. Ein seminar power bi für die Grundlagen ist ein guter Einstieg, wenn niemand im Team je mit dem Werkzeug gearbeitet hat. Sobald es aber um Ihren Abschluss und um Zahlen geht, die in einer Aufsichtsratssitzung standhalten müssen, zahlt sich das Training an Ihren eigenen Daten aus. Fragen Sie einen Anbieter früh, ob er mit Ihren Berichten arbeitet oder nur mit seinem Beispieldatensatz. Die Antwort trennt die beiden Welten.</p><h2>Woran erkennen Sie eine gute Power BI Weiterbildung?</h2><p>Prüfen Sie das Ergebnis, nicht den Lehrplan. Fünf Fragen zeigen das Meiste, und Sie warten auf konkrete Antworten, nicht auf Beruhigung.</p><ol><li>Wird an unseren Daten geübt? Die gute Antwort ist ja, mit einem echten Bericht aus Ihrem Haus. Ein Anbieter, der ausschließlich mit Musterdaten arbeitet, lehrt das Bedienen, nicht das Lösen Ihres Problems.</li><li>Lernt das Team, eine Kennzahl als Measure zu schreiben? Eine Kennzahl wie Marge gehört als DAX-Measure ins Modell, einmal definiert und überall genutzt, nicht pro Kachel neu getippt. Wer das nicht übt, produziert später wieder abweichende Zahlen.</li><li>Wird inkrementelle Aktualisierung an einer großen Tabelle gezeigt? Sie wollen RangeStart und RangeEnd hören und sehen, wie ein Lauf vor Arbeitsbeginn fertig wird. Das ist der Teil, der in der echten Datenmenge bricht.</li><li>Werden Berechtigungen behandelt? Row-Level Security und die Funktion Anzeigen als gehören in jede ernsthafte Weiterbildung, sonst sieht später jeder alles.</li><li>Kann das Team danach ohne uns weiterarbeiten? Das ist das eigentliche Ziel. Eine Übergabe mit Dokumentation und einer Übungsrunde am eigenen Bericht ist am schwersten zu fälschen.</li></ol><p>Rund 70 Prozent der Dashboard-Arbeit wird kaum genutzt (RevealBI), fast immer, weil das Modell darunter nicht stimmt oder die Definition unklar ist. Eine Weiterbildung, die diese fünf Punkte abdeckt, wirkt gegen genau diese Verschwendung. Eine, die nur Diagrammtypen durchgeht, verschiebt das Problem nur nach hinten.</p><h2>Was kostet eine Power BI Weiterbildung, und was treibt den Preis?</h2><p>Sätze schwanken nach Format und Erfahrung, deshalb halten Sie sich an die Treiber statt an eine einzelne Zahl. Ein offenes Seminar wird pro Teilnehmer und Tag abgerechnet und ist der günstige Einstieg. Ein Training an Ihren Berichten wird pro Tag berechnet und liegt höher, spart aber die Wochen, die Ihr Team sonst mit Ausprobieren verliert. Drei Dinge bewegen die Rechnung am stärksten.</p><p>Der erste Treiber ist der Zustand Ihrer Daten. Sind die Quelltabellen unsauber, geht ein Teil der Zeit in die Bereinigung, bevor Ihr Team an etwas Verwertbarem üben kann. 94 Prozent der geschäftlich genutzten Tabellenkalkulationen enthalten Fehler (Poon et al., 2024), und der ganze Sinn einer Weiterbildung ist, davon wegzukommen. Der zweite Treiber ist der Umfang: Grundlagen für zwei Personen sind ein kurzer Auftrag, ein Team über Datenmodell, DAX und Aktualisierung hinweg zu schulen ist ein Projekt. Der dritte Treiber ist, ob Sie Wissen oder nur Anwesenheit kaufen. Ein Tag Zuhören ist billig und verpufft. Ein Team, das am Ende einen echten Bericht selbst pflegt, kostet mehr und trägt weiter.</p><p>Rechnen Sie die Plattform mit ein. Eine Power BI Pro Lizenz liegt bei rund 14 US-Dollar pro Nutzer und Monat, Premium Per User bei etwa 24 US-Dollar, und eine Fabric-Kapazität wird nach Rechenleistung abgerechnet. Ein Anbieter, der die Lizenzfrage im ersten Gespräch überspringt, überrascht Sie später auf der Rechnung. Nur 40 Prozent der Führungskräfte vertrauen ihren Daten durchgehend (Talend). Eine Weiterbildung, die sich rechnet, verschiebt diese Quote nach oben, statt nur einen Kalendertag zu füllen.</p><h2>So arbeitet CaseWhen daran</h2><p>Wir verkaufen keinen Kurs von der Stange. Wenn Ihr Team eine Power BI Weiterbildung braucht, die im nächsten Abschluss etwas ändert, arbeiten wir an Ihren echten Berichten: Wir definieren die Kennzahlen gemeinsam mit Ihnen, üben das Sternschema an Ihrem Fall, richten Aktualisierung und Berechtigungen ein und übergeben so, dass Ihr Team danach selbst weiterkommt.</p><p>Wenn Sie erst einmal wissen wollen, wo Sie stehen, holen Sie sich unsere kostenlose Power BI Governance und Cost Scorecard. In fünf Minuten sehen Sie Ihre drei größten Risiken bei Kosten und Vertrauen in die Zahlen. Ist danach klar, dass sich etwas ändern soll, buchen Sie ein kurzes Scoping-Gespräch, und wir sagen Ihnen ehrlich, ob eine Schulung an Ihren Daten oder erst ein kurzer Bericht-Review der richtige nächste Schritt ist.</p><h2>Häufige Fragen</h2><p>Wie lange dauert eine Power BI Weiterbildung?
+Ein Grundlagen-Seminar dauert oft ein bis zwei Tage. Ein Training an Ihren echten Berichten, das Datenmodell, DAX und Aktualisierung wirklich übt, planen Sie mit mehreren Tagen über einige Wochen verteilt, damit das Team zwischen den Terminen am eigenen Fall arbeiten kann.</p><p>Reicht ein offenes Seminar Power BI, oder brauchen wir ein Training an unseren Daten?
+Für den ersten Kontakt mit dem Werkzeug reicht ein offenes Seminar. Sobald es um Ihren Monatsabschluss und um belastbare Zahlen geht, lernt Ihr Team schneller an genau dem Bericht, der heute den Abschluss aufhält.</p><p>Was sollte eine gute Schulung Power BI inhaltlich abdecken?
+Datenmodell und Sternschema, Kennzahlen als DAX-Measures, geplante und inkrementelle Aktualisierung sowie Row-Level Security. Fehlt einer dieser Bausteine, lernt Ihr Team das Bedienen, aber nicht das Bauen verlässlicher Berichte.</p><p>Brauchen wir eine Weiterbildung, wenn wir die Lizenzen schon haben?
+Die Lizenz zu besitzen ist der günstige Teil. Das verlässliche Modell, die vereinbarten Kennzahlen und die geprüften Berechtigungen sind die eigentliche Arbeit, und genau die vermittelt eine gute Weiterbildung.</p><p>Wie messen wir, ob sich die Weiterbildung gelohnt hat?
+An drei Dingen: Der Abschluss wird kürzer, der Vorstand sieht eine Umsatzzahl statt zwei, und Ihr Team ändert eine Kennzahl selbst, ohne einen Dienstleister zu rufen. Bleibt nach dem Kurs alles beim Alten, wurde am falschen Fall geübt.</p><p>Lohnt sich eine Weiterbildung auch für ein kleines Team?
+Gerade dann. In einem kleinen Team hängt der Abschluss oft an einer Person. Eine zweite Person, die das Modell versteht, nimmt Ihnen das Risiko, dass der Bericht bei einem Ausfall stillsteht.</p><p>Weiterlesen: unser Überblick zur [Power BI Weiterbildung und Enablement](/training), der Leitfaden zur sauberen [Power BI Einführung](/blog/power-bi-einführung) und die Fragen vor der Auswahl einer [BI Beratung](/blog/bi-beratung).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">power bi weiterbildung</span><span class="c">schulung power bi</span><span class="c">power bi seminar</span><span class="c">seminar power bi</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>
