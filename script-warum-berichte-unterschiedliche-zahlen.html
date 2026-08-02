@@ -1,0 +1,211 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Warum zeigen Berichte unterschiedliche Zahlen? Der wahre Gru</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p>[1:10-2:40] VALUE BEAT 1: Ist einer der beiden Berichte einfach falsch?
+CLAIM: SAJU: &quot;Meistens ist keiner der beiden falsch. Beide rechnen sauber, nur eben nach zwei verschiedenen Definitionen.&quot;
+(ON-SCREEN: Claim-Karte &quot;Beide Zahlen sind richtig. Das ist das Problem.&quot;)
+PROOF: (MODALITY: custom animation.)
+(ANIMATION: in der Mitte ein Wort, &quot;Umsatz&quot;. Von links kommt der Vertrieb und legt drei Regeln daneben, brutto, mit offenen Bestellungen, Datum der Bestellung. Von rechts kommt die Finanzabteilung und legt drei andere Regeln daneben, netto, nur bezahlte Rechnungen, Datum der Rechnung. Aus dem einen Wort &quot;Umsatz&quot; wachsen zwei getrennte Beträge heraus, 4,2 Millionen und 3,8 Millionen, beide mit einem grünen Haken. Farben: CaseWhen-Grün #1D967C, der Konflikt-Moment kurz in Amber.)
+SAJU (über der Animation): &quot;Nehmen Sie das Wort Umsatz. Rechnet der Vertrieb brutto oder netto? Zählen offene Bestellungen mit oder erst bezahlte Rechnungen? Zählt das Datum der Bestellung oder das der Rechnung? Jede dieser Entscheidungen ergibt eine andere Zahl, und jede ist für sich korrekt. Deshalb bringt es nichts, im Meeting zu fragen, welche Zahl stimmt. Beide stimmen. Es hat nur nie jemand festgelegt, welche die verbindliche ist. 94 Prozent der Unternehmen vermuten, dass in ihren Daten Fehler stecken. In vielen Fällen sind die Daten aber gar nicht falsch, sie sind nur unterschiedlich definiert.&quot;
+PAYOFF: (MODALITY: on-screen text.)
+(ON-SCREEN: nummerierte Karte &quot;Merksatz 1: Zwei Zahlen sind selten ein Rechenfehler. Es fehlt die verbindliche Definition.&quot; Darunter kleine Quellenzeile &quot;94 Prozent vermuten Fehler in ihren Daten. Quelle: Poon&quot;.)
+RE-HOOK: SAJU: &quot;Gut. Aber wenn beide recht haben, warum werden es dann mit der Zeit nicht zwei Zahlen, sondern zwölf?&quot;</p><p>[2:40-4:10] VALUE BEAT 2: Warum hat am Ende jede Abteilung ihre eigene Zahl?
+CLAIM: SAJU: &quot;Weil jede Abteilung ihre eigene Auswertung baut, sobald sie der zentralen nicht mehr traut.&quot;
+(ON-SCREEN: Claim-Karte &quot;Kein Vertrauen? Dann baut jeder seins.&quot;)
+PROOF: (MODALITY: screen-record.)
+(SCREEN-RECORD: eine Übersicht mit vielen fast gleich benannten Berichten, &quot;Umsatz Vertrieb&quot;, &quot;Umsatz Controlling final&quot;, &quot;Umsatz Q3 wirklich final&quot;, &quot;Umsatz Geschäftsführung&quot;. Der Cursor scrollt langsam durch eine lange Liste. Dann eine Suche nach &quot;Umsatz&quot;, die ein Dutzend Treffer zeigt. Zwei davon tragen ein rotes Warnsymbol.)
+SAJU: &quot;Das ist kein Extremfall, das ist der Normalzustand in fast jeder gewachsenen Firma. Die Finanzabteilung glaubt der Zahl aus dem Vertrieb nicht, also baut sie ihre eigene. Das Controlling glaubt beiden nicht, also kommt eine dritte dazu. Jede Version fühlt sich sicherer an, und in Summe wird alles unsicherer. 82 Prozent der Unternehmen sagen, dass Datensilos ihre Arbeitsabläufe stören. Das hier ist, wie ein Silo aussieht, wenn man es von oben anschaut: ein Dutzend Wahrheiten für ein Wort.&quot;
+PAYOFF: (MODALITY: on-screen text.)
+(ON-SCREEN: nummerierte Karte &quot;Merksatz 2: Fehlendes Vertrauen erzeugt Kopien. Kopien zerstören weiter Vertrauen.&quot; Quellenzeile &quot;82 Prozent: Silos stören die Abläufe. Quelle: ZoomInfo&quot;.)
+RE-HOOK: SAJU: &quot;Zwölf Versionen sind ärgerlich. Aber der wirkliche Schaden entsteht nicht in der Berichtsliste. Er entsteht in dem einen Raum, in dem entschieden wird.&quot;</p><p>[4:10-5:40] VALUE BEAT 3: Was kostet mich das im nächsten Vorstandsmeeting?
+CLAIM: SAJU: &quot;Der Preis ist nicht die doppelte Arbeit. Der Preis sind langsamere Entscheidungen und verlorene Glaubwürdigkeit.&quot;
+(ON-SCREEN: Claim-Karte &quot;Der teuerste Ort für zwei Zahlen ist der Vorstandstisch.&quot;)
+PROOF: (MODALITY: data-viz.)
+(DATA-VIZ: eine Vorher-Nachher-Waage. Links &quot;Meeting mit zwei Zahlen&quot;: ein Balken &quot;40 Minuten Diskussion, welche Zahl gilt&quot;, darunter &quot;0 Entscheidungen&quot;. Rechts &quot;Meeting mit einer Zahl&quot;: ein kurzer Balken &quot;5 Minuten&quot;, darunter &quot;Entscheidung getroffen&quot;. Dann blenden sich zwei weitere Zahlen ein: &quot;70 Prozent der Dashboard-Arbeit wird nie genutzt&quot; und &quot;Monatsabschluss: 8 Tage akzeptabel, unter 3 schaffen nur die Besten&quot;.)
+SAJU: &quot;Rechnen wir kurz durch, was das wirklich kostet. Erstens die Zeit im Raum: Ein halbes Vorstandsmeeting geht dafür drauf, welche Zahl gilt, statt zu entscheiden, was Sie tun. Zweitens der Abschluss: Solange sich die Zahlen widersprechen, zieht sich Ihr Monatsabschluss. Acht Tage gelten als akzeptabel, unter drei Tagen schaffen es nur die besten Teams, und der Unterschied ist fast immer eine saubere gemeinsame Zahl. Drittens die Wirkung: Rund 70 Prozent der ganzen Dashboard-Arbeit in Firmen wird am Ende nie genutzt, weil die Leute den Zahlen nicht trauen und wieder in Excel zurückgehen. Und viertens, das Teuerste, Ihre Glaubwürdigkeit. Wenn im Vorstand auffliegt, dass zwei Folien sich widersprechen, verlieren nicht die Zahlen an Vertrauen, sondern die Person, die sie vorträgt.&quot;
+PAYOFF: (MODALITY: on-screen text.)
+(ON-SCREEN: nummerierte Karte &quot;Merksatz 3: Zwei Zahlen kosten Sie Zeit, Tempo beim Abschluss und Glaubwürdigkeit.&quot; Quellenzeile &quot;70 Prozent der Dashboards ungenutzt (RevealBI) · Abschluss 8 vs unter 3 Tage (SolveXia)&quot;.)
+RE-HOOK: SAJU: &quot;Wenn das der Preis ist, dann ist die eigentliche Frage: Wie sieht denn die andere Seite aus? Wie arbeiten die Firmen, die genau eine Zahl haben?&quot;</p><p>[5:40-7:10] VALUE BEAT 4: Wie sieht eine Zahl aus, der alle vertrauen?
+CLAIM: SAJU: &quot;Die eine vertraute Zahl ist kein besseres Tool. Es ist eine Zahl, die einen Besitzer, eine Definition und eine Freigabe hat.&quot;
+(ON-SCREEN: Claim-Karte &quot;Eine vereinbarte Zahl: Besitzer, Definition, Freigabe.&quot;)
+PROOF: (MODALITY: custom animation.)
+(ANIMATION: dasselbe Wort &quot;Umsatz&quot; wie in Beat 1, aber diesmal bekommt es drei feste Etiketten angeheftet. Etikett eins, ein Gesicht, &quot;Besitzer: Leiterin Controlling&quot;. Etikett zwei, ein Dokument, &quot;Definition: netto, bezahlte Rechnungen, Rechnungsdatum&quot;. Etikett drei, ein grünes Siegel, &quot;Freigegeben&quot;. Sobald alle drei sitzen, laufen die vorher getrennten Beträge zu einer einzigen Zahl zusammen, und ein grünes Häkchen erscheint. Ein kleines Copilot-Symbol daneben greift auf genau diese eine Zahl zu.)
+SAJU (über der Animation): &quot;So sieht gut aus, und es ist weniger technisch, als Sie denken. Für jede wichtige Kennzahl gibt es drei Dinge. Erstens einen Besitzer, einen echten Menschen mit Namen, der für diese Zahl geradesteht. Zweitens eine Definition, einen Satz, der festlegt, was genau gezählt wird. Und drittens eine Freigabe, ein sichtbares Siegel, das sagt: Das hier ist die verbindliche Version, alle anderen sind nur Entwürfe. Firmen, die das haben, streiten im Meeting nicht mehr über die Zahl. Und, das wird gerade wichtig, auch die KI antwortet dann richtig. Ein Copilot oder ein Assistent greift auf die Zahl zu, die freigegeben ist. Gibt es keine freigegebene, dann rät er. Deshalb ist eine vereinbarte Zahl heute auch die Voraussetzung dafür, dass KI Ihnen im Unternehmen brauchbare Antworten gibt.&quot;
+PAYOFF: (MODALITY: on-screen text.)
+(ON-SCREEN: nummerierte Karte &quot;Merksatz 4: Gut heißt: pro Kennzahl ein Besitzer, eine Definition, eine Freigabe. Für Menschen und für KI dieselbe Zahl.&quot;)
+RE-HOOK: SAJU: &quot;Jetzt fragen Sie sich vielleicht: Schön, aber wer macht das eigentlich, und was kaufe ich da ein? Kurzer Blick unter die Haube, nur dieses eine Mal.&quot;</p><p>[7:10-8:40] VALUE BEAT 5: Was macht mein Team dahinter eigentlich?
+CLAIM: SAJU: &quot;Ganz kurz eine Ebene tiefer, damit Sie wissen, wofür Sie bezahlen. Danach geht&#x27;s wieder hoch.&quot;
+(ON-SCREEN: Claim-Karte &quot;Kurzer Blick unter die Haube.&quot;)
+PROOF: (MODALITY: screen-record mit ruhigem Erzähltempo.)
+(SCREEN-RECORD: eine Übersicht, in der aus einem Dutzend Berichten genau einer ein grünes &quot;Zertifiziert&quot;-Siegel bekommt. Auf diesem einen Bericht sind sichtbar: ein Besitzer-Name, eine kurze Beschreibung, ein Freigabe-Datum. Danach eine einfache Herkunftsansicht, in der eine Linie von der Quelle über eine Zwischenstufe bis zum Bericht läuft, damit man sieht, woher die Zahl kommt.)
+SAJU (langsamer, ruhiger Ton): &quot;Konkret macht ein gutes BI-Team drei Sachen. Es einigt sich mit Ihren Fachabteilungen auf die eine Definition und schreibt sie auf, das ist die eigentliche Arbeit und die dauert am längsten, weil es eine Entscheidung ist, keine Technik. Dann baut es genau ein zentrales Modell, in dem diese Definition fest verdrahtet ist, und gibt ihm ein sichtbares Siegel, damit jeder erkennt: Das ist die verbindliche Quelle. Und drittens sorgt es dafür, dass man nachvollziehen kann, woher jede Zahl kommt, von der Quelle bis zum Bericht. Das war der technische Teil, mehr müssen Sie davon nicht können. Genau diese drei Schritte macht CaseWhen für BI-Teams in Berlin und im deutschsprachigen Raum jede Woche, meist in einem Workshop, in dem Fachbereich und Datenteam gemeinsam am Tisch sitzen. Ihr Job als Führungskraft ist nicht, das zu bauen. Ihr Job ist, zu verlangen, dass es das gibt.&quot;
+PAYOFF: (MODALITY: on-screen text.)
+(ON-SCREEN: nummerierte Karte &quot;Merksatz 5: Dahinter stecken drei Schritte, Definition vereinbaren, ein Modell zertifizieren, Herkunft nachvollziehbar machen. Das lassen Sie machen, nicht selbst.&quot;)
+RE-HOOK: SAJU: &quot;Zurück auf Ihre Höhe. Sie müssen davon nichts bauen. Aber ab Montag können Sie etwas verlangen. Genau vier Dinge.&quot;</p><p>[8:40-10:20] WORKED EXAMPLE + REAL NUMBER + OPEN-LOOP PAYOFF
+(MODALITY: talking head mit B-Roll und eingeblendeter Data-Viz.)
+SAJU: &quot;Kurz ein echtes Beispiel. Ein mittelständisches Team, klassisch aufgestellt: drei Umsatz-Berichte, jede Woche Reibung im Führungskreis, und im Quartalsmeeting widersprechen sich zwei Folien. Wir haben keine neue Software gekauft. Wir haben mit Finanz und Vertrieb an einem Vormittag die Definition von Umsatz festgelegt, einen Bericht zur verbindlichen Quelle gemacht und die anderen beiden als Entwürfe markiert.&quot;
+(B-ROLL: Workshop-Situation, Menschen an einem Tisch, Haftnotizen auf einem Whiteboard mit drei Spalten, Besitzer, Definition, Freigabe.)
+(DATA-VIZ: Vorher-Nachher, links &quot;3 Umsatz-Zahlen · 40 Minuten Streit pro Meeting&quot;, rechts &quot;1 vereinbarte Zahl · Entscheidung in Minuten&quot;.)
+SAJU: &quot;Zur Einordnung, was das wert ist: Gartner beziffert schlechte Datenqualität auf durchschnittlich 12,9 Millionen Dollar pro Jahr und Unternehmen. Das ist der reale Preis von Zahlen, die sich widersprechen, auch wenn er nie auf einer Rechnung auftaucht.&quot;
+(ON-SCREEN: Statistik-Karte &quot;Schlechte Datenqualität: im Schnitt 12,9 Mio Dollar pro Jahr. Quelle: Gartner.&quot;)
+SAJU: &quot;Und jetzt der Punkt, den ich Ihnen am Anfang versprochen habe. Warum macht ein neues Tool das Problem oft schlimmer? Weil ein neues Tool nur einen weiteren Ort schafft, an dem jemand Umsatz noch einmal anders definiert. Solange die Definition nicht vereinbart ist, kaufen Sie sich mit jedem Tool eine dreizehnte Wahrheit dazu. Laut Precisely trauen 67 Prozent der Unternehmen ihren eigenen Zahlen nicht voll, und keine Software allein hat das je repariert. Das Problem sitzt vor dem Tool, in der Vereinbarung, wer welche Zahl wie definiert.&quot;
+(ON-SCREEN: Statistik-Karte &quot;67 Prozent trauen ihren Zahlen nicht voll. Quelle: Precisely.&quot;)</p><p>[10:20-10:55] PAYOFF: Recap, Ihr komplettes Rezept
+(MODALITY: kinetic type, Liste baut sich Zeile für Zeile auf.)
+SAJU: &quot;Fassen wir zusammen, das ist Ihr komplettes Rezept, auch wenn Sie uns nie kontaktieren.
+Erstens: Zwei Zahlen sind selten ein Rechenfehler, es fehlt die verbindliche Definition.
+Zweitens: Fehlendes Vertrauen erzeugt Kopien, Kopien zerstören weiter Vertrauen.
+Drittens: Der Preis sind langsamere Entscheidungen und Ihre Glaubwürdigkeit im Vorstand.
+Viertens: Gut heißt, pro Kennzahl ein Besitzer, eine Definition, eine Freigabe.
+Fünftens: Ein neues Tool repariert das nicht, die Vereinbarung darüber schon.&quot;
+(ON-SCREEN: die fünf Merksätze als nummerierte Liste, CaseWhen-Grün.)</p><p>[10:55-11:30] SOFT CTA: Wo fange ich an?
+(MODALITY: talking head mit Link-Karten.)
+SAJU: &quot;Wenn Sie wissen wollen, wo Ihre Berichte heute wirklich stehen: Unter dem Video liegt die kostenlose Governance und Cost Scorecard. Fünf Minuten, danach haben Sie einen Vergleich mit ähnlichen Firmen und Ihre drei größten Risiken schwarz auf weiß. Und wenn sich Ihre Zahlen danach immer noch widersprechen, buchen Sie mit uns ein kurzes Scoping-Gespräch. Kein Verkaufstermin, ein echtes Gespräch darüber, wie Sie zu einer vereinbarten Zahl kommen. Genau das machen wir bei CaseWhen jede Woche mit Teams im deutschsprachigen Raum. Bis dahin.&quot;
+(ON-SCREEN: Link-Karte 1 &quot;Kostenlose Governance und Cost Scorecard, 5 Minuten&quot;. Link-Karte 2 &quot;Scoping-Gespräch buchen&quot;. Karte 3 &quot;Als Nächstes: Was Datengovernance wirklich bringt&quot;.)</p><h2>Description
+Warum zeigen Berichte unterschiedliche Zahlen? Meistens ist keine der Zahlen falsch, es fehlt nur die verbindliche Definition. Dieses Video zeigt Führungskräften den wahren Grund und den geregelten Weg zu einer Zahl, der alle vertrauen.</h2><p>Kostenlose Governance und Cost Scorecard (5 Minuten): https://casewhen.co/scorecard
+Mit CaseWhen arbeiten (Scoping-Gespräch): https://casewhen.co/kontakt</p><p>Kapitel:
+0:00 Warum zeigen zwei Berichte unterschiedliche Zahlen?
+1:10 Ist einer der beiden Berichte einfach falsch?
+2:40 Warum hat am Ende jede Abteilung ihre eigene Zahl?
+4:10 Was kostet mich das im nächsten Vorstandsmeeting?
+5:40 Wie sieht eine Zahl aus, der alle vertrauen?
+7:10 Was macht mein Team dahinter eigentlich?
+8:40 Was mache ich als Führungskraft ab Montag?
+10:20 Wo fange ich an?</p><p>Ressourcen:
+- Governance und Cost Scorecard: https://casewhen.co/scorecard
+- Scoping-Gespräch buchen: https://casewhen.co/kontakt
+- Nächstes Video, Datengovernance erklärt: https://casewhen.co/datengovernance</p><p>In diesem Video erklärt Saju von CaseWhen für Controller, Head of Data und Geschäftsführung, warum sich Berichte widersprechen. Sie sehen, dass zwei unterschiedliche Zahlen meistens kein Rechenfehler sind, sondern zwei verschiedene Definitionen von zum Beispiel Umsatz, wie aus fehlendem Vertrauen ein Dutzend Kopien entstehen, was Sie das an Zeit, Abschlussdauer und Glaubwürdigkeit im Vorstand kostet, und wie eine vereinbarte Zahl mit Besitzer, Definition und Freigabe aussieht. Am Ende gibt es fünf konkrete Merksätze und den Grund, warum ein neues Tool das Problem oft schlimmer macht statt besser.</p><p>#PowerBI #Datengovernance #Controlling #MicrosoftFabric #BI</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

@@ -1,0 +1,228 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Microsoft Fabric: Do You Actually Need It, or Is Your Bill A</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Microsoft Fabric: Do You Actually Need It, or Is Your Bill About to Double?
+Host: Austin · Cluster: fabric · Target: 12 min · Primary keyword: microsoft fabric consulting</p><h2>Chapters
+- 0:00 Should I even turn Microsoft Fabric on?
+- 0:45 What is Fabric, and how is it different from Power BI?
+- 2:10 Why would turning it on double my bill?
+- 3:40 How can my reports go offline when the metrics look fine?
+- 5:10 When is Fabric worth the capacity spend?
+- 6:40 When should I stay on Power BI Pro instead?
+- 8:10 What&#x27;s the cheapest way to test Fabric first?
+- 10:20 So, do I need it or not?</h2><h2>Script</h2><p>[0:00-0:12] HOOK (contrarian) - talking head
+&quot;Most teams asking me about Microsoft Fabric should not turn it on yet. And the ones who flip it on too early watch a two hundred dollar Power BI bill turn into a five thousand dollar one. So before you touch that switch, let&#x27;s work out whether you&#x27;re one of the small group who needs it.&quot;
+(MODALITY: talking head, Austin blunt to camera, tight framing.)
+(ON-SCREEN: keyword card &quot;Microsoft Fabric&quot; bottom-third, brand green #1D967C. At &quot;five thousand dollar one,&quot; a number stamp punches in: $5,000.)
+(Visible change every 5-8s: cut to a second, closer angle on &quot;small group who needs it.&quot;)</p><p>[0:12-0:40] PROMISE + STAKES + OPEN LOOP - b-roll + on-screen text (Austin VO)
+&quot;By the end of this you&#x27;ll be able to tell, in about five minutes, whether Fabric is worth turning on for your team or whether it just adds cost you don&#x27;t need yet. I&#x27;ll show you where the price jumps, the four signs you&#x27;re ready, and the signs you should stay put. The stakes are real. Turn it on too early and you&#x27;re paying capacity rates for something a couple of Pro licenses could have carried. And later I&#x27;ll show you the one billing behavior that takes reports offline while your capacity metrics still look green. Most teams never spot it until users start complaining.&quot;
+(MODALITY: b-roll of a Fabric capacity dashboard over the shoulder, then kinetic promise text; Austin voiceover.)
+(ON-SCREEN: three promise chips animate in one at a time: &quot;Where the price jumps&quot; / &quot;4 signs you&#x27;re ready&quot; / &quot;The billing trap most teams miss.&quot;)
+(Credibility line, de-risking not bragging, talking head for one beat: &quot;We size Fabric capacity for BI teams every week, so this is the same checklist we&#x27;d walk you through.&quot;)
+(Hard cut into Beat 1, no throat-clearing.)</p><p>[0:45-2:10] VALUE BEAT 1 - &quot;What is Fabric, and how is it different from Power BI?&quot; - custom animation
+CLAIM (on-screen text card): &quot;Fabric is the platform. Power BI is one workload on it.&quot;
+&quot;Quick grounding, because this trips up almost everyone. Power BI is the reporting tool you already know. Fabric is the bigger platform underneath it, and Power BI is one part of that. Fabric bundles seven workloads: data movement, data engineering, a data warehouse, data science, real-time data, databases, and Power BI reporting. All seven sit on one store called OneLake. The point of putting them together is one copy of your data that every part can read. OneLake stores it once, in an open format, and each workload reads the same files. That&#x27;s the whole pitch: one store feeds many tools, and nothing gets copied between them.&quot;
+(MODALITY: custom animation.)
+(CUSTOM ANIMATION - OneLake + workloads: OneLake draws as a single flat store along the base. Seven labeled tiles dock onto it one by one: Data Factory, Data Engineering, Data Warehouse, Data Science, Real-Time Intelligence, Databases, Power BI. The Power BI tile lights brand green to mark it as just one of the seven. Then two workspace panels appear above and both drop an arrow onto the SAME file block inside OneLake, with a small &quot;1 copy, no duplicates&quot; label, to show the shortcut idea.)
+(Visible change every 5-8s: each workload tile is its own docking beat; the &quot;1 copy&quot; label pops last.)
+PAYOFF (numbered takeaway on-screen): &quot;Takeaway 1: You don&#x27;t choose Power BI or Fabric. Power BI comes inside Fabric. What you&#x27;re really deciding is whether you need the other six workloads.&quot;
+RE-HOOK: &quot;And that decision starts with money, because turning Fabric on changes how you pay. Let&#x27;s look at the jump.&quot;</p><p>[2:10-3:40] VALUE BEAT 2 - &quot;Why would turning it on double my bill?&quot; - data-viz
+CLAIM (on-screen text card): &quot;Fabric bills you for a block of capacity by the hour.&quot;
+&quot;Here&#x27;s where the money changes. Power BI Pro is per user, around fourteen dollars a month each. Premium Per User is around twenty four. With Fabric you rent a block of capacity instead, measured in something called an F-SKU: F2, F4, F8, and up. The smallest one, an F2, runs roughly two hundred and sixty dollars a month. That&#x27;s fine. The step people don&#x27;t budget for is F64. F64 is the size that lets unlimited viewers open your reports without their own license, so it&#x27;s the one bigger teams jump to. And an F64 on a one-year commitment lands around five thousand dollars a month. So the bill goes from a few per-user licenses to five thousand in one move. Same reports. Bigger invoice.&quot;
+(MODALITY: data-viz, animated step chart.)
+(DATA-VIZ: x-axis steps F2, F4, F8, F16, F32, F64; y-axis monthly cost climbing as bars grow left to right. A small green callout at the bottom reads &quot;F2 ~ $260/mo.&quot; A red marker lands on F64 labeled &quot;~$5,000/mo reserved, free viewers included.&quot; The jump from the per-user chips on the far left to the F64 bar is exaggerated for the eye.)
+(Visible change every 5-8s: each bar grows on its own beat; the red F64 marker snaps in last with a subtle shake.)
+PAYOFF (numbered takeaway on-screen): &quot;Takeaway 2: The Fabric price step to plan for is F64, around five thousand a month. Below that, per-user Pro or PPU is often cheaper. We&#x27;ll do the break-even in a minute.&quot;
+RE-HOOK: &quot;But the sticker price is only part of it. Capacity has a behavior that can take your reports offline, and the metrics won&#x27;t warn you first. That one&#x27;s worth your attention.&quot;</p><p>[3:40-5:10] VALUE BEAT 3 - &quot;How can my reports go offline when the metrics look fine?&quot; - screen-record
+CLAIM (on-screen text card): &quot;Fabric smooths your usage, then throttles you after the fact.&quot;
+&quot;This is the one that catches teams out. Fabric doesn&#x27;t bill each click the second it happens. It smooths your usage over time. A heavy report refresh gets spread out, so a big spike looks flat on the chart. That smoothing helps, right up until you&#x27;re over your capacity for long enough. Then Fabric starts throttling. First it adds a delay to interactive actions. Then it starts turning requests away. Your reports go slow, then they stop responding, and the person watching the metrics sees usage that looks under control, because the spike got smoothed into the past.&quot;
+(MODALITY: screen-record of the Microsoft Fabric Capacity Metrics app, then a short custom animation cut inside the beat.)
+(SCREEN-RECORD: open the Fabric Capacity Metrics app. Cursor over the CU usage ribbon, then the carryforward / overage bar, then the throttling panel with its three stages: interactive delay, interactive rejection, background rejection.)
+(CUSTOM ANIMATION - capacity throttling, cut in mid-beat: a CU meter fills as request tiles arrive. One tall spike gets spread sideways into a flat line to show smoothing. A running total creeps up and crosses a red capacity line. Once over the line, new request tiles queue up, then get bounced back tagged &quot;delayed,&quot; then &quot;rejected.&quot;)
+(Visible change every 5-8s: alternate between the real metrics app and the animated meter so the abstract idea lands on the concrete screen.)
+PAYOFF (numbered takeaway on-screen): &quot;Takeaway 3: If reports slow down for no clear reason, open the Fabric Capacity Metrics app and read throttling and carryforward, not just the live usage number. The live number can mislead you, because it&#x27;s already been smoothed.&quot;
+RE-HOOK: &quot;So Fabric costs more, and it needs watching. Which is exactly why the next question matters: when is it truly worth it?&quot;</p><p>[5:10-6:40] VALUE BEAT 4 - &quot;When is Fabric worth the capacity spend?&quot; - talking head + b-roll
+CLAIM (on-screen text card): &quot;Four signs Fabric is worth turning on.&quot;
+&quot;Here are the four signs you&#x27;re ready. One: you&#x27;re already stitching together separate Azure services. A pipeline tool here, a warehouse there, a lake somewhere else, and a lot of copying between them. Fabric puts those on one store, so that&#x27;s a real win for you. Two: you&#x27;ve got hundreds of people who only view reports. On per-user licensing every viewer costs money. At F64 those viewers are included, so past a couple hundred of them the capacity price starts to make sense. Three: you&#x27;re on old Power BI Premium, the P-SKUs. Microsoft is retiring those and moving everyone to Fabric F-SKUs, so your hand is being forced anyway. Better to plan it than get surprised. Four: you want Copilot and AI features running on your own data, governed in one place. That lives in Fabric. One thing worth knowing though: in the 2025 Data Integrity survey from Drexel LeBow and Precisely, only twelve percent of organizations said their data was good enough to use for AI. So turning the AI features on is one thing, trusting what they give back is another.&quot;
+(MODALITY: talking head, cutaways to b-roll.)
+(B-ROLL: a BI team at desks with the Azure portal and pipelines on screen; cut to a person clicking through a report as a plain viewer; cut to a wall calendar with a migration deadline circled; cut to a hand hovering a Copilot prompt box.)
+(ON-SCREEN: the twelve percent stat as a stamped card, cited &quot;Drexel LeBow + Precisely, 2025 Data Integrity survey.&quot;)
+(Visible change every 5-8s: each of the four signs gets its own numbered lower-third: 1, 2, 3, 4.)
+PAYOFF (numbered takeaway on-screen): &quot;Takeaway 4: If two or more of those four fit you, turning Fabric on is a defensible call. Just one, wait.&quot;
+RE-HOOK: &quot;But plenty of teams tick one box, or none, and get talked into it anyway. So let&#x27;s do the opposite list: when you should stay on Power BI Pro.&quot;</p><p>[6:40-8:10] VALUE BEAT 5 - &quot;When should I stay on Power BI Pro instead?&quot; - data-viz
+CLAIM (on-screen text card): &quot;Under about 200 users, per-user usually wins.&quot;
+&quot;Now the stay-put list. If you&#x27;ve got a small group of report authors and a handful of viewers, per-user licensing is far cheaper. Let&#x27;s do the rough math on screen. An F64 on a yearly commitment is about five thousand a month. Premium Per User is about twenty four dollars a month. Five thousand divided by twenty four is roughly two hundred and eight people. So under about two hundred users, per-user tends to win on price alone. Over that, capacity starts to pay off, especially with lots of view-only people. Second reason to stay put: you only need reports and dashboards, not the data engineering and warehouse pieces. If you&#x27;re never going to touch the other six workloads, you&#x27;re renting a platform to use one corner of it. Third: nobody on your team can watch capacity. Fabric needs someone reading that metrics app and right-sizing the SKU. No owner for that, and the bill drifts.&quot;
+(MODALITY: data-viz, break-even line chart.)
+(DATA-VIZ: x-axis = number of users, y-axis = monthly cost. Two lines draw in: PPU as a rising diagonal at $24 per user, F64 as a flat line at $5,000. They cross around 208 users. Shade the left region &quot;per-user cheaper,&quot; the right region &quot;capacity cheaper.&quot; Animate a marker onto the crossing point labeled &quot;~208 users.&quot;)
+(Visible change every 5-8s: PPU line draws first, F64 line second, the crossing marker snaps in third, the two shaded regions fill last.)
+PAYOFF (numbered takeaway on-screen): &quot;Takeaway 5: Do the break-even before you commit. Roughly: under two hundred users and view-only, stay on Pro or PPU. Over two hundred, or multiple workloads, Fabric earns its place.&quot;
+RE-HOOK: &quot;And if you&#x27;re still on the fence, you don&#x27;t have to guess. There&#x27;s a cheap way to test Fabric for real before you sign anything. Let me show you.&quot;</p><p>[8:10-10:20] WORKED EXAMPLE - &quot;What&#x27;s the cheapest way to test Fabric first?&quot; - screen-record
+CLAIM (on-screen text card): &quot;Test on an F2, and switch it off when you&#x27;re done.&quot;
+&quot;Here&#x27;s the cheap test. You don&#x27;t start at F64. You start at F2, the smallest capacity, about two hundred and sixty dollars a month at pay-as-you-go, and you only run it while you&#x27;re testing. Let me show you in the Azure portal. You create a Fabric capacity, pick F2, and set the billing to pay-as-you-go so there&#x27;s no yearly commitment. Then, and this is the part that saves the money, when nobody&#x27;s using it, you switch the capacity off. Billing stops while it&#x27;s off. Run your test workload for a few hours, watch the Capacity Metrics app, see how much you&#x27;re consuming, then power it down. There&#x27;s also a Fabric trial you can turn on for sixty days at no cost to kick the tyres first. Scale up only when the metrics tell you F2 is running out of room. Most teams find they can prove the value on an F2 or F4 and never need to gamble on an F64 up front.&quot;
+(MODALITY: screen-record of the Azure portal and the Fabric portal.)
+(SCREEN-RECORD: Azure portal, Create a resource, search &quot;Microsoft Fabric,&quot; pick capacity, choose F2, set billing to pay-as-you-go, deploy. Then on the capacity resource, cursor over the off toggle, the control that stops billing while the capacity is idle. Cut to the Fabric portal and show the 60-day trial banner. Finish on the Capacity Metrics app reading a low F2 number.)
+(Visible change every 5-8s: SKU picker, billing toggle, off toggle, trial banner, metrics read, each its own on-screen beat with a callout box.)
+PAYOFF (numbered takeaway on-screen): &quot;Takeaway 6: Prove Fabric on an F2 pay-as-you-go, switch it off between tests, and use the sixty-day trial. Never buy an F64 to find out whether you need one.&quot;
+RE-HOOK: &quot;So, put it all together. Do you need Microsoft Fabric or not?&quot;</p><p>[10:20-11:35] PAYOFF - recap + pay off the open loop - kinetic type
+(MODALITY: kinetic type recap list, then Austin talking head for the loop payoff.)
+(ON-SCREEN, &quot;Here&#x27;s the whole answer on one screen,&quot; six lines animate in one at a time:)
+&quot;1. Fabric is the platform. Power BI is one of its seven workloads on OneLake.
+2. The price step to plan for is F64, around five thousand a month.
+3. Smoothing hides spikes, then throttling takes reports offline. Watch the Capacity Metrics app.
+4. Turn it on if two or more fit: separate Azure services already, hundreds of viewers, P-SKU retirement, or Copilot on your data.
+5. Under about two hundred users and view-only, stay on Pro or PPU.
+6. Test on an F2 pay-as-you-go, switch it off between runs, use the sixty-day trial.&quot;
+(Talking head, slow single-shot delivery for the loop payoff, the one line that matters most:)
+&quot;And that billing behavior I flagged at the start, the one that takes reports offline while the metrics look green? That&#x27;s the smoothing-then-throttling pattern in point three. It&#x27;s the number one thing teams get caught by, so if you take one thing from this, take that.&quot;</p><p>[11:35-12:10] SOFT CTA - talking head
+&quot;If you want to run this yourself, we&#x27;ve put together a free Fabric readiness checklist. It walks the same signs and the same break-even math, and it&#x27;s linked below. Go through it, and if the answer comes back a maybe, that&#x27;s usually the moment to get a second pair of eyes. Sizing Fabric capacity and checking whether it&#x27;s worth turning on is exactly what we do at CaseWhen. Book a Fabric readiness and capacity check, the link&#x27;s in the description, no pitch, just a straight read on your setup. And if this helped, the next video does the full Pro versus Premium versus Fabric break-even in real numbers. That&#x27;s the one to watch next.&quot;
+(MODALITY: talking head, warm and low-pressure.)
+(ON-SCREEN: two link cards, &quot;Free Fabric readiness checklist&quot; then &quot;Book a Fabric readiness and capacity check.&quot; End card points to the Pro vs Premium vs Fabric video.)</p><h2>Description
+Microsoft Fabric consulting question we get most: do you actually need Fabric, or will turning it on double your bill? Here&#x27;s the honest answer in about twelve minutes.
+Free Fabric readiness checklist: https://casewhen.co/fabric-readiness-checklist
+Work with CaseWhen (Fabric readiness and capacity check): https://casewhen.co/contact</h2><p>Chapters:
+0:00 Should I even turn Microsoft Fabric on?
+0:45 What is Fabric, and how is it different from Power BI?
+2:10 Why would turning it on double my bill?
+3:40 How can my reports go offline when the metrics look fine?
+5:10 When is Fabric worth the capacity spend?
+6:40 When should I stay on Power BI Pro instead?
+8:10 What&#x27;s the cheapest way to test Fabric first?
+10:20 So, do I need it or not?</p><p>Resources:
+Fabric readiness checklist: https://casewhen.co/fabric-readiness-checklist
+Book a Fabric readiness and capacity check: https://casewhen.co/contact
+Watch next, Pro vs Premium vs Fabric break-even: https://casewhen.co/pro-premium-fabric</p><p>Microsoft Fabric bundles seven workloads on one store called OneLake, and Power BI is one of them. This video is a buyer&#x27;s take on whether Microsoft Fabric is worth turning on: where the price jumps from per-user Power BI Pro to F-SKU capacity, why the F64 tier lands around five thousand dollars a month, how Fabric capacity smoothing and throttling can take reports offline while the metrics look fine, the four signs Fabric is worth the capacity spend, when to stay on Power BI Pro or Premium Per User instead, and the cheapest way to test Fabric on an F2 capacity before you commit. If you&#x27;re weighing Microsoft Fabric consulting or a Fabric capacity decision, start with the readiness checklist and the break-even math above.</p><p>#MicrosoftFabric #PowerBI #FabricCapacity #DataPlatform #BIconsulting</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

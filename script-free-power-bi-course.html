@@ -1,0 +1,156 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Free Power BI Course: What You Really Get (and What You Don&#x27;</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p>[0:45-2:10] VALUE BEAT 1 - What can I do without paying anything?</p><p>CLAIM (on-screen card): &quot;Power BI Desktop is free forever. No trial, no clock.&quot;</p><p>&gt; &quot;Start with the software. Power BI Desktop is a free download from Microsoft. No trial, no clock counting down, no card on file. You install it on Windows and you get the full authoring tool, the same one paid users open. You can pull in data, clean it, build the model, write DAX measures, and design the whole report. On top of that, Microsoft Learn has official Power BI training for free, the same paths Microsoft uses to prep people for the exam. So the two things you need to start, the tool and the teaching, both cost nothing.&quot;</p><p>(MODALITY: screen-record - download Power BI Desktop from the Microsoft Store, open it, load the sample sales file, drag a chart onto the canvas, type one measure; then cut to the Microsoft Learn Power BI learning path page scrolling)
+(ON-SCREEN: takeaway 1 card - &quot;Building + training = free. Desktop covers everything up to Publish.&quot;)</p><p>PAYOFF: &quot;You can build a complete report on your own laptop for zero. Desktop plus Microsoft Learn covers everything up to the moment you press publish.&quot;</p><p>RE-HOOK: &quot;And that word, publish, is where it changes. The second another person needs to open your report, the free ride meets its first wall.&quot;</p><p>[2:10-3:45] VALUE BEAT 2 - Where does free start costing money?</p><p>CLAIM (on-screen card): &quot;Sharing a report needs a paid Pro seat, around $14 per user a month.&quot;</p><p>&gt; &quot;So, the line. Power BI is free to build with and free to view in your own workspace. Sharing is where it turns paid. The moment you publish a report and a colleague needs to open it, both of you need a Pro seat. Pro runs around fourteen dollars per user a month right now. If you need bigger data or more frequent refresh on your own, there&#x27;s Premium Per User at roughly twenty-four a month. Above that sits capacity, the Fabric and Premium tier, which is a much bigger commitment. For most people getting started, the number that matters is Pro, per person, on both sides of the report.&quot;</p><p>(MODALITY: custom animation - THE SHARING WALL. One figure authoring inside a green &quot;Free&quot; box, an arrow labelled &quot;Publish&quot; reaches toward a second figure, a wall drops down stamped &quot;Pro required&quot;. Then the animation pulls back into a LICENSE LADDER: Free ($0, build + own view) → Pro (~$14/user/mo, share) → Premium Per User (~$24/user/mo) → Capacity / Fabric (big step up). Each rung lights as it&#x27;s named.)
+(ON-SCREEN: takeaway 2 card - &quot;Free = build + your own view. Sharing starts at Pro, per person, both sides.&quot;)</p><p>PAYOFF: &quot;Free covers building and your own viewing. Sharing and teamwork start at Pro, so budget one paid seat for every person who opens the report, whoever built it.&quot;</p><p>RE-HOOK: &quot;Software sorted. Now the question I get more than any other. Is the certification free?&quot;</p><p>[3:45-5:15] VALUE BEAT 3 - Is the free certification real?</p><p>CLAIM (on-screen card): &quot;Study is free. The PL-300 exam is about $165, unless you catch a voucher event.&quot;</p><p>&gt; &quot;This one has a clean answer. Everything you study is free. Microsoft Learn gives you the full PL-300 path, the exam Microsoft uses for the Power BI Data Analyst certification, plus a free practice assessment that mirrors the real questions. What costs money is sitting the exam itself. PL-300 is around a hundred and sixty-five dollars. There are free and half-price vouchers going around, but they come through time-limited events, the Cloud Skills Challenge, or a Microsoft Virtual Training Day where finishing the session earns you a voucher. Those are real, they&#x27;re just not on tap.&quot;</p><p>(MODALITY: talking head to camera for the &quot;clean answer&quot; line, then custom animation - THE CERT PATH: four stops on a line, each with a price tag: Microsoft Learn path ($0) → free practice assessment ($0) → PL-300 exam ($165) → certification badge. A dotted branch labelled &quot;voucher event: time-limited&quot; loops back to the exam stop and flips its price to $0.)
+(MODALITY switch mid-beat: b-roll - a Microsoft Cloud Skills Challenge / Virtual Training Day registration page)
+(ON-SCREEN: takeaway 3 card - &quot;Study free. Budget the exam fee, or time a voucher event.&quot;)</p><p>PAYOFF: &quot;Study for free, and plan for the exam fee. Or time your booking to a Microsoft challenge or training day that hands one out.&quot;</p><p>RE-HOOK: &quot;And passing PL-300 shows you cleared an exam. Building a report a team can rely on is a separate skill, and we&#x27;ll come back to it. First, the Microsoft 365 question half of you are already typing.&quot;</p><p>[5:15-6:40] VALUE BEAT 4 - Is Power BI free with Microsoft 365?</p><p>CLAIM (on-screen card): &quot;Most Microsoft 365 plans do not include Power BI Pro. Only E5 bundles it.&quot;</p><p>&gt; &quot;This is the one people get wrong constantly. Paying for Microsoft 365 does not mean you have Power BI Pro. Most plans, Business Basic, Business Standard, even the common enterprise E3, give you the free Power BI license only. The plan that bundles Pro is E5, the top enterprise tier. So if your company runs on E3, and plenty do, nobody there can share a Power BI report until someone buys Pro seats.&quot;</p><p>(MODALITY: custom animation - THE M365 GRID. Five plan cards in a row: Business Basic, Business Standard, Business Premium, Enterprise E3, Enterprise E5. A &quot;Power BI Pro&quot; chip sits greyed-out on the first four with a small tag &quot;free license only, Pro sold separately&quot;, and lights up solid green only on E5.)
+(MODALITY switch: screen-record - the Microsoft 365 admin licensing view, filtering to show who has a Power BI Pro seat assigned)
+(ON-SCREEN: takeaway 4 card - &quot;Not on E5? You have the free license only. Pro is a separate line item.&quot;)</p><p>PAYOFF: &quot;Check your exact Microsoft 365 plan before you assume anything. If you&#x27;re not on E5, you have the free license, and Pro is a separate line on the bill.&quot;</p><p>RE-HOOK: &quot;Now you&#x27;ve got the tool, the training, and the licensing straight. So why do so many people still stall out after months of free tutorials? Because free content tends to teach one half of the job and skip the half that matters at work.&quot;</p><p>[6:40-8:20] VALUE BEAT 5 - Why do I keep hitting the same wall?</p><p>CLAIM (on-screen card): &quot;Free tutorials teach clicking. The thing that makes a report trustworthy is the model, and they skip it.&quot;</p><p>&gt; &quot;So why does the wall keep showing up? Most free tutorials walk you through clicking. Drag this field, pick that chart, change the color. That gets you a picture. What they skip is the part underneath, the data model, and that&#x27;s the part that decides whether your numbers are right. Think about how much rides on this. In one 2025 study from Drexel LeBow and Precisely, sixty-seven percent of organizations said they don&#x27;t fully trust the data they use to make decisions. A prettier chart doesn&#x27;t move that number. A correct model does. The model that fixes it is the star schema. One central fact table, with dimension tables around it, connected one-to-many. Get that shape right and your measures are simpler, your report is faster, and the totals reconcile.&quot;</p><p>(MODALITY: data-viz first - the 67% figure counts up on screen with the source line &quot;Drexel LeBow + Precisely, 2025 Data Integrity report&quot; underneath. Then custom animation - SKILL CEILING: a rising line labelled &quot;free tutorials&quot; climbs to a flat plateau marked &quot;make a chart&quot;; a dashed ceiling sits above it, and the space over the ceiling fills with the labels &quot;star schema, DAX, relationships, RLS, refresh&quot;. Then the STAR SCHEMA animation from the library: a central fact table, four dimension tables snapping into place around it, one-to-many arrows lighting up.)
+(ON-SCREEN: takeaway 5 card - &quot;Learn the model before the visuals. Star schema first.&quot;)</p><p>PAYOFF: &quot;Learn the data model before you touch visuals. A star schema and a few correct measures beat a hundred nicer-looking charts sitting on a messy model.&quot;</p><p>RE-HOOK: &quot;That ceiling is also the fix. So this is the free path that gets you somewhere.&quot;</p><p>[8:20-9:20] PAYOFF - recap + pay off the open loop</p><p>&gt; &quot;Quick recap. This is the whole free version, nothing left out. One, Power BI Desktop and Microsoft Learn are free, so building and training are covered. Two, sharing starts at Pro, around fourteen dollars a user a month, both sides of the report. Three, study for free but plan for the exam fee, or ride a voucher event. Four, only Microsoft 365 E5 includes Pro, so check your plan. Five, learn the model before the visuals. And the free order to learn it in, the part that saves you those six months: open Power BI Desktop with a small real dataset, learn Power Query to clean it, then build a star schema, then learn ten core DAX measures, then design the visuals last. Model first, pictures last. Do it in that order and free takes you a long way.&quot;</p><p>(MODALITY: kinetic type - the five takeaways stack up as a numbered list, then wipe to a five-step ordered path: Desktop → Power Query → star schema → DAX → visuals, with a &quot;model first, pictures last&quot; stamp)
+(ON-SCREEN: full recap list, then the ordered learning path)</p><p>[9:20-10:00] SOFT CTA - lead magnet, then &quot;we should talk&quot;</p><p>&gt; &quot;If you want that model-first path laid out step by step, there&#x27;s a free mini-lesson from our Foundations-to-Fabric course linked below. It&#x27;s the star schema build done properly, and it&#x27;s yours, no email gymnastics. If you&#x27;d rather go deeper, the full Foundations-to-Fabric course is there too, and for teams we run custom workshops where Microsoft co-funds the Copilot enablement. And if your team&#x27;s trying to get people off random tutorials and onto something that sticks, that&#x27;s the kind of thing we set up at CaseWhen every week, so the link&#x27;s in the description if you want to talk it through. Next up, if you want to see the model-first idea in action, watch the star schema build. Model first. Pictures last. See you there.&quot;</p><p>(MODALITY: talking head, warm and low-pressure, then two link cards)
+(ON-SCREEN: card 1 - &quot;Free mini-lesson: the star schema build&quot;; card 2 - &quot;Work with CaseWhen: team training + Copilot enablement&quot;; end screen - &quot;Watch next: Star schema, done properly&quot;)</p><h2>Description</h2><p>Everything in a free Power BI course, what you really get for zero, where it starts costing money, and the order to learn it in so you don&#x27;t waste six months.</p><p>Free mini-lesson (the star schema build): [link]
+Work with CaseWhen (team training + Copilot enablement, Microsoft co-funded): [link]</p><p>0:00 Is Power BI really free?
+0:45 What can I do without paying anything?
+2:10 Where does free start costing money?
+3:45 Is the free certification real?
+5:15 Is Power BI free with Microsoft 365?
+6:40 Why do I keep hitting the same wall?
+8:20 What&#x27;s the free path that works?
+9:20 Where do I go from here?</p><p>A free Power BI course gets you a long way. Power BI Desktop is a free download with no trial clock, Microsoft Learn covers the training, and there&#x27;s even a free PL-300 practice assessment. The cost shows up in three places: sharing a report needs a paid Pro seat at around fourteen dollars a user a month, the PL-300 exam runs about a hundred and sixty-five dollars unless you time a voucher event, and paying for Microsoft 365 only bundles Power BI Pro on the E5 plan. The bigger limit is what free tutorials teach. Most cover clicking and charts and skip the data model, which is the part that makes your numbers right. Learn the star schema first, then DAX, then visuals, and free Power BI training takes you further than most paid courses.</p><p>#PowerBI #MicrosoftFabric #PowerBITraining #PL300 #DataModeling</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

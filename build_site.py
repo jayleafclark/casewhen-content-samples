@@ -191,7 +191,7 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 """
 
 def nav(active):
-    items = [("index.html","Home"),("strategy.html","Strategy")] + [(f"{k}.html", v["title"]) for k, v in PLATFORMS.items()] + [("visuals.html","Visuals"),("seo.html","SEO"),("funnels.html","Funnels")]
+    items = [("index.html","Home"),("strategy.html","Strategy")] + [(f"{k}.html", v["title"]) for k, v in PLATFORMS.items()] + [("youtube.html","YouTube"),("visuals.html","Visuals"),("seo.html","SEO"),("funnels.html","Funnels")]
     return "".join(f'<a href="{h}" class="{"on" if h==active else ""}">{esc(t)}</a>' for h, t in items)
 
 def shell(active, title, inner):
@@ -1763,6 +1763,29 @@ def blog_articles_and_grid():
     (OUT / "blog.html").write_text(shell("blog.html", "Blog", f"<style>{ARTCSS}</style>{grid}"), encoding="utf-8")
     return len(files)
 
+LFDIR = Path(r"J:\Claude Code\casewhen-research\content\w-longform-scripts")
+LFCSS = ".lfgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}.lfcard{display:block;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px 20px;text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s}.lfcard:hover{border-color:var(--dark);transform:translateY(-2px)}.lfl{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--dark);border-radius:6px;padding:2px 8px}.lft{display:block;margin-top:10px;font-weight:650;line-height:1.3;font-size:16px}"
+def longform_page():
+    files = sorted(LFDIR.glob("**/*.md")) if LFDIR.exists() else []
+    cards = []
+    for f in files:
+        md = f.read_text(encoding="utf-8")
+        m = re.search(r'^#\s+(.+)$', md, re.M)
+        title = (m.group(1).strip() if m else f.stem)
+        lang = "DE" if "\\DE\\" in str(f) or "/DE/" in str(f) else "EN"
+        art = md_to_html(md)
+        inner = (f'<section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">\u2190 all scripts</a></div></section>'
+                 f'<div class="wrap article-wrap">{art}</div>')
+        (OUT / f"script-{f.stem}.html").write_text(shell(f"script-{f.stem}.html", title[:60], f"<style>{ARTCSS}</style>{inner}"), encoding="utf-8")
+        cards.append(f'<a class="lfcard" href="script-{f.stem}.html"><span class="lfl">{lang}</span><span class="lft">{esc(title)}</span></a>')
+    grid = (f'<section class="ph"><div class="wrap"><div class="eb">YouTube \u00b7 long-form</div>'
+            f'<h2>{len(files)} full video scripts, gated</h2>'
+            f'<p style="color:var(--mut);font-size:15px;margin:10px 0 0">8 to 15 minute talking-head scripts, Austin in English and Saju in German, buyer-first. '
+            f'Click any to read the full script with chapters, beats, b-roll notes and the CTA. Highlight any line to leave a note.</p></div></section>'
+            f'<div class="wrap"><div class="lfgrid">{"".join(cards)}</div></div>')
+    (OUT / "youtube.html").write_text(shell("youtube.html", "YouTube", f"<style>{ARTCSS}{LFCSS}</style>{grid}"), encoding="utf-8")
+    return len(files)
+
 def home():
     cards = ""
     for k, cfg in PLATFORMS.items():
@@ -1844,6 +1867,8 @@ tot = don = 0
 for k, cfg in PLATFORMS.items():
     n, d = platform_page(k, cfg); tot += n; don += d
 nblogs = blog_articles_and_grid()   # overwrite blog.html with the full-article grid
+nlf = longform_page()
+print(f"long-form scripts: {nlf}")
 print(f"blog articles assembled: {nblogs}")
 print(f"built index + {len(PLATFORMS)} platform pages · {tot} slots scheduled · {don} finished/gated")
 for k, cfg in PLATFORMS.items():

@@ -1,0 +1,233 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · KPI-Dashboard in Power BI bauen: von der leeren Datei zum fe</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># KPI-Dashboard in Power BI bauen: von der leeren Datei zum fertigen Board in 13 Minuten
+Host: Saju · Cluster: KPI · Target: 15 min · Primary keyword: kpi dashboard</p><h2>Chapters
+- 0:00 Warum öffnet morgens niemand mein KPI-Dashboard?
+- 1:00 Was macht eine Zahl überhaupt zu einem KPI?
+- 2:20 Wie müssen die Daten aussehen, bevor ich baue?
+- 3:55 Welche drei Zahlen gehören wirklich aufs Board?
+- 5:20 Wie schreibe ich die Kennzahl, damit sie überall stimmt?
+- 7:00 Wie baue ich ein Layout, das eine Entscheidung trägt?
+- 8:45 Warum sehen zwei Leute im selben Haus zwei verschiedene Zahlen?
+- 10:30 Wie teile ich das Board sicher, und was mache ich am Montag?</h2><h2>Script</h2><p>[0:00-0:12] HOOK (style = 3-second payoff demo)
+Spoken (Saju): &quot;Dieses KPI-Dashboard hier hat genau drei Zahlen. Nicht dreißig. Und genau deshalb öffnet es morgen früh wirklich jemand.&quot;
+(MODALITY: screen-record) Kalter Schnitt direkt auf das fertige Board. Cursor klickt einen Slicer, alle drei Kacheln aktualisieren live in unter einer Sekunde. Kein Intro, kein Logo zuerst.
+(ON-SCREEN: Keyword-Card unten links &quot;KPI-Dashboard&quot;, Marke #1D967C.)</p><p>[0:12-0:40] PROMISE + STAKES + OPEN LOOP
+Spoken (Saju): &quot;In den nächsten 13 Minuten bauen wir das von der leeren Datei bis zum fertigen Board zusammen: sauberes Datenmodell, drei belastbare Kennzahlen, ein Layout, das eine Entscheidung trägt. Die meisten Boards scheitern nicht an der Optik. Sie scheitern daran, dass zwei Leute dieselbe Frage stellen und zwei verschiedene Zahlen zurückbekommen. Am Ende zeige ich Ihnen die eine Stelle im Modell, die fast jedes Team überspringt und die genau das verursacht. Wir machen das jede Woche mit BI-Teams in Berlin, deshalb überspringen wir das Rätselraten.&quot;
+(MODALITY: talking head) Saju frontal, ruhig. Zoom-Punch auf das Wort &quot;drei&quot; bei 0:22. Kurze B-Roll-Einblende: leere Power-BI-Datei, blinkender Cursor.
+(ON-SCREEN: Promise-Text als Drei-Punkt-Liste: &quot;1 Modell · 2 Kennzahlen · 3 Layout&quot;.)</p><p>[0:40 CHAPTER CARD: &quot;Was macht eine Zahl überhaupt zu einem KPI?&quot;]</p><p>[VALUE BEAT 1 · 1:00-2:20]
+CLAIM (Spoken): &quot;Eine Kennzahl ist erst dann ein KPI, wenn sie vier Bausteine hat. Fehlt einer, ist es nur eine Metrik auf einer Kachel.&quot;
+(ON-SCREEN: Claim-Card &quot;KPI = 4 Bausteine&quot;.)
+PROOF (MODALITY: animation) Custom-Animation: Vier Blöcke rasten nacheinander ineinander und bilden eine KPI-Kachel.
+- Block 1 &quot;Zahl&quot;: der aktuelle Wert, zum Beispiel Umsatz 1,24 Mio Euro.
+- Block 2 &quot;Bezug&quot;: der Vergleich, gegen den die Zahl gelesen wird, zum Beispiel Vormonat oder Plan. Der Block zeichnet einen kleinen Pfeil neben die Zahl.
+- Block 3 &quot;Ziel&quot;: die Zielmarke. Eine gestrichelte Linie legt sich über die Zahl, darunter erscheint &quot;Ziel 1,30 Mio&quot;.
+- Block 4 &quot;Verantwortlicher&quot;: ein kleines Namensfeld dockt an die Kachel an, &quot;Owner: Vertrieb&quot;.
+Nach dem vierten Block leuchtet die ganze Kachel in #1D967C auf, die Metrik ist jetzt ein KPI.
+PAYOFF (Spoken): &quot;Also, Takeaway eins: Bevor Sie irgendetwas bauen, schreiben Sie zu jeder Kennzahl den Bezug, das Ziel und den Verantwortlichen dazu. Eine Zahl ohne Ziel sagt niemandem, ob heute ein guter Tag war.&quot;
+(ON-SCREEN: nummerierter Takeaway 1 &quot;Bezug + Ziel + Owner, sonst ist es keine Entscheidung&quot;.)
+RE-HOOK (Spoken): &quot;Diese vier Bausteine tragen aber nur, wenn die Daten darunter stimmen. Und genau da geht es bei den meisten schon schief.&quot;</p><p>[2:20 CHAPTER CARD: &quot;Wie müssen die Daten aussehen, bevor ich baue?&quot;]</p><p>[VALUE BEAT 2 · 2:20-3:55]
+CLAIM (Spoken): &quot;Bevor die erste Kachel entsteht, muss das Datenmodell ein Sternschema sein. Eine flache Riesentabelle ist der häufigste Grund, warum ein Board langsam wird und die Zahlen wandern.&quot;
+(ON-SCREEN: Claim-Card &quot;Erst das Modell, dann das Board&quot;.)
+PROOF (MODALITY: screen-record) Power BI Desktop, Modellansicht. Saju importiert eine flache Excel-Tabelle, in der Umsatz, Kunde, Produkt und Datum alle in einer Tabelle stehen. Cursor-Hervorhebung auf die doppelten Kundennamen.
+Dann Cut auf die Custom-Animation Sternschema: In der Mitte die Faktentabelle &quot;Verkäufe&quot;. Von aussen rasten drei Dimensionstabellen ein, Datum, Kunde, Produkt. Bei jedem Einrasten leuchtet ein Eins-zu-viele-Pfeil auf und zeigt in Richtung Faktentabelle. Kurzer Callout: &quot;1 Zeile pro Verkauf, jede Beschreibung nur einmal.&quot;
+Zurück zum Screen-Record: Saju baut in der Datumstabelle eine echte Kalendertabelle und markiert sie als Datumstabelle.
+PAYOFF (Spoken): &quot;Takeaway zwei: Eine Faktentabelle in der Mitte, beschreibende Tabellen aussen, dazu eine eigene Datumstabelle. Damit rechnen Ihre Kennzahlen später schnell, und ein Filter wirkt überall gleich.&quot;
+(ON-SCREEN: nummerierter Takeaway 2 &quot;Sternschema + eigene Datumstabelle&quot;.)
+RE-HOOK (Spoken): &quot;Das Modell steht. Jetzt kommt die Frage, an der die meisten Boards zu voll werden: Welche Zahlen dürfen überhaupt drauf?&quot;</p><p>[3:55 CHAPTER CARD: &quot;Welche drei Zahlen gehören wirklich aufs Board?&quot;]</p><p>[VALUE BEAT 3 · 3:55-5:20]
+CLAIM (Spoken): &quot;Ein gutes KPI-Dashboard zeigt drei bis fünf Zahlen, nicht dreissig. Jede Kachel muss eine Entscheidung auslösen können, sonst fliegt sie raus.&quot;
+(ON-SCREEN: Claim-Card &quot;3 Entscheidungen, nicht 30 Kacheln&quot;.)
+PROOF (MODALITY: talking head) Saju erklärt den Test direkt in die Kamera, dazwischen B-Roll: jemand steht früh am Schreibtisch, öffnet den Laptop, überfliegt ein Board, klappt es zu.
+Saju: &quot;Ich stelle bei jeder Kennzahl genau eine Frage: Wenn diese Zahl heute rot ist, was tut die Person dann anders? Gibt es keine Antwort, ist es Deko. Für unser Beispiel nehme ich drei: Umsatz gegen Plan, offene Angebote, und Auftragseingang pro Woche. Alle drei lösen morgen früh eine echte Handlung aus.&quot;
+Kurze Kinetik-Einblende der drei gewählten KPIs als Liste, der Rest einer langen Kennzahlenliste wird ausgegraut.
+PAYOFF (Spoken): &quot;Takeaway drei: Nehmen Sie nur Zahlen aufs Board, auf die jemand reagieren würde. Der Rest gehört in einen Detailbericht, nicht auf die erste Seite.&quot;
+(ON-SCREEN: nummerierter Takeaway 3 &quot;Wenn rot, was tut die Person? Keine Antwort, keine Kachel.&quot;)
+RE-HOOK (Spoken): &quot;Drei Zahlen sind gewählt. Jetzt schreiben wir sie so, dass sie in jedem Bericht dieselben bleiben.&quot;</p><p>[5:20 CHAPTER CARD: &quot;Wie schreibe ich die Kennzahl, damit sie überall stimmt?&quot;]</p><p>[VALUE BEAT 4 · 5:20-7:00]
+CLAIM (Spoken): &quot;Kennzahlen gehören als Measure ins Modell, nicht als berechnete Spalte und schon gar nicht pro Bericht neu getippt.&quot;
+(ON-SCREEN: Claim-Card &quot;Measure, nicht berechnete Spalte&quot;.)
+PROOF (MODALITY: screen-record) Power BI, DAX-Ansicht. Saju baut Schritt für Schritt, jede Zeile erscheint als Callout am Bildschirmrand:
+- Basis-Measure: `Umsatz = SUM(Verkäufe[Betrag])`.
+- Darauf aufbauend die Abweichung: `Umsatz vs Plan = [Umsatz] - [Planwert]`.
+- Und die Prozent-Variante mit `DIVIDE`, damit eine Null im Nenner keinen Fehler wirft: `Umsatz % Plan = DIVIDE([Umsatz vs Plan], [Planwert])`.
+Cursor-Hervorhebung darauf, dass die höheren Measures das Basis-Measure wiederverwenden. Kurzer Zoom-Punch, als das Prozentergebnis auf der Kachel erscheint und live auf einen Slicer reagiert.
+PAYOFF (Spoken): &quot;Takeaway vier: Bauen Sie ein Basis-Measure und leiten Sie alles andere daraus ab. Ändert sich die Logik, ändern Sie sie an einer Stelle, und jede Kachel zieht mit.&quot;
+(ON-SCREEN: nummerierter Takeaway 4 &quot;Ein Basis-Measure, alles andere darauf aufgebaut&quot;.)
+RE-HOOK (Spoken): &quot;Die Zahlen stimmen jetzt. Ob jemand sie in drei Sekunden liest, entscheidet das Layout. Da hat fast jedes Board denselben Fehler.&quot;</p><p>[7:00 CHAPTER CARD: &quot;Wie baue ich ein Layout, das eine Entscheidung trägt?&quot;]</p><p>[VALUE BEAT 5 · 7:00-8:45]
+CLAIM (Spoken): &quot;Das Auge liest oben links zuerst. Dorthin gehört die wichtigste Zahl, nicht das Firmenlogo.&quot;
+(ON-SCREEN: Claim-Card &quot;Wichtigste Zahl: oben links&quot;.)
+PROOF (MODALITY: data-viz) Animiertes Layout-Raster über der leeren Berichtsseite. Ein Blickpfad zeichnet sich als Linie ein: oben links starten die drei KPI-Kacheln nebeneinander, darunter der Verlauf über die Zeit, ganz unten die Detailtabelle. Neben jeder KPI-Kachel erscheint der Bezug: aktueller Wert gross, darunter klein &quot;gegen Plan&quot; mit Pfeil in #1D967C bei über Ziel und in Terra bei unter Ziel.
+Dann Cut auf ein Vorher-Nachher: links ein überladenes Board mit zwölf bunten Kacheln, rechts dasselbe reduziert auf drei KPIs plus einen Verlauf. Ein Timer blendet ein: &quot;Zeit bis zur ersten Entscheidung: 9 Sekunden gegen 2 Sekunden.&quot;
+PAYOFF (Spoken): &quot;Takeaway fünf: Ordnen Sie das Board nach Blickpfad. Oben links die Entscheidungszahl mit ihrem Ziel daneben, darunter der Trend, ganz unten die Details für alle, die nachfragen.&quot;
+(ON-SCREEN: nummerierter Takeaway 5 &quot;Blickpfad oben links, Ziel neben jede Zahl&quot;.)
+RE-HOOK (Spoken): &quot;Das Board sieht jetzt gut aus. Trotzdem ist der teuerste Fehler noch drin, und den sieht man erst, wenn zwei Leute dieselbe Zahl aufmachen.&quot;</p><p>[8:45 CHAPTER CARD: &quot;Warum sehen zwei Leute im selben Haus zwei verschiedene Zahlen?&quot;]</p><p>[VALUE BEAT 6 · 8:45-10:30]  (pays off the 0:30 open loop)
+CLAIM (Spoken): &quot;Die eine Stelle, die fast jedes Team überspringt: Die Kennzahl darf nur einmal existieren, in einem geteilten semantischen Modell. Baut jeder Bericht seine eigene Version, driften die Zahlen auseinander.&quot;
+(ON-SCREEN: Claim-Card &quot;Eine Kennzahl, ein geteiltes Modell&quot;.)
+PROOF (MODALITY: animation) Custom-Animation &quot;Die eine Zahl&quot;:
+- Links das semantische Modell als ein Kasten, darin das Measure &quot;Umsatz&quot;.
+- Rechts drei Berichte, Vertrieb, Finanzen, Geschäftsführung. In der falschen Variante zieht jeder Bericht seine eigene Kopie des Measures heraus, die Kopien färben sich leicht unterschiedlich ein, und drei verschiedene Zahlen erscheinen: 1,24 Mio, 1,19 Mio, 1,31 Mio. Ein rotes Fragezeichen blinkt in der Mitte.
+- Dann der Fix: Die drei Kopien lösen sich auf, alle drei Berichte greifen mit einem Pfeil auf dasselbe Measure im geteilten Modell zu. Alle drei Zahlen springen auf denselben Wert, 1,24 Mio. Das Modell bekommt ein kleines Häkchen-Siegel &quot;als zertifiziert markiert&quot;.
+Kurze Einblende der belegten Zahl: laut Drexel LeBow und Precisely, 2025, vertrauen 67 Prozent der Organisationen den eigenen Zahlen für Entscheidungen nicht. Genau hier fängt das an.
+PAYOFF (Spoken): &quot;Takeaway sechs, und das ist die Stelle aus dem Anfang: Definieren Sie jede KPI genau einmal im geteilten Modell und markieren Sie es als zertifiziert. Dann bekommen Vertrieb, Finanzen und Geschäftsführung dieselbe Zahl, ohne dass es jemand nachrechnen muss. Und wenn morgen Copilot dieselbe Frage stellt, bekommt auch die KI die eine richtige Zahl.&quot;
+(ON-SCREEN: nummerierter Takeaway 6 &quot;Jede KPI einmal definieren, Modell zertifizieren&quot;.)
+RE-HOOK (Spoken): &quot;Damit ist das Board fertig und die Zahlen sind wasserdicht. Bleibt die Frage, wie Sie es teilen, ohne dass am Ende jeder eine eigene Kopie hat.&quot;</p><p>[10:30 CHAPTER CARD: &quot;Wie teile ich das Board sicher, und was mache ich am Montag?&quot;]</p><p>[PAYOFF + WORKED RECAP · 10:30-12:30]
+(MODALITY: screen-record) Saju veröffentlicht das Board in einen App-Arbeitsbereich, setzt Leserechte auf eine Gruppe statt auf einzelne Personen und zeigt kurz, wie das zertifizierte Modell als vertrauenswürdige Quelle erscheint, wenn ein Kollege einen neuen Bericht startet.
+(MODALITY: b-roll) Kurze Szene: derselbe Mensch vom Anfang öffnet morgens den Laptop, sieht die drei Kacheln, nickt, greift zum Telefon. Das Board hat eine Handlung ausgelöst.
+Spoken (Saju): &quot;Kurz zusammengefasst, damit Sie das ganze Board heute Nachmittag selbst bauen können.&quot;
+(MODALITY: on-screen text / kinetic type) Recap-Liste, alle sechs Takeaways erscheinen nacheinander:
+1. Bezug, Ziel und Verantwortlichen zu jeder Zahl, sonst ist es keine Entscheidung.
+2. Sternschema mit eigener Datumstabelle, bevor Sie bauen.
+3. Nur Zahlen aufs Board, auf die jemand reagieren würde.
+4. Ein Basis-Measure, alles andere darauf aufgebaut.
+5. Blickpfad oben links, das Ziel neben jede Zahl.
+6. Jede KPI einmal im geteilten Modell definieren und zertifizieren.
+Spoken (Saju): &quot;Wenn Sie diese sechs Punkte abhaken, haben Sie kein Deko-Dashboard, sondern eines, das jemand morgens wirklich öffnet, und drei Zahlen, denen im ganzen Haus geglaubt wird.&quot;</p><p>[SOFT CTA · 12:30-13:30]
+(MODALITY: talking head) Saju ruhig, direkt in die Kamera.
+Spoken (Saju): &quot;Ich habe die sechs Punkte als 20-Punkte-Checkliste zum Modell-Review aufgeschrieben, mit der Sie Ihr eigenes Board Kachel für Kachel durchgehen. Der Link steht unten, kostenlos, ohne Haken. Und wenn Ihre Zahlen sich zwischen zwei Berichten immer noch nicht decken, dann ist genau das unsere Arbeit bei CaseWhen: ein Modell- und KPI-Review, damit Ihr Team und später auch Copilot dieselbe eine Zahl zurückbekommen. Der Link dafür steht auch unten, kein Verkaufsgespräch, einfach ein Gespräch. Im nächsten Video bauen wir das Sternschema von null auf, falls Sie da noch unsicher sind.&quot;
+(ON-SCREEN: zwei Link-Cards, &quot;Kostenlose 20-Punkte Modell-Review-Checkliste&quot; und &quot;Modell- und KPI-Review mit CaseWhen&quot;. Darunter dezent: nächstes Video &quot;Sternschema in Power BI&quot;.)</p><h2>Description
+KPI-Dashboard in Power BI bauen: sauberes Datenmodell, drei belastbare Kennzahlen und ein Layout, das eine Entscheidung trägt, von der leeren Datei bis zum fertigen Board.</h2><p>Kostenlose 20-Punkte Modell-Review-Checkliste: [Link]
+Mit CaseWhen arbeiten (Modell- und KPI-Review): [Link]</p><p>0:00 Warum öffnet morgens niemand mein KPI-Dashboard?
+1:00 Was macht eine Zahl überhaupt zu einem KPI?
+2:20 Wie müssen die Daten aussehen, bevor ich baue?
+3:55 Welche drei Zahlen gehören wirklich aufs Board?
+5:20 Wie schreibe ich die Kennzahl, damit sie überall stimmt?
+7:00 Wie baue ich ein Layout, das eine Entscheidung trägt?
+8:45 Warum sehen zwei Leute im selben Haus zwei verschiedene Zahlen?
+10:30 Wie teile ich das Board sicher, und was mache ich am Montag?</p><p>Ressourcen:
+- 20-Punkte Modell-Review-Checkliste (kostenloser Download): [Link]
+- Nächstes Video, Sternschema in Power BI: [Link]</p><p>In diesem Video bauen wir ein KPI-Dashboard in Power BI von Grund auf. Sie sehen, wie ein KPI aus vier Bausteinen entsteht, warum ein Sternschema mit eigener Datumstabelle die Grundlage für jede Kennzahl ist, wie Sie mit einem Basis-Measure in DAX rechnen, wie ein Layout nach Blickpfad eine Entscheidung in Sekunden trägt und warum jede KPI nur einmal in einem geteilten, zertifizierten semantischen Modell existieren sollte, damit alle im Haus dieselbe Zahl sehen. Am Ende haben Sie ein Board, das jemand morgens wirklich öffnet.</p><p>#PowerBI #KPIDashboard #MicrosoftFabric #DataGovernance #BusinessIntelligence</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

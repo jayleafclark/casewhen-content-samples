@@ -1,0 +1,218 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Star Schema vs Snowflake Schema: Make Power BI Stop Crawling</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Star Schema vs Snowflake Schema: Make Power BI Stop Crawling (Full Build)
+Host: Austin · Cluster: modeling-kpi · Target: 14 min · Primary keyword: snowflake schema</p><h2>Chapters
+- 0:00 Why is my Power BI report so slow?
+- 0:45 What&#x27;s eating my memory on refresh?
+- 2:15 What is a star schema, and why is it faster?
+- 4:00 Star schema vs snowflake: which do I build?
+- 5:45 How do I turn my flat table into a star schema?
+- 7:45 Which relationships and keys do I set up?
+- 9:30 How do I check the model is really faster?
+- 11:15 What do I do Monday morning?</h2><h2>Script</h2><p>[0:00-0:12] HOOK - contrarian
+(MODALITY: talking head)
+(ON-SCREEN: keyword card &quot;SNOWFLAKE SCHEMA vs STAR SCHEMA&quot;)
+Spoken: &quot;More RAM won&#x27;t fix a slow Power BI report. A snowflake schema, or worse, one giant flat table, is a big reason your model crawls, and moving to a star schema can take a refresh from several minutes down to seconds on the same data.&quot;
+(VISIBLE CHANGE ~5s: hard zoom-punch on Austin as he says &quot;won&#x27;t fix&quot;, then cut to a 1-second glimpse of a report re-rendering instantly.)</p><p>[0:12-0:45] PROMISE + STAKES + OPEN LOOP
+(MODALITY: data-viz)
+(ON-SCREEN: before/after bars - &quot;Refresh: 24 min → 40 sec&quot; and &quot;Model: 1.4 GB → 260 MB&quot;; then the stat card &quot;$12.9M / year - avg cost of poor data quality (Gartner)&quot;)
+Spoken: &quot;By the end of this you&#x27;ll be able to take a slow, bloated Power BI model and rebuild it as a star schema that refreshes faster and uses far less memory, and you&#x27;ll know exactly why it works. The cost of leaving it is real. Refreshes that run for 20 or 30 minutes, reports that time out in front of the exec who asked for them, and analysts who stop trusting the numbers. Gartner puts the average cost of poor data quality at 12.9 million dollars a year, and a lot of that starts with a model nobody can refresh or reconcile. We rebuild models like this for BI teams in Berlin most weeks, so the next 14 minutes are the same steps we&#x27;d run on your file. And near the end I&#x27;ll show you one checkbox in Power BI that&#x27;s been adding hidden date tables to your model and inflating its size, and how to switch it off.&quot;
+(VISIBLE CHANGE ~6s: the bars animate in one at a time; the Gartner card slides up last; hard cut into Beat 1, no throat-clearing.)</p><p>[0:45-2:15] VALUE BEAT 1 - What&#x27;s eating my memory on refresh?
+(MODALITY: custom animation)
+(ON-SCREEN CLAIM CARD: &quot;A flat table blows up because every column repeats.&quot;)
+Spoken: &quot;Here&#x27;s what happens on refresh. Power BI has to load the model into memory, and during a refresh it keeps the old copy while it builds the new one, so for a moment it needs close to twice the size of your data in RAM. If your whole report is one wide flat table, with the customer name, region, product, and category repeated on every single row, that table is huge, and doubling it is what tips you over into an out-of-memory refresh. The storage engine compresses columns, and it compresses far better when a column has a few repeated values than when it&#x27;s long unique text stretched across millions of rows.&quot;
+(CUSTOM ANIMATION spec: one wide flat table, columns showing the same customer and region text repeating down millions of rows. A memory bar on the right fills as the table loads, then a second faded copy of the table appears beside it during refresh and the bar crosses a red capacity line. Model shape in brand color #1D967C; the capacity-line warning is the only amber element.)
+(ON-SCREEN TAKEAWAY CARD: &quot;1 - Out of memory? Shrink the model before you buy hardware. The shrink is a star schema.&quot;)
+Spoken (payoff): &quot;Takeaway one. If your refresh runs out of memory, shrink the model before you buy hardware. The shrink is a star schema.&quot;
+Re-hook: &quot;So what does that smaller shape look like. That&#x27;s the next chapter.&quot;</p><p>[2:15-4:00] VALUE BEAT 2 - What is a star schema, and why is it faster?
+(MODALITY: screen-record - Power BI Desktop, Model view)
+(ON-SCREEN CLAIM CARD: &quot;A star schema is one fact table surrounded by dimension tables.&quot;)
+Spoken: &quot;Open the model view in Power BI Desktop and this is the shape you want. In the middle, one fact table. That&#x27;s your events, the things that happen over and over, like sales order lines, each row a transaction with its numbers and a few ID columns. Around it, separate dimension tables for the things you filter and group by. A customer table, a product table, a date table, a region table. Each dimension lists every item once, with a short ID, and the fact table just points at that ID instead of repeating the full text. Sales drops from a hundred columns of repeated text to a narrow table of numbers and IDs, and the descriptions live once in the dimensions. That&#x27;s why it compresses smaller and scans faster.&quot;
+(SCREEN-RECORD spec: drag Sales into the center; drag Customer, Product, Date, Region out to the corners; cursor moves to the Sales table as it shrinks from 100 columns to 8 as text columns are removed; lower-third label &quot;FACT&quot; on Sales, &quot;DIMENSION&quot; on each outer table.)
+(ON-SCREEN TAKEAWAY CARD: &quot;2 - One fact table for events, separate dimensions for what you slice by.&quot;)
+Spoken (payoff): &quot;Takeaway two. One fact table for the events you measure, separate dimension tables for the things you slice by. That is a star schema.&quot;
+Re-hook: &quot;Now, if one fact table with a set of dimensions is the target, where does snowflake come in, and is it ever worth it.&quot;</p><p>[4:00-5:45] VALUE BEAT 3 - Star schema vs snowflake: which do I build?
+(MODALITY: custom animation)
+(ON-SCREEN CLAIM CARD: &quot;Snowflake splits one dimension into several joined tables.&quot;)
+Spoken: &quot;A snowflake schema takes a dimension and normalizes it further. Instead of one product table, you get product, then a separate product subcategory table, then a category table, each linked to the next. It saves a tiny bit of space and it matches how a source database is often built. The cost shows up at query time. Every filter now travels through more joins to reach the fact table, and in Power BI those extra relationships usually make the model harder to read and a little slower, for savings you won&#x27;t notice. For most Power BI reports, combine those chains back into one flat dimension. Keep product, subcategory, and category as columns in a single product table. Stop at star. The one time snowflake earns its place is when a sub-table is very large and shared by several facts, or when a dimension has millions of rows you don&#x27;t want duplicated. Short of that, star wins.&quot;
+(CUSTOM ANIMATION spec: a single Product dimension splits apart into Product → Subcategory → Category, three tables chained by join arrows; a small filter dot has to hop through all three arrows to reach the fact table, visibly slower; then the three tables fold back into one Product box and the dot reaches the fact table in a single hop. Brand color #1D967C; the extra join arrows flash amber as friction, not as an accent.)
+(ON-SCREEN TAKEAWAY CARD: &quot;3 - Stop at star. Only snowflake a very large, shared dimension.&quot;)
+Spoken (payoff): &quot;Takeaway three. Stop at a star schema. Only snowflake a dimension when the sub-table is very large and reused across several fact tables.&quot;
+Re-hook: &quot;Fine, the target&#x27;s clear. Next is the part people skip. Turning the flat table you already have into that shape.&quot;</p><p>[5:45-7:45] VALUE BEAT 4 - How do I turn my flat table into a star schema?
+(MODALITY: screen-record - Power Query editor)
+(ON-SCREEN CLAIM CARD: &quot;Build dimensions from your flat table with reference queries.&quot;)
+Spoken: &quot;Here&#x27;s the build in Power Query. Start from your one flat table. Right-click it and choose reference, so you get a query that points at the same source. Rename it Customer. Keep only the customer columns, then remove duplicate rows so you&#x27;re left with one row per customer. Do the same for product and region. Each reference becomes a clean dimension. Now give every dimension a short ID column if it doesn&#x27;t have one. The fact table keeps the numbers and the ID columns, and you remove the long text columns from it, because those now live in the dimensions. Load it all, and in model view you&#x27;ll see the fact table in the middle with dimensions around it. That&#x27;s the star, built from data you already had.&quot;
+(SCREEN-RECORD spec: right-click the flat query, click Reference; rename to Customer; remove columns down to customer fields; Home → Remove Rows → Remove Duplicates; repeat quick-cut for Product and Region; back on the fact query, multi-select and delete the text columns; Close &amp; Apply; cut to Model view resolving into a star. Callout box each time a dimension row count drops from millions to a few thousand.)
+(ON-SCREEN TAKEAWAY CARD: &quot;4 - Reference query → remove duplicates → strip text out of the fact table.&quot;)
+Spoken (payoff): &quot;Takeaway four. Build each dimension as a reference query, remove duplicates down to one row per item, and strip the repeated text columns out of the fact table.&quot;
+Re-hook: &quot;The tables are there. They do nothing until you connect them properly, and this is where a lot of models leak or slow down.&quot;</p><p>[7:45-9:30] VALUE BEAT 5 - Which relationships and keys do I set up?
+(MODALITY: custom animation)
+(ON-SCREEN CLAIM CARD: &quot;Connect each dimension one-to-many, single direction.&quot;)
+Spoken: &quot;In model view, drag the ID from each dimension onto the matching ID in the fact table. You want a one-to-many relationship, the one side on the dimension, the many side on the fact table, and the filter direction set to single, so the dimension filters the fact and not the other way around. Leave bi-directional off unless you have a specific reason, because it&#x27;s slower and it can produce ambiguous results. Match on an integer ID where you can, because integers compress and scan faster than text. Once every dimension is joined like this, a filter on the customer table flows straight down into sales, and every measure you write reads cleaner and runs faster. This shape is also what Copilot and any AI feature needs to return one correct number, because it can follow the relationships instead of guessing.&quot;
+(CUSTOM ANIMATION spec: an ID column lifts out of the Customer table and drops onto CustomerID in the fact table; a &quot;1&quot; badge lights on the dimension end, a &quot;many&quot; badge on the fact end; the filter arrow points one way only (dimension → fact). A user clicks a customer and the filter cascades down into the fact rows. A ghosted bi-directional arrow appears, turns amber, and is switched off. Brand color #1D967C throughout.)
+(ON-SCREEN TAKEAWAY CARD: &quot;5 - One-to-many, single-direction filter, on an integer ID.&quot;)
+Spoken (payoff): &quot;Takeaway five. Join each dimension to the fact table one-to-many, single-direction filter, on an integer ID.&quot;
+Re-hook: &quot;Model&#x27;s built. Does it move any faster than before. Time to measure it, and to pay off that checkbox I promised.&quot;</p><p>[9:30-11:15] How do I check the model is really faster?
+(MODALITY: screen-record + data-viz)
+(ON-SCREEN CLAIM CARD: &quot;Measure it with Performance Analyzer and the model size.&quot;)
+Spoken: &quot;Don&#x27;t take my word for it, measure. In Power BI Desktop open the optimize ribbon and turn on Performance Analyzer, then refresh the visuals and read the timings before and after your rebuild. Check the model size too. Save the file and look at how much smaller the star version is on disk, or use a free tool like DAX Studio to read the VertiPaq stats and see which columns eat the most memory. On a real rebuild you&#x27;ll usually watch a refresh that ran for many minutes finish in a fraction of the time, on the same data, because the model got smaller and the joins got simpler. And here&#x27;s the checkbox I promised. Go to options, data load, and turn off Auto date/time. Left on, Power BI creates a hidden date table behind every single date column in your model, and each one inflates the file. Turn it off, then build one proper date table and connect it to the fact table like any other dimension. On models with a lot of date fields, that one setting alone can cut the size by a noticeable chunk.&quot;
+(SCREEN-RECORD spec: Performance Analyzer panel, Start recording, Refresh visuals, timings pop; split-screen the before run and after run. Then Options → Data Load → uncheck &quot;Auto date/time&quot;. DATA-VIZ overlay: two paired bars, refresh time and file size, both dropping, animated left to right.)
+(ON-SCREEN CALLOUT: &quot;Open-loop paid: Auto date/time was building a hidden date table per date column.&quot;)
+Forward line: &quot;That&#x27;s the measurement. Now the version you can act on today.&quot;</p><p>[11:15-14:00] PAYOFF RECAP + SOFT CTA
+(MODALITY: talking head)
+(ON-SCREEN RECAP LIST, kinetic type, one line at a time:
+1 - Out of memory? Shrink first. The shrink is a star schema.
+2 - One fact table for events, separate dimensions for what you filter by.
+3 - Stop at star. Only snowflake a very large, shared dimension.
+4 - Reference query, remove duplicates, strip text from the fact table.
+5 - One-to-many, single direction, integer ID.
++ Turn off Auto date/time, add one real date table.)
+Spoken (recap - give the full win away): &quot;So here&#x27;s the whole win on one screen. One, if your refresh runs out of memory, shrink the model first, and the shrink is a star schema. Two, one fact table for events, separate dimension tables for what you filter by. Three, stop at star, and only snowflake a very large, shared dimension. Four, build dimensions as reference queries, remove duplicates, and strip repeated text out of the fact table. Five, join them one-to-many, single direction, on an integer ID. And turn off Auto date/time, then add one real date table. Do those on your slowest report this week and it&#x27;ll refresh faster by Monday, on the same laptop.&quot;
+(SOFT CTA - lead magnet, then &quot;we should talk&quot;)
+(ON-SCREEN LINK CARDS: &quot;Free: 20-Point Power BI Model Review Checklist + this build&#x27;s .pbix&quot; / &quot;Work with CaseWhen: semantic-model &amp; AI-readiness review&quot;)
+Spoken: &quot;If you want the full checklist, I&#x27;ve put our 20-Point Power BI Model Review Checklist in the description. It&#x27;s the same list we run through when we audit a client&#x27;s model, free, no email gymnastics. The .pbix from this build is there too, so you can pull the tables apart yourself. And if your numbers still won&#x27;t reconcile once the model&#x27;s clean, that&#x27;s exactly what we do at CaseWhen, semantic-model and AI-readiness reviews for BI teams in Berlin. There&#x27;s a link in the description, no pitch, just a conversation. If you want the licensing side of this, watch the Power BI Pro vs Premium vs Fabric break-even video next for the sizing thresholds in real numbers. That&#x27;s it. Go make something slow fast.&quot;</p><h2>Description
+Star schema vs snowflake schema in Power BI: why your model crawls on refresh and how to rebuild it as a star schema that&#x27;s smaller and faster.</h2><p>Free 20-Point Power BI Model Review Checklist + the .pbix from this build: https://casewhen.co/model-review-checklist
+Work with CaseWhen (semantic-model &amp; AI-readiness review): https://casewhen.co/contact</p><p>0:00 Why is my Power BI report so slow?
+0:45 What&#x27;s eating my memory on refresh?
+2:15 What is a star schema, and why is it faster?
+4:00 Star schema vs snowflake: which do I build?
+5:45 How do I turn my flat table into a star schema?
+7:45 Which relationships and keys do I set up?
+9:30 How do I check the model is really faster?
+11:15 What do I do Monday morning?</p><p>A star schema is one fact table surrounded by dimension tables, and it&#x27;s the fastest shape for a Power BI model. In this full build we look at why a flat table or a snowflake schema makes refresh slow and memory-heavy, how a star schema compresses smaller, how to split a flat table into dimensions with reference queries in Power Query, how to set one-to-many single-direction relationships on integer IDs, and how to measure the before and after with Performance Analyzer and DAX Studio. We also turn off Auto date/time to shrink the model. If your Power BI refresh runs out of memory or your numbers won&#x27;t reconcile, the fix usually starts with the data model.</p><p>#PowerBI #StarSchema #DataModeling #SnowflakeSchema #MicrosoftFabric</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

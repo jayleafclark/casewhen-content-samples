@@ -1,0 +1,209 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Warum Ihre Power BI Aktualisierung so langsam ist (in 12 Min</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Warum Ihre Power BI Aktualisierung so langsam ist (in 12 Minuten erklärt)
+Host: Saju · Cluster: Reliability · Target: 12 min · Primary keyword: power bi aktualisierung langsam</p><h2>Chapters
+- 0:00 Warum wird meine Power BI Aktualisierung immer langsamer?
+- 0:40 Was passiert beim Aktualisieren eigentlich im Speicher?
+- 2:15 Warum rechnet Power Query alles auf meinem Rechner statt an der Quelle?
+- 3:50 Warum lädt mein Dataflow bei jeder Aktualisierung alles neu?
+- 5:25 Wie lade ich nur die neuen Daten statt aller Jahre?
+- 7:00 Warum macht ein flaches Datenmodell die Aktualisierung schwerer?
+- 8:35 Wie finde ich heraus, was genau meine Aktualisierung bremst?
+- 10:20 Was mache ich damit ab morgen früh?</h2><h2>Script</h2><p>[0:00-0:12] HOOK (contrarian)
+SAJU: &quot;Mehr Arbeitsspeicher und eine größere Kapazität machen Ihre Power BI Aktualisierung fast nie schneller. Bei den meisten Modellen sitzt der Engpass in ein paar Schritten, die ablaufen, lange bevor eine einzige Zeile im Speicher ankommt. Einer davon heißt Query Folding, und den sieht kaum jemand.&quot;
+(MODALITY: talking head)
+(ON-SCREEN: Karte &quot;power bi aktualisierung langsam&quot;)
+(B-ROLL/ANIM: harter Schnitt auf einen laufenden Ladebalken im Power BI Service, Zeitanzeige tickt hoch. Nach 4 Sek. Cursor-Hervorhebung springt auf die Dauer im Aktualisierungsverlauf.)</p><p>[0:12-0:40] PROMISE + STAKES + OPEN LOOP
+SAJU: &quot;In den nächsten zwölf Minuten zeige ich Ihnen genau, was eine Power BI Aktualisierung langsam macht, und wie Sie in Ihrem eigenen Modell herausfinden, welcher Schritt die Zeit kostet. Solange das ungeklärt bleibt, warten Ihre Leute morgens auf Zahlen, die längst da sein sollten, und irgendwann traut niemand mehr dem Bericht. Eine einzige Einstellung kostet dabei am meisten Zeit, und fast kein Team findet sie von allein. Die kommt in der Mitte. Wir machen das für BI-Teams in Berlin jede Woche, deshalb gehen wir die echten Bremsen jetzt der Reihe nach durch.&quot;
+(MODALITY: b-roll)
+(ON-SCREEN: kurze Texteinblendung &quot;Was bremst die Aktualisierung wirklich?&quot;)
+(B-ROLL/ANIM: ruhige Büroaufnahme, jemand starrt morgens auf ein Dashboard mit Ladesymbol. Alle 6 Sek. neuer Winkel: Hände am Kaffee, Uhr an der Wand, dann Schnitt zu Sajus Gesicht für den Satz zur Einstellung.)</p><p>[0:40-2:15] VALUE BEAT 1: der Speicher
+CLAIM (10 Sek., Textkarte): &quot;Der Import lädt beim Aktualisieren das ganze Modell noch einmal in den Speicher.&quot;
+SAJU: &quot;Im Import-Modus liegt Ihr Modell komprimiert im Speicher. Beim Aktualisieren baut Power BI die Daten neu auf, und dafür braucht es kurzzeitig ungefähr das Doppelte an Arbeitsspeicher, weil die alte und die neue Fassung eine Zeit lang gleichzeitig existieren. Ist Ihr Modell zehn Gigabyte groß, sind das im Moment der Aktualisierung schnell zwanzig. Reicht der Speicher nicht, wird ausgelagert, und ab da wird jeder Durchlauf zäh.&quot;
+(MODALITY: screen-record)
+(PROOF/DEMO: Bildschirmaufnahme in Power BI Desktop, dann im Service. Task-Manager oder Kapazitäts-Metriken zeigen den Speicher, der beim Start der Aktualisierung hochspringt und wieder abfällt. Alle 5 bis 8 Sek. ein Zoom-Punch auf die Speicherkurve, dann Cursor-Hervorhebung auf den Peak.)
+PAYOFF (Takeaway 1, on-screen): &quot;Nehmen Sie ins Modell nur die Spalten und Zeilen, die ein Bericht wirklich zeigt. Jede Spalte, die niemand ansieht, zahlen Sie bei jeder Aktualisierung mit Speicher und mit Zeit.&quot;
+RE-HOOK: &quot;Nur: selbst ein schlankes Modell kann kriechen, wenn der nächste Schritt schiefläuft.&quot;</p><p>[2:15-3:50] VALUE BEAT 2: Query Folding
+CLAIM (Textkarte): &quot;Ohne Query Folding rechnet Power Query Ihre Daten auf Ihrem Rechner statt an der Quelle.&quot;
+SAJU: &quot;Query Folding heißt: Power Query übersetzt Ihre Schritte in eine Abfrage, die die Datenbank selbst ausführt. Die Quelle filtert, gruppiert und sortiert, und schickt nur das Ergebnis zurück. Bricht die Faltung ab, dreht sich das um. Power Query zieht die kompletten Rohdaten und rechnet alles lokal nach. Genau das kommt, sobald ein Schritt drin steht, den die Quelle nicht übersetzen kann, zum Beispiel bestimmte benutzerdefinierte Spalten oder ein Zusammenführen über zwei verschiedene Quellen.&quot;
+(MODALITY: animation)
+(PROOF/DEMO, CUSTOM ANIMATION: links ein Kasten &quot;Quelle&quot;, rechts ein Kasten &quot;Power Query&quot;. Bei aktiver Faltung fließt ein dünner Pfeil mit der Beschriftung &quot;nur das Ergebnis&quot; von der Quelle nach rechts, die Quelle leuchtet in #1D967C. Dann bricht ein Schritt die Faltung: der dünne Pfeil wird zu einem dicken Strom &quot;alle Rohdaten&quot;, das Rechnen wandert sichtbar nach rechts auf den Power-Query-Kasten, der sich rot-orange füllt. Beschriftung &quot;Native Abfrage anzeigen: ausgegraut&quot; blendet ein. Alle 6 Sek. eine Zustandsänderung.)
+PAYOFF (Takeaway 2, on-screen): &quot;Prüfen Sie im Editor per Rechtsklick auf einen Schritt, ob &#x27;Native Abfrage anzeigen&#x27; noch aktiv ist. Ist es ausgegraut, ist ab dort die Faltung weg. Schieben Sie schwere Filter so weit nach oben wie möglich, damit sie noch gefaltet werden.&quot;
+RE-HOOK: &quot;Damit läuft die Abfrage schlank. Und trotzdem lädt bei vielen Teams jeder Durchlauf alles neu, wegen der Einstellung, die ich am Anfang angeteasert habe.&quot;</p><p>[3:50-5:25] VALUE BEAT 3: der Dataflow, der alles neu zieht
+CLAIM (Textkarte): &quot;Ein Dataset an einem Dataflow importiert bei jeder Aktualisierung den kompletten Dataflow neu.&quot;
+SAJU: &quot;Viele Teams bauen einen Dataflow für die Aufbereitung und hängen das Modell dann daran. Solange Sie nichts anderes einstellen, holt sich das Modell bei jeder einzelnen Aktualisierung den gesamten Dataflow, auch die Jahre, die sich nie wieder ändern. Das ist die Einstellung, die am meisten Zeit kostet, und von außen sieht man sie nicht, weil ja alles läuft, nur eben langsam.&quot;
+(MODALITY: screen-record)
+(PROOF/DEMO: Bildschirmaufnahme des Aktualisierungsverlaufs im Service, eine Reihe von Läufen mit Dauern über 40 Minuten. Cursor-Hervorhebung fährt die immer gleichen langen Dauern ab. Dann Schnitt in die Einstellungen des Dataflows, Zoom-Punch auf die Option, alle 5 bis 7 Sek. eine sichtbare Änderung.)
+PAYOFF (Takeaway 3, on-screen): &quot;Trennen Sie die Aufbereitung von der Historie. Alles, was einmal fertig ist, muss nicht jede Nacht neu durch den Dataflow. Das war die Einstellung aus dem Teaser, und sie führt direkt zur nächsten Bremse.&quot;
+RE-HOOK: &quot;Denn wenn Sie schon dabei sind, die Menge zu senken, gibt es einen Weg, der fast alles Alte in Ruhe lässt.&quot;</p><p>[5:25-7:00] VALUE BEAT 4: inkrementelle Aktualisierung
+CLAIM (Textkarte): &quot;Ohne inkrementelle Aktualisierung lädt Power BI jedes Mal alle Jahre neu.&quot;
+SAJU: &quot;Die meisten Daten von gestern ändern sich nie wieder. Trotzdem lädt eine normale Aktualisierung die kompletten fünf Jahre bei jedem Durchlauf. Mit inkrementeller Aktualisierung teilen Sie die Tabelle nach Datum in Bereiche auf. Power BI aktualisiert nur die jüngsten Bereiche, sagen wir die letzten zehn Tage, und lässt den ganzen Rest in Ruhe. Aus einer Aktualisierung über Millionen Zeilen wird eine über ein paar Tausend.&quot;
+(MODALITY: animation)
+(PROOF/DEMO, CUSTOM ANIMATION: eine lange Faktentabelle, die in Datumsblöcke zerfällt, ein Block pro Jahr, davor die letzten Tage als schmale Streifen. Bei der Aktualisierung leuchtet nur der jüngste schmale Streifen in #1D967C und verarbeitet sich sichtbar neu, alle Archivblöcke bleiben grau und still. Beschriftung &quot;RangeStart / RangeEnd&quot; und &quot;nur die letzten 10 Tage&quot; blenden ein. Alle 6 Sek. neue Bewegung.)
+PAYOFF (Takeaway 4, on-screen): &quot;Setzen Sie inkrementelle Aktualisierung auf jede große Faktentabelle mit einer Datumsspalte. Sie brauchen zwei Parameter, RangeStart und RangeEnd, und einen Datumsfilter, der sich falten lässt. Die Regel: nur laden, was sich seit dem letzten Lauf geändert hat.&quot;
+RE-HOOK: &quot;Das reduziert die Menge. Beim letzten Punkt geht&#x27;s darum, wie gut sich das, was übrig bleibt, überhaupt komprimieren lässt.&quot;</p><p>[7:00-8:35] VALUE BEAT 5: flaches Modell und hohe Kardinalität
+CLAIM (Textkarte): &quot;Eine breite flache Tabelle komprimiert schlechter und macht jede Aktualisierung schwerer.&quot;
+SAJU: &quot;Power BI komprimiert spaltenweise. Eine Spalte mit wenigen wiederkehrenden Werten wird winzig, eine Spalte mit Millionen unterschiedlicher Werte bleibt riesig. Der häufigste Übeltäter ist ein Zeitstempel mit Sekunden. Trennen Sie Datum und Uhrzeit, und die Größe geht sofort runter. Und wenn Sie alles in eine breite Tabelle packen, wiederholen Sie dieselben Textwerte millionenfach. Ein Sternschema mit schlanken Dimensionstabellen speichert jeden Wert einmal, und der Rest verweist nur darauf.&quot;
+(MODALITY: data-viz)
+(PROOF/DEMO, DATA-VIZ + ANIM: erst ein Balkendiagramm der Spaltengrößen, ein riesiger Balken &quot;Zeitstempel mit Sekunden&quot;, der sich beim Runden auf Minuten sichtbar halbiert (animierter Vorher/Nachher-Wert). Dann fährt eine Sternschema-Animation ein: eine Faktentabelle in der Mitte, Dimensionstabellen schnappen mit Eins-zu-viele-Pfeilen an, die Pfeile leuchten in #1D967C auf. Alle 5 bis 8 Sek. eine sichtbare Änderung.)
+PAYOFF (Takeaway 5, on-screen): &quot;Werfen Sie hohe Kardinalität raus, wo Sie sie nicht brauchen. Sekunden runden, Textspalten in Dimensionen auslagern, unnötige Nachkommastellen kürzen. Ein sauberes Sternschema ist die Grundlage, auf der alles andere schnell wird.&quot;
+RE-HOOK: &quot;Fünf Bremsen kennen Sie jetzt. Bleibt die Frage, welche davon in Ihrem Modell zuschlägt.&quot;</p><p>[8:35-10:20] WORKED EXAMPLE: die Reihenfolge zum Messen
+SAJU: &quot;Raten Sie nicht, messen Sie, und zwar in dieser Reihenfolge. Erstens: der Aktualisierungsverlauf im Service. Er zeigt Ihnen, ob es überhaupt der Refresh ist und welcher Datenfluss lange braucht. Zweitens: im Power Query Editor per Rechtsklick prüfen, wo die Faltung abbricht. Drittens: der VertiPaq Analyzer in DAX Studio. Der zeigt Ihnen pro Spalte, was Speicher belegt, und die Übeltäter stehen ganz oben. Damit haben Sie in einer Viertelstunde eine sortierte Liste, was Ihre Aktualisierung bremst, statt einer Vermutung.&quot;
+(MODALITY: screen-record)
+(PROOF/DEMO: drei kurze Bildschirmaufnahmen hintereinander. 1) Aktualisierungsverlauf mit langen Dauern, Cursor-Hervorhebung auf den längsten Schritt. 2) Rechtsklick im Editor, &quot;Native Abfrage anzeigen&quot; ausgegraut. 3) VertiPaq Analyzer, Spalten nach Größe sortiert, oberste Zeile hervorgehoben. Dazwischen kurze B-Roll von Saju am Schreibtisch, der auf den zweiten Monitor zeigt. Alle 6 Sek. ein Schnitt.)
+(ON-SCREEN: Karte &quot;Verlauf → Faltung → VertiPaq&quot;)</p><p>[10:20-11:30] PAYOFF: Rückblick und offene Schleife
+SAJU: &quot;Also, das ist der ganze Gewinn, auch wenn Sie nie mit uns sprechen. Erstens: nur laden, was ein Bericht zeigt, sonst zahlen Sie den Speicher doppelt. Zweitens: Faltung prüfen, damit die Quelle rechnet und nicht Ihr Rechner. Drittens: die Aufbereitung von der Historie trennen, damit der Dataflow nicht jede Nacht alles neu zieht. Das war die Einstellung, die am meisten Zeit kostet. Viertens: inkrementelle Aktualisierung auf die großen Tabellen. Fünftens: hohe Kardinalität senken und ein Sternschema bauen. Und gemessen wird in der Reihenfolge Verlauf, Faltung, VertiPaq.&quot;
+(MODALITY: on-screen text)
+(PROOF/DEMO, KINETIC TYPE: die fünf Takeaways erscheinen als nummerierte Liste, jeweils synchron zum gesprochenen Punkt, Punkt 3 wird kurz in #1D967C markiert als Auflösung des Teasers. Darunter die Zeile &quot;Messen: Verlauf → Faltung → VertiPaq&quot;.)</p><p>[11:30-12:00] SOFT CTA
+SAJU: &quot;Wenn Sie das an Ihrem eigenen Modell durchgehen wollen, unten liegt die 20-Punkte-Checkliste für Power BI Modelle, die genau diese Stellen abklopft. Und wenn Ihre Aktualisierung auf echten Daten trotzdem noch kriecht, dann ist das genau unsere Arbeit bei CaseWhen. Buchen Sie über den Link ein Modell- und Performance-Review, kein Verkaufsgespräch, einfach ein Gespräch. Wie Sie inkrementelle Aktualisierung Schritt für Schritt einrichten, zeige ich im nächsten Video. Wenn das hier nützlich war, abonnieren Sie den Kanal.&quot;
+(MODALITY: talking head)
+(ON-SCREEN: zwei Linkkarten &quot;20-Punkte-Checkliste&quot; und &quot;Modell- und Performance-Review&quot;, darunter der Verweis auf das nächste Video zur inkrementellen Aktualisierung.)
+(B-ROLL/ANIM: ruhiger Schnitt auf ein schnell durchlaufendes Dashboard, das jetzt zügig lädt, dann zurück zu Saju für die letzte Zeile.)</p><h2>Description
+Warum Ihre Power BI Aktualisierung langsam ist und wie Sie in einer Viertelstunde herausfinden, welcher Schritt die Zeit kostet.
+Kostenlose 20-Punkte-Checkliste für Power BI Modelle: https://casewhen.co/de/checkliste · Mit CaseWhen arbeiten: https://casewhen.co/de/kontakt</h2><p>0:00 Warum wird meine Power BI Aktualisierung immer langsamer?
+0:40 Was passiert beim Aktualisieren eigentlich im Speicher?
+2:15 Warum rechnet Power Query alles auf meinem Rechner statt an der Quelle?
+3:50 Warum lädt mein Dataflow bei jeder Aktualisierung alles neu?
+5:25 Wie lade ich nur die neuen Daten statt aller Jahre?
+7:00 Warum macht ein flaches Datenmodell die Aktualisierung schwerer?
+8:35 Wie finde ich heraus, was genau meine Aktualisierung bremst?
+10:20 Was mache ich damit ab morgen früh?</p><p>Ressourcen:
+- 20-Punkte-Checkliste für Power BI Modelle: https://casewhen.co/de/checkliste
+- Modell- und Performance-Review buchen: https://casewhen.co/de/kontakt
+- Nächstes Video, inkrementelle Aktualisierung einrichten: https://casewhen.co/de/inkrementelle-aktualisierung</p><p>Eine langsame Power BI Aktualisierung liegt selten am Arbeitsspeicher. In diesem Video geht Saju die häufigsten Gründe durch: der Import lädt beim Aktualisieren das Modell doppelt in den Speicher, gebrochenes Query Folding verlagert die Rechenarbeit von der Quelle auf Ihren Rechner, ein Dataflow zieht bei jeder Aktualisierung die komplette Historie neu, es fehlt die inkrementelle Aktualisierung, und ein flaches Datenmodell mit hoher Kardinalität komprimiert schlecht. Zum Schluss die Reihenfolge zum Messen: Aktualisierungsverlauf, Query Folding im Power Query Editor und der VertiPaq Analyzer in DAX Studio. So finden Sie heraus, was Ihre Power BI Aktualisierung wirklich bremst, und was Sie ab morgen früh ändern.</p><p>#PowerBI #PowerBIPerformance #Datenmodell #MicrosoftFabric #BusinessIntelligence</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

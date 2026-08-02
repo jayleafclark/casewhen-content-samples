@@ -1,0 +1,202 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Why Does Month-End Close Take So Long? The Real Reason It St</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p>### [0:45-2:15] VALUE BEAT 1 - &quot;What is everyone waiting on?&quot;
+CLAIM (0:45-0:57): &quot;Most closes don&#x27;t run slow because of the work. They run slow because the work sits in a queue behind one person.&quot;
+(MODALITY: on-screen text / kinetic type)
+(ON-SCREEN: claim card, then the word &quot;QUEUE&quot; stays on screen while a line of tasks stacks up behind a single desk icon)</p><p>PROOF / DEMO (0:57-1:55): Custom animation of the close as a relay that keeps stopping.
+(MODALITY: custom animation - the close as a stalling relay)
+- ANIMATION SPEC: Draw the close as five stations left to right: Sub-ledgers, Journals, Reconcile, Consolidate, Board pack. A baton moves station to station. At the &quot;Reconcile&quot; station, the baton stops and a single figure lights up. Every other station dims and waits. A small &quot;out of office&quot; tag drops onto that person, and the whole line freezes with a clock in the corner climbing from day two to day six. Then show the same relay with the reconcile step already done and saved, and the baton runs straight through. Keep it on brand, single accent colour #1D967C for the moving baton and the finished pack, neutral greys for the stalled stations.
+- Cut once mid-animation to a 3-second b-roll of a Slack channel with &quot;any update on the close?&quot; messages stacking (MODALITY micro-cut: b-roll), then back to the animation.</p><p>PAYOFF (1:55-2:10): &quot;Here&#x27;s what you can do this afternoon. Ask your team one question. If the person who owns reconciliation is out for a week, does the close stop? If the answer is yes, your close length is set by a queue with a single door, and widening that door brings the days down before you touch any software.&quot;
+(ON-SCREEN: numbered takeaway card &quot;TAKEAWAY 1 - If one person being out stops the close, you have a queue, not a workload&quot;)</p><p>RE-HOOK (2:10-2:15): &quot;So you get everyone working at once. Great. Now they all pull a number, and the numbers don&#x27;t match. Here&#x27;s why.&quot;</p><p>### [2:45-4:00] VALUE BEAT 2 - &quot;Why do two reports never agree on the same number?&quot;
+CLAIM (2:15-2:27): &quot;When two of your reports show a different revenue, both are usually right. They were just built from different definitions.&quot;
+(MODALITY: data-viz / animated stat cards)</p><p>PROOF / DEMO (2:27-3:45): Stack the sourced trust numbers, then animate the mechanism.
+(MODALITY: data-viz, then custom animation)
+- STAT CARDS (each with its citation visible on screen):
+  - CARD 1: &quot;Only 40% of executives always trust their own data.&quot; Source line: Talend.
+  - CARD 2: &quot;67% of organizations say they don&#x27;t fully trust the data they run the business on.&quot; Source line: Precisely.
+- CUSTOM ANIMATION (MODALITY switch: custom animation - two dashboards, two numbers): Two report tiles side by side, both labelled &quot;Revenue&quot;. One reads 4.2 million, the other 4.4 million. Trace a thin line back from each. The first pulls from the sales export, the second from the finance ledger, and each used its own cut-off date and its own definition of a returned order. The lines are drawn in two different greys so the viewer sees two separate paths landing on two numbers. Then merge both paths into one shared definition in the accent colour, and both tiles snap to the same figure.
+- On-screen label stays visible while spoken: &quot;single source of truth&quot;.</p><p>PAYOFF (3:45-3:55): &quot;This afternoon, pick your most argued-over metric. Revenue, active customers, margin, whatever gets re-litigated in meetings. Ask three people to write down its exact definition. If you get three different answers, that&#x27;s your reconciliation days right there, and no tool fixes a definition nobody agreed on.&quot;
+(ON-SCREEN: &quot;TAKEAWAY 2 - Two reports disagree because two definitions were never agreed. Agree the definition first.&quot;)</p><p>RE-HOOK (3:55-4:00): &quot;Definitions are half of it. The other half is where the numbers even come from. That&#x27;s the part that eats whole days.&quot;</p><p>### [4:10-5:20] VALUE BEAT 3 - &quot;Why does finance spend more time fixing data than reading it?&quot;
+CLAIM (4:00-4:12): &quot;Every day your close runs, someone is exporting, pasting, and hand-checking data that arrived messy in the first place.&quot;
+(MODALITY: talking head)</p><p>PROOF / DEMO (4:12-5:10): B-roll of the real work, then the sourced cost of it.
+(MODALITY: b-roll into data-viz)
+- B-ROLL (MODALITY: b-roll): a real analyst screen with eight tabs open, a source export on one side and last month&#x27;s working file on the other, a cursor copying a block of cells across.
+- DATA-VIZ (MODALITY switch: data-viz, animated stat cards):
+  - CARD 1: &quot;94% of the spreadsheets companies use to make decisions contain errors.&quot; Source line: Poon and colleagues, peer-reviewed.
+  - CARD 2: &quot;Poor data quality costs the average company 12.9 million dollars a year.&quot; Source line: Gartner.
+  - CARD 3: &quot;82% of companies say data silos get in the way of their work.&quot; Source line: ZoomInfo.
+- ANIMATION SPEC: as each stat lands, a red dot drops onto one of the copy steps from the analyst b-roll, so the viewer connects the number to the manual hand-off it comes from.</p><p>PAYOFF (5:10-5:20): &quot;Count the copies. Every time a figure gets exported, pasted, or retyped between the source and the board slide, that&#x27;s one more place it can go wrong, and one more thing a person has to check by eye. That count is why your team fixes data instead of reading it.&quot;
+(ON-SCREEN: &quot;TAKEAWAY 3 - Count the manual copies between source and board slide. That count is your risk and your delay.&quot;)</p><p>RE-HOOK (5:20-5:35): &quot;So those are the four drags. One person in the queue, disagreeing definitions, and manual data that arrives dirty. Now let me go under the hood for one minute and show you what your team changes to fix all of it.&quot;</p><p>### [5:35-6:55] VALUE BEAT 4 - &quot;What does the fix look like under the hood?&quot; (the one deep beat)
+CLAIM (5:35-5:47): &quot;Here&#x27;s the one part where I go a level deeper, then I&#x27;ll come straight back up. The fix is one design decision, made once, that removes the queue, the disagreements, and most of the copying at the same time.&quot;
+(MODALITY: on-screen text / kinetic type - signpost card &quot;GOING UNDER THE HOOD - 1 MIN&quot;)</p><p>PROOF / DEMO (5:47-6:45): A short high-level screen-record, paired with the mechanism animation.
+(MODALITY: screen-record, then custom animation)
+- SCREEN-RECORD (MODALITY: screen-record - live Power BI, high level): show a report connected straight to the source, refreshed on a schedule with nobody touching it. Then open the model and point at one measure, &quot;Net Revenue&quot;, defined a single time. Don&#x27;t teach the formula. Just show that it lives in one place, and that three report pages all read from it. Keep the cursor slow and the callouts plain.
+- CUSTOM ANIMATION (MODALITY switch: custom animation - one definition feeds everything): A fact table of transactions in the centre. Cost Center, Date, Account, and Entity tables snap into place around it with relationship arrows lighting up in the accent colour. Then &quot;Net Revenue&quot; is written once inside the model, and three report pages fan out and all land on the same figure. Rewind to the before state, three pages with three hand-typed totals slightly off from each other, then re-run the one-definition version so they agree.
+- PAYOFF LINE delivered to camera (MODALITY switch: talking head): keep it short.</p><p>PAYOFF (6:45-6:55): &quot;This is the part you hand to a specialist, and it&#x27;s the whole point of the video. You don&#x27;t need to build it. You need to know it exists, and to ask for it. Data connected once and refreshed on a schedule. Each number defined a single time so every report agrees. That one decision is what a three-day close is built on. Coming back up now.&quot;
+(ON-SCREEN: &quot;TAKEAWAY 4 - Connect the data once, define each number once. This is the decision a three-day close is built on.&quot;)</p><p>RE-HOOK (6:55-7:05): &quot;Being fast and consistent still won&#x27;t make the number correct. Before finance sends anything to the board, there&#x27;s one more step.&quot;</p><p>### [7:05-8:25] VALUE BEAT 5 - &quot;How do you know the number&#x27;s right before the board sees it?&quot;
+CLAIM (7:05-7:17): &quot;Automation with no check just produces the wrong number faster. So the last piece is a check that catches it before a person does.&quot;
+(MODALITY: talking head)</p><p>PROOF / DEMO (7:17-8:15): A high-level screen-record of the check, then a data-viz of it firing.
+(MODALITY: screen-record into data-viz)
+- SCREEN-RECORD (MODALITY: screen-record): show a small check on the report that compares the automated total against a control figure pulled straight from the source. It reads green when the two tie out and shows the exact gap when they don&#x27;t. Keep it simple and buyer-level, one green card, one amber card.
+- DATA-VIZ (MODALITY switch: data-viz): animate the check firing. Two totals slide together. When they match, a green tick. When one is off, the card flips to amber and shows the exact gap, so the report tells you before the board does.</p><p>PAYOFF (8:15-8:25): &quot;Ask for one reconciliation check that ties the final number back to a control total from the source. If it doesn&#x27;t tie, the report flags it. Not the board, not an angry email the next morning. The report itself, before the pack goes out. That&#x27;s what lets you sign off with your name on it.&quot;
+(ON-SCREEN: &quot;TAKEAWAY 5 - Add one check that ties the final number back to the source. The report flags itself before the board does.&quot;)</p><p>RE-HOOK (8:25-8:35): &quot;Put those four fixes together and the close stops being a ten-day scramble. Here&#x27;s what it turns into, and the one number I promised you.&quot;</p><p>### [8:35-9:55] PAYOFF - the three-day close + the open loop paid off
+(MODALITY: talking head into data-viz before/after)
+&quot;Remember the number I promised. It&#x27;s the count of manual hand-offs between the source and the board slide. Every export, every paste, every figure someone retypes. That count predicts your close length better than the tool you bought or the size of your team. A ten-day close is a close with dozens of hand-offs and one person carrying the middle of it. A three-day close is a close where the data arrives clean, each number is defined once, a check confirms it, and no single person is the door everything queues behind. Eight days is considered an acceptable close. The finance teams that have this sorted do it in under three. That gap is SolveXia&#x27;s benchmark, and it&#x27;s almost never about working harder. It&#x27;s about how many times a human touches a number on the way to the board.&quot;
+(ON-SCREEN: split before/after bar - &quot;10 days, dozens of hand-offs&quot; vs &quot;3 days, hand-offs near zero&quot;; the hand-off count ticks down as each fix greys out a manual step)</p><p>Recap the full win (9:35-9:55):
+(MODALITY: kinetic type list, all five on screen at once)
+&quot;Here&#x27;s everything, so you can go act on it without me:&quot;
+1. If one person being out stops the close, you have a queue, not a workload.
+2. Two reports disagree because two definitions were never agreed. Agree the definition first.
+3. Count the manual copies between source and board slide. That count is your delay.
+4. Connect the data once, define each number once. That&#x27;s the decision it&#x27;s all built on.
+5. Add one check that ties the final number back to the source.
+(ON-SCREEN: numbered 1-5 list stays on screen for the read)</p><p>### [9:55-11:15] SOFT CTA
+(MODALITY: talking head, steady delivery, link cards animating in lower third)
+&quot;If you want to see where your own close stands before you change a thing, there&#x27;s a free Power BI Governance and Cost Scorecard linked below. It takes about five minutes and gives you your score, a benchmark against similar teams, and your top three risks. That alone will tell you which of these four drags is hurting you most. Start there.</p><p>And if your month-end still runs on manual exports and one person carrying the whole middle of it, that&#x27;s the exact work we do at CaseWhen. There&#x27;s a link in the description to book a scoping call. No pitch. Tell us what your close looks like right now, and we&#x27;ll tell you what&#x27;s fixable, what it takes, and what isn&#x27;t worth touching.</p><p>If this was useful, the next video walks through the semantic model behind that one agreed number, step by step. Subscribe if you want that one when it lands.&quot;
+(ON-SCREEN: card 1 &quot;Free: Power BI Governance &amp; Cost Scorecard - 5 min&quot;; card 2 &quot;Book a scoping call&quot;; card 3 watch-next thumbnail &quot;Build the one agreed number&quot;)
+(VISIBLE CHANGE: each card animates in on its own line as Austin names it; end on the CaseWhen wordmark, single accent colour)</p><h2>Description
+Why does month-end close take so long? This walks through the four things that really drag a close out, at a decision level, so a controller can see what to fix without learning a single formula.</h2><p>Free Power BI Governance &amp; Cost Scorecard (5-min assessment): [scorecard link]
+Work with CaseWhen (book a scoping call): [contact link]</p><p>0:00 Why does month-end close take so long?
+1:20 What is everyone waiting on?
+2:45 Why do two reports never agree on the same number?
+4:10 Why does finance spend more time fixing data than reading it?
+5:35 What does the fix look like under the hood?
+7:05 How do you know the number&#x27;s right before the board sees it?
+8:35 What does a three-day close look like?
+10:00 So where do you start?</p><p>Most closes take eight to ten days for four reasons: the whole thing queues behind one person, two reports disagree because nobody agreed the definitions, the data arrives messy so finance spends more time fixing it than reading it, and there&#x27;s no check that confirms the number before it reaches the board. This video explains each one in plain terms and shows what a finance team changes to get to a three-day close: connect the data to the source once and refresh it on a schedule, define each number a single time so every report agrees, and add a reconciliation check that ties the final figure back to a source control total. High performers close in under three days, while eight is only considered acceptable (SolveXia). Only 40% of executives always trust their data (Talend), and 94% of decision-making spreadsheets contain errors (Poon et al.). If your month-end still runs on manual exports in Power BI or Microsoft Fabric, this is the order to fix it in.</p><p>#PowerBI #MonthEndClose #FinancialReporting #MicrosoftFabric #DataGovernance</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

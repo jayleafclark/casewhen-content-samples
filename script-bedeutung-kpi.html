@@ -1,0 +1,190 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Was bedeutet eine KPI wirklich? Die 4 Bausteine (in 11 Minut</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p>[0:40-2:00] VALUE BEAT 1 : Metrik oder KPI
+CLAIM (Saju spricht): &quot;Die meisten Kacheln auf Ihrem Board sind Metriken, keine KPIs. Das ist der ganze Unterschied, und er entscheidet über alles Weitere.&quot;
+(ON-SCREEN: Claim-Karte &quot;Metrik oder KPI?&quot;)</p><p>PROOF (MODALITY: data-viz): Ein Board mit sechs nackten Kacheln erscheint: Umsatz 4,2 Mio, Besucher 12.340, Aufträge 318, Retouren 41, Marge 22 Prozent, Tickets 96. Alle nur Zahlen. Eine Kachel, &quot;Umsatz&quot;, wird hervorgehoben und wächst in die Bildmitte. Nacheinander docken drei kleine Elemente an sie an: ein Zielwert-Ring, ein Trendpfeil, ein Namensschild. Aus der Kachel wird sichtbar etwas anderes. Die anderen fünf Kacheln bleiben grau und flach.
+Saju spricht dazu: &quot;Eine Metrik ist einfach eine Zahl. Eine KPI ist eine Zahl, hinter der eine Entscheidung steht. Wenn niemand sagen kann, was diese Kachel auslöst, dann messen Sie zwar etwas, aber Sie steuern nichts.&quot;</p><p>PAYOFF (Saju spricht): &quot;Also der erste Prüfschritt für heute Nachmittag: Gehen Sie Ihr Board durch und fragen Sie bei jeder Kachel, welche Entscheidung sie auslöst. Kommt keine Antwort, ist es eine Metrik, und die darf ruhig weg.&quot;
+(ON-SCREEN: nummerierte Takeaway-Karte &quot;1. Welche Entscheidung löst die Kachel aus? Keine Antwort = raus.&quot;)</p><p>RE-HOOK (Saju spricht): &quot;Und damit die Zahl überhaupt etwas taugt, muss zuerst eine Sache stimmen, an der die meisten schon ganz am Anfang scheitern.&quot;</p><p>[2:00-3:30] VALUE BEAT 2 : Baustein 1: eine Definition
+CLAIM (Saju spricht): &quot;Baustein eins ist eine klare Definition. Eine Kennzahl, eine Berechnung, überall dieselbe.&quot;
+(ON-SCREEN: Claim-Karte &quot;Baustein 1: Definition&quot;)</p><p>PROOF (MODALITY: animation, semantisches Modell): Zwei Berichtskacheln stehen nebeneinander, beide beschriftet mit &quot;Umsatz&quot;. Die linke zeigt 4,2 Mio, die rechte 4,7 Mio. Ein rotes Fragezeichen blinkt dazwischen. Kurze Einblendung: die linke rechnet Stornos raus, die rechte nicht. Dann schiebt sich von unten eine Schicht zwischen die Berichte und die Datenquelle, beschriftet &quot;semantisches Modell&quot;. In dieser Schicht entsteht ein einziges Feld: &quot;Umsatz = ...&quot;. Ein Lichtimpuls läuft von diesem Feld zu beiden Kacheln. Die rechte Kachel springt von 4,7 auf 4,2. Beide zeigen jetzt dieselbe Zahl. Das Fragezeichen verschwindet.
+Saju spricht dazu: &quot;Wenn zwei Berichte zwei Zahlen für denselben Umsatz liefern, glaubt am Ende niemand mehr einer von beiden. Der Fix passiert nicht im Bericht, sondern eine Ebene tiefer, im Modell. Sie definieren den Umsatz genau einmal, als Measure, und jeder Bericht ruft dieselbe Definition ab. Das gilt übrigens auch für Copilot. Nur 12 Prozent der Unternehmen sagen, ihre Daten seien gut genug für KI, und es scheitert meistens genau hier, an der einen vereinbarten Zahl.&quot;</p><p>PAYOFF (Saju spricht): &quot;Takeaway zwei: Definieren Sie jede Kennzahl einmal zentral im Modell, nicht in jedem Bericht neu. Dann bekommen alle, Menschen und Copilot, dieselbe Antwort zurück.&quot;
+(ON-SCREEN: Takeaway-Karte &quot;2. Jede Kennzahl einmal im Modell definieren.&quot;. Quellenzeile &quot;12 Prozent halten ihre Daten für KI-tauglich. Quelle: Drexel LeBow und Precisely, 2025&quot;.)</p><p>RE-HOOK (Saju spricht): &quot;Die Zahl steht jetzt fest. Aber ist sie gut? Das sehen Sie so noch gar nicht.&quot;</p><p>[3:30-5:00] VALUE BEAT 3 : Baustein 2: ein Zielwert
+CLAIM (Saju spricht): &quot;Baustein zwei ist ein Zielwert. Ohne Ziel ist 82 Prozent nur eine Zahl ohne Aussage.&quot;
+(ON-SCREEN: Claim-Karte &quot;Baustein 2: Zielwert&quot;)</p><p>PROOF (MODALITY: data-viz): Ein großes Kachel-Element zeigt &quot;82 %&quot;. Zuerst steht es allein da, daneben ein Achselzucken-Icon. Dann fährt eine Ziellinie bei 90 Prozent ein: die 82 rutscht sichtbar unter die Linie und färbt sich bernsteinfarben, Beschriftung &quot;unter Ziel&quot;. Schnitt auf ein zweites Szenario: dieselbe 82, aber die Ziellinie liegt jetzt bei 75 Prozent, die Zahl steht über der Linie und wird grün, Beschriftung &quot;über Ziel&quot;. Gleiche Zahl, zwei völlig verschiedene Botschaften.
+Saju spricht dazu: &quot;Dieselben 82 Prozent sind einmal ein Problem und einmal ein Erfolg. Der Unterschied ist allein der hinterlegte Zielwert. Ohne Ziel liest jeder im Meeting etwas anderes in die Zahl hinein.&quot;</p><p>PAYOFF (Saju spricht): &quot;Takeaway drei: Jede KPI braucht einen hinterlegten Zielwert im Modell, keinen im Kopf. Erst der Abstand zum Ziel macht aus der Zahl eine Aussage.&quot;
+(ON-SCREEN: Takeaway-Karte &quot;3. Zielwert hinterlegen, sonst sagt die Zahl nichts.&quot;)</p><p>RE-HOOK (Saju spricht): &quot;Ein Ziel allein reicht aber noch nicht. Die nächste Frage entscheidet, ob diese 82 Prozent wirklich Grund zur Sorge sind.&quot;</p><p>[5:00-6:30] VALUE BEAT 4 : Baustein 3: ein Bezug
+CLAIM (Saju spricht): &quot;Baustein drei ist ein Bezug. Verglichen womit, und seit wann?&quot;
+(ON-SCREEN: Claim-Karte &quot;Baustein 3: Bezug&quot;)</p><p>PROOF (MODALITY: talking head mit Inset-Chart): Saju am Tisch, rechts oben eine kleine eingeblendete Linie. Er zeigt: heute 82 Prozent. Vormonat 88. Vor einem Jahr 79. Die Inset-Linie zeichnet diese drei Punkte nach, während er spricht. Callout-Box bei jedem Wert.
+Saju spricht: &quot;82 Prozent, das klingt erst mal ordentlich. Vor einem Monat waren es aber 88, also geht es runter. Vor einem Jahr waren es 79, also über das ganze Jahr geht es rauf. Eine einzige Zahl, drei verschiedene Geschichten. 58 Prozent der Unternehmen treffen mindestens die Hälfte ihrer Entscheidungen aus dem Bauch, und oft liegt es genau daran, dass die Zahl ohne Bezug einfach nicht weiterhilft.&quot;</p><p>PAYOFF (Saju spricht): &quot;Takeaway vier: Zeigen Sie neben jeder KPI den Vergleich, zum Vormonat, zum Vorjahr oder zum Plan. Eine Zahl ohne Bezug führt zu Fehlentscheidungen, nicht zu weniger.&quot;
+(ON-SCREEN: Takeaway-Karte &quot;4. Bezug immer neben die Zahl.&quot;. Quellenzeile &quot;58 Prozent entscheiden mindestens zur Hälfte aus dem Bauch. Quelle: BARC&quot;.)</p><p>RE-HOOK (Saju spricht): &quot;Definition, Zielwert, Bezug. Damit ist die KPI fast fertig. Jetzt kommt der Baustein, den ich Ihnen am Anfang versprochen habe, der, den fast jeder weglässt.&quot;</p><p>[6:30-8:00] VALUE BEAT 5 : Baustein 4: eine Verantwortung
+CLAIM (Saju spricht): &quot;Baustein vier ist eine Verantwortung. Wer sieht die Zahl, und wer handelt, wenn sie kippt?&quot;
+(ON-SCREEN: Claim-Karte &quot;Baustein 4: Verantwortung&quot;)</p><p>PROOF (MODALITY: b-roll): Echte Büroszene. Auf einem Handy erscheint eine Benachrichtigung. Eine Person öffnet am Laptop den Bericht, klickt sich auf die betroffene Kachel, greift zum Telefon. Nahaufnahme: auf der KPI-Kachel steht ein Feld &quot;Verantwortlich: Vertrieb Nord&quot; und eine Regel &quot;Warnung ab unter 80 Prozent&quot;.
+Saju spricht dazu: &quot;Das ist der Baustein, den fast jeder überspringt, und es ist der Grund, warum gute Zahlen im Meeting nur vorgelesen werden. Eine KPI ohne Verantwortlichen und ohne klare Schwelle passiert einfach nichts. Legen Sie fest, wer die Zahl sieht, ab welchem Wert er etwas tut, und was er dann tut.&quot;</p><p>PAYOFF (Saju spricht): &quot;Takeaway fünf: Jede KPI bekommt einen Namen dahinter, eine echte Person, und eine feste Schwelle, ab der sie handelt. Ohne das bleibt selbst die sauberste Zahl folgenlos.&quot;
+(ON-SCREEN: Takeaway-Karte &quot;5. Eine Verantwortung und eine Schwelle pro KPI.&quot;)</p><p>RE-HOOK (Saju spricht): &quot;Vier Bausteine, so weit die Theorie. Jetzt baue ich Ihnen genau das in Power BI zusammen, in ein paar Minuten, damit Sie sehen, dass es kein großer Aufwand ist.&quot;</p><p>[8:00-9:40] WORKED EXAMPLE : in Power BI gebaut
+(MODALITY: screen-record, echtes Power BI Desktop.)
+Bildschirm zeigt die Modellansicht: in der Mitte die Faktentabelle &quot;Verkäufe&quot;, ringsum die Dimensionen &quot;Datum&quot;, &quot;Produkt&quot;, &quot;Region&quot;, jeweils mit einer Eins-zu-viele-Beziehung. Cursor-Hervorhebung auf die Beziehungslinien.
+Saju spricht: &quot;Kurz zum Fundament: ein sauberes Sternschema. Eine Faktentabelle in der Mitte, die Dimensionen außen herum. Darauf baut jede saubere Definition auf.&quot;
+Cut auf den Measure-Editor. Saju tippt: `Umsatz = SUM(Verkäufe[Betrag])`. Dann ein zweites Measure: `Umsatz VJ = CALCULATE([Umsatz], SAMEPERIODLASTYEAR(Datum[Datum]))`. Dann ein Ziel-Measure `Umsatzziel = 4500000`.
+Saju spricht: &quot;Baustein eins, die Definition, lebt hier als Measure. Umsatz genau einmal berechnet. Baustein drei, der Bezug, ist das Vorjahres-Measure. Und Baustein zwei, das Ziel, ein eigenes Measure oder ein Wert aus einer Zieltabelle.&quot;
+Cut auf den Report. Saju zieht ein KPI-Visual auf: Wert = Umsatz, Ziel = Umsatzziel, Trendachse = Datum. Dann eine Karte daneben mit dem Vorjahresvergleich in Prozent. In den Tooltip schreibt er &quot;Verantwortlich: Vertrieb Nord&quot;.
+Ergebnis, langsamer Schnitt, ruhig gehalten: eine einzige Kachel zeigt 4,2 Mio, Ziel 4,5 Mio, minus 7 Prozent gegenüber Vorjahr, darunter der Verantwortliche.
+Saju spricht: &quot;Diese eine Kachel hat jetzt alle vier Bausteine. Eine Definition, ein Ziel, einen Bezug, eine Verantwortung. Sie trägt eine Entscheidung, und das war der ganze Punkt.&quot;
+(ON-SCREEN: kleine Marker &quot;1 Definition&quot;, &quot;2 Ziel&quot;, &quot;3 Bezug&quot;, &quot;4 Verantwortung&quot; leuchten nacheinander an der fertigen Kachel auf.)</p><p>[9:40-10:40] PAYOFF : Rückblick
+(MODALITY: on-screen text, kinetische Liste, Saju als Voiceover.)
+Saju spricht: &quot;Sie haben jetzt alles, um jede Kennzahl auf Ihrem Board zu prüfen. Fünf Schritte, die Sie ab morgen anwenden können.&quot;
+Die fünf Takeaways erscheinen untereinander, jeweils einzeln eingeblendet:
+&quot;1. Metrik oder KPI: Welche Entscheidung löst die Kachel aus?&quot;
+&quot;2. Definition: Jede Kennzahl einmal im Modell.&quot;
+&quot;3. Zielwert: Hinterlegen, sonst sagt die Zahl nichts.&quot;
+&quot;4. Bezug: Immer neben die Zahl.&quot;
+&quot;5. Verantwortung: Ein Name und eine Schwelle.&quot;
+Saju spricht weiter: &quot;Und der Baustein vom Anfang, der, den fast jeder weglässt, war Nummer vier, die Verantwortung. Genau die trennt eine KPI, die etwas bewegt, von einer Zahl, die nur schön aussieht.&quot;
+(ON-SCREEN: die vollständige 5-Punkte-Liste bleibt kurz komplett stehen.)</p><p>[10:40-11:20] SOFT CTA
+(MODALITY: talking head, ruhig, kein Druck.)
+Saju spricht: &quot;Wenn Sie prüfen wollen, wie tragfähig Ihre Kennzahlen und Ihr Modell gerade wirklich sind, unter dem Video liegt die kostenlose Power BI Governance- und Kosten-Scorecard. Das ist eine Fünf-Minuten-Einschätzung, die Ihnen Ihre drei größten Risiken zeigt und wo Sie im Vergleich zu anderen Teams stehen. Und wenn bei Ihnen zwei Berichte weiter zwei Zahlen für denselben Umsatz liefern, dann sprechen Sie mit uns über ein Review Ihres semantischen Modells und Ihrer KI-Bereitschaft. Genau das machen wir bei CaseWhen jede Woche für BI-Teams in Berlin. Kein Verkaufsgespräch, einfach ein Gespräch. Als Nächstes ansehen: das Video zum Sternschema, das die Grundlage für alles hier ist.&quot;
+(ON-SCREEN: Link-Karte &quot;Power BI Governance- und Kosten-Scorecard, kostenlos&quot; zuerst, dann &quot;Mit CaseWhen sprechen&quot;, dann Vorschaukachel &quot;Sternschema in Power BI&quot;.)</p><h2>Description
+Was bedeutet eine KPI wirklich? Diese vier Bausteine trennen eine echte KPI von einer bloßen Zahl auf dem Dashboard.</h2><p>Kostenlose Power BI Governance- und Kosten-Scorecard: [Link] · Mit CaseWhen zusammenarbeiten: [Link]</p><p>Kapitel:
+0:00 Warum sagt mir diese eine Zahl eigentlich nichts?
+0:40 Was ist eine KPI und was ist nur eine Metrik?
+2:00 Warum liefern zwei Berichte zwei Zahlen für denselben Umsatz?
+3:30 Ist 82 Prozent jetzt gut oder schlecht?
+5:00 Verglichen womit, und seit wann?
+6:30 Wer handelt, wenn die Zahl kippt?
+8:00 Wie baue ich das in Power BI, ohne dass es zerfällt?
+9:40 Was mache ich damit ab Montag?</p><p>In diesem Video geht es um die Bedeutung einer KPI und darum, warum eine Kennzahl allein nichts aussagt. Saju erklärt die vier Bausteine, an denen die meisten Dashboards scheitern: eine klare Definition im semantischen Modell, ein hinterlegter Zielwert, ein Bezug zum Vormonat, Vorjahr oder Plan, und eine Verantwortung mit fester Schwelle. Danach baut er eine KPI in Power BI von Grund auf zusammen, vom Sternschema über die Measures bis zum fertigen KPI-Visual, damit Sie jede Kennzahl auf Ihrem eigenen Board prüfen und tragfähig machen können.</p><p>#PowerBI #KPI #MicrosoftFabric #BusinessIntelligence #Datenmodell</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

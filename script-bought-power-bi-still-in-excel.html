@@ -1,0 +1,171 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · You Bought Power BI But Everyone&#x27;s Still Using Excel (Here&#x27;s</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p>[VALUE BEAT 1], Do they even trust the number?</p><p>[1:20-1:32] CLAIM (MODALITY: on-screen text card)
+&quot;Reason one. Your team trusts the spreadsheet more than the dashboard.&quot;</p><p>[1:32-2:30] PROOF (MODALITY: data-viz, two figures count up on screen: 40% and 70%)
+&quot;Think about what happens in a real meeting. Someone puts a number on the screen, and three people around the table go quiet and open their own file to check it. That&#x27;s not rare. Talend found only 40 percent of executives always trust their own company&#x27;s data. So six in ten of your leaders look at a report and second-guess it before they act on it. And when people don&#x27;t believe a dashboard, they stop using it. RevealBI put roughly 70 percent of dashboard work as built and then never really used. So you paid to build reports your own people route around.&quot;</p><p>[2:30-2:45] PAYOFF (MODALITY: talking head)
+&quot;So here&#x27;s your move this afternoon. In your next review, ask one plain question: does everyone at this table believe this number? If two or three people hesitate, stop. That hesitation is the thing to sort out before you buy anything else.&quot;</p><p>[2:45-2:55] RE-HOOK (MODALITY: b-roll, hands typing in a spreadsheet)
+&quot;Now, sometimes that hesitation is right. Sometimes the number in Power BI really does come out wrong. Here&#x27;s how that happens.&quot;</p><p>[VALUE BEAT 2], Is the number in Power BI just wrong?</p><p>[2:55-3:07] CLAIM (MODALITY: screen-record, two dashboards side by side showing two different revenue totals)
+&quot;Reason two. Half the time the number is wrong, because the same word means three different things in your company.&quot;</p><p>[3:07-4:05] PROOF (MODALITY: custom animation, the word &quot;Revenue&quot; flows into three separate boxes labelled Sales, Finance, Ops, each landing on a different total)
+&quot;Take revenue. Sales counts it when the deal&#x27;s signed. Finance counts it when the cash lands. Ops counts something else again. Nobody wrote down one shared meaning, so the model in Power BI just picks one, and it disagrees with the spreadsheet finance keeps on the side. Both totals are correct for their own definition, and that&#x27;s exactly why your two dashboards fight. This gets expensive. Gartner puts the average cost of poor data quality at 12.9 million dollars a year for a business. A lot of that is people redoing work because the numbers won&#x27;t line up.&quot;</p><p>[4:05-4:20] PAYOFF (MODALITY: talking head)
+&quot;So today, pick one metric that started an argument last quarter. Revenue, active customer, margin, whatever it was. Get sales, finance, and ops in one room and write a single definition everyone signs. That one agreed number is worth more to you than any new chart.&quot;</p><p>[4:20-4:30] RE-HOOK (MODALITY: on-screen text, &quot;Trust. Then the number. Now the wait.&quot;)
+&quot;Okay. Say the number&#x27;s agreed and correct. Your team will still open Excel, if getting an answer means waiting three days for the data team.&quot;</p><p>[VALUE BEAT 3], Why do they export instead of asking?</p><p>[4:30-4:42] CLAIM (MODALITY: talking head)
+&quot;Reason three. If a new question means emailing IT and waiting, your team will export to Excel every time, because they can&#x27;t wait.&quot;</p><p>[4:42-5:40] PROOF (MODALITY: screen-record, a controller slicing a report by month and region herself, then a data-viz card showing 82%)
+&quot;Take a pipeline review, or a board prep. Someone asks a question the dashboard doesn&#x27;t answer yet. Filter it a different way, split it by region, look at last week only. If that means raising a ticket and waiting until Thursday, nobody waits. They grab an export and finish it in Excel, where they can move fast. ZoomInfo found 82 percent of teams say silos get in the way of their day-to-day work. That&#x27;s your people stuck waiting on someone else to hand them a number. So the answer they bring to the meeting is a day old and rebuilt by hand.&quot;</p><p>[5:40-5:55] PAYOFF (MODALITY: b-roll, a clock, then someone waiting at a desk)
+&quot;So time it. Today, ask someone in finance a question your reports don&#x27;t already answer, and watch how long it takes them to get it. If it&#x27;s over an hour and it needs IT, that&#x27;s your export habit right there. Cut that wait and a big chunk of the Excel goes with it.&quot;</p><p>[5:55-6:05] RE-HOOK (MODALITY: talking head)
+&quot;So that&#x27;s trust, the number, and the wait. Now the part most leaders never get to see. What your team does all day inside that spreadsheet.&quot;</p><p>[VALUE BEAT 4], What does your team do all day in that spreadsheet? (the one deep beat)</p><p>[6:05-6:18] CLAIM (MODALITY: on-screen text card, &quot;The one time we go into the weeds&quot;)
+&quot;This is the one time I&#x27;ll take you into the weeds, because you should see it once. Here&#x27;s your analyst&#x27;s actual month.&quot;</p><p>[6:18-7:15] PROOF (MODALITY: screen-record, the manual loop, shown step by step: three exports, a paste into a master tab, cells getting hand-fixed, a chart rebuilt, an email sent)
+&quot;Month-end lands. They export three reports out of Power BI into Excel. They paste all three into one master tab. Then they spend hours fixing the bits that don&#x27;t match, because remember, the definitions were never agreed. They rebuild the same chart they rebuilt last month. They paste it into a deck and email it around. Then next month they do the whole thing again from scratch. Every step of that is work the data model should be doing once, on its own. Instead it&#x27;s living on one person&#x27;s laptop, in one file only they understand.&quot;</p><p>[7:15-7:30] PAYOFF (MODALITY: talking head)
+&quot;So here&#x27;s that question I promised you. If that one analyst is out for a week at month-end, can anyone else finish the close? If the honest answer is no, you don&#x27;t have a reporting problem, you have a serious risk parked on one laptop.&quot;</p><p>[7:30-7:40] RE-HOOK (MODALITY: b-roll, laptop lid closing, lights off in an office)
+&quot;So that&#x27;s why it&#x27;s happening. Now what good looks like, and how you get there without ripping everything out.&quot;</p><p>[VALUE BEAT 5], So how do you get your team off Excel?</p><p>[7:40-7:52] CLAIM (MODALITY: talking head)
+&quot;Getting off Excel is a sequence, and you do it in the same order we just went through. The number, then trust, then the wait.&quot;</p><p>[7:52-8:50] PROOF (MODALITY: custom animation, a three-step track lighting up: 1 Agree the numbers, 2 One model, 3 Self-serve; then a data-viz before/after bar of close time)
+&quot;Step one, agree your top metrics. Get the definitions written down and signed by the people who argue about them. Step two, build one model everyone pulls from, so there&#x27;s a single place the number comes from and it&#x27;s the same number for all of them. Step three, make it self-serve, so your team can slice it themselves and never sit waiting on a ticket. Do those three and the reason to open Excel goes away on its own. And this shows up where you feel it. SolveXia found a healthy month-end close runs around 8 days, and the best-run finance teams get it under 3. That gap is almost all manual rework you&#x27;re removing.&quot;</p><p>[8:50-9:10] PAYOFF (MODALITY: talking head)
+&quot;And you don&#x27;t need a giant rebuild to start. Pick your three worst metrics, the ones that cause the most arguments. Agree the definitions this month, and put those three into one shared model. That&#x27;s your first real step off the spreadsheet, and you can begin it this week.&quot;</p><p>[9:10-9:20] TRANSITION (MODALITY: on-screen text, &quot;The three reasons, recapped&quot;)
+&quot;So let&#x27;s put it all together.&quot;</p><p>[9:20-10:05] PAYOFF, recap + pay off the open loop (MODALITY: kinetic type, a clean numbered list builds on screen)
+&quot;Your team&#x27;s still in Excel for three reasons, and none of them is the tool. One, they don&#x27;t trust the number, and only 40 percent of executives ever do. Two, the number&#x27;s often wrong, because the same word means three things and nobody agreed on one. Three, getting an answer means waiting on IT, so they export instead. And that question from earlier, whether your close survives one person taking a week off, that&#x27;s your fastest read on how deep this goes. If the close can&#x27;t run without them, then fixing the model is how you protect the business, plain and simple.&quot;</p><p>[10:05-11:00] SOFT CTA (MODALITY: talking head, with link cards on screen)
+&quot;So if you want to see where you stand right now, we built a free Power BI Governance and Cost Scorecard. It takes about five minutes, and you get your score, how you compare to other teams, and your top three risks in writing. Link&#x27;s below, no email wall on the good part. And if your numbers still won&#x27;t reconcile after that, book a scoping call with us. It&#x27;s a straight look at your setup and where to start, no pitch. There&#x27;s a video next on the one agreed number and how to get sales and finance to agree what a customer even is, so watch that one if this hit home. And if it was useful, subscribe, we&#x27;ll keep them coming.&quot;</p><h2>Description
+Power BI but still using Excel? You bought the tool and your finance team still exports every report to a spreadsheet. This video breaks down the three reasons it keeps happening (trust, the model, and the wait on the data team) and the first move to get your team off Excel without scrapping what you paid for.</h2><p>Free Power BI Governance and Cost Scorecard (5 min, get your score plus top 3 risks): https://casewhen.co/scorecard
+Work with CaseWhen (book a scoping call, no pitch): https://casewhen.co/call</p><p>Timestamps:
+0:00 Why is your team still in Excel?
+0:40 So did you waste your money on Power BI?
+1:20 Do they even trust the number?
+2:55 Is the number in Power BI just wrong?
+4:30 Why do they export instead of asking?
+6:05 What does your team do all day in that spreadsheet?
+7:40 So how do you get your team off Excel?
+9:20 What should you do on Monday?</p><p>Recap: Buying Power BI doesn&#x27;t get your team off Excel on its own. People keep exporting because they don&#x27;t trust the dashboard number, because the same metric means three different things across sales, finance, and ops, and because getting a fresh answer means waiting on the data team. The fix is a sequence you can start this month: agree the definitions of your worst three metrics, put them in one shared model, and make that model self-serve so nobody waits. Do that and month-end stops living on one analyst&#x27;s laptop. Sourced figures cited: executive data trust (Talend), dashboards built and unused (RevealBI), silos disrupting work (ZoomInfo), cost of poor data quality (Gartner), and month-end close benchmarks (SolveXia).</p><p>CaseWhen is a Berlin Power BI, Microsoft Fabric, and Azure BI consultancy. We help finance and operations teams get one number everyone trusts and a close they can finish on time.</p><p>#PowerBI #Excel #DataGovernance #FinanceReporting #MicrosoftFabric</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

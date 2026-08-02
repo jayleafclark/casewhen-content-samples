@@ -1,0 +1,215 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Die Fabric-Capacity-Falle: warum Ihr Report langsam wird, ob</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Die Fabric-Capacity-Falle: warum Ihr Report langsam wird, obwohl die Auslastung passt
+Host: Saju · Cluster: Fabric · Target: 12 min · Primary keyword: fabric capacity</p><h2>Chapters
+- 0:00 Warum wird mein Report langsam, obwohl die Auslastung passt?
+- 0:45 Was ist eine Capacity und was sind CU?
+- 2:10 Was macht Smoothing?
+- 3:40 Ab wann drosselt Fabric wirklich?
+- 5:20 Warum stimmt die Durchschnitts-Auslastung nicht?
+- 6:50 Wo finde ich, was die Capacity auffrisst?
+- 8:20 Was machen Sie am Montag dagegen?
+- 10:20 Zusammenfassung und Ihr nächster Schritt</h2><h2>Script</h2><p>[0:00-0:12] HOOK (MODALITY: screen-record)
+VO (Saju): &quot;Ihr Fabric-Report lädt plötzlich zehn Sekunden, manchmal öffnet er gar nicht mehr, und in der Capacity Metrics App steht die CU-Auslastung bei entspannten sechzig Prozent. Genau hier bricht es, und der Grund heißt Throttling.&quot;
+(ON-SCREEN: Keyword-Card „Fabric Capacity&quot; oben links, darunter ein roter Throttling-Hinweis.)
+(B-roll: Screen-Record eines Power-BI-Berichts, der lädt, Ladekringel dreht, dann poppt die Throttling-Meldung auf. Zoom-Punch auf die Meldung nach 4 Sekunden.)</p><p>[0:12-0:45] PROMISE + STAKES + OPEN LOOP (MODALITY: talking head)
+VO: &quot;In den nächsten zwölf Minuten verstehen Sie genau, warum eine Capacity drosselt, obwohl der Durchschnitt harmlos aussieht, und Sie können den echten Verursacher danach selbst finden. Wer das nicht sieht, kauft die nächstgrößere F-SKU für ein paar tausend Euro im Monat und wundert sich, dass die Reports trotzdem hängen. Ganz am Ende zeige ich Ihnen die eine Einstellung, die viele Teams übersehen und die genau diese Drosselung im Hintergrund abfängt. Wir bauen so etwas jede Woche für BI-Teams in Berlin, deshalb gehen wir das hier ehrlich durch.&quot;
+(ON-SCREEN: „Danach können Sie: Throttling lesen und den Verursacher benennen.&quot; Harter Schnitt in Beat 1, kein Geplänkel.)</p><p>[0:45-2:10] VALUE BEAT 1: Was ist eine Capacity und was sind CU? (MODALITY: custom animation)
+CLAIM (ON-SCREEN Text-Card): „Eine Capacity ist ein gemeinsamer Topf an Rechenleistung, aus dem sich alle Workloads bedienen.&quot;
+VO Claim: &quot;Fangen wir bei der Grundlage an. Eine Fabric Capacity ist ein fester Vorrat an Rechenleistung, gemessen in Capacity Units, kurz CU.&quot;
+DEMO (CUSTOM ANIMATION): &quot;Ein großer, halbgefüllter Behälter, beschriftet ‚F64: 64 CU&#x27;. Vier Zuflüsse mit Icons, Bericht, Aktualisierung, Pipeline und Warehouse, ziehen gleichzeitig aus demselben Behälter, der Pegel sinkt sichtbar. CaseWhen-Grün #1D967C für den Vorrat, die Warnzone in Amber. Jeder Zufluss pulst im eigenen Takt, damit man sieht, dass sie sich abwechseln und überlagern.&quot;
+VO Demo: &quot;Denken Sie an die Zahl hinter Ihrer SKU. Eine F64 hat vierundsechzig CU und kostet reserviert um die fünftausend Euro im Monat. Aus diesem einen Vorrat bedienen sich alle gleichzeitig: jede Berichtsabfrage, jede geplante Aktualisierung, jede Data-Factory-Pipeline, jede Warehouse-Abfrage. Es gibt keine getrennten Spuren für interaktiv und Hintergrund. Alles greift in denselben Topf.&quot;
+PAYOFF (ON-SCREEN nummeriert): „Merksatz 1: Eine langsame Aktualisierung und ein langsamer Report sind kein Zufall, sie konkurrieren um dieselben CU.&quot;
+VO Payoff: &quot;Das ist der erste Merksatz, und Sie können ihn heute Nachmittag anwenden. Ihre nächtliche Aktualisierung und der Report am Morgen sind keine getrennten Welten, sie greifen in denselben Vorrat.&quot;
+RE-HOOK: &quot;Bleibt die Frage, warum Sie eine Lastspitze im Metrics-Bild trotzdem kaum sehen. Das liegt an einem Mechanismus mit dem Namen Smoothing.&quot;</p><p>[2:10-3:40] VALUE BEAT 2: Was macht Smoothing? (MODALITY: data-viz)
+CLAIM (ON-SCREEN Text-Card): „Smoothing verteilt eine kurze Lastspitze rechnerisch über Minuten oder sogar 24 Stunden.&quot;
+VO Claim: &quot;Fabric verrechnet eine Lastspitze nicht in der Sekunde, in der sie passiert. Es verteilt den Verbrauch über ein Zeitfenster in die Zukunft. Das ist Smoothing.&quot;
+DEMO (DATA-VIZ, animiert): &quot;Links eine echte Spitze, ein schmaler, sehr hoher Balken auf der CU-Achse. Ein Pfeil mit der Beschriftung ‚Smoothing&#x27; greift die Spitze und zieht sie rechts in ein flaches, breites Plateau über vierundzwanzig Stunden auseinander. Fläche unter beiden Kurven bleibt sichtbar gleich groß, die Höhe schrumpft auf einen Bruchteil. Y-Achse CU, X-Achse Uhrzeit über einen Tag.&quot;
+VO Demo: &quot;Interaktive Aktionen, also Klicks im Bericht, werden über etwa fünf Minuten geglättet. Hintergrund-Aktionen wie eine geplante Aktualisierung werden über volle vierundzwanzig Stunden verteilt. Eine Aktualisierung, die in zwei echten Minuten sechzig CU-Minuten frisst, erscheint in der Kurve als dünner, langer Strich über den ganzen Tag.&quot;
+PAYOFF (ON-SCREEN nummeriert): „Merksatz 2: Die geglättete Kurve zeigt nie den Moment der Spitze, sondern ihren über Stunden verteilten Abdruck.&quot;
+VO Payoff: &quot;Zweiter Merksatz. Was Sie im Standardbild sehen, ist die geglättete Kurve, also der über Stunden verteilte Abdruck, und niemals der scharfe Moment selbst.&quot;
+RE-HOOK: &quot;Solange der Topf groß genug ist, ist das gut so. Wird er zu klein, kippt Smoothing in etwas anderes. Ab hier drosselt Fabric.&quot;</p><p>[3:40-5:20] VALUE BEAT 3: Ab wann drosselt Fabric wirklich? (MODALITY: custom animation)
+CLAIM (ON-SCREEN Text-Card): „Throttling hängt nicht an der Auslastung, sondern daran, wie viel Zukunft Sie schon verbraucht haben.&quot;
+VO Claim: &quot;Jetzt der wichtigste Teil. Wenn Sie dauerhaft mehr verbrauchen, als der Topf pro Zeitfenster hergibt, schiebt Fabric den Überhang in die Zukunft. Diese geliehene Zukunft wird in Minuten gemessen, und an drei Schwellen passiert jeweils etwas Neues.&quot;
+DEMO (CUSTOM ANIMATION): &quot;Ein CU-Meter füllt sich über die Volllinie hinaus. Der Überlauf fließt sichtbar in ein zweites Feld mit dem Namen ‚geliehene Zukunft, in Minuten&#x27;. Drei Tore stehen hintereinander und leuchten nacheinander auf, während der Zähler steigt: bei 10 Minuten Tor eins, Interactive Delay, in Amber. Bei 60 Minuten Tor zwei, Interactive Rejection, in Rot. Bei 24 Stunden Tor drei, Background Rejection, in Dunkelrot. Vor dem geschlossenen roten Tor stauen sich kleine Request-Symbole sichtbar auf.&quot;
+VO Demo: &quot;Bis zehn Minuten geliehener Zukunft merken Sie nichts, Smoothing fängt es ab. Zwischen zehn und sechzig Minuten kommt Interactive Delay: jede interaktive Abfrage bekommt eine künstliche Verzögerung, der Report ruckelt. Zwischen sechzig Minuten und vierundzwanzig Stunden kommt Interactive Rejection: interaktive Abfragen werden abgewiesen, der Report öffnet gar nicht mehr. Über vierundzwanzig Stunden kommt Background Rejection, dann brechen sogar die Aktualisierungen ab.&quot;
+PAYOFF (ON-SCREEN nummeriert): „Merksatz 3: Die erste Verzögerung startet schon bei 10 geliehenen Minuten, lange bevor die Auslastung dramatisch aussieht.&quot;
+VO Payoff: &quot;Dritter Merksatz. Die erste Drosselung greift bei zehn geliehenen Minuten, also lange bevor irgendeine Prozentzahl alarmierend wirkt.&quot;
+RE-HOOK: &quot;Und damit sind wir beim teuersten Trugschluss in Fabric: der Durchschnitts-Auslastung.&quot;</p><p>[5:20-6:50] VALUE BEAT 4: Warum stimmt die Durchschnitts-Auslastung nicht? (MODALITY: screen-record)
+CLAIM (ON-SCREEN Text-Card): „Die CU-Prozent-Kachel ist ein Durchschnitt und blendet genau die Spitzen aus, die drosseln.&quot;
+VO Claim: &quot;Öffnen wir die Fabric Capacity Metrics App. Die große Kachel oben zeigt CU-Auslastung in Prozent, und die steht oft harmlos bei fünfzig oder sechzig. Der Haken: das ist ein Durchschnitt über das ganze Zeitfenster.&quot;
+DEMO (SCREEN-RECORD, echte Metrics App): &quot;Cursor-Hervorhebung auf die große Auslastungs-Kachel, sie zeigt 60 Prozent. Dann Wechsel auf den Reiter ‚Throttling&#x27;. Drei Kurven werden sichtbar: Interactive Delay, Interactive Rejection, Background Rejection, jeweils in Prozent der geliehenen Zukunft. Zoom auf 6:30 Uhr morgens, dort schießt die Interactive-Delay-Kurve auf hundertzwanzig Prozent hoch, genau während die nächtliche Aktualisierung noch nachwirkt. Split-Screen: links die ruhige 60-Prozent-Kachel, rechts die 120-Prozent-Spitze, gleicher Zeitpunkt.&quot;
+VO Demo: &quot;Ich wechsle auf den Reiter Throttling. Hier sehen Sie drei Kurven für die drei Stufen. Und schauen Sie, um halb sieben morgens schießt die Interactive-Delay-Kurve auf hundertzwanzig Prozent, genau während die nächtliche Aktualisierung noch nachwirkt. Die große Auslastungskachel daneben? Immer noch sechzig Prozent. Beides ist zur selben Sekunde wahr.&quot;
+PAYOFF (ON-SCREEN nummeriert): „Merksatz 4: Nicht die Auslastungs-Kachel prüfen, sondern den Throttling-Reiter mit den drei Zukunfts-Kurven.&quot;
+VO Payoff: &quot;Vierter Merksatz. Lassen Sie die große Prozent-Kachel links liegen und gehen Sie direkt auf den Throttling-Reiter. Dort steht, ob gedrosselt wird.&quot;
+RE-HOOK: &quot;Sie sehen jetzt, dass gedrosselt wird. Aber wer frisst die CU? Das steht einen Klick tiefer.&quot;</p><p>[6:50-8:20] VALUE BEAT 5: Wo finde ich, was die Capacity auffrisst? (MODALITY: talking head → screen-record)
+CLAIM (ON-SCREEN Text-Card): „Der Timepoint-Drilldown zeigt sekundengenau, welche Operation die CU verbraucht hat.&quot;
+VO Claim (talking head): &quot;Der beste Teil der Metrics App wird fast immer übersehen, dabei nimmt er Ihnen das Raten komplett ab.&quot;
+DEMO (SCREEN-RECORD): &quot;Klick in der Throttling-Kurve genau auf die Spitze um 6:30. Das öffnet die Timepoint-Detailtabelle. Sie listet jede einzelne Operation in diesem Dreißig-Sekunden-Fenster, sortiert nach CU-Verbrauch. Cursor-Hervorhebung auf die oberste Zeile: eine Dataflow-Aktualisierung, die das komplette Modell neu importiert. Zeile darunter: ein einzelnes DirectQuery-Measure, das bei jedem Klick die Quelle anfragt. Kurzer Zoom-Punch auf die CU-Spalte, damit die Zahlen lesbar sind.&quot;
+VO Demo: &quot;Ich klicke in der Kurve auf genau den Zeitpunkt der Spitze. Das öffnet die Timepoint-Detailtabelle. Sie listet jede Operation in diesem Dreißig-Sekunden-Fenster, sortiert nach Verbrauch. Ganz oben eine Dataflow-Aktualisierung, die das komplette Modell neu importiert. Darunter ein DirectQuery-Measure, das bei jedem Klick die Quelle anfragt. Jetzt haben Sie Namen statt Vermutungen.&quot;
+PAYOFF (ON-SCREEN nummeriert): „Merksatz 5: Auf die Throttling-Spitze klicken, die Timepoint-Tabelle lesen, den obersten Verbraucher benennen.&quot;
+VO Payoff: &quot;Fünfter Merksatz. Auf die Spitze klicken, die Timepoint-Tabelle öffnen, den obersten Eintrag benennen. Das ist Ihr Verursacher, mit Uhrzeit und CU-Zahl.&quot;
+RE-HOOK: &quot;Bleibt die wichtigste Frage. Was machen Sie am Montag ganz konkret dagegen?&quot;</p><p>[8:20-10:20] Was machen Sie am Montag dagegen? (MODALITY: screen-record + b-roll)
+VO: &quot;Vier Hebel, von schnell zu gründlich.&quot;
+VO: &quot;Erstens: Verschieben Sie schwere Aktualisierungen und Pipelines in die Nacht, weg von der interaktiven Hauptlast am Morgen. Hintergrund wird über vierundzwanzig Stunden geglättet, verteilte Last drosselt seltener.&quot;
+(B-roll: Screen-Record des Aktualisierungs-Zeitplans, eine Uhrzeit wird von 8:00 auf 2:00 nachts gezogen.)
+VO: &quot;Zweitens: Senken Sie den Verbrauch pro Operation. Ein sauberes Sternschema, inkrementelle Aktualisierung statt Voll-Import, weniger DirectQuery. Jede eingesparte CU-Minute ist eine, die keine Zukunft leihen muss.&quot;
+(ON-SCREEN: kurze Liste „Sternschema · inkrementell · weniger DirectQuery&quot;.)
+VO: &quot;Drittens: Wenn die Last dauerhaft zu hoch ist, ist die größere SKU ehrlich richtig. Aber erst, wenn die ersten beiden Hebel ausgereizt sind, sonst zahlen Sie ein paar tausend Euro im Monat für Ihre eigene Ineffizienz.&quot;
+VO: &quot;Und viertens, die versprochene Einstellung: Surge Protection. In den Capacity-Einstellungen im Admin-Portal setzen Sie eine Obergrenze für den Hintergrund-Verbrauch. Verbraucht eine Aktualisierung viel zu viel, wird sie gedrosselt, bevor Ihre interaktiven Nutzer abgewiesen werden. Die meisten Teams wissen nicht, dass es diesen Regler gibt, dabei schützt genau er den Report am Morgen.&quot;
+(SCREEN-RECORD: Admin-Portal, Capacity-Einstellungen, der Surge-Protection-Regler wird auf eine Obergrenze gezogen. ON-SCREEN: „Surge Protection: Obergrenze für Hintergrund-Verbrauch&quot;.)
+VO (Payoff des Open Loops): &quot;Das war die Einstellung vom Anfang. Kostet nichts extra und rettet Ihnen den Morgen.&quot;</p><p>[10:20-12:00] Zusammenfassung und Ihr nächster Schritt (MODALITY: on-screen text → talking head)
+RECAP (ON-SCREEN, kinetische Liste, Zeile für Zeile eingeblendet):
+„1. Alle Workloads teilen sich einen CU-Topf.
+2. Smoothing verteilt jede Spitze über Stunden.
+3. Throttling greift ab 10 geliehenen Minuten.
+4. Throttling-Reiter prüfen, nicht die Auslastungs-Kachel.
+5. Die Timepoint-Tabelle nennt den Verursacher.&quot;
+VO Recap: &quot;Kurz zusammengefasst, und damit können Sie sofort arbeiten. Alle Workloads teilen sich einen CU-Topf. Smoothing verteilt jede Spitze über Stunden, deshalb sieht der Durchschnitt harmlos aus. Throttling greift schon bei zehn geliehenen Minuten. Prüfen Sie den Throttling-Reiter, nicht die Auslastungs-Kachel. Und die Timepoint-Tabelle nennt Ihnen den Verursacher beim Namen. Setzen Sie dazu Surge Protection, und Ihre Morgen-Reports überstehen die Nacht-Aktualisierung.&quot;
+VO CTA (talking head): &quot;Wenn Sie vorher wissen wollen, ob sich Fabric für Sie überhaupt lohnt und wie groß Ihre Capacity wirklich sein muss, laden Sie unsere Fabric-Readiness-Checkliste unten in der Beschreibung. Die ist kostenlos, und Sie brauchen uns dafür nicht. Und wenn Ihre Capacity gerade drosselt und Sie den Verursacher nicht sauber isoliert bekommen, machen wir bei CaseWhen genau diesen Fabric-Readiness- und Capacity-Check mit Ihnen. Ganz ohne Pitch, einfach ein Termin, an dem wir Ihre Zahlen gemeinsam durchgehen. Der Link steht unten, und im nächsten Video zerlegen wir die inkrementelle Aktualisierung, die hier oft die größte Einsparung bringt.&quot;
+(ON-SCREEN: zwei Link-Cards „Fabric-Readiness-Checkliste (kostenlos)&quot; und „Mit CaseWhen sprechen&quot;. Eine schlichte Abo-Zeile, plain.)</p><h2>Description
+Fabric Capacity drosselt Ihre Reports, obwohl die CU-Auslastung harmlos aussieht, hier ist der Grund und wie Sie den Verursacher selbst finden.
+Kostenlose Fabric-Readiness-Checkliste: [Link] · Mit CaseWhen arbeiten: [Link]</h2><p>0:00 Warum wird mein Report langsam, obwohl die Auslastung passt?
+0:45 Was ist eine Capacity und was sind CU?
+2:10 Was macht Smoothing?
+3:40 Ab wann drosselt Fabric wirklich?
+5:20 Warum stimmt die Durchschnitts-Auslastung nicht?
+6:50 Wo finde ich, was die Capacity auffrisst?
+8:20 Was machen Sie am Montag dagegen?
+10:20 Zusammenfassung und Ihr nächster Schritt</p><p>In diesem Video geht es um Fabric Capacity und darum, warum eine Capacity Ihre Power-BI-Reports drosselt, obwohl die CU-Auslastung in der Fabric Capacity Metrics App normal wirkt. Sie lernen, wie Smoothing eine kurze Lastspitze über Stunden verteilt, ab welchen Schwellen Throttling greift, also Interactive Delay ab zehn geliehenen Minuten, Interactive Rejection ab sechzig und Background Rejection ab vierundzwanzig Stunden, und wie Sie über den Throttling-Reiter und den Timepoint-Drilldown den echten Verursacher finden. Am Ende zeigen wir die vier Hebel für den Montag, inklusive Surge Protection als Obergrenze für den Hintergrund-Verbrauch, damit Ihre interaktiven Nutzer nicht unter der nächtlichen Aktualisierung leiden.</p><p>#MicrosoftFabric #FabricCapacity #PowerBI #DataGovernance #BusinessIntelligence</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

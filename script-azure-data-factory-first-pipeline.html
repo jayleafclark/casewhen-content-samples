@@ -1,0 +1,203 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Azure Data Factory: Your First Pipeline in 15 Minutes (No Da</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Azure Data Factory: Your First Pipeline in 15 Minutes (No Data Engineering Needed)
+Host: Austin · Cluster: azure-de · Target: 15 min · Primary keyword: azure data factory</p><h2>Chapters
+- 0:00 What even is Azure Data Factory?
+- 1:20 Do I need to be a data engineer for this?
+- 2:50 How do I create one in the Azure portal?
+- 4:20 How does it reach my data?
+- 6:00 How do I move data from one place to another?
+- 7:45 Did the pipeline really run?
+- 9:30 How do I run it every night on its own?
+- 11:00 What did that run cost, and where do I go next?</h2><h2>Script</h2><p>[0:00-0:12] HOOK, style = 3-second payoff demo
+Spoken: &quot;This pipeline copies yesterday&#x27;s sales into a clean database table every night, on its own, and I built the whole thing in Azure Data Factory without writing a line of code.&quot;
+(MODALITY: screen-record, cold cut to the finished pipeline running: green ticks in the output panel, rows landing in an Azure SQL table, a Power BI report refreshing on top of it.)
+(ON-SCREEN: keyword card &quot;Azure Data Factory&quot;.)</p><p>[0:12-0:40] PROMISE + STAKES + OPEN LOOP
+Spoken: &quot;By the end of this you&#x27;ll have built a working pipeline that moves data from one place to another on a schedule, and you&#x27;ll understand every part of it. If you keep downloading CSVs and pasting them into a Power BI model by hand, this is the thing that ends that. About 94% of business spreadsheets used to make decisions carry errors, and a lot of those creep in from doing the same import by hand over and over. And near the end I&#x27;ll show you the one setting that decides whether your nightly copy costs a few cents or reloads your entire history every single night. We stand these pipelines up for BI teams in Berlin most weeks, so this is the plain version, no data engineering background needed.&quot;
+(MODALITY: talking head, Austin to camera, one hard cut to a lower-third at &quot;94%&quot;.)
+(ON-SCREEN: stat card &quot;94% of business spreadsheets used in decision-making contain errors. Poon et al., 2024.&quot; Then a teaser card: &quot;One setting = cents vs. a full reload every night&quot;.)</p><p>[0:40-1:20] VALUE BEAT 1, what it is
+CLAIM (on-screen card): &quot;Azure Data Factory moves and reshapes data on a schedule.&quot;
+Spoken: &quot;So what is this thing. Azure Data Factory is a managed service in Azure that picks data up from one place, optionally reshapes it, and drops it somewhere else, on a schedule you set. That&#x27;s the job. For a BI person the common version looks like this: files land in storage, or rows sit in some source database, and you want them clean and sitting in one table that Power BI reads from. Instead of you doing that copy by hand each morning, Data Factory does it at 2am while you&#x27;re asleep.&quot;
+DEMO (b-roll): (MODALITY: b-roll, an analyst dragging CSV files into Power BI by hand, copy-pasting cells, then a red error on a refresh; the messy manual loop.)
+PAYOFF (numbered takeaway on-screen): &quot;Takeaway 1: it&#x27;s the step that lands clean data in your reporting table before anyone opens the report.&quot;
+RE-HOOK: &quot;You don&#x27;t need an engineering title to run it. Next, the three parts it&#x27;s built from, and once those land, the whole tool lands.&quot;</p><p>[1:20-2:50] VALUE BEAT 2, the three building blocks
+CLAIM (on-screen card): &quot;Every pipeline is built from three parts: linked services, datasets, and the pipeline itself.&quot;
+Spoken: &quot;Data Factory has three building blocks, and that&#x27;s most of it. First, a linked service. That&#x27;s the connection: the address and the login for a place your data lives, such as a storage account or an Azure SQL database. Second, a dataset. That sits on top of a linked service and points at one specific thing inside it: one file, or one table. Third, the pipeline. That&#x27;s the container for the steps you want to run, and each step is called an activity. So the shape is: a pipeline contains an activity, the activity points at datasets, and each dataset sits on a linked service that knows how to log in.&quot;
+DEMO (custom animation): (MODALITY: animation, three nested boxes snap into place. A &quot;Linked service&quot; badge plugs into a cloud-storage icon, showing a connection with a small padlock. A &quot;Dataset&quot; card drops on top of it, labelled with one table name, an arrow pointing down into the linked service. A &quot;Pipeline&quot; container slides in with a single &quot;Copy&quot; activity block; two arrows run from the Copy block down to two datasets. Brand colour #1D967C on the active box, everything else muted. Keyword lower-third: &quot;Linked service · Dataset · Pipeline&quot;.)
+PAYOFF (numbered takeaway on-screen): &quot;Takeaway 2: linked service = the connection, dataset = the pointer, pipeline = the steps. Learn those three words and nothing else in the tool is confusing.&quot;
+RE-HOOK: &quot;That&#x27;s the map. Now let&#x27;s build one for real, starting in the Azure portal.&quot;</p><p>[2:50-4:20] VALUE BEAT 3, create the factory
+CLAIM (on-screen card): &quot;Creating a Data Factory takes about a minute, and it&#x27;s free until a pipeline runs.&quot;
+Spoken: &quot;In the Azure portal, search for Data Factory and choose create. You pick a subscription, a resource group, a region close to your data, and a name. Leave the defaults for the rest. Hit review and create, and in under a minute you&#x27;ve got an empty factory. Open it, click Launch studio, and that drops you into the design surface where you build the pipelines. This part costs you nothing on its own, by the way. You only pay when pipelines run.&quot;
+DEMO (screen-record): (MODALITY: screen-record, Azure portal, cursor searches &quot;Data Factory&quot;, clicks Create, fills the create blade field by field, the cursor landing on each field, clicks Review + create, then the green deployment-complete screen, then Launch studio opening the ADF Studio canvas. Zoom-punch on the &quot;Launch studio&quot; button.)
+PAYOFF (numbered takeaway on-screen): &quot;Takeaway 3: the factory itself is free to create, so spin one up and poke around before you commit to anything.&quot;
+RE-HOOK: &quot;Empty factory&#x27;s open. Now we teach it where your data lives.&quot;</p><p>[4:20-6:00] VALUE BEAT 4, connect to your data
+CLAIM (on-screen card): &quot;You connect by making a linked service, then a dataset on top of it.&quot;
+Spoken: &quot;Inside the studio, go to Manage, then linked services, and click new. Pick the type that matches where your data is. For this build I&#x27;ve got a CSV landing in Azure Blob Storage, and I want it in an Azure SQL database, so I make two linked services, one for each. You give it the account, you give it the login, you test the connection, you save. Then over in the author tab I make two datasets: one points at the CSV file in blob, one points at the target table in SQL. When data moves, it runs through something called an integration runtime, which is just the compute that does the moving. The default one is serverless and Azure runs it for you. If your source sat inside your own office network you&#x27;d install a self-hosted runtime there instead, but for cloud to cloud you don&#x27;t touch it.&quot;
+DEMO (custom animation, then screen-record): (MODALITY: animation, the integration runtime shown as a compute box in the middle; bytes flow from a Blob CSV on the left, through the IR box, into an Azure SQL table on the right. A toggle shows &quot;Azure IR (serverless, default)&quot; versus &quot;Self-hosted IR (inside your network)&quot;; the self-hosted option greys out for this cloud-to-cloud build.) Then cut to (screen-record, Manage &gt; Linked services &gt; New, choosing Azure Blob Storage, filling the connection, clicking Test connection, which goes green; repeat for Azure SQL; then the Author tab creating two datasets, the cursor landing on the file path and the table name.)
+PAYOFF (numbered takeaway on-screen): &quot;Takeaway 4: two linked services and two datasets, one for the source, one for the destination, and both ends are wired.&quot;
+RE-HOOK: &quot;Both ends are wired. Now the part everyone came for: moving the data.&quot;</p><p>[6:00-7:45] VALUE BEAT 5, the copy activity
+CLAIM (on-screen card): &quot;Your first pipeline is a single Copy activity, source to destination.&quot;
+Spoken: &quot;Back in the author tab, create a new pipeline, and from the activities list drag in a Copy data activity. It has two halves. Source, where you pick the CSV dataset. And sink, which is the word Data Factory uses for the destination, where you pick the SQL table dataset. In the mapping tab you line up which column from the file goes into which column in the table. Data Factory can guess the mapping for you, and for a clean file it usually gets it right, but always check it, because a wrong mapping is how numbers end up in the wrong column and nobody notices for a month. That&#x27;s the whole first pipeline: one activity, a source, a sink, a mapping.&quot;
+DEMO (custom animation): (MODALITY: animation, a Copy activity block in the centre with two labelled sockets, &quot;Source&quot; and &quot;Sink&quot;. The Blob CSV dataset snaps into Source, the Azure SQL dataset snaps into Sink. Column-mapping lines draw between file columns and table columns, one lighting up in #1D967C as it connects; one deliberately mis-maps and flashes amber as a warning, then corrects.)
+PAYOFF (numbered takeaway on-screen): &quot;Takeaway 5: one Copy activity is the whole first pipeline, and you can build it in about two minutes once the datasets exist.&quot;
+RE-HOOK: &quot;It&#x27;s built. But a pipeline that just sits there is worthless. Let&#x27;s run it.&quot;</p><p>[7:45-9:30] WORKED RUN, did it really run?
+CLAIM (on-screen card): &quot;Test with Debug, confirm in the Monitor tab.&quot;
+Spoken: &quot;Before you schedule anything, you run it once by hand. At the top of the pipeline there&#x27;s a Debug button. Click it, and Data Factory runs the pipeline right now with what you&#x27;ve built. Watch the output panel at the bottom. You&#x27;ll see the Copy activity go from queued, to in progress, to succeeded, with a green tick and a row count. That row count is your first sanity check. If it copied ten thousand rows and your file had ten thousand rows, good. If the activity turns red, click the error icon and it tells you in plain text what went wrong, usually a login that didn&#x27;t take or a column type that didn&#x27;t match. Then go to the Monitor tab on the left. Every run you&#x27;ve ever done is listed there with its status and how long it took. This is where you live once things are running, because it&#x27;s how you know last night&#x27;s copy went green before anyone trusts the report on top of it.&quot;
+DEMO (talking head, then screen-record): (MODALITY: talking head, Austin says the row-count line straight to camera, slow single shot for the one line that matters.) Then cut to (screen-record, cursor clicks Debug; the output panel shows the Copy activity progressing queued to in progress to succeeded with a green tick and &quot;rows copied: 10,000&quot;; a zoom-punch on the row count. Then a deliberate red run: click the error icon, a plain-text error message appears. Then the Monitor tab with a list of pipeline runs, statuses, and durations.)
+PAYOFF (habit card on-screen): &quot;The habit that saves you: check Monitor before you trust the numbers, not after someone complains.&quot;
+RE-HOOK: &quot;You&#x27;ve run it once. Now let&#x27;s make it run every night without you.&quot;</p><p>[9:30-11:00] SCHEDULE + open-loop payoff
+CLAIM (on-screen card): &quot;A schedule trigger runs it nightly. A watermark keeps it cheap.&quot;
+Spoken: &quot;To make it repeat, you add a trigger. Click Add trigger, new, and choose Schedule. Set it to run every day at, say, 2am, pick the time zone, and save. Publish your changes, and from tonight the pipeline runs on its own on that schedule. Now the setting I promised you at the start. By default, a lot of first pipelines copy the entire source every single run. Ten thousand rows tonight, ten thousand plus tomorrow&#x27;s, and it keeps growing, and you pay to move all of it every night, forever. The fix is a watermark. You store the date or the id of the last row you loaded, and in the source query you only ask for rows newer than that. So each night you copy yesterday&#x27;s new rows and nothing else. On a small table you won&#x27;t feel the difference. On a table with years of history, a full reload every night is the difference between paying cents and paying real money for data you already moved. Set the watermark early, before the table gets big. That&#x27;s the open loop paid off. Incremental copying beats a full reload, and it&#x27;s a small query change to set up.&quot;
+DEMO (custom animation, then screen-record): (MODALITY: animation, a clock ticks to 02:00 and the pipeline fires. Then a watermark bookmark labelled &quot;last loaded date&quot; sits on a long table; only the rows below the bookmark, the newest ones, light up in #1D967C and flow through the Copy activity, while the archived rows above sit greyed and still. A side counter contrasts &quot;Full reload: all rows, every night&quot; against &quot;Incremental: new rows only&quot;.) Then cut to (screen-record, Add trigger &gt; New &gt; Schedule, setting recurrence to daily at 02:00 with a time-zone dropdown, Save, then the Publish all button with the change count.)
+PAYOFF (numbered takeaway on-screen): &quot;Takeaway: a watermark copies only new rows, which is what keeps the bill small.&quot;
+RE-HOOK: &quot;That&#x27;s a complete pipeline, running nightly, staying cheap. Two things left: what it cost, and where you take this next.&quot;</p><p>[11:00-12:20] PAYOFF, recap + cost
+Spoken: &quot;Quick recap of what you can do now. One, you know the three building blocks: a linked service is the connection, a dataset is the pointer to a file or table, and a pipeline contains the steps. Two, the factory is free to create, so there&#x27;s no reason not to spin one up today. Three, your first pipeline is a single Copy activity with a source and a sink. Four, a schedule trigger runs it nightly with nobody watching. Five, a watermark copies only new rows, which is what keeps the bill small. On cost, quickly: you&#x27;re billed mostly by how much the copy runs and how much compute it uses, measured in what Azure calls data integration units, plus a tiny charge per activity run. A small nightly incremental copy lands at around a few cents a day. A full reload of a big table every night is where people get a surprise on the invoice, which is exactly why the watermark matters.&quot;
+(MODALITY: data-viz, five takeaway cards stack in as kinetic type, each ticking green. Then a cost meter: a small bar for &quot;incremental nightly copy&quot; beside a tall bar for &quot;full reload nightly&quot;, labelled with data integration units and activity runs. No currency total, just the relative shape.)
+(ON-SCREEN: recap list of the five takeaways.)</p><p>[12:20-13:15] SOFT CTA
+Spoken: &quot;If you want to build this without stopping to take notes, I&#x27;ve put the exact steps from this pipeline into a short setup checklist, linked below, free, no email gymnastics. Grab that and follow along on your own data. And if you&#x27;re standing up a proper Azure data foundation, pipelines feeding a warehouse, reports your finance team relies on, that&#x27;s the work we do at CaseWhen. There&#x27;s a link in the description to talk to us about the build, no pitch, just a conversation about what you&#x27;re moving and where. Next up, if you want the destination side done right, watch the one on modelling that SQL table into a star schema so Power BI stays fast.&quot;
+(MODALITY: talking head, Austin to camera, steady, one link card lower-third.)
+(ON-SCREEN: link card &quot;Azure Data Factory first-pipeline checklist (free)&quot; then &quot;Talk to CaseWhen about your Azure build&quot;.)</p><h2>Description
+Build your first Azure Data Factory pipeline start to finish, in plain language, for BI people who aren&#x27;t data engineers.</h2><p>Free first-pipeline setup checklist: [link] · Work with CaseWhen on your Azure data build: [link]</p><p>0:00 What even is Azure Data Factory?
+1:20 Do I need to be a data engineer for this?
+2:50 How do I create one in the Azure portal?
+4:20 How does it reach my data?
+6:00 How do I move data from one place to another?
+7:45 Did the pipeline really run?
+9:30 How do I run it every night on its own?
+11:00 What did that run cost, and where do I go next?</p><p>This is a full Azure Data Factory walkthrough for Power BI and analyst folks who want to stop importing CSVs by hand. We cover the three building blocks (linked services, datasets, and the pipeline), creating a Data Factory in the Azure portal, connecting to Azure Blob Storage and an Azure SQL database, building a single Copy activity from source to sink, running it with Debug, confirming it in the Monitor tab, scheduling it with a trigger, and adding a watermark for incremental loads so a nightly copy stays cheap instead of reloading your whole history. By the end you&#x27;ll have a working pipeline that moves clean data into a reporting table on a schedule.</p><p>Resources: first-pipeline checklist [link] · star schema modelling video [link] · Azure Data Factory docs [link]</p><p>#AzureDataFactory #Azure #PowerBI #DataEngineering #MicrosoftFabric</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

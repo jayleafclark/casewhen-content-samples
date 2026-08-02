@@ -1,0 +1,178 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Single Source of Truth in Business Intelligence: Why Your Nu</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Single Source of Truth in Business Intelligence: Why Your Numbers Never Agree, and What It Takes to Fix It</p><p>Host: Austin · Cluster: modeling-kpi · Target: 11 min · Primary keyword: single source of truth business intelligence</p><h2>Chapters
+- 0:00 Why do sales and finance keep bringing different numbers to the same meeting?
+- 0:55 So what does single source of truth really mean in plain terms?
+- 2:25 Why do we already have five versions of the same number?
+- 4:00 What does one agreed number look like under the hood?
+- 5:35 What does this buy us in money and time?
+- 7:10 Isn&#x27;t this just buying another reporting tool?
+- 8:45 What do we put in place first?
+- 10:10 Where does a mid-sized business start?</h2><h2>Script</h2><p>[0:00-0:12] HOOK (blunt callout)</p><p>(MODALITY: 3-second cold-cut screen-record of two dashboards side by side, both labelled &quot;Revenue&quot;, showing two different totals, then hard cut to talking head)</p><p>&gt; Your sales report shows one revenue number. Finance shows another. And the board meeting turns into an argument about whose spreadsheet is right instead of what to do next.</p><p>(ON-SCREEN: keyword card, lower-third &quot;SINGLE SOURCE OF TRUTH&quot;, two revenue tiles disagreeing behind it)</p><p>[0:12-0:55] PROMISE + STAKES + OPEN LOOP</p><p>(MODALITY: talking head, cutting to quick b-roll of a leadership team around a table looking at two laptops)</p><p>&gt; By the end of these eleven minutes you&#x27;ll know exactly what a single source of truth is, what it takes to get one, and what it buys a mid-sized business. In plain terms, no database lecture. Here&#x27;s why it&#x27;s worth your time. Only 40 percent of executives say they always trust the data they run on. Talend measured that. So more than half your leadership walks into decisions second-guessing the numbers on the slide. That&#x27;s slow closes, stalled meetings, and calls made on figures nobody stands behind.</p><p>(ON-SCREEN: stat card &quot;Only 40% of executives always trust their data. Source: Talend&quot;)</p><p>&gt; We fix this for companies in Berlin most weeks, so this comes from real reporting setups, not theory. Stay to the end and I&#x27;ll show you why the business running three reporting tools usually has more versions of the truth, not fewer, and what to do instead.</p><p>(ON-SCREEN: open-loop teaser card &quot;3 tools = more disagreement?&quot;)</p><p>Then a hard cut into Beat 1.</p><p>[0:55-2:25] VALUE BEAT 1 (what it really means)</p><p>(MODALITY: custom animation)</p><p>CLAIM (on-screen text card):
+&gt; A single source of truth is one agreed definition of each number that every report reads from.</p><p>PROOF (custom animation of the mechanism):
+&gt; Most people picture one giant database somewhere. That&#x27;s not it. A single source of truth is an agreement, backed by one place the numbers live. Take the word &quot;revenue&quot;. Right now finance might count it after refunds, sales might count it the day the order lands, and marketing might include renewals. Three honest answers, three different totals, all called revenue. A single source of truth means the business decides once what revenue means, that definition gets built one time in one place, and every report, every dashboard, every export pulls from that one place. Nobody redefines it in their own spreadsheet. When someone asks &quot;what was revenue last month&quot;, there is one answer, and it&#x27;s the same answer whoever asks.</p><p>(ANIMATION SPEC: the word &quot;Revenue&quot; sits in the centre. Three arrows pull it toward three separate cards, each showing a slightly different total, each labelled with a different rule, the shared &quot;Revenue&quot; label flickering amber as a conflict marker. Then rewind: the three cards merge into one agreed definition box with a green outline, and clean arrows fan out from it to many small report tiles, all showing the same total. Sole brand colour #1D967C on the agreed box; amber used for the conflict state only, per brand.)</p><p>PAYOFF (numbered takeaway card):
+&gt; Takeaway one: a single source of truth is one agreed definition per number, built once, that everything reads from. It&#x27;s an agreement first, and a place second.</p><p>RE-HOOK:
+&gt; Simple enough on a slide. So why does almost every growing company end up with five versions of the same number anyway? That&#x27;s next.</p><p>[2:25-4:00] VALUE BEAT 2 (why the versions pile up)</p><p>(MODALITY: screen-record, real spreadsheets and exports)</p><p>CLAIM (on-screen text card):
+&gt; You get five versions of the truth because five people each built their own copy to get their job done.</p><p>PROOF (screen-record the real pattern):
+&gt; Here&#x27;s how it happens, and it&#x27;s nobody&#x27;s fault. Sales needs a number for a Monday review, the central report is missing a field, so an analyst exports to Excel and adds a column. Finance does the same for the board pack. Operations builds a third for their own targets. Each copy made sense on its own. Six months later there are five spreadsheets, five slightly different revenue figures, and five people who each trust their own. Look at this shared drive from a real engagement. Same report name, four times, with &quot;final&quot;, &quot;final v2&quot;, and &quot;use this one&quot; in the file names. This is what people mean when they say too many versions of the truth. It&#x27;s what happens when there&#x27;s no single agreed place to read from, so everyone builds their own. Around 82 percent of organizations say data silos disrupt their work. Zoominfo put that number on it. And close to 70 percent of dashboard work goes unused, most of it because people don&#x27;t trust it enough to drop their own copy. That&#x27;s the RevealBI figure.</p><p>(ON-SCREEN: file-list screen-record with the duplicate &quot;final / final v2 / use this one&quot; names circled, then stat cards &quot;82% say silos disrupt work. Source: Zoominfo&quot; and &quot;~70% of dashboard work goes unused. Source: RevealBI&quot;)</p><p>PAYOFF (numbered takeaway card):
+&gt; Takeaway two: versions multiply because people work around a gap in the reporting. Give them one trusted place and the copies stop breeding.</p><p>RE-HOOK:
+&gt; So the answer is one trusted place. Here&#x27;s the one part where I go under the hood, so you recognize it when your team describes it.</p><p>[4:00-5:35] VALUE BEAT 3 (what it looks like under the hood, signposted)</p><p>(MODALITY: custom animation)</p><p>CLAIM (on-screen text card):
+&gt; Under the hood, a single source of truth is one shared data model where each number is defined a single time.</p><p>PROOF (custom animation of the mechanism, plain for a non-builder):
+&gt; This is the one beat where I go a level deeper. If you don&#x27;t build reports yourself, you don&#x27;t need to memorize it. You just need to recognize it when your team says it. The place all the numbers should live has a name: the semantic model, sometimes called the data model. It&#x27;s the shared layer that sits between your raw data and every report. Your team builds it once. Inside it, they arrange the data into a clean shape, a central table of the events, sales, invoices, orders, surrounded by the things you slice by, date, product, customer, region. Then, and this is the part that matters to you, each headline number, revenue, margin, active customers, gets written one time, inside that model. Every report connects to the model instead of rolling its own math. So when the definition of revenue changes, it changes in one place and every report updates together. When your team says &quot;we need a proper semantic model&quot; or &quot;we should define the measures centrally&quot;, this is what they&#x27;re asking for, and it&#x27;s the difference between one number and five.</p><p>(ANIMATION SPEC: raw data tables on the left flow into one central &quot;semantic model&quot; box. Inside it, a clean star shape forms, a fact table in the middle, dimension tables, Date, Product, Customer, Region, snapping in with one-to-many arrows lighting up. A single &quot;Revenue&quot; measure card sits inside, defined once. From the model, clean arrows connect out to many report tiles and a small Copilot icon, all showing matching totals. Brand colour #1D967C on the model box and the measure card.)</p><p>PAYOFF (numbered takeaway card):
+&gt; Takeaway three: the fix lives in one shared model where each number is written once. You don&#x27;t build it, but now you know what &quot;good&quot; sounds like when your team asks for it.</p><p>RE-HOOK:
+&gt; That&#x27;s the how. Now the question a leader really cares about. What does one agreed number get you in money and time?</p><p>[5:35-7:10] VALUE BEAT 4 (what it buys)</p><p>(MODALITY: data-viz, animated before and after)</p><p>CLAIM (on-screen text card):
+&gt; One agreed number pays back as a faster close, meetings that decide instead of debate, and reports people believe.</p><p>PROOF (animated before/after figures):
+&gt; Let&#x27;s make it concrete. First, the close. A month-end close of eight days is considered acceptable. The strongest finance teams close in under three. SolveXia tracks that gap. A big chunk of those extra days is reconciliation, people chasing why two reports disagree. Take that away and days come off the close. Second, the cost of getting it wrong. Poor data quality costs the average organization 12.9 million a year. That&#x27;s Gartner. Wrong numbers in a pricing call or a hiring plan are expensive in a way that never shows up as a line item. Third, trust, which is what turns a report into a decision. Two-thirds of organizations say they don&#x27;t fully trust the data they run on, 67 percent, measured by Precisely and Drexel last year. One agreed number is how the other third got there. Faster close, fewer expensive mistakes, a board that acts on the report instead of arguing with it.</p><p>(ON-SCREEN: animated bar dropping from &quot;8-day close&quot; to &quot;under 3 days&quot;, source &quot;SolveXia&quot; beneath; then stat cards &quot;$12.9M/yr cost of poor data quality. Source: Gartner&quot; and &quot;67% don&#x27;t fully trust their data. Source: Precisely + Drexel, 2025&quot;)</p><p>PAYOFF (numbered takeaway card):
+&gt; Takeaway four: this earns its place on the P&amp;L. Days off the close, money saved on wrong calls, and a leadership team that trusts the slide.</p><p>RE-HOOK:
+&gt; Which raises the obvious buyer question. If it&#x27;s this good, do I just buy a better tool? Here&#x27;s why that usually backfires.</p><p>[7:10-8:45] VALUE BEAT 5 (not a shopping problem)</p><p>(MODALITY: talking head, cutting to b-roll of a procurement conversation and a stack of software logos)</p><p>CLAIM (on-screen text card):
+&gt; A single source of truth is an agreement and a model, so buying another tool on top of a messy setup makes it worse.</p><p>PROOF (talking head with b-roll):
+&gt; Here&#x27;s the open loop from the start. The company running three reporting tools usually has more versions of the truth, not fewer. Every new tool that connects straight to the raw data is another place someone can define revenue their own way. You didn&#x27;t add a source of truth, you added a fourth opinion. The fix almost never starts with buying software. Most mid-sized businesses already own what they need. Power BI, which you&#x27;re probably paying for, has the shared model built into it. The work is deciding the definitions with finance and the business, building them once in that model, and pointing reports at it. That&#x27;s a modeling and governance job, not a purchasing one. And there&#x27;s a 2026 reason this matters more than it used to. Copilot and every AI assistant you&#x27;re being sold reads that same model to answer questions. If your numbers disagree today, the AI will confidently give a wrong one tomorrow. One agreed model is what makes the AI answer correctly instead of guessing. Fix the model and you&#x27;ve made yourself AI-ready at the same time.</p><p>(ON-SCREEN: b-roll of three tool logos each drawing a separate line to a raw-data cylinder, then those lines redrawn to route through one shared model; card &quot;You already own the fix&quot;)</p><p>PAYOFF (numbered takeaway card):
+&gt; Takeaway five: don&#x27;t shop your way out of this. Decide the definitions, build them once in the model you already own, and you fix the numbers and get AI-ready in one move.</p><p>RE-HOOK:
+&gt; So where do you point your team on Monday? Here&#x27;s the short plan.</p><p>[8:45-10:10] PAYOFF: the plan, and the open loop paid off</p><p>(MODALITY: kinetic type list)</p><p>&gt; Here&#x27;s the whole thing on one screen. One, a single source of truth is one agreed definition of each number that everything reads from. It&#x27;s an agreement first. Two, versions pile up because people work around a gap in the reporting, one trusted place stops them. Three, the fix lives in one shared model where each headline number is written a single time. Four, the payback is a faster close, fewer expensive wrong calls, and a leadership team that trusts the report. Five, it starts with definitions and the model you already own, not with buying another tool, and it makes you AI-ready as a bonus.</p><p>(ON-SCREEN: numbered 1 to 5 list, each line animating in)</p><p>&gt; And the loop I owed you. The three-tool business has more disagreement because each tool is a new door onto the raw data where someone can invent their own version of a number. Close the doors, route everything through one agreed model, and the disagreements stop. More tools were never the answer. One agreed definition was.</p><p>(ON-SCREEN: callout on the &quot;route everything through one model&quot; line, three tool doors closing to one)</p><p>[10:10-11:00] SOFT CTA</p><p>(MODALITY: talking head, link cards)</p><p>&gt; If you want to see where your setup stands right now, the free Power BI Governance and Cost Scorecard is linked below. It&#x27;s a five-minute check that gives you a score, a benchmark against your peers, and your top three risks. No sales call to get it. And if your numbers still won&#x27;t reconcile, if two reports keep disagreeing and the close keeps dragging, that&#x27;s the work we do at CaseWhen. We agree the definitions with your team and build them once into a model your whole business reads from. Book a scoping call, link&#x27;s in the description, no pitch, just a look at your numbers and where the versions are coming from. Next video, I walk through what one agreed semantic model looks like on real reports, so you can see it end to end.</p><p>(ON-SCREEN: two link cards, &quot;Free Governance &amp; Cost Scorecard&quot; and &quot;Book a scoping call with CaseWhen&quot;, then a watch-next thumbnail)</p><h2>Description</h2><p>Single source of truth in business intelligence, explained for a COO or Head of Data in plain terms: what it means, what it takes to build one, and what it buys a mid-sized business. If your sales and finance reports never agree on the same number, this is why, and this is the fix.</p><p>Free Power BI Governance &amp; Cost Scorecard (5-minute check, get your score + peer benchmark + top 3 risks): https://casewhen.co/scorecard
+Work with CaseWhen (book a scoping call on your reporting): https://casewhen.co/contact</p><p>Chapters:
+0:00 Why do sales and finance keep bringing different numbers to the same meeting?
+0:55 So what does single source of truth really mean in plain terms?
+2:25 Why do we already have five versions of the same number?
+4:00 What does one agreed number look like under the hood?
+5:35 What does this buy us in money and time?
+7:10 Isn&#x27;t this just buying another reporting tool?
+8:45 What do we put in place first?
+10:10 Where does a mid-sized business start?</p><p>Resources:
+- Governance &amp; Cost Scorecard: https://casewhen.co/scorecard
+- What one agreed semantic model looks like (watch next): https://casewhen.co/youtube</p><p>A single source of truth in business intelligence means one agreed definition of each number, built one time in a shared data model, that every report and dashboard reads from. Most mid-sized businesses end up with several versions of the same figure because people export to their own spreadsheets to get their work done, which is why reports disagree and nobody fully trusts the dashboard. This video explains, in plain business terms, what a single source of truth is, why the versions pile up, what the fix looks like under the hood, and what it buys you: a faster month-end close, fewer costly wrong decisions, and a leadership team that trusts the numbers. It also covers why buying another reporting tool usually makes the problem worse, and why one agreed model is what makes Power BI Copilot and other AI assistants answer correctly.</p><p>#PowerBI #BusinessIntelligence #DataGovernance #SingleSourceOfTruth #MicrosoftFabric</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

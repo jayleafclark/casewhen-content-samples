@@ -1,0 +1,139 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · YouTube</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="on">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+.lfgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}.lfcard{display:block;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px 20px;text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s}.lfcard:hover{border-color:var(--dark);transform:translateY(-2px)}.lfl{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--dark);border-radius:6px;padding:2px 8px}.lft{display:block;margin-top:10px;font-weight:650;line-height:1.3;font-size:16px}</style><section class="ph"><div class="wrap"><div class="eb">YouTube · long-form</div><h2>64 full video scripts, gated</h2><p style="color:var(--mut);font-size:15px;margin:10px 0 0">8 to 15 minute talking-head scripts, Austin in English and Saju in German, buyer-first. Click any to read the full script with chapters, beats, b-roll notes and the CTA. Highlight any line to leave a note.</p></div></section><div class="wrap"><div class="lfgrid"><a class="lfcard" href="script-azure-data-factory.html"><span class="lfl">DE</span><span class="lft">Azure Data Factory einfach erklärt: was es tut und ob es abgeschafft wird (in 12 Minuten)</span></a><a class="lfcard" href="script-azure-synapse-einfach-erklaert.html"><span class="lfl">DE</span><span class="lft">Azure Synapse einfach erklärt: was der Dienst kann und warum er nicht tot ist</span></a><a class="lfcard" href="script-azure-synapse-zu-fabric-migration.html"><span class="lfl">DE</span><span class="lft">Von Azure Synapse zu Fabric: der Umzug, den kein Assistent für Sie macht</span></a><a class="lfcard" href="script-bedeutung-kpi.html"><span class="lfl">DE</span><span class="lft">Was bedeutet eine KPI wirklich? Die 4 Bausteine (in 11 Minuten erklärt)</span></a><a class="lfcard" href="script-bi-beratung.html"><span class="lfl">DE</span><span class="lft">Power BI Berater oder Agentur: was BI Beratung pro Tag wirklich kostet (in 12 Minuten)</span></a><a class="lfcard" href="script-datengovernance.html"><span class="lfl">DE</span><span class="lft">Datengovernance erklärt: warum sich Ihre Power BI Zahlen widersprechen (in 12 Minuten)</span></a><a class="lfcard" href="script-datenmodell-power-bi.html"><span class="lfl">DE</span><span class="lft">Das Datenmodell in Power BI erklärt: die Grundlage, die fast jeder überspringt</span></a><a class="lfcard" href="script-fabric-capacity.html"><span class="lfl">DE</span><span class="lft">Die Fabric-Capacity-Falle: warum Ihr Report langsam wird, obwohl die Auslastung passt</span></a><a class="lfcard" href="script-inkrementelle-aktualisierung-power-bi.html"><span class="lfl">DE</span><span class="lft">Inkrementelle Aktualisierung in Power BI: nur neue Daten laden (Schritt für Schritt)</span></a><a class="lfcard" href="script-kpi-dashboard-power-bi-bauen.html"><span class="lfl">DE</span><span class="lft">KPI-Dashboard in Power BI bauen: von der leeren Datei zum fertigen Board in 15 Minuten</span></a><a class="lfcard" href="script-kpi-dashboard.html"><span class="lfl">DE</span><span class="lft">KPI-Dashboard in Power BI bauen: von der leeren Datei zum fertigen Board in 13 Minuten</span></a><a class="lfcard" href="script-microsoft-fabric.html"><span class="lfl">DE</span><span class="lft">Microsoft Fabric einfach erklärt: OneLake, Capacity und die 7 Workloads in 11 Minuten</span></a><a class="lfcard" href="script-monatsabschluss-dauert-zu-lange.html"><span class="lfl">DE</span><span class="lft">Monatsabschluss dauert zu lange? Warum es zehn Tage sind und wie der Weg auf drei aussieht</span></a><a class="lfcard" href="script-power-bi-aktualisierung-langsam.html"><span class="lfl">DE</span><span class="lft">Warum Ihre Power BI Aktualisierung so langsam ist (in 12 Minuten erklärt)</span></a><a class="lfcard" href="script-power-bi-beratung.html"><span class="lfl">DE</span><span class="lft">Power BI Beratung: ein echtes Projekt von Discovery bis Livegang</span></a><a class="lfcard" href="script-power-bi-berechtigungen.html"><span class="lfl">DE</span><span class="lft">Power BI Berechtigungen: der Wildwuchs, den jedes Self-Service-Team bekommt (und wie man ihn einfängt)</span></a><a class="lfcard" href="script-power-bi-kurs.html"><span class="lfl">DE</span><span class="lft">Power BI Kurs: was er kostet und was Sie dafür wirklich bekommen</span></a><a class="lfcard" href="script-power-bi-lizenzkosten.html"><span class="lfl">DE</span><span class="lft">Power BI Lizenzkosten: die echte Rechnung pro Nutzer und Monat</span></a><a class="lfcard" href="script-power-bi-premium-capacity-pricing.html"><span class="lfl">DE</span><span class="lft">Power BI Premium Capacity Pricing: warum die Rechnung von 50 auf 5.000 Euro springt</span></a><a class="lfcard" href="script-power-bi-rls.html"><span class="lfl">DE</span><span class="lft">Row-Level Security in Power BI erklärt: was sie ist und wann sie versagt</span></a><a class="lfcard" href="script-power-bi-vs-fabric.html"><span class="lfl">DE</span><span class="lft">Power BI vs Fabric: Sie stellen die falsche Frage (in 12 Minuten erklärt)</span></a><a class="lfcard" href="script-power-bi-zertifizierung-pl-300.html"><span class="lfl">DE</span><span class="lft">Power BI Zertifizierung PL-300: Lohnt sich das? Ehrliche Antwort in 12 Minuten</span></a><a class="lfcard" href="script-reporting-automatisierung.html"><span class="lfl">DE</span><span class="lft">Reporting-Automatisierung in Power BI: so verschickt sich Ihr Bericht selbst (in 11 Minuten)</span></a><a class="lfcard" href="script-sternschema-power-bi.html"><span class="lfl">DE</span><span class="lft">Sternschema in Power BI: warum Ihr Datenmodell so aussehen sollte (in 12 Minuten)</span></a><a class="lfcard" href="script-tableau-to-power-bi-migration.html"><span class="lfl">DE</span><span class="lft">Tableau zu Power BI Migration: warum es ein Neubau ist, kein Umschalten (der ehrliche Plan)</span></a><a class="lfcard" href="script-warum-berichte-unterschiedliche-zahlen.html"><span class="lfl">DE</span><span class="lft">Warum zeigen Berichte unterschiedliche Zahlen? Der wahre Grund (und wie Sie ihn abstellen)</span></a><a class="lfcard" href="script-5-signs-you-need-a-bi-expert.html"><span class="lfl">EN</span><span class="lft">5 Signs You Need BI Help (And What Each One Is Costing You)</span></a><a class="lfcard" href="script-azure-data-factory-first-pipeline.html"><span class="lfl">EN</span><span class="lft">Azure Data Factory: Your First Pipeline in 15 Minutes (No Data Engineering Needed)</span></a><a class="lfcard" href="script-azure-data-factory-phased-out.html"><span class="lfl">EN</span><span class="lft">Is Azure Data Factory Being Phased Out? ADF vs Fabric Data Factory in 2026</span></a><a class="lfcard" href="script-azure-synapse-analytics.html"><span class="lfl">EN</span><span class="lft">Azure Synapse Analytics Explained in 12 Minutes: What It Is, What It Was, and Where It&#x27;s Going</span></a><a class="lfcard" href="script-azure-synapse-to-fabric-migration.html"><span class="lfl">EN</span><span class="lft">Azure Synapse Is Winding Down: What a Real Move to Fabric Actually Involves</span></a><a class="lfcard" href="script-bought-power-bi-still-in-excel.html"><span class="lfl">EN</span><span class="lft">You Bought Power BI But Everyone&#x27;s Still Using Excel (Here&#x27;s Why)</span></a><a class="lfcard" href="script-dashboards-nobody-uses.html"><span class="lfl">EN</span><span class="lft">Why Won&#x27;t Anyone Use Our Dashboards? The Real Causes of Low Adoption</span></a><a class="lfcard" href="script-data-governance-framework.html"><span class="lfl">EN</span><span class="lft">Data Governance Framework for Power BI: Build It Yourself in 14 Minutes</span></a><a class="lfcard" href="script-data-team-bottleneck.html"><span class="lfl">EN</span><span class="lft">Data Team Bottleneck: Why Every Request Queues (and How to Clear It)</span></a><a class="lfcard" href="script-data-warehouse-consultant.html"><span class="lfl">EN</span><span class="lft">What a Data Warehouse Consultant Does, Start to Finish (A Real Azure Build)</span></a><a class="lfcard" href="script-fabric-capacity-throttling-trap.html"><span class="lfl">EN</span><span class="lft">Fabric Capacity Throttling Explained: Why Your Reports Go Down When CU Looks Fine</span></a><a class="lfcard" href="script-fabric-powerbi-azure-for-business-owners.html"><span class="lfl">EN</span><span class="lft">Power BI vs Fabric vs Azure for Business: What You&#x27;re Actually Buying (No Jargon)</span></a><a class="lfcard" href="script-financial-reporting-automation.html"><span class="lfl">EN</span><span class="lft">Financial Reporting Automation: How to Take a Week Off Your Month-End Close</span></a><a class="lfcard" href="script-free-power-bi-course.html"><span class="lfl">EN</span><span class="lft">Free Power BI Course: What You Really Get (and What You Don&#x27;t)</span></a><a class="lfcard" href="script-kpi-dashboard-power-bi-executives-trust.html"><span class="lfl">EN</span><span class="lft">KPI Dashboard in Power BI: Build One Executives Actually Trust (Full Build)</span></a><a class="lfcard" href="script-kpi-vs-metric.html"><span class="lfl">EN</span><span class="lft">KPI vs Metric: Why Half of Your KPI Tracker Doesn&#x27;t Belong There</span></a><a class="lfcard" href="script-microsoft-fabric-consulting.html"><span class="lfl">EN</span><span class="lft">Microsoft Fabric: Do You Actually Need It, or Is Your Bill About to Double?</span></a><a class="lfcard" href="script-migrate-to-azure-sql.html"><span class="lfl">EN</span><span class="lft">Migrate to Azure SQL: Every Hidden Cost and Gotcha, Start to Finish</span></a><a class="lfcard" href="script-onelake-explained.html"><span class="lfl">EN</span><span class="lft">OneLake Explained in 12 Minutes: The Foundation Under All of Fabric</span></a><a class="lfcard" href="script-power-bi-certification.html"><span class="lfl">EN</span><span class="lft">Power BI Certification: Does the PL-300 Get You Hired? An Honest Look</span></a><a class="lfcard" href="script-power-bi-consultant.html"><span class="lfl">EN</span><span class="lft">What a Power BI Consultant Costs in 2026 (and When to Skip One)</span></a><a class="lfcard" href="script-power-bi-consulting.html"><span class="lfl">EN</span><span class="lft">Is Power BI Still Worth It in 2026? A Straight Power BI Consulting Verdict</span></a><a class="lfcard" href="script-power-bi-incremental-refresh.html"><span class="lfl">EN</span><span class="lft">Power BI Incremental Refresh Explained: Stop Reloading Your Whole History (in 14 Minutes)</span></a><a class="lfcard" href="script-power-bi-premium-capacity-pricing.html"><span class="lfl">EN</span><span class="lft">Power BI Premium Capacity Pricing: Why Your $50 Bill Becomes $5,000</span></a><a class="lfcard" href="script-power-bi-pro-cost.html"><span class="lfl">EN</span><span class="lft">Power BI Pro Cost vs Premium vs Fabric: The Break-Even Math (Real Numbers)</span></a><a class="lfcard" href="script-power-bi-rls-multiple-roles.html"><span class="lfl">EN</span><span class="lft">Power BI RLS Explained: Why Dynamic Roles Leak or Return Nothing</span></a><a class="lfcard" href="script-power-bi-training-vs-certification.html"><span class="lfl">EN</span><span class="lft">Power BI Training or Certification First? What Actually Builds a Career</span></a><a class="lfcard" href="script-power-bi-tutorial.html"><span class="lfl">EN</span><span class="lft">How to Learn Power BI Without Wasting Six Months (The Tutorial Order That Works)</span></a><a class="lfcard" href="script-power-bi-vs-fabric.html"><span class="lfl">EN</span><span class="lft">Power BI vs Fabric Explained: You&#x27;re Asking the Wrong Question (in 11 Minutes)</span></a><a class="lfcard" href="script-real-reason-month-end-takes-ten-days.html"><span class="lfl">EN</span><span class="lft">Why Does Month-End Close Take So Long? The Real Reason It Still Takes Ten Days</span></a><a class="lfcard" href="script-row-level-security-power-bi.html"><span class="lfl">EN</span><span class="lft">Row-Level Security in Power BI: Static and Dynamic, Built in 13 Minutes</span></a><a class="lfcard" href="script-self-service-power-bi-without-governance.html"><span class="lfl">EN</span><span class="lft">6 Ways Self-Service Power BI Rots Without a Data Governance Framework</span></a><a class="lfcard" href="script-single-source-of-truth-explained.html"><span class="lfl">EN</span><span class="lft">Single Source of Truth in Business Intelligence: Why Your Numbers Never Agree, and What It Takes to Fix It</span></a><a class="lfcard" href="script-star-schema-vs-snowflake-schema.html"><span class="lfl">EN</span><span class="lft">Star Schema vs Snowflake Schema: Make Power BI Stop Crawling (Full Build)</span></a><a class="lfcard" href="script-tableau-to-power-bi-migration.html"><span class="lfl">EN</span><span class="lft">Tableau to Power BI Migration: What Really Gets Rebuilt (and How to Scope It)</span></a><a class="lfcard" href="script-what-data-governance-buys-a-business.html"><span class="lfl">EN</span><span class="lft">What Data Governance Actually Buys a Business (Plain English, No Jargon)</span></a><a class="lfcard" href="script-when-to-hire-a-bi-consultant.html"><span class="lfl">EN</span><span class="lft">When to Hire a Power BI Consultant: 5 Signs It&#x27;s Time (and Consultant vs In-House)</span></a><a class="lfcard" href="script-why-dashboards-disagree-on-revenue.html"><span class="lfl">EN</span><span class="lft">Why Do Reports Show Different Numbers? Your Two Dashboards Disagree on Revenue</span></a></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

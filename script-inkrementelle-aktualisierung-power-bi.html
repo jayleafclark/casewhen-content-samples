@@ -1,0 +1,208 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Inkrementelle Aktualisierung in Power BI: nur neue Daten lad</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Inkrementelle Aktualisierung in Power BI: nur neue Daten laden (Schritt für Schritt)
+Host: Saju · Cluster: Reliability · Target: 14 min · Primary keyword: inkrementelle aktualisierung power bi</p><h2>Chapters
+- 0:00 Warum lädt Power BI bei jeder Aktualisierung alles neu?
+- 0:55 Was macht inkrementelle Aktualisierung wirklich?
+- 2:30 Wie richte ich RangeStart und RangeEnd ein?
+- 4:15 Welche zwei Zeitfenster muss ich festlegen?
+- 6:05 Warum wird es trotzdem nicht schneller?
+- 8:05 Warum lädt mein Dataflow immer noch alles neu?
+- 10:05 Woran sehe ich, dass wirklich nur neue Daten geladen werden?
+- 12:20 Was mache ich als Nächstes?</h2><h2>Script</h2><p>[0:00-0:12] HOOK, Stil: contrarian
+(VO) Inkrementelle Aktualisierung in Power BI macht Ihre Aktualisierung nicht automatisch schneller. Bei den meisten Modellen ohne Query Folding wird sie sogar langsamer, und ich zeige Ihnen in den nächsten Minuten ganz genau, warum.
+(MODALITY: talking head)
+(ON-SCREEN: Keyword-Karte &quot;Inkrementelle Aktualisierung&quot; unten links, daneben klein &quot;Query Folding&quot;)
+(B-ROLL/ANIMATION: Über Sajus Schulter ein Aktualisierungs-Dialog, der Ladebalken kriecht langsam nach rechts. Harter Schnitt auf Sajus Gesicht bei &quot;sogar langsamer&quot;.)</p><p>[0:12-0:45] PROMISE + STAKES + OPEN LOOP
+(VO) Am Ende von diesem Video haben Sie die inkrementelle Aktualisierung sauber eingerichtet, und Sie wissen, an welcher Stelle sie bei fast allen kippt. Warum das zählt: Zwei von drei Firmen vertrauen ihren eigenen Zahlen nicht ganz. Eine Aktualisierung, die stundenlang läuft oder halb durchläuft, ist genau so ein Grund. Und weiter hinten zeige ich Ihnen das eine Kästchen bei Dataflows, ohne das trotz aller Einstellungen jedes Mal wieder die komplette Tabelle importiert wird. Das übersehen die meisten.
+(MODALITY: on-screen text)
+(ON-SCREEN: kinetische Zeile &quot;67% vertrauen ihren Daten nicht ganz, Quelle: Drexel LeBow + Precisely, 2025&quot;, dann drei Häkchen: &quot;Einrichten · Query Folding prüfen · Dataflow-Falle&quot;)
+(B-ROLL: kurze Montage, ein Büro in Berlin, jemand startet morgens einen Bericht, der Kreisel dreht sich. Schnitt.)</p><p>[0:45] CHAPTER-KARTE animiert ein: &quot;Was macht inkrementelle Aktualisierung wirklich?&quot;</p><p>[0:55-2:30] VALUE BEAT 1
+(CLAIM, ON-SCREEN Karte) Import lädt standardmäßig die ganze Tabelle. Inkrementelle Aktualisierung teilt sie in Datumspartitionen und lädt nur das jüngste Fenster neu.
+(VO) Der Standard bei einem Import-Modell ist stur: Bei jeder Aktualisierung wird die komplette Tabelle noch einmal aus der Quelle gezogen und in den Speicher geladen. Fünf Jahre Verkaufsdaten, jeden Morgen komplett neu, obwohl sich nur die letzten Tage geändert haben. Dazu braucht der Aufbau im Speicher grob das Doppelte der Tabellengröße, und bei großen Modellen geht da irgendwann der Arbeitsspeicher aus. Inkrementelle Aktualisierung dreht das um. Power BI zerlegt die Tabelle nach Datum in Partitionen, zum Beispiel eine pro Monat. Alte Partitionen bleiben kalt liegen, sie werden nie wieder angefasst. Nur die Partitionen im aktuellen Fenster werden frisch geladen.
+(PAYOFF, ON-SCREEN nummeriert &quot;1&quot;) Merksatz: Sie laden nicht mehr die Historie, Sie laden nur noch die Änderung.
+(MODALITY: animation)
+(CUSTOM ANIMATION, &quot;Datumspartitionen&quot;: Eine lange Tabelle rutscht ins Bild und zerfällt in 60 saubere Blöcke, je einer pro Monat, aufgereiht auf einer Zeitachse. Die 58 linken Blöcke werden blass und legen sich schlafen, ein kleines Schloss-Symbol erscheint. Die zwei rechten Blöcke pulsieren in CaseWhen-Grün #1D967C und laden sich neu. Ein Zähler oben zählt &quot;neu geladen: 2 von 60&quot;. Kein Netzwerk-Globus, klare Blöcke auf Zeitachse.)
+(RE-HOOK, VO) So weit die Idee. Jetzt bauen wir das echt, und es fängt mit zwei Parametern an, die exakt so heißen müssen.</p><p>[2:30] CHAPTER-KARTE: &quot;Wie richte ich RangeStart und RangeEnd ein?&quot;</p><p>[2:30-4:15] VALUE BEAT 2
+(CLAIM, ON-SCREEN Karte) Zwei Parameter, RangeStart und RangeEnd, plus ein Datumsfilter im Power Query Editor. Ohne die geht nichts.
+(VO) Öffnen Sie den Power Query Editor. Sie legen zwei Parameter an, und die Namen sind nicht frei wählbar, sie müssen RangeStart und RangeEnd heißen, groß und klein genau so. Beide vom Typ Datum/Uhrzeit. Dann filtern Sie Ihre Datumsspalte mit genau diesen zwei Parametern: Datum größer oder gleich RangeStart und Datum kleiner als RangeEnd. Wichtig ist das Detail an den Rändern, unten größer-gleich, oben echt kleiner, damit kein Tag doppelt in zwei Partitionen landet. Diese zwei Werte sind später der Griff, an dem Power BI das Ladefenster über Ihre Daten schiebt. In Power BI Desktop sehen Sie erst mal nur einen kleinen Ausschnitt der Daten, und das ist richtig so. Die echten Partitionen entstehen später im Power-BI-Dienst.
+(PAYOFF, ON-SCREEN nummeriert &quot;2&quot;) Regel: Erst der Datumsfilter mit RangeStart und RangeEnd, dann alles andere. Ohne diesen Filter ist die Richtlinie ausgegraut.
+(MODALITY: screen-record)
+(SCREEN-RECORD: Live im Power Query Editor. Cursor-Markierung auf &quot;Parameter verwalten&quot;, zwei Parameter werden getippt. Zoom-Punch auf den Typ &quot;Datum/Uhrzeit&quot;. Dann Rechtsklick auf die Datumsspalte, benutzerdefinierter Filter, die beiden Bedingungen erscheinen. Callout-Box hebt &quot;größer oder gleich&quot; und &quot;kleiner als&quot; hervor. Alle 5 bis 7 Sekunden ein Schnitt oder Zoom.)
+(RE-HOOK, VO) Der Filter steht. Jetzt kommt die Entscheidung, die tatsächlich Ihre Kosten und Ihre Ladezeit bestimmt.</p><p>[4:15] CHAPTER-KARTE: &quot;Welche zwei Zeitfenster muss ich festlegen?&quot;</p><p>[4:15-6:05] VALUE BEAT 3
+(CLAIM, ON-SCREEN Karte) Sie stellen zwei Zeiträume ein: wie lange Sie Historie speichern und wie viele Tage Sie wirklich neu laden.
+(VO) Rechtsklick auf die Tabelle, inkrementelle Aktualisierung. Jetzt sehen Sie zwei Regler. Der erste sagt: Zeilen speichern für die letzten, sagen wir, fünf Jahre. Das ist Ihr Archiv, die kalten Partitionen. Der zweite sagt: Zeilen aktualisieren für die letzten, sagen wir, zehn Tage. Nur dieses zweite Fenster wird bei jeder Aktualisierung neu geladen. Der ganze Rest liegt still. Und hier machen viele es zu groß aus Angst, etwas zu verpassen. Wenn Ihre Daten sich nach ein paar Tagen nicht mehr ändern, dann laden Sie auch nicht dreißig Tage neu. Je kleiner das aktive Fenster, desto weniger Arbeit bei jeder Aktualisierung. Es gibt noch ein Häkchen &quot;Datenänderungen erkennen&quot;: damit lädt Power BI eine Partition nur dann neu, wenn sich dort wirklich etwas geändert hat. Das spart bei stabilen Tagen noch mehr.
+(PAYOFF, ON-SCREEN nummeriert &quot;3&quot;) Regel: Das Aktualisierungsfenster so kurz wie möglich, nur so lang wie Ihre Daten wirklich nachträglich korrigiert werden.
+(MODALITY: animation)
+(CUSTOM ANIMATION, &quot;Zwei Fenster&quot;: Eine Zeitachse von links (2021) nach rechts (heute). Ein breiter grauer Balken legt sich über fünf Jahre mit Label &quot;Archiv: 5 Jahre speichern&quot;. Ganz rechts schiebt sich ein schmales grünes Fenster über die letzten zehn Tage mit Label &quot;Aktualisieren: 10 Tage&quot;. Das grüne Fenster pulsiert und wandert jeden Tag um einen Schritt nach rechts, der graue Teil bleibt regungslos. Ein kleines Häkchen &quot;Datenänderungen erkennen&quot; blendet einzelne Tage im grünen Fenster aus.)
+(RE-HOOK, VO) Sieht gut aus, oder? Sie veröffentlichen, und die Aktualisierung ist trotzdem nicht schneller. Genau da verlieren die meisten die Geduld. Warum das passiert, kommt jetzt.</p><p>[6:05] CHAPTER-KARTE: &quot;Warum wird es trotzdem nicht schneller?&quot;</p><p>[6:05-8:05] VALUE BEAT 4
+(CLAIM, ON-SCREEN Karte) Ohne Query Folding zieht jede Partition trotzdem alle Daten. Dann ist die inkrementelle Aktualisierung nur Papier.
+(VO) Das ist der Punkt, an dem es kippt. Damit inkrementelle Aktualisierung wirkt, muss Ihr Datumsfilter als echte Bedingung bis an die Quelle durchgereicht werden. Das nennt sich Query Folding. Bei einer SQL-Datenbank passiert das normalerweise: Power BI übersetzt Ihren Filter in ein WHERE auf dem Datum, und die Datenbank schickt nur die passenden Zeilen für diese eine Partition zurück. Wenn das Folding aber abbricht, zum Beispiel weil Sie mitten in Power Query eine Umwandlung eingebaut haben, die die Quelle nicht kennt, dann zieht Power BI für jede Partition die gesamte Tabelle und filtert erst hinterher lokal. Das Ergebnis ist bitter: Sie haben jetzt mehr Partitionen und laden trotzdem jedes Mal alles. So prüfen Sie das in dreißig Sekunden: Rechtsklick auf den letzten Schritt Ihrer Abfrage, &quot;Native Abfrage anzeigen&quot;. Wenn der Eintrag klickbar ist und ein SQL mit Ihrem Datum drin auftaucht, faltet Ihre Abfrage. Ist er ausgegraut, bricht das Folding irgendwo vorher ab.
+(PAYOFF, ON-SCREEN nummeriert &quot;4&quot;) Regel: Vor der Veröffentlichung mit &quot;Native Abfrage anzeigen&quot; prüfen, ob der Datumsfilter an die Quelle geht. Kein Folding, keine echte inkrementelle Aktualisierung.
+(MODALITY: screen-record)
+(SCREEN-RECORD: Power Query, Rechtsklick auf einen Schritt, Menü &quot;Native Abfrage anzeigen&quot; wird gehighlightet. Erst der Erfolgsfall: ein SQL-Fenster mit hervorgehobener WHERE-Zeile auf dem Datum. Zoom-Punch darauf. Dann der Fehlerfall: der gleiche Menüpunkt ist ausgegraut, roter Callout-Ring. Split-Screen der beiden Zustände nebeneinander.)
+(RE-HOOK, VO) Und jetzt die Falle, die ich Ihnen ganz am Anfang versprochen habe. Sie betrifft alle, die ihre Daten über einen Dataflow ziehen.</p><p>[8:05] CHAPTER-KARTE: &quot;Warum lädt mein Dataflow immer noch alles neu?&quot;</p><p>[8:05-10:05] VALUE BEAT 5, zahlt den Open Loop ein
+(CLAIM, ON-SCREEN Karte) Ein Dataflow faltet nur mit eingeschalteter verbesserter Compute-Engine. Sonst importiert er bei jeder Aktualisierung wieder alles.
+(VO) Das ist der häufigste Frust bei diesem Thema, und er klingt so: Mein Datenmodell hängt an einem Dataflow und macht trotzdem keine inkrementelle Aktualisierung, es importiert jedes Mal den ganzen Dataflow neu. Der Grund ist fast immer derselbe. Ein Dataflow kann Ihren Datumsfilter nur dann bis in die gespeicherten Daten durchreichen, wenn die verbesserte Compute-Engine dafür eingeschaltet ist. Die gibt es nur auf Premium- oder PPU-Kapazität, und sie steht in den Einstellungen des Dataflows. Ist sie aus, gibt es kein Folding gegen den Dataflow, und dann holt sich Ihr Modell brav bei jeder Aktualisierung die komplette Menge. Zwei Dinge helfen. Erstens: verbesserte Compute-Engine in den Dataflow-Einstellungen auf &quot;Ein&quot; oder &quot;Optimiert&quot;. Zweitens, und das ist die saubere Variante: Bauen Sie die inkrementelle Aktualisierung schon in den Dataflow selbst ein, direkt gegen die ursprüngliche Quelle, statt sie erst im Modell dahinter zu versuchen.
+(PAYOFF, ON-SCREEN nummeriert &quot;5&quot;) Regel: Bei Dataflows zuerst die verbesserte Compute-Engine prüfen. Am besten die inkrementelle Aktualisierung schon im Dataflow gegen die Quelle setzen.
+(MODALITY: animation)
+(CUSTOM ANIMATION, &quot;Dataflow-Falle&quot;: Links ein Kasten &quot;Quelle&quot;, in der Mitte ein Kasten &quot;Dataflow&quot;, rechts ein Kasten &quot;Datenmodell&quot;. Zustand A, Engine aus: ein dicker Datenstrom fließt bei jeder Aktualisierung komplett von Quelle über Dataflow ins Modell, ein rotes Label &quot;verbesserte Compute-Engine: Aus&quot; blinkt. Zustand B: der Schalter kippt auf Grün &quot;Ein/Optimiert&quot;, jetzt reicht das Modell einen schmalen Datumsfilter nach links durch, und nur ein dünner Strom mit den letzten zehn Tagen fließt zurück. Der Rest der Leitung ist ausgegraut.)
+(RE-HOOK, VO) Alles eingestellt. Aber wie wissen Sie, dass es jetzt wirklich funktioniert und Sie sich das nicht nur einbilden?</p><p>[10:05] CHAPTER-KARTE: &quot;Woran sehe ich, dass wirklich nur neue Daten geladen werden?&quot;</p><p>[10:05-12:20] WORKED EXAMPLE / KONTROLLE
+(CLAIM, ON-SCREEN Karte) Sie kontrollieren am Ergebnis: an der Aktualisierungsdauer und an den Partitionen, nicht am Gefühl.
+(VO) Nach der Veröffentlichung passiert etwas Wichtiges: Die erste Aktualisierung im Power-BI-Dienst dauert lang, denn hier baut Power BI zum ersten Mal alle Partitionen auf. Das ist normal und einmalig. Ab der zweiten Aktualisierung sollte es kippen. Nehmen Sie eine Tabelle mit fünf Jahren Historie und einem Fenster von zehn Tagen: Statt sechzig Monatspartitionen berühren Sie jetzt nur noch das jüngste Stück. Sie laden einen Bruchteil, und die Dauer fällt entsprechend. Zwei Kontrollen reichen. Erstens die Aktualisierungshistorie im Dienst: Vergleichen Sie die Dauer der ersten großen Aktualisierung mit der zweiten. Wenn die zweite deutlich kürzer ist, greift die inkrementelle Aktualisierung. Zweitens die Partitionen selbst, sichtbar über ein Werkzeug wie den externen Tabelleneditor: Da sehen Sie pro Partition den Zeitstempel der letzten Verarbeitung. Nur die jüngsten tragen ein frisches Datum, die alten stehen still. Sehen Sie an allen Partitionen denselben frischen Zeitstempel, dann greift die Richtlinie nicht, und Sie sind zurück beim Query Folding aus dem vorletzten Kapitel.
+(PAYOFF, ON-SCREEN nummeriert &quot;6&quot;) Regel: Zweite Aktualisierung kürzer als die erste, und nur junge Partitionen mit frischem Zeitstempel. Das sind Ihre zwei Beweise.
+(MODALITY: data-viz)
+(DATA-VIZ ANIMATION: Zwei Balken untereinander. Oben &quot;1. Aktualisierung&quot; als langer voller Balken, alle 60 Partitionen dunkelgrün. Darunter &quot;2. Aktualisierung&quot; als kurzer Balken, 58 Partitionen blass mit altem Datum, 2 in Grün mit heutigem Zeitstempel. Ein Dauer-Zähler rechts fällt sichtbar von lang auf kurz. Darunter eine kleine Partitionsliste mit Zeitstempel-Spalte, in der nur die letzten zwei Zeilen aufleuchten.)
+(RE-HOOK, VO) Das war die komplette Einrichtung. Fassen wir zusammen, was Sie jetzt mitnehmen.</p><p>[12:20] CHAPTER-KARTE: &quot;Was mache ich als Nächstes?&quot;</p><p>[12:20-13:20] PAYOFF, Rekapitulation, alle Regeln offen auf dem Tisch
+(VO) Die ganze inkrementelle Aktualisierung in sechs Sätzen. Erstens: Import lädt sonst immer die ganze Tabelle, die Richtlinie teilt sie in Datumspartitionen und lädt nur das jüngste Fenster. Zweitens: RangeStart und RangeEnd anlegen, exakt so geschrieben, und die Datumsspalte damit filtern. Drittens: zwei Zeitfenster, Archiv lang, Aktualisierungsfenster so kurz wie möglich. Viertens, der Punkt, an dem es kippt: ohne Query Folding bringt das nichts, prüfen mit &quot;Native Abfrage anzeigen&quot;. Fünftens, die versprochene Falle: bei Dataflows die verbesserte Compute-Engine einschalten oder gleich im Dataflow gegen die Quelle inkrementell laden. Sechstens: kontrollieren an der zweiten Aktualisierungsdauer und an den Partitions-Zeitstempeln.
+(MODALITY: on-screen text)
+(ON-SCREEN: kinetische Liste, alle sechs Regeln erscheinen nacheinander als Haken. Überschrift &quot;Ihre 6 Schritte&quot;. CaseWhen-Grün.)</p><p>[13:20-14:00] SOFT CTA
+(VO) Wenn Sie das an Ihrem eigenen Modell durchgehen wollen, unter dem Video liegt unsere 20-Punkte-Checkliste fürs Power-BI-Modell-Review. Da steht der Folding-Check drin und die häufigsten Stolpersteine, kostenlos, ohne Haken. Und wenn Ihre Aktualisierungen auf echten Produktivdaten trotzdem aus dem Ruder laufen, dann ist genau das unsere Arbeit bei CaseWhen in Berlin. Kein Verkaufsgespräch, einfach ein Gespräch über Ihr Modell und Ihre Aktualisierung. Der Link ist in der Beschreibung. Als Nächstes würde ich mir das Video zum sauberen Datenmodell anschauen, denn ohne das hilft auch die beste inkrementelle Aktualisierung nur begrenzt.
+(MODALITY: talking head)
+(ON-SCREEN: zwei ruhige Link-Karten, &quot;20-Punkte-Modell-Review&quot; und &quot;Mit CaseWhen sprechen&quot;, darunter der Verweis aufs nächste Video. Eine schlichte Abo-Zeile, keine laute Aufforderung.)</p><h2>Description
+Inkrementelle Aktualisierung in Power BI Schritt für Schritt: RangeStart und RangeEnd anlegen, Query Folding prüfen und die Dataflow-Falle umgehen, damit nur neue Daten geladen werden.</h2><p>Kostenlose 20-Punkte-Checkliste fürs Power-BI-Modell-Review: https://casewhen.co/de/modell-review-checkliste
+Mit CaseWhen sprechen (Power BI, Aktualisierung, Datenmodell): https://casewhen.co/de/kontakt</p><p>Kapitel:
+0:00 Warum lädt Power BI bei jeder Aktualisierung alles neu?
+0:55 Was macht inkrementelle Aktualisierung wirklich?
+2:30 Wie richte ich RangeStart und RangeEnd ein?
+4:15 Welche zwei Zeitfenster muss ich festlegen?
+6:05 Warum wird es trotzdem nicht schneller?
+8:05 Warum lädt mein Dataflow immer noch alles neu?
+10:05 Woran sehe ich, dass wirklich nur neue Daten geladen werden?
+12:20 Was mache ich als Nächstes?</p><p>In diesem Video richten wir die inkrementelle Aktualisierung in Power BI von Grund auf ein. Wir legen die Parameter RangeStart und RangeEnd an, bauen den Datumsfilter im Power Query Editor, stellen Archiv- und Aktualisierungsfenster ein und prüfen mit &quot;Native Abfrage anzeigen&quot;, ob Query Folding greift. Danach lösen wir den häufigsten Frust auf: warum ein an einen Dataflow gebundenes Datenmodell trotzdem jedes Mal alles neu importiert, und wie die verbesserte Compute-Engine das behebt. Zum Schluss kontrollieren wir am Ergebnis, an der Aktualisierungsdauer und an den Partitionen, ob wirklich nur noch neue Daten geladen werden.</p><p>#PowerBI #InkrementelleAktualisierung #QueryFolding #Dataflow #MicrosoftFabric</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

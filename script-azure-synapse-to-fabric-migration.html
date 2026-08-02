@@ -1,0 +1,234 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Azure Synapse Is Winding Down: What a Real Move to Fabric Ac</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Azure Synapse Is Winding Down: What a Real Move to Fabric Actually Involves
+Host: Austin · Cluster: migration · Target: 14 min · Primary keyword: azure synapse</p><h2>Chapters
+- 0:00 Is Azure Synapse actually going away?
+- 1:30 What is Microsoft really retiring?
+- 3:10 Why won&#x27;t my Synapse workspace just import into Fabric?
+- 4:55 Where does my dedicated SQL warehouse go?
+- 7:05 What T-SQL breaks when I rebuild the warehouse?
+- 9:05 Do my pipelines and Spark notebooks survive the move?
+- 11:05 What will Fabric capacity actually cost me?
+- 12:50 So what do I do Monday?</h2><h2>Script</h2><p>Chapter 1. Is Azure Synapse actually going away?</p><p>[0:00-0:12] HOOK (style: real-number / here&#x27;s-what-breaks)
+Spoken: &quot;There is no import button. If you&#x27;re moving Azure Synapse to Fabric, you don&#x27;t lift the workspace across, you rebuild it by hand, and most teams find that out three weeks in.&quot;
+(MODALITY: talking head, tight, single quiet take)
+(ON-SCREEN: keyword card &quot;AZURE SYNAPSE → FABRIC&quot; with a greyed-out &quot;Import&quot; control and a small red &quot;not available&quot; tag)
+(B-ROLL: quick 2-second cut to a screen where someone right-clicks a Synapse workspace and there&#x27;s no move option)</p><p>[0:12-0:42] PROMISE + STAKES + OPEN LOOP
+Spoken: &quot;So here&#x27;s what you&#x27;ll walk away with. You&#x27;ll know exactly what Microsoft is retiring and what&#x27;s staying, which pieces recreate cleanly and which ones you rebuild from scratch, and roughly what the new bill looks like before you commit. The cost of getting this wrong is real. Teams scope it as a copy-paste job, quote two weeks, and then a stored procedure the whole finance report depends on won&#x27;t even compile in Fabric. Stay to the end, because that one T-SQL gap is what stalls most Synapse go-lives right at the finish line, and I&#x27;ll show you how to catch it up front. We rebuild these for BI teams most weeks, so this is the version with the surprises already removed.&quot;
+(MODALITY: talking head → hard cut to fast b-roll montage of Synapse Studio, a warehouse, a pipeline canvas)
+(ON-SCREEN: kinetic checklist building 3 lines: &quot;What&#x27;s retiring&quot; / &quot;What rebuilds vs recreates&quot; / &quot;What it costs&quot;)
+(Visible change every ~5s: each promise line pops as spoken)</p><p>Chapter 2. What is Microsoft really retiring?</p><p>[1:30-2:05] CLAIM
+Spoken: &quot;First, the thing nobody says plainly. Synapse is in maintenance. It still runs, but it stopped getting new features, and every new analytics project inside Microsoft&#x27;s own guidance now points at Fabric instead.&quot;
+(MODALITY: on-screen text / kinetic type)
+(ON-SCREEN: card &quot;AZURE SYNAPSE = MAINTENANCE MODE. New work → Fabric.&quot; keyword &quot;azure synapse&quot; bold)</p><p>[2:05-2:55] DEMO
+Spoken: &quot;Let me show you the pieces, because Synapse was never one product. You&#x27;ve got dedicated SQL pools, that&#x27;s the old SQL Data Warehouse, your big relational tables. You&#x27;ve got serverless SQL for querying files. Spark pools for notebooks. And Synapse pipelines for orchestration. Each one has a Fabric home now. Dedicated pools map to Fabric Warehouse. Serverless maps to the lakehouse SQL endpoint. Spark maps to Fabric notebooks. Pipelines map to Fabric Data Factory. The problem is that word, map. None of it moves on its own. Every box here is a rebuild target, not a transfer.&quot;
+(MODALITY: custom animation)
+(ANIMATION, &quot;Synapse teardown&quot;: the Synapse workspace splits into four labelled blocks, Dedicated SQL Pool, Serverless SQL, Spark, Pipelines. A dotted arrow reaches from each block toward its Fabric counterpart, Warehouse, Lakehouse endpoint, Notebooks, Data Factory. As each arrow lands it turns from solid to dashed and a small wrench icon appears on it, which reads &quot;recreate,&quot; never a clean pipe.)
+(ON-SCREEN: four mapping labels stay pinned as a legend)</p><p>[2:55-3:10] PAYOFF + RE-HOOK
+Spoken: &quot;So takeaway one. Inventory Synapse as four separate systems, not one. Each moves on its own timeline. Next question everyone asks, and it&#x27;s the expensive one. Why can&#x27;t I just import the workspace?&quot;
+(MODALITY: talking head)
+(ON-SCREEN: numbered takeaway &quot;1. Inventory Synapse as 4 systems, migrate each on its own track.&quot;)</p><p>Chapter 3. Why won&#x27;t my Synapse workspace just import into Fabric?</p><p>[3:10-3:35] CLAIM
+Spoken: &quot;Here&#x27;s the blunt answer. A Synapse workspace and a Fabric workspace are different objects sitting on different back ends. There&#x27;s no lift-and-shift because there&#x27;s nothing to lift into. You recreate each item where it lives now.&quot;
+(MODALITY: on-screen text)
+(ON-SCREEN: card &quot;No workspace import. You recreate item by item.&quot; )</p><p>[3:35-4:35] DEMO
+Spoken: &quot;Watch what actually happens. In Synapse, a linked service points at your storage and your integration runtime. In Fabric, storage is OneLake, and that concept is built in, so the linked service doesn&#x27;t carry over the same way, you re-point it. Your SQL objects, tables, views, procedures, get scripted out and rerun. Your pipelines get rebuilt activity by activity. Even where Microsoft ships a migration helper for warehouse schema, it&#x27;s giving you generated scripts to review, not a one-click move. So the honest mental model is this. You stand up an empty Fabric workspace next to Synapse, and you carry each item over by rebuilding it, then you validate the numbers match.&quot;
+(MODALITY: screen-record)
+(SCREEN-RECORD: side by side, left is Synapse Studio showing a linked service and a SQL script; right is a fresh Fabric workspace. Cursor scripts out a table in Synapse via right-click &quot;Script as CREATE,&quot; then pastes and runs it against a new Fabric Warehouse, one red squiggle appears on an unsupported clause. A callout box lands on the squiggle for ~2s.)
+(Visible change every ~6s: cut between the two panes, callout box on the linked-service re-point)</p><p>[4:35-4:55] PAYOFF + RE-HOOK
+Spoken: &quot;Takeaway two. Budget this as a rebuild with validation, not a copy. The rebuild is the fast part. Proving the new numbers match the old ones is where the hours go. Alright, the big one. Your dedicated SQL pool, your actual warehouse. Where does it land, and why is that harder than it looks?&quot;
+(MODALITY: talking head)
+(ON-SCREEN: numbered takeaway &quot;2. Budget for rebuild + validation, not a copy.&quot;)</p><p>Chapter 4. Where does my dedicated SQL warehouse go?</p><p>[4:55-5:25] CLAIM
+Spoken: &quot;Your dedicated SQL pool becomes a Fabric Warehouse. Same idea, relational tables and T-SQL, but a different engine underneath, and that difference decides how much of your old setup survives.&quot;
+(MODALITY: on-screen text)
+(ON-SCREEN: card &quot;Dedicated SQL Pool → Fabric Warehouse (different engine)&quot;)</p><p>[5:25-6:40] DEMO
+Spoken: &quot;Here&#x27;s the part that trips people. In a dedicated SQL pool, you sized compute with DWUs, and you tuned performance by choosing a distribution for every table, hash, round robin, or replicate, plus your own indexes. You owned all of that. Fabric Warehouse takes it away on purpose. Storage is Delta and parquet in OneLake. There&#x27;s no DWU dial. There&#x27;s no distribution key for you to pick, the engine handles data layout. So the parts of your DDL that were pure performance tuning, the DISTRIBUTION clauses, the manual index strategy, don&#x27;t just break, they&#x27;re gone as a concept. Your table structure carries. Your tuning doesn&#x27;t. It&#x27;s a different model. If your team spent years hand-tuning distributions, that knowledge doesn&#x27;t transfer, and the new engine wants you to trust it instead.&quot;
+(MODALITY: custom animation)
+(ANIMATION, &quot;engine swap&quot;: Left, a dedicated SQL pool drawn as fixed compute nodes with coloured &quot;hash / round robin / replicate&quot; tags on each table, and a DWU slider. On transition, the DWU slider fades out, the distribution tags detach and dissolve, and the tables flow down into a single OneLake layer rendered as Delta/parquet files. The message on screen: &quot;Schema carries. Distribution + index tuning does not.&quot;)
+(ON-SCREEN: keyword &quot;Fabric Warehouse&quot; + &quot;OneLake (Delta)&quot; pinned)</p><p>[6:40-7:05] PAYOFF + RE-HOOK
+Spoken: &quot;Takeaway three. Keep your table schemas, drop your distribution and index tuning, and re-baseline performance on the new engine before you promise anyone a speed number. Now, schema is one thing. Your actual T-SQL code is another, and this is the gap I promised you at the start.&quot;
+(MODALITY: talking head)
+(ON-SCREEN: numbered takeaway &quot;3. Schema carries; re-baseline performance, don&#x27;t assume it.&quot;)</p><p>Chapter 5. What T-SQL breaks when I rebuild the warehouse?</p><p>[7:05-7:35] CLAIM
+Spoken: &quot;Fabric Warehouse speaks T-SQL, but a smaller dialect than a dedicated SQL pool. So some code you&#x27;ve run for years won&#x27;t compile, and you want to find that on day one, not during go-live weekend.&quot;
+(MODALITY: on-screen text)
+(ON-SCREEN: card &quot;Fabric Warehouse T-SQL = a subset. Audit your procs first.&quot;)</p><p>[7:35-8:45] DEMO
+Spoken: &quot;Let me make this concrete. IDENTITY columns, the auto-incrementing keys a lot of warehouses lean on, don&#x27;t behave the way they did, so any load that relied on them needs rethinking. A handful of data types aren&#x27;t supported, so a column definition can just reject. Some procedural patterns, certain temp table tricks, a few functions, come back as errors. This is exactly the thing that stalls a go-live. The reports look done, then one nightly stored procedure that builds your finance summary hits an unsupported clause and the whole refresh stops. So the move that saves the project is boring. Before you scope anything, script out every stored procedure and every table definition, and run them against an empty Fabric Warehouse. The red squiggles are your real backlog. That list is your migration, everything else is just moving rows.&quot;
+(MODALITY: screen-record)
+(SCREEN-RECORD: Fabric Warehouse query editor. Paste a real-looking stored procedure with an IDENTITY column and an unsupported data type. Run it. Two errors surface in the messages pane. Zoom-punch onto each error line, a callout tags them &quot;rethink IDENTITY&quot; and &quot;unsupported type.&quot; Then show a simple tally sheet: &quot;Procs scanned: 42 / Erroring: 7.&quot; Numbers are illustrative, shown as a working method not a claim.)
+(Visible change: zoom-punch on each error, then cut to the tally)</p><p>[8:45-9:05] PAYOFF + RE-HOOK
+Spoken: &quot;Takeaway four. Run your existing procedures and DDL against Fabric before you quote a date. The failures are your scope, and finding them early is the whole point. Okay, warehouse handled. What about the moving parts, your pipelines and your Spark notebooks? Do those come across, or is that another rebuild?&quot;
+(MODALITY: talking head)
+(ON-SCREEN: numbered takeaway &quot;4. Compile-test your procs + DDL in Fabric before quoting.&quot;)</p><p>Chapter 6. Do my pipelines and Spark notebooks survive the move?</p><p>[9:05-9:35] CLAIM
+Spoken: &quot;Split answer, and it matters for your timeline. Your Spark notebooks come across pretty cleanly. Your pipelines mostly don&#x27;t, you rebuild them.&quot;
+(MODALITY: on-screen text)
+(ON-SCREEN: card &quot;Notebooks: mostly port. Pipelines: recreate.&quot;)</p><p>[9:35-10:45] DEMO
+Spoken: &quot;Start with the good side. Spark is Spark. Your notebook code, the PySpark and the SQL inside it, moves to Fabric notebooks with real reuse. What changes is the plumbing around it. The pool config is different, library management is handled another way, and anywhere your code read from a storage account, it now reads from a lakehouse in OneLake, so those paths get re-pointed. Now the pipelines. A Synapse pipeline looks almost identical to a Data Factory pipeline, same activities, same canvas, and that similarity fools people. Fabric Data Factory pipelines are a separate item, and there&#x27;s no import, so you rebuild each pipeline activity by activity. Some connectors and the older mapping data flows don&#x27;t have a one-for-one match, so a few activities need a genuine redesign, not a paste. The simple rule, notebooks are a copy-and-fix, pipelines are a rebuild-and-test.&quot;
+(MODALITY: screen-record)
+(SCREEN-RECORD: Fabric. First a notebook, paste PySpark from Synapse, it runs, mark the single changed line where an ADLS path becomes a lakehouse path. Then cut to a Fabric Data Factory pipeline canvas and rebuild a two-activity Copy pipeline from scratch, showing there is no &quot;import from Synapse&quot; entry point.)
+(Visible change: split the segment, notebook half then pipeline half, callout on the re-pointed path)</p><p>[10:45-11:05] PAYOFF + RE-HOOK
+Spoken: &quot;Takeaway five. Move notebooks first, they&#x27;re your quick wins, and treat every pipeline as a fresh build with a test at the end. Now the question that decides whether any of this was worth it. What does Fabric actually cost once it&#x27;s running, and why do so many teams get a bill they didn&#x27;t expect?&quot;
+(MODALITY: talking head)
+(ON-SCREEN: numbered takeaway &quot;5. Port notebooks first; rebuild + test every pipeline.&quot;)</p><p>Chapter 7. What will Fabric capacity actually cost me?</p><p>[11:05-11:35] CLAIM
+Spoken: &quot;This is where the cost surprise shows up. A dedicated SQL pool was compute you rented just for the warehouse. Fabric capacity is one shared pool that your warehouse, your pipelines, your Spark, and your Power BI reports all pull from at the same time.&quot;
+(MODALITY: on-screen text / data-viz)
+(ON-SCREEN: card &quot;Dedicated compute → one shared Fabric capacity (F-SKU)&quot;)</p><p>[11:35-12:30] DEMO
+Spoken: &quot;Here&#x27;s the trap in one picture. You size a Fabric capacity for your warehouse load, looks fine. Then month-end hits. The pipelines run, the finance team opens twenty Power BI reports, and the Spark job kicks off, all against that same capacity. Fabric smooths short spikes, which sounds helpful, until sustained demand tips it over and it starts throttling. Now reports crawl and the capacity chart still looks healthy, so nobody knows why. Fabric passed twenty-eight thousand customers as of Microsoft&#x27;s Ignite last year, so a lot of teams are flipping this on right now, and the shared-capacity bill is the single most common thing they didn&#x27;t plan for. The fix is to size on your peak concurrent load, everything running together, not the warehouse in isolation, and to run Synapse and Fabric side by side long enough to watch the real numbers in the capacity metrics app before you switch off the old Synapse setup.&quot;
+(MODALITY: custom animation)
+(ANIMATION, &quot;capacity throttling&quot;: a single CU meter. Four inflow streams labelled Warehouse, Pipelines, Spark, Power BI feed into it. Under light load the meter sits mid-way, green. At &quot;month-end&quot; all four streams thicken at once, the meter crosses a red line, and a queue of &quot;requests&quot; backs up behind a throttle gate while a separate summary tile still reads a low, steady average. On-screen: &quot;Smoothing hides the spike, then throttles you.&quot;)
+(ON-SCREEN: keyword &quot;Fabric capacity&quot; + &quot;size on PEAK concurrent load&quot;)</p><p>[12:30-12:50] PAYOFF + RE-HOOK
+Spoken: &quot;So the cost takeaway. Fabric&#x27;s shared capacity is one bill for everything at once, so size it on peak concurrency and prove it with a parallel run. Get that wrong and it&#x27;s the setting that doubles your spend before anyone notices. Let me put the whole thing together and tell you exactly what to do first.&quot;
+(MODALITY: talking head)
+(ON-SCREEN: numbered takeaway &quot;6. Size capacity on peak concurrency; run parallel before cutover.&quot;)</p><p>Chapter 8. So what do I do Monday?</p><p>[12:50-13:35] PAYOFF (full recap + open-loop payoff)
+Spoken: &quot;Here&#x27;s the entire move on one screen. One, inventory Synapse as four separate systems and migrate each on its own track. Two, budget for a rebuild plus validation, never a copy. Three, your table schemas carry, but your distribution and index tuning don&#x27;t, so re-baseline performance. Four, and this is the go-live saver I promised you, compile-test every stored procedure and table definition against an empty Fabric Warehouse before you quote a date, because the failures are your real scope. Five, port your notebooks first for quick wins and rebuild every pipeline with a test at the end. Six, size Fabric capacity on peak concurrent load and run both platforms in parallel, because that shared-capacity bill is the surprise that doubles spend. Do those six and you&#x27;ve de-risked the whole thing. On Monday, do just one of them, run your procedures against a blank Fabric Warehouse and see what breaks. That single afternoon tells you whether this is a two-week job or a two-month job, before you promise anyone anything.&quot;
+(MODALITY: kinetic type list)
+(ON-SCREEN: all 6 takeaways stack as a clean numbered list, then a &quot;Monday: compile-test your procs in Fabric&quot; card lands on top)</p><p>[13:35-14:05] SOFT CTA
+Spoken: &quot;If you want the full version of that, we put together a Synapse-to-Fabric migration checklist, every item to inventory, the T-SQL features to test, and the capacity questions to answer before you cut over. It&#x27;s linked below, free, no email required. And if you&#x27;re facing a real deadline on this, a Synapse wind-down, a Premium P-SKU move, an SSIS estate, that&#x27;s the work we do at CaseWhen. There&#x27;s a link to get a migration quote in the description. No pitch, just a straight conversation about your setup. If this saved you a painful week, the next video breaks down Fabric capacity sizing on its own, I&#x27;d start there.&quot;
+(MODALITY: talking head → end card)
+(ON-SCREEN: two link cards, &quot;Free: Synapse-to-Fabric Migration Checklist&quot; and &quot;Get a migration quote, CaseWhen&quot;, plus a small watch-next thumbnail &quot;Fabric Capacity, Sized Right&quot;)</p><h2>Description</h2><p>Azure Synapse is winding down and Microsoft is pointing new work at Fabric, so here&#x27;s what a real Synapse-to-Fabric migration actually involves, piece by piece.</p><p>Free Synapse-to-Fabric migration checklist: https://casewhen.co/synapse-fabric-checklist
+Work with CaseWhen (get a migration quote): https://casewhen.co/migration-quote</p><p>Chapters:
+0:00 Is Azure Synapse actually going away?
+1:30 What is Microsoft really retiring?
+3:10 Why won&#x27;t my Synapse workspace just import into Fabric?
+4:55 Where does my dedicated SQL warehouse go?
+7:05 What T-SQL breaks when I rebuild the warehouse?
+9:05 Do my pipelines and Spark notebooks survive the move?
+11:05 What will Fabric capacity actually cost me?
+12:50 So what do I do Monday?</p><p>Resources:
+- Synapse-to-Fabric migration checklist (free): https://casewhen.co/synapse-fabric-checklist
+- Talk to CaseWhen about your migration: https://casewhen.co/migration-quote
+- Watch next, Fabric capacity sizing: https://casewhen.co/fabric-capacity</p><p>Azure Synapse Analytics is in maintenance mode and there&#x27;s no button that moves a Synapse workspace into Microsoft Fabric. This walkthrough covers the real Synapse-to-Fabric migration: what Microsoft is retiring versus keeping, why dedicated SQL pools become a Fabric Warehouse on a different engine, which T-SQL features stop working, how Synapse pipelines and Spark notebooks carry over, and how shared Fabric capacity changes your bill. If you&#x27;re planning an Azure Synapse migration to Fabric, start by compile-testing your stored procedures against an empty warehouse, then size capacity on peak concurrent load and run both platforms in parallel before cutover.</p><p>#AzureSynapse #MicrosoftFabric #PowerBI #DataMigration #Azure</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

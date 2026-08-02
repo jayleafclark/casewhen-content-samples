@@ -1,0 +1,219 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Why Won&#x27;t Anyone Use Our Dashboards? The Real Causes of Low</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Why Won&#x27;t Anyone Use Our Dashboards? The Real Causes of Low Adoption
+Host: Austin · Cluster: governance-reliability · Target: 11 min · Primary keyword: why won&#x27;t anyone use our dashboards</p><h2>Chapters
+- 0:00 Why won&#x27;t anyone use our dashboards?
+- 0:55 Is it answering a question anyone actually asked?
+- 2:20 Why won&#x27;t they open a number they don&#x27;t believe?
+- 3:50 What is going wrong underneath the report?
+- 5:25 Did one wrong number cost you their trust for good?
+- 6:55 Does the dashboard live where your team already works?
+- 8:25 What does a dashboard people open every day look like?
+- 10:05 What should you do about it on Monday?</h2><h2>Script</h2><p>[0:00-0:12] HOOK (blunt callout, spoken)
+&quot;Your team built the dashboards. Almost nobody opens them. And you probably think you need to redesign them. You don&#x27;t.&quot;
+(MODALITY: b-roll, a big clean dashboard glowing on a monitor in an empty meeting room, nobody looking at it, slow push-in)
+(ON-SCREEN: keyword card &quot;WHY WON&#x27;T ANYONE USE OUR DASHBOARDS?&quot; lower-third, stays visible)</p><p>[0:12-0:55] PROMISE + STAKES + OPEN LOOP
+&quot;By the end of this you&#x27;ll know the real causes of why your dashboards sit unused, and what it takes to get to a dashboard your people open every day. Here&#x27;s the stakes. Around seventy percent of the dashboards companies build go unused. Only about a fifth ever get looked at. That&#x27;s from RevealBI&#x27;s research. So most of what your data team ships is money spent on reports nobody reads, and worse, people slip back to their own spreadsheet and now the company runs on numbers you can&#x27;t see. And near the end I&#x27;ll show you the one change that took a finance team from nobody opening the dashboard to the whole team checking it before their morning coffee, and it wasn&#x27;t a redesign.&quot;
+(MODALITY: talking head, one zoom-punch on &quot;seventy percent&quot;)
+(ON-SCREEN: promise text &quot;The real causes of low adoption, and the fix&quot;; stat card &quot;~70% of dashboards go unused, ~20% get used. RevealBI&quot;)</p><p>[VALUE BEAT 1], 0:55, Chapter: &quot;Is it answering a question anyone actually asked?&quot;
+CLAIM: &quot;People open a dashboard when it answers a question they already have in their head. Most dashboards answer questions nobody asked.&quot;
+(MODALITY: screen-record, scrolling a report page crammed with twenty charts, cursor drifting, no clear starting point)
+(ON-SCREEN: claim card &quot;A report is only useful if it answers a live question&quot;)
+PROOF: &quot;Watch what happens on a typical build. Someone asks the data team for a dashboard, so the team puts every field they have onto a page. Twenty charts, four filters, a wall of numbers. A department head opens it once, can&#x27;t find the one figure they came for, and closes it. Now compare that to how your people actually work. A sales lead wants to know if this quarter beats last quarter. A controller wants to know if cash is where it should be today. Those are decisions. When the dashboard opens with that answer on top, they come back. When it opens with a menu of everything, they go ask a person, and your data team becomes the bottleneck again.&quot;
+(MODALITY: animation, a single question mark on screen, then one clear number answering it, versus a cluttered grid of charts with no answer)
+(ON-SCREEN: text &quot;Start from the decision, not the data you happen to have&quot;)
+PAYOFF: &quot;Takeaway one. Every dashboard should start from a real question someone asks for by name. If you can&#x27;t name the decision it supports, that&#x27;s why it sits unused.&quot;
+(ON-SCREEN: numbered takeaway &quot;1. Build for the decision, not the data&quot;)
+RE-HOOK: &quot;But even a dashboard aimed at the right question gets abandoned for a second reason, and this one is about trust.&quot;</p><p>[VALUE BEAT 2], 2:20, Chapter: &quot;Why won&#x27;t they open a number they don&#x27;t believe?&quot;
+CLAIM: &quot;People will not use a number they don&#x27;t believe. The moment two reports disagree, everyone goes back to their own copy.&quot;
+(MODALITY: animation, two dashboards side by side, both labelled Revenue, showing two different figures, then a hand reaching for a personal spreadsheet instead)
+(ON-SCREEN: claim card &quot;No trust, no usage. Every time.&quot;)
+PROOF: &quot;This is the quiet killer. Your dashboard says revenue is one number, the finance report says another, and they&#x27;re a couple hundred grand apart. Nobody knows which one is right, so they stop believing both. Only forty percent of executives say they always trust the data they decide on, from Talend. And when a leader doesn&#x27;t trust the dashboard, they don&#x27;t complain, they just build a private spreadsheet and run their own numbers. Now you&#x27;ve got the exact thing you bought BI to get rid of, more versions of the truth, and a board meeting that opens with ten minutes of whose number is right instead of a decision.&quot;
+(MODALITY: talking head, direct, one zoom-punch on &quot;whose number is right&quot;)
+(ON-SCREEN: stat card &quot;Only 40% of executives always trust their data. Talend&quot;)
+PAYOFF: &quot;Takeaway two. Adoption is a trust problem before it&#x27;s a design problem. If the numbers disagree anywhere, people will abandon the whole thing.&quot;
+(ON-SCREEN: numbered takeaway &quot;2. Trust comes first. Disagreeing numbers kill usage&quot;)
+RE-HOOK: &quot;So why do the numbers disagree in the first place? This is the one place I&#x27;m going under the hood, because this is where your team spends its days.&quot;</p><p>[VALUE BEAT 3], 3:50, Chapter: &quot;What is going wrong underneath the report?&quot;
+CLAIM: &quot;The numbers disagree because there&#x27;s no agreed definition and no single source underneath. This is the layer your team actually works in.&quot;
+(MODALITY: talking head, signposting the one deep beat)
+(ON-SCREEN: claim card &quot;Signposted deep dive: what your team does underneath&quot;)
+PROOF: &quot;Here&#x27;s the part most leaders never see, kept plain. Underneath every report sits a data model. Its job is to give one agreed answer to what a word like revenue or customer means, and to pull that answer from one source everyone shares. When that layer is missing, each report defines revenue its own way and reads from wherever was handy, often an export someone emailed. Ninety-four percent of the spreadsheets people use to make decisions contain errors, from a peer-reviewed study by Poon and colleagues in 2024, so every one of those hand-built exports is another place to be wrong. Building this shared layer, one definition, one source, is skilled work, and it&#x27;s the difference between reports that agree and reports that argue. This is exactly what we build for BI teams in Berlin every week. When it&#x27;s right, revenue means the same thing in every report, and Gartner puts the average cost of getting it wrong at 12.9 million dollars a year in wasted effort and bad calls.&quot;
+(MODALITY: animation, one central model feeding several reports, each showing the identical revenue figure, versus a tangle of reports each wired to a different spreadsheet)
+(ON-SCREEN: text &quot;One agreed definition. One source. Every report reads the same number.&quot;)
+PAYOFF: &quot;Takeaway three. The reason usage collapses is usually below the dashboard, in the model. One agreed definition from one source is what makes every report agree, and that&#x27;s specialist work worth getting right.&quot;
+(ON-SCREEN: numbered takeaway &quot;3. Fix the model underneath: one definition, one source&quot;)
+RE-HOOK: &quot;Say you&#x27;ve done that and the numbers agree. There&#x27;s still a way to lose people overnight, and it only takes one bad morning.&quot;</p><p>[VALUE BEAT 4], 5:25, Chapter: &quot;Did one wrong number cost you their trust for good?&quot;
+CLAIM: &quot;It takes one stale or wrong number for someone to stop trusting the dashboard, and they rarely come back.&quot;
+(MODALITY: screen-record, a report with an old date on it, then the refresh schedule being set, then a live &#x27;Data as of&#x27; stamp appearing on the page)
+(ON-SCREEN: claim card &quot;One bad number and they&#x27;re gone for good&quot;)
+PROOF: &quot;Picture the moment it goes wrong. A leader opens the dashboard in a meeting, quotes a number, and someone points out it&#x27;s three weeks old because the overnight refresh had been silently erroring for two weeks. That leader gets embarrassed once, and from then on they double-check every figure by hand or ignore the dashboard entirely. Freshness is what earns the daily open. Two things buy it. First, the data updates on a reliable schedule that matches what you promised people, nightly if that&#x27;s the deal. Second, the page shows a plain &#x27;Data as of&#x27; time right where they can see it, so anyone can tell at a glance the number is current. That little timestamp is what lets a leader quote the figure with confidence in the room.&quot;
+(MODALITY: talking head, quick, one zoom-punch on &quot;quote the figure with confidence&quot;)
+(ON-SCREEN: text &quot;Reliable refresh + a visible &#x27;Data as of&#x27; time = confidence in the room&quot;)
+PAYOFF: &quot;Takeaway four. Show people the data is current. A reliable refresh and a visible as-of time on the page turn a report into something they&#x27;ll quote in front of the board.&quot;
+(ON-SCREEN: numbered takeaway &quot;4. Make freshness visible on the page&quot;)
+RE-HOOK: &quot;There&#x27;s one more reason, and it has nothing to do with the report itself. It&#x27;s about where the report lives.&quot;</p><p>[VALUE BEAT 5], 6:55, Chapter: &quot;Does the dashboard live where your team already works?&quot;
+CLAIM: &quot;A dashboard people have to go find is a dashboard people forget. It has to come to where the work already happens.&quot;
+(MODALITY: on-screen text / kinetic type, &quot;A link they have to hunt for is a link they forget&quot;, then the words rearrange into &quot;Bring the number to them&quot;)
+(ON-SCREEN: claim card &quot;If they have to go find it, they won&#x27;t&quot;)
+PROOF: &quot;Most dashboards live behind a link buried in a folder or a bookmark nobody set. So opening it is an extra chore on top of a busy day, and it drops off. The teams that get daily usage do the opposite, they bring the number to where their people already are. The key figures land in the morning email. The weekly view is pinned in the channel where the team already talks. The report is one click from the tool they live in all day. Eighty-two percent of people say data silos get in the way of their work, from ZoomInfo, and a dashboard sitting alone in its own corner is just one more silo. When the number shows up in their day without them chasing it, checking it becomes a habit.&quot;
+(MODALITY: b-roll, a phone and a laptop showing the day&#x27;s key numbers arriving in a normal morning inbox and a team channel, hands scrolling past casually)
+(ON-SCREEN: stat card &quot;82% say data silos disrupt their work. ZoomInfo&quot;)
+PAYOFF: &quot;Takeaway five. Deliver the number into the tools your team already opens every day. Usage is a habit, and habits need a trigger.&quot;
+(ON-SCREEN: numbered takeaway &quot;5. Push the number into their day, don&#x27;t wait for a visit&quot;)
+RE-HOOK: &quot;Put those five together and something changes fast. Let me show you what that looked like for one real team, and pay off the promise from the start.&quot;</p><p>[WORKED EXAMPLE + RECAP], 8:25, Chapter: &quot;What does a dashboard people open every day look like?&quot;
+&quot;Here&#x27;s the change I promised you. A finance team where nobody opened the dashboard. We didn&#x27;t redesign a single chart. We agreed one definition of the numbers from one source underneath, set a reliable overnight refresh with a visible as-of time, and sent the three figures that mattered into their morning email. Within a couple of weeks the whole team was checking it before their coffee, because now it answered their question, they believed it, it was current, and it came to them. Their close went from over a week to a few days, and high-performing finance teams close in under three, from SolveXia, so they&#x27;re on their way. So the five causes, all yours to fix. One, the dashboard answered a question nobody asked. Two, people didn&#x27;t trust the numbers. Three, the model underneath had no single agreed definition. Four, the data went stale and burned someone. Five, it lived somewhere nobody visited. The teams in the one-in-five that get used didn&#x27;t buy a fancier tool. They fixed these five.&quot;
+(MODALITY: screen-record + b-roll split, left side the old buried report with an old date, right side the clean current numbers arriving in a morning email; quick b-roll of a finance team glancing at their phones, relaxed)
+(ON-SCREEN: before/after &quot;Nobody opened it → whole team checks it daily&quot;; recap list building, 5 causes)</p><p>[PAYOFF], 9:35, open-loop payoff
+&quot;And that&#x27;s the one change I teased at the start. It was never a prettier chart. It was one trusted number, current, delivered to where they already work. Get those right and people open the dashboard on their own, no nagging, no training push.&quot;
+(MODALITY: kinetic type, the five takeaways lock into one clean list)
+(ON-SCREEN: full recap list, 5 takeaways)</p><p>[SOFT CTA], 10:05, Chapter: &quot;What should you do about it on Monday?&quot;
+&quot;If you want to see where your own setup stands, we made a free Governance and Cost Scorecard. It&#x27;s a five-minute assessment that scores how trustworthy and how well-governed your reporting is, and shows you your top risks and how you compare to your peers. Link&#x27;s below, no strings. And if you already know the numbers underneath are the problem and you want it sorted on your real reports, that&#x27;s what we do at CaseWhen. You can book a scoping call with us, link&#x27;s in the description, no pitch, just a look at why people aren&#x27;t using what you built. Run the scorecard first. That&#x27;s your Monday.&quot;
+(MODALITY: talking head, warm, low pressure)
+(ON-SCREEN: link cards &quot;Free Governance &amp; Cost Scorecard (5 min)&quot; · &quot;Book a scoping call, casewhen.co&quot;)</p><h2>Description</h2><p>Why won&#x27;t anyone use our dashboards? The honest answer is that low adoption is almost never a design problem. This walks a Head of Data through the real causes of unused dashboards, and what it takes to get a dashboard your team opens every day.</p><p>Free Governance &amp; Cost Scorecard (5-min assessment): [link]
+Work with CaseWhen (book a scoping call): https://casewhen.co</p><p>Chapters:
+0:00 Why won&#x27;t anyone use our dashboards?
+0:55 Is it answering a question anyone actually asked?
+2:20 Why won&#x27;t they open a number they don&#x27;t believe?
+3:50 What is going wrong underneath the report?
+5:25 Did one wrong number cost you their trust for good?
+6:55 Does the dashboard live where your team already works?
+8:25 What does a dashboard people open every day look like?
+10:05 What should you do about it on Monday?</p><p>Resources:
+- Free Governance &amp; Cost Scorecard: [link]
+- Book a scoping call with CaseWhen: https://casewhen.co</p><p>Around seventy percent of the dashboards companies build go unused, and only about a fifth get looked at. This video covers the five real causes of low dashboard adoption for a Head of Data: reports that answer questions nobody asked, numbers people don&#x27;t trust, a data model underneath with no single agreed definition or source, stale data that burns someone once, and dashboards that live where nobody visits. Only forty percent of executives always trust their data, and Gartner puts the average cost of poor data quality at 12.9 million dollars a year. Fix these five and people open the dashboard on their own.</p><p>#PowerBI #DataGovernance #BusinessIntelligence #MicrosoftFabric #DashboardAdoption</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

@@ -1,0 +1,229 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · KPI Dashboard in Power BI: Build One Executives Actually Tru</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># KPI Dashboard in Power BI: Build One Executives Actually Trust (Full Build)
+Host: Austin · Cluster: modeling-kpi · Target: 15 min · Primary keyword: kpi dashboard</p><h2>Chapters
+- 0:00 Why won&#x27;t executives trust my KPI dashboard?
+- 0:55 What actually makes a number board-ready?
+- 2:35 Where should the numbers even come from?
+- 4:20 Why don&#x27;t my totals add up?
+- 6:30 How do I show target versus actual?
+- 8:40 What should executives actually see on the page?
+- 10:45 How do I keep it current without breaking trust?
+- 12:40 What do I do on Monday?</h2><h2>Script</h2><p>[0:00-0:12] HOOK (3-second payoff demo)
+&quot;This is a KPI dashboard a CFO signed off on in one meeting. Same company had three different revenue numbers the week before.&quot;
+(MODALITY: screen-record, cold cut to a finished, clean KPI dashboard, one time slicer clicks and every card updates live, smooth and fast)
+(ON-SCREEN: keyword card &quot;KPI DASHBOARD&quot; lower-third, stays visible)</p><p>[0:12-0:40] PROMISE + STAKES + OPEN LOOP
+&quot;By the end of this you&#x27;ll be able to build a KPI dashboard in Power BI that executives actually trust, from a blank file to a board-ready page. Not just charts that look nice. Numbers a finance team will put their name on. Here&#x27;s the stakes. Sixty-seven percent of organizations say they don&#x27;t fully trust the data they make decisions on. That&#x27;s from the 2025 Drexel LeBow and Precisely study. A dashboard nobody trusts is worse than no dashboard, because now people argue about the data instead of the decision. And near the end I&#x27;ll show you the one thing that turns a nice chart into a number a CFO signs off on, and almost no build tutorial includes it.&quot;
+(MODALITY: talking head, one zoom-punch on &quot;sixty-seven percent&quot;)
+(ON-SCREEN: promise text &quot;Blank file → board-ready KPI dashboard&quot;; stat card &quot;67% don&#x27;t fully trust their data, Drexel LeBow + Precisely, 2025&quot;)</p><p>[VALUE BEAT 1], 0:55, Chapter: &quot;What actually makes a number board-ready?&quot;
+CLAIM: &quot;A number is board-ready when three things are agreed before you build anything: what it counts, where it comes from, and how often it refreshes.&quot;
+(MODALITY: on-screen text / kinetic type, three rules stack up one at a time)
+(ON-SCREEN: claim card &quot;Board-ready = agreed definition + one source + known refresh&quot;)
+PROOF: &quot;Take revenue. Sounds simple. But booked revenue, invoiced revenue, and recognised revenue are three different numbers, and finance means a specific one. If your dashboard says revenue and the finance report says revenue and they&#x27;re two hundred grand apart, you&#x27;ve lost the room. So before Power BI, you write one line per KPI. Revenue equals recognised revenue, from the finance ledger, refreshed nightly. That one line is your contract.&quot;
+(MODALITY: animation, a single word &quot;Revenue&quot; splits into three labelled branches: Booked, Invoiced, Recognised; the Recognised branch locks in with a check)
+(ON-SCREEN: text &quot;Revenue = recognised revenue · source: finance ledger · refresh: nightly&quot;)
+PAYOFF: &quot;Takeaway one. Write a one-line definition for every KPI in a simple dictionary before you open Power BI. It settles the fight before it starts.&quot;
+(ON-SCREEN: numbered takeaway &quot;1. One-line definition per KPI, agreed up front&quot;)
+RE-HOOK: &quot;Once the definition&#x27;s agreed, the next question is the one that breaks most dashboards without anyone noticing. Where does the number come from.&quot;</p><p>[VALUE BEAT 2], 2:35, Chapter: &quot;Where should the numbers even come from?&quot;
+CLAIM: &quot;Every KPI gets exactly one source, and it&#x27;s never a spreadsheet sitting on someone&#x27;s desktop.&quot;
+(MODALITY: screen-record, Power BI Desktop, Get Data dialog, choosing the warehouse connector, not a local Excel file)
+(ON-SCREEN: claim card &quot;One KPI. One source. Documented.&quot;)
+PROOF: &quot;Here&#x27;s Get Data in Power BI. The tempting move is to grab the export somebody emailed you. Don&#x27;t. That file&#x27;s already out of date, and next month it&#x27;ll have an extra column and the whole thing snaps. Connect to the source of record instead. Your Azure SQL database, your warehouse, or a shared dataflow that everyone builds on. Watch. I&#x27;ll connect to the sales table in the warehouse, and now this number updates from the same place finance reads. If they&#x27;re wrong, we&#x27;re wrong together, and that&#x27;s what you want. Ninety-four percent of business spreadsheets used in decisions contain errors, from a 2024 peer-reviewed study, so every hop through a manual export is another place to be wrong.&quot;
+(MODALITY: b-roll, quick cut of a messy folder of &quot;final_v3_FINAL.xlsx&quot; files, then back to the clean warehouse connection)
+(ON-SCREEN: text &quot;Source of record → not the desktop export&quot;; stat card &quot;94% of decision spreadsheets contain errors, Poon et al., 2024&quot;)
+PAYOFF: &quot;Takeaway two. Point each KPI at one source of record, and write that source next to the definition. No orphan spreadsheets.&quot;
+(ON-SCREEN: numbered takeaway &quot;2. One source of record per KPI&quot;)
+RE-HOOK: &quot;Good. The data&#x27;s in. Now the part everyone skips, and it&#x27;s why your totals won&#x27;t add up.&quot;</p><p>[VALUE BEAT 3], 4:20, Chapter: &quot;Why don&#x27;t my totals add up?&quot;
+CLAIM: &quot;Your totals double-count because you loaded one big flat table instead of a proper model.&quot;
+(MODALITY: animation, a fat flat table with repeated customer and product rows; the SUM at the bottom ticks up too high and flashes red)
+(ON-SCREEN: claim card &quot;Flat table = double-counted totals&quot;)
+PROOF: &quot;This is a star schema, and it&#x27;s the fix. In the middle you put your fact table, the sales rows, one row per transaction, just the numbers and the keys. Around it, dimension tables. A date table, a product table, a customer table. Each dimension joins to the fact on one-to-many. One customer, many sales. One product, many sales. Watch the relationships light up. Now when I slice by region, the engine filters the customer table, and that flows down into the facts cleanly, once. No repeated rows inflating the number. This is also why the model stays fast, because Power BI is built to run on exactly this shape.&quot;
+(MODALITY: screen-record, Model view in Power BI, dragging the date and product keys to build the one-to-many relationships, arrows appearing)
+(ON-SCREEN: text &quot;Fact in the centre · dimensions around it · one-to-many&quot;)
+PAYOFF: &quot;Takeaway three. Model as a star schema. One fact table, clean dimension tables, one-to-many joins. That&#x27;s what makes totals reconcile and reports stay quick.&quot;
+(ON-SCREEN: numbered takeaway &quot;3. Star schema, so totals reconcile&quot;)
+RE-HOOK: &quot;The model&#x27;s solid. But a KPI isn&#x27;t just a total. It&#x27;s a total against a target, and here&#x27;s how you write that.&quot;</p><p>[VALUE BEAT 4], 6:30, Chapter: &quot;How do I show target versus actual?&quot;
+CLAIM: &quot;A KPI is four things: the actual, the target, the gap, and a status you can read at a glance.&quot;
+(MODALITY: screen-record, the DAX measure editor, typing measures one by one, results updating in a card)
+(ON-SCREEN: claim card &quot;KPI = Actual · Target · Variance · Status&quot;)
+PROOF: &quot;Let me write these live. Actual revenue is a measure, SUM of the sales amount. Now targets. Put your targets in their own table, one row per month per KPI, and load it like any other source. Don&#x27;t hard-code targets into the formula, because next quarter they change and you don&#x27;t want to hunt through DAX to update them. Target revenue is SUM of the target column. Variance is just Actual minus Target. And status is a small measure. If variance is above zero return on track, if it&#x27;s within five percent return watch, otherwise return behind. Now this card doesn&#x27;t just say a number. It says where we are against where we said we&#x27;d be. That&#x27;s a KPI.&quot;
+(MODALITY: animation, the four measures assembling into one card: big actual number, a small target underneath, a variance arrow, a status dot filling in)
+(ON-SCREEN: text &quot;Targets live in a table, never hard-coded in DAX&quot;)
+PAYOFF: &quot;Takeaway four. Keep targets in a table you can edit, and give every KPI an actual, a target, a variance, and a status. Executives read the status first.&quot;
+(ON-SCREEN: numbered takeaway &quot;4. Actual, target, variance, status, targets in a table&quot;)
+RE-HOOK: &quot;You&#x27;ve got real KPIs now. But if you dump twelve of them on a page, they&#x27;ll still tune out. Layout is its own decision.&quot;</p><p>[VALUE BEAT 5], 8:40, Chapter: &quot;What should executives actually see on the page?&quot;
+CLAIM: &quot;Executives want one screen: the top KPIs, one time filter, and colour that means something.&quot;
+(MODALITY: data-viz, building the page: four KPI cards snap into the top row, one slicer top-right, a single trend line below)
+(ON-SCREEN: claim card &quot;One screen · KPIs on top · one filter&quot;)
+PROOF: &quot;Here&#x27;s the layout that works. Top row, four to six KPI cards, no more. Each shows the actual, the target under it, and the status colour. One time slicer, top right, so they can flip between this month and this quarter without asking you. Below that, one trend chart for the headline number, so they see direction, not just a snapshot. And the colour rule matters. Green, amber, and the status drives it automatically off that measure we wrote, not by hand. If a card&#x27;s amber, it&#x27;s amber because the number says so. Resist the twelve-chart wall. A board doesn&#x27;t read twelve charts. They read the four numbers that decide the meeting.&quot;
+(MODALITY: talking head, quick and direct, one zoom-punch on &quot;the four numbers that decide the meeting&quot;)
+(ON-SCREEN: text &quot;4, 6 cards · 1 slicer · 1 trend · status colour = automatic&quot;)
+PAYOFF: &quot;Takeaway five. One screen. KPIs on top, one time filter, one trend, and let the status measure drive the colour. Cut everything that isn&#x27;t a decision.&quot;
+(ON-SCREEN: numbered takeaway &quot;5. One executive screen, colour driven by the status measure&quot;)
+RE-HOOK: &quot;It looks board-ready now. But looking ready and being trusted are different things, and this next bit is the difference.&quot;</p><p>[VALUE BEAT 6], 10:45, Chapter: &quot;How do I keep it current without breaking trust?&quot;
+CLAIM: &quot;A dashboard earns trust when people can see it&#x27;s current, so put the refresh time on the page.&quot;
+(MODALITY: animation, the incremental-refresh partitions by date: the archive months sit cold and grey, only the newest partition lights up and re-processes)
+(ON-SCREEN: claim card &quot;Show the data-as-of time on the page&quot;)
+PROOF: &quot;First, schedule the refresh in the Power BI service so this updates on its own, nightly, matching the cadence you promised in the definition. If the model&#x27;s large, turn on incremental refresh. This is the mechanism. Instead of reloading all of history every night, Power BI splits the data into date partitions and only re-processes the newest one. The old months sit cold. That&#x27;s how a refresh goes from slow to quick without you touching the data. And here&#x27;s the one thing almost no tutorial adds, the thing I promised you. Put a text box on the page that shows data as of, and bind it to the actual last refresh time. Now when an executive opens it Monday morning, they can see it&#x27;s Sunday night&#x27;s data, not something from three weeks ago they&#x27;re unsure about. That little timestamp is what makes a CFO sign off, because trust is really just knowing the number is current and knowing where it came from.&quot;
+(MODALITY: screen-record, the Power BI service refresh schedule, then the &quot;Data as of: 28 Jul, 02:00&quot; text box live on the report page)
+(ON-SCREEN: text &quot;Scheduled refresh + incremental partitions + visible &#x27;Data as of&#x27; stamp&quot;)
+PAYOFF: &quot;Takeaway six. Schedule the refresh, use incremental refresh if it&#x27;s big, and show the data-as-of time right on the page. Visible freshness is trust.&quot;
+(ON-SCREEN: numbered takeaway &quot;6. Show &#x27;Data as of&#x27; on the page&quot;)
+RE-HOOK: &quot;That&#x27;s the full build. Now let me show you the before and after, on a real one.&quot;</p><p>[WORKED EXAMPLE], 11:55, before / after
+&quot;Here&#x27;s what this changed for one team. Before, three spreadsheets, three people, three revenue numbers, and every board meeting opened with ten minutes of whose number is right. After, one model, one agreed definition, one source, refreshing overnight, with the timestamp on the page. Same data. The arguing stopped, and the meeting started with the decision instead. That&#x27;s the whole point. Going back to that trust number, sixty-seven percent don&#x27;t trust their data. The teams in the other third didn&#x27;t buy a better tool. They agreed the definition, pointed at one source, modelled it properly, and showed people it was current.&quot;
+(MODALITY: screen-record + b-roll, split screen: three conflicting spreadsheets on the left, the single clean dashboard with the timestamp on the right; quick b-roll of a boardroom where nobody&#x27;s arguing)
+(ON-SCREEN: before/after figure &quot;3 numbers → 1 number&quot;)</p><p>[PAYOFF], 12:40, recap + open-loop payoff
+&quot;So here&#x27;s the whole build, and you&#x27;ve got all of it. One, a one-line definition for every KPI, agreed first. Two, one source of record per KPI. Three, a star schema so the totals reconcile. Four, actual, target, variance and status, with targets in a table. Five, one executive screen with automatic status colour. Six, scheduled refresh and a visible data-as-of stamp. And that stamp plus the agreed definition, that&#x27;s the pair I promised you at the start, the thing that turns a chart into a number people sign off on. It was never a fancier visual. It&#x27;s proof the number is current and proof everyone means the same thing by it.&quot;
+(MODALITY: kinetic type, all six takeaways build into one clean list on screen)
+(ON-SCREEN: full recap list, 6 takeaways)</p><p>[SOFT CTA], 13:25
+&quot;If you want to pressure-test your own model before you build on it, the 20-Point Power BI Model Review Checklist is linked below. It&#x27;s the same list we run before we trust a number, free, no email gymnastics. And if your KPIs still won&#x27;t reconcile no matter what you try, that&#x27;s what we do at CaseWhen. You can book a semantic-model and AI-readiness review with us, link&#x27;s in the description. No pitch, just a look at why the numbers disagree. If this helped, the next build I&#x27;d watch is the star schema one, it goes deeper on the model step. That&#x27;s it. Go make a number your CFO will sign.&quot;
+(MODALITY: talking head, warm, low pressure)
+(ON-SCREEN: link cards &quot;20-Point Model Review Checklist&quot; · &quot;Book a semantic-model review, casewhen.co&quot; · &quot;Watch next: Star Schema, done properly&quot;)</p><h2>Description</h2><p>Build a KPI dashboard in Power BI that executives actually trust, from a blank file to a board-ready page, with the definition, source, model, and refresh decisions most tutorials skip.</p><p>Free 20-Point Power BI Model Review Checklist: [link]
+Work with CaseWhen (semantic-model &amp; AI-readiness review): https://casewhen.co</p><p>Chapters:
+0:00 Why won&#x27;t executives trust my KPI dashboard?
+0:55 What actually makes a number board-ready?
+2:35 Where should the numbers even come from?
+4:20 Why don&#x27;t my totals add up?
+6:30 How do I show target versus actual?
+8:40 What should executives actually see on the page?
+10:45 How do I keep it current without breaking trust?
+12:40 What do I do on Monday?</p><p>Resources:
+- 20-Point Power BI Model Review Checklist (free): [link]
+- Star Schema, done properly (watch next): [link]
+- Book a semantic-model &amp; AI-readiness review: https://casewhen.co</p><p>Most KPI dashboards lose trust on the numbers underneath, not the charts on top. This full build walks through the decisions that make a Power BI KPI dashboard board-ready: agreeing a one-line definition for every KPI, pointing each number at one source of record, modelling the data as a star schema so totals reconcile, writing actual-versus-target measures with a readable status, laying out a single executive screen, and scheduling refresh with a visible data-as-of timestamp so people can see the number is current. Sixty-seven percent of organizations say they don&#x27;t fully trust the data they decide on. This is how you get into the other third.</p><p>#PowerBI #KPIDashboard #DataModeling #BusinessIntelligence #MicrosoftFabric</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

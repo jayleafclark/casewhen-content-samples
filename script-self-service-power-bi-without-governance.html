@@ -1,0 +1,183 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · 6 Ways Self-Service Power BI Rots Without a Data Governance</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># 6 Ways Self-Service Power BI Rots Without a Data Governance Framework</p><p>Host: Austin · Cluster: governance · Target: 12 min · Primary keyword: data governance framework</p><h2>Chapters
+- 0:00 Why does Power BI turn into a mess when everyone builds their own reports?
+- 0:40 Why do we have five reports that each show a different number?
+- 1:45 Whose revenue number is the right one?
+- 2:50 Why can&#x27;t anyone find the report that already exists?
+- 3:55 Who fixes this dataset when the refresh stops?
+- 5:00 Who can see the numbers they shouldn&#x27;t?
+- 6:05 Why does our capacity keep getting slammed?
+- 7:10 So what do I put in place on Monday?</h2><h2>Script</h2><p>[0:00-0:12] HOOK (blunt callout, real-number anchor)</p><p>(MODALITY: 3-second cold-cut screen-record of a Power BI workspace search returning eleven reports named &quot;Sales_final_v3&quot;, then hard cut to talking head)</p><p>&gt; Give twenty people Power BI and no rules, and within a year you&#x27;ll have five reports that each show a different revenue number for the same month. That&#x27;s the meeting nobody wants, and it&#x27;s what a data governance framework is built to stop.</p><p>(ON-SCREEN: keyword card, lower-third &quot;DATA GOVERNANCE FRAMEWORK&quot;, the messy search still visible behind)</p><p>[0:12-0:40] PROMISE + STAKES + OPEN LOOP</p><p>(MODALITY: talking head, cutting to quick b-roll of an analyst frowning at two reports side by side)</p><p>&gt; By the end of this you&#x27;ll know the six ways self-service Power BI goes bad when nobody governs it, and the one setup that stops most of them. Here&#x27;s why it&#x27;s worth ten minutes: two-thirds of organizations already say they don&#x27;t fully trust the data they run on. Precisely and Drexel measured it at 67 percent last year, up from 55 the year before. Scale self-service with no guardrails, and every new report just adds another number people won&#x27;t trust.</p><p>(ON-SCREEN: stat card &quot;67% don&#x27;t fully trust their data. Source: Drexel LeBow + Precisely, 2025&quot;)</p><p>&gt; We clean this up for BI teams in Berlin most weeks, so the next ten minutes come from real tenants, not theory. Stay to the end and I&#x27;ll show you the single guardrail that shuts down five of these six at once, and almost no team turns it on early.</p><p>(ON-SCREEN: open-loop teaser card &quot;1 guardrail = stops 5 of 6&quot;)</p><p>Then a hard cut into Beat 1.</p><p>[0:40-1:45] VALUE BEAT 1 (duplicate reports and datasets)</p><p>(MODALITY: screen-record, live Power BI service)</p><p>CLAIM (on-screen text card):
+&gt; With no rules, every team rebuilds the same dataset instead of reusing one.</p><p>PROOF (screen-record the real thing):
+&gt; Here&#x27;s a real tenant. I search &quot;sales&quot; in the Power BI service and I get nine datasets, all pulling from the same source, all built by different people. This one refreshes at 6am, this one at noon, this one hasn&#x27;t refreshed in three weeks. Same source underneath, and whichever report you open, you get a different answer. Nobody did anything wrong. There was just nothing telling them a dataset already existed.</p><p>PAYOFF (numbered takeaway card):
+&gt; Takeaway one: before anyone builds, give them a certified dataset to connect to, so new reports reuse the model instead of copying it.</p><p>RE-HOOK:
+&gt; That&#x27;s the copies. Even after you clear out the duplicates, the numbers still won&#x27;t agree, and reason two is why.</p><p>[1:45-2:50] VALUE BEAT 2 (conflicting KPI definitions)</p><p>(MODALITY: custom animation)</p><p>CLAIM (on-screen text card):
+&gt; When everyone writes their own measures, one metric ends up with three definitions.</p><p>PROOF (custom animation of the mechanism):
+&gt; Watch what happens to one word: revenue. In finance&#x27;s file, revenue is booked, net of refunds. In the sales file, it&#x27;s gross, counted at order date. In the marketing file, it counts renewals twice. Three files, one label, three formulas. Same month, and the totals land at 1.2 million, 1.5 million, and 1.35 million, and every one of them gets defended by the person who wrote it.</p><p>(ANIMATION SPEC: three Power BI file cards side by side. From each, the DAX measure named &quot;Revenue&quot; expands out and shows a different filter and formula. Three counters tick up to three different totals. The shared label &quot;Revenue&quot; pulses amber as a conflict marker sitting above all three. Amber is status only, per brand.)</p><p>PAYOFF (numbered takeaway card):
+&gt; Takeaway two: agree the definition of every headline metric once, in writing, and put it in one shared measure that all reports pull from. One number, one owner.</p><p>RE-HOOK:
+&gt; Clear out the copies and pin the definitions, and you&#x27;d still lose an afternoon to number three, because nobody can find anything.</p><p>[2:50-3:55] VALUE BEAT 3 (workspace sprawl and discoverability)</p><p>(MODALITY: screen-record, Power BI service workspace list and search)</p><p>CLAIM (on-screen text card):
+&gt; With no naming or workspace rules, nobody can find the report that&#x27;s already built.</p><p>PROOF (screen-record):
+&gt; This is a real workspace list. Forty-one workspaces. &quot;Sales&quot;, &quot;Sales new&quot;, &quot;Sales 2024&quot;, &quot;Sales FINAL&quot;, &quot;Sales FINAL v3&quot;. I search &quot;monthly revenue&quot; and get eleven reports, none marked as the one to trust. So the analyst who can&#x27;t find it does the rational thing and builds a twelfth. That&#x27;s how forty-one becomes fifty, and the sprawl feeds itself.</p><p>PAYOFF (numbered takeaway card):
+&gt; Takeaway three: give workspaces a naming rule and an owner, and mark exactly one report per topic as endorsed, so search returns the trusted one first.</p><p>RE-HOOK:
+&gt; Now the one that takes reports offline while everyone&#x27;s asleep.</p><p>[3:55-5:00] VALUE BEAT 4 (ownership and refresh)</p><p>(MODALITY: custom animation)</p><p>CLAIM (on-screen text card):
+&gt; A dataset nobody owns is a dataset nobody fixes when it stops refreshing.</p><p>PROOF (custom animation of the mechanism):
+&gt; Here&#x27;s the pattern. Someone builds a dataset, shares it, then changes teams or leaves. The refresh keeps running on their old login. Six weeks later that account gets disabled, the refresh goes red, and the report silently serves stale data. No owner means no alert reaches a human. The exec sees last month&#x27;s numbers dressed up as today&#x27;s, and makes a call on them.</p><p>(ANIMATION SPEC: a dataset box with an empty &quot;Owner&quot; field. A scheduled-refresh clock ticks forward. The credential token attached to a person icon expires and greys out. The refresh status flips to red. A notification bell appears with a line through it, labelled &quot;nobody notified&quot;. The report tile keeps showing old figures with a small amber &quot;stale&quot; marker.)</p><p>PAYOFF (numbered takeaway card):
+&gt; Takeaway four: every dataset gets a named owner and a service account for refresh, never a person&#x27;s login, so it survives someone leaving.</p><p>RE-HOOK:
+&gt; Owner sorted. Now the one that leaks numbers to people who should never see them.</p><p>[5:00-6:05] VALUE BEAT 5 (access rights and row-level security)</p><p>(MODALITY: screen-record, with a short embedded RLS animation)</p><p>CLAIM (on-screen text card):
+&gt; Self-service sharing defaults to too open, so salaries and margins reach the wrong eyes.</p><p>PROOF (screen-record plus embedded animation):
+&gt; Two things go wrong here. First, oversharing. Someone hits share, picks &quot;people in your organization&quot;, and now the whole company can open the regional P&amp;L. Second, missing row-level security. This report should show each manager only their own region. Without RLS, one manager opens it and sees every region&#x27;s salaries. Let me show the fix. I add a role, write one filter, region equals the user&#x27;s region using USERPRINCIPALNAME, and now the same report shows this manager three rows and that manager three different rows. Same file, different data per person.</p><p>(ANIMATION SPEC: reuse the standing RLS animation. One report, two user identities on the left. As each identity is selected, the table rows filter down to only that user&#x27;s region. A share dialog on the right shows &quot;people in your organization&quot; being switched off and swapped for a named group.)</p><p>PAYOFF (numbered takeaway card):
+&gt; Takeaway five: turn off org-wide sharing by default, and put row-level security on anything with pay, margin, or customer detail before it&#x27;s shared.</p><p>RE-HOOK:
+&gt; Access locked down. Last one, and it&#x27;s the one that drags the whole tenant slow at month-end.</p><p>[6:05-7:10] VALUE BEAT 6 (capacity strain)</p><p>(MODALITY: data-viz)</p><p>CLAIM (on-screen text card):
+&gt; Dozens of duplicate datasets refreshing on the same capacity drags everyone&#x27;s reports slow.</p><p>PROOF (animated data-viz):
+&gt; Remember those nine copies of the same dataset. Each one runs its own refresh, loading the model into memory at roughly twice its size. Nine imports of the same data, on one capacity, overlapping at 8am. Watch the capacity meter. It fills, crosses the line, and the platform starts smoothing and then throttling, so interactive reports go slow for people who had nothing to do with the refresh. The report team gets blamed for what&#x27;s really a modeling and duplication problem.</p><p>(DATA-VIZ SPEC: an animated capacity CU chart across one morning. Nine refresh jobs stack up as blocks around 8am. The usage line climbs and crosses a marked capacity limit. A throttle band shades in above the line. A second line, report response time, spikes upward in step. Limit line and throttle band in amber, status only.)</p><p>PAYOFF (numbered takeaway card):
+&gt; Takeaway six: cut duplicate refreshes down to shared datasets, and stagger refresh times, so one capacity isn&#x27;t hit by the same data nine times at once.</p><p>RE-HOOK:
+&gt; Six ways it rots. Here&#x27;s the setup that stops most of them before they start.</p><p>[7:10-9:00] PAYOFF: the one guardrail (open loop paid off)</p><p>(MODALITY: custom animation, then talking head)</p><p>&gt; I promised you one guardrail that shuts down five of these six. Here it is: one shared, certified semantic model that every report connects to. Build the model once, agree the measures once, give it an owner, mark it certified, and point every report at it.</p><p>(ANIMATION SPEC: one central semantic model box with a green certified badge. Many report tiles connect to that single model with one-to-many arrows lighting up. The duplicate dataset copies from Beat 1 fade out. The three conflicting revenue formulas from Beat 2 merge into one measure inside the model. The workspace search from Beat 3 now returns the certified model at the top with the green badge.)</p><p>&gt; Watch what that one move does. Duplicates go away, because people connect instead of copy. Definitions agree, because there&#x27;s one measure. Discoverability improves, because the certified model shows up first. Capacity settles, because you&#x27;re refreshing one dataset, not nine. And ownership is clear, because the certified model has a named owner. The only one it doesn&#x27;t cover is access, and that&#x27;s row-level security, which you add on top.</p><p>[9:00-10:15] What a data governance framework really is (do this Monday)</p><p>(MODALITY: talking head with kinetic type)</p><p>&gt; So a data governance framework, in plain terms, is three moving parts. One, ownership: every certified dataset and workspace has a named owner. Two, standards: naming rules, one agreed definition per metric, and endorsement on the trusted version. Three, access: org-wide sharing off by default, and row-level security on anything sensitive. That&#x27;s it. You don&#x27;t need a committee. You need those three written down and one certified model people use.</p><p>(ON-SCREEN: three-part card &quot;1 Ownership · 2 Standards · 3 Access&quot;)</p><p>[10:15-11:00] RECAP: give the full win away</p><p>(MODALITY: kinetic type list, all six on one screen)</p><p>&gt; Your six, on one screen. One, connect to a certified dataset instead of copying it. Two, one written definition per headline metric. Three, name and endorse one report per topic. Four, a named owner and a service account for every refresh. Five, org-wide sharing off, RLS on anything sensitive. Six, shared datasets and staggered refreshes so capacity stays healthy.</p><p>(ON-SCREEN: numbered 1 to 6 list, each line animating in)</p><p>&gt; Get this right and you don&#x27;t just stop the mess. Forrester found insights-driven businesses are 8.5 times more likely to grow revenue 20 percent or more year over year. Trusted numbers are what get people acting on the report instead of arguing with it.</p><p>(ON-SCREEN: stat card &quot;8.5x more likely to grow revenue 20%+ YoY. Source: Forrester, The Insights-Driven Business&quot;)</p><p>[11:00-11:30] SOFT CTA</p><p>(MODALITY: talking head, link cards)</p><p>&gt; If you want to see where your setup stands, the free Power BI Governance and Cost Scorecard is linked below. It&#x27;s a 5-minute check that gives you a score, a benchmark against your peers, and your top three risks. And if self-service has already gotten away from you, that&#x27;s the work we do at CaseWhen, cleaning up real tenants. Request a governance assessment, link&#x27;s in the description, no pitch, just a look at your setup. Next video, I build the certified semantic model end to end, so you can copy the setup.</p><p>(ON-SCREEN: two link cards, &quot;Free Governance &amp; Cost Scorecard&quot; and &quot;Work with CaseWhen&quot;, then a watch-next thumbnail)</p><h2>Description</h2><p>A data governance framework is what keeps self-service Power BI from turning into a pile of reports nobody trusts, and this video walks the six ways it goes bad and the one setup that stops most of them.</p><p>Free Power BI Governance &amp; Cost Scorecard (5-minute check, get your score + peer benchmark + top 3 risks): https://casewhen.co/scorecard
+Work with CaseWhen (request a governance assessment): https://casewhen.co/contact</p><p>Chapters:
+0:00 Why does Power BI turn into a mess when everyone builds their own reports?
+0:40 Why do we have five reports that each show a different number?
+1:45 Whose revenue number is the right one?
+2:50 Why can&#x27;t anyone find the report that already exists?
+3:55 Who fixes this dataset when the refresh stops?
+5:00 Who can see the numbers they shouldn&#x27;t?
+6:05 Why does our capacity keep getting slammed?
+7:10 So what do I put in place on Monday?</p><p>Resources:
+- Governance &amp; Cost Scorecard: https://casewhen.co/scorecard
+- Row-level security setup walkthrough (watch next): https://casewhen.co/youtube
+- Certified semantic model build (watch next): https://casewhen.co/youtube</p><p>When you give a team self-service Power BI with no data governance framework, six things go bad: duplicate reports and datasets, conflicting KPI definitions, workspace sprawl with no discoverability, datasets nobody owns when the refresh stops, over-open sharing with no row-level security, and capacity strain from the same data refreshing nine times over. The fix is one certified semantic model plus three moving parts: ownership, standards, and access. This walkthrough shows each mistake on a real Power BI tenant and the guardrail that prevents it, so your team can trust the numbers again.</p><p>#PowerBI #DataGovernance #MicrosoftFabric #BusinessIntelligence #DataQuality</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

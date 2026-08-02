@@ -1,0 +1,179 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Data Governance Framework for Power BI: Build It Yourself in</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Data Governance Framework for Power BI: Build It Yourself in 14 Minutes</p><p>Host: Austin · Cluster: governance · Target: 14 min · Primary keyword: data governance framework</p><h2>Chapters
+- 0:00 Why do our refreshes keep going red and the auditors keep flagging us?
+- 0:55 Where should a report even live?
+- 2:40 Who fixes this dataset when the person who built it leaves?
+- 4:25 How does anyone know which report to trust?
+- 6:15 How do we get everyone to the same number?
+- 8:05 Who can see what, and can we prove it?
+- 10:00 What do I put in place on Monday?
+- 12:10 So what does this get us, and where do I start?</h2><h2>Script</h2><p>[0:00-0:12] HOOK (blunt callout, named-feature anchor)</p><p>(MODALITY: 3-second cold-cut screen-record of the Power BI admin portal, cursor landing on the endorsement setting still switched off, then hard cut to talking head)</p><p>&gt; Microsoft ships Power BI with most of a data governance framework already in the box, the Certified label, workspace roles, lineage, and almost every team leaves it switched off. That&#x27;s why your refreshes go red and the auditor finds datasets nobody owns.</p><p>(ON-SCREEN: keyword card, lower-third &quot;DATA GOVERNANCE FRAMEWORK&quot;, the greyed-out endorsement toggle visible behind)</p><p>[0:12-0:55] PROMISE + STAKES + OPEN LOOP</p><p>(MODALITY: talking head, cutting to quick b-roll of an analyst scrolling a long workspace list)</p><p>&gt; By the end of the next fourteen minutes you&#x27;ll have built a data governance framework you can run, five parts: where reports live, who owns them, how the trusted one gets a label, one agreed number, and who&#x27;s allowed to see it. No committee, no fifty-page policy doc. Here&#x27;s why it&#x27;s worth the time. Two-thirds of organizations already say they don&#x27;t fully trust the data they run on. Precisely and Drexel measured that at 67 percent last year, up from 55 the year before. And poor data quality costs the average company 12.9 million a year, that&#x27;s Gartner. Ungoverned Power BI is how you land in both numbers.</p><p>(ON-SCREEN: stat cards &quot;67% don&#x27;t fully trust their data. Source: Drexel LeBow + Precisely, 2025&quot; then &quot;$12.9M/yr. Source: Gartner, data quality&quot;)</p><p>&gt; We build this for BI teams in Berlin most weeks, so this comes from real tenants. Stay to the end and I&#x27;ll show you the one certification setting that, left on default, lets anyone stamp anything Certified, which is worse than having no label at all.</p><p>(ON-SCREEN: open-loop teaser card &quot;1 default setting = fake trust&quot;)</p><p>Then a hard cut into Beat 1.</p><p>[0:55-2:40] VALUE BEAT 1 (workspace structure, the container)</p><p>(MODALITY: screen-record, live Power BI service)</p><p>CLAIM (on-screen text card):
+&gt; A governance framework starts with where reports are allowed to live.</p><p>PROOF (screen-record the real thing):
+&gt; This is a real tenant before we touched it. Forty-one workspaces, named &quot;Sales&quot;, &quot;Sales new&quot;, &quot;Sales 2024 FINAL&quot;, and personal My Workspaces full of production reports the whole company depends on. Nobody can tell what&#x27;s a draft and what&#x27;s trusted. Here&#x27;s the structure we put in. One workspace per business domain, finance, sales, operations, and inside each domain three stages: develop, test, and a locked production workspace where only a certified report gets published. Editors work in develop. Viewers only ever see production. I set that up here with workspace roles, Admin, Member, Contributor, Viewer, so a viewer can read the report but can&#x27;t republish over it.</p><p>(ON-SCREEN: before/after card, messy 41-workspace list on the left, clean &quot;Finance / Sales / Ops, each with Dev, Test, Prod&quot; grid on the right)</p><p>PAYOFF (numbered takeaway card):
+&gt; Takeaway one: one workspace per domain, three stages inside it, and production is publish-only for a small named group. That single structure ends My-Workspace production reports on day one.</p><p>RE-HOOK:
+&gt; Structure gives reports an address. It still doesn&#x27;t say who answers when one stops refreshing, so that&#x27;s next.</p><p>[2:40-4:25] VALUE BEAT 2 (ownership, the refresh reliability layer)</p><p>(MODALITY: custom animation)</p><p>CLAIM (on-screen text card):
+&gt; A dataset with no named owner is a dataset nobody repairs when the refresh stops.</p><p>PROOF (custom animation of the mechanism):
+&gt; Watch the pattern that produces most of those red refreshes. Someone builds a dataset, wires the scheduled refresh to their own login, then changes team or leaves. The refresh keeps running on their credential. Weeks later that account gets disabled, the refresh goes red, and the report serves last month&#x27;s numbers with no warning. An exec makes a call on stale data. The fix is two fields. Every certified dataset gets a named owner, a real person accountable for it, and the refresh runs on a service account, never a human login, so it survives anyone leaving.</p><p>(ANIMATION SPEC: a dataset box with an empty &quot;Owner&quot; field and a scheduled-refresh clock. A credential token attached to a person icon expires and greys out; the refresh status flips to red; the report tile keeps showing old figures with a small amber &quot;stale&quot; marker. Then rewind: the &quot;Owner&quot; field fills with a name, the credential swaps to a &quot;service account&quot; badge that stays lit as the person icon leaves, and the refresh status stays green. Amber is status only, per brand.)</p><p>PAYOFF (numbered takeaway card):
+&gt; Takeaway two: name an owner on every certified dataset and move its refresh onto a service account. Do only this and your red-refresh count drops the same week.</p><p>RE-HOOK:
+&gt; Owned and refreshing. Now the part that turns a plain report into the one people are told to trust.</p><p>[4:25-6:15] VALUE BEAT 3 (certification and endorsement)</p><p>(MODALITY: screen-record, Power BI service + admin portal)</p><p>CLAIM (on-screen text card):
+&gt; Endorsement is how the trusted report gets a visible label instead of a rumour.</p><p>PROOF (screen-record):
+&gt; Power BI has two endorsement levels built in and most teams use neither. Here&#x27;s a dataset&#x27;s settings. I can mark it Promoted, which any contributor can do, meaning &quot;this is ready to share&quot;. Above that is Certified, the gold badge, which says &quot;this is the official one&quot;. Now the open loop from the start. Go into the admin portal, Tenant settings, Certification. By default, certification is either off or open to the whole org, so anyone can stamp their own report Certified and the badge means nothing. Here&#x27;s the real setup: turn certification on, but restrict who can certify to one named security group, your data owners. Add a link in that same box to your one-page certification checklist, so a badge always means the same thing.</p><p>(ON-SCREEN: two-tier card &quot;Promoted (anyone) vs Certified (owners only)&quot;, then a zoom-punch on the admin &quot;restrict to security group&quot; field being switched from the whole org to &quot;Data Owners&quot;)</p><p>PAYOFF (numbered takeaway card):
+&gt; Takeaway three: turn on Certified, lock who can apply it to your data-owners group, and tie it to a written checklist. The label is only worth something when it&#x27;s scarce and it means one thing.</p><p>RE-HOOK:
+&gt; Now the badge points at a trusted report. It still won&#x27;t help if every report defines revenue differently, so here&#x27;s the piece that fixes that.</p><p>[6:15-8:05] VALUE BEAT 4 (one certified semantic model)</p><p>(MODALITY: custom animation)</p><p>CLAIM (on-screen text card):
+&gt; One certified semantic model is what gets every report, and Copilot, to the same number.</p><p>PROOF (custom animation of the mechanism):
+&gt; Here&#x27;s what goes wrong without it. Three teams each write their own measure named Revenue. Finance counts it net of refunds, sales counts it gross at order date, marketing double-counts renewals. Same month, three totals, 1.2 million, 1.5 and 1.35, and every one gets defended. The framework answer is a single certified semantic model. You build the star schema once, a fact table in the middle, dimensions like Date, Product, Customer joined around it, and you write each headline measure one time, inside that model. Every report connects to it instead of rolling its own. And this is the part that matters for 2026: only 12 percent of organizations say their data is good enough to use for AI. Copilot reads your semantic model. One agreed model is also what makes Copilot answer correctly instead of guessing.</p><p>(ANIMATION SPEC: three file cards, each expanding a different &quot;Revenue&quot; DAX formula, three counters ticking to three totals, a shared &quot;Revenue&quot; label pulsing amber as a conflict marker. Then the three merge into one central certified semantic model box with a green badge; a star schema forms inside it, fact table centre, dimension tables snapping in with one-to-many arrows lighting up. Many report tiles and a small Copilot icon all connect to that one model with clean arrows. Amber status only.)</p><p>PAYOFF (numbered takeaway card):
+&gt; Takeaway four: build one certified semantic model, write each headline measure once inside it, and point every report and Copilot at that model. One number, one owner, one source for the AI too.</p><p>RE-HOOK:
+&gt; One model, one number. Now the two things the auditor asks for: who can see it, and can you prove who did.</p><p>[8:05-10:00] VALUE BEAT 5 (access and audit, the compliance layer)</p><p>(MODALITY: screen-record, with a short embedded RLS animation)</p><p>CLAIM (on-screen text card):
+&gt; A framework isn&#x27;t done until access is restricted and every action is on record.</p><p>PROOF (screen-record plus embedded animation):
+&gt; Two things close the audit gap. First, access. This regional P&amp;L should show each manager only their own region. I add a role in the model, write one filter, region equals the user&#x27;s region using USERPRINCIPALNAME, and now the same report shows this manager three rows and that manager three different rows. Same file, filtered per person. On top of that I add a sensitivity label, Confidential, so the data stays protected even after someone exports it to Excel. Second, proof. This is the Purview audit log and the lineage view. Lineage shows exactly which source feeds which dataset feeds which report, so when an auditor asks where a number comes from, you point at a diagram. The audit log shows who viewed, shared, or changed a certified dataset, and when. That record is the difference between passing an audit and guessing.</p><p>(ANIMATION SPEC: reuse the standing RLS animation. One report, two user identities on the left; as each is selected, the table rows filter down to only that user&#x27;s region. A sensitivity-label pill &quot;Confidential&quot; attaches to the exported Excel icon and stays attached. Then a lineage strip animates: Source to Dataset to Report as connected nodes lighting left to right, with an audit-log line ticking entries &quot;viewed / shared / certified&quot; beside it.)</p><p>PAYOFF (numbered takeaway card):
+&gt; Takeaway five: row-level security on anything sensitive, a sensitivity label that travels with the data, and lineage plus the audit log so you can answer where a number came from and who touched it.</p><p>RE-HOOK:
+&gt; That&#x27;s all five parts built. Here&#x27;s how they fit into a framework you can put on one page and start Monday.</p><p>[10:00-12:10] PAYOFF: the framework on one page (open loop paid off)</p><p>(MODALITY: custom animation, then talking head)</p><p>&gt; I promised you the whole thing with no committee. Here it is on one page, three columns. Column one, structure and ownership: one workspace per domain with dev, test and a locked production stage, and every certified dataset has a named owner and a service-account refresh. Column two, standards: one certified semantic model, each headline measure defined once, and the Certified badge locked to your data-owners group with a written checklist behind it. Column three, access and audit: row-level security and sensitivity labels on anything sensitive, plus lineage and the audit log for proof.</p><p>(ANIMATION SPEC: a three-column framework card assembling piece by piece. Column 1 &quot;Structure + Ownership&quot; drops in the domain-stage grid and the owner/service-account badges from Beats 1 and 2. Column 2 &quot;Standards&quot; drops in the certified model and the gold Certified badge from Beats 3 and 4. Column 3 &quot;Access + Audit&quot; drops in the RLS filter, the Confidential label and the lineage strip from Beat 5. The finished card locks together with a green certified outline.)</p><p>&gt; And the open loop I owed you. That one default certification setting, the whole org allowed to certify, is why so many teams say &quot;we tried the Certified label and it stopped meaning anything&quot;. It never meant anything because everyone could apply it. Restrict it to your owners and the badge does its job.</p><p>(ON-SCREEN: three-column framework card, then a callout on the &quot;restrict certification to Data Owners&quot; line pulsing once)</p><p>[12:10-13:15] RECAP: give the full win away</p><p>(MODALITY: kinetic type list, all five on one screen)</p><p>&gt; Your framework, on one screen. One, one workspace per domain with dev, test and a locked production stage. Two, a named owner and a service-account refresh on every certified dataset. Three, the Certified badge turned on and locked to your data owners, with a checklist behind it. Four, one certified semantic model with each measure defined once, feeding your reports and Copilot. Five, row-level security, sensitivity labels, and lineage plus the audit log for proof.</p><p>(ON-SCREEN: numbered 1 to 5 list, each line animating in)</p><p>&gt; Get this in place and you&#x27;re not just clean for the auditor. Forrester found insights-driven businesses are 8.5 times more likely to grow revenue 20 percent or more year over year. Trusted, owned numbers are what get people acting on the report instead of arguing with it.</p><p>(ON-SCREEN: stat card &quot;8.5x more likely to grow revenue 20%+ YoY. Source: Forrester, The Insights-Driven Business&quot;)</p><p>[13:15-14:00] SOFT CTA</p><p>(MODALITY: talking head, link cards)</p><p>&gt; If you want to see where your setup stands right now, the free Power BI Governance and Cost Scorecard is linked below. It&#x27;s a five-minute check that gives you a score, a benchmark against your peers, and your top three risks, no email gymnastics. And if you&#x27;ve got compliance or audit gaps and refreshes going red because nobody owns the certified datasets, that&#x27;s the work we do at CaseWhen, standing this framework up on real tenants. Request a governance assessment, link&#x27;s in the description, no pitch, just a look at your setup. Next video, I build that certified semantic model end to end so you can copy it.</p><p>(ON-SCREEN: two link cards, &quot;Free Governance &amp; Cost Scorecard&quot; and &quot;Work with CaseWhen&quot;, then a watch-next thumbnail)</p><h2>Description</h2><p>A data governance framework for Power BI you can build yourself, five parts Microsoft already ships and most teams never turn on: workspace structure, ownership, certification, one semantic model, and access plus audit.</p><p>Free Power BI Governance &amp; Cost Scorecard (5-minute check, get your score + peer benchmark + top 3 risks): https://casewhen.co/scorecard
+Work with CaseWhen (request a governance assessment): https://casewhen.co/contact</p><p>Chapters:
+0:00 Why do our refreshes keep going red and the auditors keep flagging us?
+0:55 Where should a report even live?
+2:40 Who fixes this dataset when the person who built it leaves?
+4:25 How does anyone know which report to trust?
+6:15 How do we get everyone to the same number?
+8:05 Who can see what, and can we prove it?
+10:00 What do I put in place on Monday?
+12:10 So what does this get us, and where do I start?</p><p>Resources:
+- Governance &amp; Cost Scorecard: https://casewhen.co/scorecard
+- Certified semantic model build (watch next): https://casewhen.co/youtube
+- Row-level security setup walkthrough (watch next): https://casewhen.co/youtube</p><p>A data governance framework in Power BI comes down to five parts you can build without a committee: a workspace structure with dev, test and locked production stages per domain, a named owner and service-account refresh on every certified dataset, the Certified endorsement badge turned on and restricted to your data owners, one certified semantic model that defines each headline measure once for both reports and Copilot, and access plus audit through row-level security, sensitivity labels, lineage and the audit log. This walkthrough builds each part on a real Power BI tenant, so your refreshes stop going red, your numbers agree, and you can prove to an auditor where every figure came from.</p><p>#PowerBI #DataGovernance #MicrosoftFabric #BusinessIntelligence #PowerBIGovernance</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

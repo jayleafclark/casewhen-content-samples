@@ -1,0 +1,222 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Azure Synapse einfach erklärt: was der Dienst kann und warum</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Azure Synapse einfach erklärt: was der Dienst kann und warum er nicht tot ist
+Host: Saju · Cluster: Azure · Target: 11 min · Primary keyword: azure synapse</p><h2>Chapters
+- 0:00 Ist Azure Synapse wirklich tot?
+- 0:40 Was macht Azure Synapse überhaupt?
+- 2:00 Warum reicht Power BI allein nicht?
+- 3:20 Aus welchen Teilen besteht Synapse?
+- 4:50 Ist Synapse jetzt einfach Fabric?
+- 6:20 Was passiert mit meinen Dedicated SQL Pools?
+- 7:50 Was bleibt gleich, was lerne ich neu?
+- 9:20 Was sollten Sie diese Woche tun?</h2><h2>Script</h2><p>[0:00-0:12] HOOK (contrarian, mit 3-Sekunden-Demo)
+Kaltschnitt: Fabric-Workspace ist geöffnet, der Cursor fährt über eine Data-Factory-Pipeline, ein Warehouse und ein Spark-Notebook, die alle nebeneinander in einem Workspace liegen.
+Saju (aus dem Off, dann im Bild): &quot;Halb Deutschland glaubt, Azure Synapse sei abgeschaltet. Das stimmt nicht. Das, was Sie hier sehen, ist Synapse, es läuft nur unter einem neuen Namen weiter.&quot;
+(MODALITY: screen-record)
+(ON-SCREEN: Keyword-Card &quot;AZURE SYNAPSE&quot;, darunter klein &quot;lebt in Fabric weiter&quot;)</p><p>[0:12-0:40] PROMISE + STAKES + OPEN LOOP
+Saju direkt in die Kamera: &quot;In den nächsten elf Minuten verstehen Sie drei Dinge: was Azure Synapse eigentlich macht, warum es hinter fast jedem Power-BI-Bericht steckt, und was genau mit Ihren bestehenden Synapse-Sachen passiert, jetzt wo Microsoft alles nach Fabric zieht. Wer das falsch versteht, baut entweder aus Panik alles neu, oder wartet zu lange und sitzt am Ende auf einem Dienst, den keiner mehr pflegt. Und ganz am Ende zeige ich Ihnen die eine Sache an Ihren Dedicated SQL Pools, die Sie diese Woche prüfen sollten, bevor Ihnen jemand ein Enddatum vorsetzt. Wir bauen genau solche Datenplattformen jede Woche für Teams in Berlin, deshalb reden wir hier über die reale Lage, nicht über die Marketing-Folie.&quot;
+(MODALITY: talking head)
+(ON-SCREEN: drei Textzeilen bauen sich auf: &quot;1. Was Synapse macht  2. Warum es unter BI steckt  3. Was mit Ihren Sachen passiert&quot;)
+(B-ROLL: kurze Einblendung eines Berliner Büros, zwei Leute vor einem Bildschirm)</p><p>[0:40-2:00] VALUE BEAT 1: Was macht Azure Synapse überhaupt?
+CLAIM (Saju, ruhig, ein Take): &quot;Azure Synapse ist die Fabrik, die aus rohen Daten einen abfragbaren Bericht macht. Power BI ist die Auslage vorne, Synapse ist die Werkstatt dahinter.&quot;
+(ON-SCREEN: Card &quot;Synapse = die Schicht unter dem Bericht&quot;)
+PROOF (Custom Animation): Links liegen drei Quell-Kästen (SAP, eine SQL-Datenbank, eine CSV-Datei). Ein Pfeil zieht die Daten in einen mittleren Block &quot;Aufnahme und Aufbereitung&quot;. Von dort fließen sie in einen Speicher-Block, der sich als Tabellen füllt. Erst ganz rechts erscheint das Power-BI-Symbol und liest aus dem Speicher. Die mittleren Blöcke bekommen das Label &quot;das ist Synapse&quot;, das Power-BI-Symbol das Label &quot;das sehen Ihre Nutzer&quot;.
+Saju (Voiceover zur Animation): &quot;Ihre Daten liegen selten dort, wo der Bericht sie braucht. Sie kommen aus zehn Systemen, in zehn Formaten. Synapse holt sie ab, räumt sie auf und legt sie so ab, dass Power BI sie in Sekunden lesen kann. Ohne diese Schicht schaufelt jemand die Zahlen von Hand in Excel.&quot;
+PAYOFF (Saju kurz im Bild): &quot;Merken Sie sich das so: Synapse bewegt und formt Daten, Power BI zeigt sie. Wenn Ihr Bericht langsam oder falsch ist, liegt der Fehler fast immer in dieser Werkstatt, nicht in der Auslage.&quot;
+(ON-SCREEN: nummerierte Takeaway-Card &quot;1. Synapse formt die Daten, Power BI zeigt sie nur&quot;)
+RE-HOOK: &quot;Bleibt die Frage, die mir jeder stellt: wenn ich doch schon Power BI habe, wozu dann noch das alles?&quot;
+(MODALITY: animation)</p><p>[2:00-3:20] VALUE BEAT 2: Warum reicht Power BI allein nicht?
+CLAIM (Saju): &quot;Power BI kippt in dem Moment um, in dem Ihre Daten zu groß oder zu verstreut werden. Dann brauchen Sie die Schicht darunter.&quot;
+(ON-SCREEN: Card &quot;Wann Power BI allein nicht mehr trägt&quot;)
+PROOF (Screen-Record, echte Oberfläche): Im Power-BI-Desktop läuft eine Aktualisierung auf einer großen Tabelle. Der Fortschrittsbalken hängt, dann erscheint eine Speicherwarnung. Schnitt in das Azure-Portal, dort wird dieselbe Last als serverlose SQL-Abfrage in Synapse gezeigt, die in wenigen Sekunden zurückkommt. Cursor markiert die Laufzeit.
+Saju (Voiceover): &quot;Power BI lädt beim Aktualisieren das ganze Modell in den Arbeitsspeicher, oft mit dem doppelten der Datenmenge. Bei ein paar Millionen Zeilen merken Sie nichts. Bei ein paar hundert Millionen läuft Ihnen der Speicher voll und die Aktualisierung bricht ab. Synapse rechnet die schweren Sachen vorher, in der Datenbank, und gibt an Power BI nur das fertige Ergebnis. Das ist der ganze Trick.&quot;
+PAYOFF: &quot;Faustregel: Solange alles flüssig läuft, brauchen Sie Synapse nicht anzufassen. Sobald Aktualisierungen abbrechen oder über eine Stunde dauern, ist das kein Power-BI-Problem, sondern ein Zeichen, dass die Rechenarbeit eine Etage tiefer gehört.&quot;
+(ON-SCREEN: Takeaway-Card &quot;2. Schwere Rechenarbeit gehört in die Datenbank, nicht ins Modell&quot;)
+RE-HOOK: &quot;Gut. Wenn Synapse also diese Werkstatt ist, dann schauen wir uns an, aus welchen Maschinen sie besteht.&quot;
+(MODALITY: screen-record)</p><p>[3:20-4:50] VALUE BEAT 3: Aus welchen Teilen besteht Synapse?
+CLAIM (Saju): &quot;Synapse ist nicht ein Werkzeug, sondern drei Motoren um denselben Speicher. Das ist der ganze Dienst.&quot;
+(ON-SCREEN: Card &quot;Drei Motoren, ein Speicher&quot;)
+PROOF (Custom Animation): In der Mitte ein Speicher-Kreis mit dem Label &quot;Data Lake&quot;. Nacheinander docken drei beschriftete Motoren an: erstens &quot;Pipelines&quot;, ein Förderband, das Daten hereinzieht. Zweitens &quot;SQL-Pool&quot;, eine Lupe, die Tabellen abfragt, mit zwei Varianten, die kurz aufblinken: &quot;dediziert = reserviert und bezahlt&quot; und &quot;serverlos = pro Abfrage&quot;. Drittens &quot;Spark-Pool&quot;, ein Zahnrad für große, verteilte Berechnungen. Jeder Motor leuchtet auf, während Saju ihn nennt.
+Saju (Voiceover): &quot;Erstens die Pipelines. Die bewegen Daten von A nach B, nach Plan, jede Nacht. Das ist wörtlich Azure Data Factory, eingebaut in Synapse. Zweitens der SQL-Pool. Das ist die Abfrage-Ebene, Ihr Warehouse. Dediziert heißt: Sie mieten feste Rechenleistung und zahlen sie durchgehend. Serverlos heißt: Sie zahlen nur pro Abfrage. Drittens Spark, für die richtig großen, verstreuten Datenmengen, bei denen eine SQL-Datenbank an die Grenze kommt. Drei Motoren, ein gemeinsamer Speicher darunter.&quot;
+PAYOFF: &quot;Wenn Sie also von Synapse reden, fragen Sie immer nach: welcher Motor? Denn &#x27;wir nutzen Synapse&#x27; kann Pipelines heißen, oder ein dediziertes Warehouse, oder Spark, und die drei kosten und altern völlig unterschiedlich.&quot;
+(ON-SCREEN: Takeaway-Card &quot;3. Immer fragen: Pipelines, SQL-Pool oder Spark?&quot;)
+RE-HOOK: &quot;Und genau bei diesen drei Motoren wird jetzt spannend, denn die stehen alle inzwischen woanders.&quot;
+(MODALITY: animation)</p><p>[4:50-6:20] VALUE BEAT 4: Ist Synapse jetzt einfach Fabric?
+CLAIM (Saju, langsam, das ist die Kernaussage): &quot;Synapse ist nicht verschwunden. Die drei Motoren wurden herausgelöst und sitzen jetzt in Microsoft Fabric, über einem gemeinsamen Speicher namens OneLake.&quot;
+(ON-SCREEN: Card &quot;Synapse ist in Fabric aufgegangen, nicht gelöscht&quot;)
+PROOF (Screen-Record, echte Oberfläche): Der Fabric-Workspace wird durchgescrollt. Cursor zeigt auf &quot;Data Factory&quot; (die Pipelines), auf &quot;Warehouse&quot; (der SQL-Motor), auf &quot;Notebook&quot; (Spark). Schnitt in die OneLake-Ansicht: eine einzige Datei liegt im Speicher, und mit einem Shortcut greifen ein Warehouse und ein Notebook auf dieselbe Datei zu, ohne sie zu kopieren. Kurze Einblendung: die Meldung von der Ignite 2025.
+Saju (Voiceover): &quot;Schauen Sie hier. Data Factory, Warehouse, Spark-Notebook. Das sind exakt die drei Synapse-Motoren, nur in Fabric und mit einer neuen Oberfläche. Der große Unterschied liegt darunter: In Synapse hatte oft jeder Motor seine eigene Kopie der Daten. In Fabric liegt eine physische Kopie in OneLake, und alle Motoren zeigen per Shortcut darauf. Microsoft hat auf der Ignite 2025 gemeldet, dass Fabric über 28.000 Kunden hat und das am schnellsten wachsende Analyseprodukt der Firmengeschichte ist. Dorthin fließt die Entwicklung, das ist der Grund für den Umzug.&quot;
+PAYOFF: &quot;Das heißt für Sie: Was Sie über Synapse wissen, ist nicht wertlos geworden. Dieselben Bausteine, ein neues Dach. Wer Synapse verstanden hat, versteht Fabric in einem Nachmittag.&quot;
+(ON-SCREEN: Takeaway-Card &quot;4. Gleiche Bausteine, neues Dach namens OneLake&quot;)
+RE-HOOK: &quot;Und jetzt der Teil, der wirklich Geld kostet, wenn man ihn verschläft: Ihre bestehenden Dedicated SQL Pools.&quot;
+(MODALITY: screen-record)</p><p>[6:20-7:50] VALUE BEAT 5: Was passiert mit meinen Dedicated SQL Pools?
+CLAIM (Saju): &quot;Ihre alten Synapse-Sachen laufen weiter, aber es gibt keinen Knopf, der sie automatisch nach Fabric hebt. Jede Pipeline bauen Sie von Hand nach.&quot;
+(ON-SCREEN: Card &quot;Kein Import-Knopf. Handarbeit.&quot;)
+PROOF (Data-Viz plus Screen-Record): Eine einfache Zeitleiste animiert sich: heute, Ihre Dedicated SQL Pools laufen normal. Rechts ein Fragezeichen für das künftige Enddatum, dazu die Einblendung &quot;Microsoft kommuniziert Fristen schrittweise, prüfen Sie Ihren Stand&quot;. Darunter zwei Spalten, &quot;wird automatisch umgezogen&quot; (leer) gegen &quot;bauen Sie neu&quot; (Pipelines, Rollen, Verbindungen). Schnitt auf die echte Synapse-Oberfläche, Cursor öffnet die Liste der vorhandenen Pipelines.
+Saju (Voiceover): &quot;Wichtig, damit hier keine Panik entsteht: Ein Dedicated SQL Pool, der heute läuft, hört morgen nicht auf. Aber es gibt keinen Assistenten, der Ihren Synapse-Workspace nimmt und in Fabric wieder aufbaut. Jede Pipeline, jede Rolle, jede Verbindung wird im neuen Haus neu eingerichtet. Das ist keine Migration im Sinne von Kopieren, das ist ein geplanter Umzug. Und ein Umzug ohne Inventarliste wird teuer.&quot;
+PAYOFF: &quot;Deshalb die eine Sache aus dem Anfang, prüfen Sie sie diese Woche: Machen Sie eine Liste, welche Ihrer SQL Pools dediziert sind und durchgehend Geld kosten, auch nachts, wenn keiner abfragt. Genau die sind die teuersten Umzugskandidaten und der beste Ort, um früh zu planen.&quot;
+(ON-SCREEN: Takeaway-Card &quot;5. Dedizierte Pools kosten rund um die Uhr, listen Sie sie zuerst&quot;)
+RE-HOOK: &quot;Wenn Sie das jetzt hören und denken, dann muss ich ja alles neu lernen: nein, müssen Sie nicht. Schauen wir, was bleibt.&quot;
+(MODALITY: data-viz)</p><p>[7:50-9:20] VALUE BEAT 6: Was bleibt gleich, was lerne ich neu?
+CLAIM (Saju): &quot;Neunzig Prozent Ihres Synapse-Wissens tragen direkt nach Fabric. Neu ist vor allem das Speichermodell und die Kostenlogik.&quot;
+(ON-SCREEN: Card &quot;Was bleibt, was ist neu&quot;)
+PROOF (Screen-Record, konkrete Gegenüberstellung): Geteilter Bildschirm. Links eine SQL-Abfrage im alten Synapse-Warehouse, rechts dieselbe Abfrage im Fabric-Warehouse, gleiches Ergebnis. Cursor markiert: identisches SQL, identische Data-Factory-Logik. Dann wechselt rechts die Ansicht auf die Kapazitäts-Anzeige von Fabric, wo eine gemeinsame Kapazität statt getrennter Rechenleistung gezeigt wird.
+Saju (Voiceover): &quot;Ihr SQL bleibt SQL. Ihre Data-Factory-Pipelines denken in Fabric fast gleich. Wer Spark-Notebooks geschrieben hat, schreibt sie weiter. Das Wissen zieht mit um. Wirklich neu sind zwei Dinge. Erstens OneLake, also der Gedanke, dass es eine Kopie der Daten gibt und alle darauf zeigen. Zweitens die Kostenlogik: In Fabric mieten Sie eine gemeinsame Kapazität für alles, statt für jeden Motor getrennt zu zahlen. Das kann günstiger sein, kann aber auch überlaufen, wenn zu viel gleichzeitig läuft.&quot;
+PAYOFF: &quot;Also lernen Sie gezielt zwei Themen, nicht das ganze Produkt: wie OneLake und Shortcuts funktionieren, und wie die Fabric-Kapazität abrechnet. Damit sind Sie handlungsfähig, ohne einen Monat Kurs.&quot;
+(ON-SCREEN: Takeaway-Card &quot;6. SQL und Pipelines bleiben, neu sind OneLake und Kapazitäts-Kosten&quot;)
+RE-HOOK: &quot;Fassen wir zusammen, damit Sie mit einem klaren Plan aus dem Video gehen.&quot;
+(MODALITY: screen-record)</p><p>[9:20-10:20] PAYOFF: Recap und der bezahlte Open Loop
+Saju direkt in die Kamera, ruhig. Rechts baut sich die komplette Liste als Kinetik-Text auf, Zeile für Zeile:
+&quot;Sechs Dinge, die Sie jetzt wissen. Eins, Synapse formt die Daten, Power BI zeigt sie nur. Zwei, schwere Rechenarbeit gehört in die Datenbank, nicht ins Modell. Drei, fragen Sie immer, welcher Motor gemeint ist, Pipelines, SQL-Pool oder Spark. Vier, Synapse ist nicht tot, die gleichen Bausteine sitzen jetzt in Fabric über OneLake. Fünf, es gibt keinen Import-Knopf, jede Pipeline wird von Hand neu gebaut. Sechs, Ihr SQL und Ihre Pipelines bleiben, neu sind OneLake und die Kapazitäts-Kosten.&quot;
+Dann der Open Loop von Minute null: &quot;Und die eine Sache, die ich Ihnen versprochen habe: Gehen Sie diese Woche in Ihre Synapse-Umgebung und markieren Sie jeden Dedicated SQL Pool. Der zahlt durchgehend, auch nachts. Das ist Ihr teuerster Umzugsposten und der erste, den Sie einplanen wollen, bevor ein Enddatum das für Sie entscheidet.&quot;
+(ON-SCREEN: die sechs Takeaways als vollständige Liste, darunter fett &quot;Diese Woche: dedizierte Pools markieren&quot;)
+(MODALITY: on-screen text)</p><p>[10:20-11:00] SOFT CTA
+Saju, ohne Verkaufston: &quot;Wenn Sie das für Ihre eigene Umgebung sauber durchgehen wollen, ich habe eine kurze Azure-zu-Fabric-Checkliste zusammengestellt: welche Synapse-Teile Sie inventarisieren, in welcher Reihenfolge, und woran Sie einen teuren Pool erkennen. Der Link steht unten in der Beschreibung, kostenlos, kein Eintrag nötig. Und falls Sie gerade wirklich eine Azure-Datenplattform aufbauen oder Synapse nach Fabric umziehen, dann ist genau das unsere Arbeit bei CaseWhen in Berlin. Schreiben Sie uns über den Link unten, kein Verkaufsgespräch, einfach ein Gespräch darüber, was bei Ihnen bleibt und was neu gebaut wird. Im nächsten Video zerlege ich die Fabric-Kapazität und zeige, wann sie ohne Vorwarnung drosselt. Bis dahin.&quot;
+(ON-SCREEN: Link-Card &quot;Azure-zu-Fabric-Checkliste (gratis)&quot; und darunter &quot;Mit CaseWhen sprechen&quot;)
+(B-ROLL: kurze Einblendung des nächsten Videos als Vorschaubild)
+(MODALITY: talking head)</p><h2>Description
+Azure Synapse einfach erklärt: was der Dienst wirklich macht, warum er hinter fast jedem Power-BI-Bericht steckt und warum er nicht abgeschaltet wurde, sondern in Microsoft Fabric weiterlebt.</h2><p>Gratis Azure-zu-Fabric-Checkliste: [Link]
+Mit CaseWhen zu Azure und Fabric sprechen: [Link]</p><p>0:00 Ist Azure Synapse wirklich tot?
+0:40 Was macht Azure Synapse überhaupt?
+2:00 Warum reicht Power BI allein nicht?
+3:20 Aus welchen Teilen besteht Synapse?
+4:50 Ist Synapse jetzt einfach Fabric?
+6:20 Was passiert mit meinen Dedicated SQL Pools?
+7:50 Was bleibt gleich, was lerne ich neu?
+9:20 Was sollten Sie diese Woche tun?</p><p>In diesem Video erklärt Saju Azure Synapse für Einsteiger: die drei Motoren des Dienstes (Pipelines, SQL-Pool und Spark), warum die schwere Rechenarbeit in die Datenbank gehört und nicht ins Power-BI-Modell, und wie Azure Synapse in Microsoft Fabric über OneLake weiterlebt. Sie erfahren, was mit bestehenden Dedicated SQL Pools passiert, warum es keinen automatischen Import nach Fabric gibt und welche Fähigkeiten direkt mit umziehen. Am Ende gibt es einen konkreten Schritt für diese Woche und eine kostenlose Checkliste für den Umzug von Azure Synapse nach Fabric.</p><p>#AzureSynapse #MicrosoftFabric #PowerBI #Azure #OneLake</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

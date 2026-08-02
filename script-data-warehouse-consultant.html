@@ -1,0 +1,194 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · What a Data Warehouse Consultant Does, Start to Finish (A Re</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p>[0:50-2:20] VALUE BEAT 1: the audit (Chapter: Why won&#x27;t my reports agree with each other?)
+CLAIM: &quot;Phase one is a data audit. No building yet.&quot;
+Spoken: &quot;First week, we don&#x27;t build anything. We map where every number comes from. In this engagement the company ran three source platforms, an ERP, a separate CRM, and a warehouse-management tool, plus about forty Excel files people had kept by hand for years. Each one had its own definition of revenue. Sales counted a deal the day it closed. Finance counted it the day the invoice went out. So of course the totals never matched. A consultant&#x27;s first job is to find every one of those definitions and write them down. We also check something most people skip. Ninety-four percent of business spreadsheets used in decisions carry errors, so we treat the manual files as wrong until we&#x27;ve reconciled them line by line.&quot;
+PROOF/DEMO: (MODALITY: screen-record) Open the three source exports side by side, then a shared tracker where each metric is logged with its source table and its conflicting definitions. The cursor rests on two &quot;total revenue&quot; cells showing different values for the same month.
+(ON-SCREEN: source stat card, &quot;94% of business spreadsheets used in decisions contain errors, Poon et al., 2024&quot;)
+PAYOFF: &quot;Takeaway one: before anyone writes a line of code, you need one written list of every metric and its agreed definition. If your consultant skips the audit, that&#x27;s your first red flag.&quot;
+(ON-SCREEN: numbered takeaway card, &quot;1. Get one written, agreed definition per metric first&quot;)
+RE-HOOK: &quot;Once we know what the numbers should be, the next question is where to put them.&quot;</p><p>[2:20-3:50] VALUE BEAT 2: the design (Chapter: What are they going to build?)
+CLAIM: &quot;Phase two is the design. Three layers, not one big table.&quot;
+Spoken: &quot;Phase two is the design, and this is where a good consultant earns the fee. We don&#x27;t dump all that source data into one place and point Power BI straight at it. We stage it in three layers, and people call this a medallion design. The first layer, bronze, is a raw copy of the source data, untouched, so we always have the original. The second layer, silver, is where we clean it, fix the data types, remove the duplicates, and apply those agreed definitions from the audit. The third layer, gold, is the business-ready shape, the tables your reports read from. The point of three layers is that when a number looks off six months from now, you can walk back through them and see exactly where it changed.&quot;
+PROOF/DEMO: (MODALITY: custom animation, CaseWhen medallion set) Data flows left to right through three labelled panels, bronze then silver then gold. Bronze shows messy raw rows; silver shows the same rows getting cleaned and deduplicated in place; gold shows a small tidy set of business tables. A rewind arrow then runs gold back to bronze to show you can trace any figure to its origin. Brand colour #1D967C on the active layer.
+(ON-SCREEN: label card, &quot;Medallion design: bronze / silver / gold&quot;)
+PAYOFF: &quot;Takeaway two: ask for a layered design, bronze, silver, gold. That&#x27;s what lets you trace any number back to its source instead of guessing.&quot;
+(ON-SCREEN: numbered takeaway card, &quot;2. Layered design = traceable numbers&quot;)
+RE-HOOK: &quot;Design&#x27;s on paper. Now something has to move the data through those layers on a schedule.&quot;</p><p>[3:50-5:20] VALUE BEAT 3: the pipeline (Chapter: How does the data get from the source to the report?)
+CLAIM: &quot;Phase three is the pipeline. This is Azure Data Factory&#x27;s job.&quot;
+Spoken: &quot;Phase three is moving the data, and the tool for it here is Azure Data Factory. A pipeline is a set of steps that copies data from a source, runs it through the layers, and lands it where the reports can read it, on a schedule you set. In this build we ran it every night at two in the morning. Data Factory pulls from the ERP, the CRM, and the warehouse tool, drops each into bronze, then triggers the cleaning steps into silver and gold. If a source is down, the pipeline retries and sends an alert, instead of silently loading yesterday&#x27;s numbers again. Setting this up properly is a big part of what you&#x27;re paying for, because a pipeline that half-works is worse than no pipeline. People assume the data&#x27;s fresh, and stop checking.&quot;
+PROOF/DEMO: (MODALITY: screen-record, Azure Data Factory canvas) Drag a Copy Data activity, connect the ERP source to the bronze sink, then chain the transform activities. Zoom-punch on the trigger schedule set to daily 02:00, then the monitoring tab showing green runs and one retried run flagged amber.
+(ON-SCREEN: label card, &quot;Azure Data Factory pipeline: schedule + retries + alert&quot;)
+PAYOFF: &quot;Takeaway three: your pipeline needs a schedule, retries, and an alert when a load doesn&#x27;t finish. Ask to see the monitoring screen, not just the diagram.&quot;
+(ON-SCREEN: numbered takeaway card, &quot;3. See the monitoring screen, not just the diagram&quot;)
+RE-HOOK: &quot;The data lands in gold every night now. So why does the report still show two different revenue totals? That&#x27;s the next phase, and it&#x27;s the one that ends the argument for good.&quot;</p><p>[5:20-6:50] VALUE BEAT 4: the model (Chapter: Where does the one agreed number come from?)
+CLAIM: &quot;Phase four is the model. A star schema is what makes the numbers agree.&quot;
+Spoken: &quot;Phase four is the part that ends the board-meeting argument. On top of the gold layer we build a semantic model, and we shape it as a star schema. In the middle sits your fact table, the events themselves, every sale, every order. Around it sit dimension tables, your customers, your products, your calendar. Each measure, like total revenue, gets defined once, in one place, against that model. So when Finance opens their report and Sales opens theirs, they read the same definition of revenue from the same model. There&#x27;s one number, and everyone can see how it&#x27;s built. This is also the layer Copilot and any AI tool reads from. If the model&#x27;s right, the AI gives you the right answer. If the model&#x27;s wrong, the AI is confidently wrong, which is worse.&quot;
+PROOF/DEMO: (MODALITY: custom animation, CaseWhen star-schema set) A central fact table with dimension tables snapping into place around it, one-to-many relationship arrows lighting up as each connects. Then two report screens, Finance and Sales, both drawing a line back to the single &quot;Total Revenue&quot; measure on the model and landing on the identical figure.
+(ON-SCREEN: label card, &quot;Star schema: one measure, defined once&quot;)
+PAYOFF: &quot;Takeaway four: every metric gets defined once, on a star-schema model, so every report and every AI answer pulls the same number. This is the phase that buys you trust in the reporting.&quot;
+(ON-SCREEN: numbered takeaway card, &quot;4. Define each measure once, on a star schema&quot;)
+RE-HOOK: &quot;That&#x27;s the build done. But a build that&#x27;s right today can drift within months, so here comes the phase most people try to cut.&quot;</p><p>[6:50-8:20] VALUE BEAT 5: ownership and refresh (Chapter: Will this still work in six months?)
+CLAIM: &quot;Phase five is ownership and refresh. This is the phase buyers try to cut.&quot;
+Spoken: &quot;Here&#x27;s the open loop from the start. The phase people try to cut to save money is this last one, ownership and reliability, and cutting it is what makes the whole thing fall over three months later. Two parts. First, refresh. As the data grows, reloading everything every night gets slow and expensive, so we set up incremental refresh, which only processes the newest data and leaves the history alone. In this build that took the nightly run from over an hour down to a few minutes. Second, ownership. Someone has to own each certified dataset, so when a definition changes, one person updates it in one place. Without an owner, six months in you&#x27;re back to three teams making their own copies, and the numbers drift apart again. Gartner puts the cost of poor data quality at 12.9 million dollars a year for the average org, and this is the phase that keeps you out of that number.&quot;
+PROOF/DEMO: (MODALITY: screen-record) The Power BI incremental refresh policy pane, setting archive to store the last 5 years and refresh only the last 10 days, with the date partitions shown. Inset custom animation over it: a row of date partitions, only the newest one lighting up and re-processing while the older partitions sit greyed out. Cut to a lower-third showing the certified-dataset badge next to a named owner.
+(ON-SCREEN: source stat card, &quot;Poor data quality costs $12.9M per year on average, Gartner&quot;)
+PAYOFF: &quot;Takeaway five: budget for incremental refresh and a named owner per dataset. This is the cheapest phase to cut and the most expensive one to have cut.&quot;
+(ON-SCREEN: numbered takeaway card, &quot;5. Incremental refresh + a named owner per dataset&quot;)
+RE-HOOK: &quot;So that&#x27;s all five phases. The question that matters to you is what it changed for the team.&quot;</p><p>[8:20-10:40] WORKED EXAMPLE: before and after (Chapter: So what did it change for the team?)
+Spoken: &quot;So what did all that buy? Before the build, month-end close took the finance team the better part of a week. Three people pulling exports, pasting them into spreadsheets, and reconciling totals by hand. Board packs went out late, and when someone questioned a figure, nobody could say for sure where it came from. After the build, the numbers refresh overnight. Month-end is a same-morning job, the totals match across every report, and when someone asks where a figure comes from, you trace it from the report, back through gold, silver, and bronze, to the source row. The bigger change is quieter. People stopped arguing about whose number was right and started asking better questions about the business, because they finally trusted the number in front of them. For context, 67 percent of organizations say they don&#x27;t fully trust the data they run decisions on. Getting your team out of that group is what this whole engagement is really about.&quot;
+(MODALITY: data-viz, then b-roll)
+(ON-SCREEN: animated timeline bar, &quot;Month-end close&quot; shrinking from about 5 days to a same-morning block; beside it three report cards all flipping to the same revenue figure)
+(ON-SCREEN: source stat card, &quot;67% of organizations don&#x27;t fully trust the data they use to decide, Precisely, 2025&quot;)
+(B-ROLL: a short morning stand-up, the finance team looking at one screen instead of buried in spreadsheets)</p><p>[10:40-12:15] PAYOFF: recap and open-loop payoff
+Spoken: &quot;Quick recap of what a data warehouse consultant does across a real Azure engagement. One, they audit every metric and write down one agreed definition before building anything. Two, they design a layered model, bronze, silver, gold, so any number traces back to its source. Three, they build a scheduled pipeline in Azure Data Factory with retries and alerts. Four, they define each measure once on a star-schema model, so people and AI read the same number. Five, they set up incremental refresh and a named owner so it stays right over time. And the open loop from the start: that fifth phase, the one buyers cut to save money, is the one that keeps the build alive past month three. Cut it, and you pay for the first four twice.&quot;
+(MODALITY: on-screen text / kinetic type)
+(ON-SCREEN: the five takeaways stack up as a numbered list, then the fifth one pulses in brand colour #1D967C to pay off the open loop)</p><p>[12:15-13:00] SOFT CTA
+Spoken: &quot;If you want to check where your own reporting stands before you talk to anyone, we put together a free Power BI Governance and Cost Scorecard. It&#x27;s a five-minute assessment, and it gives you your score, how you compare to similar teams, and your top three risks. Link&#x27;s below. And if you&#x27;re standing up an Azure data foundation, or you read this and recognized your own month-end in it, that&#x27;s the build we do at CaseWhen. Link&#x27;s in the description, no pitch, just a conversation. If these walk-throughs are useful, there&#x27;s one next on how the pipeline moves data through those layers step by step. Thanks for watching.&quot;
+(MODALITY: talking head)
+(ON-SCREEN: two link cards, &quot;Free: Power BI Governance and Cost Scorecard&quot; and &quot;Work with CaseWhen&quot;, then a watch-next thumbnail)</p><h2>Description
+What a data warehouse consultant does on a real Azure engagement, phase by phase, so you can see exactly what you&#x27;re paying for before you sign a quote.</h2><p>Free Power BI Governance and Cost Scorecard: https://casewhen.co/scorecard
+Standing up an Azure data foundation? Work with CaseWhen: https://casewhen.co/contact</p><p>0:00 What am I paying a data warehouse consultant for?
+0:50 Why won&#x27;t my reports agree with each other?
+2:20 What are they going to build?
+3:50 How does the data get from the source to the report?
+5:20 Where does the one agreed number come from?
+6:50 Will this still work in six months?
+8:20 So what did it change for the team?
+10:40 Is this worth it for you, and where do you start?</p><p>This walk-through follows one Azure engagement end to end so a buyer can see what a data warehouse consultant really delivers. We cover the metric audit, a medallion design across bronze, silver and gold layers, an Azure Data Factory pipeline with a schedule, retries and alerts, a star-schema semantic model that gives everyone one agreed number, and the ownership and incremental refresh work that keeps it reliable. If your month-end still runs on Excel exports and three teams report three different totals, this shows you the sequence that fixes it and where the money goes.</p><p>#PowerBI #AzureDataFactory #DataWarehouse #MicrosoftFabric #BusinessIntelligence</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

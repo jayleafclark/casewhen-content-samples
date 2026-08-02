@@ -1,0 +1,220 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · 5 Signs You Need BI Help (And What Each One Is Costing You)</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># 5 Signs You Need BI Help (And What Each One Is Costing You)
+Host: Austin · Cluster: buyer · Target: 11 min · Primary keyword: signs you need bi help</p><h2>Chapters
+- 0:00 Is my reporting mess big enough to call in outside help?
+- 0:45 Why do two reports show different revenue numbers?
+- 2:25 Why does month-end still take ten days?
+- 4:05 We bought Power BI, so why is finance still in Excel?
+- 5:40 Why does every number have to go through one person?
+- 7:15 Why did we build dashboards nobody trusts?
+- 8:55 What is all this costing us?
+- 9:55 So do we hire outside help, or fix it in-house?</h2><h2>Script</h2><p>[0:00-0:12] HOOK (spoken)
+&quot;Your two reports disagree on revenue again, and nobody in the room knows which one to believe.&quot;
+(MODALITY: b-roll, a tense meeting seen from the back, two laptops open showing two different revenue figures, slow push-in)
+(ON-SCREEN: keyword card &quot;5 SIGNS YOU NEED BI HELP&quot; lower-third, stays visible)</p><p>[0:12-0:45] PROMISE + STAKES + OPEN LOOP
+&quot;So here&#x27;s what you&#x27;ll get in the next ten minutes. Five signs that mean your reporting problem has grown past a quick fix and needs an outside expert, and roughly what each one is costing you while you wait. This is a checklist you can measure your own reporting against this week, not a pitch. Here&#x27;s the stakes. Only forty percent of executives say they always trust the data they run the company on. That&#x27;s from Talend. So if your gut says something&#x27;s off with your reporting, your gut is probably right, and you&#x27;re in good company. And the fifth sign is the one most leaders miss, because on the surface everything looks fine. Stay for that one.&quot;
+(MODALITY: talking head, one zoom-punch on &quot;forty percent&quot;)
+(ON-SCREEN: promise text &quot;5 signs it&#x27;s expert-time&quot;; stat card &quot;40% of execs always trust their data, Talend&quot;)</p><p>[VALUE BEAT 1], 0:45, Chapter: &quot;Why do two reports show different revenue numbers?&quot;
+CLAIM: &quot;Sign one. Two reports pull the same metric and hand you two different numbers.&quot;
+(MODALITY: on-screen text / kinetic type, two cards labelled &quot;Revenue&quot; slide in with different totals, a red question mark between them)
+(ON-SCREEN: claim card &quot;Sign 1: same metric, two answers&quot;)
+PROOF: &quot;This is the one spot where I&#x27;ll go a level deeper, so you know what you&#x27;re paying an expert for. When two reports disagree on revenue, it&#x27;s usually because there&#x27;s no agreed definition and no single source. Sales counts a deal the day it&#x27;s signed. Finance counts it the day the cash is recognised. Both are right, and each report reads a different spreadsheet, so the totals drift apart. What good looks like is a middle layer that sits between your raw data and every report. One place where revenue is defined once, reads from one source, and every dashboard, and every Copilot answer, pulls from it. That layer has a name, a semantic model, and building it correctly is most of what we do at CaseWhen. It&#x27;s the difference between arguing about the data and getting on with the decision.&quot;
+(MODALITY: animation, raw tables at the bottom flow up into one clean middle layer, then out to several reports that all show the same figure)
+(ON-SCREEN: text &quot;One definition · one source · every report agrees&quot;)
+PAYOFF: &quot;So the first sign to check. Pick one metric, ask two teams for it, see if they match. If they don&#x27;t, you have a definition and a source problem, and that&#x27;s expert work, not a spreadsheet tweak.&quot;
+(ON-SCREEN: numbered takeaway &quot;1. Two teams, one metric, do they match?&quot;)
+RE-HOOK: &quot;If your numbers disagree, the month-end close is usually the next place it shows up, and there it shows up as lost days.&quot;</p><p>[VALUE BEAT 2], 2:25, Chapter: &quot;Why does month-end still take ten days?&quot;
+CLAIM: &quot;Sign two. Your month-end close still takes eight or ten days, and it stalls the moment one person is out sick.&quot;
+(MODALITY: screen-record, a calendar view with days ticking off one by one during a close, the counter climbing to day ten)
+(ON-SCREEN: claim card &quot;Sign 2: the close won&#x27;t speed up&quot;)
+PROOF: &quot;High-performing finance teams close their books in under three days. Eight days is the outer edge of what&#x27;s considered acceptable. That&#x27;s from SolveXia. So if your close runs past that, it&#x27;s a strong tell that people are hand-stitching data together instead of reading it. Someone pulls an export, someone else reconciles it against another export, and a third person copies the result into the board pack. Every one of those steps is manual, slow, and easy to get wrong. What good looks like is a pipeline that refreshes the numbers overnight, on its own, so the close becomes a review instead of a rebuild.&quot;
+(MODALITY: b-roll, hands copying figures between two spreadsheets, then a quick cut to a screen updating on its own overnight)
+(ON-SCREEN: stat card &quot;Under 3 days = high performers · 8 = the outer edge, SolveXia&quot;)
+PAYOFF: &quot;So the second sign to check. Time your last close, then ask your team how much of it was fixing data versus analysing it. If fixing wins, that&#x27;s automation an expert sets up once and you stop paying for every month after.&quot;
+(ON-SCREEN: numbered takeaway &quot;2. How much of the close is fixing, not analysing?&quot;)
+RE-HOOK: &quot;A slow close usually has a twin, and it&#x27;s the tool you already bought to fix it that nobody opens.&quot;</p><p>[VALUE BEAT 3], 4:05, Chapter: &quot;We bought Power BI, so why is finance still in Excel?&quot;
+CLAIM: &quot;Sign three. You paid for Power BI, and your finance team still runs the real work in Excel exports.&quot;
+(MODALITY: animation, a polished dashboard opens, then an arrow immediately labelled &quot;export to Excel&quot; pulls all the data back out into a spreadsheet)
+(ON-SCREEN: claim card &quot;Sign 3: you bought it, they still export it&quot;)
+PROOF: &quot;Watch what people do right after a report loads. If the first click is export to Excel, the reporting isn&#x27;t landing. People export because they can&#x27;t slice it the way they need, or because they don&#x27;t quite trust it, so they rebuild it by hand. Two numbers matter here. About seventy percent of dashboard work goes unused, from RevealBI. And ninety-four percent of business spreadsheets used for decisions contain errors, from a peer-reviewed study by Poon and colleagues. So every trip back to Excel is money you spent on a tool going to waste, and a fresh chance for a wrong number to reach a decision.&quot;
+(MODALITY: b-roll, a folder full of files named &quot;final_v3_FINAL.xlsx&quot;, then back to a clean report someone works inside directly)
+(ON-SCREEN: stat card &quot;70% of dashboard work unused, RevealBI · 94% of decision spreadsheets contain errors, Poon et al.&quot;)
+PAYOFF: &quot;So the third sign to check. Follow where the work happens after a report opens. If it moves straight to Excel, your reporting has a design problem, and that&#x27;s what an expert redesigns so the report becomes the place people work.&quot;
+(ON-SCREEN: numbered takeaway &quot;3. Is the next click always export to Excel?&quot;)
+RE-HOOK: &quot;Those exports tend to pile up around one person, and that person is your next sign.&quot;</p><p>[VALUE BEAT 4], 5:40, Chapter: &quot;Why does every number have to go through one person?&quot;
+CLAIM: &quot;Sign four. Every number the business needs has to go through one person or one small team, and there&#x27;s always a queue.&quot;
+(MODALITY: data-viz, a single desk in the middle with requests stacking up in a visible queue, everything routing through one point)
+(ON-SCREEN: claim card &quot;Sign 4: one person, one queue, everyone waits&quot;)
+PROOF: &quot;A department head wants a simple number, and the honest answer is they email the data team and wait two days. That&#x27;s a bottleneck, and hiring rarely clears it, because the shape of the setup is what forces every question through one door. Eighty-two percent of companies say data silos disrupt their day-to-day work, from ZoomInfo. When the data lives in scattered pockets that only a few people can reach, the business moves at the speed of that queue. Pipeline reviews run on last week&#x27;s export, decisions wait, and your best data people spend their days answering lookups instead of doing the work you hired them for.&quot;
+(MODALITY: talking head, direct, one zoom-punch on &quot;the speed of that queue&quot;)
+(ON-SCREEN: stat card &quot;82% say data silos disrupt workflows, ZoomInfo&quot;)
+PAYOFF: &quot;So the fourth sign to check. Ask how a department head gets a brand-new number today. If they honestly just wait on one person, you have a bottleneck, and it&#x27;s a setup problem an expert fixes with self-serve, not a headcount problem you hire your way out of.&quot;
+(ON-SCREEN: numbered takeaway &quot;4. Can the business get a number without waiting on one person?&quot;)
+RE-HOOK: &quot;The last sign is the easy one to miss, because everything can look busy and fine while it&#x27;s going wrong underneath.&quot;</p><p>[VALUE BEAT 5], 7:15, Chapter: &quot;Why did we build dashboards nobody trusts?&quot;
+CLAIM: &quot;Sign five. People nod at the dashboard in the meeting, then go build their own spreadsheet on the side to check it.&quot;
+(MODALITY: animation, one official dashboard in the centre, then several private spreadsheets sprout around it, each showing a slightly different number)
+(ON-SCREEN: claim card &quot;Sign 5: the dashboard nobody fully believes&quot;)
+PROOF: &quot;This is the sign that hides, because nobody says it in the meeting. Sixty-seven percent of organizations say they don&#x27;t fully trust the data they make decisions on. That&#x27;s from Drexel LeBow and Precisely. When trust is thin, senior people don&#x27;t file a ticket. They keep a private version on the side and check the official number against it. So you paid for one source of truth and ended up with five, and every meeting drifts back into whose number is right. What good looks like is people opening the same report and acting on it without keeping a backup of their own.&quot;
+(MODALITY: b-roll, an executive glancing at a shared screen, then opening their own laptop spreadsheet on the side to compare)
+(ON-SCREEN: stat card &quot;67% don&#x27;t fully trust their decision data, Drexel LeBow + Precisely&quot;)
+PAYOFF: &quot;So the fifth sign to check. Count the private spreadsheets that shadow your official reports. If your senior people keep their own copies, they don&#x27;t trust the dashboard, whatever they say in the room.&quot;
+(ON-SCREEN: numbered takeaway &quot;5. How many private spreadsheets shadow the official report?&quot;)
+RE-HOOK: &quot;Any one of these on its own is a nudge. Add up what they cost together, and it turns into a budget line.&quot;</p><p>[COST RECAP / WORKED EXAMPLE], 8:55, Chapter: &quot;What is all this costing us?&quot;
+&quot;Here&#x27;s the part that&#x27;s hard to see on any single invoice. Gartner puts the average cost of poor data quality at twelve point nine million dollars a year, per organization. Almost none of it arrives as one bill. It&#x27;s the slow closes, the meetings that open with an argument, the licences nobody opens, and the decisions made on last month&#x27;s picture. Take a team we worked with. Before, five versions of revenue, a ten-day close, and finance living in Excel. After, one agreed definition, one source, a close inside three days, and reports people work in directly. Same company, same data. The arguing stopped, and the meetings started on the decision instead of the number.&quot;
+(MODALITY: screen-record + b-roll, split screen, five clashing spreadsheets on the left, one clean report on the right, then a boardroom where nobody is arguing)
+(ON-SCREEN: stat card &quot;Avg cost of poor data quality: $12.9M/year, Gartner&quot;; before/after figure &quot;5 numbers → 1 number&quot;)</p><p>[PAYOFF], 9:55, recap + open-loop payoff
+&quot;So here are the five signs, and you&#x27;ve got all of them now. One, two teams give you two numbers for the same metric. Two, your close still drags past a week. Three, you bought the tool and finance still lives in Excel. Four, every number waits on one person. And five, the one I told you most leaders miss, people trust the dashboard so little they keep a private spreadsheet to check it. If two or three of these describe your month, this has grown past an internal fix. That&#x27;s not a criticism of your team. It&#x27;s the point where an outside expert saves you more than they cost.&quot;
+(MODALITY: kinetic type, all five signs build into one clean list on screen)
+(ON-SCREEN: full recap list, 5 signs)</p><p>[SOFT CTA], 10:40, Chapter: &quot;So do we hire outside help, or fix it in-house?&quot;
+&quot;If you want to check your own setup properly, we built a free Power BI Governance and Cost Scorecard. It takes about five minutes, no email gymnastics, and it scores where your reporting stands right now plus the top three risks worth fixing first. Link&#x27;s below. And if two or three of these signs just described your week, that&#x27;s the work we do at CaseWhen. You can book a short scoping call, link&#x27;s in the description, and we&#x27;ll give you a straight read on whether this is expert-time or something your team can handle in-house. No pitch either way. If this was useful, the one I&#x27;d watch next is why your two dashboards disagree on revenue, it goes deeper on that first sign. That&#x27;s it. Go check your numbers.&quot;
+(MODALITY: talking head, warm, low pressure)
+(ON-SCREEN: link cards &quot;Free Power BI Governance &amp; Cost Scorecard&quot; · &quot;Book a scoping call, casewhen.co&quot; · &quot;Watch next: Why your two dashboards disagree on revenue&quot;)</p><h2>Description</h2><p>Five signs you need BI help, aimed at the COO or founder who feels the reporting mess but can&#x27;t yet tell whether it needs expert time, with the business cost of each sign.</p><p>Free Power BI Governance &amp; Cost Scorecard: [link]
+Work with CaseWhen (book a scoping call): https://casewhen.co</p><p>Chapters:
+0:00 Is my reporting mess big enough to call in outside help?
+0:45 Why do two reports show different revenue numbers?
+2:25 Why does month-end still take ten days?
+4:05 We bought Power BI, so why is finance still in Excel?
+5:40 Why does every number have to go through one person?
+7:15 Why did we build dashboards nobody trusts?
+8:55 What is all this costing us?
+9:55 So do we hire outside help, or fix it in-house?</p><p>Resources:
+- Free Power BI Governance &amp; Cost Scorecard: [link]
+- Why your two dashboards disagree on revenue (watch next): [link]
+- Book a scoping call: https://casewhen.co</p><p>Most reporting problems start small and grow past the point an internal fix can reach. This video walks a business leader through five signs that your reporting needs an outside expert, and what each one costs while you wait: two reports that disagree on the same metric, a month-end close that still takes eight to ten days, a Power BI investment your finance team still bypasses for Excel, every number funnelling through one person, and dashboards your senior people rebuild on the side because they don&#x27;t trust them. Only forty percent of executives always trust their data, per Talend, and Gartner puts the average cost of poor data quality at 12.9 million dollars a year. If two or three of these signs describe your month, it&#x27;s probably expert-time.</p><p>#PowerBI #BusinessIntelligence #DataGovernance #MicrosoftFabric #Reporting</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

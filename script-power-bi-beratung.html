@@ -1,0 +1,227 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Power BI Beratung: ein echtes Projekt von Discovery bis Live</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Power BI Beratung: ein echtes Projekt von Discovery bis Livegang
+Host: Saju · Cluster: Power BI Flagship · Target: 13 min · Primary keyword: power bi beratung</p><h2>Chapters
+- 0:00 Wie läuft ein echtes Power BI Projekt ab?
+- 1:20 Womit fängt eine gute Beratung an?
+- 2:55 Warum widersprechen sich meine Zahlen?
+- 4:40 Wer darf welche Zeilen sehen?
+- 6:25 Warum wird mein Bericht trotzdem langsam?
+- 8:05 Wie kommt der Bericht sauber in den Livegang?
+- 9:45 Woran erkenne ich Pfusch schon in der ersten Stunde?
+- 11:25 Was kostet es, diese Schritte zu überspringen?</h2><h2>Script</h2><p>[0:00-0:12] HOOK (Kapitel 1 beginnt)</p><p>SAJU: &quot;Das hier ist das Ergebnis einer sauberen Power BI Beratung: ein Bericht, dem die Geschäftsführung wirklich vertraut. In den nächsten dreizehn Minuten sehen Sie, wie so ein Projekt von der ersten Stunde bis zum Livegang läuft, Schritt für Schritt.&quot;</p><p>(MODALITY: screen-record) Kalter Schnitt direkt in ein fertiges Führungs-Dashboard, das live gefiltert wird: ein Klick auf eine Region, alle Kacheln reagieren in Echtzeit. Kein Logo, kein Intro zuerst.
+(ON-SCREEN: Keyword-Karte &quot;Power BI Beratung&quot;, unten links eingeblendet ab Sekunde eins.)
+(Sichtbare Änderung alle 5 bis 8 Sekunden: Zoom-Punch auf eine KPI-Kachel bei Sekunde 4, Cursor-Hervorhebung auf dem Regionsfilter bei Sekunde 8.)</p><p>[0:12-0:40] PROMISE + STAKES + OPEN LOOP</p><p>SAJU: &quot;Am Ende wissen Sie genau, welche Schritte ein seriöses Projekt umfasst und woran Sie schlechte Arbeit früh erkennen. Das ist wichtig, denn der übliche Weg kostet Sie doppelte Berichte, widersprüchliche Zahlen und ein Dashboard, das nach drei Wochen keiner mehr öffnet. Laut einer Untersuchung von Drexel LeBow und Precisely aus dem Jahr 2025 vertrauen 67 Prozent der Organisationen den Daten nicht, mit denen sie entscheiden. Genau da setzt eine gute Beratung an. Und ganz am Ende zeige ich Ihnen die eine Frage, an der Sie schon in der ersten Stunde erkennen, ob Ihr Berater sein Handwerk versteht. Wir bauen genau solche Projekte für BI-Teams in Berlin, Woche für Woche, deshalb ist das hier kein Verkaufsgespräch, sondern der reale Ablauf.&quot;</p><p>(MODALITY: talking head) Saju frontal, ruhige Lieferung.
+(Sichtbare Änderung alle 5 bis 8 Sekunden: kurzer B-Roll-Einschub bei &quot;doppelte Berichte&quot; von zwei fast identischen Berichten nebeneinander; bei der 67-Prozent-Zahl blendet eine data-viz-Karte die Quelle &quot;Drexel LeBow + Precisely, 2025&quot; ein.)
+(ON-SCREEN bei &quot;die eine Frage&quot;: ein verschlossenes Fragezeichen-Icon als Open-Loop-Marker.)
+Harter Schnitt in Beat 1.</p><p>[0:40-2:55] VALUE BEAT 1 - Discovery (Kapitel 2: Womit fängt eine gute Beratung an?)</p><p>CLAIM
+SAJU: &quot;Ein gutes Projekt fängt mit einer Liste von Entscheidungen an, lange bevor jemand Power BI öffnet.&quot;
+(MODALITY: b-roll) (ON-SCREEN: Textkarte &quot;Erst die Entscheidungen, dann das Werkzeug.&quot;)
+B-Roll: Whiteboard-Workshop, Haftnotizen, ein Berater und drei Fachbereichsleiter im Gespräch, Hände zeigen auf Notizen.</p><p>PROOF / DEMO
+SAJU: &quot;In der Discovery klären wir vier Dinge. Erstens: welche Entscheidungen soll dieser Bericht tatsächlich tragen. Zweitens: welche Kennzahlen braucht es dafür, und wie sind sie definiert. Drittens: aus welchen Quellen kommen die Daten und wie oft. Viertens, und das überspringen die meisten: wer ist verantwortlich, wenn die Zahl morgen anders aussieht. Wir schreiben das in ein kurzes Discovery-Dokument, eine Seite pro Bereich. Das klingt unspektakulär, aber diese eine Seite entscheidet, ob am Ende ein Bericht steht, den jemand benutzt, oder eine schöne Datei, die keiner öffnet.&quot;
+(MODALITY: screen-record) Ein reales Discovery-Dokument scrollt durch: Abschnitte &quot;Entscheidungen&quot;, &quot;Kennzahlen und Definitionen&quot;, &quot;Quellen und Aktualisierung&quot;, &quot;Verantwortliche&quot;. Cursor-Hervorhebung wandert Abschnitt für Abschnitt.
+(Sichtbare Änderung alle 5 bis 8 Sekunden: Zoom auf den Abschnitt &quot;Verantwortliche&quot;, Callout-Box &quot;wird fast immer vergessen&quot;.)</p><p>PAYOFF (heute anwendbar)
+SAJU: &quot;Ihr Mitnehmer für heute: Fragen Sie in der ersten Stunde, welche fünf Entscheidungen dieser Bericht tragen soll. Steht diese Liste nicht am Anfang, baut man ins Blaue.&quot;
+(MODALITY: on-screen text) (ON-SCREEN: nummerierte Karte &quot;Takeaway 1: Fünf Entscheidungen zuerst festhalten.&quot;)</p><p>RE-HOOK
+SAJU: &quot;Wenn diese Liste steht, kommt der Punkt, an dem die meisten Projekte kippen. Die Zahlen.&quot;
+(Nächste Kapitelkarte wird eingeblendet.)</p><p>[2:55-4:40] VALUE BEAT 2 - Datenmodell (Kapitel 3: Warum widersprechen sich meine Zahlen?)</p><p>CLAIM
+SAJU: &quot;Wenn zwei Berichte unterschiedliche Umsätze zeigen, ist fast immer das Datenmodell die Ursache.&quot;
+(MODALITY: animation) (ON-SCREEN: Textkarte &quot;Eine Zahl, eine Definition.&quot;)</p><p>PROOF / DEMO
+Custom Animation, Sternschema: In der Mitte erscheint eine Faktentabelle &quot;Verkäufe&quot;. Von außen rasten drei Dimensionstabellen ein, Datum, Kunde, Produkt. Bei jedem Einrasten leuchtet ein Pfeil auf und zeigt die 1-zu-viele-Beziehung. Die Beschriftung &quot;Sternschema&quot; bleibt sichtbar.
+SAJU: &quot;So sieht ein sauberes Modell aus. Eine Faktentabelle in der Mitte, drumherum die Dimensionen. Jede Kennzahl wird einmal berechnet, an einer Stelle. Wir nennen das ein zertifiziertes semantisches Modell, und jeder Bericht greift darauf zu. Vorher zieht der Vertrieb seinen Umsatz aus der einen Tabelle, das Controlling aus einer anderen, und dann sitzen beide im Meeting mit verschiedenen Zahlen.&quot;
+(MODALITY: data-viz) Zwei Berichtskarten nebeneinander zeigen 1,2 Millionen und 1,35 Millionen. Dann verschmelzen die Datenquellen zu einem Modell, und beide Karten zeigen dieselbe Zahl. Beschriftung &quot;eine abgestimmte Zahl&quot;.
+(Sichtbare Änderung alle 5 bis 8 Sekunden: die zwei roten Zahlen pulsieren kurz auseinander, dann rasten sie auf einen grünen Wert zusammen.)</p><p>PAYOFF (heute anwendbar)
+SAJU: &quot;Ihr Mitnehmer: Legen Sie ein zertifiziertes Modell fest, aus dem jeder Bericht seine Kennzahl zieht. Eine Definition von Umsatz, nicht sieben.&quot;
+(ON-SCREEN: nummerierte Karte &quot;Takeaway 2: Ein zertifiziertes Modell als einzige Quelle der Kennzahl.&quot;)</p><p>RE-HOOK
+SAJU: &quot;Jetzt stimmt die Zahl. Aber wer darf sie überhaupt sehen.&quot;</p><p>[4:40-6:25] VALUE BEAT 3 - Governance und RLS (Kapitel 4: Wer darf welche Zeilen sehen?)</p><p>CLAIM
+SAJU: &quot;Sobald mehr als ein Team denselben Bericht öffnet, brauchen Sie Regeln, wer welche Zeilen sieht.&quot;
+(MODALITY: screen-record) (ON-SCREEN: Textkarte &quot;Berechtigungen am Modell, nicht im Bericht.&quot;)</p><p>PROOF / DEMO
+Screen-Record in Power BI Desktop: unter &quot;Modellierung&quot; eine Rolle &quot;Vertrieb Nord&quot; anlegen, einen DAX-Filter mit USERPRINCIPALNAME setzen, dann &quot;Als Rolle anzeigen&quot; klicken und zeigen, wie der Bericht sich verändert.
+SAJU: &quot;Das nennt sich Row-Level Security. Ich definiere Rollen am Modell und knüpfe sie an die Anmeldung der Person. Wichtig ist, das gehört ins Modell, damit die Regel für jeden Bericht gilt, der darauf aufsetzt.&quot;
+Custom Animation, Row-Level Security: Derselbe Bericht, zwei Nutzer nebeneinander. Bei Nutzer Nord filtern sich alle Süd-Zeilen sichtbar heraus, bei Nutzer Süd umgekehrt. Beschriftung &quot;RLS: Zeilen filtern je Identität&quot;.
+SAJU: &quot;Und Governance ist mehr als das. Dazu gehören zertifizierte Datensätze, klare Namen, nachvollziehbare Herkunft der Daten und eine benannte Person pro Datensatz. Ohne das driftet jede Umgebung, sobald Self-Service wächst.&quot;
+(Sichtbare Änderung alle 5 bis 8 Sekunden: Split-Screen der zwei Nutzeransichten, Callout-Box &quot;gleiche Datei, andere Zeilen&quot;.)</p><p>PAYOFF (heute anwendbar)
+SAJU: &quot;Ihr Mitnehmer: Definieren Sie Rollen am Modell, nicht im einzelnen Bericht. Und benennen Sie eine Person, die für jeden zertifizierten Datensatz verantwortlich ist.&quot;
+(MODALITY: on-screen text) (ON-SCREEN: nummerierte Karte &quot;Takeaway 3: RLS und Verantwortliche am Modell verankern.&quot;)</p><p>RE-HOOK
+SAJU: &quot;Sicher ist der Bericht jetzt. Trotzdem wird er bei vielen langsam. Warum, kommt jetzt.&quot;</p><p>[6:25-8:05] VALUE BEAT 4 - Performance (Kapitel 5: Warum wird mein Bericht trotzdem langsam?)</p><p>CLAIM
+SAJU: &quot;Die meisten langsamen Berichte sind ein Modellproblem, kein DAX-Problem.&quot;
+(MODALITY: data-viz) (ON-SCREEN: Textkarte &quot;Erst das Modell, dann die Formeln.&quot;)
+Data-viz, schematisch: zwei Balken für die Abfragedauer. Links &quot;eine flache Tabelle&quot; mit einem langen Balken, rechts &quot;Sternschema&quot; mit einem kurzen. Als schematisch beschriftet, keine erfundene Minutenzahl.</p><p>PROOF / DEMO
+SAJU: &quot;Der häufigste Grund für Langsamkeit ist eine einzige breite Tabelle, in der alles zusammengepresst ist. Power BI muss dann bei jeder Kennzahl durch riesige Spalten rechnen. Sobald wir dasselbe in ein Sternschema legen, prüft die Engine nur noch die kleinen Dimensionen und rechnet über eine schlanke Faktentabelle. Ich zeige Ihnen das im Performance Analyzer.&quot;
+(MODALITY: screen-record) Im Performance Analyzer in Power BI wird die Aufzeichnung gestartet, eine Kachel neu geladen, die Dauer erscheint in der Liste. Erst das flache Modell, dann das Sternschema, die Zeilen der Dauer werden hervorgehoben.
+(Sichtbare Änderung alle 5 bis 8 Sekunden: Zoom auf die Dauer-Spalte, Cursor-Hervorhebung auf dem längsten Eintrag.)</p><p>PAYOFF (heute anwendbar)
+SAJU: &quot;Ihr Mitnehmer: Bevor Sie DAX optimieren, prüfen Sie das Modell. Ein Sternschema macht fast jede Kennzahl schneller, ohne dass Sie eine Formel anfassen.&quot;
+(ON-SCREEN: nummerierte Karte &quot;Takeaway 4: Modell vor DAX prüfen.&quot;)</p><p>RE-HOOK
+SAJU: &quot;Der Bericht stimmt, ist sicher und schnell. Jetzt muss er sauber zu den Leuten kommen.&quot;</p><p>[8:05-9:45] VALUE BEAT 5 - Rollout und Livegang (Kapitel 6: Wie kommt der Bericht sauber in den Livegang?)</p><p>CLAIM
+SAJU: &quot;Ein Bericht geht nicht live, indem man ihn einmal veröffentlicht. Er braucht getrennte Umgebungen für Entwicklung, Test und Betrieb.&quot;
+(MODALITY: animation) (ON-SCREEN: Textkarte &quot;Vom Laptop geht nichts direkt in den Betrieb.&quot;)</p><p>PROOF / DEMO
+Custom Animation, Deployment Pipeline: drei Boxen von links nach rechts, beschriftet Entwicklung, Test, Betrieb. Ein Bericht wandert von der ersten Box zur zweiten, ein grünes Häkchen erscheint am Tor. Dann weiter zur dritten. Beim Übergang tauschen sich die Datenquellen-Parameter sichtbar aus, angedeutet durch wechselnde Beschriftungen.
+SAJU: &quot;In Power BI heißt das Deployment Pipeline. Wir bauen in der Entwicklung, prüfen im Test mit echten Daten und geben erst dann für den Betrieb frei. Jede Stufe zeigt auf ihre eigene Datenquelle, damit niemand versehentlich in Live-Daten testet. Und dazu gehört der Teil, den viele weglassen: Schulung der Nutzer, eine benannte Wartung und ein fester Termin, an dem geprüft wird, ob der Bericht noch gebraucht wird.&quot;
+(MODALITY: b-roll) Team am Bildschirm, jemand gibt eine Freigabe frei, kurzes Nicken, Handschlag im Büro.
+(Sichtbare Änderung alle 5 bis 8 Sekunden: die drei Pipeline-Boxen leuchten nacheinander auf; Callout-Box &quot;Test mit echten Daten, nicht im Betrieb&quot;.)</p><p>PAYOFF (heute anwendbar)
+SAJU: &quot;Ihr Mitnehmer: Trennen Sie Entwicklung, Test und Betrieb mit Deployment Pipelines. Und planen Sie die Betreuung nach dem Livegang von Anfang an ein.&quot;
+(MODALITY: on-screen text) (ON-SCREEN: nummerierte Karte &quot;Takeaway 5: Getrennte Umgebungen plus geplante Betreuung.&quot;)</p><p>RE-HOOK
+SAJU: &quot;So sieht ein sauberes Projekt aus. Jetzt zeige ich Ihnen, woran Sie in der ersten Stunde erkennen, dass etwas nicht stimmt.&quot;</p><p>[9:45-11:25] VALUE BEAT 6 - Pfusch erkennen (Kapitel 7: Woran erkenne ich Pfusch schon in der ersten Stunde?)</p><p>CLAIM
+SAJU: &quot;Sie erkennen einen guten Berater in der ersten Stunde an den Fragen, die er stellt.&quot;
+(MODALITY: on-screen text) Kinetische Checkliste, die Punkt für Punkt einfährt.</p><p>PROOF / DEMO
+SAJU: &quot;Achten Sie auf diese Warnzeichen. Er fängt sofort mit Farben und Kacheln an, statt nach Ihren Entscheidungen zu fragen. Er will kein zertifiziertes Modell, sondern klemmt alles in eine Tabelle. Er kann Ihnen nicht herleiten, wie eine Zahl zustande kommt. Er redet nicht über Berechtigungen. Und er veröffentlicht direkt aus seiner Datei in den Betrieb. Wenn Sie zwei davon sehen, drehen Sie um.&quot;
+(ON-SCREEN: rote Warnzeichen-Liste, jeder Punkt fährt einzeln ein, Häkchen in Amber als Statusfarbe.)
+SAJU: &quot;Und die guten Zeichen. Er fragt zuerst nach den Entscheidungen. Er besteht auf einer abgestimmten Zahl. Er spricht früh über Rollen und Verantwortliche. Und er hat einen Plan für den Livegang, nicht nur für den ersten Screenshot.&quot;
+(MODALITY: talking head) Saju frontal für die grünen Zeichen, ruhig, langsamer Schnitt auf der Kernaussage.
+(Sichtbare Änderung alle 5 bis 8 Sekunden: Umschalten der Liste von roten auf grüne Zeichen mit einem klaren Übergang.)</p><p>PAYOFF (heute anwendbar)
+SAJU: &quot;Ihr Mitnehmer: Fragt der Berater zuerst nach Ihren Entscheidungen und Ihrer einen Zahl, sind Sie richtig. Fängt er mit dem Aussehen an, drehen Sie um.&quot;
+(ON-SCREEN: nummerierte Karte &quot;Takeaway 6: Gute Berater fragen zuerst, sie bauen nicht sofort.&quot;)</p><p>RE-HOOK
+SAJU: &quot;Und was kostet es, diese Reihenfolge zu überspringen? Das ist der Teil, den ich Ihnen am Anfang versprochen habe.&quot;</p><p>[11:25-13:00] PAYOFF + SOFT CTA (Kapitel 8: Was kostet es, diese Schritte zu überspringen?)</p><p>RECAP (volle Wert-Rückgabe)
+SAJU: &quot;Fassen wir zusammen, damit Sie das komplette Bild mitnehmen. Erstens: fünf Entscheidungen zuerst festhalten. Zweitens: ein zertifiziertes Modell als einzige Quelle der Kennzahl. Drittens: Berechtigungen und Verantwortliche am Modell verankern. Viertens: das Modell vor dem DAX prüfen. Fünftens: getrennte Umgebungen plus geplante Betreuung. Und sechstens: ein guter Berater fragt zuerst und baut nicht sofort.&quot;
+(MODALITY: on-screen text) Kinetische Liste, alle sechs Mitnehmer erscheinen untereinander und bleiben stehen.</p><p>OPEN LOOP wird eingelöst
+SAJU: &quot;Jetzt der Preis, den ich Ihnen versprochen habe. Wer diese Reihenfolge überspringt, zahlt später. Gartner beziffert schlechte Datenqualität auf durchschnittlich 12,9 Millionen Dollar pro Jahr und Unternehmen. Und in einer begutachteten Studie von Poon und Kollegen aus dem Jahr 2024 enthalten 94 Prozent der geschäftlich genutzten Tabellen Fehler. Das ist der stille Aufpreis für Berichte, denen keiner traut. Andersherum berichten laut Forrester einsichtsgetriebene Unternehmen 8,5 mal häufiger von mehr als 20 Prozent Umsatzwachstum pro Jahr. Die eine Frage aus dem Anfang lautet übrigens: welche Entscheidung soll dieser Bericht tragen. Stellt Ihr Berater die zuerst, sind Sie in guten Händen.&quot;
+(MODALITY: data-viz) Drei Quellenkarten blenden sauber ein und aus: &quot;Gartner&quot;, &quot;Poon et al., 2024&quot;, &quot;Forrester&quot;. Jeweils mit der Zahl daneben.
+(Sichtbare Änderung alle 5 bis 8 Sekunden: jede Statistik-Karte kommt einzeln, kurzer Zoom-Punch auf die Prozentzahl.)</p><p>SOFT CTA
+SAJU: &quot;Wenn Sie wissen wollen, wo Ihr eigener Aufbau gerade steht, unten ist unsere Power BI Governance und Cost Scorecard verlinkt. Das ist eine kostenlose Einschätzung in fünf Minuten, mit Ihrem Ergebnis und den drei größten Risiken. Und wenn Ihre Zahlen partout nicht zusammenpassen oder ein Bericht ansteht, den ein ganzes Team wirklich nutzen soll: genau das machen wir bei CaseWhen. Buchen Sie einfach ein Scoping-Gespräch für Ihr Dashboard, der Link steht in der Beschreibung. Kein Verkaufsdruck, nur ein Gespräch. Wenn Ihnen das geholfen hat, abonnieren Sie den Kanal, das nächste Video zeigt, wie das zertifizierte Modell in der Praxis entsteht.&quot;
+(MODALITY: talking head) Saju frontal, ruhig, warm, kein Hype.
+(ON-SCREEN: zwei Link-Karten, &quot;Governance und Cost Scorecard, kostenlos&quot; und &quot;Scoping-Gespräch buchen&quot;. Darunter dezent der Verweis auf das nächste Video.)</p><h2>Description</h2><p>Power BI Beratung von der ersten Stunde bis zum Livegang: der reale Ablauf eines seriösen Projekts, von Discovery über Datenmodell und Governance bis zum Rollout.</p><p>Kostenlose Power BI Governance und Cost Scorecard (5 Minuten): https://casewhen.co/scorecard
+Mit CaseWhen arbeiten, Scoping-Gespräch buchen: https://casewhen.co/kontakt</p><p>Kapitel:
+0:00 Wie läuft ein echtes Power BI Projekt ab?
+1:20 Womit fängt eine gute Beratung an?
+2:55 Warum widersprechen sich meine Zahlen?
+4:40 Wer darf welche Zeilen sehen?
+6:25 Warum wird mein Bericht trotzdem langsam?
+8:05 Wie kommt der Bericht sauber in den Livegang?
+9:45 Woran erkenne ich Pfusch schon in der ersten Stunde?
+11:25 Was kostet es, diese Schritte zu überspringen?</p><p>In diesem Video zeigt Saju, wie eine gute Power BI Beratung wirklich abläuft. Es geht um die vier Fragen der Discovery, um ein zertifiziertes semantisches Modell als einzige Quelle Ihrer Kennzahl, um Row-Level Security und Governance, um Performance über ein Sternschema, und um einen sauberen Livegang mit Deployment Pipelines und geplanter Betreuung. Am Ende bekommen Sie eine kurze Checkliste, an der Sie schon in der ersten Stunde erkennen, ob Ihr Berater sein Handwerk versteht. Für Fachbereiche und BI-Teams im deutschsprachigen Raum, die aus verstreuten Berichten eine Grundlage machen wollen, der die Geschäftsführung vertraut.</p><p>#PowerBI #PowerBIBeratung #MicrosoftFabric #BusinessIntelligence #Datenmodell</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

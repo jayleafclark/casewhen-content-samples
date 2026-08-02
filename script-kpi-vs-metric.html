@@ -1,0 +1,202 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · KPI vs Metric: Why Half of Your KPI Tracker Doesn&#x27;t Belong T</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p>[0:40-2:05] VALUE BEAT 1 - What&#x27;s the real difference?
+(MODALITY: animation)
+CLAIM (ON-SCREEN card): &quot;A metric is any number you can measure. A KPI is a number with a target and a decision attached.&quot;
+DEMO / ANIMATION: Custom mechanism animation, on brand (#1D967C, amber for status only). Left side, a plain number &quot;12,000&quot; sitting alone, grey, labelled `metric`. Right side, the same number gains two pieces that snap on one at a time: a target line labelled `15,000`, then a small status chip that turns amber, relabelled `KPI`. The point is that the KPI is the metric plus two extra parts, shown physically attaching. New element every 5 to 7 seconds so the frame never sits still.
+SPOKEN: &quot;Start with the plain version. A metric is anything you can count. Revenue, sessions, average handle time, rows loaded last night. All metrics. A KPI is the small set of those numbers you&#x27;ve tied to a goal, given a target, and agreed to act on. Every KPI is a metric. Only a few metrics earn the KPI label. The test is three questions. One, is there a target this number gets measured against. Two, does one named person own it. Three, if the number moves, does someone change what they do next week. Three yeses, you&#x27;ve got a KPI. Fewer than three, you&#x27;ve got a metric you keep for context, and it should sit in the background.&quot;
+PAYOFF (ON-SCREEN numbered takeaway): &quot;Takeaway 1: run the three-question test - target, owner, decision. No target and no owner, and you&#x27;re looking at a metric.&quot;
+RE-HOOK: &quot;So what happens when a team ignores that test and calls everything a KPI. That&#x27;s where the dashboard starts losing people.&quot;</p><p>[2:05-3:25] VALUE BEAT 2 - Why does a wall of KPIs lose the room?
+(MODALITY: b-roll into data-viz)
+CLAIM (ON-SCREEN card): &quot;When every number is a KPI, none of them is.&quot;
+DEMO: Open on b-roll of a real review meeting, people looking at a screen, someone shrugging. At 2:20 cut to a data-viz built for the video: a board of forty identical tiles, all the same weight and colour. On a beat, thirty-eight of them dim to grey and two stay full colour, showing the two that decide the quarter. Animate the dim-down across ~4 seconds so the eye follows it.
+SPOKEN: &quot;Watch what that does on a real page. Promote every metric to KPI and you get forty tiles that all look equally urgent. Nobody can separate the two numbers that decide the quarter from the twenty that are only nice to know. So the meeting stalls. People argue about definitions, one person&#x27;s revenue figure doesn&#x27;t match another&#x27;s, and the page loses the room. There&#x27;s hard data behind this. Ninety-four percent of business spreadsheets used in decisions contain errors, and most KPI trackers still start life as a spreadsheet. Stack that on top of forty look-alike tiles and trust drops fast.&quot;
+PAYOFF (ON-SCREEN numbered takeaway): &quot;Takeaway 2: a page that makes everything top priority makes nothing top priority. Rank the numbers before you build the page.&quot;
+Source tag: `94% of business spreadsheets contain errors - Poon et al., 2024`.
+RE-HOOK: &quot;The good version of this is a modeling choice, and it happens well before you drag a single visual onto the canvas. Let me show you where.&quot;</p><p>[3:25-4:50] VALUE BEAT 3 - Where does the difference live in Power BI?
+(MODALITY: screen-record)
+CLAIM (ON-SCREEN card): &quot;In Power BI, the difference lives in the model, before you touch the visuals.&quot;
+DEMO / SCREEN-RECORD: Live in Power BI Desktop. Open Model view. Point at a base measure, `Total Sales`, and show it returning a plain number in a card. Then create two new measures on screen: a `Sales Target` measure (fixed goal, or last year times 1.1), and a `Sales vs Target` status measure using a simple DIVIDE of actual over target. Cursor tracks each measure as it&#x27;s typed; zoom-punch on the formula bar when the status measure lands. Show the same measure then reused on two different report pages.
+SPOKEN: &quot;Open the model view. A base measure like total sales is a metric. It just returns a number. To make it a KPI, you add two things in the model. First a target, either a fixed goal or a measure that calculates one, say last year plus ten percent. Second a status measure that compares actual against target and returns where you stand. Now that sales figure carries a goal and a verdict with it, everywhere it shows up. Build it once in the model and every report inherits it. Format it on one visual instead, and you&#x27;ve solved it for a single chart and nowhere else.&quot;
+PAYOFF (ON-SCREEN numbered takeaway): &quot;Takeaway 3: build the target and status as measures in the model, so the KPI travels with the number instead of hiding in one visual&#x27;s settings.&quot;
+RE-HOOK: &quot;Which raises the obvious next question. What&#x27;s the actual move that flips a plain metric into a KPI. It comes down to one thing people skip.&quot;</p><p>[4:50-6:15] VALUE BEAT 4 - How do I turn a metric into a KPI?
+(MODALITY: animation, short screen-record tail)
+CLAIM (ON-SCREEN card): &quot;A metric becomes a KPI the moment you commit to a target.&quot;
+DEMO / ANIMATION: Custom animation of the target mechanism. A value line rises to `12,000` sessions and sits there, grey, with a question mark over it, good or bad, you can&#x27;t say. Then a target line is drawn in at `15,000`, the gap between the two fills with a marked band, and the status chip turns amber to read &quot;behind&quot;. Then a 6-second screen-record tail: drop the built-in KPI visual on a page, set Value to the sales measure, Target to the goal measure, and it renders the number, the goal, and a status colour in one tile. Amber for short, green for past it.
+SPOKEN: &quot;This is the step most people skip. A number on its own can&#x27;t tell you whether you&#x27;re winning. The target is what makes it answerable. Say sessions this month land at twelve thousand. On its own, is that good. You can&#x27;t say. Set a target of fifteen thousand, and the same number now reads as behind, with a clear gap you can size. In Power BI you drop the KPI visual on, set the value to your sales measure, the target to your goal measure, and it shows the number, the goal, and a status colour in one tile. Amber when you&#x27;re short, green when you&#x27;re past it. That single setup turns a passive number into something a manager can act on before the month even closes.&quot;
+PAYOFF (ON-SCREEN numbered takeaway): &quot;Takeaway 4: no target, no KPI. If you can&#x27;t name the number you&#x27;re aiming at, it&#x27;s context, and it belongs in a supporting chart.&quot;
+RE-HOOK: &quot;Once targets are in, people always ask the same follow-up. How many of these should a dashboard carry. There&#x27;s a real answer, and it has four parts.&quot;</p><p>[6:15-7:40] VALUE BEAT 5 - How many KPIs should one dashboard have?
+(MODALITY: on-screen text / kinetic type)
+CLAIM (ON-SCREEN card): &quot;A good KPI has four parts. Most trackers ship one.&quot;
+DEMO / KINETIC: Four elements assemble one at a time onto a single card, each labelled as it lands: `measure` (the number), `target` (what good looks like), `time frame` (the window it&#x27;s judged over), `owner` (who&#x27;s accountable). Then a second panel: a top board showing a tight set of five to nine KPI tiles, with a faint &quot;supporting metrics&quot; drawer sliding out one level below to carry the rest. Each label pops on its own beat, roughly every 6 seconds.
+SPOKEN: &quot;People ask what makes a proper KPI. Four elements. A measure, the number itself. A target, what good looks like. A time frame, the window it gets judged over, this month, this quarter. And an owner, the person accountable when it moves. A number with all four is a KPI. A number with only the first is still a metric. As for how many, keep the headline set small. Five to nine KPIs on the top view is plenty for most teams. Everything else is a supporting metric that lives one click down, ready when you need to explain a KPI, out of the way when you don&#x27;t.&quot;
+PAYOFF (ON-SCREEN numbered takeaway): &quot;Takeaway 5: give every KPI all four parts - measure, target, time frame, owner - and cap your headline board at five to nine tiles.&quot;
+RE-HOOK: &quot;There&#x27;s still one thing that decides whether any of this survives in a real company. Two people, same KPI, two different numbers. Let me close that gap.&quot;</p><p>[7:40-9:00] The one number the whole room trusts.
+(MODALITY: screen-record, talking-head tail)
+CLAIM (ON-SCREEN card): &quot;Define each KPI once, in the model, so everyone gets the same answer.&quot;
+DEMO / SCREEN-RECORD: Show two report pages side by side with two slightly different revenue figures, then zoom into two different measure formulas that caused it. Fix it live: mark one measure as the certified version in the model, delete the duplicate, and repoint both pages at the certified measure so both figures snap to match. Then a short clip of asking Copilot or a Q&amp;A box a plain-English question and getting the same certified number back. Talking-head tail for the last two lines.
+SPOKEN: &quot;The part that decides whether this survives contact with a real team is this. The reason two people show two different revenue numbers is that the KPI is defined in two places, a measure in one report and a slightly different formula in another. Fix it in the semantic model. Define each KPI as one certified measure, with its target and status built in, and every report, every user, and Copilot when you ask it in plain English all pull from that one definition. That&#x27;s what people mean by one agreed number. With only twelve percent of organizations saying their data is in good enough shape to trust with AI, this is exactly where it bites. Copilot will hand you a confident wrong number the moment your model lets one KPI mean two things.&quot;
+PAYOFF (ON-SCREEN numbered takeaway): &quot;Takeaway 6: define each KPI once as a certified measure in the model, so people and Copilot return the same figure.&quot;
+Source tag: `Only 12% say their data is good enough for AI - Drexel LeBow + Precisely, 2025`.
+RE-HOOK: &quot;So let&#x27;s put the whole thing back together, and pay off that question I promised you at the start.&quot;</p><p>[9:00-9:45] PAYOFF - recap + pay off the open loop.
+(MODALITY: kinetic type list)
+ON-SCREEN (the full win, all six takeaways stack in, one per beat):
+&quot;1. Run the three-question test: target, owner, decision.
+2. Everything as top priority means nothing is - rank first.
+3. Build target and status as measures in the model.
+4. No target, no KPI.
+5. Four parts per KPI: measure, target, time frame, owner. Cap the board at 5 to 9.
+6. Define each KPI once as a certified measure - one agreed number.&quot;
+SPOKEN: &quot;That&#x27;s the whole method, and you can run it on your own tracker this afternoon. Now the question I promised. Look at any tile on your dashboard and ask, if this number moved, would I do something different this week. If yes, it&#x27;s a KPI, keep it on the top view. If no, it&#x27;s a metric, move it one level down. Run that across your current page and most trackers lose half their tiles by end of day.&quot;</p><p>[9:45-10:15] SOFT CTA.
+(MODALITY: talking head)
+SPOKEN: &quot;If you want to see where your own reports leak trust, we put together a free Power BI Governance and Cost Scorecard. It&#x27;s a five-minute check, you get your score plus your top three risks, and the link&#x27;s in the description. And if your KPIs still won&#x27;t reconcile across reports, that semantic-model cleanup is the work we do at CaseWhen, so book a model review with us. No pitch, just a look at your setup. Next up, watch the star schema build, since a clean model is where every one of these fixes starts.&quot;
+(ON-SCREEN: two link cards) `Free: Power BI Governance &amp; Cost Scorecard` and `Work with CaseWhen: book a semantic-model review`. End card points to the star schema video.</p><h2>Description
+KPI vs metric, explained for anyone building a Power BI KPI tracker: the ten-second test, how to build the difference into your model, and how to cut a bloated dashboard down to the numbers people act on.</h2><p>Free Power BI Governance &amp; Cost Scorecard (5-min check): https://casewhen.co/scorecard
+Work with CaseWhen (book a semantic-model review): https://casewhen.co/contact</p><p>Chapters:
+0:00 Why does my dashboard have 40 numbers and no answer?
+0:40 What&#x27;s the real difference between a KPI and a metric?
+2:05 Why does a wall of KPIs lose the room?
+3:25 Where does that difference live inside Power BI?
+4:50 How do I turn a metric into a KPI?
+6:15 How many KPIs should one dashboard have?
+7:40 How do I get one number the whole room trusts?
+9:00 What do I change on Monday?</p><p>Resources:
+- Free Power BI Governance &amp; Cost Scorecard: https://casewhen.co/scorecard
+- Book a semantic-model / AI-readiness review: https://casewhen.co/contact
+- Watch next, the star schema build: https://casewhen.co/youtube</p><p>A metric is any number you can measure. A KPI is a metric with a target, a time frame, an owner, and a decision attached, and confusing the two is why so many dashboards go unread. This walkthrough shows the three-question test that separates a KPI from a metric, where the difference lives inside the Power BI model (base measures versus a target and status measure), how the built-in KPI visual works, how many KPIs a dashboard should carry, and how a certified measure in the semantic model gives your team, and Copilot, one agreed number instead of two conflicting ones. Build your KPI tracker on the model, not on the visuals, and it stays trustworthy as it grows.</p><p>#PowerBI #KPIs #DataModeling #BusinessIntelligence #MicrosoftFabric</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

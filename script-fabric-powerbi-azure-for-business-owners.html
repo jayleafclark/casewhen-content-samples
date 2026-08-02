@@ -1,0 +1,186 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Power BI vs Fabric vs Azure for Business: What You&#x27;re Actual</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Power BI vs Fabric vs Azure for Business: What You&#x27;re Actually Buying (No Jargon)
+Host: Austin · Cluster: buyer · Target: 11 min · Primary keyword: power bi vs fabric vs azure for business</p><h2>Chapters
+- 0:00 What are you buying here?
+- 1:10 What does Power BI do for you?
+- 2:40 What is Fabric, and do you need it yet?
+- 4:10 Where does Azure fit, and will you ever touch it?
+- 5:35 Why do your two dashboards show different numbers?
+- 7:00 What does your team really do with all this?
+- 8:30 How do you keep the Fabric bill from running away?
+- 9:55 What should you decide on Monday?</h2><h2>Script</h2><p>[0:00-0:12] HOOK (spoken) (MODALITY: talking head, tight on camera) (ON-SCREEN: keyword card &quot;Power BI vs Fabric vs Azure for business&quot;)
+You&#x27;re about to spend real money on three Microsoft names, and nobody&#x27;s told you which one you&#x27;re paying for.</p><p>[0:12-0:45] PROMISE + STAKES + OPEN LOOP (MODALITY: b-roll, a quiet exec office, a laptop with a report open, hands closing a folder)
+So here&#x27;s what I&#x27;ll give you in the next ten minutes. Plain-English answers to three things. What Power BI, Fabric, and Azure each do for you, in words you&#x27;d use at dinner. Which one you need right now and which one can wait. And the one buying mistake that doubles a bill without you noticing, so you can spot it before you sign. You run the company. You feel the pain when the reports are slow or wrong. You don&#x27;t build them, and you shouldn&#x27;t have to. By the end you&#x27;ll know exactly what you&#x27;re paying for and what to ask your team before anyone renews a license. Near the end I&#x27;ll show you the setting that turns a fair Fabric price into a runaway one. Most teams find it on the invoice, months too late.</p><p>[VALUE BEAT 1 · 1:10-2:40] &quot;What does Power BI do for you?&quot; (MODALITY: screen-record, a live Power BI dashboard, filters clicking, numbers updating) (ON-SCREEN: chapter question + claim card &quot;Power BI = the report people look at&quot;)
+CLAIM: Power BI is the part you and your team see. The charts, the dashboards, the number on the screen in a meeting.
+PROOF: Watch this. Someone clicks a region, the revenue updates. Clicks a month, the margin updates. That&#x27;s Power BI doing its job, showing a picture of data that already lives somewhere else. When a board member asks &quot;what was Q3 in Germany,&quot; this is the thing that answers in two seconds instead of two days. It&#x27;s the layer your people see on top of your numbers. Here&#x27;s the part that trips up buyers. Power BI is only as good as the data feeding it. A pretty dashboard on messy data is a confident wrong answer, and a confident wrong answer in a board pack costs you more than no answer at all. Gartner puts the price of poor data at 12.9 million dollars a year for the average company. A lot of that starts as a chart that looked fine.
+PAYOFF (use today): If someone on your team says &quot;we need Power BI,&quot; they mean the reports. That&#x27;s the right tool for that. Ask them one question back. Where does the data come from, and do we trust it? (ON-SCREEN takeaway: &quot;Power BI = reporting. Buy it for reports, not for fixing data.&quot;)
+RE-HOOK: So reports are handled. But where does that trusted data get built? That&#x27;s the next name on your invoice.</p><p>[VALUE BEAT 2 · 2:40-4:10] &quot;What is Fabric, and do you need it yet?&quot; (MODALITY: custom animation, three labeled boxes &quot;raw data / cleaned data / report&quot; with data flowing left to right and combining into one platform) (ON-SCREEN: chapter question + claim card &quot;Fabric = the all-in-one data platform under the reports&quot;)
+CLAIM: Microsoft Fabric is the newer, all-in-one place where your data gets collected, cleaned, and stored before Power BI ever shows it.
+PROOF: Picture your data spread across a sales tool, a finance tool, a spreadsheet, and a warehouse. Fabric is Microsoft&#x27;s bundle that pulls all of that into one managed platform, so the cleaning and the storing and the reporting live together instead of in five disconnected places. The pitch is simple. Fewer moving parts, one bill, one vendor. That&#x27;s real, and for some companies it&#x27;s the right call. Now the honest part, because this is where costs creep up. Fabric is priced by capacity, which means you rent computing power by the hour, not by the seat. Leave it running when nobody&#x27;s using it and you pay for computing nobody used. So the buyer question is never &quot;is Fabric good.&quot; It&#x27;s &quot;do we have enough data pain to justify turning on a meter.&quot; A ten-person company with three clean sources usually doesn&#x27;t yet. A company with data scattered across many silos might. 82 percent of businesses say data silos get in the way of their work, going by ZoomInfo, so plenty of you are candidates. Plenty of you also aren&#x27;t, yet.
+PAYOFF (use today): Fabric is a commitment, not a checkbox. Before you say yes, ask your team to name the specific problem it solves for you this quarter. If they can&#x27;t, you&#x27;re early. (ON-SCREEN takeaway: &quot;Fabric = one platform for all your data. Right once your data is truly a mess, wasteful before that.&quot;)
+RE-HOOK: If Fabric is the new bundle, you might be wondering about the older name your IT lead keeps saying. Azure. Let&#x27;s settle what that even is.</p><p>[VALUE BEAT 3 · 4:10-5:35] &quot;Where does Azure fit, and will you ever touch it?&quot; (MODALITY: b-roll, a server room, then cut to a plain diagram of building-block services) (ON-SCREEN: chapter question + claim card &quot;Azure = the Microsoft cloud everything runs on&quot;)
+CLAIM: Azure is Microsoft&#x27;s cloud, the giant menu of building blocks that both Power BI and Fabric run on top of.
+PROOF: Azure is the hardware and the toolkit, rented over the internet. Storage, databases, the connections that move data around. Fabric is built from Azure pieces, pre-assembled for you. Straight Azure is the same pieces, bought separately, wired up by engineers exactly how a company wants them. Big organizations with their own data teams often go the pure-Azure route because they want the control. Most owners and founders will never log into Azure directly, and that&#x27;s completely fine. You&#x27;ll feel it only in one way. When your team says &quot;we&#x27;re building the data platform on Azure,&quot; they mean the custom, engineer-assembled route instead of the Fabric bundle. More flexible, more skill required, more of your team&#x27;s time. That&#x27;s the trade you&#x27;re approving.
+PAYOFF (use today): You don&#x27;t operate Azure. You fund it. So the question you own is simple. Do we have the in-house engineers to run the custom route, or do we want the bundle that needs fewer hands? (ON-SCREEN takeaway: &quot;Azure = the raw cloud. Fabric is Azure pre-packaged. Custom Azure needs a real data team.&quot;)
+RE-HOOK: So that&#x27;s the three names sorted. Which leaves the question that drags you into meetings. Why the numbers still disagree.</p><p>[VALUE BEAT 4 · 5:35-7:00] &quot;Why do your two dashboards show different numbers?&quot; (MODALITY: data-viz, two dashboards side by side, both labeled &quot;Revenue,&quot; each showing a different total, a red gap animating between them) (ON-SCREEN: chapter question + claim card &quot;The tool was never your real problem&quot;)
+CLAIM: When sales and finance walk in with two different revenue numbers, no tool caused that. The definitions did.
+PROOF: Here&#x27;s the scene you know. Sales says revenue is 4.2 million. Finance says 3.9. You spend the first fifteen minutes of the meeting arguing about whose number is right, and both are, because they defined &quot;revenue&quot; differently and nobody wrote it down. Buying a shinier tool does not settle that argument. A shared definition does. This is the reason so much BI money gets wasted. About 70 percent of dashboard work goes unused, going by RevealBI, and it&#x27;s usually because people stopped trusting the numbers. Only 40 percent of executives say they always trust their data, going by Talend. Precisely found 67 percent of companies don&#x27;t fully trust the data they run on. That&#x27;s an agreement problem, not a software problem, and it&#x27;s the one worth solving first.
+PAYOFF (use today): Before you approve any tool, get one thing on paper. What does &quot;revenue,&quot; &quot;customer,&quot; and &quot;active&quot; mean here, exactly, and who signs off on it. That single page saves more meetings than any dashboard. (ON-SCREEN takeaway: &quot;One agreed definition beats one more tool. Fix the meaning before you fix the software.&quot;)
+RE-HOOK: Which raises the fair question you&#x27;ve been sitting on. What is your team even doing all day with these three things?</p><p>[VALUE BEAT 5 · 7:00-8:30] &quot;What does your team really do with all this?&quot; (MODALITY: screen-record, a data model view in Power BI, tables linking together with relationship lines, then a measure being written) (ON-SCREEN: chapter question + &quot;one deep beat&quot; signpost card &quot;Here&#x27;s the one technical bit, then back to your level&quot;)
+CLAIM: This is the one part where I go a level deeper, so you know what good looks like when your team reports back.
+PROOF: Under every trustworthy report there&#x27;s a data model. That&#x27;s the layer where your team decides how tables connect and writes the calculations, so &quot;revenue&quot; always means the same thing everywhere it shows up. A well-built model is why a number reconciles across ten reports. A rushed one is why your two dashboards fought. Your team also builds the refresh, the schedule that pulls fresh data in overnight, and the access rules, so finance sees finance and the regional manager sees only their region. You will never write this yourself, and you don&#x27;t need to. What you need is a way to tell whether it was done properly, because a model built wrong looks perfectly fine right up until it hands a board the wrong figure. This is the work CaseWhen does for BI teams in Berlin every week, and it&#x27;s the layer most companies skip and later pay for. When a data platform comes in on budget and the numbers finally agree, this quiet layer is why.
+PAYOFF (use today): You don&#x27;t need to read the model. You need proof it exists and works. Ask your team to show you one number reconciling across two different reports. If it matches, your foundation is sound. If it doesn&#x27;t, you found your real problem. (ON-SCREEN takeaway: &quot;The data model is the foundation. You can&#x27;t build it, but you can demand proof it works.&quot;)
+RE-HOOK: Okay. Back up to your level, and back to your wallet, because the last one is where the surprise bills come from.</p><p>[VALUE BEAT 6 · 8:30-9:55] &quot;How do you keep the Fabric bill from running away?&quot; (MODALITY: custom animation, a meter labeled &quot;capacity&quot; filling and draining, cost ticking up whenever it runs with no users) (ON-SCREEN: chapter question + claim card &quot;Capacity = a meter, not a seat&quot;)
+CLAIM: This is the setting I promised you at the start. Fabric and a lot of Azure bill by capacity, and capacity is a meter that runs whether or not anyone&#x27;s watching a report.
+PROOF: A license per person is easy to predict. Capacity is different. You reserve a chunk of computing power, and you pay for it by the hour it&#x27;s switched on. So the runaway bill almost never comes from too many users. It comes from a heavy refresh running every hour when once a day would do, or a big capacity left on over a quiet weekend, or a job someone built and forgot. The invoice makes it look like Fabric is the problem. It&#x27;s a settings problem, and it&#x27;s fixable in an afternoon by someone who knows where to look. The buyers who get burned are the ones who treated capacity as a flat subscription and never checked the meter.
+PAYOFF (use today): Ask your team two questions this week. What size capacity are we running, and could it be smaller. And what&#x27;s the heaviest scheduled job, and does it really need to run that often. Those two answers are usually where the extra cost is. (ON-SCREEN takeaway: &quot;Capacity bills by the hour it runs. Right-size it and check the schedule, or pay for computing nobody used.&quot;)
+RE-HOOK: So put it all together, and the whole decision gets a lot smaller than the sales decks make it look.</p><p>[PAYOFF · 9:55-10:40] RECAP + PAY OFF THE OPEN LOOP (MODALITY: on-screen text / kinetic type, the takeaways stacking one by one) (ON-SCREEN: numbered recap list)
+Here&#x27;s the whole thing on one page. Power BI is the reports your people look at. Fabric is the all-in-one data platform underneath, worth it once your data is truly a mess, wasteful before that. Azure is the raw cloud both of them run on, and the custom route your engineers pick when they want full control. Your two dashboards disagree because of definitions, not software, so agree on what the words mean before you buy anything. Under the reports sits a data model your team builds, and you can demand proof it works even if you&#x27;ll never read it. And that setting I promised you. Capacity billing. Fabric and Azure charge by the hour the meter runs, so a heavy schedule or an oversized capacity is what doubles the bill without warning. Right-size it and you keep the price you signed up for.</p><p>[SOFT CTA · 10:40-11:10] (MODALITY: talking head, steady, direct to camera) (ON-SCREEN: link cards for the scorecard + the call)
+If you want to see where your own setup stands before you spend another euro, we made a free Governance and Cost Scorecard. Five minutes, and it tells you your top risks and roughly where money&#x27;s leaking. It&#x27;s linked below. And if your numbers still won&#x27;t agree, or you&#x27;re staring at a Fabric decision and want a straight answer, that&#x27;s the work we do at CaseWhen. Book a short scoping call from the description. No pitch, just a real conversation about what you need. Watch-next is right there too, where I break down the one agreed number and how to get your whole company reporting from it.</p><h2>Description
+Power BI vs Fabric vs Azure for business, explained for owners and COOs who pay for the tools but don&#x27;t build the reports. Plain English, no jargon, and the one buying mistake that doubles a Fabric bill without you noticing.</h2><p>Free Governance and Cost Scorecard (5-min assessment, your top-3 risks): [link]
+Work with CaseWhen (book a short scoping call, no pitch): [link]</p><p>Timestamps:
+0:00 What are you buying here?
+1:10 What does Power BI do for you?
+2:40 What is Fabric, and do you need it yet?
+4:10 Where does Azure fit, and will you ever touch it?
+5:35 Why do your two dashboards show different numbers?
+7:00 What does your team really do with all this?
+8:30 How do you keep the Fabric bill from running away?
+9:55 What should you decide on Monday?</p><p>Quick recap: Power BI is the reports people look at. Fabric is the all-in-one data platform underneath, right once your data is truly messy and wasteful before that. Azure is the raw Microsoft cloud both run on, and the custom route engineers pick for full control. Your dashboards disagree because of definitions, not software. Under every trustworthy report sits a data model your team builds, and you can demand proof it works. And capacity billing charges by the hour the meter runs, so right-size it before the invoice surprises you. If you want to know where your own setup stands, run the free Governance and Cost Scorecard, and book a scoping call with CaseWhen when your numbers won&#x27;t reconcile.</p><p>#PowerBI #MicrosoftFabric #Azure #DataGovernance #BusinessIntelligence</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

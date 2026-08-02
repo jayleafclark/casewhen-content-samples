@@ -1,0 +1,206 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Row-Level Security in Power BI erklärt: was sie ist und wann</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p>#### [0:48-2:10] VALUE BEAT 1 (Chapter 2: Was macht Row-Level Security in Power BI überhaupt?)
+CLAIM (spoken, flach):
+&gt; &quot;Row-Level Security filtert Zeilen, nicht Berichte. Jede Person öffnet dieselbe Datei und bekommt trotzdem nur ihre eigenen Zeilen.&quot;</p><p>(ON-SCREEN: Claim als Textkarte)</p><p>PROOF (CUSTOM ANIMATION des Mechanismus):
+&gt; &quot;Sehen Sie sich an, was im Modell passiert. Wir haben eine Faktentabelle mit Umsatz und eine Dimension mit Regionen. Ohne RLS läuft jede Abfrage über die volle Tabelle. Schalten wir eine Rolle &#x27;Nord&#x27; ein, legt Power BI vor jede Abfrage dieser Person einen unsichtbaren Filter: Region gleich Nord. Der Filter sitzt an der Dimension und fließt über die Beziehung nach unten auf den Fakt. Die Person sieht dieselben Kacheln, dieselben Measures, nur eben auf ihren Zeilen gerechnet.&quot;</p><p>(MODALITY: Custom Animation. Sternschema: Faktentabelle in der Mitte, Regions-Dimension oben. Ein Filter-Chip &quot;Region = Nord&quot; dockt an die Dimension an, ein grüner Pfeil pulsiert entlang der 1-zu-viele-Beziehung nach unten, die nicht passenden Zeilen im Fakt werden ausgegraut. Marke #1D967C für den aktiven Filterpfad.)
+(ON-SCREEN: Label &quot;1-zu-viele-Beziehung&quot; am Pfeil, Label &quot;unsichtbarer Zeilenfilter&quot; am Chip)</p><p>PAYOFF (spoken):
+&gt; &quot;Der erste Merksatz für heute: RLS ist ein Filter, der an einer Beziehung entlangfließt. Wenn keine Beziehung zur gesicherten Dimension führt, filtert nichts. Merken Sie sich das, wir kommen darauf zurück.&quot;</p><p>(MODALITY: On-Screen Kinetic Type)
+(ON-SCREEN: nummerierte Karte &quot;Takeaway 1: RLS filtert entlang einer Beziehung. Kein Pfad, kein Schutz.&quot;)</p><p>RE-HOOK (spoken):
+&gt; &quot;So weit die Theorie. Bauen wir die erste Rolle wirklich, das dauert keine fünf Minuten.&quot;</p><p>#### [2:10-3:45] VALUE BEAT 2 (Chapter 3: Wie baue ich meine erste Rolle in fünf Minuten?)
+CLAIM (spoken):
+&gt; &quot;Eine feste Rolle ist ein Tabellenname und eine Zeile DAX. Mehr braucht der Anfang nicht.&quot;</p><p>(ON-SCREEN: Claim als Textkarte)</p><p>PROOF (SCREEN-RECORD echte Power-BI-Desktop-Aktion):
+&gt; &quot;Wir gehen im Menü auf Modellierung, dann Rollen verwalten. Ich lege eine Rolle an und nenne sie Nord. Ich klicke auf die Tabelle Region und schreibe als Filter: Region gleich Anführungszeichen Nord Anführungszeichen. Speichern. Jetzt der wichtige Teil, den viele auslassen: testen, bevor irgendetwas live geht. Ich gehe auf &#x27;Als Rollen anzeigen&#x27;, wähle Nord, und der ganze Bericht rechnet sofort nur noch mit Nord-Zeilen. Veröffentliche ich das in den Service, weise ich die Personen unter den Sicherheitseinstellungen des semantischen Modells der Rolle zu. Ohne diese Zuweisung passiert nichts.&quot;</p><p>(MODALITY: Bildschirmaufnahme Power BI Desktop. Cursor-Spotlight auf: Modellierung, Rollen verwalten, DAX-Feld, Als Rollen anzeigen. Danach kurzer Schnitt in den Power BI Service auf &quot;Sicherheit&quot;.)
+(ON-SCREEN: Lower-Third mit dem DAX-Ausdruck [Region] = &quot;Nord&quot;; Callout-Box &quot;Testen: Als Rollen anzeigen&quot;)
+(Sichtbarer Wechsel alle 5-8 s: Zoom-Punch auf das DAX-Feld, dann auf die Umschaltung der Zahlen, dann Schnitt in den Service)</p><p>PAYOFF (spoken):
+&gt; &quot;Takeaway zwei: Eine Rolle ist erst fertig, wenn Sie sie mit &#x27;Als Rollen anzeigen&#x27; gesehen haben und die Personen im Service zugewiesen sind. Rolle ohne Zuweisung schützt niemanden.&quot;</p><p>(MODALITY: On-Screen Kinetic Type)
+(ON-SCREEN: nummerierte Karte &quot;Takeaway 2: Rolle bauen, mit &#x27;Als Rollen anzeigen&#x27; testen, im Service zuweisen.&quot;)</p><p>RE-HOOK (spoken):
+&gt; &quot;Eine feste Rolle für Nord ist einfach. Jetzt stellen Sie sich zwölf Regionen vor, mit Wechseln jeden Monat. Genau da hört der einfache Weg auf.&quot;</p><p>#### [3:45-5:30] VALUE BEAT 3 (Chapter 4: Warum lege ich nicht einfach eine Rolle pro Abteilung an?)
+CLAIM (spoken):
+&gt; &quot;Eine Rolle pro Abteilung skaliert nicht. Bei zwölf Regionen und ständigen Wechseln pflegen Sie zwölf DAX-Filter von Hand, und einer ist immer veraltet.&quot;</p><p>(ON-SCREEN: Claim als Textkarte)</p><p>PROOF (SCREEN-RECORD plus kurze Animation der Zuordnung):
+&gt; &quot;Der saubere Weg heißt dynamische RLS. Ich füge eine kleine Zuordnungstabelle ins Modell ein, nennen wir sie Nutzerzuordnung, mit zwei Spalten: E-Mail und Region. Eine Zeile pro Person. Diese Tabelle verbinde ich über die Spalte Region mit der Regions-Dimension. Jetzt brauche ich nur noch eine einzige Rolle, ganz ohne festen Regionsnamen. Der Filter lautet: E-Mail gleich USERPRINCIPALNAME von Klammer zu. USERPRINCIPALNAME gibt die Anmelde-Adresse der angemeldeten Person zurück. Die Tabelle filtert sich damit auf genau die eine Zeile dieser Person, und diese Zeile bestimmt die Region.&quot;</p><p>(MODALITY: Bildschirmaufnahme. Neue Tabelle im Datenbereich, Beziehung ziehen im Modellansicht-Canvas. Dann kurze Custom Animation: eine Person meldet sich an, ihre E-Mail leuchtet in der Zuordnungstabelle auf, die passende Region wird markiert.)
+(ON-SCREEN: DAX als Lower-Third [Email] = USERPRINCIPALNAME(); Label &quot;Zuordnungstabelle: E-Mail zu Region&quot;)</p><p>PAYOFF (spoken):
+&gt; &quot;Takeaway drei: Ab drei, vier festen Rollen wechseln Sie auf eine Zuordnungstabelle und USERPRINCIPALNAME. Eine Rolle, gepflegt wird nur noch eine Tabelle, nicht mehr der DAX.&quot;</p><p>(MODALITY: On-Screen Kinetic Type)
+(ON-SCREEN: nummerierte Karte &quot;Takeaway 3: Dynamische RLS. Eine Rolle, eine Zuordnungstabelle, USERPRINCIPALNAME.&quot;)</p><p>RE-HOOK (spoken):
+&gt; &quot;Klingt fertig. Ist es oft nicht. Bei den meisten Teams läuft genau dieser Aufbau, und trotzdem sieht jede Person alles. Warum, das ist der wichtigste Teil des Videos.&quot;</p><p>#### [5:30-7:15] VALUE BEAT 4 (Chapter 5: Warum filtert meine dynamische Rolle trotzdem nichts?)
+CLAIM (spoken):
+&gt; &quot;Wenn dynamische RLS nicht greift, liegt es fast immer an der Richtung der Beziehung. Der Filter muss von der Zuordnungstabelle zum Fakt fließen, und nur dorthin.&quot;</p><p>(ON-SCREEN: Claim als Textkarte)</p><p>PROOF (CUSTOM ANIMATION der Filterausbreitung):
+&gt; &quot;Schauen wir auf die Pfeile im Modell. Die Zuordnungstabelle steht auf der Eins-Seite, die Regions-Dimension bekommt den Filter über die Beziehung. Von der Dimension muss er weiter auf den Fakt. Wenn diese zweite Beziehung in die falsche Richtung zeigt oder die Zuordnungstabelle gar nicht bis zum Fakt durchreicht, bleibt der Filter oben hängen. Ergebnis: die eine Person ist zwar sauber gefiltert, aber der Fakt bekommt nie ein Signal, und jede Zahl bleibt vollständig sichtbar. Der zweite Klassiker: Sie testen in Desktop mit Ihrem eigenen Login und wundern sich. In Desktop müssen Sie unter &#x27;Als Rollen anzeigen&#x27; auf &#x27;Anderer Benutzer&#x27; gehen und dort eine echte Anmelde-Adresse eintippen, sonst prüft USERPRINCIPALNAME ins Leere.&quot;</p><p>(MODALITY: Custom Animation. Vollständiges Sternschema. Erst falscher Fall: der grüne Filterpfeil läuft von der Zuordnungstabelle zur Dimension und stoppt dort an einer Beziehung, deren Pfeilspitze in die falsche Richtung zeigt, der Fakt bleibt hell. Dann richtiger Fall: die Beziehung dreht, der Pfeil fließt bis zum Fakt durch, nicht passende Zeilen grauen aus.)
+(ON-SCREEN: Label &quot;Filter stoppt hier&quot; am falschen Pfeil; danach &quot;Anderer Benutzer: echte Anmelde-Adresse eintragen&quot;)
+(Sichtbarer Wechsel: Umschalten falsch zu richtig als harter Cut mit kurzem Zoom auf die drehende Beziehung)</p><p>PAYOFF (spoken):
+&gt; &quot;Takeaway vier: Bevor Sie an DAX zweifeln, prüfen Sie die Beziehungsrichtung von der Zuordnungstabelle bis zum Fakt, und testen Sie in Desktop immer als anderer Benutzer mit echter Adresse.&quot;</p><p>(MODALITY: On-Screen Kinetic Type)
+(ON-SCREEN: nummerierte Karte &quot;Takeaway 4: Erst Beziehungsrichtung prüfen, dann DAX. Als anderer Benutzer testen.&quot;)</p><p>RE-HOOK (spoken):
+&gt; &quot;Gut. Die Richtung stimmt, eine Person, eine Zeile. Aber was, wenn dieselbe Person in zwei Rollen steht?&quot;</p><p>#### [7:15-8:45] VALUE BEAT 5 (Chapter 6: Was passiert, wenn ein Nutzer in zwei Rollen steckt?)
+CLAIM (spoken):
+&gt; &quot;Mehrere Rollen addieren sich. Power BI verbindet sie mit Oder, nicht mit Und. Wer in zwei Rollen steht, sieht die Summe aus beiden.&quot;</p><p>(ON-SCREEN: Claim als Textkarte)</p><p>PROOF (DATA-VIZ plus kurze Animation der Mengen):
+&gt; &quot;Nehmen wir eine Person, die sowohl in der Rolle Nord als auch in der Rolle Süd steht. Viele erwarten, dass sich das gegenseitig einschränkt. Das Gegenteil passiert. Die Sicht ist Nord plus Süd, beide Regionen zusammen. Genau hier entstehen die stillen Überschreitungen: jemand wird für ein zweites Projekt kurz einer weiteren Rolle zugewiesen, die Zuweisung bleibt, und Monate später sieht diese Person mehr, als irgendjemand geplant hat. Deshalb prüfe ich im Service regelmäßig, wer in welcher Rolle hängt, und räume alte Zuweisungen weg.&quot;</p><p>(MODALITY: Data-Viz. Zwei Mengenkreise Nord und Süd, die Sicht der Person füllt beide vollständig, ein Zähler zeigt, wie die sichtbaren Zeilen von Nord auf Nord plus Süd springen. Danach kurzer Schnitt in die Rollen-Mitgliederliste im Service.)
+(ON-SCREEN: Label &quot;Zwei Rollen = Oder-Verknüpfung&quot;; Callout &quot;Alte Zuweisungen regelmäßig prüfen&quot;)</p><p>PAYOFF (spoken):
+&gt; &quot;Takeaway fünf: Mehrere Rollen sind eine Oder-Verknüpfung. Weisen Sie sparsam zu und räumen Sie alte Rollen-Mitgliedschaften aktiv weg, sonst wächst die Sicht still mit.&quot;</p><p>(MODALITY: On-Screen Kinetic Type)
+(ON-SCREEN: nummerierte Karte &quot;Takeaway 5: Mehrere Rollen addieren sich (Oder). Zuweisungen regelmäßig aufräumen.&quot;)</p><p>RE-HOOK (spoken):
+&gt; &quot;Und jetzt die Stelle, die ich Ihnen am Anfang versprochen habe. Selbst wenn alles davon sauber sitzt, gibt es eine Einstellung, die Zeilen wieder freigibt.&quot;</p><p>#### [8:45-10:45] OPEN-LOOP PAYOFF (Chapter 7: Wo leckt RLS, obwohl sie eingerichtet ist?)
+CLAIM (spoken):
+&gt; &quot;Der häufigste Leck-Punkt heißt bidirektionale Filterung. Sie schalten sie ein, damit ein Slicer über zwei Tabellen hinweg funktioniert, und öffnen damit einen Weg, auf dem Zeilen zurück nach oben wandern.&quot;</p><p>(ON-SCREEN: Claim als Textkarte)</p><p>PROOF (CUSTOM ANIMATION des Lecks, danach Bildschirmaufnahme der Einstellung):
+&gt; &quot;So sieht das aus. Ihre RLS filtert die Regions-Dimension. Daneben hängt eine zweite Dimension, sagen wir Produkte, verbunden über den Fakt. Steht die Beziehung zwischen Fakt und Produkten auf bidirektional, kann der Filter am Fakt vorbei den Rückweg nehmen und Kombinationen sichtbar machen, die zu einer fremden Region gehören. Power BI warnt Sie dabei nicht laut. Es gibt für genau diesen Fall ein Häkchen namens &#x27;Sicherheitsfilter in beide Richtungen anwenden&#x27;. Ist es nicht gesetzt, verlassen Sie sich auf eine Absicherung, die gar nicht aktiv ist. Und der zweite blinde Fleck: jede Tabelle, die keine Beziehung zur gesicherten Dimension hat, ist für alle voll sichtbar. Eine losgelöste Kalender- oder Ziel-Tabelle mit sensiblen Werten schützt Ihre RLS überhaupt nicht, weil kein Filterpfad zu ihr führt. Das ist derselbe Merksatz von Minute eins: kein Pfad, kein Schutz.&quot;</p><p>(MODALITY: Custom Animation. Modell mit zwei Dimensionen am Fakt. Eine bidirektionale Beziehung wird als Doppelpfeil dargestellt, ein roter Filterpfad läuft vom Fakt zurück nach oben und eine fremde Zeile leuchtet wieder auf. Danach Bildschirmaufnahme: das Beziehungsdialogfeld mit dem Häkchen &quot;Sicherheitsfilter in beide Richtungen anwenden&quot;.)
+(ON-SCREEN: Label &quot;Leck: bidirektionale Filterung&quot;; danach Rahmen um das Häkchen im Dialog; separate Karte &quot;Tabelle ohne Beziehung = für alle sichtbar&quot;)
+(Sichtbarer Wechsel: langsamer, ruhiger Schnitt auf dieser Kernaussage, ein einziger Take auf &quot;kein Pfad, kein Schutz&quot;)</p><p>PAYOFF (spoken):
+&gt; &quot;Das ist die Einstellung, die die meisten Teams nie finden. Zwei Dinge nehmen Sie mit: bidirektionale Filter nur mit gesetztem Sicherheitsfilter, und jede sensible Tabelle braucht einen Beziehungspfad zur gesicherten Dimension, sonst liegt sie offen.&quot;</p><p>(MODALITY: Talking Head, ruhig, direkt in die Kamera)
+(ON-SCREEN: Karte &quot;Der Leck-Fix: Sicherheitsfilter beidseitig setzen. Keine losgelösten sensiblen Tabellen.&quot;)</p><p>RE-HOOK (spoken):
+&gt; &quot;Bleibt eine Frage: Woher wissen Sie, dass wirklich alles dicht ist, bevor Sie auf Veröffentlichen klicken?&quot;</p><p>#### [10:45-11:45] PAYOFF: RECAP (Chapter 8: Was prüfe ich, bevor ich das veröffentliche?)
+SAJU (spoken):
+&gt; &quot;Fassen wir zusammen, damit Sie das heute Nachmittag anwenden können. Erstens: RLS filtert entlang einer Beziehung, kein Pfad bedeutet kein Schutz. Zweitens: Rolle bauen, mit &#x27;Als Rollen anzeigen&#x27; testen, im Service zuweisen. Drittens: ab drei, vier Rollen auf dynamische RLS mit Zuordnungstabelle und USERPRINCIPALNAME wechseln. Viertens: greift es nicht, zuerst die Beziehungsrichtung prüfen und immer als anderer Benutzer testen. Fünftens: mehrere Rollen addieren sich mit Oder, also sparsam zuweisen und aufräumen. Und der Punkt darüber hinaus: bidirektionale Filter sind der stille Leck-Punkt, setzen Sie den Sicherheitsfilter beidseitig und lassen Sie keine sensible Tabelle ohne Beziehung liegen.&quot;</p><p>(MODALITY: On-Screen Kinetic Type, die fünf Takeaways plus der Leck-Fix als Liste, jede Zeile ploppt einzeln)
+(ON-SCREEN: vollständige nummerierte Recap-Liste, bleibt am Bildschirm stehen)</p><p>PRÜF-CHECKLISTE (spoken):
+&gt; &quot;Und die Prüfung vor Veröffentlichen ist kurz: Testen Sie jede Rolle einzeln über &#x27;Als Rollen anzeigen&#x27;, dann eine Kombination aus zwei Rollen, dann eine Tabelle, von der Sie glauben, sie sei geschützt. Wenn dort für einen fremden Nutzer Zahlen auftauchen, haben Sie ein Leck gefunden, bevor Ihre Kunden es tun.&quot;</p><p>(MODALITY: B-Roll, Hände am Laptop, danach kurzer Schnitt auf den &#x27;Als Rollen anzeigen&#x27;-Dialog)
+(ON-SCREEN: Karte &quot;Vor dem Veröffentlichen: einzeln testen, kombiniert testen, ungeschützte Tabellen testen&quot;)</p><p>#### [11:45-12:45] SOFT CTA (Chapter 8 fortgeführt)
+SAJU (spoken):
+&gt; &quot;Wenn Sie kurz einschätzen wollen, wie sicher und sauber Ihr Power-BI-Setup gerade wirklich ist: Wir haben eine kostenlose Governance- und Kosten-Scorecard, fünf Minuten, danach sehen Sie Ihren Wert, einen Vergleich zu anderen Teams und die drei größten Risiken in Ihrem Aufbau. Der Link liegt in der Beschreibung. Und wenn bei Ihnen genau diese Fragen offen sind, wer welche Zeilen sehen darf und ob die Absicherung hält, dann ist das der Punkt, an dem wir bei CaseWhen mit einem Governance-Assessment reingehen. Kein Pitch, ein Gespräch. Schreiben Sie uns über den Link, und wir schauen gemeinsam auf Ihr Modell.&quot;</p><p>(MODALITY: Talking Head, ruhig, danach Endkarte)
+(ON-SCREEN: Link-Karte &quot;Kostenlose Governance- und Kosten-Scorecard&quot; und darunter &quot;Governance-Assessment mit CaseWhen anfragen&quot;)</p><p>WATCH-NEXT (spoken):
+&gt; &quot;Wenn RLS bei Ihnen langsam wird, sobald echte Datenmengen kommen, schauen Sie als Nächstes in das Video zum sauberen Sternschema. Dort liegt die halbe Miete für sichere und schnelle Berichte. Bis dahin, viel Erfolg beim Aufräumen Ihrer Rollen.&quot;</p><p>(MODALITY: Endkarte mit Video-Empfehlung)
+(ON-SCREEN: Watch-Next-Kachel &quot;Sternschema in Power BI&quot;, Kanal-Abo-Zeile schlicht)</p><h2>Description</h2><p>Row-Level Security in Power BI erklärt: was RLS ist, wie du dynamische Rollen mit USERPRINCIPALNAME baust und an welchen drei Stellen sie bei den meisten still versagt.</p><p>Kostenlose Governance- und Kosten-Scorecard (5 Minuten): https://casewhen.co/scorecard
+Mit CaseWhen arbeiten (Governance-Assessment): https://casewhen.co/governance</p><p>Kapitel:
+0:00 Warum sehen plötzlich alle Nutzer alle Zahlen?
+0:48 Was macht Row-Level Security in Power BI überhaupt?
+2:10 Wie baue ich meine erste Rolle in fünf Minuten?
+3:45 Warum lege ich nicht einfach eine Rolle pro Abteilung an?
+5:30 Warum filtert meine dynamische Rolle trotzdem nichts?
+7:15 Was passiert, wenn ein Nutzer in zwei Rollen steckt?
+8:45 Wo leckt RLS, obwohl sie eingerichtet ist?
+10:45 Was prüfe ich, bevor ich das veröffentliche?</p><p>Ressourcen:
+Governance- und Kosten-Scorecard: https://casewhen.co/scorecard
+Nächstes Video, Sternschema in Power BI: https://casewhen.co/youtube
+Microsoft-Doku zu RLS: https://learn.microsoft.com/power-bi</p><p>In diesem Video baust du Row-Level Security in Power BI von Grund auf: von der ersten festen Rolle über dynamische RLS mit einer Nutzer-Zuordnungstabelle und USERPRINCIPALNAME bis zu den Punkten, an denen RLS in der Praxis leckt. Du siehst, warum eine falsche Beziehungsrichtung die Filterausbreitung stoppt, warum sich mehrere Rollen mit Oder addieren, und warum bidirektionale Filterung der häufigste Leck-Punkt ist. Am Ende bekommst du eine kurze Prüf-Checkliste, mit der du jede Rolle testest, bevor der Bericht live geht. Power BI RLS ist kein Häkchen, sondern ein sauberer Beziehungspfad plus die richtige Prüfung.</p><p>#PowerBI #RowLevelSecurity #MicrosoftFabric #DataGovernance #PowerBITutorial</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

@@ -1,0 +1,204 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Row-Level Security in Power BI: Static and Dynamic, Built in</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p>### [0:45-2:15] BEAT 1: What is row-level security really doing? (animation)
+CLAIM (on-screen card): &quot;RLS filters rows at the model, before any visual draws.&quot;
+PROOF (MODALITY: custom animation, RLS mechanism from the brand library):
+- A Sales fact table sits center, rows tagged Nord, Sued, West, Ost.
+- User A signs in. Their identity token slides in from the left and clamps onto the Region column. Sued, West and Ost rows fade to grey and drop away. Only Nord rows stay lit and flow up into the bar chart above.
+- User B signs in. Nord drops, a different set survives, the same chart redraws to new numbers.
+- Colour: brand green #1D967C for the surviving rows, neutral grey for the filtered-out rows. No stock network-globe visuals.
+PAYOFF (on-screen numbered takeaway): &quot;Takeaway 1: RLS is a row filter tied to who&#x27;s logged in. Hiding a page still ships the data sitting underneath it.&quot;
+RE-HOOK: &quot;So where does that filter get written. It lives in something called a role →&quot;</p><p>### [2:15-4:00] BEAT 2: How do I build static RLS with roles? (screen-record)
+CLAIM (on-screen card): &quot;A static role is a fixed filter you write once, then assign people to.&quot;
+PROOF (MODALITY: screen-record, Power BI Desktop, real cursor):
+- Modeling tab, click Manage roles.
+- Create a role, call it &quot;Nord&quot;. Pick the Region table. Write the DAX filter: [Region] = &quot;Nord&quot;.
+- Create a second role &quot;Sued&quot; with [Region] = &quot;Sued&quot;. Show the two roles listed.
+- Save, then Home, Publish to the Service.
+- Cut to the Service: open the dataset, Security, drop a user&#x27;s email into the Nord role.
+(VISIBLE CHANGE ~6s: cursor zoom on the DAX box, then a callout box circling the Security assignment screen.)
+PAYOFF (on-screen numbered takeaway): &quot;Takeaway 2: one role equals one filter. Build a role per group, then drop the right people into each role in the Service.&quot;
+RE-HOOK: &quot;That&#x27;s clean for four regions. Now picture four hundred sales reps →&quot;</p><p>### [4:00-5:30] BEAT 3: Why does one role per person fall apart? (animation)
+CLAIM (on-screen card): &quot;A role per person doesn&#x27;t scale, and it rots the day someone changes teams.&quot;
+PROOF (MODALITY: custom animation):
+- Three role cards on screen. They multiply, 3 to 30 to 300, each card needing a manual hand-assignment in the Service. The pile gets visibly unmanageable.
+- One person icon moves from Nord to Sued. A red tag pops: &quot;manual edit needed&quot;. Then a second red tag: &quot;who owns this?&quot;.
+- Cut to a single card labelled &quot;Dynamic role&quot; that reads from a small table. One card, green.
+PAYOFF (on-screen numbered takeaway): &quot;Takeaway 3: if you&#x27;re writing a role per person, stop. You want one role that looks up the user while the report runs.&quot;
+RE-HOOK: &quot;That lookup is one function, and it&#x27;s already in your model →&quot;</p><p>### [5:30-7:30] BEAT 4: How do I make it dynamic with USERPRINCIPALNAME? (screen-record)
+CLAIM (on-screen card): &quot;Dynamic RLS uses the logged-in email to filter, from a small mapping table.&quot;
+PROOF (MODALITY: screen-record, Power BI Desktop):
+- Show a mapping table called UserRegion with two columns: UserEmail and Region. A few rows of real-looking emails mapped to Nord, Sued and so on.
+- Modeling, Manage roles. Create one role called &quot;Dynamic&quot;. Filter the UserRegion table with: [UserEmail] = USERPRINCIPALNAME().
+- Cut to Model view. Show the relationship going from UserRegion to the region column and on down to the Sales fact, so the filter flows one-to-many toward Sales. Show the arrow direction.
+- Publish. In the Service, assign every user to the single Dynamic role.
+(VISIBLE CHANGE ~6s: zoom on the USERPRINCIPALNAME() line, then a marker sweeping the relationship arrow in Model view.)
+PAYOFF (on-screen numbered takeaway): &quot;Takeaway 4: one role, filter [UserEmail] = USERPRINCIPALNAME(), backed by a mapping table you update without opening the model. Add a person as a row and you&#x27;re done.&quot;
+RE-HOOK: &quot;This is also the exact spot where it silently leaks. Two ways →&quot;</p><p>### [7:30-9:30] BEAT 5: Why is my RLS leaking or showing nothing? (data-viz)
+CLAIM (on-screen card): &quot;Almost every RLS breakdown is a relationship direction or a missing mapping row.&quot;
+PROOF (MODALITY: animated data-viz / diagram, the two cases side by side):
+- Leak case: the relationship between UserRegion and the fact points the wrong way, so the filter never reaches Sales. The report shows every row for everyone. Show the arrow, then flip its direction, and watch the rows clamp down to the correct set.
+- Empty case: the logged-in email isn&#x27;t in the UserRegion table. The filter matches zero rows and the whole report goes blank. Show the email miss, then the blank canvas, then add the row and the report fills back in.
+- Add the snowflake gotcha: on a longer dimension path the filter can stall one table short of the fact. Show it stopping, then reaching.
+PAYOFF (on-screen numbered takeaway): &quot;Takeaway 5: if a report shows everything, the filter isn&#x27;t reaching the fact table. If it shows nothing, the user&#x27;s email is missing from the mapping. Those two cover most leaks.&quot;
+RE-HOOK: &quot;Which is why you never ship RLS you haven&#x27;t seen through the user&#x27;s own eyes →&quot;</p><p>### [9:30-11:15] BEAT 6: How do I test it before it ships? (screen-record)
+CLAIM (on-screen card): &quot;View As lets you see the report as a role or as a specific person before anyone logs in.&quot;
+PROOF (MODALITY: screen-record, Power BI Desktop then Service):
+- Desktop: Modeling, View as. Tick the Dynamic role, then type a real user&#x27;s email into the &quot;Other user&quot; box. The report re-renders to that person&#x27;s rows in place.
+- Switch the email to a second region. The rows change again. You&#x27;re seeing exactly what they&#x27;ll see.
+- Cut to the Service: dataset, Security, use &quot;Test as role&quot; on the same role to confirm it behaves live.
+(VISIBLE CHANGE ~5s: cursor zoom on the &quot;Other user&quot; field, then a side-by-side of two emails giving two row sets.)
+PAYOFF (on-screen numbered takeaway): &quot;Takeaway 6: before you publish, View As every role and at least one real email per region. If the rows are wrong here, they&#x27;re wrong in production.&quot;
+RE-HOOK: &quot;Do that, and the two-login demo from the very start just works →&quot;</p><p>### [11:15-12:15] PAYOFF: recap + pay off the open loop (on-screen text / kinetic)
+Spoken: &quot;Quick recap, and this is the whole thing. RLS filters rows by who&#x27;s logged in. A static role is one fixed filter. A role per person doesn&#x27;t scale. Dynamic RLS is one role filtering on USERPRINCIPALNAME against a mapping table. Leaks are almost always a relationship that doesn&#x27;t reach the fact table, or an email missing from the mapping. And you check every role with View As and a real email before you publish. That View As step is the leak-catcher I promised at the start. Run it for one real person per region and a leak can&#x27;t reach production.&quot;
+(MODALITY: kinetic type. The six takeaways stack on screen as a numbered list, each line snapping in as it&#x27;s spoken, brand green accents.)
+(ON-SCREEN: &quot;The 6 RLS rules&quot; list, all visible by the end.)</p><p>### [12:15-13:00] SOFT CTA (talking head)
+Spoken: &quot;The finished .pbix from this build, both roles wired up, is linked below, along with a free Power BI Governance and Cost Scorecard. It&#x27;s a five-minute check that scores where your reports are exposed and hands you your top three risks. If your team&#x27;s carrying RLS across a lot of workspaces and you want a second set of eyes, request a governance assessment from us. Link&#x27;s in the description, no pitch, just a look at your real setup. Next video takes dynamic RLS further, more than one role landing on the same user, which is where it gets tricky.&quot;
+(MODALITY: talking head, steady single shot on the core line.)
+(ON-SCREEN: three link cards in sequence: &quot;RLS .pbix&quot; / &quot;Governance &amp; Cost Scorecard&quot; / &quot;Request a governance assessment&quot;.)
+(ON-SCREEN: one plain subscribe line, no &quot;smash like&quot;.)</p><h2>Description
+Row-level security in Power BI, done properly: build static roles and dynamic RLS with USERPRINCIPALNAME on one model, and find the leaks before your users do.</h2><p>Free RLS .pbix + Power BI Governance &amp; Cost Scorecard: [link]
+Work with CaseWhen (request a governance assessment): [link]</p><p>0:00 Can two people open the same report and see different rows?
+0:45 What is row-level security really doing?
+2:15 How do I build static RLS with roles?
+4:00 Why does one role per person fall apart?
+5:30 How do I make it dynamic with USERPRINCIPALNAME?
+7:30 Why is my RLS leaking or showing nothing?
+9:30 How do I test it before it ships?
+11:15 What do I actually do Monday?</p><p>This is a full row level security Power BI build, static and dynamic. Static RLS is a fixed filter written into a role and assigned to people in the Power BI Service. Dynamic RLS uses one role that filters a mapping table with USERPRINCIPALNAME(), so the logged-in email decides which rows show, with no role-per-person maintenance. We cover the two failures that cause most RLS leaks, a relationship that doesn&#x27;t reach the fact table and an email missing from the mapping table, and how to catch them with View As before you publish. Works the same in Power BI and in a Fabric semantic model.</p><p>#PowerBI #RowLevelSecurity #DataGovernance #MicrosoftFabric #PowerBITutorial</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

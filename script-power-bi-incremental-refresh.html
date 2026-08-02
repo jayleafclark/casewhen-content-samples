@@ -1,0 +1,247 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Power BI Incremental Refresh Explained: Stop Reloading Your</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Power BI Incremental Refresh Explained: Stop Reloading Your Whole History (in 14 Minutes)
+Host: Austin · Cluster: governance-reliability · Target: 14 min · Primary keyword: power bi incremental refresh</p><h2>Chapters
+- 0:00 Why does my refresh reload all my history every time?
+- 1:20 What is incremental refresh really doing under the hood?
+- 3:05 Why does Power BI need RangeStart and RangeEnd?
+- 4:50 How do I turn incremental refresh on, step by step?
+- 6:55 Why is my dataflow still re-importing everything?
+- 9:00 How do I refresh only the rows that changed?
+- 10:35 How do I prove it really worked?
+- 12:05 So what do I do on Monday?</h2><h2>Script</h2><p>[0:00-0:14] HOOK (blunt callout)
+(MODALITY: screen-record - refresh history pane, a stack of 40-plus minute refreshes, cursor circling the duration column)
+(ON-SCREEN: keyword card &quot;POWER BI INCREMENTAL REFRESH&quot;)
+Austin: &quot;Your Power BI refresh takes 40 minutes because every single run re-imports your entire history, five years of rows you already loaded yesterday. You only added one day of data. You&#x27;re reloading all five years to get it.&quot;</p><p>[0:14-0:42] PROMISE + STAKES + OPEN LOOP
+(MODALITY: talking head, slow single shot on the promise line, one zoom-punch on &quot;ten days&quot;)
+(ON-SCREEN: lower-third &quot;Refresh 5 years of history -&gt; refresh 10 days&quot;)
+Austin: &quot;By the end of this you&#x27;ll have incremental refresh set up so Power BI only reprocesses the last few days, and you&#x27;ll understand exactly why it speeds things up. The cost of leaving it off is real. Long refresh windows, timeouts during business hours, and a report that&#x27;s stale when someone opens it in a meeting. Gartner puts poor data quality at 12.9 million dollars a year for the average org, and a report nobody trusts because it&#x27;s always behind is part of that bill.&quot;
+(MODALITY: on-screen text)
+(ON-SCREEN: &quot;OPEN LOOP -&gt; the one dataflow setting that makes incremental refresh pull all your history anyway&quot;)
+Austin: &quot;And near the end I&#x27;ll show you the one dataflow setting that makes incremental refresh pull all your history anyway, even after you switch it on. We set this up for BI teams in Berlin every week, so the next 14 minutes are the version that works on real data. Let&#x27;s set it up.&quot;</p><p>[1:20-3:05] VALUE BEAT 1 - what incremental refresh is doing
+(MODALITY: on-screen text - CLAIM card)
+(ON-SCREEN: &quot;Incremental refresh splits your table into date partitions and only reprocesses the recent ones.&quot;)
+Austin: &quot;Here&#x27;s the whole idea in one sentence. Incremental refresh cuts your big table into slices by date, and on each refresh it only reprocesses the newest slices.&quot;
+(MODALITY: custom animation)
+(ANIMATION: the &quot;incremental refresh partitions&quot; library asset. A wide fact table, 20 million rows, splits into vertical partitions labelled by year and then by day: 2021, 2022, 2023, 2024, then Jan, Feb... down to the last 10 days. On the FIRST refresh, every partition lights up in #1D967C and processes once. On the SECOND refresh, the old partitions go grey and cold and stay untouched. Only the last 10 daily partitions light up and reprocess. A counter shows &quot;Rows read: 20,000,000&quot; on a full reload, then drops to &quot;Rows read: 60,000&quot; on the incremental run.)
+Austin: &quot;First refresh, Power BI loads everything once and builds the partitions. That one&#x27;s slow, and that&#x27;s expected. Every refresh after that, the archive partitions sit cold. Power BI never touches them again. It only reads the last few days, so instead of 20 million rows it reads 60 thousand. Same report, a fraction of the work.&quot;
+(MODALITY: on-screen text - PAYOFF takeaway)
+(ON-SCREEN: &quot;TAKEAWAY 1 - Old data doesn&#x27;t change, so stop reloading it. Reprocess only recent partitions.&quot;)
+Austin: &quot;So takeaway one. Last year&#x27;s sales are done. They don&#x27;t change. There&#x27;s no reason to read them again, and incremental refresh is how you tell Power BI to leave them alone.&quot;
+Austin: &quot;But Power BI won&#x27;t just guess which rows are recent. You have to hand it two dates. Here&#x27;s how that works.&quot;</p><p>[3:05-4:50] VALUE BEAT 2 - why it needs RangeStart and RangeEnd
+(MODALITY: screen-record - Power Query editor, Manage Parameters dialog, creating RangeStart and RangeEnd as Date/Time)
+(ON-SCREEN: &quot;CLAIM - Two datetime parameters, RangeStart and RangeEnd, tell Power BI which window to load.&quot;)
+Austin: &quot;Incremental refresh runs on two parameters with exact names. RangeStart and RangeEnd, both Date/Time. You create them in Power Query, then you filter your date column to sit between them. That filter is the whole trick.&quot;
+(MODALITY: custom animation)
+(ANIMATION: query-folding animation. Left: the Power BI semantic model box. Right: a source database cylinder. A filter chip &quot;OrderDate &gt;= RangeStart AND OrderDate &lt; RangeEnd&quot; starts inside Power BI. In the GOOD path it slides DOWN into the database and rewrites as a SQL WHERE clause; the database returns only the matching rows, a thin stream. In the BAD path the filter stays stuck inside Power BI; the database sends the ENTIRE table up the wire, a fat stream, and Power BI filters after the fact. Label the good path &quot;Query folding ON&quot;, the bad path &quot;Query folding OFF - still reads everything&quot;.)
+Austin: &quot;When your source can fold, and that&#x27;s SQL Server, Azure SQL, Synapse, most proper databases, Power BI pushes that date filter all the way down to the source as a WHERE clause. The database sends back only the recent rows. That&#x27;s what makes it fast. When the source can&#x27;t fold, the filter runs inside Power BI after it&#x27;s already pulled the whole table. You get partitions, but you still read everything. Query folding is the part that does the actual saving.&quot;
+(MODALITY: on-screen text - PAYOFF takeaway)
+(ON-SCREEN: &quot;TAKEAWAY 2 - No query folding, no real speed-up. Check View Native Query on your last step.&quot;)
+Austin: &quot;Takeaway two. Before you trust incremental refresh, right-click your last step in Power Query and look for View Native Query. If it&#x27;s greyed out, folding stopped somewhere, and you need to find where. That one check saves people days.&quot;
+Austin: &quot;Alright. Parameters and folding sorted. Now let&#x27;s really switch it on.&quot;</p><p>[4:50-6:55] VALUE BEAT 3 - setting it up step by step
+(MODALITY: screen-record - full walk-through in Power BI Desktop)
+(ON-SCREEN: &quot;CLAIM - Setup is four steps: parameters, filter, policy, publish.&quot;)
+Austin: &quot;Four steps, start to finish. Watch the screen.&quot;
+(SCREEN-RECORD, step 1) (ON-SCREEN callout: &quot;1. Create RangeStart + RangeEnd (Date/Time)&quot;) Austin: &quot;One. In Power Query, Manage Parameters, create RangeStart and RangeEnd as Date/Time. Give them any sensible default a year or two apart.&quot;
+(SCREEN-RECORD, step 2) (ON-SCREEN callout: &quot;2. Filter your date column between them&quot;) Austin: &quot;Two. On your fact table, filter the date column: is after or equal to RangeStart, and is before RangeEnd. Greater-than-or-equal on the start, strictly-less-than on the end, so no row lands in two partitions.&quot;
+(SCREEN-RECORD, step 3) (ON-SCREEN callout: &quot;3. Right-click the table -&gt; Incremental refresh&quot;) Austin: &quot;Three. Close and apply. Right-click the table in the model, pick Incremental refresh, and set two numbers. Archive data starting, say, five years before refresh date. And refresh rows in the last, say, ten days.&quot;
+(MODALITY: custom animation)
+(ANIMATION: reuse the partition animation but now with a slider UI. Dragging &quot;Archive: 5 years&quot; widens the grey cold zone; dragging &quot;Incrementally refresh: 10 days&quot; widens the green hot zone at the right edge. Show the two policies stacking: a long grey ARCHIVE band and a short green REFRESH band.)
+Austin: &quot;Those two settings are the whole policy. The archive number is how much history you keep. The refresh number is how far back you reprocess each run. Keep the refresh window a little wider than your late-arriving data, so nothing gets missed.&quot;
+(SCREEN-RECORD, step 4) (ON-SCREEN callout: &quot;4. Publish to the Service - it only works there&quot;) Austin: &quot;Four, and this is the one people miss. Publish to the Power BI Service. Incremental refresh does not run in Desktop. The first refresh in the Service builds every partition and it&#x27;s slow, once. After that, every refresh is short.&quot;
+(MODALITY: on-screen text - PAYOFF takeaway)
+(ON-SCREEN: &quot;TAKEAWAY 3 - Incremental refresh only runs in the Service, and the first refresh is a full load. That&#x27;s normal.&quot;)
+Austin: &quot;Takeaway three. Don&#x27;t panic when the first Service refresh takes as long as your old one. That&#x27;s it loading history once. Watch the second run instead.&quot;
+Austin: &quot;So that&#x27;s the clean setup on a database source. But a lot of you don&#x27;t connect to a database. You connect to a dataflow. And that&#x27;s where this goes wrong for a lot of teams.&quot;</p><p>[6:55-9:00] VALUE BEAT 4 - the dataflow re-import trap (pays off the open loop)
+(MODALITY: talking head, direct to camera, slower delivery on the problem line)
+(ON-SCREEN: lower-third &quot;Semantic model -&gt; dataflow -&gt; re-imports EVERYTHING&quot;)
+Austin: &quot;Here&#x27;s the trap, and it&#x27;s the most common one we get called in for. Your semantic model is connected to a Power BI dataflow, you set up incremental refresh on the model exactly like I just showed, and it still re-imports the entire dataflow on every run. Nothing got faster. This is that dataflow pain a lot of teams hit: the dataset connected to a dataflow isn&#x27;t doing incremental refresh, it re-imports the whole dataflow every refresh.&quot;
+(MODALITY: custom animation)
+(ANIMATION: dataflow re-import asset. A semantic model box with a date filter chip tries to fold into a dataflow store. With enhanced compute engine OFF, the filter bounces off the dataflow and the entire dataflow contents flood into the model every refresh (fat stream, &quot;reads everything&quot;). Then a toggle flips: &quot;Enhanced compute engine: On&quot;. Now the dataflow exposes a SQL-like endpoint, the date filter folds into it, and only recent rows stream through (thin stream). Caption: &quot;Folding only works if the dataflow can be queried.&quot;)
+Austin: &quot;Standard Gen1 dataflows don&#x27;t support query folding by default, so that RangeStart-RangeEnd filter has nowhere to fold into. The fix is the enhanced compute engine. On a Premium or Fabric capacity, open the dataflow settings and set the enhanced compute engine to On. That gives the dataflow a queryable endpoint the filter can fold into, and now your model&#x27;s incremental refresh pulls only recent rows. Better still, turn on incremental refresh on the dataflow itself too, so the dataflow only recomputes recent partitions before your model even asks.&quot;
+(MODALITY: on-screen text - PAYOFF takeaway)
+(ON-SCREEN: &quot;TAKEAWAY 4 - Dataflow source? Turn ON the enhanced compute engine, or folding can&#x27;t happen and you reload everything.&quot;)
+Austin: &quot;Takeaway four, and this pays off the open loop from the start. If your source is a dataflow, incremental refresh on the model alone does nothing. Turn on the enhanced compute engine on the dataflow first. That&#x27;s the one setting.&quot;
+Austin: &quot;Now, even with folding working, you can go one step further and refresh less. Let me show you how.&quot;</p><p>[9:00-10:35] VALUE BEAT 5 - detect data changes
+(MODALITY: screen-record - the Incremental refresh dialog, ticking &quot;Detect data changes&quot; and picking a column)
+(ON-SCREEN: &quot;CLAIM - Detect data changes skips partitions where nothing changed.&quot;)
+Austin: &quot;By default, incremental refresh reprocesses every partition in your refresh window, even the days where nothing moved. Detect data changes fixes that. You point it at a last-modified column, and Power BI only reprocesses a day&#x27;s partition if a row in that day really changed.&quot;
+(MODALITY: custom animation)
+(ANIMATION: partition strip of the last 10 days. Each day-partition carries a small &quot;max ModifiedDate&quot; stamp. Power BI compares the stored stamp to the current one. Eight days are unchanged and stay grey. Two days have a newer stamp and light up green and reprocess. Caption: &quot;10 days in the window -&gt; only 2 partitions really run.&quot;)
+Austin: &quot;Say your refresh window is ten days but data only landed for two of them. Without this, you reprocess all ten. With detect data changes on a ModifiedDate column, Power BI checks the newest timestamp in each day, sees eight days are unchanged, and skips them. It only runs the two that moved.&quot;
+(MODALITY: on-screen text - PAYOFF takeaway)
+(ON-SCREEN: &quot;TAKEAWAY 5 - Add a reliable last-modified column and enable Detect data changes to reprocess even less.&quot;)
+Austin: &quot;Takeaway five. If your source has a trustworthy last-modified timestamp, use it. Detect data changes turns a ten-day refresh into a two-day refresh on quiet days. Just make sure that column is reliable, because Power BI trusts it completely.&quot;
+Austin: &quot;Good. It&#x27;s set up and it&#x27;s lean. Now, how do you know it&#x27;s really working and not just looking like it?&quot;</p><p>[10:35-12:05] WORKED EXAMPLE / REAL NUMBER - proving it worked
+(MODALITY: data-viz - animated before/after bar)
+(ON-SCREEN: before/after bars &quot;Refresh time: 47 min -&gt; 4 min&quot;)
+Austin: &quot;Here&#x27;s a real one from an engagement. A sales model, about 30 million rows, refreshing in 47 minutes twice a day and regularly timing out. We put RangeStart and RangeEnd on the order date, archived five years, refreshed the last 14 days, and fixed the folding on the source. Refresh dropped to 4 minutes. Same data, same report, one change to how it loads.&quot;
+(MODALITY: screen-record - SSMS connected to the XMLA endpoint, expanding the table to show individual dated partitions; then the Service refresh history showing the short durations)
+(ON-SCREEN callout: &quot;Proof 1: partitions exist. Proof 2: refresh history got short and stayed short.&quot;)
+Austin: &quot;Two ways to prove it for yourself. One, connect to the XMLA endpoint with SQL Server Management Studio on Premium or Fabric, expand the table, and you&#x27;ll see the actual dated partitions. If they&#x27;re there, partitioning worked. Two, and simpler, open the refresh history in the Service. Your first run is long, then every run after drops and stays down. If the second refresh is still as long as the first, folding didn&#x27;t happen, and you go back to View Native Query to find where it stopped.&quot;
+(MODALITY: on-screen text)
+(ON-SCREEN: &quot;If refresh #2 isn&#x27;t shorter than #1 -&gt; folding broke. Recheck View Native Query.&quot;)
+Austin: &quot;That second-refresh check is your whole test. Short second run, you&#x27;re done. Long second run, folding broke somewhere in your query steps.&quot;</p><p>[12:05-14:00] PAYOFF RECAP + SOFT CTA
+(MODALITY: on-screen text - kinetic list, all five takeaways stack in)
+(ON-SCREEN:
+&quot;1. Stop reloading old data. Reprocess only recent partitions.
+2. No query folding, no speed-up. Check View Native Query.
+3. It only runs in the Service. First refresh is a full load.
+4. Dataflow source? Turn ON the enhanced compute engine.
+5. Reliable last-modified column? Enable Detect data changes.&quot;)
+Austin: &quot;So there&#x27;s the whole thing. One, stop reloading old data. Two, no query folding means no real speed-up, so check View Native Query. Three, it only runs in the Service and the first refresh loads everything once. Four, if you&#x27;re on a dataflow, turn on the enhanced compute engine or nothing folds. And five, add a reliable last-modified column and switch on detect data changes to refresh even less.&quot;
+(MODALITY: talking head)
+Austin: &quot;And the open loop from the start, that one dataflow setting, is number four. The enhanced compute engine. It&#x27;s the thing that makes people blame incremental refresh when the dataflow was the cause all along. Turn it on and the whole thing clicks into place.&quot;
+(MODALITY: on-screen text - link cards)
+(ON-SCREEN: card 1 &quot;Free: Power BI Governance &amp; Cost Scorecard - 5 min&quot; · card 2 &quot;Work with CaseWhen - governance assessment&quot;)
+Austin: &quot;If you want to know where else your refresh and your numbers are costing you time and trust, we built a free Power BI Governance and Cost Scorecard. Five minutes, and it gives you a score, a peer benchmark, and your top three risks. Link&#x27;s below. And if your refreshes and your numbers keep drifting on real data, that&#x27;s exactly what we do at CaseWhen. Run the scorecard, and if it flags something, request a governance assessment and we&#x27;ll talk it through. No pitch, just a conversation.&quot;
+(MODALITY: talking head)
+Austin: &quot;Next up, I&#x27;ll show you how to get one agreed number across your reports so people and Copilot stop returning different answers to the same question. That&#x27;s the one that ends the meeting arguments.&quot;</p><h2>Description</h2><p>Power BI incremental refresh, explained end to end, so your refresh stops re-importing your whole history every run and finishes in minutes.</p><p>Free Power BI Governance &amp; Cost Scorecard (5-min assessment): [scorecard link]
+Work with CaseWhen (request a governance assessment): [casewhen.co link]</p><p>Chapters:
+0:00 Why does my refresh reload all my history every time?
+1:20 What is incremental refresh really doing under the hood?
+3:05 Why does Power BI need RangeStart and RangeEnd?
+4:50 How do I turn incremental refresh on, step by step?
+6:55 Why is my dataflow still re-importing everything?
+9:00 How do I refresh only the rows that changed?
+10:35 How do I prove it really worked?
+12:05 So what do I do on Monday?</p><p>Resources:
+- Free Power BI Governance &amp; Cost Scorecard: [scorecard link]
+- Request a governance assessment: [casewhen.co link]
+- Watch next: Get one agreed number across every report: [watch-next link]</p><p>If your Power BI refresh takes 40 minutes because it re-imports every row of history on every run, incremental refresh is the fix. This walkthrough covers what incremental refresh does with date partitions, how the RangeStart and RangeEnd parameters push a date filter down to your source through query folding, the four setup steps in Power BI Desktop and the Service, why a dataflow source keeps re-importing everything until you turn on the enhanced compute engine, how detect data changes reprocesses only the partitions that moved, and how to prove your refresh really got faster using the XMLA endpoint and the Service refresh history. Set it up right and a 47-minute refresh can drop to 4.</p><p>#PowerBI #IncrementalRefresh #MicrosoftFabric #DataGovernance #PowerQuery</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

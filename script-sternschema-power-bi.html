@@ -1,0 +1,210 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Sternschema in Power BI: warum Ihr Datenmodell so aussehen s</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p>Kapitel: Was ist ein Sternschema eigentlich? ---</p><p>[0:45-2:15] VALUE BEAT 1 - Was ein Sternschema ist
+CLAIM (Saju, ruhig, ein Satz): &quot;Ein Sternschema ist eine Faktentabelle in der Mitte und mehrere Dimensionstabellen darum herum, verbunden über einfache Eins-zu-viele-Beziehungen.&quot;
+(ON-SCREEN: Claim-Card, Wortlaut identisch)
+(MODALITY: screen-record)
+PROOF/DEMO: Bildschirmaufnahme der Model-View in Power BI Desktop. Zu sehen: In der Mitte eine Tabelle &quot;Umsatz&quot; mit den messbaren Spalten, Betrag, Menge, Datum-Schlüssel, Produkt-Schlüssel, Kunde-Schlüssel. Darum herum vier Tabellen: &quot;Datum&quot;, &quot;Produkt&quot;, &quot;Kunde&quot;, &quot;Region&quot;. Der Cursor zieht die Beziehungslinien nach, jede endet mit einer 1 an der Dimension und einem Stern-Symbol an der Faktentabelle. Der Cursor fährt die Filterrichtung ab, ein Pfeil zeigt von jeder Dimension in die Fakten hinein.
+(ON-SCREEN-Callout: &quot;1 = Dimension, viele = Fakten&quot;, Filterpfeil hervorgehoben)
+PAYOFF (numerierte Card): &quot;Regel 1: Zahlen, die Sie summieren, gehören in die Faktentabelle. Beschreibungen, nach denen Sie filtern, gehören in Dimensionen.&quot;
+RE-HOOK (Saju): &quot;So weit die Form. Aber warum ist genau diese Form schneller. Schauen wir der Engine dabei zu.&quot;</p><p>--- Kapitel: Warum wird Power BI schneller? ---</p><p>[2:15-3:50] VALUE BEAT 2 - Warum es schneller ist
+CLAIM (Saju): &quot;Power BI komprimiert schmale Dimensionen viel besser als eine breite flache Tabelle, und die Engine folgt Beziehungen, statt eine riesige Tabelle zu durchsuchen.&quot;
+(ON-SCREEN: Claim-Card)
+(MODALITY: animation)
+CUSTOM ANIMATION - VertiPaq-Kompression und Beziehungssprung:
+- Links erscheint eine einzelne breite Tabelle mit dreißig Spalten und Millionen Zeilen, jede Zelle voll mit wiederholten Texten, &quot;Berlin, Berlin, Berlin, München&quot;. Die Textspalten leuchten rot, ein Kompressions-Balken zeigt nur eine kleine Ersparnis.
+- Rechts teilt sich dieselbe Tabelle in eine schmale Faktentabelle nur mit Zahlen-Schlüsseln plus eine kleine Region-Dimension, in der &quot;Berlin&quot; und &quot;München&quot; je genau einmal stehen. Der Kompressions-Balken schnellt hoch, die Faktentabelle wird sichtbar dünn.
+- Dann eine Abfrage: ein Filter &quot;Region = Berlin&quot; setzt in der Dimension einen Haken, ein Pfeil springt über die Eins-zu-viele-Beziehung in die Fakten und markiert nur die passenden Zeilen. Daneben derselbe Filter auf der flachen Tabelle, der die volle Breite Zeile für Zeile absucht. Ein Timer über beiden Wegen: der Sternschema-Weg stoppt deutlich früher.
+(ON-SCREEN: Label &quot;VertiPaq: weniger eindeutige Werte, bessere Kompression&quot;)
+PAYOFF (Card): &quot;Regel 2: Weniger eindeutige Werte pro Spalte bedeuten kleinere Dateien und schnellere Abfragen. Deshalb schlagen viele schmale Dimensionen eine breite Tabelle.&quot;
+RE-HOOK (Saju): &quot;Schneller ist die halbe Miete. Jetzt der Teil, der Ihre KPIs rettet.&quot;</p><p>--- Kapitel: Warum stimmen meine KPIs nicht überein? ---</p><p>[3:50-5:25] VALUE BEAT 3 - Eine Datumstabelle, eine Zahl
+CLAIM (Saju): &quot;Mit einer einzigen Datumstabelle liefern Ihre Measures über alle Berichte hinweg genau eine Zahl, und Zeitintelligenz funktioniert überhaupt erst.&quot;
+(ON-SCREEN: Claim-Card)
+(MODALITY: screen-record)
+PROOF/DEMO: Bildschirmaufnahme. Zuerst der kaputte Zustand: drei Visuals, jedes nutzt eine andere Datumsspalte, Bestelldatum, Lieferdatum, Rechnungsdatum, und der Jahresumsatz weicht in jedem Visual leicht ab. Saju markiert die drei Zahlen mit einem roten Callout. Dann baut er im Model-View die eine &quot;Datum&quot;-Dimension an die Faktentabelle, markiert sie über &quot;Als Datumstabelle markieren&quot;, und schreibt ein Measure mit TOTALYTD und SAMEPERIODLASTYEAR. Alle drei Visuals ziehen jetzt dieselbe Datumstabelle, die Jahreszahl ist in allen drei identisch.
+(MODALITY-Wechsel innerhalb des Beats zu data-viz für die Auflösung)
+(DATA-VIZ: die drei vorher ungleichen Balken schnappen auf denselben Wert, ein grüner Haken erscheint, Zähler zeigt &quot;1 Zahl statt 3&quot;)
+(ON-SCREEN-Card mit Stat: &quot;Nur 12 Prozent der Organisationen sagen, ihre Daten seien gut genug für KI. Quelle: Drexel LeBow und Precisely, 2025.&quot; Saju spricht dazu: &quot;Genau hier fängt das an. Eine Zahl, der Menschen und auch Copilot trauen können, kommt aus dem Modell, nicht aus dem Measure.&quot;)
+PAYOFF (Card): &quot;Regel 3: Eine dedizierte Datumstabelle, markiert als Datumstabelle, verbunden mit der Faktentabelle. Erst dann rechnen Vorjahresvergleich und laufendes Jahr korrekt.&quot;
+RE-HOOK (Saju): &quot;Eine saubere Zahl haben Sie jetzt. Aber wer darf welche Zeile sehen. Genau da wird das Sternschema wichtig.&quot;</p><p>--- Kapitel: Wie blende ich Zeilen pro Benutzer aus? ---</p><p>[5:25-7:00] VALUE BEAT 4 - RLS läuft über die Beziehungen
+CLAIM (Saju): &quot;Zeilen-Sicherheit setzen Sie auf eine Dimension, und sie greift über die Eins-zu-viele-Beziehung sauber bis in die Fakten durch.&quot;
+(ON-SCREEN: Claim-Card, Keyword &quot;RLS&quot; sichtbar)
+(MODALITY: animation)
+CUSTOM ANIMATION - RLS entlang des Sterns:
+- Ein Sternschema in der Mitte. Auf die &quot;Region&quot;-Dimension wird eine Rolle gelegt, geschrieben als Region-Manager gleich USERPRINCIPALNAME.
+- Zwei Benutzer erscheinen links und rechts, &quot;Anna, Region Nord&quot; und &quot;Ben, Region Süd&quot;. Für Anna leuchtet in der Region-Dimension nur die Zeile Nord auf, der Filterpfeil springt über die Beziehung in die Fakten und alle Süd-Zeilen werden ausgegraut. Derselbe Bericht, andere Identität, andere sichtbare Zeilen.
+- Dann die Warnung: eine zweite Beziehung wird auf beidseitige Kreuzfilterung gestellt. Der Pfeil läuft plötzlich rückwärts, eine Süd-Zeile blitzt bei Anna kurz auf und wird rot umrandet. Text erscheint: &quot;Beidseitige Kreuzfilterung kann RLS aushebeln.&quot;
+(ON-SCREEN: Vorher-Nachher zweier identischer Berichte nebeneinander, unterschiedliche Zeilen pro Benutzer)
+PAYOFF (Card): &quot;Regel 4: RLS-Filter gehören auf die Dimension, und die Beziehungen bleiben einfach gerichtet. Beidseitige Kreuzfilterung nur dort, wo Sie sie wirklich brauchen.&quot;
+RE-HOOK (Saju): &quot;Das ist die Einstellung, die ich am Anfang versprochen habe. Und genau die bringt uns zum Snowflake-Schema, dem Punkt, an dem viele Modelle kippen.&quot;</p><p>--- Kapitel: Was macht ein Snowflake-Schema kaputt? ---</p><p>[7:00-8:35] VALUE BEAT 5 - Snowflake und wie man es zurückbaut
+CLAIM (Saju): &quot;Ein Snowflake-Schema zerlegt Ihre Dimensionen in Unter-Tabellen, und jeder zusätzliche Sprung kostet Tempo, komplizierteres DAX und unklare RLS.&quot;
+(ON-SCREEN: Claim-Card)
+(MODALITY: screen-record)
+PROOF/DEMO: Bildschirmaufnahme im Model-View. Zu sehen ein Snowflake: &quot;Produkt&quot; hängt an &quot;Unterkategorie&quot;, die hängt an &quot;Kategorie&quot;, drei getrennte Tabellen in einer Kette. Saju filtert nach Kategorie und zeigt, wie der Filter über zwei Sprünge laufen muss, bis er die Fakten erreicht. Dann demonstriert er in Power Query, wie er Kategorie und Unterkategorie über zwei Merge-Schritte flach in die Produkt-Dimension zieht. Aus der Kette wird eine einzelne breite Produkt-Dimension, die Kette am Modell verschwindet, ein Stern bleibt übrig.
+(ON-SCREEN-Callout: &quot;Snowflake, drei Sprünge&quot; wird zu &quot;Stern, ein Sprung&quot;)
+PAYOFF (Card): &quot;Regel 5: In Power BI denormalisieren Sie Dimensionen. Kategorie und Unterkategorie flach in die Produkt-Dimension, statt drei verkettete Tabellen.&quot;
+RE-HOOK (Saju): &quot;So viel zur Theorie. Sehen wir uns an, was das an einem echten Modell bewirkt.&quot;</p><p>--- Kapitel: Wie sieht das an einem echten Modell aus? ---</p><p>[8:35-10:40] WORKED EXAMPLE / REAL NUMBER
+Saju (am Bildschirm, ruhiger, langsamer Schnitt für die eine wichtige Passage): &quot;Hier ist ein Modell, wie es oft zu uns kommt. Eine flache Tabelle mit 42 Spalten, elf Millionen Zeilen, jede Textbeschreibung millionenfach wiederholt. Die Datei ist groß, der erste Filterklick braucht spürbar Zeit.&quot;
+(MODALITY: screen-record)
+PROOF/DEMO: Bildschirmaufnahme. Saju zeigt die Dateigröße und einen Filterklick mit sichtbarer Verzögerung. Dann der Umbau: er trennt Datum, Produkt, Kunde und Region in eigene Dimensionen, lässt in der Faktentabelle nur Schlüssel und Kennzahlen. Er zeigt dieselbe Dateigröße nach dem Umbau, deutlich kleiner, und denselben Filterklick, jetzt ohne Verzögerung.
+(MODALITY-Wechsel zu data-viz)
+(DATA-VIZ: zwei Balken nebeneinander, &quot;Vorher&quot; und &quot;Nachher&quot;, für Modellgröße und Antwortzeit des Filters; die Nachher-Balken sind klar kürzer. Beschriftung: Werte aus Ihrem eigenen Modell einsetzen.)
+Saju: &quot;Dieselben Daten, dieselben Zahlen. Der Unterschied ist allein die Form des Modells. Und der eigentliche Gewinn ist nicht nur Tempo. Es ist, dass die Summe rechts oben jetzt in jedem Bericht dieselbe ist, und dass Ihre Zeilen-Sicherheit dabei sauber bleibt.&quot;
+(B-ROLL kurz: ein Analyst nickt vor dem schnelleren Bericht, Büro Berlin)
+PAYOFF (Übergang zur Zusammenfassung): &quot;Das sind fünf Regeln, mehr braucht es für den Anfang nicht.&quot;</p><p>--- Kapitel: Was sollte ich als Nächstes tun? ---</p><p>[10:40-11:35] PAYOFF - Recap plus offene Schleife
+(MODALITY: on-screen text / kinetic type)
+Saju spricht die Liste, während sie als kinetische Typo einläuft: &quot;Fünf Regeln zum Mitnehmen. Erstens, Zahlen zum Summieren in die Faktentabelle, Beschreibungen zum Filtern in Dimensionen. Zweitens, viele schmale Dimensionen schlagen eine breite Tabelle, weil sie besser komprimieren. Drittens, eine als Datumstabelle markierte Datumstabelle, sonst rechnet Zeitintelligenz falsch. Viertens, RLS auf die Dimension legen und Beziehungen einfach gerichtet lassen. Fünftens, Snowflake-Ketten in flache Dimensionen denormalisieren.&quot;
+(ON-SCREEN: nummerierte 1 bis 5, alle gleichzeitig sichtbar am Ende)
+Saju (zahlt die offene Schleife ein): &quot;Und die versprochene Einstellung. Beidseitige Kreuzfilterung. Sie sieht harmlos aus und wird oft aus Bequemlichkeit gesetzt, aber sie kann RLS aushebeln und Abfragen verlangsamen. Setzen Sie sie nur dort, wo Sie sie wirklich brauchen, und prüfen Sie danach jede RLS-Rolle.&quot;</p><p>[11:35-12:00] SOFT CTA
+(MODALITY: talking head)
+Saju: &quot;Wenn Sie Ihr eigenes Modell durchgehen wollen, unten liegt unsere 20-Punkte Power BI Modell-Review-Checkliste. Damit prüfen Sie Sternschema, Datumstabelle und RLS Punkt für Punkt an Ihrem echten Bericht, kostenlos. Und falls Ihre Zahlen sich trotzdem widersprechen, oder Sie das Modell KI-fest machen wollen, dann machen wir genau das bei CaseWhen. Buchen Sie eine Prüfung Ihres semantischen Modells, kein Verkaufsgespräch, einfach ein Blick auf Ihr Modell. Der Link steht in der Beschreibung. Im nächsten Video zeige ich Ihnen, wie Sie Ihre Measures sauber aufbauen, sobald der Stern steht.&quot;
+(ON-SCREEN: Link-Card &quot;20-Punkte Modell-Review-Checkliste&quot; und &quot;Modell-Review buchen, casewhen.co&quot;)
+(B-ROLL: ruhiger Ausklang, Model-View mit sauberem Stern, langsamer Zoom auf die Faktentabelle in der Mitte.)</p><h2>Description
+Ein Sternschema in Power BI macht Ihren Bericht schneller, liefert eine einzige verlässliche KPI-Zahl und lässt Ihre Zeilen-Sicherheit sauber greifen. Hier bauen wir es Schritt für Schritt auf.</h2><p>Kostenlose 20-Punkte Power BI Modell-Review-Checkliste: https://casewhen.co/modell-checkliste
+Mit CaseWhen arbeiten, Modell-Review buchen: https://casewhen.co/modell-review</p><p>Kapitel:
+0:00 Warum ist mein Power BI Bericht langsam?
+0:45 Was ist ein Sternschema eigentlich?
+2:15 Warum wird Power BI mit einem Sternschema schneller?
+3:50 Warum stimmen meine KPIs nicht überein?
+5:25 Wie blende ich Zeilen pro Benutzer aus?
+7:00 Was macht ein Snowflake-Schema in Power BI kaputt?
+8:35 Wie sieht das an einem echten Modell aus?
+10:40 Was sollte ich als Nächstes tun?</p><p>In diesem Video zeigt Saju, warum ein Sternschema in Power BI so aussieht, wie es aussieht, und warum diese Form gleichzeitig Performance, KPIs und Zeilen-Sicherheit rettet. Sie sehen, wie eine Faktentabelle mit Dimensionen aufgebaut wird, warum schmale Dimensionen besser komprimieren als eine breite flache Tabelle, wie eine dedizierte Datumstabelle Zeitintelligenz und eine einheitliche Zahl möglich macht, wie RLS über die Eins-zu-viele-Beziehungen greift und was ein Snowflake-Schema in Power BI kaputt macht. Am Ende bauen wir ein echtes Modell von einer flachen Tabelle zum Sternschema um und Sie bekommen fünf klare Regeln für Ihr eigenes Datenmodell.</p><p>Ressourcen:
+20-Punkte Modell-Review-Checkliste: https://casewhen.co/modell-checkliste
+Modell-Review buchen: https://casewhen.co/modell-review</p><p>#PowerBI #Sternschema #Datenmodellierung #MicrosoftFabric #BusinessIntelligence</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

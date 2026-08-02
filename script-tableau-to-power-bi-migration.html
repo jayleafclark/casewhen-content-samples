@@ -1,0 +1,233 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Tableau to Power BI Migration: What Really Gets Rebuilt (and</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Tableau to Power BI Migration: What Really Gets Rebuilt (and How to Scope It)
+Host: Austin · Cluster: migration · Target: 15 min · Primary keyword: tableau to power bi migration</p><h2>Chapters
+- 0:00 Can I just import my Tableau workbooks into Power BI?
+- 0:40 Why is there no auto-converter?
+- 2:10 What carries over for free?
+- 3:40 What do I have to rebuild by hand?
+- 5:15 Why do my numbers disagree after the move?
+- 7:00 Which calculation gives a different answer?
+- 8:30 How long does the migration really take?
+- 10:15 What&#x27;s the plan, and where do I start?</h2><h2>Script</h2><p>[0:00-0:12] HOOK (here&#x27;s what breaks)
+Spoken: &quot;There&#x27;s no import button. You can&#x27;t hand Power BI a Tableau workbook, click a button, and get your reports back. Every dashboard gets rebuilt by hand, and today I&#x27;ll show you exactly what breaks in a Tableau to Power BI migration.&quot;
+(MODALITY: b-roll + on-screen text)
+(ON-SCREEN: keyword card &quot;TABLEAU TO POWER BI MIGRATION&quot; over b-roll of a .twb file icon being dragged toward Power BI and sliding off the edge of the screen.)
+(VISIBLE CHANGE: at 0:06 zoom-punch onto the greyed-out spot where an &quot;Import&quot; button would be, with a red &quot;no such button&quot; call-out popping in.)</p><p>[0:12-0:40] PROMISE + STAKES + OPEN LOOP
+Spoken: &quot;By the end of this you&#x27;ll know the four things that carry over, the parts you rebuild from scratch, and how to scope the timeline so nobody on your team promises a two-week move that turns into three months. Get this wrong and you end up half-migrated: the old Tableau server stays on, the new Power BI reports don&#x27;t match, and everyone drifts back to the old numbers. We run these migrations for BI teams in Berlin, so the next twelve minutes are the same map we use on the job. And near the end I&#x27;ll show you the one calculation type that looks identical in both tools and hands you a different answer. That&#x27;s the one that erodes trust the fastest.&quot;
+(MODALITY: talking head)
+(ON-SCREEN: promise text lower-third &quot;4 keep · 4 rebuild · 1 timeline&quot;; at 0:30 a small locked-padlock icon labelled &quot;the calc that lies&quot; teases the open loop.)
+(VISIBLE CHANGE: cut to a second, tighter angle at 0:24 on the line about drifting back to the old numbers.)
+(B-ROLL: quick two-second cutaway of a real Tableau dashboard next to a Power BI report so both tools are on screen.)</p><p>[0:40-2:10] VALUE BEAT 1: Why is there no auto-converter?
+CLAIM (spoken, flat): &quot;Tableau and Power BI build reports on different engines, so there&#x27;s no reliable file converter.&quot;
+(ON-SCREEN: claim card &quot;No file converter exists.&quot;)
+PROOF (MODALITY: custom animation):
+(ANIMATION: split the frame in two. Left panel = a Tableau workbook, drawn as a stack of worksheets, each worksheet keeping its own little calculation and its own mark grammar. Right panel = Power BI, drawn as one central semantic model with DAX measures feeding several visuals. Animate a .twb file trying to cross the gap between the panels and bouncing back. Then the workbook splits into four labelled shards, data source, calculations, layout, interactivity, and each shard flies to a different destination on the Power BI side, showing there&#x27;s no single one-to-one path.)
+Spoken over animation: &quot;A Tableau workbook keeps its logic per worksheet, in Tableau&#x27;s own grammar. Power BI keeps its logic in one shared semantic model and writes calculations in DAX. Those two sit far enough apart that no tool reads one and writes the other cleanly. A few third-party converters exist. They get you a rough shell at best, and you spend longer fixing the shell than starting clean. Microsoft doesn&#x27;t ship a converter at all, and that&#x27;s a signal worth reading.&quot;
+PAYOFF (MODALITY: on-screen text):
+(ON-SCREEN: numbered takeaway &quot;1. Budget for a rebuild, not an import.&quot;)
+Spoken: &quot;Takeaway one: budget for a rebuild, not an import. Assume zero of the report files transfer.&quot;
+RE-HOOK: &quot;So if the files don&#x27;t come across, what does? More than you&#x27;d think. Here&#x27;s the part you get to keep.&quot;</p><p>[2:10-3:40] VALUE BEAT 2: What carries over for free?
+CLAIM (spoken, flat): &quot;Your data sources come across almost untouched. The reports don&#x27;t.&quot;
+(ON-SCREEN: claim card &quot;The data layer transfers. The reports don&#x27;t.&quot;)
+PROOF (MODALITY: screen-record):
+(SCREEN-RECORD: show Tableau connected to a SQL Server warehouse with a custom SQL query open. Cut to Power BI, Get Data, point at the same warehouse, same tables appear. Paste the exact custom SQL from Tableau straight into the Power Query editor and watch it load. Outline the matching table names in both tools in green.)
+Spoken over screen-record: &quot;This is the part that saves you real time. If your Tableau workbooks pull from a database, a warehouse, or a set of SQL queries, that layer moves over with little change. The tables are the tables. Your custom SQL pastes straight into Power Query. Any shaping you did in a prep step still stands. So the connections and the raw shaping, roughly the first third of the work, you mostly keep. Two more things transfer in spirit: your metric definitions and your business logic. Somebody decided what an active customer means. That decision is still good. You&#x27;re re-expressing it in DAX, not re-deciding it.&quot;
+PAYOFF (MODALITY: on-screen text):
+(ON-SCREEN: numbered takeaway &quot;2. Inventory and repoint the data sources first.&quot;)
+Spoken: &quot;Takeaway two: inventory your data sources first. Repoint them, reuse the SQL, and the cheapest part of the migration never gets redone.&quot;
+RE-HOOK: &quot;Now the expensive part. Every calculation you wrote in Tableau gets re-written by hand, and some of them change meaning when you do. Let me show you the trap.&quot;</p><p>[3:40-5:15] VALUE BEAT 3: What do I rebuild by hand?
+CLAIM (spoken, flat): &quot;Every calculated field becomes a DAX measure, and the filter context works differently.&quot;
+(ON-SCREEN: claim card &quot;Calculated fields become DAX, with new filter context.&quot;)
+PROOF (MODALITY: custom animation):
+(ANIMATION: on the left, a Tableau level-of-detail expression, drawn literally as { FIXED [Customer] : SUM([Sales]) }, sitting on a single worksheet. An arrow carries it to the right, where it lands as a DAX measure CALCULATE(SUM(Sales), ALLEXCEPT(...)). Animate the filter context as a moving outline: in Tableau the FIXED grain stays locked no matter what the sheet shows; in Power BI the same measure changes its answer as filters land on the visual, until you pin the context. Then a second row: a Tableau table calc, RUNNING_SUM, morphs into a DAX running total, and the evaluation order visibly re-sequences from Tableau&#x27;s left-to-right partition to DAX&#x27;s filter-context order.)
+Spoken over animation: &quot;In Tableau a calculated field lives close to the worksheet, and level-of-detail expressions, FIXED, INCLUDE, EXCLUDE, let you pin the grain of a number. In Power BI you rewrite those as DAX measures, and DAX decides the answer from the filter context on the visual. The logic maps over, the mental model behind it doesn&#x27;t. A FIXED expression often becomes CALCULATE with ALLEXCEPT. A table calculation such as a running total or a rank becomes a DAX pattern with its own evaluation order. Most of these have a clean equivalent. The work is knowing which one, and testing that the number matches.&quot;
+PAYOFF (MODALITY: on-screen text):
+(ON-SCREEN: numbered takeaway &quot;3. List every calculated field and table calc up front.&quot;)
+Spoken: &quot;Takeaway three: list every calculated field and table calc before you start. That list is your real rebuild backlog, and it&#x27;s usually longer than the dashboard count suggests.&quot;
+RE-HOOK: &quot;There&#x27;s one calc type I flagged at the start that looks the same and answers differently. Keep that in mind, it&#x27;s coming. First, the layer everyone underestimates: the model.&quot;</p><p>[5:15-7:00] VALUE BEAT 4: Why do my numbers disagree after the move?
+CLAIM (spoken, flat): &quot;Tableau lets each worksheet define its own logic. Power BI wants one shared model. That gap is where numbers start disagreeing.&quot;
+(ON-SCREEN: claim card &quot;One shared model, or the numbers drift.&quot;)
+PROOF (MODALITY: screen-record + data-viz):
+(SCREEN-RECORD: build a star schema in Power BI, a central fact table, dimension tables snapping in on one-to-many relationships, the arrows lighting up as each relationship connects. Define one measure once in the model.)
+(DATA-VIZ: two KPI cards side by side showing the same metric at slightly different values, one from a Tableau sheet, one from a naive copy-each-sheet Power BI rebuild. Then animate them converging to a single value once the measure is centralised in the shared model.)
+(ANIMATION insert: contrast the star schema with Tableau&#x27;s per-sheet blends, several worksheets each drawing their own little join, drawn as tangled threads, versus the one clean hub-and-spoke.)
+Spoken: &quot;This is the beat that decides whether people trust the new reports. In Tableau it&#x27;s normal for two worksheets to calculate the same metric slightly differently, one uses a blend, another a different join, and nobody notices until they sit side by side. When you rebuild in Power BI you get one shot to fix that: build a proper star schema, define each measure once, and every visual reads the same definition. Do it well and the migration cleans up years of drift. Copy each sheet&#x27;s logic one to one instead, and you ship the same disagreements into a tool that makes them more visible. In a Precisely and Drexel LeBow study, 67 percent of organisations said they don&#x27;t fully trust the data they use to make decisions. A migration is a rare moment you get to move your team out of that 67 percent.&quot;
+PAYOFF (MODALITY: on-screen text):
+(ON-SCREEN: numbered takeaway &quot;4. Build one shared star schema before you re-author a single report.&quot;)
+Spoken: &quot;Takeaway four: rebuild the shared model once, before you re-author a single dashboard. One agreed definition per metric, in the centre, so people and Copilot both return the same number.&quot;
+RE-HOOK: &quot;Okay, the calc I promised. This is the one that looks identical in both tools and hands you a different total without warning.&quot;</p><p>[7:00-8:30] VALUE BEAT 5: Which calculation gives a different answer?
+CLAIM (spoken, flat): &quot;Percent of total and running totals look the same in both tools and compute differently.&quot;
+(ON-SCREEN: claim card &quot;Same chart, different denominator.&quot;)
+PROOF (MODALITY: custom animation, then talking head):
+(ANIMATION: the same bar chart drawn twice. On the Tableau side, a quick table calc for percent of total, and the denominator spotlighted as the sum of the visible bars, a box drawn around all the marks on screen. On the Power BI side, the obvious DAX measure DIVIDE(SUM(Sales), SUM(Sales)), and the denominator spotlighted as the current filter context, a box that only wraps the single current bar, so every bar reads 100 percent. Then show ALL() dropped into the measure and the box expanding back out to all bars, and the two charts finally match.)
+Spoken over animation: &quot;Here it is. A percent of total. In Tableau you drop a quick table calc and it divides each bar by the sum of the bars you can see. In Power BI, if you write the obvious measure, divide this by the total, DAX reads the total as the current filter context, which is just this bar, so every bar comes back at 100 percent.&quot;
+(MODALITY: talking head)
+Spoken to camera: &quot;The fix is to tell DAX to ignore the bar&#x27;s own filter with ALL or ALLSELECTED. Same chart, same data, same label on the screen, and a completely different number until you handle the context. Running totals and rank behave the same way. This is why you test every migrated number against the source, and don&#x27;t just spot-check the dashboard.&quot;
+PAYOFF (MODALITY: on-screen text):
+(ON-SCREEN: numbered takeaway &quot;5. Set the denominator in DAX yourself for every table calc.&quot;)
+Spoken: &quot;Takeaway five: for any table calc, percent of total, running sum, rank, decide the denominator explicitly in DAX. Never assume it inherited what Tableau did automatically.&quot;
+RE-HOOK: &quot;So you&#x27;ve got the what. The question your boss asks is how long. Let&#x27;s scope it in real terms.&quot;</p><p>[8:30-10:15] VALUE BEAT 6: How long does the migration really take?
+CLAIM (spoken, flat): &quot;Scope by inventory, not by dashboard count. Most estates are half dead weight.&quot;
+(ON-SCREEN: claim card &quot;Count the estate, then retire before you rebuild.&quot;)
+PROOF (MODALITY: screen-record + data-viz):
+(SCREEN-RECORD: an inventory table with columns for workbook, worksheets inside it, calculated fields, data sources, and last-viewed date. Sort by last-viewed. Grey out every workbook not opened in 90 days. About 40 percent of rows stay lit as still used.)
+(DATA-VIZ: a simple sizing bar, used workbooks times average worksheets times calc complexity, resolving into a rebuild-week estimate that ticks up on screen.)
+Spoken: &quot;Everyone scopes this by counting dashboards. Wrong unit. Count four things: workbooks, the worksheets inside them, calculated fields, and data sources. Then pull the usage stats, which workbook was opened in the last 90 days. In most estates I&#x27;ve seen, a big share of workbooks haven&#x27;t been touched in months. You don&#x27;t migrate those, you retire them. That one pass often cuts the real workload by a third or more before you write a line of DAX. For what&#x27;s left, size it by calculation complexity. A KPI card with three measures is an afternoon. A dense dashboard with fifteen table calcs and custom parameters is a week. Add the shared model build once, up front. That&#x27;s your timeline, and it&#x27;s defensible, because it&#x27;s built from a count instead of a guess.&quot;
+PAYOFF (MODALITY: on-screen text):
+(ON-SCREEN: numbered takeaway &quot;6. Inventory, then retire, then rebuild.&quot;)
+Spoken: &quot;Takeaway six: inventory, then retire before you rebuild. The fastest migration is the reports you decide not to move.&quot;
+RE-HOOK: &quot;Put it together and the plan gets simple. Here&#x27;s the whole plan in one view.&quot;</p><p>[10:15-11:15] PAYOFF: recap + pay off the open loop
+(MODALITY: kinetic type / on-screen text)
+(ON-SCREEN: all six takeaways stack in as a kinetic list, one line at a time in sync with the read.)
+Spoken: &quot;So here&#x27;s the whole map. One: budget for a rebuild, not an import. Two: inventory and repoint your data sources first, that part you keep. Three: list every calculated field, that&#x27;s your real backlog. Four: build one shared star schema and define each measure once. Five: for every table calc, set the denominator in DAX yourself. Six: inventory and retire before you rebuild. Do those six and a Tableau to Power BI migration stops being a mystery and becomes a project you can size on one page.&quot;
+(ON-SCREEN: the percent-of-total animation replays for two seconds as the loop pays off.)
+Spoken: &quot;And that percent of total trap, the number that reads correct but hides a different denominator, that&#x27;s why you validate every measure against the source before you switch anyone over.&quot;</p><p>[11:15-12:00] SOFT CTA
+(MODALITY: talking head)
+(ON-SCREEN: link card &quot;Tableau to Power BI migration checklist&quot; then a second card &quot;Get a migration quote&quot;.)
+Spoken: &quot;If you&#x27;re staring at a Tableau estate right now, I&#x27;ve put our Tableau to Power BI migration checklist in the description. It&#x27;s the same inventory and rebuild list we just walked, as a file you can fill in. Grab it, run the count, and you&#x27;ll have a defensible timeline by the end of the week. And if you&#x27;re facing a real deadline, a Tableau contract renewal, an SSIS or Synapse move, a Premium P-SKU cutover, that&#x27;s the work we do at CaseWhen in Berlin. There&#x27;s a link to get a migration quote in the description. No pitch, just a look at your estate and a straight number. If this helped, the next video builds the star schema we kept pointing at, the one that makes the whole rebuild worth doing.&quot;</p><h2>Description
+Tableau to Power BI migration, explained by what really gets rebuilt: the data layer you keep, the calculated fields you re-write in DAX, and how to scope the timeline before you start.</h2><p>Free Tableau to Power BI migration checklist: https://casewhen.co/migration-checklist
+Work with CaseWhen (get a migration quote): https://casewhen.co/contact</p><p>0:00 Can I just import my Tableau workbooks into Power BI?
+0:40 Why is there no auto-converter?
+2:10 What carries over for free?
+3:40 What do I have to rebuild by hand?
+5:15 Why do my numbers disagree after the move?
+7:00 Which calculation gives a different answer?
+8:30 How long does the migration really take?
+10:15 What&#x27;s the plan, and where do I start?</p><p>There&#x27;s no import button for a Tableau to Power BI migration and no reliable file converter, so every report is re-authored by hand. Your data sources and SQL move over with little change, but calculated fields become DAX measures with a new filter context, level-of-detail expressions turn into CALCULATE patterns, and table calcs like percent of total need their denominator set explicitly with ALL or ALLSELECTED. The part that decides trust is the model: build one shared star schema and define each measure once, so your numbers stop disagreeing across reports. Scope the work by inventorying workbooks, worksheets, calculated fields and data sources, retire what nobody opens, and size the rest by calculation complexity. Do that and you get a defensible timeline instead of a guess.</p><p>#PowerBI #Tableau #DataMigration #MicrosoftFabric #BusinessIntelligence</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

@@ -1,0 +1,156 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Migrate to Azure SQL: Every Hidden Cost and Gotcha, Start to</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p>[0:40-2:20] VALUE BEAT 1 - Which Azure SQL do I pick?</p><p>CLAIM: &quot;There are three Azure SQL targets, and your SSIS and SQL Agent jobs usually pick for you.&quot;</p><p>(MODALITY: animation)
+(ON-SCREEN CLAIM CARD: &quot;3 targets. Your T-SQL surface decides.&quot;)</p><p>PROOF/DEMO (custom animation of the three-target fork): One box on the left labelled &quot;On-prem SQL Server + SSIS&quot; splits into three doors. Door 1 &quot;Azure SQL Database&quot; lights up cheapest, then three red tags drop off it reading &quot;no SQL Agent&quot;, &quot;no cross-database queries&quot;, &quot;reduced T-SQL&quot;. Door 2 &quot;Azure SQL Managed Instance&quot; lights up and keeps green checks reading &quot;SQL Agent&quot;, &quot;cross-database queries&quot;, &quot;CLR&quot;, &quot;near-full T-SQL surface&quot;. Door 3 &quot;SQL Server on Azure VM&quot; keeps every green check plus a wrench icon labelled &quot;you patch and back up&quot;. The legacy box slides through Door 2 as Austin lands the rule.</p><p>Spoken: &quot;Azure gives you three doors. Azure SQL Database is one managed database, cheapest at the low end, and it drops SQL Agent, cross-database queries, and a chunk of T-SQL. Azure SQL Managed Instance keeps almost the whole SQL Server surface, Agent jobs, cross-database queries, CLR, so a legacy estate lands there with the least rewriting. SQL Server on an Azure VM keeps every feature and hands you the patching and backups to run yourself. If you&#x27;ve got Agent jobs and packages talking across databases, single database sends you into a rewrite you never budgeted. Managed Instance costs more at the floor and saves you weeks of code changes.&quot;</p><p>PAYOFF (numbered takeaway): &quot;Takeaway one: match the target to your T-SQL surface first, price second. Agent jobs and cross-database queries mean Managed Instance.&quot;</p><p>(ON-SCREEN TAKEAWAY: &quot;1 - Target = your T-SQL surface. Agent + cross-db =&gt; Managed Instance.&quot;)</p><p>RE-HOOK: &quot;Target picked. Now the packages, because SSIS is where the runtime bill hides.&quot;</p><p>(MODALITY on re-hook: talking head, quick zoom-punch on the last word.)</p><p>[2:20-4:00] VALUE BEAT 2 - What happens to my SSIS packages?</p><p>CLAIM: &quot;Your SSIS packages lift to Azure, but the runtime that hosts them bills by the hour whether it&#x27;s working or sitting idle.&quot;</p><p>(MODALITY: screen-record)
+(ON-SCREEN CLAIM CARD: &quot;SSIS moves. The runtime bills 24/7 unless you stop it.&quot;)</p><p>PROOF/DEMO (screen-record Azure Data Factory, then a custom animation of the idle meter): Screen-record shows the Azure Data Factory portal, the Azure-SSIS Integration Runtime pane, and a package deployed to the SSISDB catalog on Managed Instance. Then cut to a custom animation: a small cluster of three VM tiles labelled &quot;Azure-SSIS IR&quot;. A clock spins across a 24-hour bar. A dollar meter ticks up every hour the tiles glow, but the tiles only do work for a 40-minute slice near 2am. The rest of the bar shows glowing tiles doing nothing while the meter keeps climbing. Then a &quot;start / stop trigger&quot; chip snaps onto the timeline, the tiles go dark outside the 40-minute slice, and the meter flattens.</p><p>Spoken: &quot;SSIS moves in two parts. The catalog, SSISDB, goes onto your Azure SQL Managed Instance. The packages run on an Azure-SSIS Integration Runtime inside Azure Data Factory, which is a cluster of virtual machines Azure spins up for you. That cluster bills per node, per hour, every hour it&#x27;s switched on. A lot of teams provision it, point their nightly load at it, and leave it running. If your load runs forty minutes and the cluster sits on all day, you&#x27;re paying for roughly twenty-three hours of an idle cluster. Put a start-and-stop schedule on it with a trigger in Data Factory, and that line drops to the minutes you use.&quot;</p><p>PAYOFF (numbered takeaway): &quot;Takeaway two: schedule the Azure-SSIS runtime to start before the load and stop after, on day one. Idle compute is the number one surprise on the first invoice.&quot;</p><p>(ON-SCREEN TAKEAWAY: &quot;2 - Start/stop the Azure-SSIS IR. Never pay for idle.&quot;)</p><p>RE-HOOK: &quot;Runtime handled. Next, how big to make the database, because over-sizing is the other easy leak.&quot;</p><p>(MODALITY on re-hook: talking head, cut to b-roll of a server rack for two seconds under the line.)</p><p>[4:00-5:45] VALUE BEAT 3 - How big should I make it?</p><p>CLAIM: &quot;Azure SQL throttles you the second you cross your purchased limit, so people over-buy to feel safe and pay for headroom they never touch.&quot;</p><p>(MODALITY: animation)
+(ON-SCREEN CLAIM CARD: &quot;Cross the ceiling and Azure governs you. So teams over-buy.&quot;)</p><p>PROOF/DEMO (custom animation of vCore throttling, then a data-viz): Animation shows two meters side by side, &quot;CPU&quot; and &quot;Log IO&quot;, with a ceiling line marked &quot;your vCore tier&quot;. A workload wave rises. When it touches the ceiling, incoming query tokens stack up in a queue behind the line and a latency number climbs from green to amber. Then cut to a data-viz: a usage histogram of real load over a week, with a marker on the 95th percentile far below the rare peak. A sizing slider snaps to the 95th percentile line, and the queue clears.</p><p>Spoken: &quot;Azure SQL sells you a ceiling, measured in vCores or DTUs. Cross it and Azure governs you, your queries queue, log writes throttle, latency climbs. Nobody wants that call, so teams buy the biggest tier and sleep better while paying for cores that sit idle. The move is to measure first. The Azure SQL Migration extension in Azure Data Studio reads your live workload and recommends a size from real numbers. Size to your 95th percentile load with a little room, then scale up later in seconds if you need it. Scaling Azure SQL up is a slider, so you don&#x27;t have to guess high.&quot;</p><p>PAYOFF (numbered takeaway): &quot;Takeaway three: size from measured load at the 95th percentile, then scale on demand. You can always go up in seconds, so stop paying for peak-of-peak all year.&quot;</p><p>(ON-SCREEN TAKEAWAY: &quot;3 - Size to measured p95. Scale up on demand, in seconds.&quot;)</p><p>RE-HOOK: &quot;Sized right. Now the discount that changes the whole invoice.&quot;</p><p>(MODALITY on re-hook: talking head, the corner padlock icon from 0:30 pulses again to remind the viewer the loop is about to pay off.)</p><p>[5:45-7:30] VALUE BEAT 4 - Where&#x27;s the discount most teams miss?</p><p>CLAIM: &quot;Two Azure settings, Hybrid Benefit and reserved capacity, can cut the compute line by more than half, and they&#x27;re off by default.&quot;</p><p>(MODALITY: screen-record)
+(ON-SCREEN CLAIM CARD: &quot;Hybrid Benefit + reserved capacity = up to 55% off. Off by default.&quot;)</p><p>PROOF/DEMO (screen-record Azure portal, then a custom animation): Screen-record shows the Azure SQL configure blade with the &quot;Azure Hybrid Benefit&quot; toggle and the &quot;reservation&quot; purchase option, both starting off. Then a custom animation: a &quot;SQL Server license&quot; badge lifts off the on-prem box and lands on the Azure compute meter, and the per-hour rate on the meter drops. A second chip labelled &quot;1-year / 3-year reservation&quot; clicks in, and the cost bar drops a second step. A caption reads &quot;per Microsoft pricing: up to 55% vs pay-as-you-go&quot;.</p><p>Spoken: &quot;This is the part that pays for the project. If you already own SQL Server licenses with Software Assurance, Azure Hybrid Benefit lets you carry them onto Azure SQL and drop the compute rate. On Managed Instance it can even cover a block of vCores at no extra license cost. Stack that with reserved capacity, where you commit to one or three years up front, and Microsoft&#x27;s own figure is up to fifty-five percent off pay-as-you-go. Both are off by default. Nobody at the portal turns them on for you. It&#x27;s a checkbox and a reservation, no code, no downtime.&quot;</p><p>PAYOFF (numbered takeaway): &quot;Takeaway four: switch on Azure Hybrid Benefit and buy reserved capacity once the size settles. That&#x27;s up to fifty-five percent off the same database, on Microsoft&#x27;s own pricing.&quot;</p><p>(ON-SCREEN TAKEAWAY: &quot;4 - Turn on Hybrid Benefit + reservation once sized. Up to 55% off.&quot;)</p><p>RE-HOOK: &quot;Cheaper and sized. Now the part that scares everyone, the cutover.&quot;</p><p>(MODALITY on re-hook: talking head, hard cut on &quot;cutover&quot;.)</p><p>[7:30-10:15] VALUE BEAT 5 - Can I move it without a weekend outage?</p><p>CLAIM: &quot;Keep the old server live and cut over in minutes with an online migration, instead of taking a downtime window.&quot;</p><p>(MODALITY: animation)
+(ON-SCREEN CLAIM CARD: &quot;Offline = outage window. Online = cut over in minutes.&quot;)</p><p>PROOF/DEMO (custom animation of online log replay, then a short screen-record of Database Migration Service): Animation shows the on-prem SQL Server on the left still serving little user icons. Azure Database Migration Service does an initial bulk load (a big block slides to the Azure target on the right), then a thin stream of &quot;transaction log&quot; records keeps flowing left to right, keeping both databases matched. At cutover, the little user icons wait for a beat, a switch labelled &quot;connection string&quot; flips from on-prem to Azure, and the users resume on the Azure side. A timer shows &quot;downtime: ~10 min&quot;. Then a two-second screen-record of the DMS migration project status page showing &quot;continuous sync&quot;.</p><p>Spoken: &quot;There are two ways to cut over. Offline is the simple one. You stop the source, back up, restore into Azure SQL, repoint, done. It works, but it needs a downtime window, which for a warehouse can be a whole weekend. Online keeps the old server serving users. Azure Database Migration Service loads the data once, then keeps replaying the transaction log from your on-prem server to Azure so the two stay matched. When you&#x27;re ready, you pick a quiet ten minutes, stop writes, let the last log records drain, and repoint the connection strings. Downtime goes from a weekend to minutes. Online costs a bit more to set up and needs the source reachable from Azure, so weigh it against how much an outage costs the business.&quot;</p><p>PAYOFF (numbered takeaway): &quot;Takeaway five: if downtime is expensive, run an online migration with Database Migration Service and cut over on log replay. Minutes, not a weekend.&quot;</p><p>(ON-SCREEN TAKEAWAY: &quot;5 - Expensive downtime? Online migration + log replay. Cut over in minutes.&quot;)</p><p>RE-HOOK: &quot;It&#x27;s live on Azure. So why are some reports suddenly slower? That trips almost everyone.&quot;</p><p>(MODALITY on re-hook: talking head, quick b-roll cutaway of a loading spinner for one second.)</p><p>[10:15-12:15] VALUE BEAT 6 - Why are my reports slower now?</p><p>CLAIM: &quot;After a clean move, some queries run slower, and it&#x27;s almost always the compatibility level and a cold plan cache.&quot;</p><p>(MODALITY: screen-record)
+(ON-SCREEN CLAIM CARD: &quot;Slower after cutover? Compatibility level + cold cache.&quot;)</p><p>PROOF/DEMO (screen-record Query Store, then a custom animation of the plan swap): Screen-record shows the database Compatibility level dropdown in the Azure SQL settings, set from 160 down to 140 to match the old server. Then the Query Store &quot;Regressed Queries&quot; view opens, showing one query with two plans, an old fast plan and a new slow one, and the &quot;Force Plan&quot; button. Cut to a custom animation: one SQL query flows into an optimizer box; at compatibility level 160 it exits on a long winding path (slow), at level 140 it exits on a short straight path (fast). A &quot;Force Plan&quot; stamp locks the short path in.</p><p>Spoken: &quot;A migration can go perfectly and still hand you a slower report on Monday. Two reasons. First, Azure SQL sets the database to the newest compatibility level, which changes how the optimizer builds query plans. Your old server ran an older level, some plans were tuned around it, and the new optimizer picks a different plan that happens to be worse for that one query. Second, the plan cache starts empty after cutover, so the first runs compile cold and feel slow before they settle. The fix is order. Set the compatibility level to match your old server before you move, get it stable, then raise it one step at a time with Query Store turned on. Query Store keeps the history of every plan, shows you the one that regressed, and lets you force the fast plan back with a click. A regression becomes a five-minute fix instead of a mystery.&quot;</p><p>PAYOFF (numbered takeaway): &quot;Takeaway six: migrate on your old compatibility level, turn on Query Store, and raise the level in steps. When a plan regresses, force the good one and move on.&quot;</p><p>(ON-SCREEN TAKEAWAY: &quot;6 - Keep old compat level, enable Query Store, raise in steps. Force good plans.&quot;)</p><p>RE-HOOK: &quot;That&#x27;s the whole move. So let&#x27;s add up what it really costs.&quot;</p><p>(MODALITY on re-hook: talking head into kinetic type.)</p><p>[12:15-13:20] PAYOFF - recap + pay off the open loop</p><p>Spoken: &quot;So here&#x27;s the full picture. Pick the target from your T-SQL surface, Managed Instance if you&#x27;ve got Agent jobs and cross-database queries. Put a start-and-stop schedule on the Azure-SSIS runtime so you never pay for idle. Size from measured load at the 95th percentile and scale on demand. Switch on Hybrid Benefit and reserved capacity for up to fifty-five percent off. Cut over online on log replay when downtime is costly. And migrate on your old compatibility level with Query Store on, then raise it in steps. That discount I promised at the start is the Hybrid Benefit plus reservation combo, and on a real estate it&#x27;s the difference between an Azure bill that runs higher than your old servers and one that runs noticeably lower. Same database, same packages. The invoice is a set of choices, and now you&#x27;ve seen all of them.&quot;</p><p>(MODALITY: on-screen text / kinetic type)
+(ON-SCREEN: the six takeaways stack in one at a time as a numbered list, then the corner padlock icon from 0:30 clicks open and the words &quot;Hybrid Benefit + reservation = up to 55% off&quot; slide across to pay off the loop.)
+(B-ROLL/ANIM: the two invoice bars from the hook return; the tall red bar shrinks down past the short green bar to land lower, showing the halved compute line.)</p><p>[13:20-14:30] SOFT CTA</p><p>Spoken: &quot;I put the whole thing into a migration checklist, the target decision, the runtime schedule, the sizing method, the discount settings, and the cutover order, in the description below, free. Work through it against your own estate. And if you&#x27;re staring down an SSIS, Tableau, or Premium P-SKU deadline and you&#x27;d rather not learn these breakpoints on your own invoice, that&#x27;s the work we do at CaseWhen out of Berlin. Send us the shape of your estate and we&#x27;ll get you a migration quote, no pitch, just the number and the plan. Next up, I&#x27;ll walk the SSIS to Azure Data Factory rebuild for the packages worth modernizing instead of lifting. That link&#x27;s on screen.&quot;</p><p>(MODALITY: talking head)
+(ON-SCREEN: two link cards, &quot;Free: Azure SQL migration checklist&quot; and &quot;Get a migration quote - CaseWhen&quot;, then a watch-next end card for the SSIS-to-ADF video.)
+(B-ROLL/ANIM: plain lower-third with the checklist link. One quiet subscribe line on screen, no callout animation, no hard sell.)</p><h2>Description</h2><p>Migrate to Azure SQL without the surprise invoice: every hidden cost and gotcha, from picking the right target to a minutes-long cutover.</p><p>Free Azure SQL migration checklist: https://casewhen.co/migration-checklist · Work with CaseWhen: https://casewhen.co/migration-quote</p><p>0:00 What does moving to Azure SQL cost?
+1:20 Which Azure SQL do I pick?
+3:00 What happens to my SSIS packages?
+4:45 How big should I make it?
+6:30 Where&#x27;s the discount most teams miss?
+8:15 Can I move it without a weekend outage?
+10:15 Why are my reports slower now?
+12:15 So what did the whole migration cost?</p><p>When you migrate to Azure SQL, the target choice, the SSIS runtime, and two pricing settings decide most of your bill. This walkthrough moves one legacy SQL Server and its SSIS estate onto Azure SQL and shows where the money leaks: choosing between Azure SQL Database, Managed Instance, and SQL Server on a VM by your T-SQL surface; scheduling the Azure-SSIS Integration Runtime so you stop paying for idle compute; sizing from measured load; switching on Azure Hybrid Benefit and reserved capacity for up to 55% off per Microsoft pricing; cutting over online with Database Migration Service and log replay; and fixing post-migration slow queries with compatibility level and Query Store. The full order lives in the free migration checklist above.</p><p>#AzureSQL #Azure #SQLServer #DataEngineering #PowerBI</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

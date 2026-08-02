@@ -1,0 +1,175 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Power BI Training or Certification First? What Actually Buil</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p>[0:00-0:12] HOOK: *(style: question)*</p><p>&quot;Should you get a Power BI certification or just train on the tool first? Power BI&#x27;s used by more than 30 million people every month, so the skill&#x27;s worth having. What matters is which path gets you hired and promoted.&quot;</p><p>(MODALITY: talking head)
+(ON-SCREEN: keyword card, &quot;POWER BI TRAINING vs CERTIFICATION&quot; with a small &quot;30M+ monthly users&quot; tag)
+(VISIBLE CHANGE: at ~0:06 punch-in on Austin; at ~0:10 the two words &quot;TRAINING&quot; and &quot;CERTIFICATION&quot; split to opposite sides of the frame)</p><p>[0:12-0:45] PROMISE + STAKES + OPEN LOOP</p><p>&quot;By the end of this you&#x27;ll know exactly which one to do first for your situation, what a hiring manager really reads when your resume lands, and the order to learn things so you&#x27;re job-ready in weeks and not a year. Here&#x27;s the stakes. People spend six months and a few hundred dollars chasing a badge that a manager reads in four seconds, then still can&#x27;t build a report that anyone trusts. And near the end I&#x27;ll show you the one thing you can build this weekend that beats every certification on your resume. We hire and train BI people for teams in Berlin, so this is the same call we help people make every week.&quot;</p><p>(MODALITY: b-roll + on-screen text)
+(ON-SCREEN: promise text, three lines appear one at a time: &quot;1. Which first, for you&quot; / &quot;2. What managers really read&quot; / &quot;3. The order to learn it&quot;)
+(B-ROLL: hands scrolling a resume on a laptop, a certificate PDF on screen, an analyst clicking through a real dashboard)
+(VISIBLE CHANGE: each promise line pops on beat; at ~0:38 a hard cut to the first chapter card)</p><p>[0:45-2:15] VALUE BEAT 1: What does the PL-300 certification actually prove?</p><p>CLAIM: &quot;The PL-300 proves you know the buttons, not that you can model real data.&quot;</p><p>(ON-SCREEN: claim card, &quot;A cert proves you know the tool. Not that you can solve the problem.&quot;)</p><p>PROOF/DEMO: &quot;Let me show you what the PL-300 exam really tests. Open the Microsoft Learn objectives page and you&#x27;ll see four areas. Prepare the data, model the data, visualize and analyze, and deploy and maintain. It&#x27;s a good syllabus. It makes you touch Power Query, relationships, DAX, and the service. But look closer at how it&#x27;s graded. It&#x27;s multiple choice and a few interactive tasks against clean, tidy sample data. The exam hands you a dataset that already makes sense. Real work never does. In real work the sales table and the finance table disagree, dates are stored as text, and someone renamed a column last Tuesday. The exam doesn&#x27;t test whether you can untangle that. It tests whether you recognize the right menu.&quot;</p><p>(MODALITY: screen-record, Microsoft Learn PL-300 skills-measured page, then a quick cut to a clean sample dataset inside Power BI Desktop)
+(ON-SCREEN: lower-third label &quot;PL-300 = Power BI Data Analyst Associate&quot;)
+(VISIBLE CHANGE: cursor points to each of the four exam domains; at ~1:40 zoom-punch onto the clean sample data; callout box &quot;clean data = exam, messy data = the job&quot;)</p><p>PAYOFF: &quot;So takeaway one. A certification confirms you can operate Power BI. Treat it as proof you finished a syllabus, not proof you can deliver.&quot;</p><p>(ON-SCREEN: numbered takeaway, &quot;1. A cert proves you finished the syllabus, not that you can deliver.&quot;)</p><p>RE-HOOK: &quot;Which is exactly why the person reading your resume treats it the way they do. Watch what happens to your cert in that pile.&quot;</p><p>[2:15-3:45] VALUE BEAT 2: Why do hiring managers skim past your cert?</p><p>CLAIM: &quot;A certification gets you past a filter. It almost never gets you the offer.&quot;</p><p>(ON-SCREEN: claim card, &quot;The cert opens the door. The work walks through it.&quot;)</p><p>PROOF/DEMO: *[custom animation]* &quot;Here&#x27;s what a Power BI hire looks like from the manager&#x27;s side. Watch this.&quot;</p><p>&gt; CUSTOM ANIMATION: the hiring funnel. A wide funnel with a stack of resume cards dropping in at the top. First gate labeled &quot;Screen&quot;: a checkbox lights up on cards that show &quot;PL-300&quot; or &quot;Power BI experience&quot;, and cards without either slide off to the side and fade. So far the cert helps. The surviving cards fall to a second, narrower gate labeled &quot;Interview: show me your work.&quot; Here the animation flips: cards that are only a cert badge dim and stall at the gate, while cards carrying a small dashboard thumbnail glow green and pass through to a final gate labeled &quot;Offer.&quot; The badge-only cards never reach it. End frame: two paths side by side, &quot;Cert only → stops at the interview&quot; and &quot;Cert + real work → offer&quot;, with the second lit in CaseWhen green.</p><p>&quot;That first gate is real. Recruiters do filter on the keyword, so the cert earns its keep there. But the second gate is a person asking you to open a report and explain a decision you made in it. A badge can&#x27;t answer that. Your work does.&quot;</p><p>(MODALITY: custom animation)
+(ON-SCREEN: gate labels animate in as the cards reach them)
+(VISIBLE CHANGE: every ~5 seconds a new batch of cards drops; color flip at the second gate; final split-path reveal)</p><p>PAYOFF: &quot;Takeaway two. Get the cert to clear the keyword screen, and understand it stops working the second a human asks you to show something.&quot;</p><p>(ON-SCREEN: numbered takeaway, &quot;2. The cert clears the screen. It goes quiet at the interview.&quot;)</p><p>RE-HOOK: &quot;So if the cert isn&#x27;t the thing that closes it, what is? Here&#x27;s the skill that does.&quot;</p><p>[3:45-5:15] VALUE BEAT 3: What actually gets you hired for a Power BI job?</p><p>CLAIM: &quot;The skill that gets you hired is data modeling. A clean star schema is worth more than any badge.&quot;</p><p>(ON-SCREEN: claim card, &quot;Modeling is the skill. Everything else is decoration.&quot;)</p><p>PROOF/DEMO: &quot;Here&#x27;s the difference on a real report. This is a Power BI file built the way most beginners build it, one giant flat table with everything jammed in. It works on ten rows. Watch what happens when I write a simple year-over-year measure against it. The DAX gets ugly, the numbers double-count, and the refresh crawls. Here&#x27;s the same data as a proper model.&quot;</p><p>&gt; CUSTOM ANIMATION: star schema. A single fact table snaps into the middle, labeled &quot;Sales&quot;. Four dimension tables slide in around it (&quot;Date&quot;, &quot;Product&quot;, &quot;Customer&quot;, &quot;Region&quot;) and one-to-many relationship arrows light up from each dimension into the fact table, forming a clean star. A &quot;flat table&quot; version sits beside it, one bloated grey block, visibly heavier. A speed meter under each: the star model fills fast and green, the flat table drags and stalls in amber.</p><p>&quot;Same measure on the star schema. The DAX is three lines, the totals are right, and it&#x27;s instant. This is what a manager is testing for at that second gate. Not whether you memorized a function. Whether your model survives when the data gets real. No certification exam pushes you to feel this difference, because the exam data never breaks.&quot;</p><p>(MODALITY: screen-record + custom animation)
+(ON-SCREEN: lower-third label &quot;Star schema, one fact, many dimensions&quot;)
+(VISIBLE CHANGE: split-screen flat-table vs star; DAX shrinks from a long block to three lines on a cut; the two speed meters race)</p><p>PAYOFF: &quot;Takeaway three. Learn to model before you learn one more DAX trick. A star schema is the single skill that separates people who get hired from people who get filtered.&quot;</p><p>(ON-SCREEN: numbered takeaway, &quot;3. Learn modeling first. The star schema is the hiring skill.&quot;)</p><p>RE-HOOK: &quot;Now, I said the cert is weak on its own. I didn&#x27;t say it&#x27;s useless. There are times you should get it first, and here&#x27;s exactly when.&quot;</p><p>[5:15-6:45] VALUE BEAT 4: When is getting certified first the right move?</p><p>CLAIM: &quot;Get certified first in three specific situations. Outside those, train first.&quot;</p><p>(ON-SCREEN: claim card, &quot;Cert first: 3 cases. Otherwise, build first.&quot;)</p><p>PROOF/DEMO: &quot;I&#x27;m not anti-certification. I&#x27;ll be straight about when it&#x27;s the right first move. One, your employer pays for it and ties it to a raise or a role change. Free money and a signal to your own management, take it. Two, you&#x27;re switching careers with nothing BI on your resume and you need something, anything, to survive the keyword screen we just watched. The cert buys you past that first gate while you build the real work behind it. Three, you&#x27;re selling into big companies or the public sector where a Microsoft credential is a box on a form somebody has to tick. In those three, cert first makes sense. Everywhere else, if you already have a job to point at or you learn better by building, train first and add the cert later as a formality. The cert is a receipt. It&#x27;s more convincing after you can actually do the work, not before.&quot;</p><p>(MODALITY: talking head)
+(ON-SCREEN: three cards count on as Austin names them, &quot;1. Employer pays + ties to role&quot; / &quot;2. Career switch, empty resume&quot; / &quot;3. Enterprise / public sector box-tick&quot;)
+(VISIBLE CHANGE: each case card slides in on beat; punch-in on Austin for the &quot;it&#x27;s a receipt&quot; line; at ~6:30 a subtle b-roll cutaway of an offer letter)</p><p>PAYOFF: &quot;Takeaway four. Certify first only when someone else pays, when your resume is empty, or when a form demands it. Otherwise build first, certify later.&quot;</p><p>(ON-SCREEN: numbered takeaway, &quot;4. Cert first only for: paid, empty resume, or a required box.&quot;)</p><p>RE-HOOK: &quot;Alright. Say you&#x27;ve decided to train. What do you actually learn, and in what order, so you&#x27;re not wasting three months on the wrong things?&quot;)</p><p>[6:45-8:30] VALUE BEAT 5: What should you learn, and in what order?</p><p>CLAIM: &quot;There&#x27;s a right order to learn Power BI. Most people learn it backwards and stall.&quot;</p><p>(ON-SCREEN: claim card, &quot;Learn it in order. Backwards is why people quit.&quot;)</p><p>PROOF/DEMO: &quot;Most beginners start with pretty charts, because that&#x27;s the fun part, then hit a wall when nothing reconciles. Here&#x27;s the order that actually works.&quot;</p><p>&gt; CUSTOM ANIMATION: the skill roadmap. A horizontal track with five stations lighting up left to right, each snapping in as Austin names it. Station 1 &quot;Get and shape data (Power Query)&quot;. Station 2 &quot;Model it (star schema, relationships)&quot;. Station 3 &quot;Measure it (core DAX)&quot;. Station 4 &quot;Visualize and read it&quot;. Station 5 &quot;Publish and share (the service, refresh)&quot;. A small figure walks the track. When the animation rewinds to show the &quot;wrong way&quot;: starting at station 4: the figure trips and the track ahead stays dark, showing the stall.</p><p>&quot;One, get and shape data in Power Query, because messy input breaks everything downstream. Two, model it, the star schema we just built. Three, learn just enough DAX for the measures you actually need, not all of it. Four, then visuals, which are quick once the model is right. Five, publish, refresh, and share it safely. Notice modeling sits at step two, near the front. That&#x27;s on purpose. Do it in this order and each step supports the next. Start at the charts and you build on sand.&quot;</p><p>(MODALITY: custom animation)
+(ON-SCREEN: the five stations remain as a numbered list after the walk-through)
+(VISIBLE CHANGE: each station lights on beat; the &quot;wrong way&quot; rewind and stumble; final full-track glow in green)</p><p>PAYOFF: &quot;Takeaway five. Learn in this order, shape, model, measure, visualize, publish. Modeling near the front is what keeps you from quitting at month three.&quot;</p><p>(ON-SCREEN: numbered takeaway, &quot;5. Order: shape → model → measure → visualize → publish.&quot;)</p><p>RE-HOOK: &quot;Now the part I promised at the start. The one thing you build this weekend that beats every cert on the pile.&quot;</p><p>[8:30-10:15] WORKED EXAMPLE: How do you prove skill when you have no job yet?</p><p>CLAIM: &quot;Build one portfolio report on public data. That&#x27;s your proof, and it wins the interview.&quot;</p><p>(ON-SCREEN: claim card, &quot;One real report &gt; one certificate.&quot;)</p><p>PROOF/DEMO: &quot;Here&#x27;s the move, and it costs nothing. Grab a public dataset, something with real mess in it. Government spending data, a Kaggle sales set, your city&#x27;s open transit numbers. Then build the whole pipeline end to end on camera in your own file. Pull it in with Power Query and clean it. Model it as a star schema, exactly like we did. Write three or four measures that answer a real question, like which region is growing once you strip out last year&#x27;s one-off. Build a single clean page that answers it. Then, and this is the part people skip, write two paragraphs on why you modeled it that way and one decision you made. Put the file and those paragraphs somewhere public. Now when that second interview gate asks &#x27;show me your work,&#x27; you open this, and you talk through a real decision. Watch what that does next to a resume that&#x27;s only a badge.&quot;</p><p>&gt; CUSTOM ANIMATION: the resume comparison. Two resume cards side by side. Left card: just a &quot;PL-300&quot; badge, static. Right card: the same badge plus a live dashboard thumbnail and a &quot;why I built it this way&quot; note. An interviewer icon points at each. The left card produces a flat speech bubble &quot;...I passed the exam.&quot; The right card produces a bubble that expands into the actual report opening and filtering. The right card lifts and stamps &quot;OFFER&quot; in CaseWhen green.</p><p>&quot;That&#x27;s the whole trick. You didn&#x27;t need a job to build it. You needed one public dataset and the order we just covered.&quot;</p><p>(MODALITY: screen-record + b-roll)
+(ON-SCREEN: lower-third label &quot;Portfolio report, public data, end to end&quot;)
+(VISIBLE CHANGE: fast montage of the four pipeline steps, each ~5 seconds; slow single-shot on the &quot;write two paragraphs&quot; line; cut to the comparison animation)</p><p>PAYOFF: &quot;So the open loop, paid off. The one thing that beats a cert is a single real report on public data that you can talk through. Build it this weekend.&quot;</p><p>(ON-SCREEN: numbered takeaway, &quot;The weekend win: one portfolio report on public data.&quot;)</p><p>RE-HOOK: &quot;Let me put the whole decision back together so you leave knowing exactly what to do first.&quot;</p><p>[10:15-11:20] PAYOFF: So which one comes first for your career?</p><p>&quot;Here&#x27;s everything, on one screen.&quot;</p><p>(MODALITY: on-screen text / kinetic type + data-viz)
+(ON-SCREEN: the five takeaways recap as a clean animated list)</p><p>&gt; 1. A cert proves you finished the syllabus, not that you can deliver.
+&gt; 2. The cert clears the resume screen, then goes quiet at the interview.
+&gt; 3. Learn modeling first. The star schema is the hiring skill.
+&gt; 4. Cert first only when someone else pays, your resume&#x27;s empty, or a form demands it.
+&gt; 5. Learn in order: shape, model, measure, visualize, publish.</p><p>&quot;So which comes first? For most people, training first. Build the modeling skill and one portfolio report, then add the certification as a formality that clears the keyword screen. Flip it only in those three cases we covered. The badge is a receipt. Get good enough that the receipt is just confirming what your work already shows.&quot;</p><p>(VISIBLE CHANGE: each recap line brightens as Austin lands it; final frame shows the one-line rule &quot;Train first, certify to confirm, flip only for the 3 cases&quot;)</p><p>[11:20-12:00] SOFT CTA</p><p>&quot;If you want a running start on that order, we put together a free mini-lesson plus a 20-Point Power BI Model Review Checklist, so you can check your own portfolio report against the same things a hiring manager and a real BI team look at. It&#x27;s linked below, no email gymnastics. That checklist is the free version of how we train people. The full Foundations-to-Fabric course is linked down there too, and for teams we run custom Power BI and Fabric workshops, including Copilot enablement that Microsoft helps fund. If your team&#x27;s trying to get sharper on real data and you&#x27;d rather not figure the order out the hard way, that&#x27;s literally what we do at CaseWhen. Link&#x27;s in the description. No pitch, just a conversation. Next, go watch the star schema build in full, since that&#x27;s the skill this whole thing rests on.&quot;</p><p>(MODALITY: talking head)
+(ON-SCREEN: link cards in sequence, &quot;Free: Mini-lesson + 20-Point Model Review Checklist&quot; / &quot;Foundations-to-Fabric course&quot; / &quot;Team workshops (Copilot enablement, MS co-funded)&quot; / &quot;Watch next: Build a Star Schema&quot;)
+(VISIBLE CHANGE: each card slides in as named; end on a plain lower-third &quot;casewhen.co&quot;)</p><h2>Description</h2><p>Power BI training or a Power BI certification first? Here&#x27;s which one actually gets you hired and promoted, and the order to learn it in.</p><p>Free: Mini-lesson + 20-Point Power BI Model Review Checklist → [link]
+Work with CaseWhen (team Power BI &amp; Fabric training) → [link]</p><p>0:00 Should I get certified or just learn Power BI?
+0:45 What does the PL-300 certification actually prove?
+2:15 Why do hiring managers skim past your cert?
+3:45 What actually gets you hired for a Power BI job?
+5:15 When is getting certified first the right move?
+6:45 What should you learn, and in what order?
+8:30 How do you prove skill when you have no job yet?
+10:15 So which one comes first for your career?</p><p>Most people chasing a Power BI job get the order wrong. They spend months on the PL-300 certification, clear the resume screen, then stall at the interview when someone asks to see their work. This video breaks down what a certification actually proves, why hiring managers skim past it, and the one skill that closes the offer: data modeling and a clean star schema. You&#x27;ll get the exact order to learn Power BI (shape, model, measure, visualize, publish), the three cases where getting certified first does make sense, and a weekend project that builds a portfolio report from public data and beats a badge in the interview. Training first for most people, certification to confirm.</p><p>Resources:
+- Free mini-lesson + 20-Point Power BI Model Review Checklist → [link]
+- Foundations-to-Fabric course → [link]
+- Team Power BI &amp; Fabric workshops (Copilot enablement, Microsoft co-funded) → [link]
+- Watch next: Build a Star Schema in Power BI → [link]</p><p>#PowerBI #PowerBITraining #PL300 #DataAnalytics #MicrosoftFabric</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

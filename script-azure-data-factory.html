@@ -1,0 +1,211 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Azure Data Factory einfach erklärt: was es tut und ob es abg</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p>[0:40-2:10] VALUE BEAT 1: Was macht Azure Data Factory überhaupt?
+CLAIM: SAJU: &quot;Azure Data Factory ist der Dienst, der Ihre Daten von A nach B bewegt, sie unterwegs umformt, und das nach Zeitplan von allein tut.&quot;
+(ON-SCREEN: Claim-Karte &quot;Bewegen, umformen, terminieren.&quot;)
+PROOF: (MODALITY: custom animation.)
+(ANIMATION: links drei Quellen als Symbole, eine SQL-Datenbank, ein SAP-Würfel, ein Ordner mit CSV-Dateien. Pfeile laufen in eine mittlere Box mit der Beschriftung &quot;Pipeline&quot;. Unterwegs formt ein kleiner Knoten die Zeilen um, aus krummen Spalten werden saubere. Rechts fließt das Ergebnis in ein Ziel mit der Beschriftung &quot;Warehouse / OneLake&quot;. Oben tickt eine Uhr auf 02:00 und startet den Lauf. Farben: CaseWhen-Grün #1D967C, Amber nur für den Moment, in dem die Uhr auslöst.)
+SAJU (über der Animation): &quot;Der Fachbegriff dafür ist ETL: extrahieren, transformieren, laden. Übersetzt: Daten aus den Quellen ziehen, in Form bringen, ins Ziel schreiben. Data Factory ist das Werkzeug, das diese Strecke steuert und terminiert. Zwei Dinge machen es angenehm. Erstens ist es serverlos, es gibt keine Maschine, die Sie warten oder patchen. Zweitens bringt es über 90 fertige Konnektoren mit, für SQL, SAP, Oracle, Salesforce, Blob-Speicher und so weiter. Sie verbinden also, statt zu programmieren. Und weil ein Zeitplan dahinterliegt, passiert das jede Nacht von selbst, ohne dass jemand einen Knopf drückt.&quot;
+PAYOFF: (MODALITY: on-screen text.)
+(ON-SCREEN: nummerierte Karte &quot;Merksatz 1: ADF ist Bewegung plus Umformung plus Zeitplan. Kein Server, den Sie pflegen.&quot;)
+RE-HOOK: SAJU: &quot;Klingt abstrakt? Öffnen wir eine echte Pipeline und schauen, woraus sie besteht.&quot;</p><p>[2:10-3:40] VALUE BEAT 2: Woraus besteht eine Pipeline?
+CLAIM: SAJU: &quot;Eine Pipeline besteht aus vier Bausteinen, mehr müssen Sie am Anfang nicht kennen.&quot;
+(ON-SCREEN: Claim-Karte &quot;Verknüpfter Dienst, Dataset, Aktivität, Trigger.&quot;)
+PROOF: (MODALITY: screen-record.)
+(SCREEN-RECORD: Azure Data Factory Studio. Auf der Zeichenfläche liegt eine Pipeline mit einer Copy-Aktivität. Der Cursor umkreist nacheinander vier Stellen: den verknüpften Dienst mit dem Verbindungs-Symbol, ein Dataset, das auf eine Tabelle zeigt, eine ForEach-Schleife um die Copy-Aktivität, und rechts oben den Zeitplan-Trigger &quot;täglich 02:00&quot;. Beim Klick auf &quot;Debug&quot; färben sich die Schritte grün, während die Zeilen kopiert werden.)
+SAJU: &quot;Vier Bausteine, das war es fürs Erste. Der verknüpfte Dienst ist die Verbindung, also die Zugangsdaten zu Quelle und Ziel. Das Dataset sagt, welche Tabelle oder welche Datei gemeint ist. Die Aktivität ist der eigentliche Schritt, die Copy-Aktivität kopiert, eine ForEach-Schleife wiederholt sie über viele Tabellen. Und der Trigger legt fest, wann das Ganze läuft, nach Uhrzeit oder bei einem Ereignis, etwa wenn eine neue Datei ankommt. Wenn Sie diese vier Begriffe kennen, können Sie jede fremde Pipeline lesen.&quot;
+PAYOFF: (MODALITY: on-screen text.)
+(ON-SCREEN: nummerierte Karte &quot;Merksatz 2: Verknüpfter Dienst, Dataset, Aktivität, Trigger. Damit lesen Sie jede Pipeline.&quot;)
+RE-HOOK: SAJU: &quot;Eine Frage hält fast jeden auf: Wie kommt ADF an Daten, die in Ihrem eigenen Rechenzentrum liegen, hinter der Firewall?&quot;</p><p>[3:40-5:10] VALUE BEAT 3: Wie hole ich Daten aus meinem eigenen Netz?
+CLAIM: SAJU: &quot;Für Daten hinter Ihrer Firewall brauchen Sie eine selbstgehostete Integration Runtime.&quot;
+(ON-SCREEN: Claim-Karte &quot;Eigenes Netz = Self-hosted Integration Runtime.&quot;)
+PROOF: (MODALITY: custom animation.)
+(ANIMATION: rechts die Cloud mit Azure Data Factory. Links ein Firmennetz hinter einer Firewall-Wand, darin eine Datenbank. In das Firmennetz setzt sich ein kleines Agenten-Symbol &quot;Self-hosted IR&quot;. Von diesem Agenten geht ein einziger Pfeil nach außen zur Cloud, deutlich beschriftet &quot;nur ausgehend&quot;. Über diesen Pfeil wandern die Daten heraus, die Firewall-Wand bleibt geschlossen. Unten drei Etiketten für die drei Runtime-Arten: &quot;Azure IR, Cloud zu Cloud&quot;, &quot;Self-hosted IR, eigenes Netz&quot;, &quot;Azure-SSIS IR, alte SSIS-Pakete&quot;.)
+SAJU (über der Animation): &quot;Die Integration Runtime ist die Rechenleistung, die die Arbeit tatsächlich ausführt. Es gibt drei Arten. Die Azure Integration Runtime läuft in der Cloud und reicht, wenn Quelle und Ziel schon in der Cloud liegen. Die selbstgehostete Runtime ist ein kleiner Agent, den Sie auf einer Maschine in Ihrem eigenen Netz installieren. Wichtig dabei: Der Agent baut die Verbindung von innen nach außen auf, Sie öffnen also keinen einzigen eingehenden Port in Ihrer Firewall. Genau das macht die IT-Sicherheit ruhig. Und die Azure-SSIS Runtime lässt Sie bestehende SSIS-Pakete unverändert in der Cloud laufen, falls Sie aus der alten Microsoft-Welt kommen.&quot;
+PAYOFF: (MODALITY: on-screen text.)
+(ON-SCREEN: nummerierte Karte &quot;Merksatz 3: Die Integration Runtime ist die Rechenleistung. Self-hosted holt sicher aus dem eigenen Netz, ohne einen Port zu öffnen.&quot;)
+RE-HOOK: SAJU: &quot;Jetzt der Teil, wegen dem Sie vielleicht überhaupt hier sind: Ist dieses ADF nicht in Fabric verschwunden?&quot;</p><p>[5:10-6:40] VALUE BEAT 4: Ist ADF jetzt in Fabric aufgegangen?
+CLAIM: SAJU: &quot;Der Motor von ADF läuft heute an drei Stellen, abgeschaltet wird keine davon.&quot;
+(ON-SCREEN: Claim-Karte &quot;Ein Motor, drei Orte.&quot;)
+PROOF: (MODALITY: data-viz mit eingebettetem Feature-Detail.)
+(DATA-VIZ: drei Spalten nebeneinander, &quot;Azure Data Factory, eigenständig&quot;, &quot;Synapse Pipelines&quot;, &quot;Fabric Data Pipelines&quot;. In jeder Spalte leuchtet dasselbe Pipeline-Symbol auf, darunter das Etikett &quot;gleiche Bausteine: verknüpfter Dienst, Dataset, Aktivität, Trigger&quot;. Über allen dreien der Hinweis &quot;keine wird abgeschaltet&quot;.)
+(SCREEN-DETAIL eingeblendet: in Microsoft Fabric der Bereich Data Factory. Eine Data pipeline wird geöffnet, sie sieht der ADF-Pipeline fast identisch aus, dieselbe Copy-Aktivität, dieselbe ForEach-Schleife. Daneben ein Dataflow Gen2 für die leichtere Umformung.)
+SAJU: &quot;Klären wir die Angst direkt. Das eigenständige Azure Data Factory ist weiterhin eine unterstützte Azure-Ressource, es wird nicht abgekündigt. Die Pipelines in Azure Synapse sind derselbe Motor unter anderem Namen. Und in Microsoft Fabric taucht genau dasselbe als Data Pipelines und Dataflow Gen2 wieder auf. Microsoft nennt Fabric die Weiterentwicklung, aber es hat die Pipeline-Bausteine nicht neu erfunden, sondern übernommen. Für Sie heißt das: Was Sie in ADF lernen, verknüpfter Dienst, Dataset, Aktivität, Trigger, gilt eins zu eins in Synapse und in Fabric weiter.&quot;
+PAYOFF: (MODALITY: on-screen text.)
+(ON-SCREEN: nummerierte Karte &quot;Merksatz 4: ADF, Synapse und Fabric teilen sich die Pipeline. Ihr Wissen zieht mit um, nichts wird weggeworfen.&quot;)
+RE-HOOK: SAJU: &quot;Bleibt die praktische Frage: Brauchen Sie ADF überhaupt, oder reicht das, was in Power BI schon eingebaut ist?&quot;</p><p>[6:40-8:10] VALUE BEAT 5: Brauche ich ADF oder reicht Power Query?
+CLAIM: SAJU: &quot;Die Grenze ist einfach: Power Query formt für einen Bericht, ADF bewegt für die ganze Firma.&quot;
+(ON-SCREEN: Claim-Karte &quot;Power Query = ein Bericht. ADF = viele Ziele.&quot;)
+PROOF: (MODALITY: screen-record.)
+(SCREEN-RECORD: zuerst Power BI mit Power Query, zwei kleine Tabellen werden für ein Modell zurechtgeschnitten, Spalten umbenannt, ein Datum geteilt. Schnitt. Dann Azure Data Factory: eine Copy-Aktivität schaufelt in der Monitor-Ansicht mehrere Millionen Zeilen in ein Warehouse, eine ForEach-Schleife arbeitet 40 Quelldateien nacheinander ab. Der Zähler der kopierten Zeilen läuft sichtbar hoch.)
+SAJU: &quot;So entscheiden Sie ohne langes Grübeln. Wenn Sie ein paar Tabellen zurechtschneiden, um genau ein Power BI Modell zu füttern, reicht Power Query, in Fabric also Dataflow Gen2. Zu ADF greifen Sie, sobald eines davon zutrifft: viele Quellen, große Mengen, denn die Copy-Aktivität bewegt Millionen Zeilen effizient, Daten aus dem eigenen Netz, ein Zeitplan mit Abhängigkeiten, oder ein Warehouse, das anschließend viele Berichte lesen. Faustregel: leichte Umformung für einen Bericht bleibt in Power Query, schweres Bewegen und Steuern für viele Abnehmer gehört in ADF.&quot;
+PAYOFF: (MODALITY: on-screen text.)
+(ON-SCREEN: nummerierte Karte &quot;Merksatz 5: Ein Bericht, wenig Umformung, Power Query. Viele Quellen, viel Volumen, ein Warehouse, ADF.&quot;)
+RE-HOOK: SAJU: &quot;Damit haben Sie das ganze Bild. Was heißt das jetzt konkret ab Montag?&quot;</p><p>[8:10-10:00] WORKED EXAMPLE + REAL NUMBER + OPEN-LOOP PAYOFF
+(MODALITY: talking head mit B-Roll und eingeblendeter Data-Viz.)
+SAJU: &quot;Machen wir es an einem echten Fall. Ein Team in Berlin, klassischer Monatsabschluss: 40 Dateien, jede Nacht von Hand aus drei Quelldatenbanken exportiert, und morgens setzt jemand alles in Excel zusammen. Wir haben nichts Exotisches gebaut. Eine ForEach-Schleife über die 40 Quelltabellen, eine Copy-Aktivität in ein Azure SQL Warehouse, ein Trigger um zwei Uhr nachts, und für die Datenbank im eigenen Rechenzentrum eine selbstgehostete Integration Runtime.&quot;
+(B-ROLL: Whiteboard mit einer Pipeline-Skizze, vier Kästchen und Pfeile; Hände, die Haftnotizen umsortieren.)
+(DATA-VIZ: Vorher-Nachher, links &quot;40 Exporte · jede Nacht von Hand · Excel&quot;, rechts &quot;1 Pipeline · 02:00 automatisch · 0 Handgriffe&quot;.)
+SAJU: &quot;Ergebnis nach zwei Wochen: Der Bericht stand morgens um sechs fertig da, ohne dass jemand ihn angefasst hat. Und die 94 Prozent Fehlerquote aus manuellen Tabellen greifen hier nicht mehr, weil niemand mehr von Hand kopiert. Zur Einordnung, was das wert ist: Diese 94 Prozent stammen aus einer geprüften Untersuchung von Poon und Kollegen aus 2024. Eine terminierte Pipeline nimmt genau diese Fehlerquelle heraus.&quot;
+(ON-SCREEN: Statistik-Karte &quot;94 Prozent der Geschäfts-Tabellen enthalten Fehler. Quelle: Poon et al., 2024.&quot;)
+SAJU: &quot;Und jetzt der Punkt, den ich Ihnen am Anfang versprochen habe. Warum benutzt ADF in Fabric denselben Motor? Weil Microsoft dieselben vier Bausteine nach Fabric übernommen hat, statt sie neu zu bauen. Wer heute eine Copy-Aktivität und einen Trigger anlegt, baut morgen in Fabric fast das Gleiche. Genau deshalb ist die Angst vor dem Abschalten unbegründet: Sie lernen einmal, wie Pipelines funktionieren, und nutzen dieses Wissen in ADF, in Synapse und in Fabric.&quot;</p><p>[10:00-10:40] PAYOFF: Recap, der volle Gewinn zum Mitnehmen
+(MODALITY: kinetic type, Liste baut sich Zeile für Zeile auf.)
+SAJU: &quot;Fassen wir zusammen, das ist Ihr komplettes Rezept, auch wenn Sie uns nie kontaktieren.
+Erstens: ADF ist Bewegung plus Umformung plus Zeitplan, ohne Server, den Sie pflegen.
+Zweitens: Eine Pipeline sind vier Bausteine, verknüpfter Dienst, Dataset, Aktivität, Trigger.
+Drittens: Die Integration Runtime ist die Rechenleistung, self-hosted holt sicher aus dem eigenen Netz.
+Viertens: ADF, Synapse und Fabric teilen sich die Pipeline, Ihr Wissen zieht mit um.
+Fünftens: Wenig Umformung für einen Bericht bleibt in Power Query, viel Bewegen für viele Ziele gehört in ADF.&quot;
+(ON-SCREEN: die fünf Merksätze als nummerierte Liste, CaseWhen-Grün.)</p><p>[10:40-12:00] SOFT CTA: Wo fange ich an?
+(MODALITY: talking head mit Link-Karten.)
+SAJU: &quot;Wenn Sie wissen wollen, ob Ihre Azure-Datenbasis heute sauber steht: Unter dem Video liegt die kostenlose Azure-Datenplattform Checkliste. Sie gehen sie einmal durch und sehen schwarz auf weiß, wo Verbindungen, Runtimes und Zeitpläne bei Ihnen noch von Hand hängen. Und wenn Sie gerade eine Azure-Datenbasis aufbauen oder von den nächtlichen Exporten wegwollen, sprechen Sie mit uns über den Aufbau. Kein Verkaufsgespräch, ein echtes Gespräch, genau das machen wir bei CaseWhen jede Woche mit Teams in Berlin. Als Nächstes schauen Sie das Video zu Azure Synapse, da ordne ich ein, was bleibt und was in Fabric neu dazukommt. Bis dahin.&quot;
+(ON-SCREEN: Link-Karte 1 &quot;Azure-Datenplattform Checkliste, kostenlos&quot;. Link-Karte 2 &quot;Über den Aufbau sprechen&quot;. Karte 3 &quot;Als Nächstes: Azure Synapse einfach erklärt&quot;.)</p><h2>Description
+Azure Data Factory einfach erklärt: was der Dienst als ETL-Werkzeug tut, woraus eine Pipeline besteht, und warum Azure Data Factory nicht abgeschafft, sondern in Microsoft Fabric weitergeführt wird.</h2><p>Kostenlose Azure-Datenplattform Checkliste: https://casewhen.co/checkliste
+Mit CaseWhen arbeiten (Azure-Aufbau): https://casewhen.co/kontakt</p><p>Kapitel:
+0:00 Wird Azure Data Factory abgeschafft?
+1:20 Was macht Azure Data Factory überhaupt?
+2:50 Woraus besteht eine Pipeline?
+4:20 Wie hole ich Daten aus meinem eigenen Netz?
+5:50 Ist ADF jetzt in Fabric aufgegangen?
+7:20 Brauche ich ADF oder reicht Power Query?
+8:50 Was mache ich damit ab Montag?
+10:40 Wo fange ich an?</p><p>Ressourcen:
+- Azure-Datenplattform Checkliste: https://casewhen.co/checkliste
+- 20-Punkte Power BI Modell-Review Checkliste: https://casewhen.co/checkliste-modell
+- Nächstes Video, Azure Synapse einfach erklärt: https://casewhen.co/synapse</p><p>In diesem Video erklärt Saju von CaseWhen Azure Data Factory ohne Buzzwords. Sie sehen, was Azure Data Factory als ETL-Werkzeug tut, woraus eine Pipeline besteht, nämlich verknüpfter Dienst, Dataset, Aktivität und Trigger, und wie die Integration Runtime funktioniert, damit Sie auch Daten aus dem eigenen Netz sicher laden. Saju nimmt außerdem die verbreitete Sorge aus dem Weg, dass Azure Data Factory abgeschafft wird: Der Dienst läuft eigenständig, in Azure Synapse und in Microsoft Fabric mit denselben Pipeline-Bausteinen weiter. Am Ende gibt es fünf konkrete Merksätze, die Sie ab Montag anwenden können, plus eine klare Grenze, wann ADF und wann Power Query das richtige Werkzeug ist.</p><p>#AzureDataFactory #Azure #MicrosoftFabric #DataEngineering #PowerBI</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

@@ -1,0 +1,205 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · How to Learn Power BI Without Wasting Six Months (The Tutori</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># How to Learn Power BI Without Wasting Six Months (The Tutorial Order That Works)
+Host: Austin · Cluster: training · Target: 12 min · Primary keyword: power bi tutorial</p><h2>Chapters
+- 0:00 Why do most Power BI tutorials waste six months?
+- 0:45 What should I learn first?
+- 2:15 Why clean the data before anything else?
+- 3:45 What is a star schema, and why learn it third?
+- 5:20 When do I start writing DAX?
+- 6:55 How do I pick the right visual?
+- 8:25 How do I run this as a one week plan?
+- 10:20 What is the fastest path from here?</h2><h2>Script</h2><p>[0:00-0:12] HOOK (contrarian)
+Spoken (Austin): &quot;Most people who search &#x27;Power BI tutorial&#x27; spend the first six months learning it in the wrong order, and most of that time goes on the part that matters least. Formatting. Colors. Which button does what. Here&#x27;s the order that gets you productive in about six weeks instead.&quot;
+(MODALITY: b-roll) Split screen: left, a hand nudging chart colors on a half finished report at &quot;month 6&quot;; right, a clean simple report already answering a question at &quot;week 6&quot;. Cursor spotlight on each side.
+(ON-SCREEN: keyword card &quot;power bi tutorial&quot; lower third, plus the words &quot;wrong order&quot; then &quot;right order&quot; swapping in.)
+(Visible change every ~5s: month-6 vs week-6 stamps punch in; the two halves slide.)</p><p>[0:12-0:45] PROMISE + STAKES + OPEN LOOP
+Spoken: &quot;By the end of this you&#x27;ll have the exact sequence to learn Power BI in: what to learn first, what to skip for now, and the one skill most people learn last that you should learn third. Learn it out of order and you get what a lot of self taught analysts get: a report that looks fine, numbers nobody trusts, and a rebuild three months in. This is a skill worth getting right. Microsoft reports Power BI is used by more than 375,000 organizations, and Gartner has ranked Microsoft a leader in analytics for eighteen years running, so it isn&#x27;t going anywhere. Near the end I&#x27;ll give you the one measure pattern that answers most business questions, so you can stop memorizing DAX functions one at a time. We train BI teams on this order every week, so this is the same path we start people on.&quot;
+(MODALITY: talking head) Austin to camera, then a quick cut to a second angle on the stat line.
+(ON-SCREEN: three chips animate in &quot;learn first / skip for now / learn third&quot;; then a source card &quot;Microsoft; Gartner Magic Quadrant, 2025&quot;.)
+(Open loop planted: the one measure pattern, paid off at 6:55.)</p><p>[0:45-2:15] VALUE BEAT 1 - the order
+CLAIM (ON-SCREEN card): &quot;Learn Power BI in outcome order: get data, shape it, model it, measure it, then visualize.&quot;
+(MODALITY: on-screen text / kinetic type) The five steps stack in, one lighting up at a time in sequence, numbered 1 to 5. Then a slow pan.
+Spoken: &quot;There are five things Power BI does, and they happen in this order every time. You get data in. You shape it. You model it, which means connecting your tables. You write measures. Then you build visuals. Most tutorials drop you at step five, dragging charts onto a canvas, because that&#x27;s the part that looks impressive on day one. So you learn the fun part first and the load bearing parts never. Flip it. Learn them in the order the data moves.&quot;
+(Internal modality switch ~40s in: cut to a short screen pan across Power BI Desktop, cursor moving from the Get Data ribbon, to Power Query, to model view, to the measures pane, to the canvas, so the five steps map to five real places.)
+PAYOFF (ON-SCREEN numbered takeaway): &quot;Takeaway 1: Learn in the order the data moves. Modeling comes before measures, and both come before visuals.&quot;
+RE-HOOK: &quot;Start with step one, and step one trips up more beginners than any DAX function. It&#x27;s getting the data clean.&quot;</p><p>[2:15-3:45] VALUE BEAT 2 - shape the data
+CLAIM (ON-SCREEN card): &quot;Do all your shaping in Power Query, before the data ever reaches your report.&quot;
+(MODALITY: screen-record) Power Query Editor open on a messy import: a date column stored as text, two stray header rows sitting in the data, a Region column with &quot;North&quot;, &quot;north &quot;, and &quot;N&quot; all present.
+Spoken: &quot;Every beginner hits the same wall. The data comes in messy. Dates that are text. A region column with four spellings of the same region. Totals mixed into the rows. The instinct is to fix it later with a formula in the report. Do it here instead, in Power Query, before the report sees it. Watch. This column is text, I set it to a date. This region field has trailing spaces, I trim it. These two rows aren&#x27;t data, I remove them. Every step gets recorded on the right, so the same cleanup runs itself on next month&#x27;s file with zero extra work.&quot;
+(Screen-record beats: click Change Type, then Trim, then Replace Values so the three spellings become one, then Remove Top Rows. The Applied Steps list on the right grows with each click. Cursor spotlight on each step name.)
+PAYOFF (ON-SCREEN numbered takeaway): &quot;Takeaway 2: Clean in Power Query, not in the report. If you&#x27;re writing a measure to fix messy data, move that fix upstream.&quot;
+RE-HOOK: &quot;Clean data still won&#x27;t get you fast, trustworthy numbers on its own. The next step is the one people skip, and it&#x27;s the reason six months turns into six weeks.&quot;</p><p>[3:45-5:20] VALUE BEAT 3 - the model (star schema)
+CLAIM (ON-SCREEN card): &quot;Build a star schema: one fact table in the middle, dimension tables around it.&quot;
+(MODALITY: custom animation) STAR SCHEMA ANIMATION. Center: a Sales fact table (columns: Date, Product, Customer, Amount) glows in. Around it, four dimension tables snap into place one at a time: Date, Product, Customer, Region. A one-to-many relationship arrow lights up from each dimension into the fact table. Then a contrast beat: a single giant flat table on the left strains and sags under its own width, while the tidy star on the right sits clean. Final beat: a user clicks a filter &quot;Region = North&quot;, and a pulse travels down the Region arrow into the fact table, and the total on a card ticks to a smaller number.
+Spoken: &quot;This is the skill most people learn last, and it&#x27;s the one that should come third. It&#x27;s the data model. Instead of one giant flat table with everything crammed into it, you split your data into a fact table, the thing you measure, like sales, and dimension tables around it, like date, product, and customer. You connect them with relationships. That shape is called a star schema. Here&#x27;s why it earns its place early. When you click a filter on region, that filter flows down these relationships into your numbers on its own, so one measure works across every chart. Learn this third, and every measure and every visual after it gets easier. Learn it last, after you&#x27;ve built forty charts on a flat table, and you rebuild all forty.&quot;
+(Keyword card &quot;star schema&quot; stays on screen through the beat. Slow, quiet delivery on the &quot;learn it third&quot; line; the arrows light up in rhythm with the sentence.)
+PAYOFF (ON-SCREEN numbered takeaway): &quot;Takeaway 3: Model before you measure. One fact table, dimensions around it, relationships connecting them. This is what makes everything after it easy.&quot;
+RE-HOOK: &quot;Now you&#x27;ve got a clean model. This is where DAX finally earns its reputation, and where most people massively overlearn it.&quot;</p><p>[5:20-6:55] VALUE BEAT 4 - measures (open-loop payoff)
+CLAIM (ON-SCREEN card): &quot;Learn ten measures deeply before you learn a hundred.&quot;
+(MODALITY: screen-record) Power BI, measures pane. Create Total Sales = SUM(Sales[Amount]) and show it on a card. Then create Sales North = CALCULATE([Total Sales], Region[Region] = &quot;North&quot;). Then Sales YTD = TOTALYTD([Total Sales], &#x27;Date&#x27;[Date]). All three land in a small table, returning numbers. Then drag the same [Total Sales] onto three different visuals to show it being reused.
+Spoken: &quot;DAX has hundreds of functions, and beginners try to learn all of them. You don&#x27;t need to. Here&#x27;s the pattern I promised at the start, the one that answers most business questions. Write one base measure, then reshape it with CALCULATE. Watch. Total Sales is just the sum of amount. That&#x27;s the base. Now, sales for the north region: I wrap that base measure in CALCULATE and add a filter. Sales year to date: I wrap the same base measure in TOTALYTD. Same base, different wrapper. Once you see that one measure feeds the next, you stop memorizing functions and start composing them. Ten measures learned this way beat a hundred half learned.&quot;
+(Screen-record shows each new measure referencing [Total Sales] by name, so the dependency is visible. Callout box points at the reused [Total Sales] each time it appears.)
+PAYOFF (ON-SCREEN numbered takeaway): &quot;Takeaway 4: Write one base measure, then reshape it with CALCULATE and time intelligence. Learn ten patterns deeply, not a hundred functions.&quot;
+RE-HOOK: &quot;You&#x27;ve got numbers you trust. Last step, and it&#x27;s the one everyone starts with and gets backwards. The visuals.&quot;</p><p>[6:55-8:25] VALUE BEAT 5 - visuals
+CLAIM (ON-SCREEN card): &quot;Pick the visual from the question, not from the gallery.&quot;
+(MODALITY: data-viz) Two questions animate in as text, each with a wrong chart then a right chart. Question one: &quot;How did sales change over twelve months?&quot; A pie chart with twelve thin slices appears and reads as noise, then wipes to a single clean line chart, and a green check lands on the line. Question two: &quot;Which five products sell most?&quot; A 3D exploding chart spins uselessly, then wipes to a plain bar chart sorted top to bottom, green check.
+Spoken: &quot;Visuals are where everyone begins, and it&#x27;s the part worth learning last, because a chart is only as good as the model under it. When you do get here, one rule covers most of it. Start from the question, then pick the chart. Change over time is a line. Ranking, like top products, is a bar, sorted. Parts of a whole, once in a while, is a bar again, because a pie chart with twelve slices tells you nothing. You don&#x27;t need thirty chart types. Learn about five, learn when each one answers a question, and skip the decorative ones.&quot;
+(Fast montage on the wrong charts; slow beat on the two right charts as the green checks land.)
+PAYOFF (ON-SCREEN numbered takeaway): &quot;Takeaway 5: Choose the chart from the question. Change over time is a line, ranking is a sorted bar. Learn five charts, not thirty.&quot;
+RE-HOOK: &quot;So that&#x27;s the order. Let me put the whole thing on a calendar, because the order only helps if you know how long each part takes.&quot;</p><p>[8:25-10:20] WORKED EXAMPLE - the one week plan
+(MODALITY: custom animation) A five day timeline animates left to right. Each day is a card that fills in, and a small badge shows which of the five steps it maps to.
+Spoken: &quot;Here&#x27;s the order on a one week plan, and each block maps to one of the five steps. Day one: get data and shape it. Import three messy files, clean them in Power Query, nothing else. Day two: build the model. One fact table, three dimensions, relationships, just the star schema, no charts yet. Day three: measures. Write your base measure, then five variations with CALCULATE and one with time intelligence. Day four: visuals. Five charts, each answering one written question. Day five: put it together into one report page and check every number against the source. Five days on the right things beats five months of tutorials that open on the charts. And you reuse the same practice data at every step, so you&#x27;re building one thing, not five disconnected exercises.&quot;
+(Each day card lights in sync with the sentence; the step badge, 1 through 5, snaps onto the matching day. Cursor spotlight moves along the timeline.)</p><p>[10:20-11:20] PAYOFF - recap + open-loop payoff
+(MODALITY: on-screen text / kinetic type) The five takeaways stack in as a numbered list, one line each, giving the full win on screen.
+Spoken: &quot;So here&#x27;s the whole order in five lines. One, learn in the order the data moves. Two, clean in Power Query, not in the report. Three, model before you measure, one fact table with dimensions around it. Four, write one base measure and reshape it with CALCULATE. Five, pick the chart from the question, and learn about five of them. Do it in that order and the six months most people lose becomes a report you trust in about six weeks. And the measure pattern I promised, a base measure plus CALCULATE, that&#x27;s the thing that stops DAX from being a hundred disconnected functions. Learn that one move and most of the rest follows.&quot;
+(ON-SCREEN: the five-line list stays up, then the &quot;base measure + CALCULATE&quot; line gets a callout box to close the loop.)</p><p>[11:20-12:00] SOFT CTA
+(MODALITY: talking head) Austin to camera, unhurried, low pressure. Two link cards animate in on the last lines.
+Spoken: &quot;If you want a guided version of this order, we made a free mini lesson that walks the first two steps, get data and the model, on a sample file, plus a short model review checklist you can run against your own report. Both are linked below. If your team wants the whole path, our Foundations to Fabric course takes you from this order all the way to publishing, and we run custom team workshops. Microsoft co funds a lot of the Copilot enablement side, so that part can cost your company less than you&#x27;d expect. No pitch. If you&#x27;re trying to get a team productive on Power BI, that&#x27;s the kind of work we do, and the link&#x27;s there if it&#x27;s useful. The star schema build is its own video, on screen now, if you want the next step.&quot;
+(ON-SCREEN: card 1 &quot;Free mini lesson + model review checklist&quot;; card 2 &quot;Work with CaseWhen: Foundations to Fabric + team workshops&quot;. End card points to the star schema video.)</p><h2>Description
+Power BI tutorial order: how to learn Power BI in the sequence that gets you productive in about six weeks instead of six months.</h2><p>Free mini lesson + model review checklist: [link]
+Work with CaseWhen (Foundations to Fabric course + custom team workshops): [link]</p><p>Timestamps
+0:00 Why do most Power BI tutorials waste six months?
+0:45 What should I learn first?
+2:15 Why clean the data before anything else?
+3:45 What is a star schema, and why learn it third?
+5:20 When do I start writing DAX?
+6:55 How do I pick the right visual?
+8:25 How do I run this as a one week plan?
+10:20 What is the fastest path from here?</p><p>Most Power BI tutorials teach the steps in the wrong order, so beginners spend months on formatting and chart colors and almost no time on the data model that everything depends on. This video walks the order that works: get data, shape it in Power Query, model it as a star schema, write a small set of DAX measures, then choose visuals from the question you&#x27;re answering. It closes with a one week plan that maps each day to one step, plus the base measure plus CALCULATE pattern that answers most business questions. If you&#x27;re learning Power BI or getting a team up to speed, this is the sequence to follow.</p><p>#PowerBI #PowerBITutorial #MicrosoftFabric #DataModeling #LearnPowerBI</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

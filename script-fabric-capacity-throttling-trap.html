@@ -1,0 +1,205 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Fabric Capacity Throttling Explained: Why Your Reports Go Do</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Fabric Capacity Throttling Explained: Why Your Reports Go Down When CU Looks Fine
+Host: Austin · Cluster: fabric · Target: 12 min · Primary keyword: fabric capacity</p><h2>Chapters
+- 0:00 My reports went down but the capacity looked fine?
+- 0:55 What is a capacity unit really counting?
+- 2:20 Why doesn&#x27;t a big spike show up right away?
+- 3:50 So when does throttling really kick in?
+- 5:25 Where do I look to see it coming?
+- 7:05 What&#x27;s eating my fabric capacity?
+- 8:40 How do I stop reports going offline?
+- 10:25 What should I check first thing tomorrow?</h2><h2>Script</h2><p>### [0:00-0:12] HOOK - &quot;here&#x27;s what breaks&quot;
+AUSTIN (voice over a screen-record): &quot;Your Fabric reports went down at 2pm, users are messaging you, and the capacity gauge says you&#x27;re at sixty percent. So the gauge is lying to you, and I&#x27;ll show you the one number in the metrics app that tells you what&#x27;s going wrong.&quot;</p><p>(MODALITY: screen-record) Cold open, no intro. Screen shows a Power BI report in a Fabric workspace stuck on a loading spinner, then a red &quot;capacity has been throttled&quot; style error. Hard cut to the Fabric Capacity Metrics app overview gauge reading a steady 60%. Zoom-punch on the 60%.
+(ON-SCREEN: keyword card lower-third, brand green #1D967C: &quot;FABRIC CAPACITY: the throttling trap&quot;)</p><p>### [0:12-0:40] PROMISE + STAKES + OPEN LOOP
+AUSTIN (on camera): &quot;By the end of this you&#x27;ll be able to open the metrics app, read the two numbers that really decide whether your reports respond, and catch a throttle before your users do. Miss this and it goes the other way: reports go offline in the middle of a workday, the exec dashboard errors out during a board meeting, and nobody can tell you why because every gauge on the overview looked green. Fabric passed twenty-eight thousand customers last year, and a lot of them are meeting this exact wall right now. Stay to the end, because there&#x27;s one refresh setting that takes reports offline hours after the refresh finished running, and most teams never connect the two.&quot;</p><p>(MODALITY: talking head) Austin mid-shot, then a quick cutaway. At 0:22 cut to 3 seconds of b-roll: a Berlin office, someone refreshing a report that won&#x27;t load. Back to camera. Callout box animates in on &quot;twenty-eight thousand customers&quot; with the source line small underneath.
+(ON-SCREEN: promise text card: &quot;Read the 2 numbers that decide if your report responds.&quot; Source chip: &quot;Microsoft, Ignite 2025&quot;)</p><p>### [0:55-2:20] VALUE BEAT 1 - What is a capacity unit really counting?
+CLAIM (AUSTIN, on camera, flat): &quot;Your capacity is measured in capacity units, and every query and every refresh spends capacity-unit seconds. An F64 gives you sixty-four of those units a second. That&#x27;s the budget.&quot;
+(MODALITY: talking head → cut to screen-record)
+(ON-SCREEN: claim card: &quot;You buy CU per second. Every operation spends CU-seconds.&quot;)</p><p>PROOF / DEMO (MODALITY: screen-record): Open the Microsoft Fabric Capacity Metrics app. Land on the Compute page. Cursor moves across the matrix of items, sorting by CU-seconds descending. Circle one scheduled refresh row consuming a large block, and one interactive report query consuming a small one. Callout box labels two columns: &quot;CU (s)&quot; and &quot;Duration (s)&quot;. At 1:40 split the screen: left side a small interactive query, right side a heavy dataflow refresh, with their CU-second totals ticking up side by side so you see the refresh dwarf the query.
+(ON-SCREEN: label chips stay pinned: &quot;Interactive = user clicks&quot; / &quot;Background = refreshes, dataflows, pipelines&quot;)</p><p>PAYOFF (AUSTIN, voice over): &quot;So takeaway one: capacity isn&#x27;t a percent at all. You&#x27;re spending CU-seconds per second, and background jobs eat far more of that budget than the clicks your users make. Write that split down, because it&#x27;s the thing the overview gauge hides.&quot;
+(ON-SCREEN: numbered takeaway card: &quot;1. Capacity = CU-seconds/sec. Background jobs cost the most.&quot;)</p><p>RE-HOOK (AUSTIN): &quot;Here&#x27;s the part that trips everyone up. If a refresh spends that much, why doesn&#x27;t the gauge spike the second it runs?&quot;</p><p>### [2:20-3:50] VALUE BEAT 2 - Why doesn&#x27;t a big spike show up right away?
+CLAIM (AUSTIN, voice over animation): &quot;Because Fabric spreads the cost out. It&#x27;s called smoothing, and it&#x27;s the whole reason the gauge looks steady while trouble is building.&quot;
+(MODALITY: custom animation)
+(ON-SCREEN: claim card: &quot;Smoothing spreads an operation&#x27;s CU cost over time.&quot;)</p><p>PROOF / DEMO (MODALITY: custom animation): CUSTOM ANIMATION of smoothing. A horizontal timeline runs left to right. A tall spike of CU cost appears at 9am (a big refresh). The spike does not stay tall. Instead it flattens and stretches into a low, wide bar spread across the next twenty-four hours, drawn in brand green. Underneath, a second track shows interactive clicks stretching into a shorter five-minute smear. A gauge on the right stays low the whole time while a hidden counter labeled &quot;carry-forward&quot; fills up in amber behind it. The animation ends with the amber counter almost full while the green gauge still reads low. Every element labeled on screen, no stock clichés.
+(ON-SCREEN: two labels pinned: &quot;Interactive: smoothed ~5 min&quot; / &quot;Background: smoothed ~24 hours&quot;)</p><p>PAYOFF (AUSTIN, voice over): &quot;Takeaway two: the gauge shows smoothed usage, so a real overload can be building for hours behind a number that reads fine. The value on the overview is the average, not the debt you&#x27;re stacking up.&quot;
+(ON-SCREEN: numbered takeaway card: &quot;2. The gauge shows smoothed average, not the overage building behind it.&quot;)</p><p>RE-HOOK (AUSTIN): &quot;So if the gauge is the average, what number really pulls the trigger and takes reports offline?&quot;</p><p>### [3:50-5:25] VALUE BEAT 3 - So when does throttling really kick in?
+CLAIM (AUSTIN, voice over): &quot;Throttling runs on how much future capacity you&#x27;ve already borrowed. There are three lines, and each one does something worse than the last.&quot;
+(MODALITY: data-viz)
+(ON-SCREEN: claim card: &quot;Throttling is based on borrowed future capacity, in 3 stages.&quot;)</p><p>PROOF / DEMO (MODALITY: data-viz): Animated three-stage bar. A single meter labeled &quot;carry-forward overage&quot; fills left to right with three marked thresholds. Stage one, up to ten minutes of borrowed future capacity: the bar sits in green and reads &quot;protected, nothing happens&quot;. Stage two, ten to sixty minutes: the bar turns amber, a report icon gets a small clock added and the label reads &quot;interactive delay, every click gets slower&quot;. Stage three, past sixty minutes: the bar turns red, a report icon shows an error and the label reads &quot;interactive rejection, reports stop responding&quot;. A fourth mark far right at twenty-four hours reads &quot;background rejection, refreshes get turned away too&quot;. Each stage animates in one at a time as Austin names it.
+(ON-SCREEN: the three numbers stay pinned: &quot;10 min · 60 min · 24 hrs&quot;)</p><p>PAYOFF (AUSTIN, voice over): &quot;Takeaway three, and this is the one to memorize: under ten minutes of overage you&#x27;re fine, past sixty minutes your users get errors, and past twenty-four hours even your refreshes get rejected. Sixty minutes of borrowed capacity is the line where your phone starts ringing.&quot;
+(ON-SCREEN: numbered takeaway card: &quot;3. 10 min = safe. 60 min = users get errors. 24 hrs = refreshes rejected.&quot;)</p><p>RE-HOOK (AUSTIN): &quot;Now you know the numbers that matter. Let me show you where they really live, because it&#x27;s not the screen you&#x27;ve been staring at.&quot;</p><p>### [5:25-7:05] VALUE BEAT 4 - Where do I look to see it coming?
+CLAIM (AUSTIN, on camera): &quot;Stop trusting the overview gauge. The Throttling tab in the metrics app is where the answer is.&quot;
+(MODALITY: talking head → screen-record)
+(ON-SCREEN: claim card: &quot;The Throttling tab, not the overview, tells the truth.&quot;)</p><p>PROOF / DEMO (MODALITY: screen-record): In the Fabric Capacity Metrics app, click into the Throttling section. Show the three lines rendered as percentages of their limit: interactive delay, interactive rejection, background rejection. Cursor traces the interactive rejection line climbing toward one hundred percent at 2pm, matching the outage from the cold open. Cut to the Overages view. Point at three values: Add percent, Burndown percent, and Cumulative percent. Circle the Cumulative line climbing all afternoon while the overview gauge next to it still reads sixty. At 6:40 click a single spiky TimePoint to drill into the exact operations running in that thirty-second window.
+(ON-SCREEN: pinned label: &quot;Throttling tab: interactive delay / interactive rejection / background rejection&quot;)</p><p>PAYOFF (AUSTIN, voice over): &quot;Takeaway four: check the Throttling tab and the Cumulative overage, not the front gauge. If Cumulative is climbing through the day, you&#x27;re borrowing capacity you have to pay back, and the reports go down when the bill comes due.&quot;
+(ON-SCREEN: numbered takeaway card: &quot;4. Watch the Throttling tab + Cumulative overage, not the gauge.&quot;)</p><p>RE-HOOK (AUSTIN): &quot;Once you can see it climbing, the next question writes itself. What&#x27;s really eating the capacity?&quot;</p><p>### [7:05-8:40] VALUE BEAT 5 - What&#x27;s eating my fabric capacity?
+CLAIM (AUSTIN, voice over animation): &quot;Nearly every time, it&#x27;s a heavy background refresh landing at the worst hour, and the twenty-four hour smoothing is why it takes reports down long after it finished.&quot;
+(MODALITY: custom animation)
+(ON-SCREEN: claim card: &quot;The usual culprit: a heavy refresh smoothed across 24 hours.&quot;)</p><p>PROOF / DEMO (MODALITY: custom animation): CUSTOM ANIMATION paying off the open loop. Timeline again. A large refresh runs at 9am and finishes by 9:20. Its CU cost, drawn in green, stretches forward as a flat band across the full day because of twenty-four hour smoothing. At 2pm, normal interactive traffic from users stacks a second green band on top of that still-present refresh band. The two together push the carry-forward counter past the sixty-minute mark, it flips to red, and a report icon at 2pm throws an error, even though the refresh itself ended five hours earlier. A label draws the line back from the 2pm outage to the 9am refresh.
+(ON-SCREEN: callout: &quot;The 9am refresh is why the 2pm report errored.&quot;)</p><p>PAYOFF (AUSTIN, voice over): &quot;Takeaway five: a refresh that finished this morning can take your reports offline this afternoon, because its cost is still spread across the day. When reports go down, look at what ran hours earlier, not just what&#x27;s running now.&quot;
+(ON-SCREEN: numbered takeaway card: &quot;5. A morning refresh can throttle afternoon reports. Look upstream in time.&quot;)</p><p>RE-HOOK (AUSTIN): &quot;So you can see it, and you know the cause. Now let&#x27;s fix it so tomorrow is boring.&quot;</p><p>### [8:40-10:25] FIXES - How do I stop reports going offline?
+CLAIM (AUSTIN, on camera): &quot;Four moves, cheapest first, and you do the first three before you ever pay for more capacity.&quot;
+(MODALITY: talking head)
+(ON-SCREEN: claim card: &quot;4 fixes, cheapest first.&quot;)</p><p>PROOF / DEMO (MODALITY: talking head with on-screen list building): Austin to camera, each fix pops onto a numbered list as he says it, with a small b-roll cutaway per item.
+- &quot;One: move heavy refreshes off-peak. Schedule the big dataflow and semantic-model refreshes for the middle of the night so their smoothed cost has burned down before your users log on. This alone clears most afternoon throttles.&quot; (cutaway: a refresh schedule dialog moving from 9am to 3am)
+- &quot;Two: cut the cost of the refresh at the source. Trim columns you don&#x27;t use, turn on incremental refresh so you only reload recent data, and fix the slow queries in the semantic model. A lighter refresh spends less capacity to smooth in the first place.&quot; (cutaway: incremental refresh setup)
+- &quot;Three: turn on capacity notifications in the admin portal so Fabric emails you when throttling starts, instead of your users telling you.&quot; (cutaway: the notification settings screen)
+- &quot;Four, and only after the first three: right-size the capacity. Scale the SKU up if the numbers really need it, or scale it down and stop it from Azure on weekends to control the cost. Sizing is the last lever, not the first.&quot;
+(ON-SCREEN: the 4 fixes stay stacked on screen as a checklist)</p><p>PAYOFF (AUSTIN, voice over): &quot;So the fix order is off-peak, then lighter refreshes, then alerts, then sizing. Three of those four cost you nothing but an afternoon of setup.&quot;
+(ON-SCREEN: numbered takeaway card: &quot;Fix order: off-peak → lighter refresh → alerts → sizing.&quot;)</p><p>RE-HOOK (AUSTIN): &quot;Let me put the whole thing back together so you walk away with the full playbook.&quot;</p><p>### [10:25-11:30] PAYOFF - What should I check first thing tomorrow?
+AUSTIN (voice over kinetic recap): &quot;Here&#x27;s everything, in order. Capacity is a budget of CU-seconds, and background jobs cost the most. The gauge shows a smoothed average, so overload hides behind a number that still reads fine. Throttling fires on borrowed future capacity: ten minutes is safe, sixty minutes gives your users errors, twenty-four hours rejects refreshes. Read the Throttling tab and the Cumulative overage, never the front gauge. And a refresh that finished this morning is the usual reason reports go down after lunch. Fix it off-peak first, sizing last.&quot;
+(MODALITY: on-screen text / kinetic type) All five takeaways plus the fix order animate up as a clean numbered list on brand background. Then pay off the open loop directly: the 9am-to-2pm refresh line from Beat 5 redraws under the words &quot;that&#x27;s the setting nobody connects.&quot;
+(ON-SCREEN: full recap list, all 5 takeaways + fix order)</p><p>### [11:30-12:00] SOFT CTA
+AUSTIN (on camera): &quot;If you want to run this on your own capacity, the Fabric readiness checklist is linked below, and the free Power BI Governance and Cost Scorecard scores your setup in about five minutes and shows your top three capacity risks. Grab those first. And if your reports are already going down and you want a second set of eyes, a Fabric readiness and capacity check is literally what we do at CaseWhen every week here in Berlin. Link&#x27;s in the description, no pitch, just a conversation. Next up, I&#x27;ll walk through right-sizing an F-SKU on real numbers, so watch that one if sizing is where you&#x27;re stuck.&quot;
+(MODALITY: talking head) Warm, low pressure. Two link cards animate in: &quot;Fabric Readiness Checklist&quot; and &quot;Governance &amp; Cost Scorecard (free)&quot;. A third small card: &quot;Watch next: Right-sizing your Fabric capacity&quot;.
+(ON-SCREEN: link cards + one plain subscribe line)</p><h2>Description
+Your Fabric capacity gauge can read 60% while throttling takes your reports offline, and this walks through why smoothing hides the overload and how to really read fabric capacity before your users do.</h2><p>Free Fabric readiness checklist + Governance &amp; Cost Scorecard: https://casewhen.co/fabric-scorecard
+Work with CaseWhen (Fabric readiness &amp; capacity check): https://casewhen.co/contact</p><p>0:00 My reports went down but the capacity looked fine?
+0:55 What is a capacity unit really counting?
+2:20 Why doesn&#x27;t a big spike show up right away?
+3:50 So when does throttling really kick in?
+5:25 Where do I look to see it coming?
+7:05 What&#x27;s eating my fabric capacity?
+8:40 How do I stop reports going offline?
+10:25 What should I check first thing tomorrow?</p><p>Resources:
+- Fabric Readiness Checklist (download): https://casewhen.co/fabric-scorecard
+- Power BI Governance &amp; Cost Scorecard (free, 5 min): https://casewhen.co/fabric-scorecard
+- Microsoft Fabric Capacity Metrics app docs: https://learn.microsoft.com/fabric
+- Watch next, right-sizing your Fabric capacity: https://casewhen.co/youtube</p><p>Fabric capacity throttling catches teams out because the overview gauge shows a smoothed average, not the carry-forward overage that decides whether reports respond. This video explains capacity units and CU-seconds, how interactive and background smoothing work, the three throttling stages at ten minutes, sixty minutes, and twenty-four hours, where to read them in the Fabric Capacity Metrics app, and the four fixes in cheapest-first order: move refreshes off-peak, lighten the refresh, turn on capacity notifications, and right-size the SKU last. If your Power BI and Fabric reports go down while the capacity looks fine, this is how you find and stop it.</p><p>#MicrosoftFabric #FabricCapacity #PowerBI #DataGovernance #BusinessIntelligence</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

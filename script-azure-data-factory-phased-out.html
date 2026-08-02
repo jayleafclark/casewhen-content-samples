@@ -1,0 +1,177 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Is Azure Data Factory Being Phased Out? ADF vs Fabric Data F</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p>[0:12-0:40] PROMISE + STAKES + OPEN LOOP (MODALITY: talking head)
+&gt; &quot;Quick promise. In about eleven minutes you&#x27;ll be able to answer three things: whether Azure Data Factory is being phased out, where it still beats the Fabric version, and which one to build new pipelines on. Get this wrong and you either rebuild working pipelines for no reason, or you start a big project on the tool that can&#x27;t reach your on-prem servers. We move data platforms for teams in Berlin most weeks, so this is the exact call we make with clients. And near the end I&#x27;ll show you the one pricing difference that can double a Fabric bill without anyone noticing.&quot;</p><p>(ON-SCREEN: three-line promise text animating in one line at a time: &quot;1. Is ADF dying? 2. Where ADF still wins 3. What to build new on&quot;) (B-ROLL: 1.5s cut of a whiteboard with two boxes drawn, then back to camera. Zoom-punch on Austin at &quot;double a Fabric bill.&quot;)</p><p>[0:45-2:05] VALUE BEAT 1 - So what actually changed in 2026? (MODALITY: animation)
+CLAIM card: &quot;There are two Data Factories now, and they live in different places.&quot;</p><p>PROOF / DEMO (custom animation): Two labeled boxes slide in. Left box &quot;Azure Data Factory&quot; sits inside an Azure resource group; arrows run out to an Azure SQL icon and a storage icon. Right box &quot;Data Factory in Microsoft Fabric&quot; sits inside a Fabric workspace; its arrow runs straight into a single OneLake cylinder that a Power BI icon and a notebook icon also connect to. Animate the two boxes glowing the same colour to show they share a name, then the arrows lighting up one at a time.
+&gt; &quot;Here&#x27;s what changed. For years, Azure Data Factory was the one place you built pipelines in the Microsoft cloud. You spun up a resource in Azure, wired up your sources, and it moved and shaped your data. Then Fabric arrived, and Microsoft put a second Data Factory inside it. Same idea, pipelines and dataflows, but this one lives in a Fabric workspace and writes straight into OneLake, the shared storage under everything in Fabric. So the question was never really whether Data Factory is dying. Microsoft says Fabric already passed twenty-eight thousand customers, and the classic Azure version is still fully supported. You&#x27;ve got two tools with the same last name, aimed at two different setups.&quot;</p><p>PAYOFF (numbered takeaway, on-screen): &quot;Takeaway 1: Azure Data Factory is still supported. Fabric added a second Data Factory next to it, not a replacement for it.&quot;</p><p>RE-HOOK:
+&gt; &quot;So if both are alive, when does the older one still win? That&#x27;s next.&quot;</p><p>[2:05-3:35] VALUE BEAT 2 - Where does Azure Data Factory still win? (MODALITY: screen-record)
+CLAIM card: &quot;For on-prem and SSIS, classic Azure Data Factory still wins.&quot;</p><p>PROOF / DEMO (screen-record, real ADF authoring): Open the Integration Runtimes panel and point at a self-hosted integration runtime with a green &quot;Running&quot; status, connected to an on-prem SQL Server. Then flip to the SSIS integration runtime and show an existing SSIS package running as-is. Then open the Git tab and the ARM export to show source control and release deployment. Cursor moves to each one in turn.
+&gt; &quot;Open classic Azure Data Factory and look at what it reaches. This is the self-hosted integration runtime. You install it on a machine inside your own network, and now your cloud pipelines can pull from an on-prem SQL Server or a file share sitting in your building. The Fabric one is getting closer here, but for deep on-prem work the classic runtime is still the mature option. Same story with SSIS. If you&#x27;ve got years of SSIS packages, Azure Data Factory can host and run them almost as they are, so you lift them into the cloud instead of rewriting from scratch. And for teams that need proper source control and release pipelines, ADF plugs into Git and deploys through the same release tooling your engineers already use.&quot;</p><p>PAYOFF (numbered takeaway, on-screen): &quot;Takeaway 2: need on-prem reach through a self-hosted runtime, or lifting real SSIS packages? Start with Azure Data Factory. It&#x27;s the stronger fit today.&quot;</p><p>RE-HOOK:
+&gt; &quot;Now flip it around. When is the Fabric version the better pick? Here&#x27;s where it pulls ahead.&quot;</p><p>[3:35-5:05] VALUE BEAT 3 - Where does the Fabric version win? (MODALITY: animation)
+CLAIM card: &quot;If your data already lives in Fabric, the Fabric Data Factory wins.&quot;</p><p>PROOF / DEMO (custom animation): A Fabric workspace frame. A Dataflow Gen2 block pulls from a source and writes one copy into a OneLake cylinder. Then a Power BI report, a notebook, and a warehouse icon all reach into the same single cylinder, each lighting up in turn with the label &quot;one copy, many workloads.&quot; No second storage box appears anywhere, and animate the absence: a greyed-out &quot;extra Azure resource&quot; box fades away.
+&gt; &quot;Now the Fabric side. The moment your reporting already lives in Fabric, the built-in Data Factory gets a lot easier. You build a pipeline or a Dataflow Gen2, and it writes straight into OneLake. Your Power BI reports, your notebooks, your warehouse, they all read that same copy, no export step, no second storage account to manage. There&#x27;s no separate Azure resource to stand up either. You&#x27;re already in the Fabric workspace, so you just start building. And because it&#x27;s part of Fabric, the Copilot help and the tight link to Power BI come along with it. For a team that&#x27;s committed to Fabric and wants everything in one place, that&#x27;s a lot less plumbing to babysit.&quot;</p><p>PAYOFF (numbered takeaway, on-screen): &quot;Takeaway 3: if your reports and storage already live in Fabric, build new pipelines in the Fabric Data Factory. You skip the extra Azure resource, and the data lands where your reports already read.&quot;</p><p>RE-HOOK:
+&gt; &quot;So one&#x27;s better for on-prem, one&#x27;s better inside Fabric. The thing that surprises people is the bill. Let me show you.&quot;</p><p>[5:05-6:35] VALUE BEAT 4 - Why do the two bills look nothing alike? (MODALITY: data-viz)
+CLAIM card: &quot;The two Data Factories charge in completely different ways.&quot;</p><p>PROOF / DEMO (animated data-viz, two meters): Left meter labeled &quot;Azure Data Factory&quot; ticks up per pipeline run and per hour of data movement, each run adding a small predictable block to its own separate bill. Right meter labeled &quot;Fabric capacity (CU)&quot; is a single shared pool; Power BI, notebooks, and the warehouse are already drawing from it. A heavy pipeline drops in, the pool drains toward the red line, and the Power BI slice visibly shrinks. When it crosses the line, a &quot;throttling&quot; flag appears and a report loading spinner slows down.
+&gt; &quot;This is the part that catches teams out. Classic Azure Data Factory bills you per pipeline run and per hour of data movement. You can look at a pipeline and roughly predict what it costs, and it sits in its own Azure bill. Fabric&#x27;s Data Factory doesn&#x27;t work that way. It draws from your Fabric capacity, the same shared pool your Power BI reports, notebooks, and warehouse all run on. Run a heavy pipeline in the middle of the day, and it eats capacity units that your reports also need. That&#x27;s the open loop I promised you. Drop pipelines onto a small Fabric capacity, and you can push it into throttling, so reports go slow with no obvious cause. It looks cheaper because there&#x27;s no separate Data Factory line on the bill, and then a report team wonders why the dashboards crawl at month-end.&quot;</p><p>PAYOFF (numbered takeaway, on-screen): &quot;Takeaway 4: Azure Data Factory has its own predictable per-run bill. Fabric&#x27;s shares your capacity, so a big pipeline can slow the reports on the same capacity. Size the capacity for both, or run heavy jobs off-peak.&quot;</p><p>RE-HOOK:
+&gt; &quot;Alright. You know how they differ. So which one do you actually build new work on? Here&#x27;s the decision I use.&quot;</p><p>[6:35-8:05] VALUE BEAT 5 - Which one should I build new work on? (MODALITY: talking head)
+CLAIM card: &quot;New pipelines: pick by where your data lives and what you connect to.&quot;</p><p>PROOF / DEMO (talking head, with a simple decision-tree animation building beside Austin as he talks): Three diamond nodes drop in one at a time. Node 1 &quot;Already on Fabric, reports in OneLake?&quot; - Yes branch lights green toward &quot;Fabric Data Factory.&quot; Node 2 &quot;Need on-prem runtime, SSIS lift, or mature Git CICD?&quot; - Yes branch lights toward &quot;Azure Data Factory.&quot; Node 3 &quot;Not on Fabric yet, sources mostly Azure SQL and storage?&quot; - branch toward &quot;Azure Data Factory, revisit later.&quot; Each node animates in as he asks the question.
+&gt; &quot;Here&#x27;s the call I make with clients on new projects. Three questions. One: are you already running on Fabric capacity, with your reports reading from OneLake? If yes, default to the Fabric Data Factory and keep everything in one place. Two: do you need that self-hosted runtime into on-prem servers, or are you lifting a pile of SSIS packages, or do you need mature Git-based release pipelines today? If yes, go with Azure Data Factory. It&#x27;s still ahead on those. Three: you&#x27;re not on Fabric yet, and your sources are mostly Azure SQL and storage? Start in Azure Data Factory, and revisit the Fabric version when you actually adopt Fabric capacity. Notice what I didn&#x27;t say. I never said rip out what already works.&quot;</p><p>PAYOFF (numbered takeaway, on-screen): &quot;Takeaway 5: default new work to wherever your data already lives. On Fabric with OneLake, use Fabric Data Factory. On-prem, SSIS, or heavy CICD, use Azure Data Factory.&quot;</p><p>RE-HOOK:
+&gt; &quot;Which leaves the question everyone with an existing setup is really asking. Do I have to move what I already built?&quot;</p><p>[8:05-9:35] VALUE BEAT 6 - Do I have to move what I already built? (MODALITY: screen-record + b-roll)
+CLAIM card: &quot;You don&#x27;t have to migrate working pipelines. There&#x27;s no auto-import anyway.&quot;</p><p>PROOF / DEMO (screen-record then b-roll): In Fabric, show that there&#x27;s no &quot;import an Azure Data Factory&quot; button anywhere in the create menu, scrolling the options slowly. Then a simple architecture card animates: classic ADF on the left still loading an Azure warehouse (untouched, steady green), new Fabric pipelines on the right feeding OneLake for the Fabric-native reports. Cut to 2s of b-roll: a small team at desks, screens with pipeline canvases.
+&gt; &quot;For anyone with pipelines already running, the honest answer is you probably don&#x27;t move them, at least not soon. There&#x27;s no button that imports an Azure Data Factory into Fabric. If you wanted everything in Fabric, you&#x27;d recreate the pipelines by hand, and that&#x27;s real work for zero new value when the old ones run fine. What we usually do with a client looks like this. The existing Azure Data Factory keeps loading the Azure warehouse, untouched. New reporting that&#x27;s going to live in Fabric gets new pipelines built in the Fabric Data Factory, writing to OneLake. The two run side by side. Over time, as more reporting moves into Fabric, more new work starts there. Nobody spends a quarter rebuilding pipelines that were already doing their job.&quot;</p><p>PAYOFF (numbered takeaway, on-screen): &quot;Takeaway 6: keep your working Azure Data Factory pipelines. Build new Fabric-bound work in Fabric Data Factory, and let the two run side by side.&quot;</p><p>RE-HOOK:
+&gt; &quot;So what do you do with all of this on Monday?&quot;</p><p>[9:35-10:30] PAYOFF - recap + pay off the open loop (MODALITY: on-screen text / kinetic type)
+Kinetic list, each line snapping in as Austin says it, then all six staying on screen as a stacked recap card.
+&gt; &quot;Quick recap, and then one free thing that&#x27;ll save you a bad call. Azure Data Factory is still supported, with no plans to retire it. Fabric added a second Data Factory that lives in a Fabric workspace and writes to OneLake. Classic ADF still wins for on-prem reach, SSIS, and mature CICD. Fabric&#x27;s version wins when your data already lives in Fabric. They bill in completely different ways, and this is the pricing one I promised you: Fabric&#x27;s Data Factory shares your capacity with your reports, so a heavy pipeline on a small capacity can slow those reports right when you need them. Size for it. And you don&#x27;t have to migrate anything that already works.&quot;</p><p>(ON-SCREEN recap card:
+1. ADF is still supported
+2. Two Data Factories now, one in Azure, one in Fabric
+3. ADF wins: on-prem, SSIS, CICD
+4. Fabric wins: data already in Fabric/OneLake
+5. Different bills - Fabric shares your capacity, size for it
+6. Keep what works, build new in the right one)</p><p>[10:30-11:10] SOFT CTA (MODALITY: talking head)
+&gt; &quot;If you want this as a one-pager, I put the whole decision into a free checklist in the description: the three questions, plus the pricing gotcha to size for. Grab it and run it against your own setup. And if you&#x27;re standing up an Azure data foundation, or you&#x27;re weighing Azure Data Factory against the Fabric version on a real project, that&#x27;s the exact work we do at CaseWhen. Link&#x27;s in the description, no pitch, just a conversation. If this saved you a rebuild, the next video walks through Fabric capacity and how to size it so pipelines don&#x27;t slow your reports. That&#x27;s the one to watch next. Subscribe if you want the rest of the Fabric calls.&quot;</p><p>(ON-SCREEN: two link cards, &quot;Free ADF vs Fabric Data Factory checklist&quot; and &quot;Talk to CaseWhen&quot;, then a watch-next thumbnail.) (B-ROLL: quick cut to the checklist one-pager, then back to camera.)</p><h2>Description
+Azure Data Factory isn&#x27;t being phased out in 2026, and this video shows where it still beats the Fabric version and which one to build new pipelines on.</h2><p>Free ADF vs Fabric Data Factory decision checklist: https://casewhen.co/adf-fabric-checklist
+Work with CaseWhen on your Azure data foundation: https://casewhen.co/contact</p><p>Chapters:
+0:00 Is Azure Data Factory being phased out?
+0:45 So what actually changed in 2026?
+2:05 Where does Azure Data Factory still win?
+3:35 Where does the Fabric version win?
+5:05 Why do the two bills look nothing alike?
+6:35 Which one should I build new work on?
+8:05 Do I have to move what I already built?
+9:35 What should I do on Monday?</p><p>Recap: Azure Data Factory is Microsoft&#x27;s cloud data integration service, and in 2026 there are two versions of it: the classic Azure Data Factory that runs in Azure, and the Data Factory built into Microsoft Fabric that writes to OneLake. This guide compares Azure Data Factory and Fabric Data Factory on on-prem reach, SSIS, CICD, OneLake integration, and pricing, then gives a plain rule for choosing which one to run new pipelines on and whether you need to migrate your existing pipelines at all. Short version: ADF is still supported, it still wins for on-prem and SSIS work, Fabric&#x27;s Data Factory wins when your data already lives in Fabric, and you don&#x27;t have to rebuild pipelines that already run fine.</p><p>#AzureDataFactory #MicrosoftFabric #DataEngineering #PowerBI #OneLake</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

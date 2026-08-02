@@ -1,0 +1,202 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Power BI Lizenzkosten: die echte Rechnung pro Nutzer und Mon</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Power BI Lizenzkosten: die echte Rechnung pro Nutzer und Monat
+Host: Saju · Cluster: Pricing · Target: 12 min · Primary keyword: power bi lizenzkosten</p><h2>Chapters
+- 0:00 Warum explodiert meine Power-BI-Rechnung auf einmal?
+- 0:45 Wofür zahle ich gerade eigentlich?
+- 2:10 Wann brauche ich wirklich Premium Per User?
+- 3:35 Ab wann zwingt mich Microsoft in eine Capacity?
+- 5:05 Ab wie vielen Zuschauern rechnet sich die Capacity?
+- 6:35 Warum ist die Rechnung doppelt so hoch wie der Preis auf dem Papier?
+- 8:15 Was übersehen fast alle bei der Kalkulation?
+- 10:00 Was sollte ich diese Woche tun?</h2><h2>Script</h2><p>[0:00-0:12] HOOK : real-number callout
+Sprecher: &quot;Letzten Monat lag Ihre Power-BI-Rechnung bei vielleicht 150 Euro im Monat. Diesen Monat legt Ihnen jemand aus der Buchhaltung ein Angebot über 5.000 Euro auf den Tisch. Gleiche Reports, gleiches Team, ungefähr das Dreißigfache. Das sind die Power BI Lizenzkosten, über die vorher niemand spricht, und ich zeige Ihnen genau, wo dieser Sprung sitzt.&quot;
+(MODALITY: data-viz) Ein animierter Rechnungszähler tickt in einem harten Schlag von 150 Euro auf 5.000 Euro hoch und friert ein, dann zieht eine rote Stufenlinie zwischen die beiden Zahlen. Sichtbare Änderung alle 3 Sekunden: der Zähler, das Einfrieren, die einrastende Stufenlinie.
+(ON-SCREEN: keyword card lower-third) &quot;Power BI Lizenzkosten&quot; über dem eingefrorenen Sprung von 150 auf 5.000 Euro.</p><p>[0:12-0:45] PROMISE + STAKES + OPEN LOOP
+Sprecher: &quot;Am Ende dieses Videos kennen Sie die drei Preisstufen, die auf Ihrer Rechnung überhaupt möglich sind, die eine Schwelle, die den Sprung in eine Capacity auslöst, und die Rechnung, ab wann sich dieser Sprung lohnt und ab wann er reines Geld aus dem Fenster ist. Wer das falsch einschätzt, zahlt entweder jeden Monat ein paar Tausend Euro für Leistung, die niemand nutzt, oder bekommt kurz nach dem Rollout gesagt, das ganze Team müsse wieder runter von Power BI. Wir rechnen diese Lizenzkosten jede Woche für BI-Teams in Berlin durch, deshalb sind die nächsten elf Minuten die Version, die ich mir vor jeder Vertragsunterschrift gewünscht hätte. Und bleiben Sie bis zum Teil kurz vor Schluss, denn dieselbe Capacity kostet je nach einer einzigen Einstellung fast das Doppelte, und genau diese Rechnung erwischt die meisten zweimal.&quot;
+(MODALITY: talking head) Saju vor der Kamera, dann ein 3-Sekunden-Schnitt auf ein B-Roll-Insert einer als dringend markierten Buchhaltungs-Mail. Der Cursor-Marker landet auf der Versprechen-Zeile, während sie erscheint.
+(ON-SCREEN: text) Eine Versprechen-Liste animiert in drei Zeilen ein: &quot;1. Die 3 Preisstufen  2. Die eine Schwelle  3. Den Sprung kommen sehen.&quot;</p><p>[0:45-2:10] VALUE BEAT 1 : Wofür zahle ich gerade eigentlich?
+CLAIM (ON-SCREEN card): &quot;Heute zahlen Sie pro Kopf. Zwei Stufen, beide pro Nutzer und Monat.&quot;
+Sprecher: &quot;Mit ziemlicher Sicherheit sind Sie gerade auf Lizenzen pro Nutzer. Es gibt zwei Stufen. Power BI Pro liegt nach Microsofts Listenpreis bei rund 14 Euro pro Person und Monat, und damit darf diese Person Berichte bauen und ansehen. Darüber liegt Premium Per User, kurz PPU, bei rund 24 Euro pro Person und Monat. PPU schaltet größere Datenmodelle frei, häufigere Aktualisierung und ein paar Enterprise-Funktionen. So sieht ein normaler kleiner Rollout aus. Drei, vier Analysten auf Pro, eine Handvoll Manager, die auch eine Lizenz zum Ansehen brauchen. Sagen wir acht Lizenzen auf Pro. Das sind rund 112 Euro im Monat, und es wächst schön gerade. Ein Zuschauer mehr, 14 Euro mehr. Auf der Rechnung passiert noch nichts Überraschendes.&quot;
+DEMO (MODALITY: screen-record) Live in der Microsoft-365-Lizenzansicht und auf der Power-BI-Preisseite: der Cursor umkreist Pro bei 14 Euro und PPU bei 24 Euro, dann baut sich eine laufende Lizenz-Summe über 8 Zeilen auf und landet bei rund 112 Euro. Zoom-Punch auf jeden Preis, während er genannt wird.
+PAYOFF (ON-SCREEN numbered takeaway): &quot;Merksatz 1: Abrechnung pro Nutzer ist linear. Jeder zusätzliche Zuschauer ist genau eine bezahlte Lizenz mehr.&quot;
+RE-HOOK: &quot;Diese lineare Rechnung stimmt genau bis zu dem Moment, in dem entweder ein einzelner Nutzer mehr Leistung braucht, oder sehr viele Leute nur zuschauen wollen. Fangen wir mit dem Einzelnen an.&quot;</p><p>[2:10-3:35] VALUE BEAT 2 : Wann brauche ich wirklich Premium Per User?
+CLAIM (ON-SCREEN card): &quot;PPU lohnt sich für einzelne schwere Nutzer, nicht fürs ganze Team.&quot;
+Sprecher: &quot;PPU ist die Stufe, die fast alle falsch einschätzen. Der Reflex ist, das ganze Team von Pro auf PPU zu heben, weil PPU die größeren Modelle und die häufigere Aktualisierung kann. Rechnen wir das durch. Zehn Leute auf Pro sind rund 140 Euro im Monat. Zehn Leute auf PPU sind rund 240 Euro. Sie zahlen also 100 Euro mehr, obwohl in den meisten Teams nur zwei oder drei Personen wirklich große Modelle bauen oder stündlich aktualisieren müssen. Der saubere Weg: die zwei, drei schweren Nutzer auf PPU, alle anderen bleiben auf Pro. Sie bekommen die Premium-Funktionen für die, die sie brauchen, und zahlen den Aufpreis nicht fürs halbe Unternehmen. PPU ist außerdem der Punkt, an dem viele denken, sie bräuchten schon eine Capacity. Brauchen sie meistens nicht. Solange niemand ohne eigene Lizenz zuschauen muss, ist PPU pro Kopf fast immer günstiger als der Sprung auf eine Capacity.&quot;
+DEMO (MODALITY: talking head) Saju zur Kamera mit einer schlichten Zwei-Spalten-Vergleichskarte, Callouts poppen auf: &quot;alle 10 auf PPU: 240 EUR&quot; gegen &quot;3 auf PPU + 7 auf Pro: rund 170 EUR&quot;. Alle 5 Sekunden ein neuer Callout oder ein Schnitt auf eine zweite Kameraachse.
+PAYOFF (ON-SCREEN numbered takeaway): &quot;Merksatz 2: PPU gehört auf einzelne Köpfe, nicht auf die ganze Mannschaft. Heben Sie nur die zwei, drei schweren Nutzer hoch.&quot;
+RE-HOOK: &quot;Der Einzelne war der eine Fall. Jetzt der andere, viele Zuschauer, und genau hier zieht Microsoft eine harte Linie.&quot;</p><p>[3:35-5:05] VALUE BEAT 3 : Ab wann zwingt mich Microsoft in eine Capacity?
+CLAIM (ON-SCREEN card): &quot;Freies Zuschauen ohne eigene Lizenz beginnt erst bei F64.&quot;
+Sprecher: &quot;Der große Sprung passiert an dem Tag, an dem Sie Zuschauer wollen, die nicht jeder eine eigene Lizenz haben. Im Pro-Modell braucht jede einzelne Person, die einen Bericht öffnet, eine Pro- oder PPU-Lizenz. In dem Moment, in dem hundert Leute oder das ganze Unternehmen ein Dashboard lesen sollen, ohne hundert Lizenzen zu kaufen, müssen Sie auf eine Capacity wechseln. Und hier zieht Microsoft eine klare Grenze. Freies Zuschauen für Nutzer ohne eigene Lizenz gibt es erst ab der F64-Capacity, oder der älteren P1, die sie ablöst. Unter F64 gibt es kein freies Zuschauen. Ab F64 darf jeder in Ihrem Tenant die Berichte auf dieser Capacity lesen. Ihre Optionen sind also entweder eine Rechnung pro Kopf, die mit jedem Zuschauer weiter steigt, oder eine Capacity, die bei rund 5.000 Euro im Monat startet. Dazwischen gibt es fast nichts. Ein Analyst zählt die Zuschauer, sieht die Pro-Summe klettern, und stellt die naheliegende Frage. Die Antwort kommt als Sprung auf 5.000 Euro zurück.&quot;
+DEMO (MODALITY: custom animation) Das Zuschauer-Tor: eine Reihe kleiner Lizenz-Icons mit je einem 14-Euro-Schild versucht, eine Schranke zu passieren. Die Schranke bleibt zu. Dann rastet ein F64-Block ein, die Schranke hebt sich, und eine Menge grauer Zuschauer ohne Lizenz strömt frei hindurch. Ein Preisschild am F64-Block zeigt rund 5.000 Euro pro Monat. Das Label bleibt stehen: &quot;F64 = freies Zuschauen beginnt hier.&quot; Sichtbare Änderung alle 5 Sekunden: Lizenzen, geschlossene Schranke, F64 rastet ein, die Menge fließt.
+PAYOFF (ON-SCREEN numbered takeaway): &quot;Merksatz 3: Freie Zuschauer beginnen bei F64. Alles darunter braucht weiter eine bezahlte Lizenz pro Kopf.&quot;
+RE-HOOK: &quot;Damit schreibt sich die nächste Frage von selbst. Ab wie vielen Zuschauern schlägt eine große Capacity das Bezahlen pro Lizenz? Legen wir echte Zahlen drauf.&quot;</p><p>[5:05-6:35] VALUE BEAT 4 : Ab wie vielen Zuschauern rechnet sich die Capacity?
+CLAIM (ON-SCREEN card): &quot;Der Break-even liegt grob zwischen 350 und 500 Zuschauern.&quot;
+Sprecher: &quot;Rechnen wir es auf dem Bildschirm. Eine Capacity mit freiem Zuschauen, eine F64 auf Jahresreservierung, kostet rund 5.000 Euro im Monat. Eine Pro-Lizenz kostet rund 14 Euro. 5.000 geteilt durch 14 sind etwa 360. Wenn also jeder Ihrer Zuschauer sonst eine Pro-Lizenz bräuchte, fängt die Capacity irgendwo zwischen 350 und 500 Zuschauern an zu gewinnen, sobald Sie die Autoren einrechnen, die zum Veröffentlichen weiter ihre eigene Pro- oder PPU-Lizenz brauchen. Darunter ist pro Kopf günstiger. Darüber ist die Capacity günstiger und einfacher zu verwalten. Die Falle ist die Mitte. Viele Teams springen bei 80 Zuschauern auf eine 5.000-Euro-Capacity, weil sie das freie Zuschauen wollten, obwohl 80 Pro-Lizenzen sie rund 1.100 Euro gekostet hätten. Sie kaufen rund 4.000 Euro monatliche Reserve, um eine Lizenz-Vorliebe zu bedienen, während die Lizenzen allein nur einen Bruchteil gekostet hätten.&quot;
+DEMO (MODALITY: data-viz) Ein Break-even-Diagramm zeichnet sich live: eine steigende Kosten-pro-Lizenz-Linie (Zuschauer auf der x-Achse, Euro auf der y-Achse) klettert mit 14 Euro pro Kopf und kreuzt bei rund 360 Zuschauern eine flache 5.000-Euro-Capacity-Linie. Der Kreuzungspunkt pulsiert. Ein Marker fällt bei &quot;80 Zuschauer&quot; weit unter die flache Linie, schattiert, um die rund 4.000 Euro verschenkte Reserve zu zeigen.
+PAYOFF (ON-SCREEN numbered takeaway): &quot;Merksatz 4: Machen Sie die Teilen-durch-14-Probe. Unter rund 350 echten Zuschauern gewinnt pro Nutzer fast immer.&quot;
+RE-HOOK: &quot;Der Listenpreis ist aber nur die halbe Wahrheit. Selbst bei F64 kann die Zahl auf der Rechnung fast doppelt so hoch landen. Hier ist der Grund.&quot;</p><p>[6:35-8:15] VALUE BEAT 5 : Warum ist die Rechnung doppelt so hoch wie der Preis auf dem Papier?
+CLAIM (ON-SCREEN card): &quot;Pay-as-you-go F64 kostet rund 8.000 Euro. Die Reservierung rund 5.000.&quot;
+Sprecher: &quot;Es gibt zwei Wege, dieselbe F64-Capacity zu kaufen. Pay-as-you-go, stundenweise abgerechnet, landet bei rund 8.000 Euro im Monat, wenn Sie sie rund um die Uhr laufen lassen. Eine Jahresreservierung für dieselbe Capacity kostet rund 5.000. Gleiche Rechenleistung, gleiche Geschwindigkeit, ein Unterschied von rund 3.000 Euro jeden Monat, nur wegen der Art, wie Sie sich festgelegt haben. Die meisten Teams schalten Fabric zum Ausprobieren mit einer Pay-as-you-go-Capacity ein, vergessen, dass sie rund um die Uhr läuft, und bekommen eine erste Rechnung um die 8.000 statt der 5.000, mit denen sie geplant hatten. Dann kommt die zweite Überraschung. Fabric glättet Ihre Rechenlast über die Zeit, eine schwere Aktualisierung am Morgen wird also über den Tag verteilt. Wenn Sie dauerhaft mehr verlangen, als die F64 hergibt, passiert eines von zwei Dingen. Ist Autoscale an, wird die Mehrlast obendrauf berechnet. Ist es aus, drosselt die Capacity, und die Berichte werden langsam oder reagieren nicht mehr, während die Metrik oben noch grün anzeigt, als sei alles in Ordnung. Die Rechnung wächst also für Last, die Sie auf dem Übersichtsbildschirm nicht einmal sehen.&quot;
+DEMO (MODALITY: screen-record) Das Azure-Portal, Capacity-Blade nebeneinander: Pay-as-you-go bei rund 8.000 Euro neben der Jahresreservierung bei rund 5.000, der Cursor umkreist die Lücke. Dann Schnitt in die Capacity-Metrics-App: ein CU-Messwert füllt sich über eine Morgenspitze, die Glättung flacht sie ab, die Linie kreuzt die Grenze, und Anfragen stauen sich hinter einem Drossel-Balken, während die Anzeige oben noch grün bleibt.
+PAYOFF (ON-SCREEN numbered takeaway): &quot;Merksatz 5: Preisen Sie immer die Reservierung ein, und prüfen Sie, ob Ihre Capacity auf Pay-as-you-go läuft. Diese eine Einstellung ist der Unterschied zwischen 5.000 und 8.000 Euro.&quot;
+RE-HOOK: &quot;Und selbst wenn Sie diese Einstellung richtig setzen, übersehen fast alle drei Posten in der Kalkulation. Die kosten Sie am Ende am meisten.&quot;</p><p>[8:15-10:00] VALUE BEAT 6 : Was übersehen fast alle bei der Kalkulation?
+CLAIM (ON-SCREEN card): &quot;Drei Posten fehlen in fast jeder Lizenz-Rechnung.&quot;
+Sprecher: &quot;Drei Dinge, und alle drei kosten echtes Geld. Erstens, eine Capacity spart die Lizenz nur für reine Zuschauer. Jeder, der Berichte baut und veröffentlicht, braucht weiter seine eigene Pro- oder PPU-Lizenz, auch auf einer F64. Wer glaubt, die Capacity ersetze alle Lizenzen, verkalkuliert sich bei jedem Autor. Zweitens, F64 ist nicht die einzige Stufe. Wenn Sie kein freies Zuschauen fürs ganze Unternehmen brauchen, sondern nur mehr Rechenleistung oder eine bestimmte Fabric-Funktion, reicht oft eine kleinere Stufe wie F32 oder F16, und die kostet anteilig weniger. Viele zahlen eine F64, während sie einen Bruchteil davon nutzen. Drittens, eine Capacity lässt sich pausieren. Eine Pay-as-you-go-Capacity, die Sie über Nacht und am Wochenende ausschalten, kann die Rechnung um mehr als die Hälfte senken, und das An und Aus lässt sich automatisieren. Autoren mitrechnen, kleinere Stufe prüfen, ausschalten, wenn niemand da ist. Diese drei Posten stehen in keinem Marketing-Preisschild, und genau sie entscheiden, ob die Rechnung am Ende stimmt.&quot;
+DEMO (MODALITY: custom animation) Drei Panels bauen sich nacheinander auf. Panel 1: der F64-Block, graue Zuschauer strömen frei durch, aber drei Autoren-Icons tragen weiter ein Schild mit 14 und 24 Euro. Panel 2: ein F-Stufen-Dropdown stuft F64 herunter auf F32 auf F16, der Preis halbiert sich mit jedem Schritt. Panel 3: ein Uhr-Icon schaltet die Capacity von 19:00 bis 07:00 dunkel, der Kostenbalken fällt um die Hälfte. Jedes Panel landet mit seiner eigenen Zahl.
+PAYOFF (ON-SCREEN numbered takeaway): &quot;Merksatz 6: Autoren zahlen weiter pro Kopf, die kleinere F-Stufe reicht oft, und eine pausierte Capacity halbiert die Rechnung.&quot;
+RE-HOOK: &quot;Setzen wir das ganze Bild zusammen.&quot;</p><p>[10:00-11:15] PAYOFF : Recap und der bezahlte Open Loop
+Sprecher: &quot;Hier ist die ganze Rechnung in sechs Zeilen. Abrechnung pro Nutzer ist linear, rund 14 Euro je Pro-Lizenz. PPU gehört auf einzelne schwere Nutzer, nicht aufs ganze Team. Freies Zuschauen fürs ganze Unternehmen beginnt erst bei F64, nahe 5.000 Euro im Monat. Der Break-even liegt damit bei rund 350 Zuschauern, darunter gewinnen die Lizenzen. Pay-as-you-go läuft nahe 8.000, die Reservierung bei rund 5.000, preisen Sie also immer die Reservierung ein. Und drei Posten übersehen fast alle: Autoren zahlen weiter, die kleinere F-Stufe reicht oft, und eine pausierte Capacity halbiert die Rechnung. Machen Sie das, und der Sprung ist keine Überraschung mehr. Sie sehen ihn kommen und entscheiden selbst, wann Sie hochgehen, statt geschoben zu werden.&quot;
+(MODALITY: on-screen text / kinetic type) Die sechs Merksätze stapeln sich zu einer einzigen Recap-Karte, pro Satz rastet eine Zeile ein, die Zahlen F64, 5.000 und 8.000 schwerer gewichtet. Die frühere Lücke zwischen 8.000 und 5.000 zeichnet sich neu, während der Open Loop bezahlt wird.
+(ON-SCREEN: card title) &quot;Die 6 Zeilen.&quot;</p><p>[11:15-12:05] SOFT CTA : Lead-Magnet, dann das Angebot ohne Druck
+Sprecher: &quot;Wenn Sie sehen wollen, wo Ihr eigenes Setup steht, bevor es die Buchhaltung tut, dafür haben wir ein kostenloses Werkzeug gebaut. Es ist die Power BI Governance- und Kosten-Scorecard, ein Fünf-Minuten-Check, der Ihre Lizenzierung und Governance bewertet und Ihnen Ihre drei größten Kostenrisiken zeigt, gemessen an anderen Teams. Der Link steht unten. Und wenn Sie die Lizenzrechnung lieber auf Ihrem echten Tenant gemacht hätten, Pro gegen PPU gegen Capacity für Ihre tatsächliche Zuschauerzahl, dann sprechen Sie mit uns. Genau das machen wir bei CaseWhen jede Woche. Der Link dazu steht in der Beschreibung. Kein Verkaufsgespräch, nur die Zahlen auf Ihrem Setup. Und wenn Ihnen das gerade eine böse Rechnung erspart hat, das nächste Video zerlegt den Sprung von Pro zu Premium Capacity Schritt für Schritt.&quot;
+(MODALITY: talking head) Saju vor der Kamera, ruhig und ohne Eile. Zwei Link-Karten schieben sich ein: die Scorecard, dann &quot;Mit CaseWhen arbeiten&quot;. Unten rechts erscheint ein kleines Watch-next-Thumbnail für das Video zur Premium-Capacity.
+(ON-SCREEN: cards) &quot;Kostenlos: Power BI Governance- und Kosten-Scorecard&quot; · &quot;Mit CaseWhen sprechen&quot; · &quot;Weiter: der 5.000-Euro-Sprung erklärt.&quot;</p><h2>Description
+Power BI Lizenzkosten erklärt: warum Ihre Rechnung von rund 140 Euro pro Monat auf Nutzerlizenzen bei rund 5.000 Euro landet, sobald Sie die F64-Schwelle überschreiten, und wie Sie den Sprung kommen sehen.</h2><p>Kostenlose Power BI Governance- und Kosten-Scorecard (5-Minuten-Check): https://casewhen.co/scorecard
+Mit CaseWhen an Ihrer Lizenzrechnung arbeiten: https://casewhen.co/kontakt</p><p>0:00 Warum explodiert meine Power-BI-Rechnung auf einmal?
+0:45 Wofür zahle ich gerade eigentlich?
+2:10 Wann brauche ich wirklich Premium Per User?
+3:35 Ab wann zwingt mich Microsoft in eine Capacity?
+5:05 Ab wie vielen Zuschauern rechnet sich die Capacity?
+6:35 Warum ist die Rechnung doppelt so hoch wie der Preis auf dem Papier?
+8:15 Was übersehen fast alle bei der Kalkulation?
+10:00 Was sollte ich diese Woche tun?</p><p>Ressourcen:
+- Microsoft Fabric Capacity Metrics App (kostenlos, im AppSource)
+- Power BI Governance- und Kosten-Scorecard: https://casewhen.co/scorecard
+- Weiter ansehen, der Sprung von Pro zu Premium Capacity: https://casewhen.co/youtube</p><p>Power BI Lizenzkosten sind die Stufe, die fast niemand einplant. Die Abrechnung pro Nutzer, Pro bei rund 14 Euro und Premium Per User bei rund 24 Euro, wächst gerade, ein kleines Team zahlt also eine niedrige Monatsrechnung. Freies Zuschauen für Leute ohne eigene Lizenz gibt es erst ab der F64-Capacity, nahe 5.000 Euro im Monat auf Jahresreservierung und näher an 8.000 Euro auf Pay-as-you-go, und genau da sitzt der Sprung. Dieses Video rechnet den Break-even durch, zeigt, warum der Pay-as-you-go-Preis fast doppelt so hoch läuft, und gibt Ihnen die drei Posten, die in fast jeder Kalkulation fehlen, damit Sie die Stufe richtig wählen und die Kosten deckeln, bevor die Buchhaltung eine böse Rechnung sieht.</p><p>#PowerBI #MicrosoftFabric #PowerBILizenzkosten #Datenanalyse #FabricCapacity</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

@@ -1,0 +1,244 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Azure Synapse Analytics Explained in 12 Minutes: What It Is,</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Azure Synapse Analytics Explained in 12 Minutes: What It Is, What It Was, and Where It&#x27;s Going
+Host: Austin · Cluster: azure-de · Target: 12 min · Primary keyword: azure synapse analytics</p><h2>Chapters
+- 0:00 What is Azure Synapse Analytics?
+- 1:30 Why did Microsoft build Synapse in the first place?
+- 3:05 What are the parts inside Synapse?
+- 4:45 Dedicated or serverless SQL, which one am I paying for?
+- 6:25 What do Spark and Synapse Link actually do?
+- 8:05 Is Synapse being replaced by Microsoft Fabric?
+- 9:45 Should I start a new project on Synapse or Fabric?
+- 11:20 So what do I do about it on Monday?</h2><h2>Script</h2><p>Chapter 1. What is Azure Synapse Analytics?</p><p>[0:00-0:12] HOOK (style: question / named-feature anchor)
+Spoken: &quot;So what is Azure Synapse Analytics, and in 2026 should you still start a new project on it? It packed four separate engines behind one workspace, and Microsoft has since pointed all new analytics work at Fabric instead.&quot;
+(MODALITY: talking head, tight, one quiet take)
+(ON-SCREEN: keyword card &quot;AZURE SYNAPSE ANALYTICS&quot; with four small engine icons appearing one by one: SQL, Spark, Pipelines, Data Explorer)
+(B-ROLL: 2-second cut to the Synapse Studio home screen loading)</p><p>[0:12-0:45] PROMISE + STAKES + OPEN LOOP
+Spoken: &quot;By the end of this you&#x27;ll know exactly what Synapse is, what each piece does, what you pay for, and whether it&#x27;s still a safe bet or a dead end. That last part matters. Teams still stand up brand-new Synapse warehouses right now, wire months of work into them, then find out Microsoft is putting every new feature somewhere else. In Precisely&#x27;s 2025 survey, only about one in eight companies said their data was even ready for AI, so the foundation you pick here is the thing everything else sits on. Stay to the end and I&#x27;ll give you the straight answer on Synapse versus Fabric for anything you start today. We build these Azure data platforms for BI teams most weeks, so this is the plain-English version, no product-page spin.&quot;
+(MODALITY: kinetic type over voice, then a fast b-roll montage)
+(ON-SCREEN: three promise lines pop in sequence: &quot;What it is&quot; / &quot;What you pay for&quot; / &quot;Synapse or Fabric in 2026&quot;)
+(Visible change every ~5s: each promise line lands as spoken, then a quick montage of a warehouse, a Spark notebook, a pipeline canvas)</p><p>[0:45-1:30] VALUE BEAT 1 (the plain definition)
+CLAIM
+Spoken: &quot;Here&#x27;s the one-line version. Azure Synapse Analytics is one workspace that bundles four different data engines on top of your data lake, so you can ingest, store, query, and report without stitching four separate services together yourself.&quot;
+(MODALITY: custom animation)
+(ANIMATION, &quot;one roof, four engines&quot;: an Azure Data Lake slab draws in at the bottom. Above it, a single labelled frame reads &quot;Synapse workspace.&quot; Inside that frame four tiles fade up in a row, &quot;Dedicated SQL,&quot; &quot;Serverless SQL,&quot; &quot;Apache Spark,&quot; &quot;Pipelines,&quot; each with a thin arrow reaching down to the same lake. Keyword &quot;azure synapse analytics&quot; pinned lower-third.)
+(ON-SCREEN: card &quot;Synapse = 1 workspace, 4 engines, 1 data lake&quot;)
+PAYOFF + RE-HOOK
+Spoken: &quot;So takeaway one, and write this down. Synapse is a bundle of engines sharing one lake and one login, so treat it as a set of tools, not one box. Which raises the obvious question, why did Microsoft glue all that together in the first place?&quot;
+(MODALITY: talking head)
+(ON-SCREEN: numbered takeaway &quot;1. Synapse = four engines bundled over one data lake.&quot;)</p><p>Chapter 2. Why did Microsoft build Synapse in the first place?</p><p>[1:30-2:00] CLAIM
+Spoken: &quot;Synapse exists because the old way was a mess of moving parts you had to wire up and secure yourself.&quot;
+(MODALITY: on-screen text)
+(ON-SCREEN: card &quot;Before Synapse: four services, four bills, four security setups&quot;)
+(B-ROLL: hands at a whiteboard sketching disconnected boxes)</p><p>[2:00-2:50] DEMO
+Spoken: &quot;Rewind a few years. If you wanted a proper analytics setup on Azure, you bought SQL Data Warehouse for your big relational tables, you ran a separate Spark service for heavy transforms, you built pipelines in Azure Data Factory to move data around, and you connected Power BI on top. Four services, four ways to log in, four places to set access, four bills to reconcile. Synapse took that whole stack and put it behind one workspace called Synapse Studio, with shared security and one place to see everything. That&#x27;s the entire pitch. It didn&#x27;t invent new engines, it stopped you from being the integration glue between them.&quot;
+(MODALITY: b-roll / screen-record cutaway)
+(SCREEN-RECORD: Synapse Studio left-hand rail, cursor moving down the hubs, Data, Develop, Integrate, Manage, so the viewer sees SQL, notebooks, and pipelines all living in one pane. Callout box lands on the single rail: &quot;one workspace, all four.&quot;)
+(Visible change every ~6s: cut from the whiteboard sketch to the real Studio rail, callout box appears)</p><p>[2:50-3:05] PAYOFF + RE-HOOK
+Spoken: &quot;Takeaway two. Synapse&#x27;s real value was never one engine, it was the bundling, one workspace instead of four services you glue together. Good. Now let&#x27;s open the box and look at those four engines one at a time, because you pay for them very differently.&quot;
+(MODALITY: talking head)
+(ON-SCREEN: numbered takeaway &quot;2. The value is the bundle: one workspace over four engines.&quot;)</p><p>Chapter 3. What are the parts inside Synapse?</p><p>[3:05-3:35] CLAIM
+Spoken: &quot;Inside Synapse there are four engines, and each one is good at a different job. Get these names straight and the whole service stops being confusing.&quot;
+(MODALITY: on-screen text)
+(ON-SCREEN: card &quot;The 4 engines: Dedicated SQL · Serverless SQL · Spark · Pipelines&quot;)</p><p>[3:35-4:30] DEMO
+Spoken: &quot;Here&#x27;s each one in a sentence. Dedicated SQL pool, that&#x27;s the old SQL Data Warehouse, a big relational warehouse where you provision compute up front for fast, repeated reporting. Serverless SQL, that&#x27;s a pay-per-query engine that reads files sitting in your lake with no infrastructure to size. Apache Spark pools, that&#x27;s your engine for notebooks and heavy data prep across huge files, Python or Scala or Spark SQL. And Synapse Pipelines, that&#x27;s Azure Data Factory built right in, for scheduling and moving data. All four read and write the same Azure Data Lake underneath, so a Spark job can clean a file and a SQL query can read the result minutes later, no copy step in between.&quot;
+(MODALITY: custom animation)
+(ANIMATION, &quot;four engines, one lake&quot;: the Data Lake slab sits center. Four labelled engine blocks arrange around it, Dedicated SQL, Serverless SQL, Spark, Pipelines. A file icon drops into the lake, a Spark block lights up and rewrites it to a clean &quot;gold&quot; file, then a Serverless SQL block lights up and reads that same file, with a two-way arrow to the lake, never a duplicate copy. Each engine&#x27;s one-line job label stays pinned as a legend.)
+(ON-SCREEN: four legend labels remain: &quot;warehouse / query files / notebooks / move data&quot;)</p><p>[4:30-4:45] PAYOFF + RE-HOOK
+Spoken: &quot;Takeaway three. Learn the four engines by their job, warehouse, query files, notebooks, and move data, and Synapse stops feeling like alphabet soup. Now the two engines people mix up most are the SQL ones, and picking the wrong one is where the bill gets ugly. Let me show you.&quot;
+(MODALITY: talking head)
+(ON-SCREEN: numbered takeaway &quot;3. Four engines by job: warehouse, query-files, notebooks, move-data.&quot;)</p><p>Chapter 4. Dedicated or serverless SQL, which one am I paying for?</p><p>[4:45-5:15] CLAIM
+Spoken: &quot;The two SQL engines look similar and bill in opposite ways. Dedicated is reserved compute you rent by the hour. Serverless charges you per terabyte of data a query scans.&quot;
+(MODALITY: on-screen text)
+(ON-SCREEN: card &quot;Dedicated = rent compute by the hour · Serverless = pay per TB scanned&quot;)</p><p>[5:15-6:10] DEMO
+Spoken: &quot;Watch the difference on the meter. A dedicated SQL pool is sized in DWUs, and here&#x27;s the part that surprises finance. The moment you provision it, it&#x27;s charging you, even overnight when nobody runs a single query. It bills for being switched on, not for being used. You can suspend the pool to stop that meter, but a lot of teams forget, and the bill just runs. Serverless is the opposite shape. There&#x27;s nothing to provision, you just query files in the lake, and you pay for the gigabytes each query reads. Great for exploring and light workloads, but scan a giant folder ten times a day and per-terabyte pricing adds up fast too. So the choice is about workload, steady heavy reporting leans dedicated, occasional querying over lake files leans serverless.&quot;
+(MODALITY: screen-record)
+(SCREEN-RECORD: Synapse Studio Manage hub. First open a dedicated SQL pool showing its DWU setting and a &quot;provisioned, running&quot; status, callout: &quot;billing now, query or not.&quot; Then run a serverless query in the SQL editor and point the cursor at the results footer showing &quot;data processed: 2.1 GB,&quot; callout: &quot;you pay for this number.&quot; Zoom-punch on each figure.)
+(Visible change every ~6s: cut between the pool settings and the live query footer, two callout boxes)</p><p>[6:10-6:25] PAYOFF + RE-HOOK
+Spoken: &quot;Takeaway four. Dedicated bills for being on, serverless bills for what it scans, so match the engine to the workload and suspend dedicated pools you&#x27;re not using. Alright, that&#x27;s the SQL side. The other two engines, Spark and something called Synapse Link, are where the more interesting capability lives.&quot;
+(MODALITY: talking head)
+(ON-SCREEN: numbered takeaway &quot;4. Dedicated = pay to run; serverless = pay to scan. Match to workload.&quot;)</p><p>Chapter 5. What do Spark and Synapse Link actually do?</p><p>[6:25-6:55] CLAIM
+Spoken: &quot;Spark is your heavy-lifting engine for big data prep. Synapse Link is the quiet feature that lets you analyze live operational data without building a single pipeline.&quot;
+(MODALITY: on-screen text)
+(ON-SCREEN: card &quot;Spark = big transforms · Synapse Link = live data, no ETL&quot;)</p><p>[6:55-7:50] DEMO
+Spoken: &quot;Take Spark first. When a file is too big or too messy for SQL, you spin up a Spark pool, write a notebook in Python or Spark SQL, and process millions of rows across a cluster, then land a clean result back in the lake for the SQL engines to read. Standard big-data work, built right into the same workspace. Now Synapse Link, this one&#x27;s useful and badly underused. Normally, to report on data from an operational database like Cosmos DB or Dataverse or SQL, you&#x27;d build pipelines to copy it out on a schedule, which is slow and always a bit stale. Synapse Link mirrors that operational data into an analytical copy in near real time, automatically, with no pipeline to build and no load on the app database. Then Synapse SQL or Spark queries the mirrored copy while your app keeps writing to the original. You get fresh numbers without the copy machinery.&quot;
+(MODALITY: custom animation)
+(ANIMATION, &quot;Synapse Link, no pipeline&quot;: left side, an operational database labelled &quot;Cosmos DB / Dataverse&quot; with an app writing to it, small write-dots flowing in. A thin auto-sync channel continuously mirrors those changes to a right-side &quot;analytical copy&quot; drawn as a column store. Crucially, the usual row of &quot;pipeline&quot; boxes in the middle greys out and dissolves, replaced by one glowing auto-mirror arrow. Then Synapse SQL and Spark icons query the right-side copy while the app keeps writing on the left. On-screen: &quot;operational writes stay untouched; analytics reads a live mirror.&quot;)
+(ON-SCREEN: keyword &quot;Synapse Link&quot; pinned with sub-label &quot;near real-time, no ETL&quot;)</p><p>[7:50-8:05] PAYOFF + RE-HOOK
+Spoken: &quot;Takeaway five. Use Spark for the big transforms, and remember Synapse Link exists, it gives you near-live analytics over operational data with no pipeline to maintain. Okay, you now know what Synapse is and does. Here&#x27;s the part you clicked for. Is any of this a dead end, because Microsoft Fabric is all anyone talks about now?&quot;
+(MODALITY: talking head)
+(ON-SCREEN: numbered takeaway &quot;5. Spark for big transforms; Synapse Link for live data with no ETL.&quot;)</p><p>Chapter 6. Is Synapse being replaced by Microsoft Fabric?</p><p>[8:05-8:35] CLAIM
+Spoken: &quot;Here&#x27;s the blunt status. Synapse still runs and is fully supported, but it&#x27;s in maintenance for new features, and Microsoft Fabric is where those same engines now get all the investment.&quot;
+(MODALITY: data-viz / on-screen text)
+(ON-SCREEN: timeline card, &quot;Synapse: supported, maintenance mode&quot; on the left, &quot;Fabric: 28,000+ customers, all new features&quot; on the right, arrow pointing right)</p><p>[8:35-9:30] DEMO
+Spoken: &quot;Let me show you what Fabric changed, because it&#x27;s the same ideas repackaged. Synapse gave you those four engines, but you still managed the knobs, you sized the DWUs, you configured the Spark pools, you wired the security. Fabric takes the same engines, warehouse, Spark, pipelines, and delivers them as a finished software product where the infrastructure is handled for you, all sitting on one storage layer called OneLake instead of your own lake account. You don&#x27;t provision a warehouse, you just use one, and you buy a single capacity that every engine shares. Microsoft said Fabric passed twenty-eight thousand customers at its Ignite event, the fastest-growing analytics product in its history, and every new capability is landing there, not in Synapse. So Synapse keeps running with full support, and the roadmap has clearly moved on.&quot;
+(MODALITY: custom animation)
+(ANIMATION, &quot;Synapse to Fabric&quot;: the four Synapse engine blocks sit inside an Azure frame covered in little &quot;settings&quot; gears the user has to turn. On transition, the gears fade out, the four blocks lift up and re-seat themselves as clean pre-wired tiles inside a &quot;Fabric&quot; frame, and the four separate lake slabs merge into a single labelled &quot;OneLake&quot; slab underneath all of them. A capacity meter labelled &quot;one shared capacity&quot; appears beside the Fabric frame. On-screen: &quot;same engines, run for you, one OneLake, one capacity.&quot;)
+(ON-SCREEN: mapping labels, &quot;Dedicated SQL → Fabric Warehouse · Serverless → Lakehouse SQL · Spark → Fabric Notebooks · Pipelines → Data Factory&quot;)</p><p>[9:30-9:45] PAYOFF + RE-HOOK
+Spoken: &quot;Takeaway six. Synapse is supported but frozen, Fabric is the same engines delivered as a finished product on OneLake, and that&#x27;s where every new feature goes. Which leaves the only decision that matters for you. Do you start something new on Synapse, or go straight to Fabric?&quot;
+(MODALITY: talking head)
+(ON-SCREEN: numbered takeaway &quot;6. Synapse = frozen but supported; Fabric = same engines, new features.&quot;)</p><p>Chapter 7. Should I start a new project on Synapse or Fabric?</p><p>[9:45-10:15] CLAIM
+Spoken: &quot;Straight answer. For anything brand new in 2026, default to Fabric. Keep Synapse only where you already run it well and a rebuild isn&#x27;t worth it yet.&quot;
+(MODALITY: on-screen text)
+(ON-SCREEN: card &quot;New build → Fabric. Running Synapse fine → keep, migrate on your timeline.&quot;)</p><p>[10:15-11:05] DEMO
+Spoken: &quot;Let me make that a real decision, not a slogan. Three cases. One, you&#x27;re greenfield, nothing built yet, start on Fabric, because you&#x27;d only be building on an engine that stopped getting new features. Two, you&#x27;ve got a mature Synapse warehouse running fine, don&#x27;t panic-migrate, it&#x27;s supported, so keep it and plan a move to Fabric on your own schedule, not a fire drill. Three, you have a specific need Fabric doesn&#x27;t cover yet, some deep Azure networking or a control Synapse still exposes, then Synapse can still be the right short-term call, with eyes open that it&#x27;s a bridge. The trap to avoid is the middle mistake, starting a fresh Synapse build in 2026 out of habit, because you&#x27;re signing up to migrate it to Fabric later anyway.&quot;
+(MODALITY: data-viz)
+(DATA-VIZ: a clean three-row decision panel builds line by line. Row 1 &quot;Greenfield / new&quot; → green &quot;Fabric.&quot; Row 2 &quot;Mature Synapse, running fine&quot; → amber &quot;Keep, migrate on your timeline.&quot; Row 3 &quot;Specific gap Fabric can&#x27;t cover yet&quot; → grey &quot;Synapse, short-term bridge.&quot; A red &quot;avoid&quot; tag drops onto a fourth phantom row: &quot;New build on Synapse out of habit.&quot; Amber used strictly as a status colour, brand green for the recommended path.)
+(ON-SCREEN: the three rows stay as a summary panel)</p><p>[11:05-11:20] PAYOFF + RE-HOOK
+Spoken: &quot;Takeaway seven. New work goes to Fabric, a healthy Synapse setup stays until you choose to move it, and the one thing you don&#x27;t do is start a fresh Synapse build today. Let me pull the whole picture together and give you one thing to do this week.&quot;
+(MODALITY: talking head)
+(ON-SCREEN: numbered takeaway &quot;7. New → Fabric; healthy Synapse → keep; never start fresh on Synapse now.&quot;)</p><p>Chapter 8. So what do I do about it on Monday?</p><p>[11:20-12:05] PAYOFF (full recap + open-loop payoff)
+Spoken: &quot;Here&#x27;s the whole thing on one screen. One, Azure Synapse Analytics is one workspace bundling four engines over your data lake. Two, its real value was the bundle, one login instead of four glued-together services. Three, learn the four engines by their job, warehouse, query files, notebooks, and move data. Four, dedicated SQL bills for being switched on, serverless bills for what it scans, so match the engine to the workload and suspend idle pools. Five, Spark handles the big transforms and Synapse Link gives you near-live analytics with no pipeline. Six, Synapse is supported but frozen, and Fabric is those same engines as a finished product on OneLake with twenty-eight thousand customers already on it. And seven, the open loop I promised, the straight answer, for anything new, start on Fabric, keep a healthy Synapse platform running until you plan its move, and don&#x27;t spin up a fresh Synapse build in 2026. Do that and you won&#x27;t waste a quarter building on a frozen engine.&quot;
+(MODALITY: kinetic type list)
+(ON-SCREEN: all 7 takeaways stack as a clean numbered list, then a &quot;Monday: pick Fabric for anything new&quot; card lands on top)</p><p>[12:05-12:40] SOFT CTA
+Spoken: &quot;If you want to get this right on your own setup, we put together a free Azure data platform readiness checklist, what to inventory in your Synapse workspace, the questions to answer before you build anything new, and the Fabric migration checkpoints. It&#x27;s linked below, no email needed. And if you&#x27;re standing up an Azure data foundation and want it built right the first time, that&#x27;s the work we do at CaseWhen, there&#x27;s a link in the description to talk to us about the build, no pitch, just a straight conversation about your setup. If this helped, the next video breaks down Fabric capacity and what it really costs, I&#x27;d watch that one next.&quot;
+(MODALITY: talking head → end card)
+(ON-SCREEN: two link cards, &quot;Free: Azure Data Platform Readiness Checklist&quot; and &quot;Talk to CaseWhen about the build,&quot; plus a small watch-next thumbnail &quot;Fabric Capacity, What It Really Costs&quot;)</p><h2>Description</h2><p>Azure Synapse Analytics explained in plain English: what it is, the four engines inside it, what you really pay for, and whether you should still build on it now that Microsoft Fabric exists.</p><p>Free Azure data platform readiness checklist: https://casewhen.co/azure-readiness-checklist
+Work with CaseWhen (talk about the build): https://casewhen.co/azure-build</p><p>Chapters:
+0:00 What is Azure Synapse Analytics?
+1:30 Why did Microsoft build Synapse in the first place?
+3:05 What are the parts inside Synapse?
+4:45 Dedicated or serverless SQL, which one am I paying for?
+6:25 What do Spark and Synapse Link actually do?
+8:05 Is Synapse being replaced by Microsoft Fabric?
+9:45 Should I start a new project on Synapse or Fabric?
+11:20 So what do I do about it on Monday?</p><p>Resources:
+- Azure data platform readiness checklist (free): https://casewhen.co/azure-readiness-checklist
+- Talk to CaseWhen about your Azure build: https://casewhen.co/azure-build
+- Watch next, Fabric capacity and cost: https://casewhen.co/fabric-capacity</p><p>Azure Synapse Analytics is one Azure workspace that bundles four engines, dedicated SQL pools, serverless SQL, Apache Spark, and pipelines, on top of your data lake. This walkthrough covers what Synapse is, why Microsoft built it to replace a stack of separate services, how dedicated and serverless SQL bill in opposite ways, what Spark and Synapse Link do, and how Microsoft Fabric now delivers those same engines as a finished product on OneLake. If you&#x27;re deciding between Azure Synapse Analytics and Fabric, the short version is to start new projects on Fabric, keep a healthy Synapse workspace running until you plan its migration, and avoid starting a fresh Synapse build in 2026.</p><p>#AzureSynapse #MicrosoftFabric #Azure #DataEngineering #PowerBI</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>
