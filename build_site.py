@@ -318,12 +318,16 @@ def card(platform, idx, lang, day, r, detail=None):
     elif c:  # finished short text (LinkedIn / X / blog summary)
         hook_t = (c.get("hook") or "").strip()
         txt_t = (c.get("body") or "").strip()
-        # X posts store the whole post in body (hook included); don't print the hook twice
+        # The body field often holds the WHOLE post (hook at the start, close at the end).
+        # Strip both so the separately-rendered hook and close don't appear twice.
         if hook_t and txt_t.startswith(hook_t):
             txt_t = txt_t[len(hook_t):].lstrip(" \n")
+        close_t = (c.get("close") or "").strip()
+        if close_t and txt_t.rstrip().endswith(close_t):
+            txt_t = txt_t.rstrip()[:-len(close_t)].rstrip()
         body = f'<div class="body done annotatable"><span class="hook">{esc(hook_t)}</span>' \
                f'<div class="txt">{esc(txt_t)}</div>'
-        if c.get("close"): body += f'<div class="close">{esc(c["close"])}</div>'
+        if close_t: body += f'<div class="close">{esc(close_t)}</div>'
         body += f'<div class="meta"><span class="ship">SHIP ✓ gated</span>' \
                 f'<span>{esc(c.get("note",""))}</span></div></div>'
     else:  # scheduled plan

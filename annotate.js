@@ -199,9 +199,10 @@
       html += '<blockquote>' + esc(n.quote.slice(0, 220)) + '</blockquote>';
       html += '<textarea placeholder="What should change here? e.g. this doesn\'t sound natural / cut this / add a number">' + esc(n.note) + '</textarea>';
       html += '<div class="cw-row"><button data-act="ai" data-aid="' + n.aid + '">✨ Suggest edit</button>' +
+              '<button data-act="aiwide" data-aid="' + n.aid + '" title="Apply this note across the whole post, not just the highlighted line">Apply to whole post</button>' +
               '<button data-act="del" data-aid="' + n.aid + '" class="ghost">Delete</button></div>';
       if (n.revision) {
-        html += '<div class="cw-rev"><div class="cw-rev-t">Suggested:</div><p>' + esc(n.revision) + '</p>' +
+        html += '<div class="cw-rev"><div class="cw-rev-t">' + (n.wide ? "Whole-post rewrite:" : "Suggested:") + '</div><p>' + esc(n.revision) + '</p>' +
                 '<div class="cw-row"><button data-act="accept" data-aid="' + n.aid + '">Accept</button>' +
                 '<button data-act="reject" data-aid="' + n.aid + '" class="ghost">Reject</button></div></div>';
       }
@@ -230,28 +231,46 @@
     var arr = notes(); var n = aid && arr.find(function (x) { return x.aid === aid; });
     if (a === "close") { panel.classList.remove("open"); return; }
     if (a === "del" && n) { n.status = "deleted"; saveNotes(arr); var m = document.querySelector('mark[data-aid="' + aid + '"]'); if (m) m.replaceWith(document.createTextNode(m.textContent)); renderPanel(); return; }
-    if (a === "reject" && n) { n.revision = ""; saveNotes(arr); renderPanel(); return; }
+    if (a === "reject" && n) { n.revision = ""; n.wide = false; saveNotes(arr); renderPanel(); return; }
     if (a === "accept" && n) {
-      var m = document.querySelector('mark[data-aid="' + aid + '"]');
-      if (m) { m.textContent = n.revision; m.classList.add("done"); }
+      if (n.wide) {
+        // whole-post rewrite: replace the entire post body (keep the approval bar + data attrs)
+        var cont = document.querySelector('.annotatable[data-cwid="' + n.cwid + '"]');
+        if (cont) {
+          var bar = cont.querySelector(".cw-approve");
+          var paras = (n.revision || "").split(/\n\s*\n/).map(function (p) { return p.trim() ? "<p>" + esc(p.trim()) + "</p>" : ""; }).join("");
+          cont.innerHTML = paras;
+          if (bar) cont.appendChild(bar);
+        }
+      } else {
+        var m = document.querySelector('mark[data-aid="' + aid + '"]');
+        if (m) { m.textContent = n.revision; m.classList.add("done"); }
+      }
       n.status = "resolved"; n.applied = n.revision; saveNotes(arr); renderPanel(); return;
     }
+    if (a === "aiwide" && n) { suggest(n, arr, true); return; }
     if (a === "export") { exportNotes(); return; }
     if (a === "exportjson") { exportNotesJSON(); return; }
     if (a === "exportap") { exportApprovals(); return; }
     if (a === "ai" && n) { suggest(n, arr); return; }
   }
 
-  // ---- AI surgical edit ----
-  function suggest(n, arr) {
+  // ---- AI edit (surgical passage, or whole-post when wide=true) ----
+  function suggest(n, arr, wide) {
     var c = cfg();
     var noteEl = panel.querySelector('.cw-note[data-aid="' + n.aid + '"]');
-    var btn = noteEl && noteEl.querySelector('[data-act="ai"]');
+    var btn = noteEl && noteEl.querySelector('[data-act="' + (wide ? "aiwide" : "ai") + '"]');
+    var btnLabel = wide ? "Apply to whole post" : "✨ Suggest edit";
     if (btn) { btn.disabled = true; btn.textContent = "Thinking…"; }
     var de = /[äöüß]/i.test(n.quote) || document.documentElement.lang === "de";
     // full surrounding post + keyword, so the edit has context (not just the isolated passage)
     var container = document.querySelector('.annotatable[data-cwid="' + n.cwid + '"]');
-    var fullPost = container ? container.innerText.trim().slice(0, 1800) : "";
+    var fullPost = "";
+    if (container) {
+      var clone = container.cloneNode(true);
+      clone.querySelectorAll(".cw-approve, .meta, .cw-notebtn, .bar").forEach(function (e) { e.remove(); });
+      fullPost = clone.innerText.trim().slice(0, wide ? 8000 : 1800);
+    }
     var card = container && container.closest('.card, article') || container;
     var gt = function (sel) { return card && card.querySelector(sel) ? card.querySelector(sel).textContent.trim() : ""; };
     var kw = gt(".kw");
@@ -262,26 +281,34 @@
       "youtube": "a long-form YouTube script", "visuals": "a carousel or quote card" }[
       (location.pathname.split("/").pop() || "").replace(/(-post-\d+)?\.html$/, "").replace(/^(script|blog)-.*/, "$1")
     ] || (/script-/.test(location.pathname) ? "a long-form YouTube script" : /\.html$/.test(location.pathname) ? "a blog article" : "a post"));
-    var sys = "You are a surgical copy editor for CaseWhen, a Berlin Power BI / Microsoft Fabric / Azure consultancy that helps business buyers (controllers, CFOs, heads of data) get one trusted number. Rewrite ONLY the passage the reviewer selected, addressing their note, and make it fit naturally inside the full post you are given. "
-      + "CaseWhen rules (obey all): (1) PROBLEM-FIRST — if the passage is the opening line, it must state the reader's real problem in plain everyday words with NO statistic, NO percentage, NO research-source name in that first line; earn the stat later. (2) NAME THE NOUN — never a vague placeholder ('the right things', 'something', 'what matters'); name the concrete thing. (3) At most one stat, and never default to Talend 40% / solvexia / revealbi 70% / ZoomInfo 82%; keep any stat's real source. (4) Keep the exact SEO keyword if present. (5) Plain, human, founder voice with contractions; be specific enough to be wrong. "
+    var task = wide
+      ? "Rewrite the ENTIRE post below, applying the reviewer's note across the whole thing (not just one line). Keep it the same type and roughly the same length, keep the same structure (a hook first line, the body, then the closing question), and keep the exact SEO keyword if one is given. "
+      : "Rewrite ONLY the passage the reviewer selected, addressing their note, and make it fit naturally inside the full post you are given. ";
+    var sys = "You are a surgical copy editor for CaseWhen, a Berlin Power BI / Microsoft Fabric / Azure consultancy that helps business buyers (controllers, CFOs, heads of data) get one trusted number. " + task
+      + "CaseWhen rules (obey all): (1) PROBLEM-FIRST — the opening line must state the reader's real problem in plain everyday words with NO statistic, NO percentage, NO research-source name in that first line; earn the stat later. (2) NAME THE NOUN — never a vague placeholder ('the right things', 'something', 'what matters'); name the concrete thing. (3) At most one stat, and never default to Talend 40% / solvexia / revealbi 70% / ZoomInfo 82%; keep any stat's real source. (4) Keep the exact SEO keyword if present. (5) Plain, human, founder voice with contractions; be specific enough to be wrong. "
       + "Hard bans: no em dashes, no metaphors or analogies, no 'not X but Y' cadence, no hype or AI-slop words, no corny throat-clearing ('here's the thing', 'the good news', 'at its core', 'nobody tells you'), no jargon (DACH, TAM, ICP). "
       + "Brand rules (always): write \"Power BI\" with exactly that capitalization, never \"power bi\" or \"powerbi\" (leave URLs/slugs like power-bi-consultant and app.powerbi.com as they are); and never use the word \"board\" at all (no \"board report\", \"board pack\", \"board meeting\", \"boardroom\") — use \"management report\" for the document, \"leadership\" for the audience, \"leadership review\" for the meeting (German: Managementbericht / Management / Management-Meeting). "
-      + "Return ONLY the revised passage as plain text, nothing else." + (de ? " The post is German; reply in natural German with correct ä/ö/ü and formal Sie." : "");
+      + (wide ? "Return ONLY the full revised post as plain text, with a blank line between paragraphs, nothing else." : "Return ONLY the revised passage as plain text, nothing else.")
+      + (de ? " The post is German; reply in natural German with correct ä/ö/ü and formal Sie." : "");
     var ctx = "THIS SPECIFIC POST — its identity and goal (keep the edit true to it): This is " + channel + " for CaseWhen aimed at a business buyer (a controller, CFO, or head of data), not an engineer."
       + (kw ? " Its target keyword is \"" + kw + "\" (preserve it)." : "")
       + (cat ? " Topic category: " + cat + "." : "")
       + (who ? " Author voice: " + who + "." : "")
       + (goal ? " Its intent/angle: " + goal + "." : "")
       + " The post's job is to make the buyer feel one real problem and trust CaseWhen to fix it. Your edit must serve that goal and stay plain and relatable to a non-technical decision maker.";
-    var usr = ctx
-      + "\n\nFULL POST (for context — do NOT rewrite this whole thing):\n" + fullPost
-      + "\n\nTHE SELECTED PASSAGE TO REWRITE:\n" + n.quote
-      + "\n\nREVIEWER NOTE:\n" + (n.note || "make it sound more natural and specific")
-      + "\n\nReturn only the revised passage, fitting this post's voice and goal, and not repeating any other line in it.";
+    var usr = wide
+      ? ctx + "\n\nTHE FULL POST TO REWRITE:\n" + fullPost
+        + "\n\nREVIEWER NOTE (apply this across the whole post):\n" + (n.note || "tighten it and make it sound more natural")
+        + (n.quote ? "\n\n(The reviewer flagged this line as an example of the problem: \"" + n.quote + "\")" : "")
+        + "\n\nReturn the full revised post only."
+      : ctx + "\n\nFULL POST (for context — do NOT rewrite this whole thing):\n" + fullPost
+        + "\n\nTHE SELECTED PASSAGE TO REWRITE:\n" + n.quote
+        + "\n\nREVIEWER NOTE:\n" + (n.note || "make it sound more natural and specific")
+        + "\n\nReturn only the revised passage, fitting this post's voice and goal, and not repeating any other line in it.";
     callModel(c, sys, usr).then(function (out) {
-      n.revision = (out || "").trim(); saveNotes(arr); renderPanel();
+      n.revision = (out || "").trim(); n.wide = !!wide; saveNotes(arr); renderPanel();
     }).catch(function (err) {
-      if (btn) { btn.disabled = false; btn.textContent = "✨ Suggest edit"; }
+      if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
       alert("AI request failed: " + (err && err.message ? err.message : err));
     });
   }
@@ -317,7 +344,7 @@
   function exportNotesJSON() {
     var list = notes().filter(function (n) { return n.status !== "deleted" && (n.note || "").trim(); });
     var items = list.filter(function (n) { return n.src; }).map(function (n) {
-      return { file: n.src, selection: n.quote || "", note: n.note || "" };
+      return { file: n.src, selection: n.quote || "", note: n.note || "", scope: n.wide ? "whole_post" : "passage" };
     });
     var missing = list.length - items.length;
     var payload = JSON.stringify({ notes: items }, null, 1);
