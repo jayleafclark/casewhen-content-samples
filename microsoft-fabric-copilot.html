@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Microsoft Fabric Copilot: Why Your Data Has to Be Ready Firs</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, CaseWhen</b><span>microsoft fabric copilot</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>Microsoft Fabric Copilot: Why Your Data Has to Be Ready First</h1><figure class="achart"><figcaption>Organizations with data good enough to use for AI</figcaption><div class="cbar"><span class="cl">Ready</span><div class="ctrack"><div class="cfill" style="width:13%"></div></div><span class="cv">12%</span></div><div class="cbar"><span class="cl">Not ready</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">88%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><p>Quick Answer: Microsoft Fabric Copilot is the built-in AI assistant that answers business questions and builds reports from your data using plain language. It only returns answers you can trust when the data underneath it is clean, governed, and has one agreed version of each number. You cannot just switch Microsoft Fabric Copilot on and expect correct results. The quality of the answer depends entirely on the quality and structure of the data you point it at.</p><p>You turned on Microsoft Fabric Copilot, asked it a simple question about last quarter, and it handed back a number that nobody on the team could confirm. The answer looked confident and clear. Then someone checked it against the finance report and the two figures did not match. Now you are not sure whether to trust anything it says, and the people you wanted to give self-serve answers to are already going back to their spreadsheets.</p><p>This is the most common thing that happens in the first month of using Copilot inside Fabric. The tool works exactly as designed. The problem is that it answers based on whatever data it can reach, and in most companies that data is messy, duplicated, and defined three different ways across three different tables. Copilot does not fix that for you. It reflects it straight back, faster and with more confidence than before.</p><h2>What is Microsoft Fabric Copilot and what does it actually do?</h2><p>Microsoft Fabric Copilot is the AI assistant Microsoft built into Fabric and Power BI. You type a question in plain English, and it writes the query, pulls the data, and gives you an answer or a chart. It can also build a report page for you, write DAX measures, summarize a dataset, and explain what a table contains. The promise is real. A finance lead or a sales manager can ask &quot;what were our top five products by margin last quarter&quot; and get a usable answer without waiting three days for the data team.</p><p>Underneath, Copilot reads your semantic model. That model is the layer that tells it what &quot;revenue&quot; means, which table contains customers, and how the pieces join together. When Copilot answers a question, it is reading the names, relationships, and measures you defined in that model. If the model says revenue lives in two places and they disagree, Copilot has no way to know which one you meant. It picks one and moves on.</p><p>So the tool is only as good as the model behind it. A clear, well-built semantic model gives Copilot the vocabulary to answer correctly. A model with duplicate measures, vague column names, and no single definition of the key numbers gives Copilot the freedom to guess.</p><h2>Why does Microsoft Fabric Copilot give wrong answers?</h2><p>When Copilot returns a figure that does not tie out, the cause is almost always in the data, not the AI. Here are the usual reasons the answer comes back wrong.</p><p>The same number is defined in more than one place. If &quot;net revenue&quot; exists as three different measures across three reports, Copilot will use whichever one it finds first. Ask the question twice and you can get two answers.</p><p>The column and table names do not describe what they contain. Copilot reads names to understand your data. A table called &quot;tbl_fct_02&quot; or a column called &quot;amt3&quot; tells it nothing, so it makes an assumption about what those fields mean.</p><p>There is no row-level security in place. Copilot answers based on what the user is allowed to see. If permissions are loose, a regional manager can ask a question and get the whole company&#x27;s numbers back, which is both wrong for them and a governance problem for you.</p><p>The data has not been cleaned. Duplicate customer records, blank values, and dates stored as text all produce answers that look fine and are still incorrect. Copilot does not flag this. It just counts what is there.</p><p>None of these are AI failures. They are data foundation gaps that were invisible while humans built every report by hand and corrected for them along the way. Copilot removes the human in the middle, and the gaps become visible in the answers.</p><h2>Is your data actually ready for Microsoft Fabric Copilot?</h2><p>This is the honest question most teams skip. Everyone wants the AI layer. Far fewer have the foundation it needs to sit on.</p><p>The numbers back this up. Only 12% of organizations say their data is good enough in quality and access to use for AI, according to Drexel University LeBow College of Business and Precisely in their 2025 Data Integrity report. That means close to nine in ten companies switching on an AI assistant are pointing it at data that is not ready for the job. When that happens, the forecast Copilot helps build comes in wrong, gets shared, and then has to be walked back a week later once someone spots the error.</p><p>Being ready does not mean your data is perfect. It means a few specific things are true: each important number has one agreed definition, the tables Copilot reads are clean and named clearly, permissions are set so people only see what they should, and the semantic model is built well enough that a plain question maps to a correct answer. Those four things are the difference between Copilot as a useful assistant and Copilot as a fast way to produce confident wrong numbers.</p><h2>What does good data look like next to bad data for Copilot?</h2><p>Here is the practical difference, side by side.</p><table><tr><th>What Copilot reads</th><th>Messy, ungoverned data</th><th>Clean, governed single source</th></tr><tr><td>Key numbers like revenue</td><td>Defined in several places, they disagree</td><td>One agreed definition, used everywhere</td></tr><tr><td>Table and column names</td><td>Codes like tbl_02, amt3</td><td>Plain names that say what they contain</td></tr><tr><td>Permissions</td><td>Everyone sees everything</td><td>Row-level security, people see their slice</td></tr><tr><td>Data quality</td><td>Duplicates, blanks, text dates</td><td>Cleaned, deduplicated, typed correctly</td></tr><tr><td>The answer you get</td><td>Confident and often wrong</td><td>Trustworthy and repeatable</td></tr><tr><td>What the team does next</td><td>Goes back to Excel</td><td>Trusts the answer, asks the next question</td></tr></table><p>Most companies sit in the left column when they first turn Copilot on. The readiness work moves them into the right column. Closing that gap is a data modeling and governance project. It is the same work that makes your normal Power BI reports trustworthy whether or not you ever use AI.</p><h2>How do you get your data ready for Microsoft Fabric Copilot?</h2><p>You do not need a year-long program before you see value. You need to fix the foundation in the right order. This is the sequence we use.</p><p>Start with the numbers that matter most. Pick the ten or so measures your leadership actually asks about, revenue, margin, active customers, pipeline, and give each one a single agreed definition. This is the one agreed number work, and it does more for Copilot accuracy than anything else.</p><p>Clean and name the tables Copilot will read. Fix duplicates, blanks, and wrong data types. Rename cryptic fields so a person, and the AI, can tell what each one means. Copilot uses those names to figure out your data, so plain names directly improve its answers.</p><p>Build a proper semantic model. Set up the relationships, the measures, and a clear star schema so a plain question has one correct path to an answer. A weak model is the single biggest reason Copilot guesses.</p><p>Put governance and permissions in place. Turn on row-level security so people only get the data they are allowed to see. Decide who owns each dataset and who can publish. This is what keeps Copilot answers both correct and safe to hand out widely.</p><p>Then turn Copilot on for a small group first. Test it against numbers you already know are right. Fix what does not tie out before you open it up to the whole company. Trust is easy to lose on day one and slow to win back.</p><p>Done in this order, the foundation work pays off twice. It makes Copilot reliable, and it makes every existing report more trustworthy at the same time.</p><h2>Ready to see where your data stands?</h2><p>Before you spend budget switching Microsoft Fabric Copilot on for everyone, it is worth knowing exactly where your foundation is strong and where it will produce wrong answers. Our free Power BI Governance and Cost Scorecard is a five-minute assessment that shows you your top governance and readiness risks, plus how your setup compares to other teams. If the scorecard flags gaps, or your numbers still will not reconcile, book a Fabric readiness and AI-readiness review with us and we will map the exact work needed to make Copilot trustworthy on your real data.</p><h2>FAQ</h2><p>Can I use Microsoft Fabric Copilot without cleaning my data first?
+You can turn it on, but the answers will reflect whatever state your data is in. If numbers are defined in several places or tables are messy, Copilot will return confident answers that do not tie out. It is far cheaper to fix the foundation for the ten numbers leadership cares about first, then switch Copilot on, than to lose trust in it on the first wrong answer.</p><p>Does Microsoft Fabric Copilot cost extra on top of Fabric?
+Copilot runs on Fabric capacity, so it consumes capacity units when people use it. That means usage shows up in your Fabric capacity cost rather than as a separate line item. Right-sizing that capacity, and understanding how much Copilot use will add, is part of a proper Fabric readiness and cost review before you roll it out widely.</p><p>Why does Microsoft Fabric Copilot give me a different answer than my report?
+Almost always because the number is defined more than once in your data, and Copilot used a different definition than your report did. The fix is to give that number one agreed definition in your semantic model so both the report and Copilot read the same thing. This is the core of getting your data ready for AI.</p><p>Read next: [The complete guide to Microsoft Fabric](/blog/microsoft-fabric) and [How to build a data governance framework](/blog/data-governance-framework).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">microsoft fabric copilot</span><span class="c">power bi copilot, microsoft fabric ai readiness, copilot data governance</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

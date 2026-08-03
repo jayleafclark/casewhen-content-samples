@@ -1,0 +1,154 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Pricing</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="on">Pricing</a></nav></div></header>
+<style>
+.pnote{background:#fff6ec;border:1px solid #f0d8b8;border-left:4px solid #d98a3d;border-radius:0 10px 10px 0;padding:14px 16px;margin:18px 0;font-size:14px;color:#6b4a22}
+.ladder{display:flex;flex-direction:column;gap:10px;margin:16px 0}
+.rung{display:grid;grid-template-columns:150px 1fr;gap:16px;border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--card)}
+.rung .amt{font-weight:800;font-size:18px;color:var(--dark)}
+.rung .amt small{display:block;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-bottom:2px}
+.rung h3{font-size:16px;margin:0 0 4px}
+.rung p{font-size:13.5px;color:var(--mut);margin:0}
+.rung .bump{font-size:12.5px;color:var(--faint);margin-top:5px}
+.otab{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+.otab th{text-align:left;background:var(--dark);color:#fff;padding:9px 11px;font-size:12px}
+.otab td{border-top:1px solid var(--line);padding:9px 11px;vertical-align:top}
+.why{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:12px}
+.why .w{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--card)}
+.why .w b{color:var(--dark)}
+@media(max-width:760px){.rung{grid-template-columns:1fr}.why{grid-template-columns:1fr}}
+</style>
+<section class="hero"><div class="wrap"><div class="eb">CaseWhen &middot; offers &amp; pricing</div>
+<h1>What CaseWhen sells, and the pricing behind it.</h1>
+<p>The seven offers, the value ladder from a free scorecard up to a managed retainer, and the reasoning
+for each price. Every post and script on this site points at one of these.</p></div></section>
+<div class="wrap">
+<div class="pnote"><b>Proposed, not final.</b> These prices are researched starting points to react to.
+CaseWhen has the final say on every number here. Nothing is set, and we expect you to move them.</div>
+<div class="eb">The seven offers</div>
+<table class="otab"><tr><th>Offer</th><th>Role</th><th>What it is</th></tr><tr><td><b>Power BI Development & Dashboards</b></td><td>Core</td><td>Done-for-you semantic models, DAX, RLS, refresh, trusted usable reports. Highest buyer-value cluster.</td></tr><tr><td><b>Data Modeling / the One Agreed Number</b></td><td>Lead offer</td><td>Fix the semantic model so people and Copilot return one correct number. The AI-readiness wedge.</td></tr><tr><td><b>Azure Data Platform & Warehousing</b></td><td>Core (US-weighted)</td><td>Azure Data Factory, Synapse and warehouse, pipelines, the plumbing BI stands on.</td></tr><tr><td><b>Microsoft Fabric Adoption & Capacity FinOps</b></td><td>Core (DACH-weighted)</td><td>Fabric setup, capacity right-sizing and cost control, Premium P-SKU to Fabric migration.</td></tr><tr><td><b>Governance & Trusted BI (+ AI-output governance)</b></td><td>Core, rising</td><td>RLS, governance frameworks, lineage, trusted numbers, and governing what Copilot returns.</td></tr><tr><td><b>Reporting Automation & Migrations</b></td><td>Supporting</td><td>Automate manual and Excel reporting; Tableau to Power BI, on-prem to Fabric, SSIS to Azure.</td></tr><tr><td><b>Training & Enablement (Copilot supervision)</b></td><td>Supporting, top-of-funnel</td><td>Productized Power BI, Fabric and Copilot-supervision courses. Microsoft co-funds Copilot training.</td></tr></table>
+<div class="eb" style="margin-top:26px">The value ladder</div>
+<p style="color:var(--mut);font-size:14px;margin:6px 0 0">Each rung is a small yes that makes the next one easier. The bridges between rungs are where funnels usually die, so each has a deliberate next step.</p>
+<div class="rung"><div class="amt"><small>Rung 0</small>Free</div><div><h3>Governance & Cost Scorecard</h3><p>A 5-minute interactive self-assessment (12-15 questions on model health, DAX, RLS, refresh ownership, Fabric readiness). Output: a score out of 100, a peer benchmark, and the top 3 risks. Email-only to unlock.</p><div class="bump">Email capture. The whole funnel starts here.</div></div></div><div class="rung"><div class="amt"><small>Rung 1</small>&euro;49</div><div><h3>Star Schema Fix Kit</h3><p>A 45-minute walkthrough plus a .pbix template (star schema, date table, 25 DAX measures) and a governance checklist. Sold on the scorecard thank-you page.</p><div class="bump">Order bump +&euro;19: DAX Performance Pack (15 optimized patterns + query-folding cheat sheet).</div></div></div><div class="rung"><div class="amt"><small>Rung 2</small>&euro;299</div><div><h3>Foundations to Fabric course</h3><p>~6-8h self-paced on the three highest-demand pillars: modeling and star schema, performant DAX, governance and a first Fabric look. Intro price &euro;199. The pipeline engine.</p><div class="bump">Bump +&euro;79 Governance Starter Templates; upsell +&euro;149 Fabric Readiness Track.</div></div></div><div class="rung"><div class="amt"><small>Rung 3</small>&euro;1,500</div><div><h3>Dashboard-in-a-Day (your team)</h3><p>Live, done-with-your-team, on your own data, ~10 seats. The deliberate bridge from course to services, a scoping session disguised as training.</p><div class="bump">Tier above: Team Enablement Package &euro;4,500 (3 sessions + model/governance review + 30 days async).</div></div></div><div class="rung"><div class="amt"><small>Rung 4</small>Project</div><div><h3>Bounded-entry first project</h3><p>A fixed-scope, fixed-price first engagement so a new client can start without signing a big open-ended contract.</p><div class="bump">Designed to convert into the retainer once trust is proven.</div></div></div><div class="rung"><div class="amt"><small>Rung 5</small>&euro;2,500-4,500/mo</div><div><h3>Managed BI & governance retainer</h3><p>Ongoing model, governance, Fabric and Azure work. 6-month minimum. Then full project consulting above it.</p><div class="bump">The durable revenue line the whole ladder climbs toward.</div></div></div>
+<div class="eb" style="margin-top:26px">Why these prices (the logic)</div>
+<div class="why">
+<div class="w"><b>Free scorecard, email-only.</b> An interactive assessment beats a static PDF, and a one-field form converts far better than a two-field one (about 4.4% vs 2.9%). We profile the lead after capture, not before.</div>
+<div class="w"><b>&euro;49 tripwire as a buyer filter.</b> A small paid yes separates real buyers from browsers and pays for the traffic. It is tightly tied to the services so it scopes the next step, not a random product.</div>
+<div class="w"><b>&euro;299 course as the pipeline.</b> It is both revenue and lead-gen. It teaches the three things buyers search for most, then the &quot;now do it on your data&quot; bridge invites the mid-ticket.</div>
+<div class="w"><b>&euro;1,500 mid-ticket scopes the high-ticket.</b> Dashboard-in-a-Day on the client's own data is a live scoping session. It de-risks the retainer for both sides before anyone signs a big number.</div>
+<div class="w"><b>US vs DACH framing differs.</b> US and UK buyers respond to build-first, direct-to-call. DACH buyers respond to education and workshop-first, in German, anchored on modeling and governance.</div>
+<div class="w"><b>AI is the trigger, not a line item.</b> Copilot and Fabric AI only pay off on governed data, so the AI conversation feeds offers 2, 4 and 5. We never sell &quot;AI consulting&quot; as its own thing.</div>
+</div>
+</div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

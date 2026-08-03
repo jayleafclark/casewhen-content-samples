@@ -1,0 +1,146 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · AI in Power BI only works on data that&#x27;s ready for it</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>ai in power bi</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>AI in Power BI only works on data that&#x27;s ready for it</h1><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><p>Quick Answer: AI in Power BI means Copilot and the Fabric AI features that let people ask questions in plain English and get answers, summaries, and draft reports. It only gives right answers when the data underneath is clean, governed, and comes from one agreed source. So the real question is not whether to switch it on, it&#x27;s whether your data is ready for it.
+---</p><p>You keep hearing that AI in Power BI will answer questions in plain English, so you turn on Copilot, ask it for last month&#x27;s revenue, and get a number nobody in the room can check. It sounds confident. It looks finished. And you have no fast way to tell if it&#x27;s right. That&#x27;s the gap this piece is about, and most teams hit it in the first week.</p><p>The reason is simple. Copilot doesn&#x27;t invent a correct number, it reads whatever model and tables you point it at. If two of your reports already disagree on revenue, the AI will happily pick one, phrase it well, and hand it to you as fact. So the tool inherits every problem your data already has, and then says it with more confidence than a human would.</p><h2>What does AI in Power BI actually do today?</h2><p>There are two pieces people mean when they say AI in Power BI, and it helps to separate them.</p><p>The first is Copilot inside Power BI. You type a question like &quot;show me margin by product for last quarter&quot; and it builds the visual, or it writes a first draft of a report page, or it summarizes what a dashboard is showing in a sentence. It also drafts the underlying calculations for you.</p><p>The second is the Microsoft Fabric AI layer underneath. Fabric is where your data is stored, cleaned, and joined together before a report ever sees it. The AI features there help prepare and connect data, and they are what let Copilot answer across your whole business rather than one small dataset.</p><p>Both are genuinely useful. Neither can fix a number that was wrong before it arrived. That&#x27;s the part the demos skip.</p><h2>Why can&#x27;t you just switch Copilot on?</h2><p>Because Copilot answers from your model, and most models were never built to be asked open questions.</p><p>Think about how a normal report gets made. Someone loads the tables that were easy to get, wires up a few visuals for a specific meeting, and ships it. It answers the three questions it was built for. Copilot, though, gets asked anything: margin by customer, revenue by region, headcount by month. When the model wasn&#x27;t built to answer that, the AI still returns something, and now you have a confident answer with no owner and no way to trace it.</p><p>This is the honest message, and it&#x27;s worth saying plainly. You cannot just switch AI in Power BI on and trust it. Your data has to be ready for it first. Ready means the numbers are defined once, the tables are joined correctly, permissions are set so people only see what they should, and every report reads from the same source.</p><p>Only 12% of organizations say their data is good enough, in both quality and access, to actually use for AI (Drexel LeBow and Precisely, 2025). So if your setup isn&#x27;t ready yet, you&#x27;re in the large majority, not behind.</p><h2>What does &quot;AI ready&quot; data actually mean?</h2><p>It&#x27;s less exotic than it sounds. AI ready data is the same clean foundation that makes any report trustworthy, and Copilot just raises the stakes because it will answer far more questions than a human ever coded by hand.</p><p>Here&#x27;s what changes when you point AI at a messy setup versus a governed one.</p><table><tr><th>The question you ask Copilot</th><th>On messy, ungoverned data</th><th>On AI ready, governed data</th></tr><tr><td>&quot;What was revenue last month?&quot;</td><td>Picks one of several conflicting figures, states it as fact</td><td>Returns the one agreed number from a shared model</td></tr><tr><td>&quot;Show margin by customer&quot;</td><td>Guesses a join, may double-count</td><td>Uses the defined relationship, counts once</td></tr><tr><td>&quot;Who can see this?&quot;</td><td>Everyone sees everything, including salaries</td><td>Row-level security limits each person to their data</td></tr><tr><td>&quot;Where did this number come from?&quot;</td><td>No trace, no owner</td><td>Clear source, a named owner, a written definition</td></tr><tr><td>Can you act on the answer?</td><td>Not without checking it in Excel first</td><td>Yes, because it matches the trusted report</td></tr></table><p>The left column is why a Copilot pilot quietly gets abandoned. People try it, get an answer they can&#x27;t verify, and go back to the spreadsheet they believe. The right column is what makes it stick, and it&#x27;s the same work that fixes reports for humans too.</p><h2>What does it cost when the data isn&#x27;t ready?</h2><p>The visible cost is a wrong decision made quickly. Say your head of sales asks Copilot for pipeline by region before a forecast call, gets a clean-looking answer built on a broken join, and the quarterly forecast goes out too high. It gets walked back a month later, and the tool that was meant to save time just made a confident mistake faster.</p><p>The quieter cost is the pilot that dies. You paid for Copilot licenses, a few people tried it, nobody could trust the answers, and now the license sits unused while everyone keeps working the old way. You&#x27;ve bought AI and kept the manual work.</p><p>There&#x27;s also a permissions cost people forget. Copilot answers from what the model can see. If your model has no row-level security, a plain-English question can surface numbers a person was never meant to reach, like another team&#x27;s margins or a salary line. On messy data, the AI is a fast way to leak the wrong figure to the wrong person.</p><h2>What should you fix before turning on AI in Power BI?</h2><p>You don&#x27;t need a huge program. You need the data foundation in order first, then the AI on top.</p><ol><li>Agree your core numbers once. Revenue, margin, and a couple of others, each defined in writing and built into one shared model, so there&#x27;s a single answer for Copilot to find.</li><li>Point every report at that one model instead of separate extracts. This is what stops Copilot picking between five versions of the same figure.</li><li>Turn on row-level security so each person, and the AI answering for them, only sees the data they&#x27;re allowed to.</li><li>Name an owner for each model and report. An AI answer with no human owner is where trust breaks.</li><li>Then, and only then, switch on Copilot for a small group and check its answers against the trusted reports before you widen it.</li></ol><p>Do those four foundation steps and the AI stops guessing, because there&#x27;s one clean, governed, single source for it to read. This is exactly the Microsoft Fabric AI and Power BI Copilot readiness work we do, and it&#x27;s mostly modeling and governance, not magic.</p><p>If you want to see where your setup stands, the free Power BI Governance and Cost Scorecard is a five-minute check that gives you a score, a peer benchmark, and your top three risks. And if you&#x27;re weighing up Copilot and want to know whether your data is ready for it, that&#x27;s the work we do at CaseWhen. Book a scoping call and we&#x27;ll look at your real reports and give you a straight read on what to fix before you turn AI on, with no pitch.</p><h2>Frequently asked questions</h2><p>Do we need Microsoft Fabric to use AI in Power BI?
+Not for basic Copilot inside a report, but the bigger AI features and the ability to answer across your whole business run on the Fabric AI layer. It&#x27;s where data gets prepared, so it matters more the more you want the AI to do.</p><p>Will Copilot fix our conflicting numbers on its own?
+No. Copilot reads your model and answers from it. If two reports disagree today, it will pick one and state it confidently. The fix is one agreed number in a shared model first, then the AI reads that.</p><p>Is our data ready for AI right now?
+Most teams&#x27; data isn&#x27;t, and that&#x27;s normal. Ready means numbers defined once, tables joined correctly, permissions set with row-level security, and every report reading from the same source. A short review tells you where the gaps are.</p><p>Read next: [How to get one number everyone in the room trusts](/blog/data-governance-framework) and [Bought Power BI but the team still lives in Excel](/blog/power-bi-but-team-still-uses-excel).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">ai in power bi</span><span class="c">power bi copilot</span><span class="c">microsoft fabric ai</span><span class="c">ai ready data</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

@@ -191,7 +191,7 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 """
 
 def nav(active):
-    items = [("index.html","Home"),("strategy.html","Strategy")] + [(f"{k}.html", v["title"]) for k, v in PLATFORMS.items()] + [("youtube.html","YouTube"),("visuals.html","Visuals"),("seo.html","SEO"),("funnels.html","Funnels")]
+    items = [("index.html","Home"),("strategy.html","Strategy")] + [(f"{k}.html", v["title"]) for k, v in PLATFORMS.items()] + [("youtube.html","YouTube"),("visuals.html","Visuals"),("seo.html","SEO"),("funnels.html","Funnels"),("pricing.html","Pricing")]
     return "".join(f'<a href="{h}" class="{"on" if h==active else ""}">{esc(t)}</a>' for h, t in items)
 
 def shell(active, title, inner):
@@ -1626,6 +1626,70 @@ description, the slug, or the schema, so a post cannot ship under-optimized. The
 gate's output, made visible.</div></div>"""
     (OUT/"seo.html").write_text(shell("seo.html","SEO coverage",body),encoding="utf-8")
 
+def pricing_page():
+    st = """
+.pnote{background:#fff6ec;border:1px solid #f0d8b8;border-left:4px solid #d98a3d;border-radius:0 10px 10px 0;padding:14px 16px;margin:18px 0;font-size:14px;color:#6b4a22}
+.ladder{display:flex;flex-direction:column;gap:10px;margin:16px 0}
+.rung{display:grid;grid-template-columns:150px 1fr;gap:16px;border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--card)}
+.rung .amt{font-weight:800;font-size:18px;color:var(--dark)}
+.rung .amt small{display:block;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-bottom:2px}
+.rung h3{font-size:16px;margin:0 0 4px}
+.rung p{font-size:13.5px;color:var(--mut);margin:0}
+.rung .bump{font-size:12.5px;color:var(--faint);margin-top:5px}
+.otab{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+.otab th{text-align:left;background:var(--dark);color:#fff;padding:9px 11px;font-size:12px}
+.otab td{border-top:1px solid var(--line);padding:9px 11px;vertical-align:top}
+.why{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:12px}
+.why .w{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--card)}
+.why .w b{color:var(--dark)}
+@media(max-width:760px){.rung{grid-template-columns:1fr}.why{grid-template-columns:1fr}}
+"""
+    rungs = [
+      ("Free","Governance & Cost Scorecard","A 5-minute interactive self-assessment (12-15 questions on model health, DAX, RLS, refresh ownership, Fabric readiness). Output: a score out of 100, a peer benchmark, and the top 3 risks. Email-only to unlock.","Email capture. The whole funnel starts here."),
+      ("&euro;49","Star Schema Fix Kit","A 45-minute walkthrough plus a .pbix template (star schema, date table, 25 DAX measures) and a governance checklist. Sold on the scorecard thank-you page.","Order bump +&euro;19: DAX Performance Pack (15 optimized patterns + query-folding cheat sheet)."),
+      ("&euro;299","Foundations to Fabric course","~6-8h self-paced on the three highest-demand pillars: modeling and star schema, performant DAX, governance and a first Fabric look. Intro price &euro;199. The pipeline engine.","Bump +&euro;79 Governance Starter Templates; upsell +&euro;149 Fabric Readiness Track."),
+      ("&euro;1,500","Dashboard-in-a-Day (your team)","Live, done-with-your-team, on your own data, ~10 seats. The deliberate bridge from course to services, a scoping session disguised as training.","Tier above: Team Enablement Package &euro;4,500 (3 sessions + model/governance review + 30 days async)."),
+      ("Project","Bounded-entry first project","A fixed-scope, fixed-price first engagement so a new client can start without signing a big open-ended contract.","Designed to convert into the retainer once trust is proven."),
+      ("&euro;2,500-4,500/mo","Managed BI & governance retainer","Ongoing model, governance, Fabric and Azure work. 6-month minimum. Then full project consulting above it.","The durable revenue line the whole ladder climbs toward."),
+    ]
+    ladder = "".join(
+      f'<div class="rung"><div class="amt"><small>Rung {i}</small>{amt}</div><div><h3>{name}</h3><p>{desc}</p><div class="bump">{bump}</div></div></div>'
+      for i,(amt,name,desc,bump) in enumerate(rungs))
+    offers = [
+      ("Power BI Development & Dashboards","Core","Done-for-you semantic models, DAX, RLS, refresh, trusted usable reports. Highest buyer-value cluster."),
+      ("Data Modeling / the One Agreed Number","Lead offer","Fix the semantic model so people and Copilot return one correct number. The AI-readiness wedge."),
+      ("Azure Data Platform & Warehousing","Core (US-weighted)","Azure Data Factory, Synapse and warehouse, pipelines, the plumbing BI stands on."),
+      ("Microsoft Fabric Adoption & Capacity FinOps","Core (DACH-weighted)","Fabric setup, capacity right-sizing and cost control, Premium P-SKU to Fabric migration."),
+      ("Governance & Trusted BI (+ AI-output governance)","Core, rising","RLS, governance frameworks, lineage, trusted numbers, and governing what Copilot returns."),
+      ("Reporting Automation & Migrations","Supporting","Automate manual and Excel reporting; Tableau to Power BI, on-prem to Fabric, SSIS to Azure."),
+      ("Training & Enablement (Copilot supervision)","Supporting, top-of-funnel","Productized Power BI, Fabric and Copilot-supervision courses. Microsoft co-funds Copilot training."),
+    ]
+    otab = "".join(f'<tr><td><b>{n}</b></td><td>{tag}</td><td>{d}</td></tr>' for n,tag,d in offers)
+    body = f"""<style>{st}</style>
+<section class="hero"><div class="wrap"><div class="eb">CaseWhen &middot; offers &amp; pricing</div>
+<h1>What CaseWhen sells, and the pricing behind it.</h1>
+<p>The seven offers, the value ladder from a free scorecard up to a managed retainer, and the reasoning
+for each price. Every post and script on this site points at one of these.</p></div></section>
+<div class="wrap">
+<div class="pnote"><b>Proposed, not final.</b> These prices are researched starting points to react to.
+CaseWhen has the final say on every number here. Nothing is set, and we expect you to move them.</div>
+<div class="eb">The seven offers</div>
+<table class="otab"><tr><th>Offer</th><th>Role</th><th>What it is</th></tr>{otab}</table>
+<div class="eb" style="margin-top:26px">The value ladder</div>
+<p style="color:var(--mut);font-size:14px;margin:6px 0 0">Each rung is a small yes that makes the next one easier. The bridges between rungs are where funnels usually die, so each has a deliberate next step.</p>
+{ladder}
+<div class="eb" style="margin-top:26px">Why these prices (the logic)</div>
+<div class="why">
+<div class="w"><b>Free scorecard, email-only.</b> An interactive assessment beats a static PDF, and a one-field form converts far better than a two-field one (about 4.4% vs 2.9%). We profile the lead after capture, not before.</div>
+<div class="w"><b>&euro;49 tripwire as a buyer filter.</b> A small paid yes separates real buyers from browsers and pays for the traffic. It is tightly tied to the services so it scopes the next step, not a random product.</div>
+<div class="w"><b>&euro;299 course as the pipeline.</b> It is both revenue and lead-gen. It teaches the three things buyers search for most, then the &quot;now do it on your data&quot; bridge invites the mid-ticket.</div>
+<div class="w"><b>&euro;1,500 mid-ticket scopes the high-ticket.</b> Dashboard-in-a-Day on the client's own data is a live scoping session. It de-risks the retainer for both sides before anyone signs a big number.</div>
+<div class="w"><b>US vs DACH framing differs.</b> US and UK buyers respond to build-first, direct-to-call. DACH buyers respond to education and workshop-first, in German, anchored on modeling and governance.</div>
+<div class="w"><b>AI is the trigger, not a line item.</b> Copilot and Fabric AI only pay off on governed data, so the AI conversation feeds offers 2, 4 and 5. We never sell &quot;AI consulting&quot; as its own thing.</div>
+</div>
+</div>"""
+    (OUT / "pricing.html").write_text(shell("pricing.html", "Pricing", body), encoding="utf-8")
+
 def strategy_page():
     st = """
 .goal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
@@ -1644,9 +1708,10 @@ def strategy_page():
 """
     def barrow(label, pct, note=""):
         return f'<tr><td>{esc(label)}</td><td class="pct">{pct}%</td><td><div class="bar"><span style="width:{pct}%"></span></div>{("<div style=\"font-size:12px;color:var(--faint);margin-top:4px\">"+esc(note)+"</div>") if note else ""}</td></tr>'
-    blog_topics = [("KPI & data modeling",30),("Training & certification",28),("Azure & data engineering",12),("Pricing & licensing",11),("Governance",7),("Power BI flagship",6),("Fabric",3),("Migrations / automation",3)]
-    li_topics = [("KPI",19),("Training",17),("Governance",15),("Azure",13),("Pricing",12),("Fabric",10),("Migrations",8),("Automation",6)]
-    sf_topics = [("KPI",31),("Training",26),("Pricing",11),("Azure",11),("Governance",8),("Power BI flagship",7),("Fabric",4),("Migrations / automation",2)]
+    # Target split after the Aug-2026 rebalance (opener-and-proof doctrine §4) — buyer-pain first, AI + migration added
+    blog_topics = [("Governance & trust",16),("AI & Copilot",12),("Close & finance",12),("Dashboards & adoption",12),("Pricing & licensing",12),("Migration",10),("Fabric & Azure",10),("KPI & modeling",9),("Hiring & consulting",7)]
+    li_topics = blog_topics
+    sf_topics = blog_topics
     body = f"""<style>{st}</style>
 <section class="hero"><div class="wrap"><div class="eb">CaseWhen · content strategy</div>
 <h1>The split, the volumes, and the goal.</h1>
@@ -1772,6 +1837,9 @@ ARTCSS = """
 .bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
 .bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
 .bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
 @media(max-width:640px){.bgrid{grid-template-columns:1fr}}
 """
 
@@ -1823,7 +1891,12 @@ def blog_articles_and_grid():
         blang = "DE" if re.search(r'[äöüß]', md) else "EN"
         bcat = categorize({"keyword": kw, "cluster": cluster}, kw)
         cats_present.add(bcat)
-        cards.append(f'<a class="bcard" data-lang="{blang}" data-cat="{esc(bcat)}" href="{f.stem}.html"><img src="img/blogcovers/{f.stem}.png" loading="lazy" alt="{esc(h1)}"></a>')
+        has_cover = (OUT / "img" / "blogcovers" / f"{f.stem}.png").exists()
+        if has_cover:
+            inner_c = f'<img src="img/blogcovers/{f.stem}.png" loading="lazy" alt="{esc(h1)}">'
+        else:  # cover not rendered yet (e.g. fresh gap-fill blog) — text tile so it still shows + clicks
+            inner_c = f'<div class="btile"><span class="btcat">{esc(bcat)} · {blang}</span><span class="bth">{esc(h1)}</span></div>'
+        cards.append(f'<a class="bcard" data-lang="{blang}" data-cat="{esc(bcat)}" href="{f.stem}.html">{inner_c}</a>')
     grid = (f'<section class="ph"><div class="wrap"><div class="eb">Blog</div><h2>{len(files)} full articles, written and gated</h2>'
             f'<p style="color:var(--mut);font-size:15px;margin:10px 0 0">One English article a day plus three German a week, across six months. Filter by language or category, then click any cover to read the finished, SEO-optimized article.</p></div></section>'
             f'{filter_bar(cats_present)}<div class="wrap"><div class="bgrid">{"".join(cards)}</div></div>')
@@ -1877,6 +1950,7 @@ X. Every finished one is written plainly and passes the language and SEO checks 
 
 home()
 strategy_page()
+pricing_page()
 seo_page()
 funnels_page()
 visuals_page()
