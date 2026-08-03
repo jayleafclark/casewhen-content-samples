@@ -127,6 +127,42 @@
     if (ta) ta.focus();
   }
 
+  // ---- Austin / Saju approval checkmarks (per piece, keyed by its source file) ----
+  function apKey(src) { return "cw_approve_" + src; }
+  function getAp(src) { try { return JSON.parse(LS.getItem(apKey(src))) || {}; } catch (e) { return {}; } }
+  function setAp(src, who, val) { var a = getAp(src); a[who] = val; a.t = Date.now(); LS.setItem(apKey(src), JSON.stringify(a)); }
+  function apBtn(who, on) { return '<button class="cw-ap' + (on ? " on" : "") + '" data-who="' + who + '" type="button">' + (on ? "✓ " : "") + (who === "austin" ? "Austin" : "Saju") + " check</button>"; }
+  function injectApprovals() {
+    document.querySelectorAll(".annotatable[data-src]").forEach(function (el) {
+      var src = el.getAttribute("data-src");
+      if (!src || el.querySelector(".cw-approve")) return;
+      var a = getAp(src);
+      var bar = document.createElement("div");
+      bar.className = "cw-approve";
+      bar.innerHTML = '<span class="cw-aplab">Aligned and ready to film?</span>' + apBtn("austin", a.austin) + apBtn("saju", a.saju);
+      bar.querySelectorAll(".cw-ap").forEach(function (b) {
+        b.addEventListener("click", function (e) {
+          e.preventDefault(); e.stopPropagation();
+          var who = b.getAttribute("data-who"); var nv = !getAp(src)[who];
+          setAp(src, who, nv); b.classList.toggle("on", nv);
+          b.textContent = (nv ? "✓ " : "") + (who === "austin" ? "Austin" : "Saju") + " check";
+        });
+      });
+      el.appendChild(bar);
+    });
+  }
+  function exportApprovals() {
+    var rows = [];
+    for (var i = 0; i < LS.length; i++) {
+      var k = LS.key(i); if (k.indexOf("cw_approve_") !== 0) continue;
+      var v = getAp(k.slice("cw_approve_".length));
+      rows.push({ file: k.slice("cw_approve_".length), austin: !!v.austin, saju: !!v.saju });
+    }
+    var blob = new Blob([JSON.stringify({ approvals: rows }, null, 1)], { type: "application/json" });
+    var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "approvals.json"; a.click();
+    alert(rows.length + " piece(s) with a check recorded. " + rows.filter(function (r) { return r.austin && r.saju; }).length + " have BOTH Austin and Saju.");
+  }
+
   // ---- panel ----
   var panel, fab;
   function openPanel() { ensurePanel(); panel.classList.add("open"); }
@@ -177,7 +213,7 @@
       }
       html += '</div>';
     });
-    html += '<footer><button data-act="export" class="ghost">Export notes (md)</button><button data-act="exportjson" class="ghost">Export for AI editor</button></footer>';
+    html += '<footer><button data-act="export" class="ghost">Export notes (md)</button><button data-act="exportjson" class="ghost">Export for AI editor</button><button data-act="exportap" class="ghost">Export approvals</button></footer>';
     panel.innerHTML = html;
     wire();
   }
@@ -208,6 +244,7 @@
     }
     if (a === "export") { exportNotes(); return; }
     if (a === "exportjson") { exportNotesJSON(); return; }
+    if (a === "exportap") { exportApprovals(); return; }
     if (a === "ai" && n) { suggest(n, arr); return; }
   }
 
@@ -316,6 +353,7 @@
     document.querySelectorAll(".cw-notebtn").forEach(function (b) {
       b.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); openDeckNote(b.closest(".annotatable")); });
     });
+    injectApprovals();  // Austin/Saju check on every reviewable piece
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 })();
