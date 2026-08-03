@@ -382,7 +382,7 @@ def platform_page(k, cfg):
             card_list.append(card(k, i, lang, day, r, detail=slug))
             focused = card(k, i, lang, day, r)
             dinner = (f'<section class="ph"><div class="wrap"><a href="{k}.html" style="font-size:13px;color:var(--faint);text-decoration:none">&larr; all {esc(cfg["title"])}</a>'
-                      f'<p style="color:var(--faint);font-size:13px;margin:10px 0 0"><b>Highlight any line</b> and an &ldquo;+ Add note&rdquo; button pops up. Write what should change; add your API key in the &#9998; Review panel (corner) to get an instant AI edit, or export the notes for the repo editor.</p></div></section>'
+                      f'<p style="color:var(--faint);font-size:13px;margin:10px 0 0"><b>Highlight any line</b> and an &ldquo;+ Add note&rdquo; button pops up. Write what should change, then hit &ldquo;Suggest edit&rdquo; for an instant AI rewrite of just that line, no key or setup needed. Accept it inline, or export the notes.</p></div></section>'
                       f'<div class="wrap" style="max-width:720px;margin:0 auto">{focused}</div>')
             (OUT / slug).write_text(shell(f"{k}.html", cfg["title"] + " · post", f"<style>{FILTCSS}</style>{dinner}"), encoding="utf-8")
         else:

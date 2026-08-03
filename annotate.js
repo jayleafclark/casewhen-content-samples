@@ -1,7 +1,7 @@
 /* CaseWhen preview review layer.
    Highlight any section of a blog / script / LinkedIn / X post (EN or DE), attach a note,
-   and (with your own API key) get a surgical AI edit back that you can accept inline.
-   100% client-side. Your API key stays in this browser (localStorage), nothing is sent
+   and get a surgical AI edit back that you can accept inline. The AI runs through a
+   CaseWhen-hosted proxy (the key lives server-side); reviewers never enter a key. Notes
    anywhere except directly to the model provider you choose. */
 (function () {
   "use strict";
@@ -193,13 +193,7 @@
     var c = cfg();
     var list = notes().filter(function (n) { return n.status !== "deleted"; });
     var html = '<header><b>Review notes</b><span class="cw-x" data-act="close">×</span></header>';
-    html += '<div class="cw-cfg"><details><summary>AI settings (your key)</summary>' +
-      '<label>Provider<select data-k="provider"><option value="anthropic"' + (c.provider !== "openai" ? " selected" : "") + '>Anthropic (Claude)</option><option value="openai"' + (c.provider === "openai" ? " selected" : "") + '>OpenAI</option></select></label>' +
-      '<label>Model<input data-k="model" value="' + esc(c.model || (c.provider === "openai" ? "gpt-4o-mini" : "claude-sonnet-4-5")) + '"></label>' +
-      '<label>API key<input data-k="key" type="password" placeholder="sk-... (stays in this browser)" value="' + esc(c.key || "") + '"></label>' +
-      '<small>Your key is stored only in this browser and sent directly to the provider.</small>' +
-      '</details></div>';
-    if (!list.length) html += '<p class="cw-empty">Select any text in the post and click <b>Add note</b>. Say what feels off or what to add or cut. With your API key set, the AI makes a surgical edit to just that part.</p>';
+    if (!list.length) html += '<p class="cw-empty">Select any text in the post and click <b>Add note</b>. Say what feels off, or what to add or cut, then hit <b>Suggest edit</b> and the AI rewrites just that part for you. No setup, no keys.</p>';
     list.forEach(function (n) {
       html += '<div class="cw-note' + (n.status === "resolved" ? " done" : "") + '" data-aid="' + n.aid + '">';
       html += '<blockquote>' + esc(n.quote.slice(0, 220)) + '</blockquote>';
@@ -251,7 +245,6 @@
   // ---- AI surgical edit ----
   function suggest(n, arr) {
     var c = cfg();
-    if (!c.key) { alert("Add your API key first (AI settings, top of the panel)."); return; }
     var noteEl = panel.querySelector('.cw-note[data-aid="' + n.aid + '"]');
     var btn = noteEl && noteEl.querySelector('[data-act="ai"]');
     if (btn) { btn.disabled = true; btn.textContent = "Thinking…"; }
@@ -293,22 +286,14 @@
     });
   }
 
+  // The CaseWhen key lives ONLY on this server-side proxy (origin-locked to this site).
+  // Reviewers never see or enter a key — the AI edit just works.
+  var CW_PROXY = "https://casewhen-ai-proxy-production.up.railway.app/edit";
+  var CW_APP = "cw-preview-a7f3k9q2m5";
   function callModel(c, sys, usr) {
-    if (c.provider === "openai") {
-      return fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: { "content-type": "application/json", "authorization": "Bearer " + c.key },
-        body: JSON.stringify({ model: c.model || "gpt-4o-mini", temperature: 0.4, messages: [{ role: "system", content: sys }, { role: "user", content: usr }] })
-      }).then(chk).then(function (j) { return j.choices[0].message.content; });
-    }
-    return fetch("https://api.anthropic.com/v1/messages", {
+    return fetch(CW_PROXY, {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "x-api-key": c.key,
-        "anthropic-version": "2023-06-01",
-        "anthropic-dangerous-direct-browser-access": "true"
-      },
+      headers: { "content-type": "application/json", "x-cw-app": CW_APP },
       body: JSON.stringify({ model: c.model || "claude-sonnet-4-5", max_tokens: 700, system: sys, messages: [{ role: "user", content: usr }] })
     }).then(chk).then(function (j) { return (j.content && j.content[0] && j.content[0].text) || ""; });
   }
