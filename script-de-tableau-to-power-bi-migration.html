@@ -1,0 +1,214 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Tableau zu Power BI Migration: warum es ein Neubau ist, kein</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Tableau zu Power BI Migration: warum es ein Neubau ist, kein Umschalten (der ehrliche Plan)
+Host: Saju · Cluster: Migration · Target: 13 min · Primary keyword: tableau to power bi migration</p><h2>Chapters
+- 0:00 Gibt es einen Konverter von Tableau zu Power BI?
+- 1:30 Warum lässt sich ein Tableau-Bericht nicht einfach importieren?
+- 3:00 Was muss zuerst passieren, bevor ich einen Bericht neu baue?
+- 4:30 Wie übersetze ich Tableau-Berechnungen nach DAX?
+- 6:15 Wie baue ich das Datenmodell richtig auf?
+- 8:00 Wie bilde ich Tableau-Dashboards und Freigaben in Power BI nach?
+- 10:00 In welcher Reihenfolge migriere ich, ohne alles auf einmal zu riskieren?
+- 11:45 Was nehme ich heute mit, und wie geht es weiter?</h2><h2>Script</h2><p>[0:00-0:12] HOOK (style = contrarian)
+Saju (spoken): &quot;Es gibt keinen Knopf, der Ihre Tableau-Berichte nach Power BI übersetzt. Kein Assistent, kein Auto-Konverter. Jeder Bericht wird von Hand neu gebaut, und genau deshalb scheitern die meisten Umzüge schon in Woche eins.&quot;
+(MODALITY: screen-record) Kurzer Zusammenschnitt: links eine Tableau-Arbeitsmappe mit LOD-Berechnung, rechts die leere Power-BI-Datei. Cursor sucht in Power BI Desktop im Menü nach &quot;Import Tableau&quot;, findet nichts.
+(ON-SCREEN: Keyword-Karte &quot;Tableau zu Power BI Migration&quot;, darunter klein &quot;kein Konverter&quot;).</p><p>[0:12-0:40] PROMISE + STAKES + OPEN LOOP
+Saju (spoken): &quot;Ich bin Saju von CaseWhen. In den nächsten dreizehn Minuten bekommen Sie den ehrlichen Ablauf: warum die beiden Plattformen technisch anders ticken, was Sie in welcher Reihenfolge neu aufbauen, und woran Sie ein sauberes Migrationsprojekt von Pfusch unterscheiden. Wer stattdessen eins zu eins nachklickt, baut die alten Probleme direkt mit ein und zahlt sie zwei Jahre lang ab. Und gegen Ende zeige ich Ihnen die eine Tableau-Berechnung, die halbe Dashboards trägt und in Power BI so gar nicht existiert. Die übersehen fast alle im Angebot.&quot;
+(MODALITY: talking head) Saju am Schreibtisch, Zoom-Punch auf &quot;dreizehn Minuten&quot;.
+(ON-SCREEN: Versprechen als drei kurze Zeilen: &quot;1 Warum es ein Neubau ist  2 Was in welcher Reihenfolge  3 Woran man Pfusch erkennt&quot;).</p><p>[VALUE BEAT 1 · 1:30-3:00] Warum lässt sich ein Tableau-Bericht nicht einfach importieren?
+CLAIM: &quot;Tableau und Power BI speichern die Logik an verschiedenen Stellen, deshalb gibt es nichts zu importieren.&quot;
+(ON-SCREEN: Kachel &quot;Andere Plattform, andere Logik&quot;)
+(MODALITY: animation) CUSTOM ANIMATION &quot;zwei Plattformen nebeneinander&quot;: Links ein Tableau-Block, in dem Datenquelle, Berechnungen und die Optik in einer .twb-Datei zusammenkleben. Rechts ein Power-BI-Block, in dem drei getrennte Schichten aufleuchten und sich sauber stapeln: unten das Datenmodell (VertiPaq), in der Mitte die DAX-Kennzahlen, oben die Visuals. Ein Pfeil von links nach rechts zerbricht in der Mitte und wird zu drei einzelnen Pfeilen, die je in eine andere Schicht zeigen. Beschriftung: &quot;1 Datei gegen 3 Schichten&quot;.
+Saju (spoken, über der Animation): &quot;In Tableau steckt vieles in einer Arbeitsmappe: die Verbindung zur Quelle, Ihre berechneten Felder, die Tabellenberechnungen und die Optik hängen eng zusammen. Power BI trennt das strikt. Unten liegt das Datenmodell, darüber die Kennzahlen in DAX, ganz oben die Visuals. Ein Import müsste diese eine Datei in drei getrennte Schichten zerlegen und dabei jede Berechnung in eine andere Sprache übertragen. Kein Werkzeug macht das verlässlich, und deshalb baut man neu.&quot;
+PAYOFF (nummeriert): &quot;Merksatz 1: Behandeln Sie den Umzug ab der ersten Stunde als Neubau in drei Schichten, nicht als Datei-Konvertierung.&quot;
+(ON-SCREEN: &quot;Takeaway 1 · Neubau in 3 Schichten planen&quot;)
+RE-HOOK: &quot;Wenn nichts importiert wird, ist die erste echte Frage: was bauen Sie überhaupt neu. Und die Antwort ist fast nie alles.&quot;</p><p>[VALUE BEAT 2 · 3:00-4:30] Was muss zuerst passieren, bevor ich einen Bericht neu baue?
+CLAIM: &quot;Vor der ersten Kennzahl steht eine Inventur, sonst schleppen Sie toten Ballast mit.&quot;
+(ON-SCREEN: Kachel &quot;Erst Inventur, dann bauen&quot;)
+(MODALITY: screen-record) Bildschirmaufnahme in Tableau Server bzw. Tableau Cloud: Saju öffnet die Ansicht mit den Nutzungsstatistiken, sortiert die Arbeitsmappen nach Aufrufen der letzten neunzig Tage. Cursor markiert eine lange Liste von Berichten mit null Aufrufen. Danach kurzer Schnitt in eine Arbeitsmappe, in der er die berechneten Felder aufklappt und drei fast identische Umsatz-Felder nebeneinander zeigt.
+Saju (spoken): &quot;Öffnen Sie zuerst die Nutzungsdaten in Tableau. Sie werden sehen, dass ein großer Teil der Berichte seit Monaten niemand mehr aufruft. Diese Dashboards baut man nicht neu, die verabschiedet man. Dann schauen Sie in die aktiv genutzten Arbeitsmappen und sammeln die berechneten Felder ein. Meistens finden Sie dieselbe Kennzahl in drei Varianten, weil sie jeder Ersteller neu erfunden hat. Genau diese Dopplungen räumen Sie jetzt auf, bevor eine Zeile DAX entsteht.&quot;
+PAYOFF: &quot;Merksatz 2: Migrieren Sie nur die Berichte mit echter Nutzung, und einigen Sie sich pro Kennzahl auf eine einzige Definition.&quot;
+(ON-SCREEN: &quot;Takeaway 2 · Nur genutzte Berichte, eine Definition pro Kennzahl&quot;)
+RE-HOOK: &quot;Jetzt haben Sie eine kurze, ehrliche Liste. Der nächste Schritt ist der, an dem die meisten Projekte Zeit verlieren: die Berechnungen.&quot;</p><p>[VALUE BEAT 3 · 4:30-6:15] Wie übersetze ich Tableau-Berechnungen nach DAX?
+CLAIM: &quot;Tableau-Berechnungen kennen den Kontext des Arbeitsblatts, DAX kennt ihn nicht, also müssen Sie ihn selbst setzen.&quot;
+(ON-SCREEN: Kachel &quot;LOD und Tabellenberechnung neu denken&quot;)
+(MODALITY: animation) CUSTOM ANIMATION &quot;Kontext-Umbau&quot;: Oben eine Tableau-Tabellenberechnung &quot;Prozent vom Gesamt&quot; und eine LOD-Formel mit FIXED, die auf einem Arbeitsblatt sitzen. Ein Rahmen um das Arbeitsblatt leuchtet auf und trägt die Beschriftung &quot;Kontext kommt vom Blatt&quot;. Der Rahmen löst sich auf, die Formel fällt nach unten in eine leere Power-BI-Fläche und steht plötzlich ohne Rahmen da. Dann baut sich Stück für Stück eine DAX-Kennzahl auf, in der CALCULATE und ALL den Rahmen von Hand nachzeichnen. Beschriftung wechselt zu &quot;Kontext selbst schreiben&quot;.
+Saju (spoken): &quot;Hier ist die Berechnung, die ich am Anfang angekündigt habe. In Tableau rechnen Tabellenberechnungen wie &#x27;Prozent vom Gesamt&#x27; oder &#x27;laufende Summe&#x27; auf Basis dessen, was gerade im Arbeitsblatt steht. Die Anordnung im Blatt liefert den Kontext gratis mit. Power BI hat das nicht. Eine DAX-Kennzahl weiß von sich aus nicht, was &#x27;Gesamt&#x27; bedeutet. Sie schreiben den Kontext selbst, meistens mit CALCULATE und ALL. Auch LOD-Ausdrücke mit FIXED bauen Sie neu, als Kennzahl mit fest gesetztem Filterkontext. Das ist keine Fleißarbeit von einer Stunde, das ist der Teil, für den Sie im Zeitplan echte Tage einplanen.&quot;
+PAYOFF: &quot;Merksatz 3: Übersetzen Sie keine Formel Wort für Wort. Klären Sie erst, welchen Kontext die Berechnung braucht, und schreiben Sie ihn in DAX aus.&quot;
+(ON-SCREEN: &quot;Takeaway 3 · Erst Kontext klären, dann DAX schreiben&quot;)
+RE-HOOK: &quot;Berechnungen ergeben aber nur dann verlässliche Zahlen, wenn das Modell darunter stimmt. Und das ist der Punkt, an dem sich Tableau-Gewohnheiten am stärksten rächen.&quot;</p><p>[VALUE BEAT 4 · 6:15-8:00] Wie baue ich das Datenmodell richtig auf?
+CLAIM: &quot;Ein Tableau-Extrakt ist oft eine breite Tabelle, Power BI will ein Sternschema.&quot;
+(ON-SCREEN: Kachel &quot;Breite Tabelle raus, Sternschema rein&quot;)
+(MODALITY: screen-record) Bildschirmaufnahme in Power BI Desktop, Modellansicht. Saju zeigt zuerst eine einzige breite Importtabelle, wie sie aus einem .hyper-Extrakt entsteht. Dann zieht er die Tabelle auseinander: eine Faktentabelle in der Mitte, darum Dimensionstabellen für Datum, Kunde, Produkt. Beim Ziehen der Beziehungen leuchten die Eins-zu-viele-Pfeile auf.
+CUSTOM ANIMATION (eingeblendet über der Aufnahme) &quot;Sternschema&quot;: Faktentabelle rückt in die Mitte, die Dimensionstabellen schnappen ringsum ein, jede Beziehung zeichnet einen Eins-zu-viele-Pfeil, der kurz aufleuchtet. Eine langsame flache Tabelle daneben wird durchgestrichen.
+Saju (spoken): &quot;Viele Tableau-Berichte laufen auf einem großen Extrakt, einer breiten Tabelle mit allem drin. Das funktioniert in Tableau, weil die Optik direkt darauf sitzt. In Power BI macht dieselbe breite Tabelle die Kennzahlen langsam und die Filter unzuverlässig. Power BI ist auf ein Sternschema ausgelegt: eine Faktentabelle in der Mitte, drumherum saubere Dimensionen für Datum, Kunde, Produkt. Sie zerlegen den Extrakt also in ein Modell, statt ihn eins zu eins zu übernehmen. Ihre neuen DAX-Kennzahlen aus dem letzten Kapitel rechnen auf diesem Modell sofort schneller und geben pro Filter dieselbe Zahl.&quot;
+PAYOFF: &quot;Merksatz 4: Übernehmen Sie den Extrakt nicht als eine Tabelle. Zerlegen Sie ihn in eine Faktentabelle plus Dimensionen, bevor Sie ein einziges Visual bauen.&quot;
+(ON-SCREEN: &quot;Takeaway 4 · Extrakt in Faktentabelle plus Dimensionen zerlegen&quot;)
+RE-HOOK: &quot;Steht das Modell, kommt der Teil, den die Fachbereiche am ehesten sehen: die Dashboards selbst und wer sie sehen darf.&quot;</p><p>[VALUE BEAT 5 · 8:00-10:00] Wie bilde ich Tableau-Dashboards und Freigaben in Power BI nach?
+CLAIM: &quot;Tableau-Aktionen und Nutzerfilter haben in Power BI andere Namen und andere Regeln.&quot;
+(ON-SCREEN: Kachel &quot;Aktionen und Nutzerfilter neu abbilden&quot;)
+(MODALITY: animation) CUSTOM ANIMATION &quot;Row-Level Security&quot;: Ein und derselbe Umsatzbericht, daneben zwei Personen-Symbole, Nord und Süd. Beim Symbol Nord filtern sich die Süd-Zeilen sichtbar aus der Tabelle heraus, beim Symbol Süd umgekehrt. Über dem Bericht steht die Rolle, die den Filter über USERPRINCIPALNAME setzt. Beschriftung: &quot;Eine Rolle, gefiltert pro Anmeldung&quot;.
+Saju (spoken): &quot;Zwei Dinge, die in Tableau selbstverständlich sind, bauen Sie in Power BI bewusst neu. Erstens die Interaktion: Tableau-Aktionen, bei denen ein Klick andere Blätter filtert, bilden Sie über die Kreuzfilterung, über Drill-Through und über Lesezeichen ab. Zweitens die Sicht pro Person: Tableau-Nutzerfilter werden in Power BI zu Row-Level Security. Sie legen eine Rolle an, die über die Anmeldung des Nutzers filtert, und weisen sie im Arbeitsbereich zu. Wichtig ist die Freigabe-Struktur: In Power BI trennen Sie den Arbeitsbereich, in dem gebaut wird, von der App, die der Fachbereich sieht. Wer das überspringt, verteilt Berichte wild und verliert genau die Kontrolle, die ihn in Tableau schon geärgert hat.&quot;
+PAYOFF: &quot;Merksatz 5: Planen Sie Interaktivität und Berechtigungen als eigene Aufgabe ein. Kreuzfilterung ersetzt Aktionen, Row-Level Security ersetzt Nutzerfilter, und die App trennt Bauen von Ansehen.&quot;
+(ON-SCREEN: &quot;Takeaway 5 · Kreuzfilterung, Row-Level Security, App-Freigabe getrennt planen&quot;)
+RE-HOOK: &quot;Sie haben jetzt alle Bausteine. Fehlt die Reihenfolge, in der Sie sie zusammensetzen, ohne dass Ihnen der Betrieb stehen bleibt.&quot;</p><p>[WORKED EXAMPLE · 10:00-11:45] In welcher Reihenfolge migriere ich, ohne alles auf einmal zu riskieren?
+(MODALITY: talking head) Saju direkt in die Kamera, ruhiger, langsamer geschnitten für die Kernaussage.
+Saju (spoken): &quot;So läuft ein sauberes Projekt bei uns ab. Zuerst die Inventur aus Kapitel drei: eine kurze Liste der wirklich genutzten Berichte und eine abgestimmte Definition pro Kennzahl. Dann suchen Sie sich einen mittelwichtigen Bericht als Erstes aus, nicht das Vorstands-Dashboard und nicht die kleinste Spielerei. An diesem einen Bericht bauen Sie das Modell, die DAX-Kennzahlen und die Freigabe komplett durch. Dieser erste Bericht ist Ihre Vorlage: Datum, Kunde und Produkt liegen danach als fertige Dimensionen bereit, und die nächsten Berichte hängen sich dran, statt jedes Mal von vorn zu beginnen. Sie lassen Tableau in dieser Zeit weiterlaufen und schalten einen Bericht erst ab, wenn sein Power-BI-Nachbau von den Fachleuten abgenommen ist, Zahl für Zahl. So steht der Betrieb nie still, und Sie erkennen Pfusch früh: Wenn jemand nach einer Woche &#x27;fertig migriert&#x27; meldet, ohne ein Sternschema und ohne abgenommene Zahlen, dann wurde nachgeklickt, nicht neu gebaut.&quot;
+(MODALITY: b-roll) Kurze Aufnahmen: Team an einem Board mit drei Spalten &quot;Inventur, Vorlage-Bericht, Nachbauten&quot;; Hände, die Klebezettel von &quot;in Arbeit&quot; nach &quot;abgenommen&quot; schieben.
+(ON-SCREEN: Ablauf als vier Schritte &quot;Inventur, Vorlage-Bericht, Nachbauten anhängen, erst nach Abnahme abschalten&quot;)
+PAYOFF des Open Loops: &quot;Und die angekündigte Berechnung, die Tabellenberechnung mit ihrem Kontext vom Blatt, ist genau der Grund, warum &#x27;in einer Woche fertig&#x27; unrealistisch ist. Wer sie kennt, plant den Aufwand richtig ein.&quot;</p><p>[PAYOFF · 11:45-12:20] Was nehme ich heute mit?
+(MODALITY: on-screen text / kinetic type) Die fünf Merksätze bauen sich als Liste auf, einer nach dem anderen.
+(ON-SCREEN, nacheinander):
+&quot;1 · Neubau in drei Schichten planen, nicht importieren
+2 · Nur genutzte Berichte, eine Definition pro Kennzahl
+3 · Erst den Kontext klären, dann DAX schreiben
+4 · Extrakt in Faktentabelle plus Dimensionen zerlegen
+5 · Kreuzfilterung, Row-Level Security und App-Freigabe getrennt planen&quot;
+Saju (spoken, über der Liste): &quot;Das ist der komplette Ablauf. Mit diesen fünf Schritten können Sie ein Tableau-Portfolio nach Power BI überführen, ohne die alten Probleme mitzunehmen, und zwar auch dann, wenn Sie das ganz allein angehen. Zur Einordnung: Power BI zählt nach Microsoft-Angaben über 375.000 Organisationen und mehr als 30 Millionen aktive Nutzer im Monat. Die Plattform ist gesetzt. Die Frage ist nur, ob Sie sauber ankommen oder mit einem Nachbau, der schon wieder wackelt.&quot;</p><p>[SOFT CTA · 12:20-13:00]
+(MODALITY: talking head) Saju, ruhig, Link-Karten werden eingeblendet.
+Saju (spoken): &quot;Wenn Sie das selbst angehen wollen: Unter dem Video liegt unsere Migrations-Checkliste. Sie führt genau diese Reihenfolge durch, von der Inventur bis zur Abnahme, mit den Punkten, die man leicht übersieht. Und wenn bei Ihnen gerade eine echte Frist im Raum steht, ein Tableau-Umzug, eine Ablösung von SSIS oder das Auslaufen einer Premium-Kapazität, dann sollten wir reden. Wir machen genau diese Umzüge für Teams im deutschsprachigen Raum. Schreiben Sie uns über den Link in der Beschreibung, und wir schauen uns Ihren Fall an und schätzen den Aufwand ehrlich ein. Kein Verkaufsgespräch, ein Gespräch. Im nächsten Video zerlege ich, wie Sie in Power BI aus einer breiten Tabelle ein sauberes Sternschema machen, Schritt für Schritt.&quot;
+(ON-SCREEN: Karte 1 &quot;Migrations-Checkliste (kostenlos)&quot;; Karte 2 &quot;Migration mit CaseWhen anfragen&quot;; Karte 3 &quot;Weiter: Sternschema in Power BI bauen&quot;)</p><h2>Description
+Warum eine Tableau zu Power BI Migration ein Neubau ist und kein Umschalten, plus der ehrliche Ablauf von der Inventur bis zur Abnahme.</h2><p>Kostenlose Migrations-Checkliste: [Link] · Migration mit CaseWhen anfragen: [Link]</p><p>0:00 Gibt es einen Konverter von Tableau zu Power BI?
+1:30 Warum lässt sich ein Tableau-Bericht nicht einfach importieren?
+3:00 Was muss zuerst passieren, bevor ich einen Bericht neu baue?
+4:30 Wie übersetze ich Tableau-Berechnungen nach DAX?
+6:15 Wie baue ich das Datenmodell richtig auf?
+8:00 Wie bilde ich Tableau-Dashboards und Freigaben in Power BI nach?
+10:00 In welcher Reihenfolge migriere ich, ohne alles auf einmal zu riskieren?
+11:45 Was nehme ich heute mit, und wie geht es weiter?</p><p>Eine Tableau zu Power BI Migration lässt sich nicht per Konverter erledigen, weil die Plattformen die Logik anders speichern: Tableau bündelt Datenquelle, Berechnungen und Optik in einer Arbeitsmappe, Power BI trennt Datenmodell, DAX-Kennzahlen und Visuals in drei Schichten. Dieses Video zeigt den kompletten Ablauf für den Umzug: die genutzten Berichte per Inventur einsammeln, eine Definition pro Kennzahl festlegen, Tableau-Berechnungen und LOD-Ausdrücke in DAX mit korrektem Filterkontext neu schreiben, den breiten Extrakt in ein Sternschema mit Faktentabelle und Dimensionen zerlegen, sowie Aktionen als Kreuzfilterung und Nutzerfilter als Row-Level Security nachbauen. Zum Schluss die Reihenfolge, mit der Sie migrieren, ohne den laufenden Betrieb zu stoppen: erst einen Vorlage-Bericht komplett durchbauen, die nächsten anhängen und jeden alten Bericht erst nach der Abnahme abschalten.</p><p>#PowerBI #Tableau #DataMigration #MicrosoftFabric #BusinessIntelligence</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

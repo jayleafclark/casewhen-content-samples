@@ -1,0 +1,190 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Power BI vs Fabric: Sie stellen die falsche Frage (in 12 Min</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p>VALUE BEAT 1 (0:40-2:15) · Ist Fabric ein Ersatz für Power BI?
+(MODALITY: custom animation)
+(ON-SCREEN CLAIM-KARTE: &quot;Power BI ist die Berichtsschicht von Fabric.&quot;)</p><p>CLAIM: Power BI ist die Berichtsschicht von Fabric.</p><p>Saju: Der wichtigste Punkt zuerst. Fabric ist die Datenplattform. Power BI ist die Schicht darin, in der Berichte und Dashboards entstehen. Alles, was Sie an Power BI kennen, Berichte, semantische Modelle, DAX, das läuft heute innerhalb von Fabric weiter. Fabric fügt darunter die Teile hinzu, die vorher in Azure verstreut lagen: Datenintegration, ein Data Warehouse, Data Engineering, Echtzeit-Daten. Power BI zeigt die Zahlen. Fabric liefert und speichert sie.</p><p>(ANIMATION-SPEC, Schicht-Diagramm, on-brand #1D967C, Amber nur für Status):
+- Unten: ein Speicher-Block, Beschriftung &quot;OneLake&quot;.
+- Mitte: mehrere Bausteine, die in diesen Speicher schreiben (Data Factory, Warehouse, Data Engineering, Real-Time).
+- Oben: der Power-BI-Block, als sichtbare oberste Schicht hervorgehoben, mit einem Beispiel-Dashboard.
+- Bewegung: von unten nach oben fließen Daten durch die Schichten in das Dashboard. Der Power-BI-Block pulsiert kurz, um zu zeigen: das ist der Teil, den die meisten &quot;Power BI&quot; nennen.
+(Visueller Wechsel alle 5-8 s: jede Schicht animiert nacheinander ein, Beschriftung erscheint als Lower-Third)</p><p>PAYOFF: Merksatz 1: Sie wählen nicht zwischen beiden. Power BI ist immer dabei. Die Frage ist nur, ob Sie die Schichten darunter brauchen.
+(ON-SCREEN: nummerierter Merksatz 1)</p><p>RE-HOOK: Und um das zu beantworten, müssen Sie wissen, was in diesen Schichten überhaupt drinsteckt.</p><p>VALUE BEAT 2 (2:15-3:50) · Was steckt eigentlich in Fabric drin?
+(MODALITY: screen-record der Fabric-Oberfläche im Browser)
+(ON-SCREEN CLAIM-KARTE: &quot;Fabric bündelt sieben Bausteine auf einem Speicher: OneLake.&quot;)</p><p>CLAIM: Fabric bündelt sieben Bausteine auf einem Speicher, OneLake.</p><p>Saju: Hier ist Fabric im Browser. Oben links wechsle ich zwischen den Bausteinen. Data Factory holt die Daten ab. Das Data Warehouse und die Lakehouses speichern sie. Data Engineering und Data Science verarbeiten sie. Real-Time Intelligence deckt Live-Daten ab. Und Power BI macht daraus Berichte. Der eigentliche Kern ist aber das hier: OneLake. Alle diese Bausteine schreiben in denselben Speicher. Eine Kopie der Daten, viele Werkzeuge greifen darauf zu, ohne dass die Daten noch einmal kopiert werden.</p><p>(SCREEN-RECORD, konkret: Fabric-Workload-Umschalter oben links anklicken, kurz durch die sieben Bausteine gehen, Cursor-Hervorhebung auf jedem; dann in einen Lakehouse-Ordner klicken und &quot;OneLake&quot; in der Adresse zeigen)
+(ANIMATION-INSET, OneLake-Shortcut, als Cutaway):
+- Links der alte Weg: eine Datei wird viermal kopiert, in vier Berichte, vier Pfeile, vier Kopien, rot markiert als Dopplung.
+- Rechts der Fabric-Weg: eine physische Datei in der Mitte, vier Arbeitsbereiche zeigen per Shortcut-Pfeil darauf, keine Kopie, alles in #1D967C.
+(Visueller Wechsel alle 5-8 s: Umschalter-Klick, Ordner-Klick, Cutaway-Einblendung, Zurück-Schnitt auf Saju am Rand)</p><p>PAYOFF: Merksatz 2: Fabric lohnt sich erst, wenn Sie mehrere dieser Bausteine wirklich nutzen. Nur für Berichte brauchen Sie die anderen sechs nicht.
+(ON-SCREEN: nummerierter Merksatz 2)</p><p>RE-HOOK: Damit sind wir bei der Frage, die zählt: Was braucht Ihr Team heute wirklich?</p><p>VALUE BEAT 3 (3:50-5:25) · Woran merke ich, dass Power BI allein reicht?
+(MODALITY: talking head, ruhige, langsame Passage für den Kernsatz)
+(ON-SCREEN CLAIM-KARTE: &quot;Für die meisten Teams reicht Power BI Pro plus ein sauberes Datenmodell.&quot;)</p><p>CLAIM: Für die meisten Teams reicht Power BI Pro und ein sauberes Datenmodell.</p><p>Saju: Drehen wir die Frage um. Nicht Power BI oder Fabric, sondern: was fehlt uns heute? Wenn Ihre Daten aus ein paar Quellen kommen, einer Excel-Datei, einer Datenbank, vielleicht einem Onlineshop, und ein Datenmodell im Power-BI-Desktop das alles zusammenführt, dann brauchen Sie Fabric nicht. Power BI Pro kostet rund zehn bis vierzehn Euro pro Nutzer und Monat, das ist der Microsoft-Listenpreis. Damit veröffentlichen Sie Berichte, planen Aktualisierungen und vergeben Rechte. Für sehr viele Firmen ist genau das die richtige und günstigste Antwort. Microsoft zählt über 375.000 Organisationen und mehr als 30 Millionen aktive Nutzer in Power BI, Stand 2025. Die allermeisten davon fahren gut, ganz ohne eigene Kapazität.</p><p>(B-ROLL-Einblendungen über die Talking-Head-Passage: kurzer Screen-Record eines Power-BI-Desktop-Modells mit drei, vier Tabellen; ein veröffentlichter Bericht im Dienst; ein Aktualisierungs-Zeitplan)
+(Visueller Wechsel alle 5-8 s: Callout-Box mit &quot;10-14 EUR / Nutzer / Monat&quot;, dann Zahl &quot;375.000 Organisationen&quot; als Text-Pop)</p><p>PAYOFF: Merksatz 3: Solange ein Datenmodell im Desktop Ihre Quellen trägt und die Aktualisierung in Pro sauber durchläuft, ist Power BI allein genug.
+(ON-SCREEN: nummerierter Merksatz 3)</p><p>RE-HOOK: Der teure Fehler beginnt genau dort, wo jemand Fabric einschaltet, ohne diesen Bedarf zu haben.</p><p>VALUE BEAT 4 (5:25-7:00) · Wann kostet Fabric nur Geld ohne Nutzen?
+(MODALITY: custom animation, Kapazitäts-Mechanik)
+(ON-SCREEN CLAIM-KARTE: &quot;Eine Fabric-Kapazität startet bei rund 5.000 Euro im Monat.&quot;)</p><p>CLAIM: Eine Fabric-Kapazität startet bei rund 5.000 Euro im Monat.</p><p>Saju: Jetzt die Kostenseite. Fabric wird nicht pro Nutzer abgerechnet, sondern über eine Kapazität, gemessen in Capacity Units, kurz CU. Eine Einstiegs-Kapazität wie F64 liegt bei ungefähr 5.000 Euro pro Monat, wieder der Microsoft-Listenpreis. Von rund fünfzig Euro Pro-Lizenzen auf mehrere Tausend Euro Kapazität, das ist der Sprung, der viele überrascht. Und jetzt kommt der Teil, den fast alle übersehen.</p><p>(ANIMATION-SPEC, CU-Meter und Drosselung):
+- Eine Anzeige füllt sich mit Last, kleine Spitzen schießen über die Linie.
+- Diese Spitzen werden über die Zeit flach verteilt, Beschriftung &quot;Smoothing&quot; in Amber.
+- Dann steigt die Grundlast dauerhaft über die Grenze, neue Anfragen stellen sich in eine Warteschlange, Beschriftung &quot;Throttling / Drosselung&quot; in Amber.
+- Parallel bleibt eine zweite Anzeige &quot;Auslastung&quot; scheinbar ruhig, obwohl hinten schon gedrosselt wird.
+(Visueller Wechsel alle 5-8 s: Spitze, Glättung, Grenzüberschreitung, Warteschlange, jeweils eigener Schnitt)</p><p>Saju: Fabric glättet kurze Lastspitzen über die Zeit. In der Auslastungsanzeige sieht deshalb alles ruhig aus. Liegt die Last aber dauerhaft über der Grenze, drosselt Fabric im Hintergrund, und Ihre Berichte werden langsam, ohne dass die Anzeige einen klaren Grund nennt. Wer jetzt eine große Kapazität kauft, weil die Prozent-Anzeige grün ist, zahlt für Leistung, die er nie sieht.</p><p>PAYOFF: Merksatz 4: Verlassen Sie sich nicht auf die Prozent-Auslastung. Die entscheidende Zahl ist die Drosselung, und die zeige ich Ihnen gleich live.
+(ON-SCREEN: nummerierter Merksatz 4)</p><p>RE-HOOK: Bleibt die Frage, wann sich diese Kapazität dann überhaupt lohnt.</p><p>VALUE BEAT 5 (7:00-8:35) · Wann lohnt sich der Umstieg auf Fabric wirklich?
+(MODALITY: data-viz, animierte Signal-Übersicht)
+(ON-SCREEN CLAIM-KARTE: &quot;Fabric rechnet sich ab zwei klaren Signalen.&quot;)</p><p>CLAIM: Fabric rechnet sich ab dem Punkt, an dem mehrere Teams dieselben Daten brauchen.</p><p>Saju: Wann lohnt sich Fabric also? Es gibt ein paar klare Signale. Erstens: mehrere Teams brauchen dieselben Daten, und heute liegen davon fünf Kopien in fünf Berichten. Zweitens: Ihre Aktualisierungen dauern zu lange oder scheitern, weil die Pro-Modelle an ihre Grenzen stoßen. Drittens: Sie ziehen Daten aus vielen Quellen und brauchen echte Datenintegration statt zusammengeklickter Abfragen. Viertens: Sie wollen Copilot und KI auf Ihre Daten ansetzen. Und hier ein ehrlicher Punkt: nur zwölf Prozent der Firmen sagen, dass ihre Daten gut genug für KI sind, das ist die Zahl von Drexel LeBow und Precisely aus 2025. Fabric einzuschalten repariert ein schwaches Datenmodell nicht. Die Grundlage muss vorher stimmen.</p><p>(DATA-VIZ-SPEC): vier Signal-Kacheln, jede leuchtet in #1D967C auf, wenn sie zutrifft; darunter ein Reife-Balken, der mit jedem Signal steigt; am Ende animiert der Wert &quot;12 %&quot; als kurzer Balken mit Quelle &quot;Drexel LeBow + Precisely, 2025&quot; als Fußzeile.
+(Visueller Wechsel alle 5-8 s: Kachel eins, Kachel zwei, Kachel drei, Kachel vier, dann der 12-Prozent-Balken)</p><p>PAYOFF: Merksatz 5: Erst wenn zwei oder mehr dieser Signale zutreffen, ist Fabric die günstigere Antwort. Bei nur einem Signal reicht meist Power BI Pro.
+(ON-SCREEN: nummerierter Merksatz 5)</p><p>RE-HOOK: Setzen wir das jetzt zu einer Entscheidung zusammen, die Sie heute treffen können.</p><p>WORKED EXAMPLE (8:35-10:45) · Wie entscheide ich das für mein Team?
+(MODALITY: screen-record der Capacity-Metrics-App plus kurze b-roll)
+(ON-SCREEN: &quot;Beispiel: 3 Quellen, 4 Berichte, Pro&quot;)</p><p>Saju: Machen wir es konkret an einem typischen Team. Nehmen wir an: drei Datenquellen, vier Berichte, alles läuft heute auf Power BI Pro. Die Aktualisierung braucht rund 40 Minuten und fällt zweimal die Woche aus. Zwei Signale treffen zu: lange, wacklige Aktualisierungen und mehrere Teams, die dieselben Zahlen wollen. Also lohnt der Blick auf Fabric. Bevor wir aber eine Kapazität kaufen, öffne ich die Capacity-Metrics-App und schaue auf genau die Zahl, die ich Ihnen versprochen habe.</p><p>(SCREEN-RECORD, konkret: Microsoft Fabric Capacity Metrics App öffnen, auf die Zeile &quot;Throttling&quot; beziehungsweise &quot;Overages&quot; zoomen, Cursor-Hervorhebung darauf)</p><p>OPEN-LOOP-PAYOFF: Das hier ist die versprochene Zahl, die Drosselungs-Zeile. Steht sie dauerhaft über null, ist Ihre Kapazität schon zu klein, egal wie ruhig die Prozent-Auslastung aussieht. Bei diesem Team wäre die Last kurz und stoßweise, also genau das, was Fabric glättet. Eine F64 zu rund 5.000 Euro wäre hier zu groß. Eine kleinere Kapazität, F16 oder F32, trägt die Last, und die Drosselungs-Zeile bleibt bei null. So spart dieses Team, statt blind die größte Kapazität zu kaufen.</p><p>(B-ROLL: Saju am Whiteboard, zeichnet die beiden Signale und einen Pfeil auf F16/F32; kurze Einblendung der Preis-Stufen als Text)
+(Visueller Wechsel alle 5-8 s: App-Zeile, Zoom, Whiteboard, Preis-Karte)</p><p>Saju: Das ist die ganze Entscheidung. Signale zählen, dann die Drosselungs-Zeile prüfen, dann die kleinste Kapazität wählen, die diese Zeile bei null hält.</p><p>PAYOFF (10:45-11:35) · Was mache ich jetzt konkret?
+(MODALITY: on-screen text, kinetische Liste, schneller Schnitt)
+(ON-SCREEN: die fünf Merksätze als Liste, jeder animiert ein)</p><p>Saju: Halten wir fest, was Sie jetzt wissen. Erstens: Power BI ist Teil von Fabric, Sie wählen nicht zwischen beiden. Zweitens: Fabric bündelt sieben Bausteine auf einem Speicher, OneLake, und lohnt erst, wenn Sie mehrere davon nutzen. Drittens: solange ein Datenmodell im Desktop trägt und in Pro aktualisiert, reicht Power BI allein. Viertens: prüfen Sie in der Capacity-Metrics-App die Drosselungs-Zeile, nicht die Prozent-Anzeige. Fünftens: erst ab zwei klaren Signalen rechnet sich eine Kapazität, und die richtige Größe ist oft kleiner als F64. Die versprochene Zahl war die Drosselungs-Zeile: steht sie über null, ist Ihre Kapazität zu klein oder falsch gewählt, so grün die Auslastung auch aussieht.</p><p>SOFT CTA (11:35-12:15)
+(MODALITY: talking head, ruhig, direkt in die Kamera)
+(ON-SCREEN: Link-Karte &quot;Fabric-Readiness-Checkliste&quot;, danach &quot;Mit CaseWhen sprechen&quot;)</p><p>Saju: Wenn Sie das für Ihr eigenes Team durchgehen wollen, haben wir eine kostenlose Fabric-Readiness-Checkliste zusammengestellt. Die geht genau diese Signale und die Kapazitäts-Zahlen der Reihe nach durch. Der Link liegt unter dem Video. Und wenn Sie unsicher sind, ob sich Fabric für Sie lohnt, machen wir bei CaseWhen genau das: einen Fabric-Readiness- und Capacity-Check, in dem wir Ihre Zahlen gemeinsam ansehen und die passende Kapazität bestimmen, bevor Sie etwas kaufen. Kein Verkaufsgespräch, einfach ein Termin, um die richtige Entscheidung zu treffen. Im nächsten Video zerlege ich die Fabric-Capacity-Falle im Detail: warum Berichte langsam werden, obwohl die Auslastung passt. Bis dahin.</p><h2>Description</h2><p>Power BI vs Fabric einfach erklärt: wie beide zusammenhängen, wann Power BI Pro reicht und wann sich eine Fabric-Kapazität wirklich rechnet.
+Kostenlose Fabric-Readiness-Checkliste: https://casewhen.co/fabric-readiness · Mit CaseWhen arbeiten: https://casewhen.co/kontakt</p><p>Viele Teams diskutieren Power BI vs Fabric als Entweder-oder. Das ist die falsche Frage, denn Power BI ist die Berichtsschicht von Fabric. In diesem Video sehen Sie, wie Power BI und Microsoft Fabric zusammenhängen, was OneLake und die sieben Fabric-Bausteine sind, wann Power BI Pro völlig ausreicht, und ab welchen Signalen sich eine Fabric-Kapazität lohnt. Dazu die Kostenfalle, die fast alle übersehen: Smoothing und Drosselung in der Capacity-Metrics-App.</p><p>Kapitel:
+0:00 Power BI oder Fabric, was denn nun?
+0:40 Ist Fabric ein Ersatz für Power BI?
+2:15 Was steckt eigentlich in Fabric drin?
+3:50 Woran merke ich, dass Power BI allein reicht?
+5:25 Wann kostet Fabric nur Geld ohne Nutzen?
+7:00 Wann lohnt sich der Umstieg auf Fabric wirklich?
+8:35 Wie entscheide ich das für mein Team?
+10:45 Was mache ich jetzt konkret?</p><p>Ressourcen:
+- Fabric-Readiness-Checkliste (kostenlos): https://casewhen.co/fabric-readiness
+- Fabric-Readiness- und Capacity-Check mit CaseWhen: https://casewhen.co/kontakt
+- Microsoft Fabric und OneLake, Dokumentation: https://learn.microsoft.com/fabric
+- Nächstes Video, die Fabric-Capacity-Falle: https://casewhen.co/youtube</p><p>Kurz zusammengefasst: Power BI vs Fabric ist kein Duell. Power BI läuft innerhalb von Microsoft Fabric und zeigt die Zahlen, Fabric liefert und speichert sie über OneLake. Für viele Firmen reicht Power BI Pro mit einem sauberen Datenmodell. Eine Fabric-Kapazität lohnt sich erst, wenn mehrere Teams dieselben Daten brauchen, Aktualisierungen an Grenzen stoßen oder KI und Copilot dazukommen. Prüfen Sie vor dem Kauf die Drosselungs-Zeile in der Capacity-Metrics-App, damit Sie die passende Kapazität wählen statt der teuersten.</p><p>#PowerBI #MicrosoftFabric #Fabric #PowerBIvsFabric #BusinessIntelligence</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

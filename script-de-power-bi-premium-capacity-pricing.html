@@ -1,0 +1,228 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Power BI Premium Capacity Pricing: warum die Rechnung von 50</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Power BI Premium Capacity Pricing: warum die Rechnung von 50 auf 5.000 Euro springt</p><p>Host: Saju · Cluster: Pricing · Target: 11 min · Primary keyword: power bi premium capacity pricing</p><h2>Chapters
+- 0:00 Warum springt meine Power-BI-Rechnung plötzlich auf 5.000 Euro?
+- 0:45 Was zahle ich bei Pro und PPU pro Nutzer wirklich?
+- 2:05 Ab wann zwingt mich Power BI überhaupt in die Capacity?
+- 3:25 Was macht die Premium Capacity so teuer?
+- 4:55 Wie halte ich den 5.000-Euro-Sprung hinaus?
+- 6:25 Ab wie vielen Lesern rechnet sich die Capacity endlich?
+- 7:55 Welche Einstellung verdoppelt dieselbe Rechnung leise?
+- 9:25 Was sollten Sie jetzt als Nächstes tun?</h2><h2>Script</h2><p>### [0:00-0:12] HOOK (blunt callout, real number)
+Spoken: &quot;Ihre Power-BI-Rechnung steht heute vielleicht bei fünfzig Euro im Monat. Und dann sagt Ihnen jemand, die nächste Stufe kostet fünftausend. Kein Tippfehler. Das Hundertfache für dieselbe Firma. Genau diese Klippe zerlege ich jetzt mit Ihnen.&quot;
+(MODALITY: talking head)
+(ON-SCREEN: keyword card &quot;Power BI Premium Capacity&quot;)
+VISUAL CHANGE: at &quot;fünftausend&quot; punch-zoom on Saju, a red price tag &quot;≈ 5.000 €/Monat&quot; snaps in beside his head; at &quot;Hundertfache&quot; a small &quot;50 €&quot; tag flips to &quot;5.000 €&quot;.</p><p>### [0:12-0:40] PROMISE + STAKES + OPEN LOOP
+Spoken: &quot;Am Ende dieses Videos wissen Sie genau, ab wann Microsoft Sie in diese teure Stufe drückt, wie Sie den Sprung seriös hinauszögern, und ab welcher Nutzerzahl er sich sogar lohnt. Wer das nicht durchrechnet, zahlt entweder jahrelang zu viel pro Kopf, oder kippt aus Panik in einen 5.000-Euro-Vertrag, den er gar nicht braucht. Und ganz am Schluss zeige ich Ihnen eine Einstellung, die dieselbe Capacity leise fast doppelt so teuer macht. Die meisten Teams finden sie nie. Wir machen genau diese Rechnung bei CaseWhen in Berlin jede Woche mit BI-Teams, deshalb reden wir hier Klartext und nicht in Prospektsprache.&quot;
+(MODALITY: b-roll)
+B-ROLL: hands sliding a paper invoice across a desk in a Berlin office, then a quiet cut to Saju mid-sentence.
+(ON-SCREEN: lower-third &quot;Was Sie am Ende können: den Sprung planen statt erleiden&quot;)
+VISUAL CHANGE: at &quot;eine Einstellung&quot; a locked padlock icon appears with label &quot;später im Video&quot;; the padlock stays teased.</p><p>### [0:40-2:05] VALUE BEAT 1: Was zahle ich pro Nutzer wirklich?
+CLAIM: &quot;Solange Sie klein sind, zahlen Sie in Power BI pro Kopf, nicht pro Server.&quot;
+(ON-SCREEN claim card: &quot;Klein = Preis pro Kopf&quot;)
+(MODALITY: screen-record)
+SCREEN-RECORD: the public Power BI plan page, cursor moving from the Pro row to the Premium-per-user row; each per-user price gets a callout ring.
+Spoken: &quot;Power BI verkauft Ihnen auf der kleinen Stufe Lizenzen pro Person. Eine Pro-Lizenz liegt bei ungefähr zehn Euro pro Nutzer und Monat. Jeder, der einen Bericht baut oder ansieht, braucht eine. Bei fünf Leuten sind das rund fünfzig Euro, bei zwanzig Leuten zweihundert. Die Rechnung wächst gerade mit den Köpfen, und genau das fühlt sich lange fair an. Zur Einordnung: Power BI nutzen über 375.000 Organisationen und mehr als dreißig Millionen Menschen im Monat, die allermeisten davon genau auf dieser Pro-Stufe. Es gibt noch eine Zwischenstufe, Premium per User, kurz PPU, bei etwa zwanzig Euro pro Nutzer. Dafür bekommen Sie größere Modelle und häufigere Aktualisierungen, aber weiterhin pro Kopf abgerechnet.&quot;
+PAYOFF: &quot;Regel eins: Unter etwa fünfzig aktiven Nutzern ist die Pro-Rechnung fast immer die günstigste. Köpfe mal zehn Euro, fertig.&quot;
+(ON-SCREEN takeaway: &quot;1. Unter ~50 Nutzern: Köpfe x 10 €&quot;)
+RE-HOOK: &quot;Die Frage ist nur, wann diese einfache Rechnung plötzlich aufhört zu funktionieren.&quot;
+VISUAL CHANGE: every 6 seconds a new price tag animates in as the cursor lands on it (10 €, 20 €), then a small counter tallies &quot;5 Nutzer = 50 €&quot;.</p><p>### [2:05-3:25] VALUE BEAT 2: Ab wann zwingt mich Power BI in die Capacity?
+CLAIM: &quot;Nicht Ihre Nutzerzahl treibt Sie hoch, sondern was Ihre Modelle verlangen.&quot;
+(ON-SCREEN claim card: &quot;Grenzen kippen Sie, nicht Köpfe&quot;)
+(MODALITY: data-viz)
+DATA-VIZ / ANIMATION: three vertical meters side by side, labelled &quot;Modellgröße&quot;, &quot;Aktualisierungen/Tag&quot; und &quot;Leser&quot;. They fill up and each hits a red ceiling line; when the third hits, a card flips from &quot;Pro&quot; to &quot;Capacity nötig&quot;.
+Spoken: &quot;Viele glauben, der Wechsel kommt automatisch mit mehr Leuten. So ist es nicht. Sie werden von technischen Grenzen nach oben gedrückt. Ein Pro-Modell darf nur bis etwa ein Gigabyte groß sein. Sie dürfen es achtmal am Tag aktualisieren. Große Datenmengen, direkte Abfragen auf die Quelle, Verteilung an Hunderte Leser, das alles stößt irgendwann an diese Decke. In dem Moment sagt Ihnen Power BI nicht höflich Bescheid, sondern eine Aktualisierung bricht ab oder ein Bericht lädt nicht mehr. Erst dann suchen Sie die nächste Stufe, und da steht auf einmal die Capacity.&quot;
+PAYOFF: &quot;Regel zwei: Behalten Sie drei Zahlen im Blick, Modellgröße, Aktualisierungshäufigkeit und die Zahl der reinen Leser. Diese drei drücken Sie nach oben, nicht der Mitarbeiter Nummer einundzwanzig.&quot;
+(ON-SCREEN takeaway: &quot;2. Grenzen im Blick: Modellgröße · Refreshes · Leser&quot;)
+RE-HOOK: &quot;Also schauen wir uns an, was diese Capacity eigentlich ist und warum sie so viel kostet.&quot;
+VISUAL CHANGE: each meter fills in its own 5 to 7 second beat; the red ceiling flashes once on contact.</p><p>### [3:25-4:55] VALUE BEAT 3: Was macht die Premium Capacity so teuer?
+CLAIM: &quot;Mit der Capacity mieten Sie keine Lizenzen mehr, sondern eine reservierte Maschine.&quot;
+(ON-SCREEN claim card: &quot;Capacity = reservierte Maschine&quot;)
+(MODALITY: custom animation)
+ANIMATION (reuse-worthy &quot;dedicated capacity&quot; build): a single glowing server block labelled &quot;P1&quot; spins around the clock. Little user figures walk up and attach to it without carrying a personal licence badge. A meter over the block shows it running even at night when no user is attached, with a euro counter ticking regardless.
+Spoken: &quot;Der Denkfehler ist, die Capacity wie eine große Lizenz zu sehen. Sie ist etwas ganz anderes. Sie mieten einen festen Block Rechenleistung, der nur Ihnen gehört und rund um die Uhr bereitsteht, egal ob ihn gerade jemand nutzt oder nicht. Die kleinste klassische Premium-Stufe, P1, liegt bei rund fünftausend Euro im Monat. Dafür dürfen dann beliebig viele Leute die Berichte ansehen, ohne eigene Lizenz. Sie zahlen also nicht mehr pro Kopf, sondern für einen Motor, der immer läuft. Genau deshalb ist der Sprung so hart, fünfzig Euro Verbrauch gegen fünftausend Euro Bereitstellung.&quot;
+PAYOFF: &quot;Regel drei: Die Capacity ist eine Grundgebühr, kein Verbrauch. Sie lohnt sich erst, wenn viele Leser draufsitzen, die sonst je eine eigene Lizenz bräuchten.&quot;
+(ON-SCREEN takeaway: &quot;3. Grundgebühr statt Verbrauch&quot;)
+RE-HOOK: &quot;Bleibt die eigentliche Frage: Wie kommen Sie an diesem 5.000-Euro-Block vorbei, wenn Sie ihn noch gar nicht auslasten?&quot;
+VISUAL CHANGE: the euro counter over the server ticks visibly every few seconds; a &quot;nachts, niemand da&quot; caption appears while it keeps ticking.</p><p>### [4:55-6:25] VALUE BEAT 4: Wie halte ich den 5.000-Euro-Sprung hinaus?
+CLAIM: &quot;Zwischen 50 und 5.000 Euro liegt heute eine ganze Treppe, die kaum jemand nutzt.&quot;
+(ON-SCREEN claim card: &quot;Die Treppe zwischen Pro und P1&quot;)
+(MODALITY: screen-record)
+SCREEN-RECORD: the Fabric capacity creation screen in Azure, scrolling the SKU dropdown from F2, F4, F8 up to F64; cursor stops on a small SKU, then on the suspend button.
+Spoken: &quot;Früher gab es genau diese Lücke, unten die Lizenzen, oben P1, dazwischen nichts. Heute nicht mehr. Microsoft baut Power BI längst in seine neue Datenplattform Fabric ein, die inzwischen über 28.000 Kunden hat, und ersetzt die alten P-Stufen durch Fabric-Kapazitäten, die sogenannten F-SKUs. Die fangen ganz klein an, bei F2, und steigen in Schritten bis F64 und höher. Eine kleine F-Kapazität kostet keine fünftausend, sondern einen Bruchteil davon. Sie können sie außerdem stundenweise abrechnen und sogar pausieren, wenn niemand arbeitet. Damit kaufen Sie genau die Rechenleistung, die zwischen Ihrer Pro-Lizenz und dem großen Block liegt, ohne gleich in die volle Klippe zu springen.&quot;
+PAYOFF: &quot;Regel vier: Wenn Ihre Modelle die Pro-Grenzen sprengen, Sie aber noch keine Hundertschaft an Lesern haben, ist eine kleine F-Kapazität fast immer die richtige Zwischenstufe.&quot;
+(ON-SCREEN takeaway: &quot;4. Zwischenstufe: kleine F-Kapazität statt gleich P1&quot;)
+RE-HOOK: &quot;Und irgendwann kippt die Rechnung dann doch zugunsten der großen Stufe. Dieser Punkt lässt sich sauber ausrechnen.&quot;
+VISUAL CHANGE: each SKU in the dropdown gets a per-hour price bubble as the cursor passes; the suspend button pulses once.</p><p>### [6:25-7:55] VALUE BEAT 5: Ab wie vielen Lesern rechnet sich die Capacity?
+CLAIM: &quot;Ab F64 brauchen Ihre Leser keine eigene Lizenz mehr, und genau da dreht sich die Rechnung.&quot;
+(ON-SCREEN claim card: &quot;F64 = freie Leser inklusive&quot;)
+(MODALITY: data-viz)
+DATA-VIZ: two cost lines on one chart. A rising diagonal &quot;Lizenzen pro Kopf&quot; and a flat horizontal &quot;F64-Kapazität&quot;. They cross around 500 Leser; the crossing point flashes with the label &quot;Break-even ≈ 500 Leser&quot;.
+Spoken: &quot;Es gibt einen Punkt, an dem freie Leser eingeschlossen sind. Bei Fabric ist das die Stufe F64. Ab da darf jeder die Berichte ansehen, ohne dass Sie für ihn eine Lizenz kaufen. Rechnen wir es durch. F64 liegt in der Größenordnung der alten fünftausend Euro. Fünftausend Euro geteilt durch zehn Euro pro Pro-Lizenz sind fünfhundert Nutzer. Grob gesagt, ab einigen Hundert reinen Lesern wird die große Kapazität billiger als lauter Einzellizenzen. Haben Sie zweihundert Leser, zahlen Sie mit Lizenzen zweitausend Euro und fahren günstiger. Haben Sie achthundert, zahlen Sie mit Lizenzen achttausend, und die Kapazität gewinnt deutlich.&quot;
+PAYOFF: &quot;Regel fünf: Teilen Sie die Kapazitätskosten durch den Lizenzpreis. Das Ergebnis ist Ihre Grenze in Lesern. Darunter Lizenzen, darüber Kapazität.&quot;
+(ON-SCREEN takeaway: &quot;5. Grenze in Lesern = Kapazitätskosten / Lizenzpreis&quot;)
+RE-HOOK: &quot;Und jetzt zu der Einstellung, die ich Ihnen am Anfang versprochen habe, die dieselbe Kapazität leise fast verdoppelt.&quot;
+VISUAL CHANGE: a slider moves the reader count from 200 to 800; the two totals (2.000 € vs 8.000 €) update live as it moves.</p><p>### [7:55-9:25] WORKED EXAMPLE / OPEN-LOOP PAYOFF: Welche Einstellung verdoppelt die Rechnung?
+CLAIM: &quot;Dieselbe F-Kapazität kostet Sie das Einfache oder fast das Doppelte, je nach einem einzigen Häkchen.&quot;
+(ON-SCREEN claim card: &quot;Ein Häkchen, fast doppelter Preis&quot;)
+(MODALITY: talking head)
+TALKING HEAD, then hard cut into SCREEN-RECORD of the Azure billing toggle &quot;Pay-as-you-go&quot; vs &quot;Reservation&quot;, then a suspend schedule.
+Spoken: &quot;Hier ist der Teil, den fast alle übersehen. Eine Fabric-Kapazität können Sie auf zwei Arten kaufen. Entweder nutzungsbasiert, Sie zahlen pro Stunde und können jederzeit pausieren. Oder reserviert, Sie binden sich für ein Jahr und zahlen dafür deutlich weniger pro Stunde. Der Unterschied zwischen beiden liegt grob bei rund vierzig Prozent. Wer nutzungsbasiert bucht und die Kapazität dann rund um die Uhr laufen lässt, ohne je zu pausieren, zahlt fast das Doppelte für exakt dieselbe Leistung. Das ist die versprochene Einstellung. Läuft Ihre Kapazität dauerhaft, nehmen Sie die Reservierung. Wird sie nur tagsüber gebraucht, pausieren Sie sie nachts und am Wochenende, dann ist nutzungsbasiert günstiger.&quot;
+PAYOFF: &quot;Regel sechs: Läuft die Kapazität durchgehend, reservieren. Läuft sie nur zeitweise, nutzungsbasiert buchen und konsequent pausieren. Die falsche Wahl kostet Sie fast die Hälfte.&quot;
+(ON-SCREEN takeaway: &quot;6. Reserviert vs. nutzungsbasiert: bis ~40 % Unterschied&quot;)
+RE-HOOK: &quot;Damit haben Sie die komplette Rechnung. Fassen wir sie in einem Bild zusammen.&quot;
+VISUAL CHANGE: the padlock from the intro clicks open on screen; the two monthly totals sit side by side and one turns red.</p><p>### [9:25-10:20] PAYOFF (voller Recap)
+Spoken: &quot;Also, das Wichtigste in einem Bild. Erstens, unter etwa fünfzig Nutzern zahlen Sie am besten pro Kopf, Köpfe mal zehn Euro. Zweitens, nach oben drücken Sie drei Grenzen, Modellgröße, Aktualisierungen und Leserzahl, nicht der nächste Mitarbeiter. Drittens, die Capacity ist eine reservierte Maschine mit Grundgebühr, kein Verbrauch. Viertens, zwischen Pro und den fünftausend Euro liegt die F-Treppe, fangen Sie klein an und pausieren Sie. Fünftens, Ihre Grenze in Lesern ist Kapazitätskosten geteilt durch Lizenzpreis. Und die Einstellung vom Anfang, reserviert gegen nutzungsbasiert, entscheidet über fast die Hälfte der Rechnung. Wenn Sie nur diese sechs Punkte mitnehmen, treffen Sie die Lizenzentscheidung besser als die meisten Firmen, die dafür teuer beraten werden.&quot;
+(MODALITY: on-screen text / kinetic type)
+KINETIC TYPE: the six takeaways stack in one list, each line snapping in as Saju names it; the whole list stays on screen at the end.
+VISUAL CHANGE: one line brightens as it is spoken, the previous line dims.</p><p>### [10:20-11:00] SOFT CTA
+Spoken: &quot;Ich habe Ihnen die ganze Rechnung gegeben, dafür brauchen Sie niemanden. Wenn Sie Ihren eigenen Stand in fünf Minuten sehen wollen, unten liegt unsere kostenlose Power BI Kosten- und Governance-Scorecard. Die zeigt Ihnen Ihre wahrscheinliche Stufe und Ihre größten Kostenrisiken. Und falls Sie die Lizenzrechnung lieber einmal sauber für Ihr echtes Setup durchgerechnet haben wollen, genau das machen wir bei CaseWhen. Der Link zum Gespräch steht in der Beschreibung, ohne Verkaufsdruck, einfach ein Gespräch. Im nächsten Video nehme ich mir die Fabric-Kapazität und die Drosselung vor, der logische nächste Schritt, sobald Sie einmal auf einer Kapazität sitzen.&quot;
+(MODALITY: talking head)
+(ON-SCREEN: link card &quot;Kostenlose Kosten- &amp; Governance-Scorecard&quot; and below it &quot;Mit CaseWhen sprechen&quot;)
+VISUAL CHANGE: two link cards slide up under Saju; a small thumbnail of the next video appears at the end.</p><h2>Description</h2><p>Power BI Premium Capacity Pricing verständlich erklärt: warum Ihre Rechnung von rund 50 auf 5.000 Euro im Monat springt und wie Sie den Sprung planen statt erleiden.</p><p>Kostenlose Kosten- &amp; Governance-Scorecard (5 Minuten): https://casewhen.co/scorecard
+Mit CaseWhen sprechen (Lizenzrechnung für Ihr Setup): https://casewhen.co/kontakt</p><p>0:00 Warum springt meine Power-BI-Rechnung plötzlich auf 5.000 Euro?
+0:45 Was zahle ich bei Pro und PPU pro Nutzer wirklich?
+2:05 Ab wann zwingt mich Power BI überhaupt in die Capacity?
+3:25 Was macht die Premium Capacity so teuer?
+4:55 Wie halte ich den 5.000-Euro-Sprung hinaus?
+6:25 Ab wie vielen Lesern rechnet sich die Capacity endlich?
+7:55 Welche Einstellung verdoppelt dieselbe Rechnung leise?
+9:25 Was sollten Sie jetzt als Nächstes tun?</p><p>Ressourcen:
+- Kosten- &amp; Governance-Scorecard: https://casewhen.co/scorecard
+- Nächstes Video, Fabric Capacity und Drosselung: https://casewhen.co/youtube</p><p>In diesem Video geht es um Power BI Premium Capacity Pricing ohne Marketing-Nebel. Wir vergleichen die Lizenz pro Nutzer, also Power BI Pro und Premium per User, mit der reservierten Premium Capacity und den neuen Fabric-Kapazitäten, den F-SKUs. Sie sehen, ab wann Modellgröße, Aktualisierungen und Leserzahl Sie in eine Kapazität drücken, wie eine kleine F-Kapazität den 5.000-Euro-Sprung hinauszögert, ab wie vielen Lesern sich F64 rechnet, und warum die Wahl zwischen reserviert und nutzungsbasiert fast die halbe Rechnung ausmacht. Am Ende können Sie Ihre eigene Break-even-Grenze selbst ausrechnen.</p><p>#PowerBI #MicrosoftFabric #PowerBIPricing #BusinessIntelligence #DataGovernance</p></div></div>
+<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

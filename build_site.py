@@ -283,8 +283,13 @@ def card(platform, idx, lang, day, r):
     elif c and c.get("format") == "script":  # short-form script
         body = render_script(c)
     elif c:  # finished short text (LinkedIn / X / blog summary)
-        body = f'<div class="body done annotatable"><span class="hook">{esc(c["hook"])}</span>' \
-               f'<div class="txt">{esc(c["body"])}</div>'
+        hook_t = (c.get("hook") or "").strip()
+        txt_t = (c.get("body") or "").strip()
+        # X posts store the whole post in body (hook included); don't print the hook twice
+        if hook_t and txt_t.startswith(hook_t):
+            txt_t = txt_t[len(hook_t):].lstrip(" \n")
+        body = f'<div class="body done annotatable"><span class="hook">{esc(hook_t)}</span>' \
+               f'<div class="txt">{esc(txt_t)}</div>'
         if c.get("close"): body += f'<div class="close">{esc(c["close"])}</div>'
         body += f'<div class="meta"><span class="ship">SHIP ✓ gated</span>' \
                 f'<span>{esc(c.get("note",""))}</span></div></div>'
@@ -1775,11 +1780,13 @@ def longform_page():
         m = re.search(r'^#\s+(.+)$', md, re.M)
         title = (m.group(1).strip() if m else f.stem)
         lang = "DE" if "\\DE\\" in str(f) or "/DE/" in str(f) else "EN"
+        # lang-prefixed slug so an EN/DE pair sharing a filename gets two distinct pages
+        slug = f"script-{lang.lower()}-{f.stem}.html"
         art = md_to_html(md)
         inner = (f'<section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">\u2190 all scripts</a></div></section>'
                  f'<div class="wrap article-wrap">{art}</div>')
-        (OUT / f"script-{f.stem}.html").write_text(shell(f"script-{f.stem}.html", title[:60], f"<style>{ARTCSS}</style>{inner}"), encoding="utf-8")
-        cards.append(f'<a class="lfcard" href="script-{f.stem}.html"><span class="lfl">{lang}</span><span class="lft">{esc(title)}</span></a>')
+        (OUT / slug).write_text(shell(slug, title[:60], f"<style>{ARTCSS}</style>{inner}"), encoding="utf-8")
+        cards.append(f'<a class="lfcard" href="{slug}"><span class="lfl">{lang}</span><span class="lft">{esc(title)}</span></a>')
     grid = (f'<section class="ph"><div class="wrap"><div class="eb">YouTube \u00b7 long-form</div>'
             f'<h2>{len(files)} full video scripts, gated</h2>'
             f'<p style="color:var(--mut);font-size:15px;margin:10px 0 0">8 to 15 minute talking-head scripts, Austin in English and Saju in German, buyer-first. '
