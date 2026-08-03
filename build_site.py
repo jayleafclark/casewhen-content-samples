@@ -209,6 +209,11 @@ per-platform format) before it appears as done. Internal preview · not indexed.
 </body></html>"""
 
 CONTENT = Path(r"J:\Claude Code\casewhen-research\content\w-batch02-presentation")
+_REPO = Path(r"J:\Claude Code\casewhen-research")
+def reposrc(f):
+    """Repo-relative source path for a content file, for the AI-editor data-src."""
+    try: return str(Path(f).resolve().relative_to(_REPO)).replace("\\", "/")
+    except Exception: return ""
 
 def md_to_html(md):
     """Light markdown -> HTML for a finished blog article (front-matter already handled)."""
@@ -362,14 +367,17 @@ def platform_page(k, cfg):
     for i,(lang,day,r) in enumerate(slots):
         c = COPY.get(f"{k}:{i}")
         cats_present.add(categorize(c, c.get("keyword") if c else "", r))
-        slug = f"{k}-post-{i}.html"
-        card_list.append(card(k, i, lang, day, r, detail=slug))
-        # per-post detail page: focused single post + the ✎ Review / feedback layer
-        focused = card(k, i, lang, day, r)
-        dinner = (f'<section class="ph"><div class="wrap"><a href="{k}.html" style="font-size:13px;color:var(--faint);text-decoration:none">&larr; all {esc(cfg["title"])}</a>'
-                  f'<p style="color:var(--faint);font-size:13px;margin:10px 0 0"><b>Highlight any line</b> and an &ldquo;+ Add note&rdquo; button pops up. Write what should change; add your API key in the &#9998; Review panel (corner) to get an instant AI edit, or export the notes for the repo editor.</p></div></section>'
-                  f'<div class="wrap" style="max-width:720px;margin:0 auto">{focused}</div>')
-        (OUT / slug).write_text(shell(f"{k}.html", cfg["title"] + " · post", f"<style>{FILTCSS}</style>{dinner}"), encoding="utf-8")
+        # only social platforms get per-post detail pages; blog's real detail pages are its articles
+        if k in ("linkedin", "shortform", "x") and c:
+            slug = f"{k}-post-{i}.html"
+            card_list.append(card(k, i, lang, day, r, detail=slug))
+            focused = card(k, i, lang, day, r)
+            dinner = (f'<section class="ph"><div class="wrap"><a href="{k}.html" style="font-size:13px;color:var(--faint);text-decoration:none">&larr; all {esc(cfg["title"])}</a>'
+                      f'<p style="color:var(--faint);font-size:13px;margin:10px 0 0"><b>Highlight any line</b> and an &ldquo;+ Add note&rdquo; button pops up. Write what should change; add your API key in the &#9998; Review panel (corner) to get an instant AI edit, or export the notes for the repo editor.</p></div></section>'
+                      f'<div class="wrap" style="max-width:720px;margin:0 auto">{focused}</div>')
+            (OUT / slug).write_text(shell(f"{k}.html", cfg["title"] + " · post", f"<style>{FILTCSS}</style>{dinner}"), encoding="utf-8")
+        else:
+            card_list.append(card(k, i, lang, day, r))
     cards = "".join(card_list)
     inner = f"""<section class="ph"><div class="wrap"><div class="eb">6-month plan</div>
 <h2>{esc(cfg['title'])}</h2><p>{esc(cfg['blurb'])}</p>
@@ -1879,7 +1887,8 @@ def blog_articles_and_grid():
         kw = (fm.get("KEYWORD", "").split("|")[0]).strip()
         h1 = fm.get("H1", "") or fm.get("META_TITLE", "")
         cluster = fm.get("CLUSTER", "") or ("KPI" if "kpi" in kw.lower() else "Power BI")
-        art = md_to_html(md)
+        art = md_to_html(md).replace('class="body article annotatable"',
+                                     f'class="body article annotatable" data-src="{esc(reposrc(f))}"', 1)
         # insert the chart right after the Quick Answer box (or after H1)
         chart = article_chart(kw)
         if 'class="qa"' in art:
@@ -1938,7 +1947,8 @@ def longform_page():
         cats_present.add(lcat)
         # lang-prefixed slug so an EN/DE pair sharing a filename gets two distinct pages
         slug = f"script-{lang.lower()}-{f.stem}.html"
-        art = md_to_html(md)
+        art = md_to_html(md).replace('class="body article annotatable"',
+                                     f'class="body article annotatable" data-src="{esc(reposrc(f))}"', 1)
         inner = (f'<section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">\u2190 all scripts</a></div></section>'
                  f'<div class="wrap article-wrap">{art}</div>')
         (OUT / slug).write_text(shell(slug, title[:60], f"<style>{ARTCSS}</style>{inner}"), encoding="utf-8")
