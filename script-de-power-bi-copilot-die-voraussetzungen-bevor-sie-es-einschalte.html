@@ -1,0 +1,213 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Power BI Copilot: die Voraussetzungen, bevor Sie es einschal</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p>[0:40-2:10] VALUE BEAT 1: Woher nimmt Copilot seine Antwort überhaupt?
+CLAIM: SAJU: &quot;Copilot liest keine Rohdaten. Es liest Ihr semantisches Modell.&quot;
+(ON-SCREEN: Claim-Karte &quot;Copilot antwortet aus dem Modell, nicht aus der Datenbank.&quot;)
+PROOF: (MODALITY: custom animation.)
+(ANIMATION: eine Frage in normalem Deutsch, &quot;Wie hoch war der Umsatz im Q3?&quot;, wandert von links ein. Sie trifft nicht auf eine Tabelle voller Rohdaten, sondern auf eine Ebene mit der Beschriftung &quot;Semantisches Modell&quot;: dort liegen die Kennzahl &quot;Umsatz&quot;, die Beziehungen, die Definitionen. Aus dieser Ebene kommt die Antwort heraus. Dann wird die Modell-Ebene ausgegraut, und dieselbe Frage prallt ins Leere und liefert eine zufällige Zahl. Farben: CaseWhen-Grün #1D967C, der Konflikt-Moment kurz in Amber.)
+SAJU (über der Animation): &quot;Das ist der Punkt, den fast alle unterschätzen. Copilot rechnet nicht selbst in Ihren Rohdaten herum. Es übersetzt Ihre Frage in eine Abfrage auf das semantische Modell und gibt zurück, was das Modell hergibt. Ist die Kennzahl Umsatz dort sauber definiert, bekommen Sie die richtige Zahl. Ist sie es nicht, bekommen Sie trotzdem eine Zahl, nur eben irgendeine. Copilot ist also genau so gut wie das Modell, auf das es zugreift. Die ganze Arbeit passiert vor dem Anschalten, nämlich im Modell.&quot;
+PAYOFF: (MODALITY: on-screen text.)
+(ON-SCREEN: nummerierte Karte &quot;Merksatz 1: Copilot ist nur so gut wie Ihr Modell. Erst das Modell, dann der Schalter.&quot;)
+RE-HOOK: SAJU: &quot;Und genau daraus wächst das erste Problem: Welches Modell nimmt Copilot, wenn es zwölf davon gibt?&quot;</p><p>[2:10-3:40] VALUE BEAT 2: Warum stimmt die Zahl nicht, obwohl die Daten da sind?
+CLAIM: SAJU: &quot;Gibt es zwölf Umsatz-Modelle mit zwölf Definitionen, rät Copilot.&quot;
+(ON-SCREEN: Claim-Karte &quot;Ohne eine vereinbarte Zahl rät die KI.&quot;)
+PROOF: (MODALITY: screen-record.)
+(SCREEN-RECORD: Power BI Service, Suche nach &quot;Umsatz&quot; gibt zwölf verschiedene semantische Modelle zurück, ähnlich benannt, &quot;Umsatz final&quot;, &quot;Umsatz Reporting v2&quot;, und so weiter. Der Copilot-Bereich wird geöffnet, dieselbe Frage gestellt, und die Antwort weicht von der Zahl in der Vorstandsvorlage ab. Cursor zeigt auf zwei Modelle mit unterschiedlicher Umsatz-Definition, einmal mit Retouren, einmal ohne.)
+SAJU: &quot;Das ist der häufigste Grund für falsche Copilot-Zahlen, und er hat nichts mit KI zu tun. Wenn im Haus zwölf Definitionen von Umsatz nebeneinander leben, brutto und netto, mit und ohne Retouren, nach Bestell- oder nach Rechnungsdatum, dann greift Copilot sich eine davon. Die Daten sind vollständig da, und die Antwort ist trotzdem falsch, weil die Frage nie verbindlich beantwortet wurde: Welche Zahl gilt? Die Voraussetzung heißt: genau ein zertifiziertes Modell pro Fachbereich, mit einer festgeschriebenen Definition je Kennzahl. Das ist die eine vereinbarte Zahl, auf die sich Menschen und Copilot gleichermaßen berufen.&quot;
+PAYOFF: (MODALITY: on-screen text.)
+(ON-SCREEN: nummerierte Karte &quot;Merksatz 2: Eine vereinbarte Zahl. Ein zertifiziertes Modell pro Fachbereich, klare Definition je Kennzahl.&quot;)
+RE-HOOK: SAJU: &quot;Jetzt hat Copilot das richtige Modell. Es scheitert aber immer noch, wenn es Ihre Frage falsch versteht.&quot;</p><p>[3:40-5:10] VALUE BEAT 3: Warum versteht Copilot meine Frage nicht?
+CLAIM: SAJU: &quot;Copilot übersetzt Ihre Wörter über Beschreibungen und Synonyme auf Ihre Felder.&quot;
+(ON-SCREEN: Claim-Karte &quot;Kein Wörterbuch, keine gute Antwort.&quot;)
+PROOF: (MODALITY: screen-record mit eingeblendetem Detail.)
+(SCREEN-RECORD: Power BI Modellansicht. Eine Kennzahl heißt technisch &quot;rev_net_fx&quot;, eine Spalte &quot;cust_id_2&quot;. Ein Nutzer fragt Copilot nach &quot;Nettoumsatz je Kunde&quot;, und Copilot findet die Felder nicht sicher zu. Dann werden im Modell die Beschreibungen gefüllt, sprechende Namen vergeben, im Q&amp;A-Bereich Synonyme wie &quot;Erlös&quot; und &quot;Umsatz netto&quot; hinterlegt, und technische Hilfsspalten ausgeblendet. Dieselbe Frage trifft jetzt sauber auf die richtige Kennzahl.)
+SAJU: &quot;Copilot ist auf das angewiesen, was im Modell an Erklärung steht. Heißt die Kennzahl intern rev_net_fx und hat keine Beschreibung, dann rät die KI, welches Feld Sie meinen. Drei Dinge beheben das, und keines davon ist Technik für Fortgeschrittene. Erstens: sprechende Namen und eine kurze Beschreibung an jeder Kennzahl und jeder wichtigen Spalte. Zweitens: Synonyme im Q&amp;A-Bereich, damit Erlös, Umsatz und Nettoumsatz auf dasselbe Feld zeigen. Drittens: technische Hilfsspalten ausblenden, damit Copilot gar nicht erst danebengreift. Das ist eine halbe Stunde Arbeit pro Modell und der Unterschied zwischen einer brauchbaren und einer peinlichen Antwort.&quot;
+PAYOFF: (MODALITY: on-screen text.)
+(ON-SCREEN: nummerierte Karte &quot;Merksatz 3: Sprechende Namen, Beschreibungen, Synonyme. Technische Spalten ausblenden.&quot;)
+RE-HOOK: SAJU: &quot;Jetzt versteht Copilot die Frage. Bleibt die heikelste Frage: Wer darf die Antwort sehen?&quot;</p><p>[5:10-6:40] VALUE BEAT 4: Wer darf die Antwort von Copilot sehen?
+CLAIM: SAJU: &quot;Copilot antwortet mit der Identität des Nutzers. Sind die Berechtigungen lose, wird es zum schnellsten Weg an vertrauliche Zahlen.&quot;
+(ON-SCREEN: Claim-Karte &quot;Copilot erbt genau die Rechte, die Sie offen lassen.&quot;)
+PROOF: (MODALITY: custom animation.)
+(ANIMATION: dasselbe Modell, zwei Nutzer nebeneinander. Nutzer A ist der Vertriebsleitung West zugeordnet, Nutzer B der Region Süd. Beide stellen Copilot dieselbe Frage nach Umsatz. Mit gesetzter Row Level Security filtert die Antwort pro Identität, A sieht West, B sieht Süd. Dann wird die Sicherheitsrolle entfernt und die Arbeitsbereichs-Rolle auf offen gestellt: jetzt liefert Copilot beiden die kompletten Zahlen inklusive Margen. Ein Etikett blendet ein: &quot;Ohne RLS beantwortet Copilot jede Frage für jeden.&quot;)
+SAJU: &quot;Das ist die Voraussetzung, die am meisten weh tut, wenn sie fehlt. Copilot hält sich an Row Level Security, das ist die gute Nachricht. Es hält sich aber auch an lose Berechtigungen. Wenn heute jeder im Arbeitsbereich alles sehen darf, dann macht Copilot dieses Rechteproblem nur schneller sichtbar. Statt sich durch Berichte zu klicken, tippt jemand einfach: Zeig mir die Margen je Kunde, oder die Gehälter je Abteilung, und Copilot antwortet, weil die Berechtigung es zulässt. Deshalb gehört vor das Anschalten: Row Level Security auf den sensiblen Modellen, saubere Arbeitsbereichs-Rollen, und ein Sensitivitätslabel, das auch beim Export nach Excel erhalten bleibt. Das steuert Microsoft Purview.&quot;
+PAYOFF: (MODALITY: on-screen text.)
+(ON-SCREEN: nummerierte Karte &quot;Merksatz 4: Row Level Security, saubere Rollen und Sensitivitätslabel setzen, bevor Copilot an ist.&quot;)
+RE-HOOK: SAJU: &quot;Damit steht das Fachliche. Es gibt aber noch eine Hürde, die rein technisch ist, und an der viele hängen bleiben.&quot;</p><p>[6:40-8:10] VALUE BEAT 5: Warum ist Copilot bei mir ausgegraut oder langsam?
+CLAIM: SAJU: &quot;Copilot braucht eine bezahlte Fabric-Kapazität und einen Schalter im Tenant, sonst passiert gar nichts.&quot;
+(ON-SCREEN: Claim-Karte &quot;Kapazität und Tenant-Schalter zuerst.&quot;)
+PROOF: (MODALITY: screen-record.)
+(SCREEN-RECORD: Fabric Admin-Portal. Der Tenant-Schalter &quot;Copilot und KI-Funktionen&quot; wird von aus auf an gestellt. Dann die Kapazitätsansicht: eine zu kleine Kapazität, die Copilot-Anfragen stauen sich und werden gedrosselt. Die Kapazität wird passend höher gesetzt, das CU-Diagramm entspannt sich. Zuletzt die Regionseinstellung, damit die Verarbeitung im richtigen Raum bleibt.)
+SAJU: &quot;Hier scheitert es oft an Grau statt an Falsch. Copilot in Fabric und Power BI läuft nur auf einer kostenpflichtigen Kapazität, nicht mit einer reinen Pro-Lizenz. Ist keine passende Kapazität da, ist der Knopf ausgegraut. Ist sie zu klein, teilen sich Ihre Berichte und Copilot dieselben Recheneinheiten, und beides wird langsam. Drei Dinge prüfen Sie deshalb vor dem Rollout. Erstens: den Tenant-Schalter für Copilot, den setzt Ihr Administrator bewusst frei, nicht jeder darf das. Zweitens: die Kapazität passend dimensionieren, damit Copilot Berichte nicht ausbremst. Drittens: die Region und Datenresidenz prüfen, gerade im deutschsprachigen Raum ist das eine echte Anforderung. Das kostet einen halben Tag Vorbereitung und erspart Ihnen einen misslungenen Start.&quot;
+PAYOFF: (MODALITY: on-screen text.)
+(ON-SCREEN: nummerierte Karte &quot;Merksatz 5: Tenant-Schalter frei, Kapazität passend, Region und Datenresidenz geprüft.&quot;)
+RE-HOOK: SAJU: &quot;Damit haben Sie die vier Voraussetzungen beisammen. Was davon machen Sie konkret ab Montag?&quot;</p><p>[8:10-10:00] PRAXISBEISPIEL + ECHTE ZAHL + AUFLÖSUNG DES OFFENEN PUNKTES
+(MODALITY: talking head mit B-Roll und eingeblendeter Data-Viz.)
+SAJU: &quot;Machen wir es an einem echten Fall. Ein Datenteam in Berlin wollte Copilot ausrollen, klassisch aufgestellt: 40 Arbeitsbereiche, drei Umsatz-Modelle, offene Rollen, und keine Beschreibungen an den Kennzahlen. Der erste Test mit Copilot lieferte selbstbewusste, falsche Zahlen. Wir haben nichts Neues gebaut. Wir haben ein Modell zertifiziert, die Definition von Umsatz einmal verbindlich festgeschrieben, Beschreibungen und Synonyme ergänzt, Row Level Security und Rollen gesetzt, und die Kapazität passend dimensioniert.&quot;
+(B-ROLL: Whiteboard mit vier Spuren, Modell, Wörterbuch, Rechte, Kapazität; Hände, die Haftnotizen umsortieren.)
+(DATA-VIZ: Vorher-Nachher, links &quot;3 Modelle · offene Rechte · keine Beschreibungen · falsche Copilot-Antwort&quot;, rechts &quot;1 zertifiziertes Modell · RLS · Copilot liefert die vereinbarte Zahl&quot;.)
+SAJU: &quot;Ergebnis nach drei Wochen: Copilot gibt dieselbe Umsatzzahl aus, die auch in der Vorstandsvorlage steht, und nur den Menschen, die sie sehen dürfen. Zur Einordnung, warum so viele hier zuerst scheitern: Laut einer Erhebung von Drexel LeBow und Precisely sagen nur 12 Prozent der Unternehmen, dass ihre Daten in Qualität und Zugriff gut genug für KI sind. Das ist der eigentliche Grund, warum das Anschalten allein nichts bringt. Copilot ist die letzte Meile, die Voraussetzung ist die eine saubere, vereinbarte Zahl.&quot;
+(ON-SCREEN: Statistik-Karte &quot;Nur 12 Prozent sagen, ihre Daten sind gut genug für KI. Quelle: Drexel LeBow und Precisely, 2025&quot;.)
+SAJU: &quot;Und jetzt der Punkt, den ich Ihnen am Anfang versprochen habe: die Voraussetzung, die fast alle überspringen und die aus Copilot am ersten Tag ein Datenleck macht. Es sind die Berechtigungen. Die meisten Teams testen Copilot in einer Umgebung, in der historisch jeder alles sehen durfte, weil das bei Berichten nie aufgefallen ist. Copilot macht diese offene Tür sofort nutzbar: Eine getippte Frage nach Margen oder Gehältern, und die Antwort ist da. Wer Copilot einschaltet, ohne vorher Row Level Security und Rollen zu ordnen, verteilt vertrauliche Zahlen auf Zuruf. Governance ist die Voraussetzung dafür, dass Copilot Ihnen die richtige Zahl gibt, und sie nur den Richtigen gibt.&quot;</p><p>[10:00-10:40] PAYOFF: das ganze Rezept, auch wenn Sie uns nie kontaktieren
+(MODALITY: kinetic type, Liste baut sich Zeile für Zeile auf.)
+SAJU: &quot;Fassen wir zusammen, das sind Ihre Voraussetzungen, bevor der Schalter umgelegt wird.
+Erstens: Copilot ist nur so gut wie Ihr Modell. Erst das Modell, dann der Schalter.
+Zweitens: eine vereinbarte Zahl, ein zertifiziertes Modell pro Fachbereich mit klarer Definition.
+Drittens: sprechende Namen, Beschreibungen und Synonyme, technische Spalten ausblenden.
+Viertens: Row Level Security, saubere Rollen und Sensitivitätslabel setzen.
+Fünftens: Tenant-Schalter frei, Kapazität passend, Region und Datenresidenz geprüft.&quot;
+(ON-SCREEN: die fünf Merksätze als nummerierte Liste, CaseWhen-Grün.)</p><p>[10:40-11:00] SOFT CTA: Wo fange ich an?
+(MODALITY: talking head mit Link-Karten.)
+SAJU: &quot;Wenn Sie wissen wollen, wie weit Ihre Umgebung heute wirklich ist, bevor Sie Copilot anschalten: Unter dem Video liegt die Power BI Governance und Cost Scorecard. Fünf Minuten, danach haben Sie Ihren Score, einen Vergleich mit ähnlichen Teams, und Ihre drei größten Risiken schwarz auf weiß. Und wenn Ihre Zahlen sich heute noch widersprechen, fordern Sie bei uns ein Semantik-Modell- und AI-Readiness-Review an. Kein Verkaufsgespräch, ein echtes Gespräch, genau das machen wir bei CaseWhen jede Woche mit Datenteams in Berlin. Eine Frage an Sie zum Schluss: Welche Ihrer Kennzahlen hat heute mehr als eine gültige Definition im Haus? Schreiben Sie es in die Kommentare, das ist meistens genau die Zahl, an der Copilot als Erstes scheitert.&quot;
+(ON-SCREEN: Link-Karte 1 &quot;Power BI Governance und Cost Scorecard, 5 Minuten&quot;. Link-Karte 2 &quot;Semantik-Modell- und AI-Readiness-Review anfragen&quot;. Karte 3 &quot;Als Nächstes: Datengovernance erklärt&quot;.)</p><h2>Description
+Power BI Copilot Voraussetzungen erklärt: was Copilot in Power BI und Microsoft Fabric wirklich braucht, bevor Sie es einschalten, und warum das Anschalten allein falsche Zahlen liefert.</h2><p>Kostenlose Power BI Governance und Cost Scorecard (5 Minuten): https://casewhen.co/scorecard
+Mit CaseWhen arbeiten (Semantik-Modell- und AI-Readiness-Review): https://casewhen.co/kontakt</p><p>Kapitel:
+0:00 Warum gibt Copilot mir eine falsche Zahl?
+0:40 Woher nimmt Copilot seine Antwort überhaupt?
+2:10 Warum stimmt die Zahl nicht, obwohl die Daten da sind?
+3:40 Warum versteht Copilot meine Frage nicht?
+5:10 Wer darf die Antwort von Copilot sehen?
+6:40 Warum ist Copilot bei mir ausgegraut oder langsam?
+8:10 Was bringt das an einem echten Fall?
+10:00 Wo fange ich an?</p><p>Ressourcen:
+- Power BI Governance und Cost Scorecard: https://casewhen.co/scorecard
+- 20-Punkte Power BI Modell-Review Checkliste: https://casewhen.co/checkliste
+- Nächstes Video, Datengovernance erklärt: https://casewhen.co/datengovernance</p><p>In diesem Video erklärt Saju von CaseWhen die Voraussetzungen für Power BI Copilot ohne Buzzwords. Sie sehen, warum Copilot aus dem semantischen Modell antwortet und nicht aus den Rohdaten, warum zwölf Umsatz-Definitionen zu falschen Copilot-Zahlen führen, wie Beschreibungen und Synonyme dafür sorgen, dass Copilot Ihre Frage versteht, warum Row Level Security und saubere Rollen vor dem Anschalten stehen müssen, und welche Kapazität und welchen Tenant-Schalter Copilot in Microsoft Fabric braucht. Am Ende gibt es fünf konkrete Merksätze und den Grund, warum Copilot ohne Governance am ersten Tag zu einem Datenleck wird.</p><p>#PowerBI #Copilot #MicrosoftFabric #Datengovernance #BI</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

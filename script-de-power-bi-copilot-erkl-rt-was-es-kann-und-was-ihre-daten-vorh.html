@@ -1,0 +1,152 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Power BI Copilot erklärt: Was es kann und was Ihre Daten vor</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Power BI Copilot erklärt: Was es kann und was Ihre Daten vorher brauchen</p><p>Host: Saju · Cluster: AI/Copilot · Zielgruppe: Head of Data · Laufzeit: 11 Min · Primärkeyword: power bi copilot</p><h2>Chapters</h2><ul><li>[0:00] Warum gibt Copilot manchmal die falsche Zahl zurück?</li><li>[0:40] Was kann Power BI Copilot heute konkret?</li><li>[2:10] Warum ist Copilot nur so gut wie Ihr Datenmodell?</li><li>[3:40] Welche drei Dinge brauchen Ihre Daten, bevor Copilot funktioniert?</li><li>[5:20] Copilot, Microsoft Fabric und die Frage nach den Kosten</li><li>[7:00] Wer darf welche Zahl sehen, wenn Copilot antwortet?</li><li>[8:30] Was sollten Sie diese Woche tun, bevor Sie Copilot einschalten?</li><li>[9:50] Der eine Punkt, den fast jedes Team übersieht</li></ul><h2>Script</h2><p>[0:00-0:12] HOOK
+*(Modality: Screen-record. ON-SCREEN CARD: &quot;power bi copilot&quot;)*</p><p>Sie schalten Copilot in Power BI ein, tippen eine ganz normale Frage ein, und die Zahl, die zurückkommt, stimmt nicht. Sie sieht sauber aus, sie klingt sicher, und sie ist trotzdem falsch. Genau darüber reden wir in den nächsten elf Minuten.</p><p>[0:12-0:40] PROMISE + STAKES + OPEN LOOP
+*(Modality: Talking head. ON-SCREEN CARD: &quot;Was Copilot kann · was Ihre Daten brauchen&quot;)*</p><p>Ich zeige Ihnen, was Power BI Copilot heute wirklich kann, wo es hilft, und was Ihre Daten vorher mitbringen müssen, damit die Antworten stimmen. Denn das ist der Punkt, den in der Demo niemand sagt: Sie können Copilot nicht einfach anknipsen. Wenn Ihre Daten nicht in Ordnung sind, gibt Copilot Ihnen eine falsche Antwort mit voller Überzeugung, und jemand trägt diese Zahl in den nächsten Quartalsforecast. Am Ende zeige ich Ihnen die eine Stelle in Ihrem Modell, die fast jedes Team leer lässt, und die darüber entscheidet, ob Copilot das Wort Umsatz überhaupt versteht. Wir machen das jede Woche mit Datenteams in Berlin, deshalb geht es hier gerade zur Sache und nicht um Marketing.</p><p>[0:40-2:10] BEAT 1 — Was kann Power BI Copilot heute konkret?
+*(Modality: Screen-record. ON-SCREEN CARD: &quot;Copilot: 4 echte Aufgaben&quot;)*</p><p>CLAIM: Copilot ist keine Magie. Es ist eine Hilfe für vier ziemlich konkrete Aufgaben.</p><p>BELEG: Erstens, Sie können in normaler Sprache eine Frage stellen, zum Beispiel Umsatz nach Region im letzten Quartal, und Copilot baut die passende Visualisierung dazu. Zweitens, Copilot fasst einen Bericht in ein paar Sätzen zusammen, damit jemand, der die Zahlen nicht jeden Tag sieht, den Kern versteht. Drittens, es hilft Ihren Entwicklern beim Schreiben von DAX, also den Rechenformeln hinter den Kennzahlen. Und viertens gibt es Copilot als Chat direkt im Bericht, sodass eine Führungskraft selbst nachfragen kann, ohne Sie anzurufen.</p><p>*(Modality: B-roll. Person tippt eine Frage, Diagramm erscheint.)*</p><p>PAYOFF: Merken Sie sich diese eine Regel: Copilot beschleunigt Arbeit, die Sie sowieso richtig machen würden. Es ersetzt kein Wissen über Ihre eigenen Daten.</p><p>RE-HOOK: Und genau hier fängt das Problem an, denn all das steht und fällt mit einer Sache unter der Oberfläche.</p><p>[2:10-3:40] BEAT 2 — Warum ist Copilot nur so gut wie Ihr Datenmodell?
+*(Modality: Custom animation. ON-SCREEN CARD: &quot;Copilot liest Ihr Modell, nicht Ihre Absicht&quot;)*</p><p>CLAIM: Copilot antwortet nicht aus dem Rohdatensatz. Es antwortet aus Ihrem semantischen Modell, also der Schicht, in der Ihre Tabellen, Beziehungen und Kennzahlen definiert sind.</p><p>BELEG: Stellen Sie sich vor, was passiert, wenn dort etwas unsauber ist. Sie haben drei Tabellen mit Umsatz, zwei davon veraltet. Sie haben eine Kennzahl, die Retouren nicht abzieht. Sie haben eine Kundentabelle, die einen Kunden doppelt führt. Ein erfahrener Analyst weiß, welche Zahl die richtige ist, weil er die Geschichte dahinter kennt. Copilot kennt diese Geschichte nicht. Es nimmt, was im Modell steht, und rechnet los. Wenn zwei Wahrheiten im Modell liegen, wählt Copilot eine, und Sie erfahren nicht, welche.</p><p>*(Modality: Data-viz. Zwei Umsatzzahlen nebeneinander, beide plausibel, eine markiert.)*</p><p>PAYOFF: Die Regel für heute: Bevor Copilot eine verlässliche Antwort geben kann, braucht Ihr Modell genau eine anerkannte Zahl pro Kennzahl. Eine Definition von Umsatz, nicht drei.</p><p>RE-HOOK: Was heißt das praktisch für Ihre Daten? Es kommt auf drei Dinge an.</p><p>[3:40-5:20] BEAT 3 — Welche drei Dinge brauchen Ihre Daten vorher?
+*(Modality: On-screen text / kinetic type. ON-SCREEN CARD: &quot;1 Eindeutig · 2 Verknüpft · 3 Beschrieben&quot;)*</p><p>CLAIM: Damit Copilot brauchbar wird, müssen Ihre Daten drei Bedingungen erfüllen.</p><p>BELEG: Erstens, Eindeutigkeit. Jede wichtige Kennzahl hat eine Definition, die alle akzeptieren. Umsatz heißt überall dasselbe. Zweitens, saubere Beziehungen. Ihre Tabellen sind richtig miteinander verbunden, sodass Umsatz pro Kunde und pro Monat korrekt zusammenläuft und nichts doppelt gezählt wird. Drittens, gute Beschreibungen. Jede Tabelle und jedes Feld trägt einen Namen und eine kurze Erklärung, die ein Mensch versteht. Copilot liest diese Namen, wenn es Ihre Frage übersetzt.</p><p>*(Modality: Talking head. ON-SCREEN CARD: &quot;Nur 12 % sagen: Daten gut genug für KI. Quelle: Drexel LeBow + Precisely, 2025&quot;)*</p><p>Hier eine Zahl, die zeigt, wie groß diese Lücke wirklich ist. In einer Erhebung von Drexel LeBow und Precisely aus dem Jahr 2025 sagten nur zwölf Prozent der Unternehmen, ihre Daten seien in Qualität und Zugänglichkeit gut genug, um sie für KI zu nutzen. Zwölf Prozent. Der Rest will KI, hat aber die Grundlage noch nicht.</p><p>PAYOFF: Ihre Aufgabe vor Copilot ist also nicht KI-Arbeit, sondern Aufräumarbeit an Ihrem Modell: eindeutig, verknüpft, beschrieben.</p><p>RE-HOOK: Und sobald wir über KI in Power BI reden, kommt sofort die nächste Frage, nämlich die nach Fabric und nach dem Preis.</p><p>[5:20-7:00] BEAT 4 — Copilot, Microsoft Fabric und die Frage nach den Kosten
+*(Modality: Custom animation. ON-SCREEN CARD: &quot;Copilot braucht Kapazität&quot;)*</p><p>CLAIM: Copilot ist nicht in jeder Power-BI-Lizenz enthalten. Es läuft auf kostenpflichtiger Kapazität, entweder über Microsoft Fabric oder über Power BI Premium.</p><p>BELEG: Das heißt, jede Frage an Copilot verbraucht Rechenleistung, die Sie bezahlen. Diese Kapazität wird in Einheiten gemessen, und wenn viele Leute gleichzeitig Copilot nutzen und die Kapazität zu klein gewählt ist, werden Anfragen verlangsamt oder in eine Warteschlange gestellt. Wählen Sie die Kapazität zu groß, zahlen Sie jeden Monat für Leistung, die Sie nie brauchen. Beides passiert oft, weil die Kapazität einmal geschätzt und dann nie wieder angeschaut wird.</p><p>*(Modality: Data-viz. Kapazitäts-Anzeige füllt sich, überschreitet die Grenze, Anfragen stauen sich.)*</p><p>PAYOFF: Die Regel: Behandeln Sie Copilot als laufende Kosten, nicht als Schalter. Legen Sie die richtige Kapazitätsgröße fest und prüfen Sie den Verbrauch monatlich.</p><p>RE-HOOK: Es gibt aber ein Risiko, das teurer ist als jede Kapazität, und es hat mit einer einzigen Frage zu tun: Wer darf eigentlich was sehen?</p><p>[7:00-8:30] BEAT 5 — Wer darf welche Zahl sehen, wenn Copilot antwortet?
+*(Modality: Custom animation. ON-SCREEN CARD: &quot;Row-Level Security gilt auch für Copilot&quot;)*</p><p>CLAIM: Copilot antwortet jedem im Rahmen seiner Berechtigungen. Wenn diese Berechtigungen unsauber gesetzt sind, wird Copilot zur schnellsten Art, vertrauliche Zahlen offenzulegen.</p><p>BELEG: In einem gut geführten Bericht sorgt Row-Level Security dafür, dass der Vertriebsleiter Nord nur die Zahlen für Nord sieht und nicht die für Süd. Copilot hält sich an diese Regeln, wenn sie existieren. Der Punkt ist: Viele Berichte haben diese Regeln nie sauber bekommen, weil bisher nur wenige, geschulte Leute den Bericht geöffnet haben. Copilot lädt plötzlich alle ein, in normaler Sprache alles zu fragen. Wenn jemand tippt, zeig mir die Gehälter der Geschäftsleitung, und die Berechtigungen sind lückenhaft, dann bekommt er eine Antwort.</p><p>*(Modality: Split-screen. Zwei Nutzer, dieselbe Frage, unterschiedliche erlaubte Zeilen.)*</p><p>PAYOFF: Bevor Sie Copilot für ein breites Publikum freigeben, prüfen Sie für jeden sensiblen Bericht: Wer darf welche Zeile sehen, und ist das im Modell tatsächlich hinterlegt?</p><p>RE-HOOK: Damit das kein abstrakter Rat bleibt, hier ist die konkrete Reihenfolge für diese Woche.</p><p>[8:30-9:50] BEAT 6 — Was sollten Sie diese Woche tun, bevor Sie Copilot einschalten?
+*(Modality: On-screen text / kinetic type. ON-SCREEN CARD: &quot;Vor Copilot: 4 Schritte&quot;)*</p><p>CLAIM: Sie brauchen keine große KI-Initiative. Sie brauchen vier Schritte an Ihrem wichtigsten Bericht.</p><p>BELEG: Schritt eins, wählen Sie einen Bericht aus, der oft genutzt wird und der zählt, zum Beispiel den Umsatzbericht der Geschäftsleitung. Schritt zwei, prüfen Sie jede Kennzahl darin und einigen Sie sich auf genau eine Definition, dokumentiert und von der Fachseite bestätigt. Schritt drei, gehen Sie die Berechtigungen durch und legen Sie fest, wer welche Zeilen sehen darf. Schritt vier, testen Sie Copilot mit zehn echten Fragen, die Ihre Leute wirklich stellen würden, und vergleichen Sie jede Antwort mit der Zahl, von der Sie wissen, dass sie richtig ist.</p><p>*(Modality: B-roll. Team am Bildschirm, Häkchen erscheinen an einer Liste.)*</p><p>PAYOFF: Nach dieser einen Woche wissen Sie, ob Ihr wichtigster Bericht bereit für Copilot ist, und was noch fehlt. Das ist ehrliche Vorarbeit, und sie zahlt sich sofort aus, auch ganz ohne Copilot.</p><p>RE-HOOK: Bleibt der eine Punkt, den ich Ihnen versprochen habe, und den fast jedes Team übersieht.</p><p>[9:50-10:40] PAYOFF — Der eine Punkt, den fast jedes Team übersieht
+*(Modality: Screen-record. ON-SCREEN CARD: &quot;Feldnamen + Beschreibungen = Copilots Wörterbuch&quot;)*</p><p>Hier ist die Stelle: die Namen und Beschreibungen Ihrer Felder im Modell. Wenn Ihre Umsatzspalte intern Umsatz_neu_final_v3 heißt und keine Beschreibung hat, dann versteht Copilot das Wort Umsatz nicht, wenn Ihre Führungskraft danach fragt. Copilot liest Ihre Feldnamen und Ihre Beschreibungen wie ein Wörterbuch. Die meisten Teams füllen dieses Wörterbuch nie aus, weil bisher nur Fachleute das Modell benutzt haben, die die kryptischen Namen ohnehin kannten. Geben Sie Ihren Feldern klare Namen und tragen Sie kurze Beschreibungen und gängige Bezeichnungen ein, also auch Erlös, wenn Ihre Leute das Wort benutzen. Das ist die günstigste Arbeit mit der größten Wirkung, bevor Sie Copilot einschalten.</p><p>[10:40-11:00] SOFT CTA + FRAGE
+*(Modality: Talking head. ON-SCREEN CARDS: &quot;Governance- und Kosten-Scorecard (gratis)&quot; · &quot;Governance-Assessment buchen&quot;)*</p><p>Wenn Sie wissen wollen, wo Ihr Modell heute steht, machen Sie unsere kostenlose Governance- und Kosten-Scorecard. Das dauert fünf Minuten, Sie sehen Ihren Wert, einen Vergleich mit ähnlichen Unternehmen und Ihre drei größten Risiken. Der Link steht unten. Und wenn Ihre Zahlen sich noch nicht sauber decken oder Sie vor der Copilot-Freigabe Sicherheit wollen, buchen Sie ein Governance-Assessment bei uns, ganz ohne Verkaufsgespräch, einfach ein Gespräch über Ihre Daten.</p><p>Eine Frage zum Schluss, ehrlich beantwortet: Wenn Sie morgen Copilot einschalten und Ihre Führungskraft nach dem Umsatz fragt, sind Sie sicher, dass alle im Haus dieselbe Zahl bekommen würden?</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

@@ -1,0 +1,152 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Wechsel zu Power BI: Was sich wirklich lohnt und was Sie neu</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Wechsel zu Power BI: Was sich wirklich lohnt und was Sie neu bauen</p><p>Host: Saju · Cluster: Migration · Zielgruppe: Head of Data · Laufzeit: 11 Min · Primärkeyword: wechsel zu power bi</p><h2>Chapters</h2><ul><li>[0:00] Warum kostet der Wechsel zu Power BI mehr als der Lizenzpreis?</li><li>[0:40] Was überträgt sich beim Wechsel wirklich, und was bleibt liegen?</li><li>[2:10] Warum können Sie Ihre alten Berichte nicht einfach eins zu eins nachbauen?</li><li>[3:40] Was müssen Sie neu bauen, damit Power BI auch schnell bleibt?</li><li>[5:10] Wie behalten Ihre Zahlen beim Umzug das Vertrauen der Fachbereiche?</li><li>[6:40] Welche Risiken kippen eine Migration mitten im Projekt?</li><li>[8:10] Wie wechseln Sie, ohne dass am Ende zwei Werkzeuge parallel laufen?</li><li>[9:40] Der eine Schritt, den fast jedes Team beim Wechsel überspringt</li></ul><h2>Script</h2><p>[0:00-0:12] HOOK
+*(Modality: Screen-record. ON-SCREEN CARD: &quot;wechsel zu power bi&quot;)*</p><p>Sie wechseln zu Power BI, um endlich schnellere und sauberere Berichte zu bekommen. Und drei Monate später laufen das alte Werkzeug und Power BI gleichzeitig, keiner traut den neuen Zahlen, und niemand will den Stecker beim alten ziehen. Genau darüber reden wir in den nächsten elf Minuten.</p><p>[0:12-0:40] PROMISE + STAKES + OPEN LOOP
+*(Modality: Talking head. ON-SCREEN CARD: &quot;Was sich überträgt · was Sie neu bauen&quot;)*</p><p>Ich zeige Ihnen, was sich beim Wechsel zu Power BI wirklich überträgt, was Sie neu bauen müssen, und wie Sie das machen, ohne das Vertrauen in Ihre Zahlen zu verlieren. Denn das ist der Punkt, den in keinem Angebot steht: Ein Wechsel ist zur Hälfte ein technischer Umzug und zur Hälfte eine Frage des Vertrauens. Machen Sie es falsch, bleibt das Projekt auf halbem Weg stehen, beide Werkzeuge laufen weiter, und Sie zahlen doppelt, während der Vertrieb weiter im alten Bericht nachschaut. Am Ende zeige ich Ihnen den einen Schritt vor dem Nachbauen, den fast jedes Team überspringt, und der darüber entscheidet, ob die alte und die neue Zahl am Ende überhaupt zusammenpassen. Wir begleiten solche Wechsel jede Woche mit Datenteams in Berlin, deshalb geht es hier gleich um die Praxis und nicht um Marketing.</p><p>[0:40-2:10] BEAT 1 — Was überträgt sich beim Wechsel wirklich, und was bleibt liegen?
+*(Modality: Screen-record. ON-SCREEN CARD: &quot;Überträgt sich · Bleibt liegen&quot;)*</p><p>CLAIM: Beim Wechsel zu Power BI überträgt sich weniger, als die Verkäufer sagen, und mehr, als Ihr Team befürchtet. Der Trick ist zu wissen, was in welche Kategorie fällt.</p><p>BELEG: Was sich überträgt, ist die Verbindung zu Ihren Datenquellen. Ihre Datenbank, Ihr Warehouse, Ihre Exporte bleiben, wo sie sind, und Power BI liest daraus. Es überträgt sich auch Ihr Fachwissen darüber, welche Kennzahl was bedeutet, und die Abfragen, die Sie in SQL geschrieben haben, denn SQL bleibt SQL. Was sich nicht überträgt, sind die Berichte selbst. Ihre gebauten Dashboards, Ihre Formeln aus Tableau oder Qlik, Ihre Berechnungen im alten Werkzeug lassen sich nicht kopieren. Es gibt kein Knopf, der ein Tableau-Dashboard in einen Power-BI-Bericht verwandelt. Diese Arbeit passiert von Hand.</p><p>*(Modality: Data-viz. Zwei Spalten, links &quot;überträgt sich&quot; mit Datenquellen und SQL, rechts &quot;neu gebaut&quot; mit Berichten und Formeln.)*</p><p>PAYOFF: Merken Sie sich diese eine Regel: Ihre Daten und Ihr Wissen ziehen um, Ihre Berichte werden neu gebaut. Wer das umdreht und eine reine Kopie plant, verschätzt sich beim Aufwand um das Doppelte.</p><p>RE-HOOK: Und genau hier machen die meisten Teams den ersten teuren Fehler, wenn sie doch versuchen zu kopieren.</p><p>[2:10-3:40] BEAT 2 — Warum können Sie Ihre alten Berichte nicht eins zu eins nachbauen?
+*(Modality: Custom animation. ON-SCREEN CARD: &quot;Andere Rechenlogik, nicht nur andere Farben&quot;)*</p><p>CLAIM: Ein alter Bericht sieht aus wie ein Layout-Problem. In Wahrheit steckt darunter eine andere Rechenlogik, die sich nicht übersetzen lässt.</p><p>BELEG: Jedes Werkzeug rechnet anders. Tableau hat seine eigenen Berechnungen, Qlik hat eine eigene Art, Filter über Daten zu legen, und Power BI rechnet mit DAX, also seiner eigenen Formelsprache. Wenn Sie eine Kennzahl eins zu eins nachbauen wollen, treffen Sie ständig auf Stellen, wo die alte Formel in Power BI gar keine direkte Entsprechung hat. Dazu kommt ein zweites Problem. Viele alte Berichte ziehen ihre Daten aus einer einzigen breiten Tabelle, einem großen Export, in dem alles nebeneinander steht. Bauen Sie diese eine breite Tabelle in Power BI genauso nach, wird der Bericht langsam und die Zahlen fangen an zu doppeln, sobald jemand filtert.</p><p>*(Modality: Screen-record. Eine breite Tabelle, dann derselbe Bericht mit einem sauberen Modell dahinter.)*</p><p>PAYOFF: Die Regel für heute: Behandeln Sie den Wechsel als Neubau der Rechenlogik, nicht als Nachzeichnen des Layouts. Was Sie übernehmen, ist die Frage, die der Bericht beantwortet, nicht die Formel, die dahintersteht.</p><p>RE-HOOK: Wenn Sie also neu bauen, stellt sich sofort die Frage, was Sie neu bauen müssen, damit Power BI seine Stärke überhaupt zeigt.</p><p>[3:40-5:10] BEAT 3 — Was müssen Sie neu bauen, damit Power BI auch schnell bleibt?
+*(Modality: Custom animation. ON-SCREEN CARD: &quot;Star-Schema: eine Faktentabelle, klare Dimensionen&quot;)*</p><p>CLAIM: Das eine, was Sie beim Wechsel wirklich neu bauen, ist Ihr Datenmodell. Und davon hängt ab, ob Power BI schnell ist oder zäh.</p><p>BELEG: Power BI ist am schnellsten, wenn die Daten in einem sogenannten Star-Schema liegen. Das heißt, in der Mitte steht eine Faktentabelle mit den Vorgängen, also den Verkäufen, den Buchungen, den Aufträgen. Und daran hängen klar getrennte Dimensionstabellen, zum Beispiel eine Tabelle für Kunden, eine für Produkte, eine für Datum. Statt einer breiten Tabelle mit allem drin haben Sie also einen klaren Kern und saubere Zuordnungen. Auf diesem Modell definieren Sie dann Ihre Kennzahlen in DAX, einmal und an einer Stelle. Umsatz wird genau einmal berechnet, und jeder Bericht greift auf dieselbe Definition zu.</p><p>*(Modality: Data-viz. Die Faktentabelle in der Mitte, Dimensionen rasten mit Verbindungslinien ein.)*</p><p>PAYOFF: Ihre Aufgabe beim Wechsel ist also zuerst Modellarbeit: eine Faktentabelle, klare Dimensionen, jede Kennzahl an einer Stelle definiert. Das ist die Grundlage, ohne die auch der schönste Bericht langsam bleibt.</p><p>RE-HOOK: Jetzt kommt der Teil, an dem die meisten Wechsel wirklich scheitern, und er ist keine technische Frage.</p><p>[5:10-6:40] BEAT 4 — Wie behalten Ihre Zahlen beim Umzug das Vertrauen der Fachbereiche?
+*(Modality: Talking head. ON-SCREEN CARD: &quot;Alte Zahl neben neuer Zahl, Zeile für Zeile&quot;)*</p><p>CLAIM: Der Moment, der über den ganzen Wechsel entscheidet, ist der, in dem der neue Bericht eine andere Zahl zeigt als der alte. Passiert das unerklärt, verlieren Sie den Fachbereich sofort.</p><p>BELEG: Beim Umzug ändert sich fast immer eine Kleinigkeit in der Rechnung, und plötzlich sagt Power BI 4,2 Millionen Umsatz, wo der alte Bericht 4,4 zeigte. Beide können sauber gerechnet sein, aber wenn Sie nicht erklären können, warum sie sich unterscheiden, glaubt der Fachbereich der neuen Plattform kein Wort mehr. Und dieses Misstrauen ist schon groß, bevor Sie überhaupt anfangen.</p><p>*(Modality: Talking head. ON-SCREEN CARD: &quot;67 % vertrauen den eigenen Zahlen nicht voll. Quelle: Drexel LeBow + Precisely, 2025&quot;)*</p><p>In einer Erhebung von Drexel LeBow und Precisely aus dem Jahr 2025 gaben 67 Prozent der Unternehmen an, dass sie den Daten, mit denen sie ihre Entscheidungen treffen, nicht voll vertrauen. Das ist die Lage schon vor dem Wechsel. Ein Umzug, der zwei Zahlen unerklärt nebeneinanderstellt, macht dieses Misstrauen nur größer. Deshalb läuft ein sauberer Wechsel immer als Parallelbetrieb: Der alte und der neue Bericht laufen eine Weile gleichzeitig, und Sie vergleichen sie Zeile für Zeile, bis jede Abweichung eine Erklärung hat.</p><p>PAYOFF: Die Regel: Schalten Sie das Alte erst ab, wenn jede wichtige Zahl im neuen Bericht mit der alten übereinstimmt oder die Abweichung schriftlich erklärt und vom Fachbereich abgenommen ist.</p><p>RE-HOOK: Dieser Parallelbetrieb ist richtig, birgt aber selbst ein Risiko, und mit ihm fängt die Liste der Dinge an, die eine Migration kippen lassen.</p><p>[6:40-8:10] BEAT 5 — Welche Risiken kippen eine Migration mitten im Projekt?
+*(Modality: On-screen text / kinetic type. ON-SCREEN CARD: &quot;3 Risiken: Doppelbetrieb · Schlüsselperson · Rechte&quot;)*</p><p>CLAIM: Fast jeder gescheiterte Wechsel scheitert an denselben drei Stellen. Wenn Sie diese kennen, umgehen Sie die meisten Probleme.</p><p>BELEG: Erstens, der Doppelbetrieb, der nie endet. Der Parallelbetrieb ist gesund, solange er ein festes Enddatum hat. Ohne dieses Datum laufen beide Werkzeuge für immer weiter, Sie zahlen zweimal Lizenz und pflegen zwei Wahrheiten. Zweitens, die eine Person, die das alte Modell im Kopf hat. Oft weiß nur ein Mensch, warum eine bestimmte Zahl im alten Werkzeug so und nicht anders gerechnet wird. Geht diese Person, bevor das Wissen aufgeschrieben ist, nehmen Sie es mit. Drittens, die Berechtigungen. Wer welche Zeile sehen darf, wird im alten Werkzeug oft über Jahre gewachsen und nirgends dokumentiert. Beim Wechsel müssen Sie diese Regeln in Power BI mit Row-Level Security neu aufbauen, also der Funktion, die dem Vertriebsleiter Nord nur die Zahlen für Nord zeigt. Wird das vergessen, sieht plötzlich jeder alles.</p><p>*(Modality: B-roll. Kalender mit einem markierten Abschalttermin, dann eine Liste mit Häkchen.)*</p><p>PAYOFF: Setzen Sie gegen jedes der drei Risiken eine konkrete Maßnahme: ein festes Abschaltdatum, die alte Rechenlogik schriftlich festgehalten, und die Berechtigungen als eigene Aufgabe im Projektplan.</p><p>RE-HOOK: Das schwerste dieser drei ist der Doppelbetrieb, also schauen wir uns an, wie Sie sauber umschalten.</p><p>[8:10-9:40] BEAT 6 — Wie wechseln Sie, ohne dass am Ende zwei Werkzeuge parallel laufen?
+*(Modality: Screen-record. ON-SCREEN CARD: &quot;Nach Wichtigkeit umschalten, nicht alles auf einmal&quot;)*</p><p>CLAIM: Sie migrieren nicht alle Berichte gleichzeitig. Sie schalten in einer festen Reihenfolge um, und jeder Bericht hat ein Datum, an dem seine alte Fassung stirbt.</p><p>BELEG: Fangen Sie mit einer Liste an. Sortieren Sie Ihre Berichte danach, wie oft sie genutzt werden und wie wichtig ihre Entscheidungen sind. Der Umsatzbericht der Geschäftsleitung steht oben, der Bericht, den seit einem Jahr niemand öffnet, fällt ganz raus, denn den bauen Sie gar nicht erst nach. Dann nehmen Sie sich die wichtigsten Berichte einzeln vor. Für jeden gilt derselbe Ablauf: neu bauen, im Parallelbetrieb prüfen, vom Fachbereich abnehmen lassen, und dann ein festes Datum setzen, an dem die alte Fassung abgeschaltet wird. Erst wenn ein Bericht abgenommen und die alte Fassung abgeschaltet ist, gehen Sie zum nächsten.</p><p>*(Modality: Data-viz. Eine Liste von Berichten, oben nach unten nacheinander von &quot;alt&quot; auf &quot;Power BI&quot; umgeschaltet.)*</p><p>PAYOFF: Nach jeder Runde ist ein wichtiger Bericht sicher umgezogen und eine alte Fassung endgültig aus. So wird der Doppelbetrieb jede Woche kleiner statt größer, und der Wechsel hat ein Ende, das man sehen kann.</p><p>RE-HOOK: Bleibt der eine Schritt, den ich Ihnen versprochen habe, und den fast jedes Team direkt am Anfang überspringt.</p><p>[9:40-10:40] PAYOFF — Der eine Schritt, den fast jedes Team beim Wechsel überspringt
+*(Modality: Screen-record. ON-SCREEN CARD: &quot;Zuerst die Zahl definieren, dann bauen&quot;)*</p><p>Hier ist der Schritt: Bevor Sie die erste Kennzahl in Power BI bauen, schreiben Sie auf, wie diese Zahl im alten Werkzeug genau gerechnet wird, und lassen Sie den Fachbereich diese Definition bestätigen. Also nicht nur der Name Umsatz, sondern die genaue Regel: Werden Retouren abgezogen, ab welchem Datum zählt ein Auftrag, welche Kunden sind ausgeschlossen. Die meisten Teams springen direkt ins Bauen, weil der Neubau nach echter Arbeit aussieht und das Aufschreiben nach Bürokratie. Doch ohne diese Definition bauen Sie eine neue Zahl, die vielleicht sauberer ist als die alte, und trotzdem im Vergleich durchfällt, weil niemand vereinbart hat, wie richtig überhaupt aussieht. Mit der Definition wird der Parallelbetrieb einfach: Jede Abweichung ist entweder ein Fehler, den Sie beheben, oder eine bewusste Verbesserung, die Sie erklären können. Das ist die günstigste Stunde im ganzen Projekt und die, die das Vertrauen rettet.</p><p>[10:40-11:00] SOFT CTA + FRAGE
+*(Modality: Talking head. ON-SCREEN CARDS: &quot;Governance- und Kosten-Scorecard (gratis)&quot; · &quot;Migrations-Gespräch buchen&quot;)*</p><p>Wenn Sie vor einem Wechsel wissen wollen, wo Ihr heutiger Aufbau steht und was er Sie wirklich kostet, machen Sie unsere kostenlose Governance- und Kosten-Scorecard. Das dauert fünf Minuten, Sie sehen Ihren Wert, einen Vergleich mit ähnlichen Unternehmen und Ihre drei größten Risiken. Der Link steht unten. Und wenn bei Ihnen ein konkreter Wechsel ansteht, etwa von Tableau, von Qlik oder von einer alten Excel-Landschaft, buchen Sie ein Migrations-Gespräch bei uns, ganz ohne Verkaufsdruck, einfach ein Gespräch über den richtigen Weg.</p><p>Eine Frage zum Schluss, ehrlich beantwortet: Könnten Sie heute für Ihre drei wichtigsten Kennzahlen aufschreiben, wie sie genau gerechnet werden, und würde Ihr Fachbereich dieser Definition zustimmen?</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

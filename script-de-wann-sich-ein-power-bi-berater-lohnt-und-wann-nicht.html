@@ -1,0 +1,152 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Wann sich ein Power-BI-Berater lohnt und wann nicht</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Wann sich ein Power-BI-Berater lohnt und wann nicht</p><p>Host: Saju · Cluster: Hiring/consulting · Zielgruppe: COO/Founder · Laufzeit: 11 Min · Primärkeyword: wann power bi berater</p><h2>Chapters</h2><ul><li>[0:00] Woran merken Sie, dass Sie über einen Power-BI-Berater nachdenken?</li><li>[0:40] Wann lohnt sich ein Power-BI-Berater wirklich?</li><li>[2:10] Wann sollten Sie die Arbeit besser im eigenen Team lassen?</li><li>[3:40] Was bleibt bei Ihnen, und was bauen Sie später mühsam neu?</li><li>[5:10] Welche Risiken übersehen die meisten Auftraggeber?</li><li>[6:40] Wie holen Sie Hilfe, ohne das Vertrauen in Ihre Zahlen zu verlieren?</li><li>[8:10] Woran erkennen Sie einen guten Power-BI-Berater?</li><li>[9:40] Die eine Vereinbarung, die fast jeder Vertrag vergisst</li><li>[10:30] Ihr nächster Schritt</li></ul><h2>Script</h2><p>[0:00-0:12] HOOK
+*(Modality: Talking head. ON-SCREEN CARD: &quot;wann Power-BI-Berater&quot;)*</p><p>Sie überlegen, ob Sie sich für Power BI jemanden von außen holen, oder ob Ihr Team das allein schafft. Und Sie haben die Sorge, am Ende viel Geld für einen Bericht auszugeben, den hinterher niemand benutzt. Genau darum geht es in den nächsten elf Minuten.</p><p>[0:12-0:40] PROMISE + STAKES + OPEN LOOP
+*(Modality: Talking head. ON-SCREEN CARD: &quot;Lohnt sich · lohnt sich nicht&quot;)*</p><p>Ich zeige Ihnen ganz konkret, wann sich ein Power-BI-Berater lohnt und wann nicht, was nach dem Projekt tatsächlich bei Ihnen bleibt, und wie Sie das Ganze angehen, ohne danach abhängiger dazustehen als vorher. Denn wenn Sie hier falsch entscheiden, passiert eine von zwei Sachen. Entweder Sie zahlen für ein schönes Dashboard, das keiner öffnet. Oder Sie bekommen einen Aufbau, den außer dem Berater kein Mensch versteht, und Ihre Zahlen driften langsam auseinander, ohne dass es jemand merkt. Am Ende zeige ich Ihnen die eine Vereinbarung, die fast jeder Vertrag vergisst, und die darüber entscheidet, ob die Arbeit am Schluss wirklich Ihnen gehört. Wir machen genau das jede Woche mit Datenteams in Berlin, deshalb rede ich hier Klartext und nicht in Werbesprache.</p><p>[0:40-2:10] BEAT 1 — Wann lohnt sich ein Power-BI-Berater wirklich?
+*(Modality: Screen-record. ON-SCREEN CARD: &quot;3 Fälle, in denen es sich lohnt&quot;)*</p><p>CLAIM: Ein Berater rechnet sich in drei ziemlich klaren Situationen.</p><p>BELEG: Erstens, wenn es um einen einmaligen Aufbau geht, den Sie so schnell nicht wiederholen. Das erste saubere Datenmodell, der erste Führungskräfte-Bericht, dem alle vertrauen. Das braucht man einmal richtig, und danach selten wieder in dieser Tiefe. Zweitens, wenn Sie einen Termin haben, den Sie nicht verschieben können. Eine Fabric-Umstellung mit fester Frist, eine Prüfung, ein Stichtag bei den Lizenzen. Drittens, wenn Sie eine ganz bestimmte Fähigkeit für ein paar Wochen brauchen und nicht für immer. Zum Beispiel jemanden, der einen langsamen Bericht schnell macht oder Berechtigungen sauber einrichtet.</p><p>*(Modality: B-roll. Person am Bildschirm, eine lange Ladezeit wird kurz.)*</p><p>PAYOFF: Merken Sie sich die Regel: Holen Sie sich Hilfe von außen für eine klar abgegrenzte Aufgabe mit hohem Können und einem echten Schlusspunkt. Ein Anfang, ein Ende, ein Ergebnis, das man abnehmen kann.</p><p>RE-HOOK: Und genau daneben liegt der Fall, in dem dasselbe Geld einfach verpufft.</p><p>[2:10-3:40] BEAT 2 — Wann sollten Sie die Arbeit besser im eigenen Team lassen?
+*(Modality: Custom animation. ON-SCREEN CARD: &quot;3 Fälle, in denen intern besser ist&quot;)*</p><p>CLAIM: Es gibt drei Situationen, in denen ein externer Berater die falsche Wahl ist.</p><p>BELEG: Erstens, wenn es um das tägliche Berichtswesen geht, das sich ständig ändert. Wer jede Woche neue Fragen bekommt, braucht jemanden, der im Haus sitzt und die Abläufe kennt, nicht jemanden auf Rechnung. Zweitens, wenn Sie selbst noch nicht wissen, was Sie eigentlich messen wollen. Keine Fachkraft von außen kann eine Frage beantworten, die Sie intern noch gar nicht entschieden haben. Drittens, wenn das eigentliche Problem gar nicht bei der Technik liegt, sondern bei den Menschen. Wenn Vertrieb und Finanzen sich nicht einig sind, was Umsatz überhaupt bedeutet, dann baut Ihnen kein Berater diese Einigkeit ein.</p><p>*(Modality: On-screen text / kinetic type. ON-SCREEN CARD: &quot;Laufend · unklar · eine Meinungsfrage&quot;)*</p><p>PAYOFF: Die Regel für heute: Wenn die Arbeit laufend ist, wenn das Ziel noch unklar ist, oder wenn im Kern zwei Abteilungen uneins sind, dann bleibt ein Aufbau von außen nicht kleben. Das lösen Sie zuerst intern.</p><p>RE-HOOK: Damit kommen wir zu der Frage, die fast alle falsch einschätzen. Was bleibt eigentlich bei Ihnen, wenn der Berater wieder weg ist?</p><p>[3:40-5:10] BEAT 3 — Was bleibt bei Ihnen, und was bauen Sie später mühsam neu?
+*(Modality: Screen-record + Data-viz. ON-SCREEN CARD: &quot;Bleibt bei Ihnen vs. geht mit&quot;)*</p><p>CLAIM: Ein Teil der Arbeit bleibt für immer bei Ihnen. Ein anderer Teil läuft mit dem Berater zur Tür hinaus.</p><p>BELEG: Was bei Ihnen bleibt: das Datenmodell mit klaren Beziehungen, die dokumentierten Definitionen Ihrer Kennzahlen, die Dateien selbst, und der eingerichtete Aktualisierungsplan. Vorausgesetzt, all das liegt in Ihrer eigenen Umgebung und ist so beschrieben, dass ein Mensch es lesen kann. Was Sie dagegen später schmerzhaft neu bauen: undokumentierte Rechenformeln, die nur der Berater verstanden hat. Ein Modell ohne eine einzige Beschreibung. Und Berichte, die in seinem Konto gebaut wurden und nicht in Ihrem. Das sieht am Abnahmetag gleich aus. Sechs Monate später ist der Unterschied riesig.</p><p>*(Modality: Split-screen. Links ein beschriftetes Modell, rechts kryptische Feldnamen.)*</p><p>PAYOFF: Der Wert, den Sie kaufen, ist genau das, was nach dem letzten Rechnungstag noch benutzbar ist. Verlangen Sie deshalb ab dem ersten Tag zwei Dinge: Dokumentation und Eigentum in Ihrer eigenen Umgebung.</p><p>RE-HOOK: Und genau an dieser Stelle verstecken sich die Risiken, die später am meisten kosten.</p><p>[5:10-6:40] BEAT 4 — Welche Risiken übersehen die meisten Auftraggeber?
+*(Modality: Custom animation. ON-SCREEN CARD: &quot;3 Risiken vor dem Start klären&quot;)*</p><p>CLAIM: Drei Risiken tauchen fast immer auf, und fast nie stehen sie vorher im Vertrag.</p><p>BELEG: Das erste ist Abhängigkeit. Am Ende versteht nur eine Person oder eine Agentur das Modell, und die ruft für jede kleine Änderung wieder an. Das zweite ist der Vertrauensbruch bei den Zahlen. Der Berater baut eine Kennzahl, die eine andere Zahl liefert als die, die Ihre Finanzabteilung seit Jahren nennt. Jetzt haben Sie zwei Wahrheiten im Haus, und keiner weiß, welche gilt. Das dritte sind die laufenden Kosten. Für die Vorführung wird eine Fabric-Kapazität eingeschaltet, und danach zahlen Sie jeden Monat weiter, ohne dass jemand die Größe je wieder anschaut.</p><p>*(Modality: Data-viz. ON-SCREEN CARD: &quot;Nur 25 % nutzen die BI-Werkzeuge, für die bezahlt wird. Quelle: BARC + Eckerson Group, 2022&quot;)*</p><p>Und hier eine Zahl, die zeigt, warum das dritte Risiko so weh tut. In einer Erhebung von BARC und der Eckerson Group aus dem Jahr 2022 nutzten im Schnitt nur fünfundzwanzig Prozent der Mitarbeiter die BI-Werkzeuge, für die ihr Unternehmen bezahlt. Fünfundzwanzig Prozent. Ein teures Dashboard schützt Sie also überhaupt nicht davor, dass es am Ende leer bleibt.</p><p>PAYOFF: Die Regel: Schreiben Sie diese drei Risiken vor dem Start auf. Wer außer dem Berater kann das Modell pflegen, welche Zahl gilt bei einem Widerspruch, und wer prüft die Kapazitätskosten jeden Monat.</p><p>RE-HOOK: Womit die wichtigste Frage kommt. Wie holen Sie überhaupt jemanden ins Haus, ohne das Vertrauen in Ihre Zahlen zu verlieren?</p><p>[6:40-8:10] BEAT 5 — Wie holen Sie Hilfe, ohne das Vertrauen in Ihre Zahlen zu verlieren?
+*(Modality: On-screen text / kinetic type. ON-SCREEN CARD: &quot;4 Regeln für den Start&quot;)*</p><p>CLAIM: Sie brauchen kein großes Regelwerk. Sie brauchen vier Punkte, die vor dem ersten Bericht feststehen.</p><p>BELEG: Erstens, eine anerkannte Zahl zuerst. Bevor irgendein Dashboard gebaut wird, einigen sich Ihre Fachleute auf genau eine Definition Ihrer wichtigsten Kennzahlen, schriftlich, und die Finanzseite nickt sie ab. Zweitens, gebaut wird in Ihrer Umgebung und in Ihrem Konto, vom ersten Tag an, niemals im Konto des Beraters. Drittens, Dokumentation ist eine vereinbarte Leistung und kein Gefallen am Schluss. Sie steht mit im Angebot. Viertens, es gibt eine Übergabe, in der eine Person aus Ihrem Team eine Kennzahl selbst nachbaut, während der Berater daneben sitzt.</p><p>*(Modality: B-roll. Zwei Personen an einem Bildschirm, eine übernimmt die Maus.)*</p><p>PAYOFF: Das Vertrauen bleibt erhalten, wenn die Zahlen vor dem Bau abgestimmt sind und das Wissen am Ende übergeben und nicht gehortet wird. Diese vier Punkte kosten Sie nichts und ersparen Ihnen das teuerste Ergebnis, nämlich zwei Wahrheiten.</p><p>RE-HOOK: Bleibt die praktische Frage, wie Sie unter mehreren Angeboten den Richtigen erkennen.</p><p>[8:10-9:40] BEAT 6 — Woran erkennen Sie einen guten Power-BI-Berater?
+*(Modality: Talking head. ON-SCREEN CARD: &quot;Warnzeichen vs. gute Zeichen&quot;)*</p><p>CLAIM: Ein guter Power-BI-Berater fragt nach Ihrem Geschäft, bevor er über Werkzeuge redet.</p><p>BELEG: Die Warnzeichen sind deutlich. Jemand springt sofort zu bunten Diagrammen, ohne Ihre Kennzahlen verstanden zu haben. Jemand will die Dokumentation nicht fest zusagen. Jemand möchte alles in seinem eigenen Konto hosten. Oder jemand kann Ihnen das Modell nicht in einfachen Worten erklären. Die guten Zeichen sind das Gegenstück. Der Berater fragt, wer bei Ihnen die Definitionen entscheidet. Er schlägt ein klar abgegrenztes erstes Projekt vor, statt gleich alles zu versprechen. Und er redet von sich aus über die Übergabe an Ihr Team.</p><p>*(Modality: Screen-record. Eine kurze, saubere Modellansicht mit beschrifteten Feldern.)*</p><p>PAYOFF: Die Regel: Nehmen Sie den, der seinen eigenen Abschied mitplant. Wer über die Übergabe redet, bevor Sie danach fragen, will Sie unabhängig machen und nicht anbinden.</p><p>RE-HOOK: Und damit sind wir bei der einen Vereinbarung, die ich Ihnen versprochen habe, und die fast jeder Vertrag vergisst.</p><p>[9:40-10:30] PAYOFF — Die eine Vereinbarung, die fast jeder Vertrag vergisst
+*(Modality: Custom animation. ON-SCREEN CARD: &quot;Eigentum + Dokumentation + benannter interner Verantwortlicher&quot;)*</p><p>Hier ist sie: Eigentum und Dokumentation in Ihrer eigenen Umgebung, plus eine namentlich benannte Person in Ihrem Team, die während des Projekts eingearbeitet wird. Die meisten Verträge regeln den Preis und den Termin, aber nicht diesen einen Satz. Und ohne ihn ist die Arbeit am Ende nicht wirklich Ihre. Sie liegt vielleicht auf einem Rechner beim Berater, sie ist niemandem intern erklärt worden, und beim nächsten kleinen Wunsch rufen Sie wieder an und zahlen wieder. Schreiben Sie diesen Satz in jedes Angebot, bevor Sie unterschreiben.</p><p>*(Modality: On-screen text / kinetic type. ON-SCREEN CARD: &quot;Ihre 5 Mitnahmen&quot;)*</p><p>Also die fünf Dinge zum Mitnehmen. Erstens, holen Sie Hilfe für abgegrenzte, terminkritische Aufgaben mit klarem Können. Zweitens, lassen Sie laufende, unklare oder rein zwischenmenschliche Themen im eigenen Team. Drittens, der gekaufte Wert ist das, was nach dem letzten Tag noch benutzbar ist. Viertens, klären Sie Abhängigkeit, widersprüchliche Zahlen und laufende Kosten vor dem Start. Fünftens, verlangen Sie Eigentum, Dokumentation und eine eingearbeitete Person im Vertrag.</p><p>[10:30-11:00] SOFT CTA + FRAGE
+*(Modality: Talking head. ON-SCREEN CARDS: &quot;Governance- und Kosten-Scorecard (gratis)&quot; · &quot;Scoping-Gespräch buchen&quot;)*</p><p>Wenn Sie wissen wollen, wo Ihr Berichtswesen heute steht, bevor Sie überhaupt jemanden ins Haus holen, machen Sie unsere kostenlose Governance- und Kosten-Scorecard. Das dauert fünf Minuten, Sie sehen Ihren Wert, einen Vergleich mit ähnlichen Unternehmen und Ihre drei größten Risiken. Der Link steht unten. Und wenn Sie gerade konkret vor der Frage stehen, ob sich ein Power-BI-Berater für Ihr Vorhaben lohnt, buchen Sie ein kurzes Scoping-Gespräch mit uns. Kein Verkaufsgespräch, einfach eine ehrliche Einschätzung, ob Sie das intern machen sollten oder nicht.</p><p>Eine Frage zum Schluss, ehrlich beantwortet: Wenn Ihr Power-BI-Berater morgen nicht mehr erreichbar wäre, könnte dann jemand in Ihrem Team die wichtigste Kennzahl allein erklären und nachbauen?</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

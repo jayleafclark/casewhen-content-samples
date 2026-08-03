@@ -1,0 +1,207 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Controlling ohne Excel: wann sich der Umstieg lohnt</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Controlling ohne Excel: wann sich der Umstieg lohnt
+Host: Saju · Cluster: Close/finance · Target: 11 min · Primary keyword: controlling ohne excel</p><h2>Chapters
+- 0:00 Warum schließt mein Team den Monat immer noch in Excel ab?
+- 0:45 Wann lohnt sich der Umstieg wirklich, und wann nicht?
+- 2:10 Was von meiner Excel-Arbeit nehme ich einfach mit?
+- 3:40 Was muss ich stattdessen neu bauen?
+- 5:10 Wo bricht beim Umstieg das Vertrauen in die Zahlen?
+- 6:40 Wie halte ich die alte und die neue Zahl parallel, bis sie passen?
+- 8:10 Was habe ich am Ende konkret gewonnen?
+- 9:50 Wie fange ich an, ohne alles auf einmal umzustellen?</h2><h2>Script</h2><p>[0:00-0:12] HOOK (Problem-Ansage)
+SAJU: &quot;Sie haben Geld für ein Berichtstool ausgegeben, und Ihr Controlling schließt den Monat trotzdem wieder in Excel ab. Am Monatsende hängt alles an einer riesigen Datei und an der einen Person, die weiß, wie sie funktioniert. Ist die im Urlaub, wartet der Abschluss.&quot;
+(MODALITY: talking head)
+(ON-SCREEN: Karte groß zentriert &quot;controlling ohne excel&quot;)
+(B-ROLL/ANIM: harter Schnitt auf einen Bildschirm mit einer riesigen Excel-Mappe, viele Reiter unten, jemand scrollt durch verschachtelte Formeln. Nach 4 Sek. Zoom-Punch auf eine Zelle mit einer langen SVERWEIS-Formel.)</p><p>[0:12-0:45] VERSPRECHEN + EINSATZ + OFFENE SCHLEIFE
+SAJU: &quot;In den nächsten elf Minuten wissen Sie, wann sich der Umstieg vom Excel-Controlling auf Power BI wirklich lohnt, was von Ihrer bisherigen Arbeit einfach mitkommt, was Sie neu bauen müssen, und wie Sie das machen, ohne dass irgendjemand das Vertrauen in die Zahlen verliert. Solange das offen bleibt, verschiebt sich Ihr Abschluss jeden Monat um ein, zwei Tage, und wenn die eine Person kündigt, geht das Wissen mit ihr aus dem Haus. Wir machen das mit Finanzteams in Berlin regelmäßig, deshalb zeige ich Ihnen ganz am Schluss auch den einen Schritt, den fast jedes Team überspringt und der später darüber entscheidet, ob überhaupt jemand der neuen Zahl glaubt.&quot;
+(MODALITY: b-roll)
+(ON-SCREEN: Versprechen-Text unten &quot;Wann lohnt es sich? · Was kommt mit? · Was bauen Sie neu?&quot;)
+(B-ROLL/ANIM: ruhige Büroszene, ein Controller am Schreibtisch, zwei Monitore, links Excel, rechts ein leeres Dashboard. Alle 6 Sek. neuer Winkel: Hände auf der Tastatur, ein Kalender mit rot markiertem Monatsende, dann Schnitt auf Sajus Gesicht für den Satz zur offenen Schleife.)</p><p>[0:45-2:10] VALUE BEAT 1. Wann lohnt sich der Umstieg wirklich?
+CLAIM (10 Sek., Textkarte): &quot;Der Umstieg lohnt sich bei Berichten, die jeden Monat gleich laufen und eine Entscheidung tragen. Nicht bei der einmaligen Analyse.&quot;
+SAJU: &quot;Sortieren Sie Ihre Excel-Arbeit in zwei Körbe. In den ersten Korb kommt alles, was in festem Rhythmus wiederkehrt, jeden Monat dasselbe Format hat, und auf dessen Zahlen mehr als eine Person angewiesen ist. Der Monatsabschluss, das Umsatzreporting, der Kostenstellenbericht. Das lohnt sich umzustellen. In den zweiten Korb kommt die einmalige Szenariorechnung, die Ad-hoc-Frage aus der Geschäftsführung, die Modellierung für eine einzelne Investitionsentscheidung. Das bleibt sinnvollerweise in Excel. Und der Grund, warum sich der erste Korb lohnt, steht in den Zahlen: Die besten Finanzteams schließen den Monat in fünf Tagen oder schneller ab, die langsamsten brauchen zehn Tage und mehr, das hat APQC gemessen. Der Unterschied ist fast nie das Talent im Team, sondern wie oft dieselben Zahlen von Hand aus mehreren Dateien zusammengesucht werden.&quot;
+(MODALITY: animation)
+(PROOF/DEMO, CUSTOM ANIMATION: oben schweben sechs Berichts-Kacheln, unten zwei beschriftete Behälter &quot;Umstellen&quot; in CaseWhen-Grün #1D967C und &quot;In Excel lassen&quot; in neutralem Grau. Die Kacheln fallen einzeln in den passenden Behälter, jede mit einem kurzen Prüf-Label: Kehrt es wieder? Gleiches Format? Braucht es mehr als einer? Bei &quot;fünf Tagen&quot; und &quot;zehn Tagen&quot; zwei Balken, kurz mit Quelle &quot;APQC&quot;.)
+PAYOFF (Takeaway 1, on-screen): &quot;Drei Fragen vor jedem Umstieg: Kehrt der Bericht regelmäßig wieder? Trägt er eine Entscheidung? Brauchen ihn mehrere Leute mit derselben Zahl? Dreimal ja, dann lohnt sich der Wechsel.&quot;
+RE-HOOK: &quot;Sagen wir, ein Bericht besteht diesen Test. Dann die gute Nachricht: Ein großer Teil Ihrer Excel-Arbeit kommt einfach mit.&quot;</p><p>[2:10-3:40] VALUE BEAT 2. Was nehme ich einfach mit?
+CLAIM (Textkarte): &quot;Ihre Rechenlogik kommt mit. Nur das Klicken von Hand bleibt zurück.&quot;
+SAJU: &quot;Das Wertvolle an Ihrer Excel-Mappe ist nicht die Datei, es ist die Logik darin, die Sie über Jahre aufgebaut haben. Und die lässt sich fast eins zu eins übertragen. Ihre Aufbereitungsschritte, also filtern, Spalten trennen, Werte ersetzen, werden zu Schritten in Power Query. Ihre berechneten Spalten und Ihre Pivot-Summen werden zu Kennzahlen, den sogenannten Measures. Ihre Definition davon, was zum Beispiel Nettoumsatz genau bedeutet, wandert als eine geprüfte Kennzahl in das Modell und gilt ab dann überall gleich. Was Sie zurücklassen, ist die Handarbeit: das Kopieren zwischen Dateien, die SVERWEISe über fünf Mappen, das monatliche Neu-Eintippen derselben Zahlen.&quot;
+(MODALITY: animation)
+(PROOF/DEMO, CUSTOM ANIMATION: links eine Excel-Bearbeitungsleiste mit einer Formel, rechts baut sich derselbe Inhalt zweimal auf, einmal als benannter Power-Query-Schritt, einmal als Measure. Ein Pfeil in #1D967C zieht die Logik von links nach rechts. Darunter fällt ein grauer Stapel &quot;Kopieren, SVERWEIS, Neu-Eintippen&quot; aus dem Bild heraus. Alle 6 Sek. eine Zustandsänderung, Beschriftung &quot;Logik kommt mit · Handarbeit bleibt&quot;.)
+PAYOFF (Takeaway 2, on-screen): &quot;Schreiben Sie vor dem Bauen jede Rechnung auf, die Ihre Excel-Mappe macht. Diese Liste ist Ihr Bauplan. Sie übertragen die Logik, nicht die Klicks.&quot;
+RE-HOOK: &quot;Einen Teil dürfen Sie allerdings genau nicht mitkopieren. Kopieren Sie ihn, tragen Sie Ihr altes Problem gleich mit rüber.&quot;</p><p>[3:40-5:10] VALUE BEAT 3. Was muss ich neu bauen?
+CLAIM (Textkarte): &quot;Das Datenmodell bauen Sie neu. Eine flache Excel-Tabelle hat die falsche Form.&quot;
+SAJU: &quot;In Excel liegt meistens alles in einer breiten Tabelle: Buchungen, Konten, Kostenstellen, Monat, alles nebeneinander in einem Blatt. Genau das kopieren Sie nicht. In Power BI trennen Sie die Bewegungsdaten, also die einzelnen Buchungen, von den Stammdaten, also Konten, Kostenstellen und einem Kalender, und verbinden die Tabellen über Beziehungen. Das nennt sich Sternschema, und es ist die Grundlage, auf der später jede Auswertung schnell und eindeutig wird. Das zweite, was Sie neu bauen, ist die Anbindung an die Quelle. Statt jeden Monat einen Export aus dem ERP zu ziehen und in Excel zu kleben, verbinden Sie Power BI direkt mit dem Vorsystem, damit sich die Zahl von allein holt. Genau diese beiden Dinge, das Sternschema und die direkte Anbindung, sind der Neubau. Der Rest ist Umzug.&quot;
+(MODALITY: screen-record zu animation)
+(PROOF/DEMO: kurze Bildschirmaufnahme in Power BI Desktop, die Modellansicht. Erst eine einzelne breite Tabelle, dann zieht der Cursor sie sichtbar auseinander in eine Faktentabelle in der Mitte und drei Dimensionstabellen außen. Dann Custom-Animation: die Dimensionstabellen schnappen mit Eins-zu-viele-Pfeilen an die Faktentabelle, die Pfeile leuchten in #1D967C. Ein zweites Symbol zeigt eine Leitung vom ERP direkt ins Modell, ein manueller Export-Stapel verschwindet. Alle 5 bis 8 Sek. eine sichtbare Änderung.)
+PAYOFF (Takeaway 3, on-screen): &quot;Neu bauen Sie zwei Dinge: das Sternschema aus Fakten und Dimensionen, und die direkte Verbindung zur Quelle. Alles andere portieren Sie.&quot;
+RE-HOOK: &quot;Und jetzt kommt die Stelle, an der die meisten Umstiege wackeln. Hier bricht das Vertrauen.&quot;</p><p>[5:10-6:40] VALUE BEAT 4. Wo bricht das Vertrauen in die Zahlen?
+CLAIM (Textkarte): &quot;Vertrauen bricht, wenn der neue Bericht eine andere Zahl zeigt als die alte Excel-Mappe und keiner sagen kann, welche stimmt.&quot;
+SAJU: &quot;Am ersten Tag mit dem neuen Bericht steht die Umsatzzahl anders da als in Excel, und in dem Moment glaubt niemand mehr dem Dashboard. Für diese Abweichung gibt es fast immer drei Gründe. Erstens: In Excel steckte eine Regel, die nie jemand aufgeschrieben hat, eine Kostenstelle wurde rausgerechnet, oder es wurde gerundet, und nur die Autorin wusste davon. Zweitens: Der Export war eine Momentaufnahme zu einer anderen Uhrzeit, also andere Daten, nicht andere Rechnung. Drittens: In der Mappe saß ein Filter, den alle vergessen hatten. Und hier ist das Unbequeme: Die alte Zahl ist nicht automatisch die richtige. Vierundneunzig Prozent der geschäftlich genutzten Tabellen enthalten Fehler, das hat Panko von der Universität Hawaii über Jahre in echten Mappen nachgezählt. Reagieren Sie darauf falsch, tippt Ihr Team das fertige Dashboard am Ende doch wieder in Excel ab, weil es der neuen Zahl nicht traut.&quot;
+(MODALITY: talking head plus animation)
+(PROOF/DEMO: Saju spricht, daneben klinkt sich eine Animation ein. Zwei Zahlen nebeneinander, links &quot;Excel 1.204.880&quot;, rechts &quot;Power BI 1.198.450&quot;, dazwischen ein rotes Fragezeichen. Nacheinander leuchten drei Ursachen auf: eine ausgeblendete Kostenstelle, eine Uhr mit zwei Zeigern, ein vergessener Filter. Bei &quot;Vierundneunzig Prozent&quot; eine große Data-Viz-Zahl mit Quelle &quot;Panko&quot;. Alle 6 Sek. eine sichtbare Änderung.)
+PAYOFF (Takeaway 4, on-screen): &quot;Für jede Zahl, die abweicht, suchen Sie zuerst den Grund, bevor Sie irgendetwas ändern. Meistens liegt es an der Definition, nicht am Werkzeug.&quot;
+RE-HOOK: &quot;Und genau deshalb legen Sie den Schalter nie kalt um. Sie lassen beide Zahlen erst eine Weile nebeneinander laufen.&quot;</p><p>[6:40-8:10] VALUE BEAT 5. Wie halte ich beide Zahlen parallel?
+CLAIM (Textkarte): &quot;Sie führen Excel und Power BI zwei, drei Abschlüsse lang parallel, bis jede Zahl zusammenpasst.&quot;
+SAJU: &quot;Nehmen Sie einen einzigen Bericht, bauen Sie ihn in Power BI, und rechnen Sie den Monatsabschluss dann in beidem, in der alten Mappe und im neuen Modell. Stellen Sie die zwei Ergebnisse Zeile für Zeile nebeneinander. Für jede Abweichung klären Sie den Grund und schreiben die abgestimmte Definition auf: Was zählt zum Nettoumsatz, welche Kostenstellen sind drin, auf welchen Stichtag. Erst wenn die beiden Fassungen zwei Abschlüsse hintereinander übereinstimmen, schalten Sie die Excel-Version ab. Und diese abgestimmten Definitionen kommen auf eine Seite, die das Team gemeinsam abzeichnet. Das ist der Schritt aus dem Anfang, den fast jeder überspringt, weil er langweilig aussieht. Er ist der Grund, warum am Ende jemand der neuen Zahl glaubt.&quot;
+(MODALITY: screen-record)
+(PROOF/DEMO: Bildschirmaufnahme, zwei Spalten nebeneinander, &quot;Excel&quot; und &quot;Power BI&quot;, darunter Zeilen für Umsatz, Kosten, Deckungsbeitrag. Der Cursor fährt Zeile für Zeile ab, passende Zeilen werden grün abgehakt, eine Zeile weicht ab und bekommt einen Kommentar &quot;Kostenstelle 4711 fehlte in Excel&quot;. Dann Schnitt auf ein einseitiges Definitionsblatt, das abgehakt wird. Alle 5 bis 7 Sek. eine sichtbare Änderung.)
+PAYOFF (Takeaway 5, on-screen): &quot;Schalten Sie Excel nie am ersten Tag ab. Zwei Abschlüsse parallel, jede Abweichung erklärt, jede Definition aufgeschrieben. So übersteht das Vertrauen den Umstieg.&quot;
+RE-HOOK: &quot;Bleibt die Frage, was am Ende konkret dabei herauskommt.&quot;</p><p>[8:10-9:50] PAYOFF. Was habe ich gewonnen? (Auflösung der offenen Schleife)
+SAJU: &quot;Fassen wir zusammen, damit Sie das komplett mitnehmen, auch wenn Sie nie mit uns sprechen. Erstens: Umstellen lohnt sich bei Berichten, die regelmäßig wiederkehren, eine Entscheidung tragen und die mehrere brauchen. Zweitens: Ihre Rechenlogik kommt mit, als Power-Query-Schritte und Measures, nur die Handarbeit bleibt zurück. Drittens: neu bauen Sie das Sternschema und die direkte Anbindung an die Quelle. Viertens: Abweichungen zuerst erklären, denn meistens liegt es an einer nie aufgeschriebenen Definition. Fünftens: zwei Abschlüsse parallel laufen lassen, bis alles zusammenpasst. Und der versprochene Schritt, den fast jeder überspringt, war Punkt fünf, genauer die eine Seite mit den abgestimmten Definitionen. Diese Seite entscheidet, ob jemand dem neuen Bericht glaubt. Der eigentliche Gewinn ist am Ende doppelt: Ihr Abschluss wartet nicht mehr auf eine einzige Person, und die Zahl kommt jeden Monat aus einer verbundenen Quelle, statt aus fünf Excel-Ständen auf fünf Laptops.&quot;
+(MODALITY: on-screen text)
+(PROOF/DEMO, KINETIC TYPE: die fünf Takeaways erscheinen als nummerierte Liste, jeweils synchron zum gesprochenen Punkt. Punkt fünf wird kurz in #1D967C markiert als Auflösung des Teasers, daneben ein Symbol &quot;1 Seite: Definitionen&quot;. Darunter zwei kleine Karten &quot;Kein Personen-Risiko mehr&quot; und &quot;Eine verbundene Quelle&quot;.)</p><p>[9:50-11:00] SOFT CTA. Wie fange ich an?
+SAJU: &quot;Wenn Sie wissen wollen, wie sauber und wie teuer Ihr aktuelles Setup gerade steht, laden Sie sich unten die Power BI Governance- und Kosten-Scorecard herunter. Fünf Minuten, und Sie bekommen einen Wert plus die drei größten Risiken in Ihrem Aufbau. Kostet nichts. Und wenn Ihr Monatsabschluss noch an einer großen Excel-Mappe und an einer Person hängt, buchen Sie über den Link ein kurzes Gespräch mit uns. Kein Verkaufstermin, wir schauen einfach gemeinsam auf einen ersten Bericht, den Sie sinnvoll umstellen können, und auf den, den Sie besser in Excel lassen. Genau das machen wir bei CaseWhen. Als Nächstes würde ich mir das Video zum semantischen Modell ansehen, denn ein Controlling-Bericht ist nur so verlässlich wie das Modell darunter. Wenn das hier nützlich war, abonnieren Sie den Kanal. Bis dahin.&quot;
+(MODALITY: talking head)
+(ON-SCREEN: zwei Link-Karten nacheinander &quot;Scorecard (kostenlos)&quot; und &quot;Gespräch buchen: Controlling ohne Excel&quot;, danach dezentes Watch-next-Thumbnail &quot;Weiter: Das semantische Modell in Power BI&quot;.)
+(B-ROLL/ANIM: ruhiger Schnitt auf ein zügig ladendes Controlling-Dashboard mit Umsatz und Deckungsbeitrag, dann zurück zu Saju für die letzte Zeile.)</p><h2>Description</h2><p>Controlling ohne Excel: wann sich der Umstieg auf Power BI wirklich lohnt, was von Ihrer Excel-Arbeit einfach mitkommt, was Sie neu bauen müssen, und wie Sie umstellen, ohne dass jemand das Vertrauen in die Zahlen verliert.</p><p>Kostenlose Power BI Governance- und Kosten-Scorecard: https://casewhen.co/de/scorecard · Mit CaseWhen arbeiten: https://casewhen.co/de/kontakt</p><p>Kapitel:
+0:00 Warum schließt mein Team den Monat immer noch in Excel ab?
+0:45 Wann lohnt sich der Umstieg wirklich, und wann nicht?
+2:10 Was von meiner Excel-Arbeit nehme ich einfach mit?
+3:40 Was muss ich stattdessen neu bauen?
+5:10 Wo bricht beim Umstieg das Vertrauen in die Zahlen?
+6:40 Wie halte ich die alte und die neue Zahl parallel, bis sie passen?
+8:10 Was habe ich am Ende konkret gewonnen?
+9:50 Wie fange ich an, ohne alles auf einmal umzustellen?</p><p>Ressourcen:
+- Power BI Governance- und Kosten-Scorecard (5 Minuten): https://casewhen.co/de/scorecard
+- Gespräch zum Umstieg buchen: https://casewhen.co/de/kontakt
+- Weiter ansehen: Das semantische Modell in Power BI</p><p>In diesem Video geht Saju den Umstieg vom Excel-Controlling auf Power BI der Reihe nach durch: wann sich der Wechsel lohnt und wann ein Bericht besser in Excel bleibt, welche Logik als Power-Query-Schritte und Measures mitkommt, was Sie mit dem Sternschema und der direkten Anbindung an das Vorsystem neu bauen, warum der neue Bericht anfangs eine andere Zahl zeigt als die alte Mappe, und wie ein paralleler Lauf über zwei Abschlüsse mit einer abgestimmten Definition jeder Kennzahl das Vertrauen sichert. Am Ende wissen Sie, welchen ersten Bericht Sie umstellen und wie Sie anfangen, ohne alles auf einmal zu wechseln.</p><p>#PowerBI #Controlling #MicrosoftFabric #DataGovernance #BusinessIntelligence</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>
