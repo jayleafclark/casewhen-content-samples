@@ -28,7 +28,11 @@ def rows(fn):
         r = list(csv.DictReader(fh))
     return r
 
-def esc(s): return html.escape((s or "").strip())
+def esc(s):
+    # Brand rule: 'Power BI' always capitalized in DISPLAY text. The space-form regex
+    # cannot touch slugs/URLs (power-bi-*, app.powerbi.com use hyphens/no space).
+    s = re.sub(r"\bpower\s+bi\b", "Power BI", (s or "").strip(), flags=re.I)
+    return html.escape(s)
 
 # weekday of day d (day 1 = Monday). 0=Mon..6=Sun
 def wd(d): return (d - 1) % 7
