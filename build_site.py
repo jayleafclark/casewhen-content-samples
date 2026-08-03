@@ -337,6 +337,11 @@ def card(platform, idx, lang, day, r, detail=None):
     full = " full" if (c and c.get("article_file")) else ""
     _catl = categorize(c, c.get("keyword") if c else "", r)
     _src = esc((c or {}).get("_src", ""))
+    # Put the source on the INNER annotatable body too, so BOTH the per-post Austin/Saju approval
+    # bar (injected on .annotatable[data-src]) and the note/AI-edit system work on every social post,
+    # not just blogs. Without this, the annotatable body has no data-src and gets neither.
+    if _src and 'annotatable"' in body and 'annotatable" data-src' not in body:
+        body = body.replace('annotatable"', f'annotatable" data-src="{_src}"', 1)
     return f'<article class="card{full}" data-lang="{lang.upper()}" data-cat="{esc(_catl)}" data-src="{_src}">{bar}{body}</article>'
 
 def filter_bar(cats_present):
@@ -826,7 +831,7 @@ def scorecard_page():
   <div class="qh">Try it now</div>
   <h3>Rate your reporting foundation</h3>
   <div class="qmini">Pick one answer per row. Your score updates as you go.</div>
-  <div class="q"><h4>1. Can you name the one person who owns the revenue number on your board report?</h4>
+  <div class="q"><h4>1. Can you name the one person who owns the revenue number on your management report?</h4>
    <div class="opts"><div class="opt" data-q="0" data-v="2">Yes, one named owner</div><div class="opt" data-q="0" data-v="1">Sort of</div><div class="opt" data-q="0" data-v="0">No</div></div></div>
   <div class="q"><h4>2. How do report changes reach the live dashboard?</h4>
    <div class="opts"><div class="opt" data-q="1" data-v="2">Dev, test, then live</div><div class="opt" data-q="1" data-v="1">Straight to live</div><div class="opt" data-q="1" data-v="0">Not sure</div></div></div>
@@ -835,7 +840,7 @@ def scorecard_page():
   <div class="q"><h4>4. Do you know if a Fabric capacity would be cheaper than your per-user licences?</h4>
    <div class="opts"><div class="opt" data-q="3" data-v="2">Yes, we've run the math</div><div class="opt" data-q="3" data-v="1">Roughly</div><div class="opt" data-q="3" data-v="0">No idea</div></div></div>
   <div class="qresult">
-   <div class="rrow"><span>At risk</span><span>Functional</span><span>Board-ready</span></div>
+   <div class="rrow"><span>At risk</span><span>Functional</span><span>Leadership-ready</span></div>
    <div class="qmeter"><div class="qneedle" id="qneedle"></div></div>
    <div class="qtier" id="qtier">Answer the four questions</div>
    <div class="qnote" id="qnote">Then drop your email below for the full score and your top three risks.</div>
@@ -880,7 +885,7 @@ def scorecard_page():
      <div class="rk"><span class="n">1</span><div><b>No named owner for the revenue metric.</b>
       <span>Finance and sales can reconcile to different numbers.</span></div></div>
      <div class="rk"><span class="n">2</span><div><b>Changes ship straight to live.</b>
-      <span>No dev or test step means a broken measure reaches the board.</span></div></div>
+      <span>No dev or test step means a broken measure reaches leadership.</span></div></div>
      <div class="rk"><span class="n">3</span><div><b>Licensing past the crossover.</b>
       <span>At 400+ viewers a Fabric capacity likely beats your per-user Pro spend.</span></div></div>
     </div>
@@ -917,7 +922,7 @@ def scorecard_page():
    "If the scorecard flags your data model, the 49 euro Star Schema Fix Kit gives you the template, the measures, and the checklist to repair it yourself this week.",
    "fix-kit.html", "See the Fix Kit")}
 
-{final_cta("Two minutes now, or find out in the boardroom",
+{final_cta("Two minutes now, or find out in the leadership review",
    "You already know which question made you pause. Get the score, get your top three risks, and fix the soft one before someone else spots it.",
    "#capture", "Get my score", "Free · Instant score · A one-page result you can forward")}
 """
@@ -930,9 +935,9 @@ function render(){var ks=Object.keys(ans);if(!ks.length)return;var s=0;ks.forEac
  var pct=Math.round(s/8*100);document.getElementById('qneedle').style.left=Math.max(4,Math.min(96,pct))+'%';
  var t=document.getElementById('qtier'),n=document.getElementById('qnote');
  if(ks.length<4){t.textContent='Keep going ('+ks.length+' of 4)';t.style.color='#94a29c';return;}
- if(pct<40){t.textContent='At risk';t.style.color='#CE8168';n.textContent='A board could poke a hole in this. Your result ranks which risk to shore up first.';}
+ if(pct<40){t.textContent='At risk';t.style.color='#CE8168';n.textContent='Leadership could poke a hole in this. Your result ranks which risk to shore up first.';}
  else if(pct<75){t.textContent='Functional';t.style.color='#b8862f';n.textContent='It holds day to day, but a couple of gaps could bite. Your result ranks them.';}
- else{t.textContent='Board-ready';t.style.color='#1D967C';n.textContent='Solid. Your result confirms it and flags the one thing worth watching.';}}
+ else{t.textContent='Leadership-ready';t.style.color='#1D967C';n.textContent='Solid. Your result confirms it and flags the one thing worth watching.';}}
 function mockSend(e){e.preventDefault();document.getElementById('mockmsg').style.display='block';return false;}
 </script>"""
     funnel_page("scorecard.html", "Governance & Cost Scorecard", "\U0001F4CA", hero, body, extra_js=js)

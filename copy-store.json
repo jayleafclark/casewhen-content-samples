@@ -2,7 +2,7 @@
   "blog:0": {
     "hook": "Bedeutung KPI: eine Kennzahl mit einem klaren Ziel und einem Besitzer.",
     "body": "Eine KPI misst den Fortschritt zu einem Ziel. Die Bedeutung KPI liegt in der Definition und im Besitzer, nicht in der Zahl allein. Fehlt der Besitzer, rechnet eine Abteilung den Umsatz brutto, die naechste netto, die dritte nach Lieferdatum. Alle drei Zahlen sind richtig, und keine passt zur anderen.",
-    "close": "Weiterlesen: was Bedeutung KPI fuer ein Board-Pack heisst, das standhaelt.",
+    "close": "Weiterlesen: was Bedeutung KPI fuer ein Managementbericht heisst, das standhaelt.",
     "note": "kw 'bedeutung kpi' in H1 + erstem Satz · Article+FAQPage · Saju"
   },
   "blog:1": {
@@ -13,20 +13,20 @@
     "note": "kw 'power bi certification' in H1 + first 100 words · Article+FAQPage · Austin · full article, gated SHIP"
   },
   "blog:2": {
-    "hook": "Most Power BI training teaches the buttons, not the data model your board numbers rest on.",
+    "hook": "Most Power BI training teaches the buttons, not the data model your leadership team numbers rest on.",
     "body": "Power BI training usually walks through menus and charts. The hard part is the data model underneath: which tables connect, what each measure means, and who owns it. A two-day session on your own reports teaches more than a week of generic screenshots, because the model is where a wrong number starts.",
     "close": "Read the full guide: Power BI training, explained without the sales pitch.",
     "note": "kw 'power bi training' in H1 + first sentence · Article · Austin"
   },
   "linkedin:0": {
-    "hook": "If nobody can name who owns your revenue KPI, the board is trusting a guess.",
+    "hook": "If nobody can name who owns your revenue KPI, leadership is trusting a guess.",
     "body": "If your monthly numbers never quite reconcile between two teams, this is usually the reason, and it is worth a minute to explain.\n\nThe formula is almost always correct. The disagreement starts because two teams each decided what the number includes, and both wrote a correct formula for a different definition. Sales counts a signed order. Finance counts an invoiced one. Both are right, and the two reports disagree every month. A KPI definition on one page (name, formula, source, and owner) settles it for good.",
     "close": "Which number in your company do two teams define two different ways?",
     "note": "kw 'kpi definition' · declarative hook 84c · question close · link in first comment"
   },
   "linkedin:1": {
-    "hook": "Wenn niemand die Bedeutung einer KPI aufschreibt, ist die Zahl im Aufsichtsrat am Ende geraten.",
-    "body": "Kurz vorab, warum das mehr ist als Wortklauberei: eine Kennzahl ohne Besitzer wird in jedem Meeting neu ausgelegt.\n\nIn fast jedem Review stimmt die Formel. Es fehlt eine geschriebene Definition und ein Besitzer. Der Umsatz wird brutto, netto oder nach Lieferdatum gerechnet, und alle drei Zahlen sind fuer sich richtig. In Deutschland ist eine falsche Zahl im Aufsichtsrat am Ende eine Haftungsfrage.",
+    "hook": "Wenn niemand die Bedeutung einer KPI aufschreibt, ist die Zahl im Management am Ende geraten.",
+    "body": "Kurz vorab, warum das mehr ist als Wortklauberei: eine Kennzahl ohne Besitzer wird in jedem Meeting neu ausgelegt.\n\nIn fast jedem Review stimmt die Formel. Es fehlt eine geschriebene Definition und ein Besitzer. Der Umsatz wird brutto, netto oder nach Lieferdatum gerechnet, und alle drei Zahlen sind fuer sich richtig. In Deutschland ist eine falsche Zahl im Management am Ende eine Haftungsfrage.",
     "close": "Wer entscheidet bei Ihnen, was eine Kennzahl genau bedeutet?",
     "note": "kw 'bedeutung kpi' · Saju · deklarativer Hook · Frage am Ende"
   },
