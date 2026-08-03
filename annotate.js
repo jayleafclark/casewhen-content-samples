@@ -222,17 +222,31 @@
     // full surrounding post + keyword, so the edit has context (not just the isolated passage)
     var container = document.querySelector('.annotatable[data-cwid="' + n.cwid + '"]');
     var fullPost = container ? container.innerText.trim().slice(0, 1800) : "";
-    var card = container && container.closest('.card, article');
-    var kw = card ? (card.querySelector('.kw') ? card.querySelector('.kw').textContent.trim() : "") : "";
+    var card = container && container.closest('.card, article') || container;
+    var gt = function (sel) { return card && card.querySelector(sel) ? card.querySelector(sel).textContent.trim() : ""; };
+    var kw = gt(".kw");
+    var cat = (card && card.getAttribute("data-cat")) || "";
+    var who = gt(".who");
+    var goal = gt(".meta span:last-child") || (card && card.getAttribute("data-note-label")) || "";
+    var channel = ({ "linkedin": "a LinkedIn post", "x": "an X post", "shortform": "a short-form video script",
+      "youtube": "a long-form YouTube script", "visuals": "a carousel or quote card" }[
+      (location.pathname.split("/").pop() || "").replace(/(-post-\d+)?\.html$/, "").replace(/^(script|blog)-.*/, "$1")
+    ] || (/script-/.test(location.pathname) ? "a long-form YouTube script" : /\.html$/.test(location.pathname) ? "a blog article" : "a post"));
     var sys = "You are a surgical copy editor for CaseWhen, a Berlin Power BI / Microsoft Fabric / Azure consultancy that helps business buyers (controllers, CFOs, heads of data) get one trusted number. Rewrite ONLY the passage the reviewer selected, addressing their note, and make it fit naturally inside the full post you are given. "
       + "CaseWhen rules (obey all): (1) PROBLEM-FIRST — if the passage is the opening line, it must state the reader's real problem in plain everyday words with NO statistic, NO percentage, NO research-source name in that first line; earn the stat later. (2) NAME THE NOUN — never a vague placeholder ('the right things', 'something', 'what matters'); name the concrete thing. (3) At most one stat, and never default to Talend 40% / solvexia / revealbi 70% / ZoomInfo 82%; keep any stat's real source. (4) Keep the exact SEO keyword if present. (5) Plain, human, founder voice with contractions; be specific enough to be wrong. "
       + "Hard bans: no em dashes, no metaphors or analogies, no 'not X but Y' cadence, no hype or AI-slop words, no corny throat-clearing ('here's the thing', 'the good news', 'at its core', 'nobody tells you'), no jargon (DACH, TAM, ICP). "
       + "Return ONLY the revised passage as plain text, nothing else." + (de ? " The post is German; reply in natural German with correct ä/ö/ü and formal Sie." : "");
-    var usr = "FULL POST (for context — do NOT rewrite this whole thing):\n" + fullPost
-      + (kw ? "\n\nSEO KEYWORD to preserve: " + kw : "")
+    var ctx = "THIS SPECIFIC POST — its identity and goal (keep the edit true to it): This is " + channel + " for CaseWhen aimed at a business buyer (a controller, CFO, or head of data), not an engineer."
+      + (kw ? " Its target keyword is \"" + kw + "\" (preserve it)." : "")
+      + (cat ? " Topic category: " + cat + "." : "")
+      + (who ? " Author voice: " + who + "." : "")
+      + (goal ? " Its intent/angle: " + goal + "." : "")
+      + " The post's job is to make the buyer feel one real problem and trust CaseWhen to fix it. Your edit must serve that goal and stay plain and relatable to a non-technical decision maker.";
+    var usr = ctx
+      + "\n\nFULL POST (for context — do NOT rewrite this whole thing):\n" + fullPost
       + "\n\nTHE SELECTED PASSAGE TO REWRITE:\n" + n.quote
       + "\n\nREVIEWER NOTE:\n" + (n.note || "make it sound more natural and specific")
-      + "\n\nReturn only the revised passage, fitting the post's voice and not repeating any other line in it.";
+      + "\n\nReturn only the revised passage, fitting this post's voice and goal, and not repeating any other line in it.";
     callModel(c, sys, usr).then(function (out) {
       n.revision = (out || "").trim(); saveNotes(arr); renderPanel();
     }).catch(function (err) {
