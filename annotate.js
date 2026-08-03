@@ -198,11 +198,13 @@
       html += '<div class="cw-note' + (n.status === "resolved" ? " done" : "") + '" data-aid="' + n.aid + '">';
       html += '<blockquote>' + esc(n.quote.slice(0, 220)) + '</blockquote>';
       html += '<textarea placeholder="What should change here? e.g. this doesn\'t sound natural / cut this / add a number">' + esc(n.note) + '</textarea>';
-      html += '<div class="cw-row"><button data-act="ai" data-aid="' + n.aid + '">✨ Suggest edit</button>' +
-              '<button data-act="aiwide" data-aid="' + n.aid + '" title="Apply this note across the whole post, not just the highlighted line">Apply to whole post</button>' +
+      html += '<div class="cw-row"><button data-act="ai" data-aid="' + n.aid + '" title="Rewrite just the highlighted line">✨ This line</button>' +
+              '<button data-act="aiwide" data-aid="' + n.aid + '" title="Apply this note across the whole of THIS post">Whole post</button>' +
+              '<button data-act="aiall" data-aid="' + n.aid + '" title="Fix this on EVERY post that has the same thing. Previews here now; runs as a gated batch across all posts when you Export for AI editor.">All posts</button>' +
               '<button data-act="del" data-aid="' + n.aid + '" class="ghost">Delete</button></div>';
+      if (n.scope === "all_posts") html += '<div class="cw-scope">↳ Queued to fix this on every matching post (runs when you Export for AI editor).</div>';
       if (n.revision) {
-        html += '<div class="cw-rev"><div class="cw-rev-t">' + (n.wide ? "Whole-post rewrite:" : "Suggested:") + '</div><p>' + esc(n.revision) + '</p>' +
+        html += '<div class="cw-rev"><div class="cw-rev-t">' + (n.wide ? "Rewrite preview:" : "Suggested:") + '</div><p>' + esc(n.revision) + '</p>' +
                 '<div class="cw-row"><button data-act="accept" data-aid="' + n.aid + '">Accept</button>' +
                 '<button data-act="reject" data-aid="' + n.aid + '" class="ghost">Reject</button></div></div>';
       }
@@ -248,7 +250,8 @@
       }
       n.status = "resolved"; n.applied = n.revision; saveNotes(arr); renderPanel(); return;
     }
-    if (a === "aiwide" && n) { suggest(n, arr, true); return; }
+    if (a === "aiwide" && n) { suggest(n, arr, "whole_post"); return; }
+    if (a === "aiall" && n) { suggest(n, arr, "all_posts"); return; }
     if (a === "export") { exportNotes(); return; }
     if (a === "exportjson") { exportNotesJSON(); return; }
     if (a === "exportap") { exportApprovals(); return; }
@@ -256,11 +259,13 @@
   }
 
   // ---- AI edit (surgical passage, or whole-post when wide=true) ----
-  function suggest(n, arr, wide) {
+  function suggest(n, arr, mode) {
+    var wide = (mode === "whole_post" || mode === "all_posts");
+    var actName = mode === "all_posts" ? "aiall" : (mode === "whole_post" ? "aiwide" : "ai");
+    var btnLabel = mode === "all_posts" ? "All posts" : (mode === "whole_post" ? "Whole post" : "✨ This line");
     var c = cfg();
     var noteEl = panel.querySelector('.cw-note[data-aid="' + n.aid + '"]');
-    var btn = noteEl && noteEl.querySelector('[data-act="' + (wide ? "aiwide" : "ai") + '"]');
-    var btnLabel = wide ? "Apply to whole post" : "✨ Suggest edit";
+    var btn = noteEl && noteEl.querySelector('[data-act="' + actName + '"]');
     if (btn) { btn.disabled = true; btn.textContent = "Thinking…"; }
     var de = /[äöüß]/i.test(n.quote) || document.documentElement.lang === "de";
     // full surrounding post + keyword, so the edit has context (not just the isolated passage)
@@ -306,7 +311,7 @@
         + "\n\nREVIEWER NOTE:\n" + (n.note || "make it sound more natural and specific")
         + "\n\nReturn only the revised passage, fitting this post's voice and goal, and not repeating any other line in it.";
     callModel(c, sys, usr).then(function (out) {
-      n.revision = (out || "").trim(); n.wide = !!wide; saveNotes(arr); renderPanel();
+      n.revision = (out || "").trim(); n.wide = !!wide; n.scope = mode || "passage"; saveNotes(arr); renderPanel();
     }).catch(function (err) {
       if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
       alert("AI request failed: " + (err && err.message ? err.message : err));
@@ -344,7 +349,7 @@
   function exportNotesJSON() {
     var list = notes().filter(function (n) { return n.status !== "deleted" && (n.note || "").trim(); });
     var items = list.filter(function (n) { return n.src; }).map(function (n) {
-      return { file: n.src, selection: n.quote || "", note: n.note || "", scope: n.wide ? "whole_post" : "passage" };
+      return { file: n.src, selection: n.quote || "", note: n.note || "", scope: n.scope || "passage" };
     });
     var missing = list.length - items.length;
     var payload = JSON.stringify({ notes: items }, null, 1);

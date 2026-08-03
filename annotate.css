@@ -46,3 +46,5 @@ mark.cw-anno.done{ background:#D8F3EE; box-shadow:inset 0 -2px 0 var(--cw-teal);
   mark.cw-anno{ color:#1A1615; }
   .cw-rev{ background:#12332b; border-color:#1d4d41; }
 }
+
+.cw-scope{font-size:11px;color:var(--brand,#1D967C);margin:2px 0 6px;font-weight:600}
