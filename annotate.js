@@ -119,10 +119,20 @@
   function ensurePanel() {
     if (panel) return;
     fab = document.createElement("button");
-    fab.className = "cw-fab"; fab.title = "Review this page";
+    fab.className = "cw-fab"; fab.title = "Highlight any line to leave a note or get an AI edit";
     fab.innerHTML = "✎ Review";
     fab.addEventListener("click", function () { ensurePanel(); panel.classList.toggle("open"); renderPanel(); });
     document.body.appendChild(fab);
+    // one-time coach bubble so first-time reviewers know the gesture
+    if (!LS.getItem("cw_coached")) {
+      var coach = document.createElement("div");
+      coach.className = "cw-coach";
+      coach.innerHTML = "Highlight any line to leave a note or get an AI edit &times;";
+      document.body.appendChild(coach);
+      var hide = function () { coach.remove(); LS.setItem("cw_coached", "1"); };
+      coach.addEventListener("click", hide);
+      setTimeout(hide, 9000);
+    }
     panel = document.createElement("aside");
     panel.className = "cw-panel";
     document.body.appendChild(panel);
@@ -195,8 +205,20 @@
     var btn = noteEl && noteEl.querySelector('[data-act="ai"]');
     if (btn) { btn.disabled = true; btn.textContent = "Thinking…"; }
     var de = /[äöüß]/i.test(n.quote) || document.documentElement.lang === "de";
-    var sys = "You are a surgical copy editor for CaseWhen, a Berlin Power BI / Fabric / Azure consultancy. Rewrite ONLY the passage the reviewer selected, addressing their note. Keep the meaning, any statistics and their sources, and any SEO keywords. Keep the casual, human, founder voice with contractions. Hard rules: no em dashes, no metaphors or analogies, no 'not X but Y' cadence, no hype/AI-slop words, no corny phrasing. Return ONLY the revised passage as plain text, nothing else." + (de ? " The passage is German; reply in natural German." : "");
-    var usr = "PASSAGE:\n" + n.quote + "\n\nREVIEWER NOTE:\n" + (n.note || "make it sound more natural") + "\n\nReturn only the revised passage.";
+    // full surrounding post + keyword, so the edit has context (not just the isolated passage)
+    var container = document.querySelector('.annotatable[data-cwid="' + n.cwid + '"]');
+    var fullPost = container ? container.innerText.trim().slice(0, 1800) : "";
+    var card = container && container.closest('.card, article');
+    var kw = card ? (card.querySelector('.kw') ? card.querySelector('.kw').textContent.trim() : "") : "";
+    var sys = "You are a surgical copy editor for CaseWhen, a Berlin Power BI / Microsoft Fabric / Azure consultancy that helps business buyers (controllers, CFOs, heads of data) get one trusted number. Rewrite ONLY the passage the reviewer selected, addressing their note, and make it fit naturally inside the full post you are given. "
+      + "CaseWhen rules (obey all): (1) PROBLEM-FIRST — if the passage is the opening line, it must state the reader's real problem in plain everyday words with NO statistic, NO percentage, NO research-source name in that first line; earn the stat later. (2) NAME THE NOUN — never a vague placeholder ('the right things', 'something', 'what matters'); name the concrete thing. (3) At most one stat, and never default to Talend 40% / solvexia / revealbi 70% / ZoomInfo 82%; keep any stat's real source. (4) Keep the exact SEO keyword if present. (5) Plain, human, founder voice with contractions; be specific enough to be wrong. "
+      + "Hard bans: no em dashes, no metaphors or analogies, no 'not X but Y' cadence, no hype or AI-slop words, no corny throat-clearing ('here's the thing', 'the good news', 'at its core', 'nobody tells you'), no jargon (DACH, TAM, ICP). "
+      + "Return ONLY the revised passage as plain text, nothing else." + (de ? " The post is German; reply in natural German with correct ä/ö/ü and formal Sie." : "");
+    var usr = "FULL POST (for context — do NOT rewrite this whole thing):\n" + fullPost
+      + (kw ? "\n\nSEO KEYWORD to preserve: " + kw : "")
+      + "\n\nTHE SELECTED PASSAGE TO REWRITE:\n" + n.quote
+      + "\n\nREVIEWER NOTE:\n" + (n.note || "make it sound more natural and specific")
+      + "\n\nReturn only the revised passage, fitting the post's voice and not repeating any other line in it.";
     callModel(c, sys, usr).then(function (out) {
       n.revision = (out || "").trim(); saveNotes(arr); renderPanel();
     }).catch(function (err) {

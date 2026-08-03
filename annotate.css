@@ -6,6 +6,9 @@ mark.cw-anno.done{ background:#D8F3EE; box-shadow:inset 0 -2px 0 var(--cw-teal);
 .cw-pop-btn{ font:600 12.5px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:var(--cw-dark); color:#fff; border:0; border-radius:8px; padding:8px 12px; cursor:pointer; box-shadow:0 6px 20px rgba(17,73,63,.28); }
 .cw-fab{ position:fixed; right:18px; bottom:18px; z-index:9998; font:650 14px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:var(--cw-teal); color:#fff; border:0; border-radius:24px; padding:12px 18px; cursor:pointer; box-shadow:0 8px 26px rgba(29,150,124,.4); }
 .cw-fab:hover{ background:var(--cw-dark); }
+.cw-coach{ position:fixed; right:18px; bottom:64px; z-index:9998; max-width:230px; font:600 12.5px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#132630; color:#fff; border-radius:12px; padding:10px 14px; box-shadow:0 10px 30px rgba(0,0,0,.28); cursor:pointer; animation:cwup .3s ease; }
+.cw-coach:after{ content:""; position:absolute; right:26px; bottom:-6px; width:12px; height:12px; background:#132630; transform:rotate(45deg); }
+@keyframes cwup{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:none;} }
 .cw-panel{ position:fixed; top:0; right:0; height:100vh; width:380px; max-width:92vw; background:var(--cw-panel); border-left:1px solid var(--cw-line); box-shadow:-12px 0 40px rgba(0,0,0,.12); z-index:9999; transform:translateX(100%); transition:transform .25s cubic-bezier(.2,.8,.2,1); overflow-y:auto; font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; color:var(--cw-ink); }
 .cw-panel.open{ transform:none; }
 .cw-panel header{ display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid var(--cw-line); position:sticky; top:0; background:var(--cw-panel); }
