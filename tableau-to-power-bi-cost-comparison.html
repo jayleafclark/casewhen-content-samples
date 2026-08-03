@@ -1,0 +1,148 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Tableau to Power BI Cost Comparison: The CFO Version</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, Co-Founder, CaseWhen</b><span>tableau to power bi cost comparison</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>Tableau to Power BI Cost Comparison: The CFO Version</h1><figure class="achart"><figcaption>Power BI Pro list price, per user per month</figcaption><div class="cbar"><span class="cl">2024</span><div class="ctrack"><div class="cfill" style="width:71%"></div></div><span class="cv">$10</span></div><div class="cbar"><span class="cl">2025</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">$14</span></div><div class="csrc">Source: Microsoft, 2025 price update</div></figure><p>Quick Answer: A tableau to power bi cost comparison comes down to three numbers, not one: the yearly license price, the one-time cost to move your reports over, and what you pay to run the new setup each year. Power BI licenses cost a lot less per person than Tableau, but the migration work in year one is where the real money sits, and skipping that math is how a switch that looked cheap turns expensive.
+---
+Your Tableau renewal just landed on your desk, and someone on the team says Power BI would be cheaper, so now you need a tableau to power bi cost comparison you can actually defend in a budget meeting. The problem is that most comparisons you find online stop at the sticker price. They put one license fee next to another, show a big gap, and call it a saving. That number is real, but it is not the whole cost, and if you present it as the whole cost you will be explaining a surprise invoice six months later.</p><p>Here is the honest version, in the three parts a finance leader actually has to sign off on.</p><h2>What goes into a real tableau to power bi cost comparison?</h2><p>A proper tableau to power bi cost comparison has three moving parts, and the license fee is only the first.</p><p>The first part is the yearly license cost, which is the number everyone quotes. The second is the migration, which is the one-time cost to rebuild your reports, data connections, and security rules in the new tool. The third is the running cost after you switch: the capacity you pay for, the training your team needs, and the hours to keep it healthy. Most cost comparisons only show you the first number because it is the easiest to find and it makes the biggest headline. The other two decide whether the move is actually worth it.</p><p>Treat any comparison that only shows license fees as half an answer. It tells you the direction, not the total.</p><h2>Why is the license price only part of the story?</h2><p>This is where the tableau vs power bi pricing gap is real and worth understanding.</p><p>Microsoft lists Power BI Pro at $14 per user each month, while Tableau Creator lists at $75 per user each month (vendor list prices, 2025). For a team of thirty report builders, that is roughly $5,000 a year against about $27,000, so the license line alone can drop by more than twenty grand. That gap is why so many finance teams start the conversation.</p><p>But license fees behave differently in the two tools. Tableau charges you mostly per person, split across Creator, Explorer, and Viewer roles. Power BI can charge per person too, or it can move to a fixed Fabric capacity where a set monthly fee covers a large group of viewers at once. So the fair comparison is more than cheaper seats. It is a different shape of bill, and which shape wins depends on how many people build reports versus how many only read them. A company with ten builders and four hundred readers saves the most on Power BI. A company where almost everyone builds saves less than the headline suggests.</p><table><tr><th>Cost line</th><th>Tableau</th><th>Power BI</th></tr><tr><td>Full author seat, monthly list (USD)</td><td>75 per user</td><td>14 per user (Pro)</td></tr><tr><td>Read-only viewer</td><td>Paid Viewer seat per user</td><td>Free on a large Fabric capacity, or a paid seat</td></tr><tr><td>How you scale a big audience</td><td>Add more paid seats</td><td>Move to a fixed monthly Fabric capacity</td></tr><tr><td>Where the surprise usually hides</td><td>Viewer seats add up over time</td><td>Capacity size and the year-one migration</td></tr></table><p>So the tableau license cost is clearly higher per builder, and that is a fair point in Power BI&#x27;s favor. Just do not let the seat saving stand in for the total, because the next number can eat a chunk of it in the first year.</p><h2>What does a Tableau to Power BI migration actually cost?</h2><p>The power bi migration cost is the line that gets left off the cheap comparison, and it is the one that decides your first-year budget.</p><p>Moving off Tableau is not a copy and paste. Every dashboard has to be rebuilt in Power BI, every calculated field re-written in the new formula language, every data connection re-pointed, and every access rule re-created so the wrong people still cannot see the wrong numbers. None of that is hard in a bad way, but it is real work, and the bill scales with how many reports you have and how tangled they are. A tidy set of twenty dashboards is a modest project. Two hundred reports built over eight years by people who have since left is a much bigger one.</p><p>Two things drive the migration cost more than anything else. The first is volume, meaning how many reports you truly need to keep, which is almost always fewer than the number you currently have. The second is the state of the data underneath. If your Tableau reports each pull from their own spreadsheet or query, the project also has to fix the reason two of them never agreed in the first place. That cleanup is worth doing, and it belongs in the budget rather than in a footnote.</p><p>The practical move here is to count before you switch. List the reports people actually open each month, and you usually find that half the library can be retired. Migrating fifty live reports instead of two hundred forgotten ones is the single biggest lever on the power bi migration cost.</p><h2>How much can you save each year once the switch is done?</h2><p>Run the numbers across three years, not one, because year one carries the migration and years two and three carry only the saving.</p><p>Take that thirty-builder team. The license saving is around $22,000 a year. Say the migration comes in at $40,000 as a one-time project, and the new Power BI running cost lands close to the old Tableau running cost. In year one you spend the $40,000 and save $22,000, so you are about $18,000 down. In year two you save the full $22,000 with no migration to pay. By the end of year three the switch has paid for itself and put roughly $26,000 back in the budget. Change the team size or the report count and the numbers move, but the shape stays the same: the first year is an investment and the saving is real from year two on.</p><p>That three-year view is the one to bring to the budget meeting. A one-year view shows only the migration cost and hides the saving, and a license-only view shows only the saving and hides the migration. Neither is true, and both get walked back later.</p><h2>When does the switch not pay off?</h2><p>A move off Tableau stops making sense in a few honest cases, and it is cheaper to spot them now than after the project starts.</p><p>If your whole team builds reports and nobody just views them, the per-seat saving shrinks, because you were never going to benefit from Power BI&#x27;s cheaper viewing. If you have only a handful of reports, the license saving is small in absolute terms and may not clear the migration cost for years. And if your Tableau reports already run on a clean, shared data model that everyone trusts, you are moving a working setup, which is a harder case to justify on cost alone. The switch pays off best when you have a large read-only audience, a data setup that needs fixing anyway, and enough builders that the seat gap adds up.</p><h2>How should a CFO run the numbers before deciding?</h2><p>Work it in this order and the decision gets simple.</p><p>First, count the reports people actually use each month, not the ones that exist. Second, split your users into builders and viewers, because that split decides how big the license saving really is. Third, get a real migration quote against that trimmed report list, not a guess. Fourth, put all three numbers into a three-year view so the year-one investment and the ongoing saving both show up. Do that and the answer is usually clear on the page, without anyone having to argue about it.</p><p>If you want that math done on your real setup, run the free Power BI Governance and Cost Scorecard below. It takes about five minutes and gives you a first read on your license split, your report count, and the data risks that drive migration cost. If the switch looks worth it, book a scoping call and we will price the migration against your actual reports so the number you take to the board is one you can stand behind.</p><h2>Frequently asked questions</h2><p>Is Power BI really cheaper than Tableau?
+Per builder, yes. Power BI Pro lists at $14 per user each month against Tableau Creator at $75, so the tableau vs power bi pricing gap is large on seats. Whether it is cheaper overall depends on your migration cost and how many people only view reports rather than build them.</p><p>What is usually the biggest cost when moving from Tableau to Power BI?
+The migration itself in year one. Rebuilding dashboards, re-writing calculations, re-pointing data connections, and re-creating access rules is real project work, and the power bi migration cost scales with how many reports you keep and how clean the data underneath them is.</p><p>How long until a Tableau to Power BI switch pays for itself?
+For a mid-sized team it is often around two to three years. Year one usually runs at a small loss because of the migration, and the license saving comes through in full from year two once there is no migration left to pay for.</p><p>Do we have to migrate every Tableau report?
+No, and you should not. Most report libraries have far more dashboards than people actually open. Migrating only the reports in real monthly use is the fastest way to cut the tableau license cost you carry and the migration bill at the same time.</p><p>Read next: [The plain-English Tableau to Power BI migration guide](/blog/tableau-to-power-bi-migration) and [The cost of a Power BI license, in real dollars](/blog/cost-of-power-bi-license).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">tableau to power bi cost comparison</span><span class="c">tableau vs power bi pricing</span><span class="c">power bi migration cost</span><span class="c">tableau license cost</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

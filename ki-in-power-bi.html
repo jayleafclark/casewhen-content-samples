@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · KI in Power BI: Was Copilot wirklich kann</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Sajagan Thirugnanam, CaseWhen</b><span>ki in power bi</span><span>Article + FAQPage + BreadcrumbList</span></div><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><h1>KI in Power BI: Was Copilot wirklich kann</h1><div class="qa"><b>Quick answer.</b> KI in Power BI heißt heute vor allem Copilot: ein Assistent von Microsoft, der Berichte, Erklärungen und Kennzahlen in normaler Sprache erstellt, direkt in Power BI. Er liefert aber nur dann verlässliche Antworten, wenn Ihr Datenmodell geordnet ist und jede Kennzahl eine feste Definition hat. Ohne diese Grundlage gibt der Assistent schnell Zahlen aus, die gut klingen und trotzdem niemand geprüft hat.</div><p>Sie haben gehört, dass KI in Power BI jetzt Berichte auf Zuruf erstellt, und im Team fragt jemand, ob man Copilot einfach anschalten soll. Die ehrliche Antwort ist unbequem: Der Schalter allein bringt wenig. Copilot liest genau die Daten, die schon da sind. Wenn zwei Tabellen einen anderen Umsatz zeigen, greift der Assistent eine Zahl heraus, ohne zu wissen, welche stimmt, und formuliert die Antwort trotzdem sicher.</p><p>Dieser Leitfaden ist für Sie, wenn Sie den Einsatz von KI verantworten und bezahlen, nicht selbst die Modelle bauen. Er erklärt in klaren Worten, was Copilot wirklich leistet, warum das Ergebnis an Ihren Daten hängt, was der Einsatz kostet und wie Sie Ihr Team so vorbereiten, dass die Antworten stimmen. Wir schreiben aus der Arbeit an echten Kundenprojekten.</p><h2>Was bedeutet KI in Power BI?</h2><p>KI in Power BI meint heute vor allem Copilot, den KI-Assistenten von Microsoft direkt im Berichtswerkzeug. Sie stellen eine Frage in normaler Sprache, etwa nach dem Umsatz pro Region im letzten Quartal, und Copilot baut daraus eine Auswertung, schreibt eine kurze Erklärung dazu oder schlägt eine passende Kennzahl vor.</p><p>Wichtig ist, was darunter passiert. Copilot erfindet keine Daten. Er arbeitet mit dem Datenmodell, das in Ihrem Bericht steckt: den Tabellen, den Beziehungen und den Definitionen der Kennzahlen. Die Qualität der Antwort hängt damit an genau der Stelle, die man beim Thema KI gern überspringt, nämlich an der Ordnung in den Daten. Deshalb ist power bi copilot kein Ersatz für ein sauberes Modell. Er setzt eines voraus.</p><h2>Warum funktioniert Copilot nur mit sauberen Daten?</h2><p>Copilot ist so gut wie die Grundlage, auf der er steht. Wenn dieselbe Kennzahl in drei Berichten anders gerechnet wird, kann auch der beste Assistent nicht wissen, welche Version die richtige ist.</p><p>Nur 12 Prozent der Unternehmen sagen, dass ihre Daten in Qualität und Zugang gut genug sind, um sie für KI zu nutzen (Drexel LeBow und Precisely, 2025). Das ist der eigentliche Grund, warum viele Copilot-Projekte enttäuschen. Das Problem ist selten das Werkzeug. Das Problem ist die Ordnung darunter.</p><p>Der Effekt im Alltag ist konkret. Fragt eine Führungskraft Copilot nach der Marge und das Modell trägt zwei Margen-Definitionen, bekommt sie eine plausibel klingende Zahl, die niemand geprüft hat. Landet diese Zahl in einem Bank- oder Investorenupdate, ist der Schaden größer als jede Zeitersparnis. KI verstärkt, was schon da ist: Aus sauberen Daten macht sie schnelle Antworten, aus unklaren Daten schnelle Irrtümer.</p><h2>Was kann Copilot in Power BI heute konkret?</h2><p>Drei Dinge macht Copilot in Power BI zuverlässig, wenn das Modell stimmt.</p><p>Erstens Berichte entwerfen: Sie beschreiben in Worten, welche Auswertung Sie brauchen, und Copilot legt eine erste Seite mit passenden Diagrammen an. Zweitens Zahlen erklären: Copilot fasst zusammen, was ein Bericht zeigt, etwa welche Region den größten Rückgang hatte. Drittens beim Rechnen helfen: Copilot schlägt Formeln für neue Kennzahlen vor, die eine Fachkraft dann prüft und freigibt.</p><p>Was Copilot nicht übernimmt, ist die Verantwortung für die Definition. Ob Umsatz mit oder ohne Retouren gilt, entscheidet Ihr Unternehmen, nicht der Assistent. Genau diese Festlegung ist die Arbeit, die vor dem KI-Einsatz kommt.</p><h2>Wie machen Sie Ihre Daten bereit für KI in Power BI?</h2><p>Der Weg zu verlässlichen KI-Antworten führt über das Datenmodell, nicht über eine Lizenz. Drei Schritte bringen den größten Unterschied.</p><p>Erstens eine feste Definition je Kennzahl. Umsatz, Marge und aktive Kunden brauchen jeweils eine einzige, dokumentierte Rechnung, die überall gilt. So bekommt Copilot eine eindeutige Antwort, statt zwischen Varianten zu raten.</p><p>Zweitens ein geordnetes Modell mit klaren Beziehungen. Wenn die Tabellen in einer sauberen Struktur zusammenhängen, findet der Assistent den richtigen Weg durch die Daten. Ein unübersichtliches Modell führt auch KI in die Irre.</p><p>Drittens Zugriffsrechte und geprüfte Quellen. Copilot soll nur aus freigegebenen Daten antworten, und jede Person soll nur sehen, was sie sehen darf. Diese Ordnung ist zugleich die Grundlage, auf der Microsoft Fabric und eine spätere Ausweitung stehen.</p><h2>Was kostet der Einsatz von Copilot?</h2><p>Der Preis hat zwei Teile: die Lizenz für Copilot und die Vorarbeit an den Daten.</p><p>Die Lizenz ist der kleinere und planbare Teil. Die Copilot-Funktionen setzen eine passende Kapazität oder Premium-Lizenz voraus, während Power BI Pro weiterhin bei etwa 14 US-Dollar pro Nutzer und Monat liegt. Diese Kosten lassen sich vorher rechnen.</p><p>Der größere Teil ist die Vorarbeit, und genau hier entscheidet sich, ob sich der Einsatz lohnt. Ein Modell mit festen Definitionen aufzubauen kostet einmal Zeit und bringt danach jede KI-Antwort auf sicheren Boden. Wer diesen Schritt überspringt und Copilot auf ungeordnete Daten setzt, zahlt zweimal: erst für die Lizenz, dann für die falschen Entscheidungen, die auf ungeprüften Zahlen beruhen.</p><table><tr><th>Was Sie sich von KI erhoffen</th><th>Was ohne Vorarbeit passiert</th><th>Was eine geordnete Grundlage bringt</th></tr><tr><td>Bericht auf Zuruf</td><td>Copilot greift eine von mehreren Umsatzzahlen heraus</td><td>eine geprüfte Zahl je Kennzahl</td></tr><tr><td>Schnelle Erklärung einer Zahl</td><td>plausibler Text zu einer falschen Definition</td><td>Erklärung, die zur festen Rechnung passt</td></tr><tr><td>Weniger Handarbeit im Team</td><td>mehr Nacharbeit, weil Ergebnisse nicht stimmen</td><td>echte Zeitersparnis bei verlässlichem Ergebnis</td></tr><tr><td>Vertrauen der Führung in die Zahlen</td><td>zwei Werte für denselben Umsatz</td><td>ein Wert, der im Update standhält</td></tr></table><h2>Wann lohnt sich KI in Power BI für Ihr Team?</h2><p>Nicht jedes Team braucht Copilot sofort. Der Einsatz lohnt sich, wenn zwei Dinge zusammenkommen: Es gibt wiederkehrende Fragen an die Daten, und das Modell darunter ist bereits geordnet.</p><p>Wenn Ihre Leute jede Woche dieselben Auswertungen von Hand bauen und die Kennzahlen eine feste Definition haben, nimmt Copilot echte Arbeit ab. Fehlt diese Ordnung noch, ist der bessere erste Schritt eine saubere Modellierung, und die KI kommt danach. Ein Anbieter, der Ihnen Copilot verkauft, ohne vorher die Daten anzusehen, verkauft eine Enttäuschung mit Startdatum.</p><h2>So arbeitet CaseWhen daran</h2><p>Wir verkaufen keine KI von der Stange. Wenn Ihr Team über Copilot nachdenkt, prüfen wir zuerst an Ihren echten Berichten, ob die Daten bereit sind, und bringen die Kennzahlen auf eine feste Definition, damit Mensch und KI dieselbe Zahl bekommen.</p><p>Wenn Sie zunächst wissen wollen, wo Sie stehen, holen Sie sich unser kostenloses Power BI Governance und Cost Scorecard. In fünf Minuten sehen Sie Ihre drei größten Risiken bei Kosten und Vertrauen in die Zahlen. Ist danach klar, dass KI ein Thema wird, buchen Sie ein kurzes Gespräch, und wir prüfen mit Ihnen die KI-Bereitschaft Ihres Datenmodells und sagen ehrlich, welcher Schritt sich zuerst lohnt.</p><h2>Häufige Fragen</h2><p>Kann ich Copilot in Power BI einfach einschalten?
+Technisch ja, sinnvoll selten. Mit der passenden Lizenz ist Copilot in wenigen Minuten aktiv. Brauchbar wird er aber erst, wenn die Kennzahlen im Modell eindeutig gerechnet sind. Auf ungeordneten Daten liefert er selbstbewusste Zahlen, hinter denen keine geprüfte Definition steht.</p><p>Ersetzt KI in Power BI meine Datenanalysten?
+Nein. Copilot nimmt Routinearbeit ab, etwa einen ersten Berichtsentwurf oder eine kurze Erklärung. Die Entscheidung, wie eine Kennzahl gerechnet wird und welche Zahl stimmt, bleibt bei Ihren Fachleuten. KI beschleunigt geprüfte Arbeit, die Prüfung selbst ersetzt sie nicht.</p><p>Brauche ich Microsoft Fabric für KI in Power BI?
+Nicht zwingend. Copilot arbeitet in Power BI auch ohne eine volle Fabric-Umgebung. Sobald aber viele Quellen zusammenlaufen und die Datenmenge wächst, gibt ein gemeinsamer, geordneter Speicher der KI eine bessere Grundlage. Ob sich der Schritt lohnt, zeigt eine kurze Prüfung an Ihren echten Daten.</p><p>Weiterlesen: unser Leitfaden zu [Microsoft Fabric](/microsoft-fabric), der Artikel zur [Single Source of Truth](/blog/single-source-of-truth-mittelstand) und die plain erklärte [Power BI Einführung](/blog/power-bi-einführung).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">ki in power bi</span><span class="c">power bi copilot</span><span class="c">copilot in power bi</span><span class="c">microsoft fabric</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

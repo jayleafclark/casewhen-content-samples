@@ -1,0 +1,146 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Power BI Berechtigungen einrichten: was Sie wirklich brauche</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Sajagan Thirugnanam, CaseWhen</b><span>power bi berechtigungen einrichten</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>Power BI Berechtigungen einrichten: was Sie wirklich brauchen</h1><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><p>Quick Answer: Power BI Berechtigungen einrichten heißt, drei Ebenen sauber zu trennen: wer im Arbeitsbereich Berichte baut, wer die fertige App nur liest und wer über die Zeilenebenensicherheit welche Zeilen einer Tabelle sehen darf. Die technische Einrichtung dauert Minuten. Die eigentliche Arbeit ist, für jede Rolle vorher festzulegen, welche Zahlen sie sehen soll, damit nicht jeder alles sieht.
+---</p><p>Sie wollen in Power BI Berechtigungen einrichten, und am Ende sieht trotzdem jeder alles. Der Kollege aus der einen Region öffnet den Umsatzbericht und liest die Zahlen aller anderen Regionen mit. Jemand, der einen Bericht nur ansehen sollte, kann ihn plötzlich verändern. Und niemand im Haus kann klar sagen, wer eigentlich Zugriff auf welche Tabelle hat. Das ist eine unangenehme Lage, weil ein einziger falsch gesetzter Haken vertrauliche Zahlen für Leute öffnet, die sie nie sehen sollten.</p><p>Dieser Beitrag ordnet die Berechtigungen für Sie als Head of Data. Sie erfahren, welche drei Ebenen es gibt, wie die Rollen im Arbeitsbereich zusammenhängen, wie die Zeilenebenensicherheit dafür sorgt, dass jeder nur seine eigenen Zeilen sieht, und in welcher Reihenfolge Sie das einrichten, ohne dass hinterher jemand zu viel sieht.</p><h2>Was heißt es, Power BI Berechtigungen einrichten zu wollen?</h2><p>Der häufigste Denkfehler ist, Berechtigungen als eine einzige Einstellung zu sehen. In Power BI sind es drei getrennte Ebenen, und jede beantwortet eine andere Frage. Wenn Sie diese drei nicht auseinanderhalten, geben Sie an einer Stelle zu viel und an einer anderen zu wenig frei.</p><p>Die erste Ebene ist der Arbeitsbereich. Sie regelt, wer an den Berichten arbeitet, also wer das Datenmodell und die Berichte baut, verändert und veröffentlicht. Die zweite Ebene ist die App, die Ihre Anwender öffnen. Sie regelt, wer die fertigen Berichte nur ansieht, ohne an ihnen etwas ändern zu können. Die dritte Ebene ist die Zeilenebenensicherheit. Sie regelt innerhalb eines Berichts, welche Zeilen einer Tabelle eine Person sehen darf, also ob ein Vertriebsleiter nur seine Region sieht oder alle.</p><p>Für Sie als Entscheider ist die Reihenfolge dieser Ebenen wichtig. Die ersten beiden trennen Bauen und Lesen. Die dritte trennt, welche Daten ein Leser innerhalb desselben Berichts überhaupt zu Gesicht bekommt. Erst alle drei zusammen ergeben ein Modell, dem Sie vertrauen können.</p><h2>Welche Rollen gibt es im Power BI Arbeitsbereich?</h2><p>Im Arbeitsbereich vergeben Sie eine von vier Rollen, und der Unterschied zwischen ihnen entscheidet, wer Zahlen verändern darf. Genau hier passieren die teuersten Fehler, weil viele Häuser aus Bequemlichkeit allen die höchste Rolle geben.</p><p>Der Administrator verwaltet den Arbeitsbereich selbst, also auch, wer darin welche Rolle hat. Das Mitglied darf Berichte veröffentlichen und die App verteilen. Der Mitwirkende darf Berichte und Daten bearbeiten, aber die App nicht neu verteilen. Der Betrachter darf ausschließlich lesen. Wenn Sie Power BI Berechtigungen verwalten, ist die Betrachter-Rolle für die große Mehrheit Ihrer Anwender die richtige, denn die meisten Menschen sollen Berichte lesen, nicht bauen.</p><p>Der klassische Fehler ist, den gesamten Arbeitsbereich für eine breite Gruppe freizugeben, damit alle schnell an die Berichte kommen. Damit machen Sie Leser zu Bearbeitern. Ein Betrachter, der versehentlich Mitwirkender wird, kann eine Kennzahl ändern, und plötzlich zeigt der Bericht für alle eine andere Zahl. Vergeben Sie die Rolle deshalb nach dem, was jemand wirklich tun muss, und nicht nach dem, was am schnellsten geht.</p><h2>Wie funktioniert die Zeilenebenensicherheit?</h2><p>Die Zeilenebenensicherheit, oft als row-level security bezeichnet, ist die Ebene, die über Vertraulichkeit entscheidet. Die ersten beiden Ebenen trennen nur Bauen und Lesen. Erst diese dritte legt fest, welche Zeilen einer Tabelle eine bestimmte Person tatsächlich sieht.</p><p>Sie funktioniert über Rollen, die Sie im Datenmodell anlegen. Eine Rolle bekommt eine Regel, zum Beispiel: Diese Rolle sieht nur die Zeilen, deren Region der angemeldeten Person entspricht. Ordnen Sie einer Person diese Rolle zu, sieht sie im selben Bericht nur ihre eigene Region, während die Geschäftsführung ohne diese Einschränkung alles sieht. So kann ein einziger Bericht für zwanzig Regionalleiter zwanzig unterschiedliche Sichten zeigen, ohne dass Sie zwanzig Berichte pflegen.</p><p>Wenn Sie die Zeilenebenensicherheit einrichten, ist ein Schritt nicht verhandelbar: das Testen. In Power BI gibt es die Funktion &quot;Als Rolle anzeigen&quot;, mit der Sie den Bericht genau so sehen, wie eine bestimmte Rolle ihn sieht. Prüfen Sie damit jede Rolle, bevor Sie den Bericht verteilen. Eine Regel, die nie getestet wurde, ist der Grund, warum am Ende doch jemand die falschen Zeilen liest.</p><h2>Warum reicht das Teilen einzelner Berichte nicht?</h2><p>Der schnellste Weg, einen Bericht weiterzugeben, ist ihn direkt zu teilen oder einen Link zu verschicken. Genau das ist die Gewohnheit, die Berechtigungen mit der Zeit unkontrollierbar macht. Jeder geteilte Link ist eine eigene Zutrittstür, die niemand mehr überblickt, und nach ein paar Monaten weiß keiner mehr, wer worauf Zugriff hat.</p><p>Der geordnete Weg ist, Berichte über eine App zu verteilen und den Zugriff an Gruppen zu hängen, nicht an einzelne Personen. Dann steuern Sie die Berechtigung an einer Stelle. Wer ein Team verlässt, verliert mit dem Gruppenwechsel den Zugriff, ohne dass Sie in jedem einzelnen Bericht nachsehen müssen. Das ist der Unterschied zwischen einem Zugriff, den Sie belegen können, und einem, der über die Zeit einfach wächst.</p><p>Dass diese Ordnung selten von allein entsteht, ist kein Einzelfall. Gartner rechnet damit, dass bis 2027 rund 80 % aller Data-Governance-Vorhaben scheitern werden (Gartner, 2024), meist weil niemand die Zuständigkeit übernimmt und die Regeln im Alltag verwässern. Bei Berechtigungen sieht das konkret so aus: Ein Betrachter, der nur seine eigene Region sehen sollte, liest die Gehälter der gesamten Firma in einer Tabelle mit, und ein Wirtschaftsprüfer markiert später, dass niemand kontrolliert, wer worauf Zugriff hat. An diesem Punkt ist die Reparatur teuer, weil Sie rückwirkend prüfen müssen, wer in den vergangenen Monaten was gesehen hat.</p><h2>Wie richten Sie Berechtigungen Schritt für Schritt ein?</h2><p>Gehen Sie die Ebenen in der Reihenfolge durch, in der sie über Vertrauen und Vertraulichkeit entscheiden. So schließen Sie die gefährlichste Lücke zuerst, statt am Ende alles noch einmal aufzurollen.</p><table><tr><th>Schritt</th><th>Ebene</th><th>Worauf Sie achten</th></tr><tr><td>1</td><td>Arbeitsbereich-Rollen</td><td>Nur Ersteller bekommen Mitwirkender oder mehr, alle anderen bleiben Betrachter</td></tr><tr><td>2</td><td>Zugriff über Gruppen</td><td>Berechtigung an eine Gruppe hängen, nie an einzelne Personen</td></tr><tr><td>3</td><td>Zeilenebenensicherheit</td><td>Rolle mit Regel je Region oder Abteilung im Datenmodell anlegen</td></tr><tr><td>4</td><td>Test &quot;Als Rolle anzeigen&quot;</td><td>Jede Rolle prüfen, bevor der Bericht rausgeht</td></tr><tr><td>5</td><td>Verteilung über App</td><td>Berichte als App teilen, keine einzelnen Links verschicken</td></tr></table><p>Die richtige Reihenfolge erspart Ihnen den teuersten Fehler. Klären Sie zuerst, wer bauen und wer nur lesen darf, und legen Sie erst danach fest, welche Zeilen jeder Leser sieht. Wer die Zeilenebenensicherheit überspringt, verteilt einen Bericht, in dem jeder alles liest. Wer sie einrichtet und testet, kann denselben Bericht an das ganze Haus geben und weiß trotzdem, dass jede Person nur ihre eigenen Zahlen sieht.</p><p>Holen Sie sich als Startpunkt die kostenlose Power BI Governance und Cost Scorecard weiter unten. In fünf Minuten sehen Sie, ob Ihre Rollen und Ihre Zeilenebenensicherheit sauber getrennt sind und welche drei Lücken Ihre Berechtigungen am stärksten gefährden. Und wenn Sie Ihre Berechtigungen auf echten Berichten ordnen wollen, buchen Sie eine kurze Governance-Prüfung mit uns, bevor die nächste vertrauliche Zahl bei der falschen Person landet.</p><h2>Häufige Fragen zu Power BI Berechtigungen</h2><p>Was ist der Unterschied zwischen Arbeitsbereich-Rollen und Zeilenebenensicherheit?
+Die Arbeitsbereich-Rollen regeln, wer Berichte baut und wer sie nur liest. Die Zeilenebenensicherheit steuert je Person, welche Zeilen einer Tabelle in einem Bericht sichtbar sind, etwa nur die eigene Region. Sie brauchen beide: die Rollen trennen Bauen und Lesen, die Zeilenebenensicherheit trennt, welche Daten ein Leser überhaupt zu Gesicht bekommt.</p><p>Reicht die Betrachter-Rolle, damit jemand einen Bericht sehen kann?
+Ja, für reines Lesen ist der Betrachter die richtige Rolle, und für die große Mehrheit Ihrer Anwender ist sie ausreichend. Wer eine höhere Rolle bekommt, kann Berichte und Kennzahlen verändern. Geben Sie höhere Rollen deshalb nur den wenigen Personen, die wirklich am Modell arbeiten.</p><p>Wie prüfe ich, ob meine Berechtigungen wirklich greifen?
+Nutzen Sie die Funktion &quot;Als Rolle anzeigen&quot;, um jeden Bericht genau so zu sehen, wie eine bestimmte Rolle ihn sieht. Prüfen Sie damit jede Zeilenebenensicherheit-Rolle vor der Verteilung. Kontrollieren Sie zusätzlich, dass der Zugriff an Gruppen hängt und nicht an einzelnen geteilten Links, sonst verlieren Sie mit der Zeit den Überblick.</p><p>Weiterlesen: [Data Governance Framework](/blog/data-governance-framework) und [Power BI Copilot Voraussetzungen](/blog/power-bi-copilot-voraussetzungen).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">power bi berechtigungen einrichten</span><span class="c">power bi berechtigungen verwalten</span><span class="c">zeilenebenensicherheit einrichten</span><span class="c">row-level security</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

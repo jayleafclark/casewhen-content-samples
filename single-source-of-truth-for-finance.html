@@ -1,0 +1,147 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Single Source of Truth for Finance: How to Trust One Number</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, CaseWhen</b><span>single source of truth for finance</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>Single Source of Truth for Finance: How to Trust One Number</h1><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><p>Quick Answer: A single source of truth for finance is one governed place where every key number, like revenue, margin, and cash, has a single agreed definition, a clear owner, and one value that every report and every person returns. It is what lets your team stop arguing about whose figure is right and start trusting the number in front of them.
+---</p><p>Two of your reports show a different revenue number for the same month, and nobody in the room can say which one is correct. That is the exact gap a single source of truth for finance is meant to close. You cannot buy it as a piece of software or switch it on as a dashboard. It is the state where your revenue, your margin, and your cash position each have one definition, one owner, and one value that stays the same no matter who pulls the report or which tool they use.</p><p>This is a plain guide for finance leaders who are tired of month-end turning into a reconciliation exercise. If you are a CFO or a Head of FP&amp;A being asked to sign off on numbers you had to check three times, read this before your next close.</p><h2>What is a single source of truth for finance?</h2><p>A single source of truth for finance is one trusted layer that sits between your raw source tools and the reports people read. Your numbers live in a few places already: the ERP, the CRM, a billing tool, and a stack of spreadsheets. Each of those has its own version of a customer, a period, and a sale. When a report pulls straight from any of them, it inherits whatever that source happened to record.</p><p>The single source of truth is the layer where those differences get resolved once. Revenue is defined one way. A closed deal means the same thing whether sales logged it or finance booked it. The reporting period ends on the same date everywhere. Every dashboard, board pack, and export then reads from that one layer instead of going back to the raw sources and guessing.</p><p>So when three people ask for last month&#x27;s revenue, they get the same figure, because they are all reading the same agreed number rather than three separate calculations that happen to share a name.</p><h2>Why do finance teams end up with conflicting numbers?</h2><p>Because each source tool was built to do its own job, without matching the others. The CRM counts a deal when it is marked won. Billing counts it when the invoice goes out. The ERP counts it when the revenue is recognized. All three are correct inside their own world, and all three give a different number for the same week.</p><p>Spreadsheets make the gap wider. Someone exports from one tool, adjusts a few cells, and emails the file. A second person copies part of it into their own version and adds a formula. Now there are two files that both claim to be the real revenue, and neither one links back to a source you can check. Research from the University of Hawaii found that 94% of real business spreadsheets audited in the field contained errors (Panko). When your close depends on files like these, a wrong figure can travel all the way into a bank covenant report before anyone catches it.</p><p>The result is a monthly ritual. Finance builds a number, another team disputes it, and everyone spends two days tracing where the difference came from. People here are careful. The number just never had one agreed place to live, so every export drifted a little from the last.</p><h2>What does a single source of truth for finance look like in practice?</h2><p>It has four parts, and each one closes a specific gap.</p><p>First, one semantic model. This is the layer, usually built in Power BI or Microsoft Fabric, where a measure like &quot;net revenue&quot; or &quot;gross margin&quot; is written down once as a formula. Every report reads that formula instead of recreating it. Change the definition in one place and every report updates together.</p><p>Second, clean data with a clear grain. Grain means what one row stands for: one invoice, one day, or one customer. Most wrong totals come from mixed grain, where a table ends up counting the same sale twice. Fixing the grain is what makes your subtotals actually add up.</p><p>Third, financial data governance. Every important table needs a named owner, a refresh schedule you can see, and row-level security so a regional controller sees only their own entities. Governance is what makes the number both trustworthy and safe to share.</p><p>Fourth, documentation. A short plain description on each measure tells the next person what &quot;active customer&quot; or &quot;recognized revenue&quot; actually counts. This is the part teams skip, and it is the part that stops the next argument before it starts.</p><table><tr><th>Part</th><th>With a single source of truth</th><th>Without it</th></tr><tr><td>Metric definition</td><td>Revenue defined once in the model</td><td>Three reports, three revenue figures</td></tr><tr><td>Data grain</td><td>One row means one clear thing</td><td>Totals double-count or go missing</td></tr><tr><td>Governance and access</td><td>Owner, refresh schedule, row-level security</td><td>No owner, everyone sees everything</td></tr><tr><td>Documentation</td><td>Each measure described in plain words</td><td>People guess what a column means</td></tr></table><h2>How much is the trust gap actually costing finance?</h2><p>More than most teams realize, because the cost hides inside normal work. Nearly 40% of CFOs do not completely trust their own organization&#x27;s financial data (BlackLine, 2024). When the person signing the accounts is not sure the numbers are right, the whole team spends time proving them instead of using them.</p><p>That time has a real shape. Analysts who should be explaining the forecast are instead tracing why two reports disagree. The close slips another two days while someone rebuilds a figure by hand. A forecast goes out, then gets walked back the following week when a cleaner number surfaces. None of this shows up as a line item, but it is where your finance team&#x27;s hours go.</p><p>A single source of truth turns that spending off. When the number is agreed once, the reconciliation step disappears, and the people who were checking figures go back to analyzing them.</p><h2>How do you build a single source of truth for finance?</h2><p>You start with the numbers that matter most, not all of them at once. Pick the five or six figures that go into your board pack and your bank reporting: revenue, margin, cash, headcount cost, and whatever your business lives or dies by. Those are the ones worth getting to one version of the truth first.</p><p>Then agree the definition of each one in a room, with finance and the teams that feed the data. This is a business conversation before it is a technical one. When does a deal count as revenue? What is included in gross margin? Write the answer down. That agreement is the actual asset, and the model just enforces it.</p><p>From there the build is straightforward for a team that does this often. The agreed definitions go into one semantic model, the source tables get cleaned to a single grain, ownership and access get set, and the old spreadsheets get retired one by one. You do not need to fix everything at once. You need the numbers on your board pack to tie out, every time, without a manual check.</p><h2>Do you need Microsoft Fabric for this, or just Power BI?</h2><p>Either can store your single source of truth, and the right answer depends on where your data sits today. If your finance data already lands cleanly in a warehouse or a few well-behaved systems, a Power BI semantic model on top of it is often all you need. The model becomes the one place every measure is defined, and reports read from it.</p><p>If your data is scattered across many systems and volumes are large, Microsoft Fabric gives you one storage layer, called OneLake, to bring it together before the model sits on top. Fabric is the heavier option, and it earns its place when you are consolidating a lot of sources or preparing for AI features like Copilot, which will only ever be as trustworthy as the single source of truth underneath it.</p><p>The tool is the last decision you make here. The definitions and the governance are what make the number trustworthy. The platform just enforces what you already agreed.</p><p>If you want to see where your finance reporting stands, our free Power BI Governance and Cost Scorecard walks you through the trust and ownership questions in about five minutes and shows your top risks. If the score turns up gaps, book a scoping call with us and we will map exactly what it takes to get your board numbers to one agreed version.</p><h2>FAQ</h2><p>Is a single source of truth for finance a tool I can buy?
+No. It is a state your data reaches. Tools like Power BI and Microsoft Fabric store and enforce it, and the value comes from the agreed definitions, clear ownership, and clean data underneath. You can own every tool and still have three versions of revenue.</p><p>How long does it take to reach one version of the truth?
+For the handful of numbers on your board pack, an assessment takes days and the build usually takes a few weeks. It depends on how many figures disagree today and how much sits in spreadsheets. Starting with your most important metrics gets you a trusted close far faster than trying to fix everything at once.</p><p>Will this stop finance going back to Excel?
+That is the point of it. Teams return to Excel when they do not trust the dashboard, so they rebuild the number by hand to be sure. Once the model returns the same figure every time, with a clear owner and definition, the manual recheck stops being worth the effort and the spreadsheets fade out.</p><p>Does trusted financial reporting need governance, or just clean data?
+It needs both. Clean data gives you the right number, and financial data governance gives you a named owner, a visible refresh, and controlled access so the number stays right and only reaches the people who should see it. Without governance, a clean number drifts back out of trust within a quarter.</p><p>Read next: [Data Governance Framework for Power BI](/blog/blog-data-governance-framework) and [The One Agreed Number: Fixing Your Semantic Model](/blog/blog-one-agreed-number).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">single source of truth for finance</span><span class="c">financial data governance</span><span class="c">one version of the truth</span><span class="c">trusted financial reporting</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · SAP BusinessObjects to Power BI: A Head of Data Guide</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, CaseWhen</b><span>sap businessobjects to power bi</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>SAP BusinessObjects to Power BI: A Head of Data Guide</h1><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><p>Quick Answer: A SAP BusinessObjects to Power BI migration means moving your Universes, Web Intelligence reports, and Crystal Reports off the old platform and rebuilding them on Power BI. No export button does it for you. The reports carry business logic that has to be rebuilt in a Power BI semantic model, and the safe way to do it is one report area at a time, checking each number against the old reports before you switch anyone over.</p><p>Your BusinessObjects reports still run every morning, the license bill keeps climbing, and fewer people open the reports each quarter. That is the quiet reason a SAP BusinessObjects to Power BI move lands on your desk. The old platform works, but it is expensive, the people who understood the Universes are leaving, and the business keeps asking for dashboards it will not give them. So you start pricing a switch, and the first thing you find is that nobody can tell you how big the job actually is.</p><p>Here is the part the sales demo skips. BusinessObjects and Power BI both let you build reports on top of a data layer, so people expect a straight swap. It seldom works that way. The logic that makes your BusinessObjects numbers correct lives inside the Universe and inside years of report-level formulas, and none of that moves on its own. Rebuild it carelessly and you get reports that look finished and hand back numbers that disagree with the ones finance has trusted for a decade.</p><h2>Why move from SAP BusinessObjects to Power BI?</h2><p>Most teams do not move because they are bored with BusinessObjects. They move for three plain reasons.</p><p>The first is cost. BusinessObjects carries server licenses, maintenance renewals, and the specialist staff to keep it running. Power BI Pro is a per-user monthly cost with no server to host, and for a lot of teams the math is simply lower.</p><p>The second is people. The engineers who built and understood your Universes are retiring or moving on, and they are hard to replace. Power BI skills are far easier to hire and far easier to train, so the platform stops depending on one or two people who know where everything is buried.</p><p>The third is what the business keeps asking for. People want to open a report on their phone, click into a number, and ask a follow-up question. BusinessObjects was not built for that, and Power BI was. Microsoft has been named a Leader in the Gartner Magic Quadrant for Analytics and Business Intelligence Platforms for 18 years running (Gartner, 2025), so a move to Power BI puts you where most of the market already reports.</p><h2>What actually has to move?</h2><p>This is where a lot of plans go wrong, because people count the wrong thing. They count reports, when most of the work sits in the layer underneath the reports.</p><p>Here is what is actually in scope when you move from BusinessObjects to Power BI:</p><ul><li>The Universe. This is the model layer in BusinessObjects, the place where tables are joined and business measures are defined. In Power BI this becomes a semantic model. The joins, the measures, and the rules for how a number is calculated all have to be rebuilt here, and this is the hardest and most important part of the whole job.</li><li>Web Intelligence reports. These are your interactive business reports. Moving Web Intelligence to Power BI means rebuilding each one as a Power BI report, and any calculation written inside the report has to be recreated as a DAX measure.</li><li>Crystal Reports. These are your pixel-perfect, printable documents such as invoices and statements. Power BI is not a pixel-perfect print tool, so some Crystal Reports move to Power BI Paginated Reports and some stay where they are. You decide this one report at a time.</li><li>Scheduling and security. Who gets which report, and who is allowed to see which rows. In Power BI this is handled by workspaces and row-level security, and it has to be mapped over deliberately, not guessed.</li></ul><p>Count reports and you will underestimate the job every time. Count the logic inside the Universe and the report-level formulas, and you will plan something realistic.</p><h2>How do you migrate SAP BusinessObjects to Power BI?</h2><p>There is no button that reads a Universe and writes a Power BI semantic model for you. Tools exist that convert some pieces, but the business logic still needs a human to check it. So the reliable approach is staged, and it looks like this.</p><p>Start by picking one report area, not the whole estate. Choose a single subject, such as sales reporting or the finance close pack. Small enough to finish, important enough to prove the point.</p><p>Rebuild the model first, before any report. Take the part of the Universe that feeds those reports and rebuild it as a clean Power BI semantic model, with one agreed definition for each measure. This is the step that most decides whether the migration works.</p><p>Rebuild the reports on top of the new model. Now recreate the Web Intelligence reports as Power BI reports. Because the model is clean, the reports are faster to build and the numbers are consistent between them.</p><p>Run both systems side by side and reconcile. For a few weeks, the old BusinessObjects report and the new Power BI report run at the same time, and someone checks that the numbers match to the cent. This is the step teams are tempted to skip, and it is the step that protects your credibility.</p><p>Switch over, then decommission. Once a report area reconciles and the users are working in Power BI, you retire the old reports for that area. Then you repeat the whole loop with the next area.</p><p>The reason this is slow on purpose is simple. The moment a Power BI number disagrees with a BusinessObjects number that finance has trusted for years, trust in the whole migration is gone, and it is very hard to win back.</p><h2>What breaks if you just lift and shift?</h2><p>The way this goes wrong is always the same. A team treats the migration as a copying exercise, rebuilds every report as fast as possible, and skips the reconciliation.</p><p>Then month-end comes. The new Power BI dashboard shows a revenue figure, the old BusinessObjects report shows a different one, and now two teams are arguing about which number is real in the middle of the close. The close slips two days while someone traces the difference back to a measure that was rebuilt slightly wrong, and the whole Power BI project gets the reputation of being the tool that broke the numbers.</p><p>None of that is a Power BI problem. It is a rebuild-without-checking problem. The old report and the new report defined a measure differently, nobody compared them, and the gap only showed up once a real decision depended on it.</p><p>Here is how the two platforms actually compare, so you can see why a straight copy does not work.</p><table><tr><th>What you are comparing</th><th>SAP BusinessObjects</th><th>Power BI</th></tr><tr><td>The model layer</td><td>The Universe</td><td>Semantic model with DAX measures</td></tr><tr><td>Interactive reports</td><td>Web Intelligence</td><td>Power BI reports</td></tr><tr><td>Pixel-perfect print</td><td>Crystal Reports</td><td>Paginated Reports, or kept as is</td></tr><tr><td>Hosting</td><td>Your own servers</td><td>Microsoft cloud, or Fabric capacity</td></tr><tr><td>Licensing</td><td>Server plus maintenance</td><td>Per-user Pro, or capacity</td></tr><tr><td>Hiring for it</td><td>Getting harder each year</td><td>Much easier to hire and train</td></tr></table><p>The rows do not line up one to one, and that is the whole point. Every row is a decision, not a copy.</p><h2>How long does a BusinessObjects migration take?</h2><p>Honestly, it depends on how much logic is buried in your Universes and how many reports still get real use. Most estates are smaller than they look, because a large share of the reports have not been opened in a year and do not need to move at all.</p><p>So the first job is an inventory, before you build anything: which reports are actually used, which numbers matter, and how complex the Universe behind them really is. Once you know that, you can size the work in report areas, and each area is a few weeks of build plus reconciliation. A focused finance and sales migration is a project of months, not years, as long as you resist the urge to move everything at once.</p><h2>How CaseWhen can help</h2><p>If a SAP BusinessObjects to Power BI move is on your plate this year, the real question underneath it is whether your numbers will still reconcile on the other side. That is the work we do at CaseWhen. We rebuild the model layer properly, one agreed definition per measure, so the Power BI reports on top of it match what your business has always trusted.</p><p>A good place to start is our free Power BI Governance and Cost Scorecard. It is a five-minute assessment that scores where your reporting stands today and flags the top risks before you move anything. If you already know a migration is coming, book a scoping call and we will map your Universes and reports into a staged plan with reconciliation built in, so no number gets lost on the way across.</p><h2>FAQ</h2><p>Can you convert a BusinessObjects Universe to a Power BI model automatically?
+Partly. Some tools convert structure such as tables and joins, but the business logic, the measures, and the rules that make a number correct still need a person to rebuild and check. Treat any automated conversion as a first draft, never as the finished model.</p><p>Do I have to move Crystal Reports to Power BI as well?
+Not always. Power BI is not a pixel-perfect print tool, so invoices and statements often move to Power BI Paginated Reports, and some stay in their current tool. You decide document by document, based on whether it needs exact print layout or interactive analysis.</p><p>Should we run BusinessObjects and Power BI at the same time?
+Yes, for a while. Running both side by side for each report area and checking that the numbers match to the cent is the step that protects trust. You retire the old reports only once the new ones reconcile and the users have moved over.</p><h2>Read next</h2><ul><li>[Power BI Governance: How to Get to One Trusted Number](/blog/power-bi-governance)</li><li>[Tableau to Power BI: A Migration Guide for Data Leaders](/blog/tableau-to-power-bi)</li></ul></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">sap businessobjects to power bi</span><span class="c">BusinessObjects migration, Web Intelligence to Power BI, BusinessObjects Universe to semantic model</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

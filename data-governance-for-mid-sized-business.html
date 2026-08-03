@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Data governance for mid-sized business, made practical</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, CaseWhen</b><span>data governance for mid-sized business</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>Data governance for mid-sized business, made practical</h1><figure class="achart"><figcaption>Organizations that fully trust their data</figcaption><div class="cbar"><span class="cl">Trust it</span><div class="ctrack"><div class="cfill" style="width:49%"></div></div><span class="cv">33%</span></div><div class="cbar"><span class="cl">Do not</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">67%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><p>Quick Answer: Data governance for mid-sized business means agreeing who owns each number, what each metric actually means, and who is allowed to change it, so everyone works from one trusted figure. You do not need a large committee or a year-long program to start. A COO or founder can begin with three moves: name one owner for each core metric, write one clear definition per metric, and set access rights so the right people see the right data.</p><p>Your sales report and your finance report show different revenue numbers for the same month, and nobody in the room can say which one is right. That is the everyday reason data governance for mid-sized business matters, long before anyone reaches for the words governance or compliance. When two people pull the same metric and get two answers, the meeting slows down while everyone argues about whose number to trust instead of what to do next.</p><p>Most mid-sized companies get here by accident. You grew fast, people built the reports they needed in the moment, and now there are four spreadsheets and two dashboards that all claim to show revenue. No single person was ever put in charge of making them agree. This guide walks a COO or founder through what to do about it, without turning your company into a bureaucracy.</p><h2>What does data governance for mid-sized business actually mean?</h2><p>Governance sounds heavy, so let us make it plain. For a company of 50 to 500 people, data governance is a short set of agreements about your most important numbers. It answers three questions for each metric that matters: who owns it, what it means, and who can change how it is calculated.</p><p>A useful data governance framework at your size fits on one page. It lists your ten or fifteen core metrics, names an owner for each, gives each a written definition, and says where the trusted version lives. That is the whole thing. This stays lightweight on purpose. You are just writing down the answers your team already emails about every week.</p><p>The payoff is simple. When a metric has an owner and one definition, arguments about the number stop. People stop rebuilding the same report five different ways because they now know where the correct one already lives.</p><h2>Why do mid-sized companies struggle with data governance?</h2><p>The trouble is rarely the tools. It is that nobody was ever made responsible for the numbers. In a small company the founder knew every figure by heart. At 200 people, that memory is spread across a dozen laptops, and each person just trusts their own version.</p><p>The stakes here are real money. According to BlackLine&#x27;s 2024 research, nearly 40% of CFOs do not completely trust their own company&#x27;s financial data. If the person signing the accounts is unsure, everyone downstream is guessing too. Every wrong figure that reaches a bank update or an investor call is a real cost, not a rounding error.</p><p>The other reason is speed. Governance feels like the thing you do later, once the fire is out. So it never gets done, and the fires keep starting because the underlying data is never agreed. A COO who steps in here, even for two afternoons, removes a source of friction that touches every team.</p><h2>What does a data governance strategy look like without a big committee?</h2><p>A right-sized data governance strategy has four moving parts, and a founder can set all four in a week.</p><p>First, name owners. For each core metric, one person is accountable for its definition. Not a team, one name. Second, write definitions. One sentence each: what counts as revenue, what counts as an active customer, what date a deal is booked. Third, pick the one place the trusted number lives, usually a single semantic model in Power BI, so every report reads from the same source. Fourth, set access rights with row-level security so people see the data they should and nothing they should not.</p><p>That fourth part is where master data management earns its keep. It sounds technical, but for you it just means one clean list of your customers, one list of your products, and one list of your accounts, agreed across every tool. When those core lists match everywhere, the numbers built on top of them finally agree too.</p><h2>Who should own data governance in a mid-sized business?</h2><p>At your size, the sponsor is a COO or founder, and the day-to-day owner is whoever runs finance or operations data. You do not need a Chief Data Officer. You need one person with the authority to say &quot;this is the revenue number&quot; and have it stick.</p><p>Give that person a short mandate: keep the one-page framework current, settle disputes about definitions, and sign off before a new company-wide metric is added. Ten or fifteen metrics, one owner, one hour a month. That is a governance job a real company can actually keep up.</p><h2>How do you know your data governance is working?</h2><p>You will notice it in meetings first. Nobody opens a call by questioning the number on the slide. The revenue figure in the board pack matches the one in the sales dashboard, and finance no longer re-keys the &quot;finished&quot; report back into Excel to check it.</p><p>The second sign is speed. New reports get built faster because people start from the trusted model instead of rebuilding definitions from scratch. The third sign is quieter: your best analyst stops being the only person who knows how a number is calculated, because the definition is written down where anyone can read it.</p><h2>Heavy governance vs. right-sized governance</h2><table><tr><th>What to decide</th><th>Heavy enterprise approach</th><th>Right-sized for mid-sized business</th></tr><tr><td>Who runs it</td><td>Chief Data Officer plus a standing committee</td><td>One COO or founder sponsor, one data owner</td></tr><tr><td>The framework</td><td>40-page policy document</td><td>One page listing core metrics and owners</td></tr><tr><td>Metric definitions</td><td>Reviewed quarterly by a working group</td><td>Written once, updated when the business changes</td></tr><tr><td>Where the number lives</td><td>Full data catalog and lineage tooling</td><td>One semantic model in Power BI as the source</td></tr><tr><td>Access control</td><td>Formal roles across many teams</td><td>Row-level security on the reports that matter</td></tr><tr><td>Time to first value</td><td>Six to twelve months</td><td>Two to four weeks</td></tr></table><p>The aim is to run the version of governance that fits a company your size, so it actually gets used instead of sitting in a folder nobody opens.</p><p>If you want a quick read on where your numbers are at risk, our free Power BI Governance and Cost Scorecard takes about five minutes and gives you your top three risks plus a benchmark against similar teams. If your reports still will not reconcile after that, book a governance assessment with us and we will map your core metrics to a single trusted model your whole team can work from.</p><h2>FAQ</h2><p>How long does it take to set up data governance for a mid-sized business?
+The first version takes two to four weeks. Naming owners and writing definitions can be done in a few working sessions. Moving every report onto one trusted model in Power BI is the longer part, and it is worth doing in stages, starting with your revenue and customer numbers.</p><p>Do we need to hire a Chief Data Officer?
+No. At 50 to 500 people, a COO or founder sponsor plus one data owner is enough. A dedicated data leader makes sense later, once you have many teams and heavier compliance needs. Start with one accountable person and a one-page framework.</p><p>Is data governance the same as data security?
+No, though they overlap. Security is about protecting data from outside access. Governance is about agreeing what your numbers mean, who owns them, and who can change them, so the business can trust the figures it decides on. Access rights and row-level security sit in both.</p><p>Read next: [What a data governance framework really includes](/blog/data-governance-framework) and [How to build a single source of truth in Power BI](/blog/single-source-of-truth-power-bi).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">data governance for mid-sized business</span><span class="c">data governance framework</span><span class="c">data governance strategy</span><span class="c">master data management</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

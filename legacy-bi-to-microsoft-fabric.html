@@ -1,0 +1,146 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Legacy BI to Microsoft Fabric: How to Plan the Move</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, CaseWhen</b><span>legacy bi to microsoft fabric</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>Legacy BI to Microsoft Fabric: How to Plan the Move</h1><figure class="achart"><figcaption>Organizations with data good enough to use for AI</figcaption><div class="cbar"><span class="cl">Ready</span><div class="ctrack"><div class="cfill" style="width:13%"></div></div><span class="cv">12%</span></div><div class="cbar"><span class="cl">Not ready</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">88%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><p>Quick Answer: Moving legacy BI to Microsoft Fabric means retiring old reporting tools and rebuilding your reports on one governed platform where every number has a single definition and a clear owner. The goal is to fix the model underneath so both people and Copilot return the same trusted number, instead of copying your old dashboards straight across.
+---</p><p>Your old reporting tools still run the business, and every plan to move legacy BI to Microsoft Fabric slips to next quarter. The reports mostly work, nobody wants to break them, and the person who understood how they were built is either very busy or already gone. So the migration stays on the roadmap and never leaves it.</p><p>This is a plain guide to what the move actually involves and how to do it without the numbers breaking in front of the people who rely on them. If you are a Head of Data being asked when the old platform gets switched off, read this before you commit to a date.</p><h2>What does moving legacy BI to Microsoft Fabric actually mean?</h2><p>Legacy BI is the reporting setup you already have: an older tool such as a QlikView site, a Cognos server, a Tableau estate, a SQL Server Reporting Services box, or a pile of scheduled Excel exports that feed the monthly pack. Microsoft Fabric is one platform that keeps your data, your models, and your reports in a single place called OneLake, with Power BI as the reporting layer on top.</p><p>So the move is more than swapping one tool for another. In most legacy setups, the logic that decides what a number means lives inside individual reports. One report calculates revenue one way, another does it slightly differently, and there is no single place that says which is right. When you move to Fabric, you pull that logic out of the reports and into one semantic model that every report and every AI answer reads from.</p><p>That is the real work. Copying old dashboards across gets you a new tool with the same old problems. Rebuilding the model gets you numbers people can trust.</p><h2>Why do legacy BI to Microsoft Fabric migrations stall?</h2><p>Because the risk feels bigger than the reward, and for a while it is. The old reports are wrong in ways the team has learned to correct by hand. Nobody wrote down those corrections. So a straight rebuild produces numbers that look different from the old ones, finance asks why, and the whole project loses trust in week two.</p><p>Here is how it usually plays out. A team starts the migration, rebuilds the top ten reports, and shows them side by side with the old ones. Three numbers do not match. The differences are actually the new reports being correct and the old ones carrying an error everyone forgot about, but there is no documentation to prove it. The safe move looks like keeping both systems running until someone can explain the gap, and now you are paying for two platforms and trusting neither.</p><p>More caution does not fix this. What fixes it is knowing, before you touch anything, which numbers are supposed to match and which old figures were wrong all along. That comes from writing down the definitions first, and it comes before you rebuild.</p><h2>How do you plan a legacy BI to Microsoft Fabric migration?</h2><p>Start with an inventory, not a rebuild. You need to see what you actually have before you move any of it.</p><p>First, list every report on the old platform and mark which ones people really use. In most estates, a large share of reports have not been opened in months. You do not migrate those, you retire them. Moving dead reports is how a three-month project becomes a year.</p><p>Second, for each report that stays, write down what its key numbers mean. Revenue, active customers, margin: one definition each, agreed with the people who use them. This is the step teams skip and the reason migrations stall, so do it before you build.</p><p>Third, pick the pattern for each source. Some data lands in OneLake through a pipeline in Fabric, some connects live, some gets rebuilt from scratch because the old logic was never clean. Naming the pattern per source stops surprises halfway through.</p><p>Fourth, move in slices, not all at once. Pick one report area, rebuild it in Fabric on the agreed model, run it in parallel with the old one until the numbers tie out, then switch that slice off on the old platform. Repeat. Running both for a short, planned window per slice is normal. Running both indefinitely because nothing is finished is the mistake to avoid.</p><table><tr><th>Step</th><th>What you decide</th><th>Why it matters</th></tr><tr><td>Inventory reports</td><td>Which reports stay, which get retired</td><td>Stops you migrating reports nobody opens</td></tr><tr><td>Define the numbers</td><td>One agreed meaning per key metric</td><td>The old reports disagree, so pick the truth first</td></tr><tr><td>Choose the source pattern</td><td>Pipeline, live connection, or rebuild</td><td>Avoids surprises halfway through the move</td></tr><tr><td>Migrate in slices</td><td>One report area at a time, run in parallel</td><td>Keeps trusted numbers live while you switch</td></tr></table><h2>What should you move first?</h2><p>Move the reports that carry the most risk and have the clearest definitions, not the flashiest dashboards. The monthly finance pack, the board numbers, the figures that go to a bank or an auditor: these are where a wrong number costs the most, so they earn the careful rebuild first.</p><p>Leave the exploratory and one-off reports for last, or retire them. A dashboard three people glance at once a quarter does not need to be first in line, and some of it should not be rebuilt at all.</p><p>Microsoft Fabric passed 28,000 customers by late 2025, the fastest-growing analytics product in Microsoft&#x27;s history (Microsoft, Ignite 2025). That growth is why the platform is a safe target to build on, but it also means a lot of teams are moving at once and copying old messes straight across. Being deliberate about what you move first is what separates a clean migration from a rushed one.</p><h2>How long does it take and what does it cost?</h2><p>It depends on how many reports actually matter and how much of the definition work is already done. A focused migration of the reports that run the business is a matter of weeks to a few months, not a single big switch. The inventory and definition work takes days and saves you far more than that later, because it stops you rebuilding things nobody needs.</p><p>The cost that surprises teams is not the platform, it is running two systems at once for longer than planned. Every extra month of parallel running is a month of paying for the old license, the new capacity, and the people keeping both running. A tight plan with clear slices is the thing that keeps that window short.</p><p>If you want to see where your current setup stands before you commit to a date, our free Power BI Governance and Cost Scorecard walks you through the key readiness questions in about five minutes and gives you your top risks. If the score shows gaps, book a migration review with us, and we will map exactly what to move first, what to retire, and how to keep the numbers trusted while you switch.</p><h2>FAQ</h2><p>Can you just copy your old reports straight into Microsoft Fabric?
+You can, but you will bring every disagreement and hidden error with you and end up with a new tool that people trust as little as the old one. The value of the move comes from rebuilding on one agreed model, not from a copy. Retire the reports nobody uses and rebuild the ones that matter properly.</p><p>Do you have to move everything off the legacy platform at once?
+No, and you should not. Migrate one report area at a time, run it in parallel with the old version until the numbers tie out, then switch that slice off. The one thing to avoid is running both platforms indefinitely because nothing is ever finished.</p><p>What is the hardest part of a legacy BI to Microsoft Fabric migration?
+Agreeing what the numbers mean. The old reports usually disagree with each other, and the corrections people apply by hand were never written down. Settling one definition per key metric before you build is the step that makes the whole migration reliable.</p><p>Read next: [Microsoft Fabric: What It Is and When to Move](/blog/blog-microsoft-fabric) and [Tableau to Power BI Migration Guide](/blog/blog-tableau-to-power-bi-migration).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">legacy bi to microsoft fabric</span><span class="c">microsoft fabric migration</span><span class="c">legacy bi replacement</span><span class="c">onelake data platform</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

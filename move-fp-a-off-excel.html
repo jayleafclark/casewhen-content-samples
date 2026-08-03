@@ -1,0 +1,146 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · How to Move FP&amp;A Off Excel Without Breaking the Close</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, CaseWhen</b><span>move fp&amp;a off excel</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>How to Move FP&amp;A Off Excel Without Breaking the Close</h1><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><p>Quick Answer: To move FP&amp;A off Excel, you rebuild your planning and reporting on one governed model, usually in Power BI or Microsoft Fabric, where each figure has a single definition, a clear owner, and a refresh you can trust. Excel stays as the place to sketch and test, and the numbers people report from live in the model instead of a workbook.
+---</p><p>Your monthly forecast lives in one giant spreadsheet, and every close someone finds a formula that will not calculate, a stale tab, or a total that no longer ties out. If you want to move FP&amp;A off Excel, the hard part is not picking a tool, it is keeping the numbers trustworthy while you make the switch. This is a plain guide for controllers and heads of FP&amp;A who are tired of the forecast breaking the week before it is due.</p><p>Excel earns its keep for a lot of finance work. It is a good place to model an idea and test a scenario. The trouble starts when the workbook becomes the book of record, the thing the board reads and the bank relies on. That is a job it was never built for.</p><h2>What does it take to move FP&amp;A off Excel?</h2><p>Three things, and none of them is the software.</p><p>First, agreed definitions. Every number your team reports, like revenue, gross margin, and headcount cost, needs one written definition that finance signs off. Most spreadsheet disputes are really definition disputes wearing a formula.</p><p>Second, one model that carries those definitions. This is where Power BI or Microsoft Fabric comes in. A measure like net revenue gets written once, and every report reads it from there instead of each analyst rebuilding it in their own tab.</p><p>Third, ownership and refresh. Each important table gets a named owner and a schedule you can see, so the numbers update on their own and you know who to ask when something looks off.</p><p>Get those three right and the tool almost picks itself. Skip them and you have just moved the same mess into a prettier dashboard.</p><h2>Why is FP&amp;A still stuck in spreadsheets?</h2><p>Because Excel does the one thing every other tool makes hard: it lets you change anything, instantly, with no sign-off from anyone. That freedom is why analysts love it, and it is also why the workbook turns into the problem.</p><p>A forecast starts as a clean model. Then someone adds a column for a one-off adjustment. Someone else copies last quarter&#x27;s tab and edits half of it. A third person emails a version with their own tweaks. Within a few months the file is a stack of overrides that only one person understands, and that person is now the one your whole close depends on.</p><p>FP&amp;A teams spend just 25% of their time on analysis and 42% of it gathering data (AFP and APQC, 2019). That is the real cost of spreadsheet-based FP&amp;A: your most expensive finance people spend more of their week fetching and stitching numbers than explaining what those numbers mean.</p><p>When the underlying file is fragile, the risk is not only wasted time. A wrong figure slips through, the quarterly forecast goes out, and finance has to walk it back the following week once a cleaner number surfaces.</p><h2>Which parts of FP&amp;A should leave Excel first?</h2><p>The reporting, before the modeling. Split your spreadsheet work into two kinds.</p><p>The first kind is exploration: a quick scenario, a one-off analysis, a sketch you will throw away. Excel is still the right home for that, and moving it would only slow you down.</p><p>The second kind is anything repeated and reported: the monthly management pack, the budget-versus-actuals view, the cash forecast the board sees. These are the files that break, and they are the ones worth moving into a governed model first. They run on the same shape every month, so they gain the most from fp&amp;a automation and lose the least in flexibility.</p><p>Start with the one report that hurts most at close, usually board actuals or the rolling forecast. Move that to the model, prove it ties out, then take the next one. You reach a trusted close far faster this way than by trying to rebuild everything at once.</p><h2>What does FP&amp;A look like after Excel?</h2><p>The workbook stops being the source of record and becomes a scratchpad again. Here is the difference in the parts that matter.</p><table><tr><th>Part of the work</th><th>Spreadsheet-based FP&amp;A</th><th>FP&amp;A on a governed model</th></tr><tr><td>Where numbers live</td><td>A workbook emailed around</td><td>One model every report reads</td></tr><tr><td>Metric definitions</td><td>Rebuilt in each analyst&#x27;s tabs</td><td>Written once, owned, reused</td></tr><tr><td>Refresh</td><td>Manual export and paste</td><td>Scheduled, automatic, visible</td></tr><tr><td>Key-person risk</td><td>One person understands the file</td><td>Owner named, logic documented</td></tr><tr><td>Excel&#x27;s role</td><td>The book of record</td><td>A place to explore and test</td></tr></table><p>Financial planning in Power BI does not take Excel away from your analysts. It takes away the part of Excel that was never safe: the fragile, hand-updated file that the whole company depended on and no one fully trusted.</p><h2>Do you need Microsoft Fabric, or just Power BI?</h2><p>It depends on where your data sits. If your actuals already land cleanly in an ERP or a small set of systems, a Power BI model on top is usually enough. The model becomes the one place every figure is defined, and your reports read from it.</p><p>If your data is spread across many systems, or volumes are large, Microsoft Fabric adds one storage layer to bring it together before the model sits on top. Fabric is the heavier option, and it earns its place when you are consolidating a lot of sources or getting ready for AI features like Copilot, which will only ever be as reliable as the model underneath it.</p><p>Either way, the platform is the last decision. The definitions and the ownership are what make the switch stick.</p><p>If you want to see where your finance reporting stands before you move anything, our free Power BI Governance and Cost Scorecard walks you through the trust and ownership questions in about five minutes and shows your top risks. If the score turns up gaps, book a scoping call with us and we will map exactly what it takes to move your close and forecast off Excel and onto a model your board can trust.</p><h2>FAQ</h2><p>Does moving FP&amp;A off Excel mean my team stops using spreadsheets?
+No. Your analysts keep Excel for scenarios, quick analysis, and sketching. What leaves Excel is the repeated, reported work: the management pack, the budget-versus-actuals view, the cash forecast. Those move to a governed model so the reported number is trustworthy, while exploration stays where it is fast.</p><p>How long does it take to move a report off Excel?
+For a single report like board actuals or the rolling forecast, an assessment takes days and the build usually takes a few weeks. It depends on how clean your source data is and how many overrides are buried in the current file. Starting with your most painful report gets you a trusted close quickly, without a year-long project.</p><p>Will the numbers actually match what we have in Excel today?
+They should match the correct version, which is not always the current one. Part of moving FP&amp;A off Excel is agreeing the real definition of each figure, so where the model and the old spreadsheet disagree, you usually find the spreadsheet was carrying an error. That is the point of the switch.</p><p>Read next: [Excel to Power BI](/blog/excel-to-power-bi) and [Single Source of Truth for Finance](/blog/single-source-of-truth-for-finance).</p></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">move fp&amp;a off excel</span><span class="c">fp&amp;a automation</span><span class="c">spreadsheet-based fp&amp;a</span><span class="c">financial planning in power bi</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">an H2</span><span class="p">meta description</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

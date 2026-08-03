@@ -1,0 +1,146 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · How to Migrate From Tableau to Power BI: A Practical Guide</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, CaseWhen</b><span>how to migrate from tableau to power bi</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>How to Migrate From Tableau to Power BI: A Practical Guide</h1><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><p>Quick Answer: How to migrate from Tableau to Power BI comes down to four steps: take stock of what you still use, rebuild the data model properly in Power BI, recreate the reports that matter, then run both tools side by side until the numbers match. The mistake most teams make is trying to convert dashboards one for one. Power BI works differently under the hood, so a clean rebuild of the model is faster and safer than a copy.</p><p>You picked Tableau years ago, and now the rest of the company runs on Microsoft, so someone has asked how to migrate from Tableau to Power BI without losing every dashboard your team built. That is a fair question and a stressful one. You have dozens of workbooks, a few people who know where the numbers come from, and a licence renewal coming up. Nobody wants to spend six months on a move that leaves the business with two reporting tools and no clear answer to which one is right.</p><p>Thousands of teams have done this move, so it is well understood. Most guides still make it sound simpler than it really is. Tableau and Power BI look similar on the surface and think about data very differently underneath. If you treat the move as a straight copy, you get reports that render but return the wrong totals. This guide walks through how to do it properly, in plain terms, without the sales gloss.</p><h2>What does it really take to migrate from Tableau to Power BI?</h2><p>Three things move when you switch tools, and they are not equally hard.</p><p>The first is the data connections. Tableau connects to your databases, extracts, and files. Power BI does the same, and this part is usually straightforward. You point Power BI at the same sources.</p><p>The second is the data model, which is the set of tables, relationships, and calculations behind your charts. This is the real work. Tableau uses its own calculation language and its own way of joining data. Power BI uses a language called DAX and a star-schema model, and the two do not translate line for line. A Tableau calculated field often has to be rethought as a DAX measure, not simply pasted across.</p><p>The third is the reports and dashboards themselves, the visuals people open every day. These are the easiest to recreate once the model is right, and the most tempting to start with, which is exactly the trap.</p><p>Most teams start with the visuals because that is what everyone can see. Then they discover the numbers do not tie out, because the model underneath was never rebuilt. Start with the model. The visuals come quickly after.</p><h2>How do you plan a migration without stalling halfway?</h2><p>The most common way this goes wrong is not technical. A team starts converting workbooks with no priority list, runs out of time or budget, and ends up with half the reports in Power BI and half still in Tableau. Now both licences are being paid for, nobody trusts either version, and the finance team keeps using the old one anyway. The migration stalls half finished and both tools run at once, which is the worst of every outcome.</p><p>You avoid that with a short planning pass before anyone touches Power BI.</p><ol><li>Inventory what exists. List every Tableau workbook and dashboard. Note who opens each one and how often. Tableau&#x27;s own usage stats tell you this.</li><li>Cut hard. Most Tableau deployments have a long tail of reports nobody opens. You do not migrate those. You retire them. Moving dead reports is pure waste.</li><li>Rank what is left. Order the survivors by how much the business relies on them. The month-end pack and the sales pipeline report come first. The one chart someone made in 2021 comes last, if at all.</li><li>Pick a first slice. Choose one important, self-contained report to migrate first. You learn the real effort on something that matters, not on a toy.</li></ol><p>This step alone often cuts the work in half, because most teams are carrying far more reports than anyone uses.</p><h2>How to migrate from Tableau to Power BI step by step</h2><p>Once the plan is set, the build follows a repeatable order. Do it in this sequence and the numbers stay correct.</p><ul><li>Connect the data. Point Power BI at the same sources Tableau used. Confirm you can see the same raw tables.</li><li>Rebuild the model as a star schema. Lay out fact tables and dimension tables cleanly, with clear relationships. This is where trusted numbers come from. Do not skip it to save time.</li><li>Rewrite the calculations as DAX measures. Take each Tableau calculated field that matters and rebuild it as a measure. Write the definition down as you go, so there is one agreed version of revenue, margin, and every other number.</li><li>Recreate the reports. Now build the visuals. With a clean model, this is the fast part.</li><li>Add row-level security. So a regional manager sees only their region, the way your Tableau permissions did.</li><li>Validate against Tableau. Put the old report and the new report next to each other and check that every total matches. Skipping this step is how wrong numbers reach the business.</li></ul><p>That validation step is the one people rush, and it is the one that decides whether the business trusts the new tool. If a total is off by even a little, find out why before you switch anyone over.</p><h2>Should you convert dashboards or rebuild them?</h2><p>There are tools that promise to convert Tableau workbooks into Power BI automatically. They can help with a first draft and save some clicking, but they will not save you from the real work, because they cannot rebuild a proper data model or decide what your one agreed definition of margin should be. A converted dashboard usually needs almost as much cleanup as a fresh build, and it hides problems inside logic you did not write.</p><p>For anything important, rebuild it. The rebuild forces you to decide what each number means, which is the whole point of the exercise. Reserve auto-conversion for low-stakes reports where a rough copy is good enough.</p><p>Part of the reason teams take this on at all is cost. Power BI Pro lists at $14 per user each month, against Tableau Creator at $75, according to vendor list prices in 2025. Across a large deployment that gap is real money, and it is often what gets a migration approved. Just do not let the saving tempt you into a rushed copy, because a Power BI report nobody trusts costs far more than the licence you saved.</p><h2>What changes for your team in Tableau vs Power BI?</h2><p>Here is how the two tools compare on the points that matter during a move.</p><table><tr><th>Point</th><th>Tableau</th><th>Power BI</th></tr><tr><td>Calculation language</td><td>Tableau calculations</td><td>DAX measures</td></tr><tr><td>Data model shape</td><td>Flexible joins, less enforced</td><td>Star schema, clearer structure</td></tr><tr><td>Licence list price</td><td>Creator around $75/user/month</td><td>Pro around $14/user/month</td></tr><tr><td>Fits Microsoft stack</td><td>Separate platform</td><td>Native with Excel, Teams, Fabric</td></tr><tr><td>Learning curve for the team</td><td>Known to your current users</td><td>New syntax, familiar Office feel</td></tr></table><p>The table shows why the move is worth doing and where the real effort sits. The cost and the Microsoft fit pull you toward Power BI. The different calculation language is exactly why you cannot just copy your work across.</p><h2>How CaseWhen can help</h2><p>If you are working out how to migrate from Tableau to Power BI, the hard part is rebuilding the data model so the new reports return the same trusted numbers your team already relies on. The visuals are the quick part. That is the work we do. We inventory what you have, rebuild the semantic model to one agreed number, and validate every total against your existing Tableau reports before anyone switches over.</p><p>Start with our free Power BI Governance and Cost Scorecard. It is a five-minute assessment that scores where your reporting stands today and flags the top risks before a migration starts. If you have a Tableau renewal or a deadline in front of you, book a migration scoping call with us and we will map the real effort on your actual reports.</p><h2>FAQ</h2><p>How long does a Tableau to Power BI migration take?
+It depends far more on how many reports you keep than on the tool. A focused migration of the reports that matter can take a few weeks. A full move of a large, uncleaned Tableau estate can run several months, which is exactly why cutting dead reports first is so important.</p><p>Can you automatically convert Tableau dashboards to Power BI?
+Partly. Some tools generate a first draft, but they cannot rebuild a proper data model or decide what each number means. For important reports, a clean rebuild is faster and safer than fixing an automatic conversion.</p><p>Will the numbers match after we migrate from Tableau to Power BI?
+Only if you validate them. Put the old and new versions side by side and check every total before switching users over. Differences almost always trace back to the data model or a calculation that was copied instead of rebuilt.</p><p>Do we have to run Tableau and Power BI at the same time?
+For a short window, yes, and that is healthy. Running both while you validate lets you prove the new numbers before you retire the old tool. The risk is leaving both running for months with no plan to finish, so set an end date.</p><h2>Read next</h2><ul><li>[Tableau vs Power BI: Which One Fits Your Team](/blog/tableau-vs-power-bi)</li><li>[Power BI Governance: How to Get to One Trusted Number](/blog/power-bi-governance)</li></ul></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">how to migrate from tableau to power bi</span><span class="c">Tableau to Power BI migration, convert Tableau dashboards to Power BI, Tableau vs Power BI</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

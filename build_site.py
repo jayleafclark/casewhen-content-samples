@@ -1855,7 +1855,13 @@ def blog_articles_and_grid():
     training = [f for f in rest if is_training(f)]
     other = [f for f in rest if not is_training(f)]
     # BUYER-WEIGHTED grid: buyer/business-side articles first, then practitioner, training capped
-    files = buyer + other + training[:8]
+    # generate a page for EVERY blog (so none keeps a stale footer), dedup by stem
+    allblogs = buyer + other + training
+    seen_stem = set(); files = []
+    for f in allblogs:
+        if f.stem in seen_stem: continue
+        seen_stem.add(f.stem); files.append(f)
+    grid_stems = seen_stem  # everything visible: every blog gets a card, buyer-first order
     cards = []; cats_present = set()
     for f in files:
         md = f.read_text(encoding="utf-8"); fm, body = _fm_body(md)
@@ -1888,15 +1894,16 @@ def blog_articles_and_grid():
                f'it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div>')
         inner = f'<section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">\u2190 all articles</a></div></section><div class="wrap article-wrap">{art}{chart if False else ""}{geo}</div>'
         (OUT / f"{f.stem}.html").write_text(shell(f"{f.stem}.html", h1[:60], f"<style>{ARTCSS}</style>{inner}"), encoding="utf-8")
-        blang = "DE" if re.search(r'[äöüß]', md) else "EN"
-        bcat = categorize({"keyword": kw, "cluster": cluster}, kw)
-        cats_present.add(bcat)
-        has_cover = (OUT / "img" / "blogcovers" / f"{f.stem}.png").exists()
-        if has_cover:
-            inner_c = f'<img src="img/blogcovers/{f.stem}.png" loading="lazy" alt="{esc(h1)}">'
-        else:  # cover not rendered yet (e.g. fresh gap-fill blog) — text tile so it still shows + clicks
-            inner_c = f'<div class="btile"><span class="btcat">{esc(bcat)} · {blang}</span><span class="bth">{esc(h1)}</span></div>'
-        cards.append(f'<a class="bcard" data-lang="{blang}" data-cat="{esc(bcat)}" href="{f.stem}.html">{inner_c}</a>')
+        if f.stem in grid_stems:  # only the buyer-weighted display set becomes a grid card
+            blang = "DE" if re.search(r'[äöüß]', md) else "EN"
+            bcat = categorize({"keyword": kw, "cluster": cluster}, kw)
+            cats_present.add(bcat)
+            has_cover = (OUT / "img" / "blogcovers" / f"{f.stem}.png").exists()
+            if has_cover:
+                inner_c = f'<img src="img/blogcovers/{f.stem}.png" loading="lazy" alt="{esc(h1)}">'
+            else:  # cover not rendered yet (e.g. fresh gap-fill blog) — text tile so it still shows + clicks
+                inner_c = f'<div class="btile"><span class="btcat">{esc(bcat)} · {blang}</span><span class="bth">{esc(h1)}</span></div>'
+            cards.append(f'<a class="bcard" data-lang="{blang}" data-cat="{esc(bcat)}" href="{f.stem}.html">{inner_c}</a>')
     grid = (f'<section class="ph"><div class="wrap"><div class="eb">Blog</div><h2>{len(files)} full articles, written and gated</h2>'
             f'<p style="color:var(--mut);font-size:15px;margin:10px 0 0">One English article a day plus three German a week, across six months. Filter by language or category, then click any cover to read the finished, SEO-optimized article.</p></div></section>'
             f'{filter_bar(cats_present)}<div class="wrap"><div class="bgrid">{"".join(cards)}</div></div>')
@@ -1933,12 +1940,16 @@ def longform_page():
     (OUT / "youtube.html").write_text(shell("youtube.html", "YouTube", f"<style>{ARTCSS}{LFCSS}{FILTCSS}</style>{grid}"), encoding="utf-8")
     return len(files)
 
-def home():
+def home(counts=None):
+    counts = counts or {}
     cards = ""
     for k, cfg in PLATFORMS.items():
-        n = len(cfg["slots"])
+        n = counts.get(k, len(cfg["slots"]))
         cards += (f'<a href="{k}.html"><div class="n">{n}</div>'
                   f'<div class="l">{esc(cfg["title"])}</div><div class="s">{esc(cfg["tag"])}</div></a>')
+    if counts.get("youtube"):
+        cards += (f'<a href="youtube.html"><div class="n">{counts["youtube"]}</div>'
+                  f'<div class="l">Long-form YouTube</div><div class="s">8 to 15 min scripts, EN + DE</div></a>')
     inner = f"""<section class="hero"><div class="wrap">
 <div class="eb">CaseWhen · 6-month content plan</div>
 <h1>Six months of CaseWhen content.</h1>
@@ -1948,7 +1959,6 @@ X. Every finished one is written plainly and passes the language and SEO checks 
 <div class="cad">{cards}</div></div></section>"""
     (OUT / "index.html").write_text(shell("index.html", "6-month content plan", inner), encoding="utf-8")
 
-home()
 strategy_page()
 pricing_page()
 seo_page()
@@ -1995,11 +2005,25 @@ def build_social():
                 d["buyer"] = True
                 out.append(d)
         return out
+    _CR = Path(r"J:\Claude Code\casewhen-research\content")
+    GAP_LI, GAP_X, GAP_REEL = _CR/"w-gapfill-linkedin", _CR/"w-gapfill-x", _CR/"w-gapfill-reels"
     merged = {
-        "linkedin": _buyer(BUYER_LI, kw_from_note=True) + existing.get("linkedin", []),
-        "shortform": _buyer(BUYER_REEL) + _buyer(CADENCE_REEL) + existing.get("shortform", []),
-        "x": _buyer(CADENCE_X) + existing.get("x", []),
+        "linkedin": _buyer(GAP_LI, kw_from_note=True) + _buyer(BUYER_LI, kw_from_note=True) + existing.get("linkedin", []),
+        "shortform": _buyer(GAP_REEL) + _buyer(BUYER_REEL) + _buyer(CADENCE_REEL) + existing.get("shortform", []),
+        "x": _buyer(GAP_X) + _buyer(CADENCE_X) + existing.get("x", []),
     }
+    # DEDUP: never render the same post twice (normalized hook/body), keep first occurrence
+    def _sig(p):
+        import re as _re
+        return _re.sub(r'[^a-z0-9]+', ' ', ((p.get("hook") or p.get("body") or "")).lower()).strip()[:80]
+    for plat in merged:
+        seen = set(); uniq = []
+        for p in merged[plat]:
+            s = _sig(p)
+            if s and s in seen:
+                continue
+            seen.add(s); uniq.append(p)
+        merged[plat] = uniq
     total = 0
     for plat, posts in merged.items():
         slots = []
@@ -2018,6 +2042,9 @@ for k, cfg in PLATFORMS.items():
     n, d = platform_page(k, cfg); tot += n; don += d
 nblogs = blog_articles_and_grid()   # overwrite blog.html with the full-article grid
 nlf = longform_page()
+home({"blog": nblogs, "linkedin": len(PLATFORMS["linkedin"]["slots"]),
+      "shortform": len(PLATFORMS["shortform"]["slots"]), "x": len(PLATFORMS["x"]["slots"]),
+      "youtube": nlf})   # real counts, after everything is built
 print(f"long-form scripts: {nlf}")
 print(f"blog articles assembled: {nblogs}")
 print(f"built index + {len(PLATFORMS)} platform pages · {tot} slots scheduled · {don} finished/gated")

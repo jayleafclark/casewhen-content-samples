@@ -1,0 +1,142 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Self Service BI Governance: der Leitfaden für Head of Data</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Sajagan Thirugnanam, CaseWhen</b><span>self service bi governance</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>Self Service BI Governance: der Leitfaden für Head of Data</h1><figure class="achart"><figcaption>Organizations that fully trust their data</figcaption><div class="cbar"><span class="cl">Trust it</span><div class="ctrack"><div class="cfill" style="width:49%"></div></div><span class="cv">33%</span></div><div class="cbar"><span class="cl">Do not</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">67%</span></div><div class="csrc">Source: Precisely &amp; Drexel LeBow, 2025</div></figure><p>Quick Answer: Self Service BI Governance bedeutet, dass Ihre Teams ihre eigenen Berichte bauen dürfen, ohne dass am Ende jeder eine andere Zahl hat. Sie brauchen dafür keine strengen Freigaben, die das Tempo bremsen. Der Kern ist einfach: eine verantwortliche Person je wichtiger Kennzahl, ein gemeinsames Datenmodell als einzige Quelle und saubere Zugriffsrechte, damit Freiheit und Verlässlichkeit zusammenpassen.</p><p>Sie haben Ihren Teams Power BI in die Hand gegeben, damit jeder sich seine eigenen Auswertungen bauen kann, und heute zeigen zwei davon einen anderen Umsatz für denselben Monat. Genau an diesem Punkt wird Self Service BI Governance für Sie als Head of Data wichtig, denn plötzlich sind Sie derjenige, der erklären soll, welche Zahl gilt und warum. Es geht dabei nicht um Kontrolle um der Kontrolle willen, sondern um eine schlichte Frage: Auf welchen Wert kann sich das Haus verlassen, wenn jeder seine eigenen Berichte baut.</p><p>In vielen Unternehmen ist die Antwort darauf offen. Der Vertrieb zieht seine Zahlen aus dem CRM, das Controlling rechnet in einem eigenen Excel weiter, ein Team hat ein hübsches Dashboard gebaut, das keiner mehr prüft. Jeder für sich hat gute Arbeit gemacht, und trotzdem passen die Ergebnisse nicht zusammen. Self-Service hat die Menge an Berichten vervielfacht, aber niemand hat festgelegt, welcher davon die Wahrheit sagt.</p><p>Dieser Leitfaden zeigt Ihnen, wie Sie Self Service BI Governance so aufsetzen, dass Ihre Teams frei bleiben und Sie am Ende trotzdem eine Zahl haben, der alle trauen.</p><h2>Was bedeutet Self Service BI Governance eigentlich?</h2><p>Governance klingt nach Freigaben, Ausschüssen und einer Bremse für alle, die schnell etwas auswerten wollen. Für Self-Service ist das genau das falsche Bild. Self Service BI Governance heißt nicht, dass Sie den Teams das Bauen verbieten. Es heißt, dass klar ist, woher die Zahlen kommen, wer für jede wichtige Kennzahl verantwortlich ist und wer welche Daten sehen oder verändern darf.</p><p>Nehmen Sie den Monatsumsatz. Ohne Governance definiert ihn jedes Team leicht anders, mal mit Stornos, mal ohne, mal in einer anderen Währungslogik. Mit Governance ist eine Person benannt, die diese Kennzahl besitzt. Die Berechnung liegt einmal zentral im Datenmodell, und alle Berichte greifen darauf zu, statt die Formel jeweils neu zu erfinden. So dürfen die Teams weiter selbst bauen, aber sie bauen auf demselben Fundament.</p><p>In Ihrer Rolle ist das die eigentliche Aufgabe. Sie sollen den Menschen nicht das Werkzeug wegnehmen, sondern dafür sorgen, dass Freiheit im Frontend und Verlässlichkeit im Kern zusammengehen. Genau das leistet ein gutes governance framework: Es gibt den Rahmen vor, in dem Self-Service sicher ist.</p><h2>Warum kippt Self Service Analytics ohne Governance ins Chaos?</h2><p>Der Grund liegt in der Natur von Self-Service selbst. Sie geben vielen Menschen die Möglichkeit, Daten zu ziehen und zu rechnen. Ohne gemeinsame Grundlage rechnet jeder ein wenig anders, und aus zehn Berichten werden zehn Versionen der Wahrheit. Das fällt nicht sofort auf, weil jeder einzelne Bericht für sich plausibel aussieht.</p><p>Dazu kommt der Wildwuchs. Jemand baut ein Dashboard für eine einmalige Frage, es bleibt liegen, andere finden es und arbeiten damit weiter, obwohl niemand die Quelle mehr kennt. Nach einem Jahr haben Sie Hunderte Berichte, von denen keiner weiß, welche noch stimmen. Die eigentliche Ironie ist, dass am Ende trotzdem kaum jemand die Berichte nutzt. Laut BARC und Eckerson Group (2022) verwenden im Schnitt nur 25 Prozent der Mitarbeiter die BI-Werkzeuge, für die ihr Unternehmen bezahlt. Viel Self-Service, wenig Vertrauen, kaum Nutzung.</p><p>Der gefährlichste Punkt ist aber die stille Uneinigkeit. Solange niemand die Zahlen direkt nebeneinanderlegt, fühlt sich alles in Ordnung an. Das Problem zeigt sich erst im falschen Moment, etwa wenn die Vertriebsprognose nach oben gemeldet und ein Quartal später leise zurückgenommen wird, weil die Zahl von Anfang an aus einem ungeprüften Bericht stammte. Bis dahin wirkt der Self-Service wie ein Erfolg, obwohl er längst auf wackligem Boden steht.</p><h2>Wie richten Sie Governance ein, ohne Self-Service abzuwürgen?</h2><p>Der Weg ist bewusst schlank, damit die Teams die Freiheit behalten. Sie fangen nicht mit einem Regelwerk an, sondern mit einer Liste. Schreiben Sie die zehn bis fünfzehn Kennzahlen auf, die im Haus wirklich zählen: Umsatz, Deckungsbeitrag, offene Forderungen, Auftragseingang, Pipeline. Diese Zahlen sind das, was geschützt gehört. Alles andere dürfen die Teams frei bauen, wie sie wollen.</p><p>Für jede geschützte Kennzahl klären Sie drei Dinge. Erstens, wer sie besitzt und im Zweifel sagt, welcher Wert gilt. Zweitens, wo sie zentral berechnet wird, damit nicht jedes Team seine eigene Formel pflegt. Drittens, wer sie sehen und wer sie ändern darf. In Power BI heißt das konkret: ein gemeinsames, geprüftes Datenmodell für die zentralen Zahlen, feste Berechnungen darin und Zeilenberechtigungen, damit jeder Nutzer genau die Daten sieht, die für ihn bestimmt sind. Das ist der Kern jeder tragfähigen power bi governance.</p><p>Wichtig ist die Trennung von zwei Zonen. Es gibt einen geprüften Bereich mit den zentralen Kennzahlen, auf den sich alle verlassen können, und einen freien Bereich, in dem die Teams experimentieren dürfen. Self-Service lebt im freien Bereich, greift aber für die wichtigen Zahlen auf den geprüften Kern zu. So bremsen Sie niemanden aus und schützen trotzdem das, was zählt.</p><p>Die folgende Übersicht zeigt, warum der schlanke Rahmen dem strengen Regelwerk überlegen ist.</p><table><tr><th>Kriterium</th><th>Strenge Freigabe für jeden Bericht</th><th>Self Service BI Governance mit geprüftem Kern</th></tr><tr><td>Tempo für die Teams</td><td>Niedrig, alles muss freigegeben werden</td><td>Hoch, freies Bauen bleibt erlaubt</td></tr><tr><td>Verlässlichkeit der Kennzahlen</td><td>Hoch, aber teuer erkauft</td><td>Hoch, weil der Kern zentral geprüft ist</td></tr><tr><td>Akzeptanz im Haus</td><td>Gering, gilt als Bürokratie</td><td>Hoch, löst ein echtes Problem</td></tr><tr><td>Risiko bei Personalwechsel</td><td>Bleibt, Wissen steckt in Köpfen</td><td>Sinkt, Besitz und Quelle sind dokumentiert</td></tr><tr><td>Aufwand beim Start</td><td>Monate, eigenes Projekt</td><td>Tage bis wenige Wochen</td></tr></table><h2>Woran erkennen Sie, dass Ihre Governance greift?</h2><p>Sie erkennen es an einem einfachen Test. Fragen Sie drei Personen aus verschiedenen Abteilungen nach dem Umsatz des letzten Monats. Nennen alle drei denselben Wert und dieselbe Quelle, greift Ihre Governance. Weichen die Zahlen ab, wissen Sie sofort, wo Sie ansetzen müssen. Dieser Test dauert fünf Minuten und sagt mehr als jede Dokumentation.</p><p>Ein zweites Zeichen ist der Umgang mit Fehlern. Wenn ein Wert falsch ist, muss klar sein, wer ihn korrigiert und ab wann die Korrektur überall sichtbar wird. In vielen Häusern mit viel Self-Service wandert ein falscher Wert wochenlang durch Dutzende Berichte, bis er zufällig auffällt. Mit einem geprüften Kern und klarer Verantwortung wird aus wochenlangem Suchen eine Korrektur an einer Stelle.</p><p>Das dritte Zeichen betrifft Sie selbst. Wenn Sie eine Zahl für eine Prognose oder ein Reporting freigeben, sollten Sie nicht hoffen müssen, dass sie stimmt. Sie sollten wissen, dass sie stimmt, weil klar ist, aus welchem Modell sie kommt und wer sie besitzt. Genau dieses Vertrauen ist das Ziel von Self Service BI Governance, und es ist mit wenigen klaren Regeln erreichbar, ohne dass jemand seine Freiheit verliert.</p><h2>Was kostet es, wenn Sie nichts ändern?</h2><p>Das Risiko ist selten ein lauter Knall. Es ist das leise Abrutschen. Der Monatsabschluss verzögert sich um zwei Tage, weil wieder zwei Berichte nicht zusammenpassen. Eine Prognose wird zu hoch gemeldet und später still korrigiert. Ein Pipeline-Review wird zum Streit darüber, wessen Zahl aus wessen Dashboard nun die richtige ist. Jeder Fall für sich wirkt harmlos.</p><p>In der Summe kostet Sie das genau die Sache, die am schwersten zurückzuholen ist: das Vertrauen in die eigenen Zahlen. Ist es einmal weg, entscheiden die Teams wieder aus dem Bauch heraus, obwohl längst überall Daten liegen. Der teure Self-Service liefert dann viele Berichte und wenig Sicherheit.</p><p>Ein schlanker Governance-Rahmen verhindert dieses Abrutschen. Er nimmt niemandem das Werkzeug, er bremst das Tempo nicht, und er sorgt dafür, dass die nächste wichtige Entscheidung auf einer Zahl steht, der alle im Haus trauen.</p><h2>Bereit für den nächsten Schritt?</h2><p>Wenn Sie wissen wollen, wie verlässlich Ihre Zahlen im Self-Service wirklich sind, hilft Ihnen unser kostenloses Governance- und Kosten-Scorecard weiter. In etwa fünf Minuten sehen Sie, wie klar Verantwortung, Quellen und Zugriffsrechte in Ihrem Haus geregelt sind und wo die größten Risiken liegen. Wenn Sie danach einen konkreten Plan für Ihre eigene Umgebung möchten, buchen Sie ein kurzes Gespräch mit uns, und wir schauen uns Ihre Governance gemeinsam an.</p><h2>FAQ</h2><p>### Bremst Governance den Self-Service nicht aus?</p><p>Nur, wenn Sie sie am Konzernmodell mit Freigaben für jeden Bericht ausrichten. Der schlanke Weg schützt allein die zehn bis fünfzehn zentralen Kennzahlen und lässt den Rest frei. Die Teams bauen weiter selbst, greifen für die wichtigen Zahlen aber auf einen geprüften Kern zu. So bleibt das Tempo hoch und die zentralen Werte trotzdem verlässlich.</p><p>### Brauchen wir dafür eine eigene Software oder eine neue Stelle?</p><p>Nein. Sie brauchen keine gesonderte Governance-Software und keine neue Abteilung. Das gemeinsame Datenmodell, feste Berechnungen und Zeilenberechtigungen setzen Sie in Ihrem bestehenden Power BI um. Wichtiger als ein Werkzeug ist die klare Zuordnung, wer welche Kennzahl besitzt und aus welcher Quelle sie kommt.</p><p>### Wo fangen wir an, wenn schon Hunderte Berichte im Umlauf sind?</p><p>Sie fangen nicht bei den Berichten an, sondern bei den Kennzahlen. Legen Sie die wenigen zentralen Zahlen fest, klären Sie Besitz und Quelle und bauen Sie dafür ein geprüftes Modell. Danach verweisen Sie die wichtigen Berichte nach und nach auf diesen Kern. Den Wildwuchs müssen Sie nicht auf einmal aufräumen, sondern Zahl für Zahl.</p><p>Weiterlesen</p><ul><li>[Data Governance Framework: der Leitfaden für verlässliche BI](/blog/data-governance-framework)</li><li>[Daten Governance im Mittelstand: der Praxis-Leitfaden](/blog/daten-governance-mittelstand)</li></ul></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">self service bi governance</span><span class="c">self service analytics, governance framework, power bi governance</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>

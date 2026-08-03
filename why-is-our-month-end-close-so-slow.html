@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>CaseWhen · Why Is Our Month End Close So Slow? The Real Causes</title>
+<style>
+:root{--ink:#141a19;--bg:#fbfcfc;--card:#fff;--line:#e2e8e6;--mut:#5c6866;--faint:#93a09c;
+--brand:#1D967C;--dark:#11493F;--mid:#7AC4B5;--pale:#D8F3EE;--neutral:#E9ECE8}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;font-family:'NM',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
+p,h1,h2,h3,li,td,th{overflow-wrap:break-word}
+@font-face{font-family:'NM';src:url('fonts/nm-book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'NM';src:url('fonts/nm-bold.woff2') format('woff2');font-weight:700;font-display:swap}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
+a{color:var(--dark)}
+/* top nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding:12px 20px;flex-wrap:wrap}
+.top img{height:24px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-size:13.5px;color:var(--mut);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{background:var(--pale);color:var(--dark)}
+.nav a.on{background:var(--dark);color:#fff}
+/* hero */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line)}
+.hero .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+.hero h1{font-size:clamp(29px,5.4vw,50px);max-width:17ch}
+.hero p{font-size:clamp(16px,2.2vw,18.5px);color:var(--mut);max-width:60ch;margin:18px 0 0}
+/* cadence cards on home */
+.cad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:30px}
+.cad a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;
+padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
+.cad a:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(17,73,63,.10)}
+.cad .n{font-size:30px;font-weight:700;color:var(--dark);letter-spacing:-.03em}
+.cad .l{font-weight:600;margin-top:2px}
+.cad .s{font-size:12.5px;color:var(--faint);margin-top:3px}
+/* section header */
+.ph{padding:40px 0 8px}
+.ph .eb{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.ph h2{font-size:clamp(24px,3.4vw,34px);margin:6px 0 0}
+.ph p{color:var(--mut);max-width:64ch;margin:12px 0 0;font-size:15.5px}
+.count{font-size:12.5px;color:var(--faint);margin-top:10px}
+/* post cards */
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.full{grid-column:1/-1}
+.card .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;min-width:0}
+.day{font-size:11px;font-weight:700;letter-spacing:.03em;background:var(--dark);color:#fff;border-radius:7px;padding:4px 8px}
+.lang{font-size:11px;font-weight:700;border-radius:7px;padding:4px 8px}
+.lang.en{background:var(--pale);color:var(--dark)}.lang.de{background:#e7efe9;color:#2c5a4c}
+.who{font-size:12px;color:var(--faint)}
+.kw{margin-left:auto;font-size:11.5px;color:var(--dark);background:#eef5f2;border:1px solid var(--mid);border-radius:20px;padding:3px 10px;font-weight:500;white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.card .body{padding:15px 16px 16px;font-size:14px;color:#2d3330}
+.plan .t{font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px}
+.plan .row{display:flex;gap:7px;font-size:12px;color:var(--mut);margin:4px 0}
+.plan .row b{color:var(--faint);font-weight:600;flex:none;width:64px;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding-top:2px}
+.state{margin-top:12px;font-size:11.5px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px}
+.done .hook{font-weight:700;font-size:15.5px;display:block;margin-bottom:8px}
+.done .txt{white-space:pre-line}
+.done .close{margin-top:10px;color:var(--dark);font-weight:500}
+.done .meta{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:11px;color:var(--faint);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ship{color:var(--brand);font-weight:700}
+/* short-form script */
+.script .sk-hook{font-weight:700;font-size:15.5px;margin:2px 0 4px}
+.script .sk-os{font-size:11.5px;color:var(--dark);background:var(--pale);border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.beat{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.beat .t{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.03em;padding-top:2px}
+.beat .sp{font-size:13.5px;color:#2d3330}
+.beat .os{font-size:11px;color:var(--dark);margin-top:4px}
+.beat .os b{font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px}
+.beat .pr{font-size:11px;color:var(--faint);margin-top:3px;font-style:italic}
+.cap{margin-top:12px;background:#f4f8f6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#2d3330}
+.cap b{color:var(--faint);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;display:block;margin-bottom:3px}
+/* full blog article */
+.article{max-width:none}
+.article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
+.article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
+.article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
+.article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.article th{text-align:left;background:var(--neutral);padding:7px 9px;font-size:11.5px}
+.article td{border-top:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.article ol,.article ul{padding-left:20px}.article li{font-size:14px;margin:4px 0}
+.article .fm{font-size:11px;color:var(--faint);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap}
+/* visuals page */
+.vsec{padding:26px 0;border-top:1px solid var(--line)}
+.vsec:first-of-type{border-top:0}
+.vname{font-weight:700;font-size:17px;margin:0 0 3px}
+.vname span{color:var(--faint);font-weight:400;font-size:13.5px}
+.vgal{display:grid;gap:16px;margin-top:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.vgal.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vgal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);display:block}
+.vstrip{display:flex;gap:14px;overflow-x:auto;margin-top:14px;padding-bottom:12px;scroll-snap-type:x mandatory}
+.vstrip img{flex:none;width:200px;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(17,73,63,.13);scroll-snap-align:start}
+.vhint{font-size:11.5px;color:var(--faint);margin-top:8px}
+@media(max-width:760px){.vgal{grid-template-columns:repeat(2,minmax(0,1fr))}.vgal.wide{grid-template-columns:1fr}}
+.foot{padding:30px 0 50px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+ .cad{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .days{grid-template-columns:minmax(0,1fr)}
+ .top .wrap{gap:8px}
+ .nav{width:100%;margin-left:0;flex-wrap:wrap;gap:6px}
+ .hero{padding:40px 0 26px}
+}
+</style><link rel="stylesheet" href="annotate.css"></head><body>
+<header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
+<nav class="nav"><a href="index.html" class="">Home</a><a href="strategy.html" class="">Strategy</a><a href="blog.html" class="">Blog</a><a href="linkedin.html" class="">LinkedIn</a><a href="shortform.html" class="">Short-form scripts</a><a href="x.html" class="">X / Twitter</a><a href="youtube.html" class="">YouTube</a><a href="visuals.html" class="">Visuals</a><a href="seo.html" class="">SEO</a><a href="funnels.html" class="">Funnels</a><a href="pricing.html" class="">Pricing</a></nav></div></header>
+<style>
+.article-wrap{max-width:760px;margin:0 auto}
+.achart{margin:20px 0;padding:18px 20px;background:var(--pale);border-radius:14px}
+.achart figcaption{font-weight:700;font-size:15px;color:var(--dark);margin-bottom:12px}
+.cbar{display:grid;grid-template-columns:120px 1fr 54px;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.cbar .cl{color:#33372f}.cbar .cv{font-weight:700;color:var(--dark);text-align:right}
+.ctrack{background:#fff;border-radius:8px;height:22px;overflow:hidden}
+.cfill{height:100%;background:var(--brand);border-radius:8px}
+.csrc{font-size:11.5px;color:var(--faint);margin-top:10px}
+.geo{margin:26px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.geo h3{font-size:16px;margin:0 0 8px}
+.geo .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.geo .chips .c{font-size:12px;border-radius:20px;padding:3px 10px;background:var(--pale);color:var(--dark);border:1px solid var(--mid)}
+.geo .plc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.geo .plc .p{font-size:12px;color:var(--dark)}
+.geo .plc .p::before{content:"\2713 ";color:var(--brand);font-weight:700}
+.geo p{font-size:13.5px;color:var(--mut);margin:8px 0 0}
+/* blog grid — real 01-blog-cover thumbnails, rotating colours */
+.bgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 0 60px}
+.bcard{display:block;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(17,73,63,.10);transition:transform .14s,box-shadow .14s;background:var(--card)}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(17,73,63,.20)}
+.bcard img{width:100%;height:auto;display:block}
+.btile{aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:space-between;padding:18px;background:linear-gradient(135deg,var(--dark),var(--brand))}
+.btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
+@media(max-width:640px){.bgrid{grid-template-columns:1fr}}
+</style><section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all articles</a></div></section><div class="wrap article-wrap"><div class="body article annotatable"><div class="fm"><b>Austin Levine, CaseWhen</b><span>why is our month end close so slow</span><span>Article + FAQPage + BreadcrumbList</span></div><h1>Why Is Our Month End Close So Slow? The Real Causes</h1><figure class="achart"><figcaption>Regular business decisions made on gut feel, not data</figcaption><div class="cbar"><span class="cl">On data</span><div class="ctrack"><div class="cfill" style="width:72%"></div></div><span class="cv">42%</span></div><div class="cbar"><span class="cl">On gut feel</span><div class="ctrack"><div class="cfill" style="width:100%"></div></div><span class="cv">58%</span></div><div class="csrc">Source: BARC</div></figure><p>Quick Answer: Why is our month end close so slow usually comes down to three things: your team rebuilds the same reports by hand every month, one person owns the numbers nobody else can reproduce, and the figures from different tools never agree on the first pass. Fix the data model underneath the close so numbers tie out automatically, and the days you lose to re-keying and reconciling go away.</p><p>Every month your team loses the same days to the same scramble, and you are left asking why is our month end close so slow when you already bought the tools that were supposed to speed it up. The reports still get built by hand. Someone still pulls an export, pastes it into a workbook, and checks it against last month by eye. The close does not drag because your people are slow. It drags because the work underneath the close was never set up to run itself.</p><p>This is the pattern we see in almost every finance team that calls us. The software is fine. Power BI is installed, the ERP is running, the data is technically all there. But the close still waits on manual steps that happen the same way every single month, and nobody has ever been given the time to remove them.</p><h2>Why is our month end close so slow when we already have the tools?</h2><p>Here is the honest version. Buying Power BI or a new ERP does not close your books. It gives you the pieces. The close is slow because the pieces were never connected into one trusted flow, so your team fills the gap with manual work.</p><p>A typical close has four hidden bottlenecks:</p><ul><li>Manual exports. Someone downloads a report from the ERP, opens Excel, and rebuilds the same summary they rebuilt last month. This step alone eats days across a team.</li><li>One-person knowledge. The reconciliation logic lives in one analyst&#x27;s head and one giant spreadsheet. When that person is on leave, the close stalls.</li><li>Numbers that do not reconcile. Revenue in the CRM says one thing, revenue in the ERP says another, and finance spends a day finding out which is right before anything can be signed off.</li><li>Late adjustments. A journal entry lands on day four, and every downstream report has to be rebuilt by hand because nothing refreshes on its own.</li></ul><p>None of these are people problems. They are all setup problems, and setup problems are fixable.</p><h2>What actually slows the close down each month?</h2><p>The single biggest time sink is the data gathering that happens before anyone can even start the accounting. The days go there, well before the first journal entry.</p><p>Finance teams routinely spend more of the close pulling, pasting, and cross-checking data than they spend analyzing it. According to the AFP and APQC, FP&amp;A teams spend just 25 percent of their time on analysis and 42 percent of it gathering data (AFP and APQC, 2019). That gap is the close problem in one line. The people you hired to interpret the numbers are stuck assembling them instead.</p><p>When the data gathering is manual, every month starts from zero. Nothing carries over. The workbook someone built in July has to be rebuilt in August because the source data moved, a column changed, or a new account was added. So you never really have one slow month. You have the same slow month repeated, because the work was never made repeatable.</p><h2>How do manual Excel exports make the close slower?</h2><p>Excel is not the villain here. The problem is what the exports hide.</p><p>When your close depends on someone downloading a file and reshaping it, three risks stack up. First, the number can be wrong and nobody will catch it, because there is no automatic check against the source. Second, the process only works while that one person is available to run it. Third, every export is a fresh chance for a bad formula or a mis-pasted range to slip a wrong figure into the final pack.</p><p>Research on real business spreadsheets found that 94 percent of the workbooks audited contained errors. When your month end sign-off rests on hand-built workbooks, you are trusting a process that has been shown, again and again, to carry mistakes. A wrong figure that reaches an investor update or a bank covenant report gets walked back in front of the people you least want to correct yourself in front of.</p><p>The fix is to move the repeated, rule-based work out of Excel and into a modeled layer that produces the same numbers the same way every month, so your team uses Excel for judgment instead of assembly.</p><h2>What does a fast close actually look like?</h2><p>A fast close is boring, and that is the point. The numbers are ready because they were built continuously through the month, not assembled in a panic on day one.</p><p>Here is the difference in plain terms.</p><table><tr><th>The slow close</th><th>The fast close</th></tr><tr><td>Reports rebuilt by hand each month</td><td>Reports refresh automatically from one model</td></tr><tr><td>Reconciliation lives in one person&#x27;s head</td><td>Reconciliation logic is documented and repeatable</td></tr><tr><td>CRM and ERP numbers argue until someone checks</td><td>One agreed number, defined once, used everywhere</td></tr><tr><td>A late journal means rebuilding everything</td><td>A late journal flows through on the next refresh</td></tr><tr><td>Close takes 8 to 10+ business days</td><td>Close lands in a handful of days, predictably</td></tr></table><p>Top-performing finance teams close the month in five business days or fewer, while the slowest take ten or more (APQC, 2023). The teams at the fast end are almost never faster at accounting. They have simply removed the manual steps between the source data and the finished report, so the days are spent reviewing rather than rebuilding.</p><h2>How do you make the close reconcile on the first pass?</h2><p>The reconciliation fight, where the CRM and the ERP show two different numbers, is almost always a data modeling problem. The accounting is usually correct on both sides, and the two figures were simply defined differently.</p><p>When revenue is defined one way in the CRM and a slightly different way in the ERP, both numbers are technically correct and they will never match. The fix is to define each key figure once, in a single semantic model that sits between your source tools and your reports. Revenue means one thing. A customer is counted one way. A period closes on one calendar. Every report, and every person, then pulls from that one definition instead of re-deriving it.</p><p>Once that model exists, reconciliation stops being a manual hunt. The numbers tie out because they came from the same place. This is the layer most finance teams are missing, and it is the layer that turns a ten-day close into a five-day one.</p><h2>What can a controller change first?</h2><p>You do not have to rebuild everything to get the close back. Start with the one report that eats the most days, and ask a simple question: which steps happen the exact same way every month? Those steps are the ones to automate first, because they carry no judgment and all of the delay.</p><p>Map the manual handoffs. Write down who touches each number, in what tool, in what order. The bottleneck usually becomes obvious the moment it is on paper, and it is almost always a single export or a single reconciliation that everything else waits on. That is where the first fix goes.</p><p>If your month end close still runs on manual exports and one person&#x27;s spreadsheet, it is worth seeing exactly where the days are going. Our free Power BI Governance and Cost Scorecard is a five-minute assessment that shows you where your reporting is fragile and what a faster close would take. If you want the reconciliation done on your real numbers, book a scoping call and we will map your close with you. No pitch, just a clear picture of the fix.</p><h2>FAQ</h2><p>How many days should a month end close take?
+Strong finance teams close in five business days or fewer, while the slowest take ten or more (APQC, 2023). The difference is rarely the accounting. It is how much of the close still runs by hand versus refreshing automatically from one trusted data model.</p><p>Is Excel the reason our close is slow?
+Not by itself. The problem is depending on hand-built exports for numbers that get rebuilt the same way every month. Move the repeated, rule-based work into a modeled layer that produces the same figures automatically, and keep Excel for the judgment work it is actually good at.</p><p>Why do our CRM and ERP numbers never match at close?
+Because the CRM and the ERP each define the figure slightly differently, so both are correct and neither agrees. Defining each key number once in a single semantic model, and having every report pull from that, makes the numbers reconcile on the first pass instead of after a day of checking.</p><h2>Read next</h2><ul><li>[The One Agreed Number: fixing the data model behind your reports](/blog/one-agreed-number)</li><li>[Finance reporting automation: getting your team off manual Excel exports](/blog/finance-reporting-automation)</li></ul></div><div class="geo"><h3>Keywords this article targets</h3><div class="chips"><span class="c" style="background:var(--dark);color:#fff">why is our month end close so slow</span><span class="c">month end close process, close the books faster, finance reporting automation</span></div><div class="plc"><span class="p">meta title</span><span class="p">H1</span><span class="p">first 100 words</span><span class="p">an H2</span><span class="p">meta description</span><span class="p">URL slug</span></div><p><b>Why it does well for GEO:</b> the first lines answer the question directly (the Quick Answer box AI engines lift), it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div></div>
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
+finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
+per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
+<script src="annotate.js"></script>
+</body></html>
