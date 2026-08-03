@@ -1774,28 +1774,41 @@ Power BI audience.</p></div></section>
 """
     (OUT / "strategy.html").write_text(shell("strategy.html", "Strategy", body), encoding="utf-8")
 
+def _visual_manifest():
+    p = Path(r"J:\Claude Code\casewhen-research\content\carousel-manifest.json")
+    try: return json.loads(p.read_text(encoding="utf-8"))
+    except Exception: return {"carousels": [], "quotes": []}
+
 def visuals_page():
     D = "img/decks/"
-    def deck_strip(prefix, n):
-        imgs = "".join(f'<img src="{D}{prefix}-{i}.png" loading="lazy" alt="{prefix} slide {i}">' for i in range(1, n+1))
-        return f'<div class="vstrip">{imgs}</div><div class="vhint">← swipe through all {n} slides →</div>'
-    def qgal(slugs):
-        imgs = "".join(f'<img src="{D}quote-{s}.png" loading="lazy" alt="quote">' for s in slugs)
-        return f'<div class="vgal">{imgs}</div>'
-    quotes = ["rls-viewas","incremental-refresh","deployment-pipelines","onelake-shortcut","power-query","training-starschema"]
-    body = f"""<section class="ph"><div class="wrap"><div class="eb">Visuals</div>
-<h2>Carousels and cards</h2>
-<p>The carousels that carry the posts on LinkedIn and Instagram. Each is a full seven-slide deck:
-a cover that states the payoff, five slides that each teach one idea with a headline and an
-explanation, and a save slide. Swipe each one. Every line passed the same language checks as the
-written posts, and each slide carries one real, concrete specific.</p></div></section>
-<div class="wrap">
- <div class="vsec"><div class="vname">Governance checklist <span>· 5 signs your Power BI numbers won't survive a board review</span></div>{deck_strip("governance", 7)}</div>
- <div class="vsec"><div class="vname">Migration: myth vs reality <span>· what actually transfers from Tableau to Power BI</span></div>{deck_strip("migration", 7)}</div>
- <div class="vsec"><div class="vname">Power BI licensing <span>· the 350-viewer line where a Fabric capacity beats per-user pricing</span></div>{deck_strip("pricing", 7)}</div>
- <div class="vsec"><div class="vname">Quote cards <span>· four self-contained founder insights, one topic each</span></div>{qgal(quotes)}</div>
-</div>"""
-    (OUT / "visuals.html").write_text(shell("visuals.html", "Visuals", body), encoding="utf-8")
+    man = _visual_manifest()
+    cars, quotes = man.get("carousels", []), man.get("quotes", [])
+    cats_present = set()
+    ccards = []
+    for c in sorted(cars, key=lambda x: (x["cat"], x["lang"])):
+        cats_present.add(c["cat"])
+        strip = "".join(f'<img src="{D}{c["slug"]}-{i}.png" loading="lazy" alt="slide {i}">' for i in range(1, c["n"] + 1))
+        ccards.append(f'<div class="vcard" data-lang="{c["lang"]}" data-cat="{esc(c["cat"])}">'
+                      f'<div class="vname">{esc(c.get("cover") or c["cat"])} <span>&middot; {esc(c["cat"])} &middot; {c["lang"]}</span></div>'
+                      f'<div class="vstrip">{strip}</div></div>')
+    qcards = []
+    for q in sorted(quotes, key=lambda x: (x["cat"], x["lang"])):
+        cats_present.add(q["cat"])
+        qcards.append(f'<div class="vcard vq" data-lang="{q["lang"]}" data-cat="{esc(q["cat"])}" title="{esc(q.get("quote",""))}">'
+                      f'<img src="{D}quote-{q["slug"]}.png" loading="lazy" alt="quote card"></div>')
+    vcss = ("<style>.vcard{margin:0 0 26px}.vname{font-weight:650;font-size:15px;margin:0 0 10px}"
+            ".vname span{color:var(--faint);font-weight:400}.vstrip{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px}"
+            ".vstrip img{height:300px;width:auto;border-radius:12px;box-shadow:0 6px 20px rgba(17,73,63,.10);flex:0 0 auto}"
+            ".vgal{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}"
+            ".vq img{width:100%;border-radius:12px;box-shadow:0 6px 20px rgba(17,73,63,.10);display:block}</style>")
+    body = f"""{vcss}<section class="ph"><div class="wrap"><div class="eb">Visuals</div>
+<h2>{len(cars)} carousels and {len(quotes)} quote cards</h2>
+<p style="color:var(--mut);font-size:15px;margin:10px 0 0">One carousel and one quote card a week per language, across six months. Each carousel is a seven-slide deck (cover, teaching slides, a myth-versus-reality slide, and a save slide). Filter by language or category. Every line passed the same language checks as the written posts.</p></div></section>
+{filter_bar(cats_present)}
+<div class="wrap"><div class="eb" style="margin-bottom:14px">Carousels ({len(cars)})</div>{"".join(ccards)}</div>
+<div class="wrap"><div class="eb" style="margin:30px 0 14px">Quote cards ({len(quotes)})</div><div class="vgal">{"".join(qcards)}</div></div>"""
+    (OUT / "visuals.html").write_text(shell("visuals.html", "Visuals", f"<style>{FILTCSS}</style>{body}"), encoding="utf-8")
+    return len(cars), len(quotes)
 
 BLOGDIR = Path(r"J:\Claude Code\casewhen-research\content\w-batch03-blogs")
 BUYERBLOG = Path(r"J:\Claude Code\casewhen-research\content\w-buyer-blogs")
@@ -1971,6 +1984,12 @@ def home(counts=None):
     if counts.get("youtube"):
         cards += (f'<a href="youtube.html"><div class="n">{counts["youtube"]}</div>'
                   f'<div class="l">Long-form YouTube</div><div class="s">8 to 15 min scripts, EN + DE</div></a>')
+    if counts.get("carousels"):
+        cards += (f'<a href="visuals.html"><div class="n">{counts["carousels"]}</div>'
+                  f'<div class="l">Carousels</div><div class="s">7-slide decks, EN + DE</div></a>')
+    if counts.get("quotes"):
+        cards += (f'<a href="visuals.html"><div class="n">{counts["quotes"]}</div>'
+                  f'<div class="l">Quote cards</div><div class="s">one sharp line each</div></a>')
     inner = f"""<section class="hero"><div class="wrap">
 <div class="eb">CaseWhen · 6-month content plan</div>
 <h1>Six months of CaseWhen content.</h1>
@@ -1984,7 +2003,7 @@ strategy_page()
 pricing_page()
 seo_page()
 funnels_page()
-visuals_page()
+_ncar, _nq = visuals_page()
 SOCIALDIR = Path(r"J:\Claude Code\casewhen-research\content\w-batch03-social-v2")
 BUYER_LI = Path(r"J:\Claude Code\casewhen-research\content\w-buyer-linkedin")
 BUYER_REEL = Path(r"J:\Claude Code\casewhen-research\content\w-buyer-reels")
@@ -2070,7 +2089,8 @@ for k, cfg in PLATFORMS.items():
     n, d = platform_page(k, cfg); tot += n; don += d
 nblogs = blog_articles_and_grid()   # overwrite blog.html with the full-article grid
 nlf = longform_page()
-home({"blog": nblogs, "linkedin": len(PLATFORMS["linkedin"]["slots"]),
+home({"carousels": _ncar, "quotes": _nq,
+      "blog": nblogs, "linkedin": len(PLATFORMS["linkedin"]["slots"]),
       "shortform": len(PLATFORMS["shortform"]["slots"]), "x": len(PLATFORMS["x"]["slots"]),
       "youtube": nlf})   # real counts, after everything is built
 print(f"long-form scripts: {nlf}")
