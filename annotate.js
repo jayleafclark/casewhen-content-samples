@@ -113,6 +113,20 @@
     if (ta) { ta.focus(); }
   }
 
+  // whole-item note for image cards (carousels, quote cards): no text to highlight, so the note
+  // is tied to the whole deck via its data-src, and the repo AI editor actions it on the source JSON.
+  function openDeckNote(card) {
+    if (!card) return;
+    var n = { aid: uid(), quote: card.getAttribute("data-note-label") || "(whole item)", note: "",
+              status: "open", revision: "", src: card.getAttribute("data-src") || "",
+              cwid: card.getAttribute("data-cwid") || "", deck: true };
+    openPanel();
+    var arr = notes(); arr.push(n); saveNotes(arr);
+    renderPanel();
+    var ta = document.querySelector('.cw-note[data-aid="' + n.aid + '"] textarea');
+    if (ta) ta.focus();
+  }
+
   // ---- panel ----
   var panel, fab;
   function openPanel() { ensurePanel(); panel.classList.add("open"); }
@@ -284,6 +298,10 @@
     rehighlight();
     document.addEventListener("mouseup", function () { setTimeout(onSelect, 10); });
     document.addEventListener("selectionchange", function () { if (window.getSelection().isCollapsed && pop) pop.style.display = "none"; });
+    // image cards (carousels, quote cards) get a "Note this" button instead of text-selection
+    document.querySelectorAll(".cw-notebtn").forEach(function (b) {
+      b.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); openDeckNote(b.closest(".annotatable")); });
+    });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 })();

@@ -1788,19 +1788,25 @@ def visuals_page():
     for c in sorted(cars, key=lambda x: (x["cat"], x["lang"])):
         cats_present.add(c["cat"])
         strip = "".join(f'<img src="{D}{c["slug"]}-{i}.png" loading="lazy" alt="slide {i}">' for i in range(1, c["n"] + 1))
-        ccards.append(f'<div class="vcard" data-lang="{c["lang"]}" data-cat="{esc(c["cat"])}">'
-                      f'<div class="vname">{esc(c.get("cover") or c["cat"])} <span>&middot; {esc(c["cat"])} &middot; {c["lang"]}</span></div>'
+        src = f'content/w-carousels/{c["slug"]}.json'
+        ccards.append(f'<div class="vcard annotatable" data-lang="{c["lang"]}" data-cat="{esc(c["cat"])}" data-src="{src}" data-note-label="carousel: {esc(c.get("cover") or c["cat"])}">'
+                      f'<div class="vname">{esc(c.get("cover") or c["cat"])} <span>&middot; {esc(c["cat"])} &middot; {c["lang"]}</span>'
+                      f'<button class="cw-notebtn" type="button">&#9998; Note this deck</button></div>'
                       f'<div class="vstrip">{strip}</div></div>')
     qcards = []
     for q in sorted(quotes, key=lambda x: (x["cat"], x["lang"])):
         cats_present.add(q["cat"])
-        qcards.append(f'<div class="vcard vq" data-lang="{q["lang"]}" data-cat="{esc(q["cat"])}" title="{esc(q.get("quote",""))}">'
-                      f'<img src="{D}quote-{q["slug"]}.png" loading="lazy" alt="quote card"></div>')
-    vcss = ("<style>.vcard{margin:0 0 26px}.vname{font-weight:650;font-size:15px;margin:0 0 10px}"
+        src = f'content/w-quotes/{q["slug"]}.json'
+        qcards.append(f'<div class="vcard vq annotatable" data-lang="{q["lang"]}" data-cat="{esc(q["cat"])}" data-src="{src}" data-note-label="quote: {esc(q.get("quote",""))}" title="{esc(q.get("quote",""))}">'
+                      f'<img src="{D}quote-{q["slug"]}.png" loading="lazy" alt="quote card">'
+                      f'<button class="cw-notebtn" type="button">&#9998; Note</button></div>')
+    vcss = ("<style>.vcard{margin:0 0 26px;position:relative}.vname{font-weight:650;font-size:15px;margin:0 0 10px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}"
             ".vname span{color:var(--faint);font-weight:400}.vstrip{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px}"
             ".vstrip img{height:300px;width:auto;border-radius:12px;box-shadow:0 6px 20px rgba(17,73,63,.10);flex:0 0 auto}"
             ".vgal{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}"
-            ".vq img{width:100%;border-radius:12px;box-shadow:0 6px 20px rgba(17,73,63,.10);display:block}</style>")
+            ".vq{position:relative}.vq img{width:100%;border-radius:12px;box-shadow:0 6px 20px rgba(17,73,63,.10);display:block}"
+            ".cw-notebtn{font:inherit;font-size:12px;font-weight:700;color:#fff;background:var(--brand);border:0;border-radius:999px;padding:4px 11px;cursor:pointer}"
+            ".vq .cw-notebtn{position:absolute;top:10px;right:10px;opacity:.92}.cw-notebtn:hover{background:var(--dark)}</style>")
     body = f"""{vcss}<section class="ph"><div class="wrap"><div class="eb">Visuals</div>
 <h2>{len(cars)} carousels and {len(quotes)} quote cards</h2>
 <p style="color:var(--mut);font-size:15px;margin:10px 0 0">One carousel and one quote card a week per language, across six months. Each carousel is a seven-slide deck (cover, teaching slides, a myth-versus-reality slide, and a save slide). Filter by language or category. Every line passed the same language checks as the written posts.</p></div></section>
