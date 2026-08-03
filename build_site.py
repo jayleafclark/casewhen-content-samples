@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-build_site.py — generate the CaseWhen 30-day content site from the real calendar
+build_site.py — generate the CaseWhen 6-month content site from the real calendar
 tables + a copy store of finished, gated post text.
 
 - Reads the per-platform idea tables (content/w-platform-batches/*.csv).
-- Lays out a 30-day schedule per platform at the cadence from 12-distribution-map:
+- Lays out a 6-month library per platform at the cadence from 12-distribution-map:
     Blog        1/day EN  +  Mon/Wed/Fri DE
     LinkedIn    Austin EN Mon/Wed/Fri  +  Saju DE Tue/Thu/Sat (different order)
     Short-form  EN Tue/Thu/Sat + DE Mon/Wed  (title + caption + on-screen text)
@@ -202,7 +202,7 @@ def shell(active, title, inner):
 <header class="top"><div class="wrap"><img src="img/wordmark.png" alt="CaseWhen">
 <nav class="nav">{nav(active)}</nav></div></header>
 {inner}
-<footer class="foot"><div class="wrap">A 30-day content plan built from the keyword calendar. Every
+<footer class="foot"><div class="wrap">A 6-month content plan built from the keyword calendar. Every
 finished post clears the ship gate (plain language, a concrete specific, external-facing only, and the
 per-platform format) before it appears as done. Internal preview · not indexed.</div></footer>
 <script src="annotate.js"></script>
@@ -266,6 +266,28 @@ def render_script(c):
             f'<span class="sk-os">frame 1: {esc(c.get("onscreen",""))}</span>{beats}{cap}'
             f'<div class="meta"><span class="ship">SHIP ✓ gated</span><span>{esc(c.get("note",""))}</span></div></div>')
 
+CATS = ["AI & Copilot","Migration","Governance & trust","Pricing & licensing","Close & finance",
+        "Dashboards & adoption","Fabric & Azure","KPI & modeling","Hiring & consulting"]
+def categorize(c, kw, r=None):
+    """Map a post to one content category from its cluster/note/keyword."""
+    blob = " ".join(str(x) for x in [
+        (c or {}).get("cluster",""), (c or {}).get("note",""), (c or {}).get("keyword",""),
+        kw, (r or {}).get("cluster","")]).lower()
+    tests = [
+        ("AI & Copilot", ["copilot","ai/","ai ","genai"," ki ","künstliche","natural language","fabric ai","ai readiness","ai-ready"]),
+        ("Migration", ["migrat","tableau","qlik","cognos","businessobjects","sap bo","wechsel","umzug","move off","move to power"]),
+        ("Governance & trust", ["governance","single source","source of truth","trust","vertrau","row-level","row level","permission","berechtigung","silo"]),
+        ("Pricing & licensing", ["pricing","price","cost","license","licence","premium","per user","per-user","capacity","preis","lizenz","kosten"]),
+        ("Close & finance", ["close","month-end","monthly close","excel","fp&a","reconcil","abschluss","finance","controlling","kennzahl"]),
+        ("Dashboards & adoption", ["dashboard","adoption","self-service","self serve","bottleneck","nobody uses","citizen"]),
+        ("Fabric & Azure", ["fabric","onelake","lakehouse","synapse","azure","data factory","adf","databricks","warehouse"]),
+        ("KPI & modeling", ["kpi","dax","measure","data model","datenmodell","semantic","star schema","sternschema","snowflake","rankx","modeling"]),
+        ("Hiring & consulting", ["consultant","consulting","consultancy","hire","expert","agency","beratung","dienstleister","berater","in-house","vendor"]),
+    ]
+    for name, kws in tests:
+        if any(w in blob for w in kws): return name
+    return "Governance & trust"
+
 def card(platform, idx, lang, day, r):
     key = f"{platform}:{idx}"
     c = COPY.get(key)
@@ -274,7 +296,8 @@ def card(platform, idx, lang, day, r):
         lang = (c.get("lang") or lang).upper()
     who = (c.get("who") if c and c.get("who") else ("Austin" if lang == "EN" else "Saju"))
     kw = esc(c.get("keyword") if c and c.get("keyword") else r.get("primary_keyword"))
-    bar = (f'<div class="bar"><span class="day">Day {day} · {WD_NAME[wd(day)]}</span>'
+    cat = categorize(c, c.get("keyword") if c else "", r)
+    bar = (f'<div class="bar"><span class="cat">{esc(cat)}</span>'
            f'<span class="lang {lang.lower()}">{lang}</span>'
            f'<span class="who">{who}</span><span class="kw">{kw}</span></div>')
     if c and c.get("article_file"):  # full blog article
@@ -302,17 +325,47 @@ def card(platform, idx, lang, day, r):
                 f'<div class="row"><b>Hook</b><span>{esc(r.get("hook_type"))}</span></div>'
                 '<div class="state">Scheduled · finished copy being written through the ship gate</div></div>')
     full = " full" if (c and c.get("article_file")) else ""
-    return f'<article class="card{full}">{bar}{body}</article>'
+    _catl = categorize(c, c.get("keyword") if c else "", r)
+    return f'<article class="card{full}" data-lang="{lang.upper()}" data-cat="{esc(_catl)}">{bar}{body}</article>'
+
+def filter_bar(cats_present):
+    """EN/DE + category filter, client-side, no dependencies."""
+    catbtns = "".join(f'<button class="fbtn" data-f="cat" data-v="{esc(c)}">{esc(c)}</button>' for c in CATS if c in cats_present)
+    return (
+      '<div class="wrap"><div class="filters">'
+      '<div class="fgroup"><span class="flab">Language</span>'
+      '<button class="fbtn on" data-f="lang" data-v="ALL">All</button>'
+      '<button class="fbtn" data-f="lang" data-v="EN">English</button>'
+      '<button class="fbtn" data-f="lang" data-v="DE">Deutsch</button></div>'
+      '<div class="fgroup"><span class="flab">Category</span>'
+      '<button class="fbtn on" data-f="cat" data-v="ALL">All</button>' + catbtns +
+      '</div><span class="fcount" id="fcount"></span></div></div>'
+      '<script>(function(){var st={lang:"ALL",cat:"ALL"};'
+      'function apply(){var cards=document.querySelectorAll(".card"),n=0;'
+      'cards.forEach(function(c){var okL=st.lang=="ALL"||c.dataset.lang==st.lang,'
+      'okC=st.cat=="ALL"||c.dataset.cat==st.cat;var v=okL&&okC;c.style.display=v?"":"none";if(v)n++;});'
+      'var fc=document.getElementById("fcount");if(fc)fc.textContent=n+" shown";}'
+      'document.querySelectorAll(".fbtn").forEach(function(b){b.addEventListener("click",function(){'
+      'var f=b.dataset.f;st[f]=b.dataset.v;'
+      'document.querySelectorAll(\'.fbtn[data-f="\'+f+\'"]\').forEach(function(x){x.classList.remove("on");});'
+      'b.classList.add("on");apply();});});apply();})();</script>')
+
+FILTCSS = ".filters{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin:0 0 22px;padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:12px}.fgroup{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.flab{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-right:4px}.fbtn{font:inherit;font-size:13px;font-weight:600;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--mut);cursor:pointer;transition:all .12s}.fbtn:hover{border-color:var(--dark);color:var(--ink)}.fbtn.on{background:var(--dark);border-color:var(--dark);color:#fff}.fcount{margin-left:auto;font-size:13px;color:var(--faint)}"
 
 def platform_page(k, cfg):
     slots = sorted(cfg["slots"], key=lambda s: (s[1], s[0]))
     done = sum(1 for i,(lang,day,r) in enumerate(slots) if f"{k}:{i}" in COPY)
     cards = "".join(card(k, i, lang, day, r) for i,(lang,day,r) in enumerate(slots))
-    inner = f"""<section class="ph"><div class="wrap"><div class="eb">30-day plan</div>
+    cats_present = set()
+    for i,(lang,day,r) in enumerate(slots):
+        c = COPY.get(f"{k}:{i}")
+        cats_present.add(categorize(c, c.get("keyword") if c else "", r))
+    inner = f"""<section class="ph"><div class="wrap"><div class="eb">6-month plan</div>
 <h2>{esc(cfg['title'])}</h2><p>{esc(cfg['blurb'])}</p>
-<div class="count">{len(slots)} posts scheduled over 30 days · {done} finished and gated · {cfg['tag']}</div></div></section>
+<div class="count">{len(slots)} posts across 6 months · {done} finished and gated · {cfg['tag']}</div></div></section>
+{filter_bar(cats_present)}
 <div class="wrap"><div class="days">{cards}</div></div>"""
-    (OUT / f"{k}.html").write_text(shell(f"{k}.html", cfg["title"], inner), encoding="utf-8")
+    (OUT / f"{k}.html").write_text(shell(f"{k}.html", cfg["title"], f"<style>{FILTCSS}</style>{inner}"), encoding="utf-8")
     return len(slots), done
 
 FONTFACE = """
@@ -1722,8 +1775,10 @@ ARTCSS = """
 @media(max-width:640px){.bgrid{grid-template-columns:1fr}}
 """
 
+GAPBLOG = Path(r"J:\Claude Code\casewhen-research\content\w-gapfill-blogs")
 def blog_articles_and_grid():
-    buyer = sorted(BUYERBLOG.glob("**/*.md")) if BUYERBLOG.exists() else []
+    gapfill = sorted(GAPBLOG.glob("**/*.md")) if GAPBLOG.exists() else []
+    buyer = gapfill + (sorted(BUYERBLOG.glob("**/*.md")) if BUYERBLOG.exists() else [])
     cadence = sorted(CADENCEBLOG.glob("**/*.md")) if CADENCEBLOG.exists() else []
     rest = cadence + sorted(BLOGDIR.glob("*.md"))
     def is_training(f):
@@ -1733,7 +1788,7 @@ def blog_articles_and_grid():
     other = [f for f in rest if not is_training(f)]
     # BUYER-WEIGHTED grid: buyer/business-side articles first, then practitioner, training capped
     files = buyer + other + training[:8]
-    cards = []
+    cards = []; cats_present = set()
     for f in files:
         md = f.read_text(encoding="utf-8"); fm, body = _fm_body(md)
         kw = (fm.get("KEYWORD", "").split("|")[0]).strip()
@@ -1765,34 +1820,44 @@ def blog_articles_and_grid():
                f'it carries FAQPage schema, and the keyword sits in the title, first 100 words, an H2, the meta, and the URL, so both Google and AI answers can place it.</p></div>')
         inner = f'<section class="ph"><div class="wrap"><a href="blog.html" style="font-size:13px;color:var(--faint);text-decoration:none">\u2190 all articles</a></div></section><div class="wrap article-wrap">{art}{chart if False else ""}{geo}</div>'
         (OUT / f"{f.stem}.html").write_text(shell(f"{f.stem}.html", h1[:60], f"<style>{ARTCSS}</style>{inner}"), encoding="utf-8")
-        cards.append(f'<a class="bcard" href="{f.stem}.html"><img src="img/blogcovers/{f.stem}.png" loading="lazy" alt="{esc(h1)}"></a>')
-    grid = f'<section class="ph"><div class="wrap"><div class="eb">Blog</div><h2>{len(files)} full articles, written and gated</h2><p style="color:var(--mut);font-size:15px;margin:10px 0 0">One English article a day plus three German a week. Click any cover to read the finished, SEO-optimized article, each with a chart and the keywords it targets.</p></div></section><div class="wrap"><div class="bgrid">{"".join(cards)}</div></div>'
-    (OUT / "blog.html").write_text(shell("blog.html", "Blog", f"<style>{ARTCSS}</style>{grid}"), encoding="utf-8")
+        blang = "DE" if re.search(r'[äöüß]', md) else "EN"
+        bcat = categorize({"keyword": kw, "cluster": cluster}, kw)
+        cats_present.add(bcat)
+        cards.append(f'<a class="bcard" data-lang="{blang}" data-cat="{esc(bcat)}" href="{f.stem}.html"><img src="img/blogcovers/{f.stem}.png" loading="lazy" alt="{esc(h1)}"></a>')
+    grid = (f'<section class="ph"><div class="wrap"><div class="eb">Blog</div><h2>{len(files)} full articles, written and gated</h2>'
+            f'<p style="color:var(--mut);font-size:15px;margin:10px 0 0">One English article a day plus three German a week, across six months. Filter by language or category, then click any cover to read the finished, SEO-optimized article.</p></div></section>'
+            f'{filter_bar(cats_present)}<div class="wrap"><div class="bgrid">{"".join(cards)}</div></div>')
+    (OUT / "blog.html").write_text(shell("blog.html", "Blog", f"<style>{ARTCSS}{FILTCSS}</style>{grid}"), encoding="utf-8")
     return len(files)
 
 LFDIR = Path(r"J:\Claude Code\casewhen-research\content\w-longform-scripts")
 LFCSS = ".lfgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}.lfcard{display:block;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px 20px;text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s}.lfcard:hover{border-color:var(--dark);transform:translateY(-2px)}.lfl{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--dark);border-radius:6px;padding:2px 8px}.lft{display:block;margin-top:10px;font-weight:650;line-height:1.3;font-size:16px}"
+LFEXTRA = [Path(r"J:\Claude Code\casewhen-research\content\w-gapfill-longform")]
 def longform_page():
     files = sorted(LFDIR.glob("**/*.md")) if LFDIR.exists() else []
-    cards = []
+    for d in LFEXTRA:
+        if d.exists(): files += sorted(d.glob("**/*.md"))
+    cards = []; cats_present = set()
     for f in files:
         md = f.read_text(encoding="utf-8")
         m = re.search(r'^#\s+(.+)$', md, re.M)
         title = (m.group(1).strip() if m else f.stem)
         lang = "DE" if "\\DE\\" in str(f) or "/DE/" in str(f) else "EN"
+        lcat = categorize({"keyword": title, "note": f.stem}, title)
+        cats_present.add(lcat)
         # lang-prefixed slug so an EN/DE pair sharing a filename gets two distinct pages
         slug = f"script-{lang.lower()}-{f.stem}.html"
         art = md_to_html(md)
         inner = (f'<section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">\u2190 all scripts</a></div></section>'
                  f'<div class="wrap article-wrap">{art}</div>')
         (OUT / slug).write_text(shell(slug, title[:60], f"<style>{ARTCSS}</style>{inner}"), encoding="utf-8")
-        cards.append(f'<a class="lfcard" href="{slug}"><span class="lfl">{lang}</span><span class="lft">{esc(title)}</span></a>')
+        cards.append(f'<a class="lfcard" data-lang="{lang}" data-cat="{esc(lcat)}" href="{slug}"><span class="lfl">{lang}</span><span class="lft">{esc(title)}</span></a>')
     grid = (f'<section class="ph"><div class="wrap"><div class="eb">YouTube \u00b7 long-form</div>'
             f'<h2>{len(files)} full video scripts, gated</h2>'
             f'<p style="color:var(--mut);font-size:15px;margin:10px 0 0">8 to 15 minute talking-head scripts, Austin in English and Saju in German, buyer-first. '
             f'Click any to read the full script with chapters, beats, b-roll notes and the CTA. Highlight any line to leave a note.</p></div></section>'
-            f'<div class="wrap"><div class="lfgrid">{"".join(cards)}</div></div>')
-    (OUT / "youtube.html").write_text(shell("youtube.html", "YouTube", f"<style>{ARTCSS}{LFCSS}</style>{grid}"), encoding="utf-8")
+            f'{filter_bar(cats_present)}<div class="wrap"><div class="lfgrid">{"".join(cards)}</div></div>')
+    (OUT / "youtube.html").write_text(shell("youtube.html", "YouTube", f"<style>{ARTCSS}{LFCSS}{FILTCSS}</style>{grid}"), encoding="utf-8")
     return len(files)
 
 def home():
@@ -1802,13 +1867,13 @@ def home():
         cards += (f'<a href="{k}.html"><div class="n">{n}</div>'
                   f'<div class="l">{esc(cfg["title"])}</div><div class="s">{esc(cfg["tag"])}</div></a>')
     inner = f"""<section class="hero"><div class="wrap">
-<div class="eb">CaseWhen · 30-day content sample</div>
-<h1>A 30-day sample of CaseWhen content.</h1>
-<p>Thirty days of posts for every platform, in English and German, built from the real keyword plan.
+<div class="eb">CaseWhen · 6-month content plan</div>
+<h1>Six months of CaseWhen content.</h1>
+<p>Six months of posts for every platform, in English and German, built from the real keyword plan.
 Pick a platform below to see the posts: blog articles, LinkedIn posts, short-form video scripts, and
 X. Every finished one is written plainly and passes the language and SEO checks before it appears.</p>
 <div class="cad">{cards}</div></div></section>"""
-    (OUT / "index.html").write_text(shell("index.html", "30-day content plan", inner), encoding="utf-8")
+    (OUT / "index.html").write_text(shell("index.html", "6-month content plan", inner), encoding="utf-8")
 
 home()
 strategy_page()
