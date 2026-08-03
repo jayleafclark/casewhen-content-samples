@@ -43,6 +43,7 @@
     }
     sel.removeAllRanges();
     note.cwid = container.getAttribute("data-cwid");
+    note.src = container.getAttribute("data-src") || "";
     note.quote = quote;
     return note;
   }
@@ -152,7 +153,7 @@
       }
       html += '</div>';
     });
-    html += '<footer><button data-act="export" class="ghost">Export notes</button></footer>';
+    html += '<footer><button data-act="export" class="ghost">Export notes (md)</button><button data-act="exportjson" class="ghost">Export for AI editor</button></footer>';
     panel.innerHTML = html;
     wire();
   }
@@ -182,6 +183,7 @@
       n.status = "resolved"; n.applied = n.revision; saveNotes(arr); renderPanel(); return;
     }
     if (a === "export") { exportNotes(); return; }
+    if (a === "exportjson") { exportNotesJSON(); return; }
     if (a === "ai" && n) { suggest(n, arr); return; }
   }
 
@@ -235,6 +237,22 @@
     var blob = new Blob([md], { type: "text/markdown" });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob); a.download = "review-notes" + PATH + ".md"; a.click();
+  }
+
+  // Export in the format the GitHub Action (apply_notes.py) consumes: [{file, selection, note}].
+  // Commit the downloaded file to the research repo as review-notes/pending.json to trigger the editor.
+  function exportNotesJSON() {
+    var list = notes().filter(function (n) { return n.status !== "deleted" && (n.note || "").trim(); });
+    var items = list.filter(function (n) { return n.src; }).map(function (n) {
+      return { file: n.src, selection: n.quote || "", note: n.note || "" };
+    });
+    var missing = list.length - items.length;
+    var payload = JSON.stringify({ notes: items }, null, 1);
+    var blob = new Blob([payload], { type: "application/json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = "pending.json"; a.click();
+    alert(items.length + " note(s) exported to pending.json.\nCommit it to the research repo as review-notes/pending.json to run the AI editor." +
+      (missing ? "\n\n(" + missing + " note(s) skipped: no source file on that element.)" : ""));
   }
 
   function boot() {

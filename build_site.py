@@ -288,7 +288,7 @@ def categorize(c, kw, r=None):
         if any(w in blob for w in kws): return name
     return "Governance & trust"
 
-def card(platform, idx, lang, day, r):
+def card(platform, idx, lang, day, r, detail=None):
     key = f"{platform}:{idx}"
     c = COPY.get(key)
     # a merged social post carries its own real topic/lang; prefer it over the slot's
@@ -297,9 +297,10 @@ def card(platform, idx, lang, day, r):
     who = (c.get("who") if c and c.get("who") else ("Austin" if lang == "EN" else "Saju"))
     kw = esc(c.get("keyword") if c and c.get("keyword") else r.get("primary_keyword"))
     cat = categorize(c, c.get("keyword") if c else "", r)
+    open_lnk = f'<a class="openp" href="{detail}">Open &amp; review &rarr;</a>' if detail else ''
     bar = (f'<div class="bar"><span class="cat">{esc(cat)}</span>'
            f'<span class="lang {lang.lower()}">{lang}</span>'
-           f'<span class="who">{who}</span><span class="kw">{kw}</span></div>')
+           f'<span class="who">{who}</span><span class="kw">{kw}</span>{open_lnk}</div>')
     if c and c.get("article_file"):  # full blog article
         md = (CONTENT / c["article_file"]).read_text(encoding="utf-8")
         body = md_to_html(md)
@@ -326,7 +327,8 @@ def card(platform, idx, lang, day, r):
                 '<div class="state">Scheduled · finished copy being written through the ship gate</div></div>')
     full = " full" if (c and c.get("article_file")) else ""
     _catl = categorize(c, c.get("keyword") if c else "", r)
-    return f'<article class="card{full}" data-lang="{lang.upper()}" data-cat="{esc(_catl)}">{bar}{body}</article>'
+    _src = esc((c or {}).get("_src", ""))
+    return f'<article class="card{full}" data-lang="{lang.upper()}" data-cat="{esc(_catl)}" data-src="{_src}">{bar}{body}</article>'
 
 def filter_bar(cats_present):
     """EN/DE + category filter, client-side, no dependencies."""
@@ -350,16 +352,25 @@ def filter_bar(cats_present):
       'document.querySelectorAll(\'.fbtn[data-f="\'+f+\'"]\').forEach(function(x){x.classList.remove("on");});'
       'b.classList.add("on");apply();});});apply();})();</script>')
 
-FILTCSS = ".filters{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin:0 0 22px;padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:12px}.fgroup{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.flab{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-right:4px}.fbtn{font:inherit;font-size:13px;font-weight:600;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--mut);cursor:pointer;transition:all .12s}.fbtn:hover{border-color:var(--dark);color:var(--ink)}.fbtn.on{background:var(--dark);border-color:var(--dark);color:#fff}.fcount{margin-left:auto;font-size:13px;color:var(--faint)}"
+FILTCSS = ".filters{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin:0 0 22px;padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:12px}.fgroup{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.flab{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-right:4px}.fbtn{font:inherit;font-size:13px;font-weight:600;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--mut);cursor:pointer;transition:all .12s}.fbtn:hover{border-color:var(--dark);color:var(--ink)}.fbtn.on{background:var(--dark);border-color:var(--dark);color:#fff}.fcount{margin-left:auto;font-size:13px;color:var(--faint)}.openp{margin-left:auto;font-size:12px;font-weight:700;color:var(--brand);text-decoration:none;white-space:nowrap;border:1px solid var(--line);border-radius:999px;padding:3px 10px;transition:all .12s}.openp:hover{background:var(--dark);border-color:var(--dark);color:#fff}"
 
 def platform_page(k, cfg):
     slots = sorted(cfg["slots"], key=lambda s: (s[1], s[0]))
     done = sum(1 for i,(lang,day,r) in enumerate(slots) if f"{k}:{i}" in COPY)
-    cards = "".join(card(k, i, lang, day, r) for i,(lang,day,r) in enumerate(slots))
     cats_present = set()
+    card_list = []
     for i,(lang,day,r) in enumerate(slots):
         c = COPY.get(f"{k}:{i}")
         cats_present.add(categorize(c, c.get("keyword") if c else "", r))
+        slug = f"{k}-post-{i}.html"
+        card_list.append(card(k, i, lang, day, r, detail=slug))
+        # per-post detail page: focused single post + the ✎ Review / feedback layer
+        focused = card(k, i, lang, day, r)
+        dinner = (f'<section class="ph"><div class="wrap"><a href="{k}.html" style="font-size:13px;color:var(--faint);text-decoration:none">&larr; all {esc(cfg["title"])}</a>'
+                  f'<p style="color:var(--faint);font-size:13px;margin:10px 0 0">Highlight any line and hit &#10003; Review to leave a note. With an API key it makes the surgical edit.</p></div></section>'
+                  f'<div class="wrap" style="max-width:720px;margin:0 auto">{focused}</div>')
+        (OUT / slug).write_text(shell(f"{k}.html", cfg["title"] + " · post", f"<style>{FILTCSS}</style>{dinner}"), encoding="utf-8")
+    cards = "".join(card_list)
     inner = f"""<section class="ph"><div class="wrap"><div class="eb">6-month plan</div>
 <h2>{esc(cfg['title'])}</h2><p>{esc(cfg['blurb'])}</p>
 <div class="count">{len(slots)} posts across 6 months · {done} finished and gated · {cfg['tag']}</div></div></section>
@@ -1985,6 +1996,10 @@ def build_social():
     if bf.exists():
         for b in json.loads(bf.read_text(encoding="utf-8")):
             briefs[b.get("id")] = b
+    _REPOROOT = Path(r"J:\Claude Code\casewhen-research")
+    def _relsrc(f):
+        try: return str(Path(f).resolve().relative_to(_REPOROOT)).replace("\\", "/")
+        except Exception: return ""
     existing = _c.defaultdict(list)
     if SOCIALDIR.exists():
         for f in sorted(SOCIALDIR.glob("*.json")):
@@ -1993,12 +2008,14 @@ def build_social():
             b = briefs.get(f.stem, {})
             for k in ("keyword", "lang", "who", "cluster"):
                 if b.get(k) and not d.get(k): d[k] = b[k]
+            d["_src"] = _relsrc(f)
             existing[f.stem.split("-", 1)[0]].append(d)
     def _buyer(dirp, kw_from_note=False):
         out = []
         if dirp.exists():
             for f in sorted(dirp.glob("**/*.json")):
                 d = _load_json(f)
+                if d: d["_src"] = _relsrc(f)
                 if not d: continue
                 if not d.get("keyword") and kw_from_note:
                     d["keyword"] = (d.get("note", "").split(",")[-1].strip() or "Buyer post")
