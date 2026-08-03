@@ -348,7 +348,7 @@ def filter_bar(cats_present):
       '<button class="fbtn on" data-f="cat" data-v="ALL">All</button>' + catbtns +
       '</div><span class="fcount" id="fcount"></span></div></div>'
       '<script>(function(){var st={lang:"ALL",cat:"ALL"};'
-      'function apply(){var cards=document.querySelectorAll(".card"),n=0;'
+      'function apply(){var cards=document.querySelectorAll(".card,.bcard,.lfcard,.vcard"),n=0;'
       'cards.forEach(function(c){var okL=st.lang=="ALL"||c.dataset.lang==st.lang,'
       'okC=st.cat=="ALL"||c.dataset.cat==st.cat;var v=okL&&okC;c.style.display=v?"":"none";if(v)n++;});'
       'var fc=document.getElementById("fcount");if(fc)fc.textContent=n+" shown";}'
