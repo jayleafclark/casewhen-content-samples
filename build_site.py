@@ -2015,7 +2015,8 @@ def build_social():
     # DEDUP: never render the same post twice (normalized hook/body), keep first occurrence
     def _sig(p):
         import re as _re
-        return _re.sub(r'[^a-z0-9]+', ' ', ((p.get("hook") or p.get("body") or "")).lower()).strip()[:80]
+        # key on the opening 50 chars: the doctrine mandates unique openers, so a shared opener == a duplicate
+        return _re.sub(r'[^a-z0-9]+', ' ', ((p.get("hook") or p.get("body") or "")).lower()).strip()[:50]
     for plat in merged:
         seen = set(); uniq = []
         for p in merged[plat]:
