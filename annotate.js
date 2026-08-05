@@ -295,7 +295,7 @@
       (location.pathname.split("/").pop() || "").replace(/(-post-\d+)?\.html$/, "").replace(/^(script|blog)-.*/, "$1")
     ] || (/script-/.test(location.pathname) ? "a long-form YouTube script" : /\.html$/.test(location.pathname) ? "a blog article" : "a post"));
     var task = wide
-      ? "Rewrite the ENTIRE post below, applying the reviewer's note across the whole thing (not just one line). Keep it the same type and roughly the same length, keep the same structure (a hook first line, the body, then the closing question), and keep the exact SEO keyword if one is given. "
+      ? "Make ONLY the change the reviewer asks for, applied everywhere in the post it is relevant. This is a SURGICAL edit across the whole post, NOT a rewrite: change only the words that the note is about, and keep every other word, sentence, number, heading, structure, and the SEO keyword EXACTLY as they already are. Do not rephrase, reorder, shorten, or 'improve' anything the note does not mention. A lot of care went into this copy; preserve it. Return the full post with just that one change made. "
       : "Rewrite ONLY the passage the reviewer selected, addressing their note, and make it fit naturally inside the full post you are given. ";
     var sys = "You are a surgical copy editor for CaseWhen, a Berlin Power BI / Microsoft Fabric / Azure consultancy that helps business buyers (controllers, CFOs, heads of data) get one trusted number. " + task
       + "CaseWhen rules (obey all): (1) PROBLEM-FIRST — the opening line must state the reader's real problem in plain everyday words with NO statistic, NO percentage, NO research-source name in that first line; earn the stat later. (2) NAME THE NOUN — never a vague placeholder ('the right things', 'something', 'what matters'); name the concrete thing. (3) At most one stat, and never default to Talend 40% / solvexia / revealbi 70% / ZoomInfo 82%; keep any stat's real source. (4) Keep the exact SEO keyword if present. (5) Plain, human, founder voice with contractions; be specific enough to be wrong. "
@@ -310,15 +310,15 @@
       + (goal ? " Its intent/angle: " + goal + "." : "")
       + " The post's job is to make the buyer feel one real problem and trust CaseWhen to fix it. Your edit must serve that goal and stay plain and relatable to a non-technical decision maker.";
     var usr = wide
-      ? ctx + "\n\nTHE FULL POST TO REWRITE:\n" + fullPost
-        + "\n\nREVIEWER NOTE (apply this across the whole post):\n" + (n.note || "tighten it and make it sound more natural")
-        + (n.quote ? "\n\n(The reviewer flagged this line as an example of the problem: \"" + n.quote + "\")" : "")
-        + "\n\nReturn the full revised post only."
+      ? ctx + "\n\nTHE FULL POST (edit it surgically, keep everything not covered by the note byte-for-byte the same):\n" + fullPost
+        + "\n\nREVIEWER NOTE (make ONLY this change, everywhere in the post it applies):\n" + (n.note || "tighten it and make it sound more natural")
+        + (n.quote ? "\n\n(The reviewer flagged this line as an example of the thing to change: \"" + n.quote + "\")" : "")
+        + "\n\nReturn the full post with only that one change made, nothing else altered."
       : ctx + "\n\nFULL POST (for context — do NOT rewrite this whole thing):\n" + fullPost
         + "\n\nTHE SELECTED PASSAGE TO REWRITE:\n" + n.quote
         + "\n\nREVIEWER NOTE:\n" + (n.note || "make it sound more natural and specific")
         + "\n\nReturn only the revised passage, fitting this post's voice and goal, and not repeating any other line in it.";
-    callModel(c, sys, usr, wide ? 3200 : 700).then(function (out) {
+    callModel(c, sys, usr, wide ? 8000 : 700).then(function (out) {
       n.revision = (out || "").trim(); n.wide = !!wide; n.scope = mode || "passage"; saveNotes(arr); renderPanel();
     }).catch(function (err) {
       if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
