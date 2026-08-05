@@ -193,11 +193,19 @@
     var c = cfg();
     var list = notes().filter(function (n) { return n.status !== "deleted"; });
     var html = '<header><b>Review notes</b><span class="cw-x" data-act="close">×</span></header>';
+    html += '<p class="cw-coachline">Accepting an edit updates this <b>preview</b> only. Nothing auto-publishes: your edits and notes go live on the real posts when Ilai runs the batch (not on a schedule). Use <b>Export for AI editor</b> to send them.</p>';
     if (!list.length) html += '<p class="cw-empty">Select any text in the post and click <b>Add note</b>. Say what feels off, or what to add or cut, then hit <b>Suggest edit</b> and the AI rewrites just that part for you. No setup, no keys.</p>';
     list.forEach(function (n) {
       html += '<div class="cw-note' + (n.status === "resolved" ? " done" : "") + '" data-aid="' + n.aid + '">';
       html += '<blockquote>' + esc(n.quote.slice(0, 220)) + '</blockquote>';
       html += '<textarea placeholder="What should change here? e.g. this doesn\'t sound natural / cut this / add a number">' + esc(n.note) + '</textarea>';
+      if (n.deck) {
+        // Image cards (carousels, quote cards) have no text to rewrite inline and can't be previewed
+        // here — the card is regenerated from your note when the batch runs. So: note only.
+        html += '<div class="cw-scope">↳ Card note. It updates the carousel/quote card when Ilai runs the batch. Nothing to preview here.</div>';
+        html += '<div class="cw-row"><button data-act="del" data-aid="' + n.aid + '" class="ghost">Delete</button></div>';
+        html += '</div>'; return;
+      }
       html += '<div class="cw-row"><button data-act="ai" data-aid="' + n.aid + '" title="Rewrite just the highlighted line">✨ This line</button>' +
               '<button data-act="aiwide" data-aid="' + n.aid + '" title="Apply this note across the whole of THIS post">Whole post</button>' +
               '<button data-act="aiall" data-aid="' + n.aid + '" title="Fix this on EVERY post that has the same thing. Previews here now; runs as a gated batch across all posts when you Export for AI editor.">All posts</button>' +
@@ -310,7 +318,7 @@
         + "\n\nTHE SELECTED PASSAGE TO REWRITE:\n" + n.quote
         + "\n\nREVIEWER NOTE:\n" + (n.note || "make it sound more natural and specific")
         + "\n\nReturn only the revised passage, fitting this post's voice and goal, and not repeating any other line in it.";
-    callModel(c, sys, usr).then(function (out) {
+    callModel(c, sys, usr, wide ? 3200 : 700).then(function (out) {
       n.revision = (out || "").trim(); n.wide = !!wide; n.scope = mode || "passage"; saveNotes(arr); renderPanel();
     }).catch(function (err) {
       if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
@@ -322,11 +330,11 @@
   // Reviewers never see or enter a key — the AI edit just works.
   var CW_PROXY = "https://casewhen-ai-proxy-production.up.railway.app/edit";
   var CW_APP = "cw-preview-a7f3k9q2m5";
-  function callModel(c, sys, usr) {
+  function callModel(c, sys, usr, maxTok) {
     return fetch(CW_PROXY, {
       method: "POST",
       headers: { "content-type": "application/json", "x-cw-app": CW_APP },
-      body: JSON.stringify({ model: c.model || "claude-sonnet-4-5", max_tokens: 700, system: sys, messages: [{ role: "user", content: usr }] })
+      body: JSON.stringify({ model: c.model || "claude-sonnet-4-5", max_tokens: maxTok || 700, system: sys, messages: [{ role: "user", content: usr }] })
     }).then(chk).then(function (j) { return (j.content && j.content[0] && j.content[0].text) || ""; });
   }
   function chk(r) { if (!r.ok) { return r.text().then(function (t) { throw new Error(r.status + " " + t.slice(0, 160)); }); } return r.json(); }
@@ -360,9 +368,21 @@
       (missing ? "\n\n(" + missing + " note(s) skipped: no source file on that element.)" : ""));
   }
 
+  // re-apply accepted whole-post rewrites after a reload, so an accepted preview doesn't vanish
+  function rehydrateWide() {
+    notes().forEach(function (n) {
+      if (n.status !== "resolved" || !n.wide || !n.applied) return;
+      var cont = document.querySelector('.annotatable[data-cwid="' + n.cwid + '"]');
+      if (!cont) return;
+      var bar = cont.querySelector(".cw-approve");
+      cont.innerHTML = n.applied.split(/\n\s*\n/).map(function (p) { return p.trim() ? "<p>" + esc(p.trim()) + "</p>" : ""; }).join("");
+      if (bar) cont.appendChild(bar);
+    });
+  }
   function boot() {
     if (!document.querySelector(".annotatable")) return;
     collectContainers();
+    rehydrateWide();
     ensurePanel();
     rehighlight();
     document.addEventListener("mouseup", function () { setTimeout(onSelect, 10); });
