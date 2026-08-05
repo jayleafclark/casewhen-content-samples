@@ -32,7 +32,9 @@
     if (!((n.note || "").trim() || n.applied || n.revision)) return;
     syncPost({ kind: "note", page: page || location.pathname, aid: n.aid, src: n.src || "",
       quote: (n.quote || "").slice(0, 300), note: n.note || "", scope: n.scope || "passage",
-      status: n.status || "open", deck: !!n.deck, accepted: n.status === "resolved" });
+      status: n.status || "open", deck: !!n.deck, accepted: n.status === "resolved",
+      // also carry the AI rewrite they saw/accepted, so what they signed off on is preserved verbatim
+      suggestion: (n.revision || "").slice(0, 12000), accepted_text: (n.applied || "").slice(0, 12000) });
   }
   function syncAll() { try { notes().forEach(function (n) { pushNote(n); }); } catch (e) {} }
   // Full-origin flush: localStorage is shared across every page of this site, so from ONE page load
