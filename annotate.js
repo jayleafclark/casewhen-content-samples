@@ -27,15 +27,32 @@
   }
   var _syncT;
   function scheduleSync() { clearTimeout(_syncT); _syncT = setTimeout(syncAll, 1200); }
-  function syncAll() {
+  function pushNote(n, page) {
+    if (!n || n.status === "deleted") return;
+    if (!((n.note || "").trim() || n.applied || n.revision)) return;
+    syncPost({ kind: "note", page: page || location.pathname, aid: n.aid, src: n.src || "",
+      quote: (n.quote || "").slice(0, 300), note: n.note || "", scope: n.scope || "passage",
+      status: n.status || "open", deck: !!n.deck, accepted: n.status === "resolved" });
+  }
+  function syncAll() { try { notes().forEach(function (n) { pushNote(n); }); } catch (e) {} }
+  // Full-origin flush: localStorage is shared across every page of this site, so from ONE page load
+  // we can upload every note + approval the reviewer ever left, across ALL posts — no need to revisit
+  // each page. This is what captures the notes made before auto-sync existed.
+  function flushAllStored() {
     try {
-      var who = (cfg().reviewer || "");
-      notes().filter(function (n) { return n.status !== "deleted" && ((n.note || "").trim() || n.applied || n.revision); })
-        .forEach(function (n) {
-          syncPost({ kind: "note", page: location.pathname, reviewer: who, aid: n.aid, src: n.src || "",
-            quote: (n.quote || "").slice(0, 300), note: n.note || "", scope: n.scope || "passage",
-            status: n.status || "open", deck: !!n.deck, accepted: n.status === "resolved" });
-        });
+      for (var i = 0; i < LS.length; i++) {
+        var k = LS.key(i); if (!k) continue;
+        if (k.indexOf("cw_notes_") === 0) {
+          var page = k.slice("cw_notes_".length), arr;
+          try { arr = JSON.parse(LS.getItem(k)) || []; } catch (e) { arr = []; }
+          arr.forEach(function (n) { pushNote(n, page); });
+        } else if (k.indexOf("cw_approve_") === 0) {
+          var src = k.slice("cw_approve_".length), v;
+          try { v = JSON.parse(LS.getItem(k)) || {}; } catch (e) { v = {}; }
+          if (v.austin) syncPost({ kind: "approval", src: src, who: "austin", val: true });
+          if (v.saju) syncPost({ kind: "approval", src: src, who: "saju", val: true });
+        }
+      }
     } catch (e) {}
   }
 
@@ -414,7 +431,7 @@
       b.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); openDeckNote(b.closest(".annotatable")); });
     });
     injectApprovals();  // Austin/Saju check on every reviewable piece
-    scheduleSync();     // flush any notes already saved in this browser to the durable repository
+    flushAllStored();   // upload EVERY note/approval saved in this browser (all pages) to the durable repository
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 })();
