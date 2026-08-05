@@ -14,8 +14,30 @@
   function cfg() { try { return JSON.parse(LS.getItem(CFG_KEY)) || {}; } catch (e) { return {}; } }
   function setCfg(c) { LS.setItem(CFG_KEY, JSON.stringify(c)); }
   function notes() { try { return JSON.parse(LS.getItem(NOTES_KEY)) || []; } catch (e) { return []; } }
-  function saveNotes(n) { LS.setItem(NOTES_KEY, JSON.stringify(n)); }
+  function saveNotes(n) { LS.setItem(NOTES_KEY, JSON.stringify(n)); scheduleSync(); }
   function esc(s) { return (s || "").replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
+
+  // --- durable capture: mirror notes + approvals to the CaseWhen feedback service (a real
+  //     repository), so review work is never trapped in one browser's localStorage. Fire-and-forget;
+  //     if the reviewer is offline it simply retries on the next save/page-load. ---
+  var SYNC_URL = "https://casewhen-feedback-bot-production.up.railway.app/note";
+  var SYNC_APP = "cw-preview-a7f3k9q2m5";
+  function syncPost(o) {
+    try { fetch(SYNC_URL, { method: "POST", headers: { "content-type": "application/json", "x-cw-app": SYNC_APP }, body: JSON.stringify(o) }).catch(function () {}); } catch (e) {}
+  }
+  var _syncT;
+  function scheduleSync() { clearTimeout(_syncT); _syncT = setTimeout(syncAll, 1200); }
+  function syncAll() {
+    try {
+      var who = (cfg().reviewer || "");
+      notes().filter(function (n) { return n.status !== "deleted" && ((n.note || "").trim() || n.applied || n.revision); })
+        .forEach(function (n) {
+          syncPost({ kind: "note", page: location.pathname, reviewer: who, aid: n.aid, src: n.src || "",
+            quote: (n.quote || "").slice(0, 300), note: n.note || "", scope: n.scope || "passage",
+            status: n.status || "open", deck: !!n.deck, accepted: n.status === "resolved" });
+        });
+    } catch (e) {}
+  }
 
   var containers = [];
   function collectContainers() {
@@ -130,7 +152,7 @@
   // ---- Austin / Saju approval checkmarks (per piece, keyed by its source file) ----
   function apKey(src) { return "cw_approve_" + src; }
   function getAp(src) { try { return JSON.parse(LS.getItem(apKey(src))) || {}; } catch (e) { return {}; } }
-  function setAp(src, who, val) { var a = getAp(src); a[who] = val; a.t = Date.now(); LS.setItem(apKey(src), JSON.stringify(a)); }
+  function setAp(src, who, val) { var a = getAp(src); a[who] = val; a.t = Date.now(); LS.setItem(apKey(src), JSON.stringify(a)); syncPost({ kind: "approval", page: location.pathname, src: src, who: who, val: !!val }); }
   function apBtn(who, on) { return '<button class="cw-ap' + (on ? " on" : "") + '" data-who="' + who + '" type="button">' + (on ? "✓ " : "") + (who === "austin" ? "Austin" : "Saju") + " check</button>"; }
   function injectApprovals() {
     document.querySelectorAll(".annotatable[data-src]").forEach(function (el) {
@@ -193,7 +215,7 @@
     var c = cfg();
     var list = notes().filter(function (n) { return n.status !== "deleted"; });
     var html = '<header><b>Review notes</b><span class="cw-x" data-act="close">×</span></header>';
-    html += '<p class="cw-coachline">Accepting an edit updates this <b>preview</b> only. Nothing auto-publishes: your edits and notes go live on the real posts when Ilai runs the batch (not on a schedule). Use <b>Export for AI editor</b> to send them.</p>';
+    html += '<p class="cw-coachline">Accepting an edit updates this <b>preview</b> only. Nothing auto-publishes: your edits and notes go live on the real posts when Ilai runs the batch (not on a schedule). Your notes save automatically. Use <b>Export for AI editor</b> to send them.</p>';
     if (!list.length) html += '<p class="cw-empty">Select any text in the post and click <b>Add note</b>. Say what feels off, or what to add or cut, then hit <b>Suggest edit</b> and the AI rewrites just that part for you. No setup, no keys.</p>';
     list.forEach(function (n) {
       html += '<div class="cw-note' + (n.status === "resolved" ? " done" : "") + '" data-aid="' + n.aid + '">';
@@ -392,6 +414,7 @@
       b.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); openDeckNote(b.closest(".annotatable")); });
     });
     injectApprovals();  // Austin/Saju check on every reviewable piece
+    scheduleSync();     // flush any notes already saved in this browser to the durable repository
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 })();
