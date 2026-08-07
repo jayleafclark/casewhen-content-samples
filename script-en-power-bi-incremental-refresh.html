@@ -137,7 +137,7 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 </style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable" data-src="content/w-longform-scripts/EN/power-bi-incremental-refresh.md"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Power BI Incremental Refresh Explained: Stop Reloading Your Whole History (in 14 Minutes)
 Host: Austin · Cluster: governance-reliability · Target: 14 min · Primary keyword: Power BI incremental refresh</p><h2>Chapters
 - 0:00 Why does my refresh reload all my history every time?
-- 1:20 What is incremental refresh really doing under the hood?
+- 1:20 What&#x27;s incremental refresh really doing under the hood?
 - 3:05 Why does Power BI need RangeStart and RangeEnd?
 - 4:50 How do I turn incremental refresh on, step by step?
 - 6:55 Why is my dataflow still re-importing everything?
@@ -182,7 +182,7 @@ Austin: &quot;Four steps, start to finish. Watch the screen.&quot;
 (MODALITY: custom animation)
 (ANIMATION: reuse the partition animation but now with a slider UI. Dragging &quot;Archive: 5 years&quot; widens the grey cold zone; dragging &quot;Incrementally refresh: 10 days&quot; widens the green hot zone at the right edge. Show the two policies stacking: a long grey ARCHIVE band and a short green REFRESH band.)
 Austin: &quot;Those two settings are the whole policy. The archive number is how much history you keep. The refresh number is how far back you reprocess each run. Keep the refresh window a little wider than your late-arriving data, so nothing gets missed.&quot;
-(SCREEN-RECORD, step 4) (ON-SCREEN callout: &quot;4. Publish to the Service - it only works there&quot;) Austin: &quot;Four, and this is the one people miss. Publish to the Power BI Service. Incremental refresh does not run in Desktop. The first refresh in the Service builds every partition and it&#x27;s slow, once. After that, every refresh is short.&quot;
+(SCREEN-RECORD, step 4) (ON-SCREEN callout: &quot;4. Publish to the Service - it only works there&quot;) Austin: &quot;Four, and this is the one people miss. Publish to the Power BI Service. Incremental refresh doesn&#x27;t run in Desktop. The first refresh in the Service builds every partition and it&#x27;s slow, once. After that, every refresh is short.&quot;
 (MODALITY: on-screen text - PAYOFF takeaway)
 (ON-SCREEN: &quot;TAKEAWAY 3 - Incremental refresh only runs in the Service, and the first refresh is a full load. That&#x27;s normal.&quot;)
 Austin: &quot;Takeaway three. Don&#x27;t panic when the first Service refresh takes as long as your old one. That&#x27;s it loading history once. Watch the second run instead.&quot;
@@ -233,7 +233,7 @@ Austin: &quot;If you want to know where else your refresh and your numbers are c
 Austin: &quot;Next up, I&#x27;ll show you how to get one agreed number across your reports so people and Copilot stop returning different answers to the same question. That&#x27;s the one that ends the meeting arguments.&quot;</p><h2>Description</h2><p>Power BI incremental refresh, explained end to end, so your refresh stops re-importing your whole history every run and finishes in minutes.</p><p>Free Power BI Governance &amp; Cost Scorecard (5-min assessment): [scorecard link]
 Work with CaseWhen (request a governance assessment): [casewhen.co link]</p><p>Chapters:
 0:00 Why does my refresh reload all my history every time?
-1:20 What is incremental refresh really doing under the hood?
+1:20 What&#x27;s incremental refresh really doing under the hood?
 3:05 Why does Power BI need RangeStart and RangeEnd?
 4:50 How do I turn incremental refresh on, step by step?
 6:55 Why is my dataflow still re-importing everything?

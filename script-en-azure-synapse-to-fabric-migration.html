@@ -137,25 +137,25 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 </style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable" data-src="content/w-longform-scripts/EN/azure-synapse-to-fabric-migration.md"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Azure Synapse Is Winding Down: What a Real Move to Fabric Actually Involves
 Host: Austin · Cluster: migration · Target: 14 min · Primary keyword: azure synapse</p><h2>Chapters
 - 0:00 Is Azure Synapse actually going away?
-- 1:30 What is Microsoft really retiring?
+- 1:30 What&#x27;s Microsoft really retiring?
 - 3:10 Why won&#x27;t my Synapse workspace just import into Fabric?
 - 4:55 Where does my dedicated SQL warehouse go?
 - 7:05 What T-SQL breaks when I rebuild the warehouse?
 - 9:05 Do my pipelines and Spark notebooks survive the move?
 - 11:05 What will Fabric capacity actually cost me?
 - 12:50 So what do I do Monday?</h2><h2>Script</h2><p>Chapter 1. Is Azure Synapse actually going away?</p><p>[0:00-0:12] HOOK (style: real-number / here&#x27;s-what-breaks)
-Spoken: &quot;There is no import button. If you&#x27;re moving Azure Synapse to Fabric, you don&#x27;t lift the workspace across, you rebuild it by hand, and most teams find that out three weeks in.&quot;
+Spoken: &quot;There&#x27;s no import button. If you&#x27;re moving Azure Synapse to Fabric, you don&#x27;t lift the workspace across, you rebuild it by hand, and most teams find that out three weeks in.&quot;
 (MODALITY: talking head, tight, single quiet take)
 (ON-SCREEN: keyword card &quot;AZURE SYNAPSE → FABRIC&quot; with a greyed-out &quot;Import&quot; control and a small red &quot;not available&quot; tag)
 (B-ROLL: quick 2-second cut to a screen where someone right-clicks a Synapse workspace and there&#x27;s no move option)</p><p>[0:12-0:42] PROMISE + STAKES + OPEN LOOP
 Spoken: &quot;So here&#x27;s what you&#x27;ll walk away with. You&#x27;ll know exactly what Microsoft is retiring and what&#x27;s staying, which pieces recreate cleanly and which ones you rebuild from scratch, and roughly what the new bill looks like before you commit. The cost of getting this wrong is real. Teams scope it as a copy-paste job, quote two weeks, and then a stored procedure the whole finance report depends on won&#x27;t even compile in Fabric. Stay to the end, because that one T-SQL gap is what stalls most Synapse go-lives right at the finish line, and I&#x27;ll show you how to catch it up front. We rebuild these for BI teams most weeks, so this is the version with the surprises already removed.&quot;
 (MODALITY: talking head → hard cut to fast b-roll montage of Synapse Studio, a warehouse, a pipeline canvas)
 (ON-SCREEN: kinetic checklist building 3 lines: &quot;What&#x27;s retiring&quot; / &quot;What rebuilds vs recreates&quot; / &quot;What it costs&quot;)
-(Visible change every ~5s: each promise line pops as spoken)</p><p>Chapter 2. What is Microsoft really retiring?</p><p>[1:30-2:05] CLAIM
+(Visible change every ~5s: each promise line pops as spoken)</p><p>Chapter 2. What&#x27;s Microsoft really retiring?</p><p>[1:30-2:05] CLAIM
 Spoken: &quot;First, the thing nobody says plainly. Synapse is in maintenance. It still runs, but it stopped getting new features, and every new analytics project inside Microsoft&#x27;s own guidance now points at Fabric instead.&quot;
 (MODALITY: on-screen text / kinetic type)
 (ON-SCREEN: card &quot;AZURE SYNAPSE = MAINTENANCE MODE. New work → Fabric.&quot; keyword &quot;azure synapse&quot; bold)</p><p>[2:05-2:55] DEMO
-Spoken: &quot;Let me show you the pieces, because Synapse was never one product. You&#x27;ve got dedicated SQL pools, that&#x27;s the old SQL Data Warehouse, your big relational tables. You&#x27;ve got serverless SQL for querying files. Spark pools for notebooks. And Synapse pipelines for orchestration. Each one has a Fabric home now. Dedicated pools map to Fabric Warehouse. Serverless maps to the lakehouse SQL endpoint. Spark maps to Fabric notebooks. Pipelines map to Fabric Data Factory. The problem is that word, map. None of it moves on its own. Every box here is a rebuild target, not a transfer.&quot;
+Spoken: &quot;Let me show you the pieces, because Synapse was never one product. You&#x27;ve got dedicated SQL pools, that&#x27;s the old SQL Data Warehouse, your big relational tables. You&#x27;ve got serverless SQL for querying files. Spark pools for notebooks. And Synapse pipelines for orchestration. Each one has a Fabric home now. Dedicated pools map to Fabric Warehouse. Serverless maps to the lakehouse SQL endpoint. Spark maps to Fabric notebooks. Pipelines map to Fabric Data Factory. The problem is that word, map. None of it moves on its own. Every box here&#x27;s a rebuild target, not a transfer.&quot;
 (MODALITY: custom animation)
 (ANIMATION, &quot;Synapse teardown&quot;: the Synapse workspace splits into four labelled blocks, Dedicated SQL Pool, Serverless SQL, Spark, Pipelines. A dotted arrow reaches from each block toward its Fabric counterpart, Warehouse, Lakehouse endpoint, Notebooks, Data Factory. As each arrow lands it turns from solid to dashed and a small wrench icon appears on it, which reads &quot;recreate,&quot; never a clean pipe.)
 (ON-SCREEN: four mapping labels stay pinned as a legend)</p><p>[2:55-3:10] PAYOFF + RE-HOOK
@@ -177,7 +177,7 @@ Spoken: &quot;Your dedicated SQL pool becomes a Fabric Warehouse. Same idea, rel
 (ON-SCREEN: card &quot;Dedicated SQL Pool → Fabric Warehouse (different engine)&quot;)</p><p>[5:25-6:40] DEMO
 Spoken: &quot;Here&#x27;s the part that trips people. In a dedicated SQL pool, you sized compute with DWUs, and you tuned performance by choosing a distribution for every table, hash, round robin, or replicate, plus your own indexes. You owned all of that. Fabric Warehouse takes it away on purpose. Storage is Delta and parquet in OneLake. There&#x27;s no DWU dial. There&#x27;s no distribution key for you to pick, the engine handles data layout. So the parts of your DDL that were pure performance tuning, the DISTRIBUTION clauses, the manual index strategy, don&#x27;t just break, they&#x27;re gone as a concept. Your table structure carries. Your tuning doesn&#x27;t. It&#x27;s a different model. If your team spent years hand-tuning distributions, that knowledge doesn&#x27;t transfer, and the new engine wants you to trust it instead.&quot;
 (MODALITY: custom animation)
-(ANIMATION, &quot;engine swap&quot;: Left, a dedicated SQL pool drawn as fixed compute nodes with coloured &quot;hash / round robin / replicate&quot; tags on each table, and a DWU slider. On transition, the DWU slider fades out, the distribution tags detach and dissolve, and the tables flow down into a single OneLake layer rendered as Delta/parquet files. The message on screen: &quot;Schema carries. Distribution + index tuning does not.&quot;)
+(ANIMATION, &quot;engine swap&quot;: Left, a dedicated SQL pool drawn as fixed compute nodes with coloured &quot;hash / round robin / replicate&quot; tags on each table, and a DWU slider. On transition, the DWU slider fades out, the distribution tags detach and dissolve, and the tables flow down into a single OneLake layer rendered as Delta/parquet files. The message on screen: &quot;Schema carries. Distribution + index tuning doesn&#x27;t.&quot;)
 (ON-SCREEN: keyword &quot;Fabric Warehouse&quot; + &quot;OneLake (Delta)&quot; pinned)</p><p>[6:40-7:05] PAYOFF + RE-HOOK
 Spoken: &quot;Takeaway three. Keep your table schemas, drop your distribution and index tuning, and re-baseline performance on the new engine before you promise anyone a speed number. Now, schema is one thing. Your actual T-SQL code is another, and this is the gap I promised you at the start.&quot;
 (MODALITY: talking head)
@@ -197,7 +197,7 @@ Spoken: &quot;Split answer, and it matters for your timeline. Your Spark noteboo
 (ON-SCREEN: card &quot;Notebooks: mostly port. Pipelines: recreate.&quot;)</p><p>[9:35-10:45] DEMO
 Spoken: &quot;Start with the good side. Spark is Spark. Your notebook code, the PySpark and the SQL inside it, moves to Fabric notebooks with real reuse. What changes is the plumbing around it. The pool config is different, library management is handled another way, and anywhere your code read from a storage account, it now reads from a lakehouse in OneLake, so those paths get re-pointed. Now the pipelines. A Synapse pipeline looks almost identical to a Data Factory pipeline, same activities, same canvas, and that similarity fools people. Fabric Data Factory pipelines are a separate item, and there&#x27;s no import, so you rebuild each pipeline activity by activity. Some connectors and the older mapping data flows don&#x27;t have a one-for-one match, so a few activities need a genuine redesign, not a paste. The simple rule, notebooks are a copy-and-fix, pipelines are a rebuild-and-test.&quot;
 (MODALITY: screen-record)
-(SCREEN-RECORD: Fabric. First a notebook, paste PySpark from Synapse, it runs, mark the single changed line where an ADLS path becomes a lakehouse path. Then cut to a Fabric Data Factory pipeline canvas and rebuild a two-activity Copy pipeline from scratch, showing there is no &quot;import from Synapse&quot; entry point.)
+(SCREEN-RECORD: Fabric. First a notebook, paste PySpark from Synapse, it runs, mark the single changed line where an ADLS path becomes a lakehouse path. Then cut to a Fabric Data Factory pipeline canvas and rebuild a two-activity Copy pipeline from scratch, showing there&#x27;s no &quot;import from Synapse&quot; entry point.)
 (Visible change: split the segment, notebook half then pipeline half, callout on the re-pointed path)</p><p>[10:45-11:05] PAYOFF + RE-HOOK
 Spoken: &quot;Takeaway five. Move notebooks first, they&#x27;re your quick wins, and treat every pipeline as a fresh build with a test at the end. Now the question that decides whether any of this was worth it. What does Fabric actually cost once it&#x27;s running, and why do so many teams get a bill they didn&#x27;t expect?&quot;
 (MODALITY: talking head)
@@ -220,7 +220,7 @@ Spoken: &quot;If you want the full version of that, we put together a Synapse-to
 (ON-SCREEN: two link cards, &quot;Free: Synapse-to-Fabric Migration Checklist&quot; and &quot;Get a migration quote, CaseWhen&quot;, plus a small watch-next thumbnail &quot;Fabric Capacity, Sized Right&quot;)</p><h2>Description</h2><p>Azure Synapse is winding down and Microsoft is pointing new work at Fabric, so here&#x27;s what a real Synapse-to-Fabric migration actually involves, piece by piece.</p><p>Free Synapse-to-Fabric migration checklist: https://casewhen.co/synapse-fabric-checklist
 Work with CaseWhen (get a migration quote): https://casewhen.co/migration-quote</p><p>Chapters:
 0:00 Is Azure Synapse actually going away?
-1:30 What is Microsoft really retiring?
+1:30 What&#x27;s Microsoft really retiring?
 3:10 Why won&#x27;t my Synapse workspace just import into Fabric?
 4:55 Where does my dedicated SQL warehouse go?
 7:05 What T-SQL breaks when I rebuild the warehouse?

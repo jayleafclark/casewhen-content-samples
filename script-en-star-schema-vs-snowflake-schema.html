@@ -138,7 +138,7 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 Host: Austin · Cluster: modeling-kpi · Target: 14 min · Primary keyword: snowflake schema</p><h2>Chapters
 - 0:00 Why is my Power BI report so slow?
 - 0:45 What&#x27;s eating my memory on refresh?
-- 2:15 What is a star schema, and why is it faster?
+- 2:15 What&#x27;s a star schema, and why is it faster?
 - 4:00 Star schema vs snowflake: which do I build?
 - 5:45 How do I turn my flat table into a star schema?
 - 7:45 Which relationships and keys do I set up?
@@ -150,21 +150,21 @@ Spoken: &quot;More RAM won&#x27;t fix a slow Power BI report. A snowflake schema
 (VISIBLE CHANGE ~5s: hard zoom-punch on Austin as he says &quot;won&#x27;t fix&quot;, then cut to a 1-second glimpse of a report re-rendering instantly.)</p><p>[0:12-0:45] PROMISE + STAKES + OPEN LOOP
 (MODALITY: data-viz)
 (ON-SCREEN: before/after bars - &quot;Refresh: 24 min → 40 sec&quot; and &quot;Model: 1.4 GB → 260 MB&quot;; then the stat card &quot;32% of their own data - what companies think is inaccurate (Experian, 2021)&quot;)
-Spoken: &quot;By the end of this you&#x27;ll be able to take a slow, bloated Power BI model and rebuild it as a star schema that refreshes faster and uses far less memory, and you&#x27;ll know exactly why it works. The cost of leaving it is real. Refreshes that run for 20 or 30 minutes, reports that time out in front of the exec who asked for them, and analysts who stop trusting the numbers. Companies think 32 percent of their own data is inaccurate, and a lot of that distrust starts with a model nobody can refresh or reconcile. We rebuild models like this for BI teams in Berlin most weeks, so the next 14 minutes are the same steps we&#x27;d run on your file. And near the end I&#x27;ll show you one checkbox in Power BI that&#x27;s been adding hidden date tables to your model and inflating its size, and how to switch it off.&quot;
+Spoken: &quot;By the end of this you&#x27;ll be able to take a slow, bloated Power BI model and rebuild it as a star schema that refreshes faster and uses far less memory, and you&#x27;ll know exactly why it works. The cost of leaving it&#x27;s real. Refreshes that run for 20 or 30 minutes, reports that time out in front of the exec who asked for them, and analysts who stop trusting the numbers. Companies think 32 percent of their own data is inaccurate, and a lot of that distrust starts with a model nobody can refresh or reconcile. We rebuild models like this for BI teams in Berlin most weeks, so the next 14 minutes are the same steps we&#x27;d run on your file. And near the end I&#x27;ll show you one checkbox in Power BI that&#x27;s been adding hidden date tables to your model and inflating its size, and how to switch it off.&quot;
 (VISIBLE CHANGE ~6s: the bars animate in one at a time; the Experian card slides up last; hard cut into Beat 1, no throat-clearing.)</p><p>[0:45-2:15] VALUE BEAT 1 - What&#x27;s eating my memory on refresh?
 (MODALITY: custom animation)
 (ON-SCREEN CLAIM CARD: &quot;A flat table blows up because every column repeats.&quot;)
-Spoken: &quot;Here&#x27;s what happens on refresh. Power BI has to load the model into memory, and during a refresh it keeps the old copy while it builds the new one, so for a moment it needs close to twice the size of your data in RAM. If your whole report is one wide flat table, with the customer name, region, product, and category repeated on every single row, that table is huge, and doubling it is what tips you over into an out-of-memory refresh. The storage engine compresses columns, and it compresses far better when a column has a few repeated values than when it&#x27;s long unique text stretched across millions of rows.&quot;
+Spoken: &quot;Here&#x27;s what happens on refresh. Power BI has to load the model into memory, and during a refresh it keeps the old copy while it builds the new one, so for a moment it needs close to twice the size of your data in RAM. If your whole report is one wide flat table, with the customer name, region, product, and category repeated on every single row, that table is huge, and doubling it&#x27;s what tips you over into an out-of-memory refresh. The storage engine compresses columns, and it compresses far better when a column has a few repeated values than when it&#x27;s long unique text stretched across millions of rows.&quot;
 (CUSTOM ANIMATION spec: one wide flat table, columns showing the same customer and region text repeating down millions of rows. A memory bar on the right fills as the table loads, then a second faded copy of the table appears beside it during refresh and the bar crosses a red capacity line. Model shape in brand color #1D967C; the capacity-line warning is the only amber element.)
 (ON-SCREEN TAKEAWAY CARD: &quot;1 - Out of memory? Shrink the model before you buy hardware. The shrink is a star schema.&quot;)
 Spoken (payoff): &quot;Takeaway one. If your refresh runs out of memory, shrink the model before you buy hardware. The shrink is a star schema.&quot;
-Re-hook: &quot;So what does that smaller shape look like. That&#x27;s the next chapter.&quot;</p><p>[2:15-4:00] VALUE BEAT 2 - What is a star schema, and why is it faster?
+Re-hook: &quot;So what does that smaller shape look like. That&#x27;s the next chapter.&quot;</p><p>[2:15-4:00] VALUE BEAT 2 - What&#x27;s a star schema, and why is it faster?
 (MODALITY: screen-record - Power BI Desktop, Model view)
 (ON-SCREEN CLAIM CARD: &quot;A star schema is one fact table surrounded by dimension tables.&quot;)
 Spoken: &quot;Open the model view in Power BI Desktop and this is the shape you want. In the middle, one fact table. That&#x27;s your events, the things that happen over and over, like sales order lines, each row a transaction with its numbers and a few ID columns. Around it, separate dimension tables for the things you filter and group by. A customer table, a product table, a date table, a region table. Each dimension lists every item once, with a short ID, and the fact table just points at that ID instead of repeating the full text. Sales drops from a hundred columns of repeated text to a narrow table of numbers and IDs, and the descriptions live once in the dimensions. That&#x27;s why it compresses smaller and scans faster.&quot;
 (SCREEN-RECORD spec: drag Sales into the center; drag Customer, Product, Date, Region out to the corners; cursor moves to the Sales table as it shrinks from 100 columns to 8 as text columns are removed; lower-third label &quot;FACT&quot; on Sales, &quot;DIMENSION&quot; on each outer table.)
 (ON-SCREEN TAKEAWAY CARD: &quot;2 - One fact table for events, separate dimensions for what you slice by.&quot;)
-Spoken (payoff): &quot;Takeaway two. One fact table for the events you measure, separate dimension tables for the things you slice by. That is a star schema.&quot;
+Spoken (payoff): &quot;Takeaway two. One fact table for the events you measure, separate dimension tables for the things you slice by. That&#x27;s a star schema.&quot;
 Re-hook: &quot;Now, if one fact table with a set of dimensions is the target, where does snowflake come in, and is it ever worth it.&quot;</p><p>[4:00-5:45] VALUE BEAT 3 - Star schema vs snowflake: which do I build?
 (MODALITY: custom animation)
 (ON-SCREEN CLAIM CARD: &quot;Snowflake splits one dimension into several joined tables.&quot;)
@@ -208,7 +208,7 @@ Spoken: &quot;If you want the full checklist, I&#x27;ve put our 20-Point Power B
 Star schema vs snowflake schema in Power BI: why your model crawls on refresh and how to rebuild it as a star schema that&#x27;s smaller and faster.</h2><p>Free 20-Point Power BI Model Review Checklist + the .pbix from this build: https://casewhen.co/model-review-checklist
 Work with CaseWhen (semantic-model &amp; AI-readiness review): https://casewhen.co/contact</p><p>0:00 Why is my Power BI report so slow?
 0:45 What&#x27;s eating my memory on refresh?
-2:15 What is a star schema, and why is it faster?
+2:15 What&#x27;s a star schema, and why is it faster?
 4:00 Star schema vs snowflake: which do I build?
 5:45 How do I turn my flat table into a star schema?
 7:45 Which relationships and keys do I set up?

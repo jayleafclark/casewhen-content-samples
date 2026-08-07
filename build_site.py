@@ -234,12 +234,23 @@ def md_to_html(md):
     out.append(f'<h1>{esc(fm.get("H1", fm.get("META_TITLE","")))}</h1>')
     blocks = re.split(r"\n\s*\n", md.strip())
     tbl = []
-    for blk in blocks:
+    skip = -1
+    for i, blk in enumerate(blocks):
+        if i == skip:
+            continue
         b = blk.strip()
         if not b or b == "---":
             continue
         if b.upper().startswith("QUICK ANSWER"):
-            txt = b.split(":", 1)[1].strip() if ":" in b else b
+            txt = b.split(":", 1)[1].strip() if ":" in b else ""
+            txt = re.sub(r"\s*-{3,}\s*$", "", txt).strip()   # drop a trailing --- separator
+            if not txt:                                       # answer sits in a following block
+                j = i + 1
+                while j < len(blocks) and (not blocks[j].strip() or blocks[j].strip() == "---"):
+                    j += 1
+                if j < len(blocks):
+                    txt = re.sub(r"\s*-{3,}\s*$", "", blocks[j].strip()).strip()
+                    skip = j
             out.append(f'<div class="qa"><b>Quick answer.</b> {esc(txt)}</div>'); continue
         if b.startswith("## "):
             out.append(f'<h2>{esc(b[3:].strip())}</h2>'); continue
@@ -789,9 +800,9 @@ def proof_block(kicker="Who's behind it", head="Built by people who've fixed thi
  <div class="quote"><p>{q2[0]}</p><div class="who">{esc(q2[1])}</div></div>
 </div>
 <div class="cred">CaseWhen is a Berlin Power BI and Fabric consultancy run by <b>Microsoft-certified</b>
-BI engineers. We've built and repaired reporting foundations for teams at <b>Schindler</b> and
-<b>Ipsen</b>, so the checks and templates here aren't theory. They're what we reach for on day one.
-<div class="logos"><span>Schindler</span><span>Ipsen</span><span>WellBeauty</span></div></div>
+BI engineers. We've built and repaired reporting foundations for finance and BI teams, including <b>Schindler</b>,
+so the checks and templates here aren't theory. They're what we reach for on day one.
+<div class="logos"><span>Schindler</span></div></div>
 </div></section>"""
 
 def bridge_block(kicker, head, text, href, label):
@@ -1352,13 +1363,7 @@ def team_page():
  </div>
 </div></section>
 
-{proof_block(head="Teams we've enabled and kept",
-  q1=("\"The bounded-entry project was the smart way in. Fixed price, clear outcome, no big commitment. "
-      "Six weeks later we moved onto a retainer without a second thought.\"",
-      "COO, Ipsen"),
-  q2=("\"Having CaseWhen on a retainer is like having a senior BI engineer we don't have to recruit. The "
-      "governance review alone caught two things that would have bitten us at year end.\"",
-      "Finance Director, Schindler"))}
+{proof_block(head="Teams we've enabled and kept")}
 
 <section id="book" class="deep"><div class="wrap narrow center-head" data-r>
  <div class="kicker">Start here</div>

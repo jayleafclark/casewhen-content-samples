@@ -135,16 +135,16 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 .btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
 @media(max-width:640px){.bgrid{grid-template-columns:1fr}}
 </style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable" data-src="content/w-longform-scripts/EN/microsoft-fabric-consulting.md"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p># Microsoft Fabric: Do You Actually Need It, or Is Your Bill About to Double?
-Host: Austin · Cluster: fabric · Target: 12 min · Primary keyword: microsoft fabric consulting</p><h2>Chapters
+Host: Austin · Cluster: Fabric · Target: 12 min · Primary keyword: microsoft Fabric consulting</p><h2>Chapters
 - 0:00 Should I even turn Microsoft Fabric on?
-- 0:45 What is Fabric, and how is it different from Power BI?
+- 0:45 What&#x27;s Fabric, and how is it different from Power BI?
 - 2:10 Why would turning it on double my bill?
 - 3:40 How can my reports go offline when the metrics look fine?
 - 5:10 When is Fabric worth the capacity spend?
 - 6:40 When should I stay on Power BI Pro instead?
 - 8:10 What&#x27;s the cheapest way to test Fabric first?
 - 10:20 So, do I need it or not?</h2><h2>Script</h2><p>[0:00-0:12] HOOK (contrarian) - talking head
-&quot;Most teams asking me about Microsoft Fabric should not turn it on yet. And the ones who flip it on too early watch a two hundred dollar Power BI bill turn into a five thousand dollar one. So before you touch that switch, let&#x27;s work out whether you&#x27;re one of the small group who needs it.&quot;
+&quot;Most teams asking me about Microsoft Fabric shouldn&#x27;t turn it on yet. And the ones who flip it on too early watch a two hundred dollar Power BI bill turn into a five thousand dollar one. So before you touch that switch, let&#x27;s work out whether you&#x27;re one of the small group who needs it.&quot;
 (MODALITY: talking head, Austin blunt to camera, tight framing.)
 (ON-SCREEN: keyword card &quot;Microsoft Fabric&quot; bottom-third, brand green #1D967C. At &quot;five thousand dollar one,&quot; a number stamp punches in: $5,000.)
 (Visible change every 5-8s: cut to a second, closer angle on &quot;small group who needs it.&quot;)</p><p>[0:12-0:40] PROMISE + STAKES + OPEN LOOP - b-roll + on-screen text (Austin VO)
@@ -152,7 +152,7 @@ Host: Austin · Cluster: fabric · Target: 12 min · Primary keyword: microsoft 
 (MODALITY: b-roll of a Fabric capacity dashboard over the shoulder, then kinetic promise text; Austin voiceover.)
 (ON-SCREEN: three promise chips animate in one at a time: &quot;Where the price jumps&quot; / &quot;4 signs you&#x27;re ready&quot; / &quot;The billing trap most teams miss.&quot;)
 (Credibility line, de-risking not bragging, talking head for one beat: &quot;We size Fabric capacity for BI teams every week, so this is the same checklist we&#x27;d walk you through.&quot;)
-(Hard cut into Beat 1, no throat-clearing.)</p><p>[0:45-2:10] VALUE BEAT 1 - &quot;What is Fabric, and how is it different from Power BI?&quot; - custom animation
+(Hard cut into Beat 1, no throat-clearing.)</p><p>[0:45-2:10] VALUE BEAT 1 - &quot;What&#x27;s Fabric, and how is it different from Power BI?&quot; - custom animation
 CLAIM (on-screen text card): &quot;Fabric is the platform. Power BI is one workload on it.&quot;
 &quot;Quick grounding, because this trips up almost everyone. Power BI is the reporting tool you already know. Fabric is the bigger platform underneath it, and Power BI is one part of that. Fabric bundles seven workloads: data movement, data engineering, a data warehouse, data science, real-time data, databases, and Power BI reporting. All seven sit on one store called OneLake. The point of putting them together is one copy of your data that every part can read. OneLake stores it once, in an open format, and each workload reads the same files. That&#x27;s the whole pitch: one store feeds many tools, and nothing gets copied between them.&quot;
 (MODALITY: custom animation.)
@@ -176,7 +176,7 @@ CLAIM (on-screen text card): &quot;Fabric smooths your usage, then throttles you
 PAYOFF (numbered takeaway on-screen): &quot;Takeaway 3: If reports slow down for no clear reason, open the Fabric Capacity Metrics app and read throttling and carryforward, not just the live usage number. The live number can mislead you, because it&#x27;s already been smoothed.&quot;
 RE-HOOK: &quot;So Fabric costs more, and it needs watching. Which is exactly why the next question matters: when is it truly worth it?&quot;</p><p>[5:10-6:40] VALUE BEAT 4 - &quot;When is Fabric worth the capacity spend?&quot; - talking head + b-roll
 CLAIM (on-screen text card): &quot;Four signs Fabric is worth turning on.&quot;
-&quot;Here are the four signs you&#x27;re ready. One: you&#x27;re already stitching together separate Azure services. A pipeline tool here, a warehouse there, a lake somewhere else, and a lot of copying between them. Fabric puts those on one store, so that&#x27;s a real win for you. Two: you&#x27;ve got hundreds of people who only view reports. On per-user licensing every viewer costs money. At F64 those viewers are included, so past a couple hundred of them the capacity price starts to make sense. Three: you&#x27;re on old Power BI Premium, the P-SKUs. Microsoft is retiring those and moving everyone to Fabric F-SKUs, so your hand is being forced anyway. Better to plan it than get surprised. Four: you want Copilot and AI features running on your own data, governed in one place. That lives in Fabric. One thing worth knowing though: speed here is a real dividing line. APQC found the top finance teams close their month in five days or fewer, while the slowest take ten or more. A single governed source of data is a big part of how the fast ones stay fast.&quot;
+&quot;Here are the four signs you&#x27;re ready. One: you&#x27;re already stitching together separate Azure services. A pipeline tool here, a warehouse there, a lake somewhere else, and a lot of copying between them. Fabric puts those on one store, so that&#x27;s a real win for you. Two: you&#x27;ve got hundreds of people who only view reports. On per-user licensing every viewer costs money. At F64 those viewers are included, so past a couple hundred of them the capacity price starts to make sense. Three: you&#x27;re on old Power BI Premium, the P-SKUs. Microsoft is retiring those and moving everyone to Fabric F-SKUs, so your hand is being forced anyway. Better to plan it than get surprised. Four: you want Copilot and AI features running on your own data, governed in one place. That lives in Fabric. One thing worth knowing though: speed here&#x27;s a real dividing line. APQC found the top finance teams close their month in five days or fewer, while the slowest take ten or more. A single governed source of data is a big part of how the fast ones stay fast.&quot;
 (MODALITY: talking head, cutaways to b-roll.)
 (B-ROLL: a BI team at desks with the Azure portal and pipelines on screen; cut to a person clicking through a report as a plain viewer; cut to a wall calendar with a migration deadline circled; cut to a hand hovering a Copilot prompt box.)
 (ON-SCREEN: the close-speed stat as a stamped card, &quot;Top finance teams close in 5 days or fewer; slowest take 10+,&quot; cited &quot;APQC, 2023.&quot;)
@@ -214,7 +214,7 @@ Microsoft Fabric consulting question we get most: do you actually need Fabric, o
 Free Fabric readiness checklist: https://casewhen.co/fabric-readiness-checklist
 Work with CaseWhen (Fabric readiness and capacity check): https://casewhen.co/contact</h2><p>Chapters:
 0:00 Should I even turn Microsoft Fabric on?
-0:45 What is Fabric, and how is it different from Power BI?
+0:45 What&#x27;s Fabric, and how is it different from Power BI?
 2:10 Why would turning it on double my bill?
 3:40 How can my reports go offline when the metrics look fine?
 5:10 When is Fabric worth the capacity spend?
