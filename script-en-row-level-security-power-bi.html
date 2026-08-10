@@ -78,6 +78,7 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 .article{max-width:none}
 .article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
 .article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article h3{font-size:16px;margin:16px 0 4px;color:var(--dark)}
 .article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
 .article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
 .article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
@@ -134,7 +135,7 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 .btile .btcat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
 .btile .bth{font-size:18px;font-weight:700;line-height:1.25;color:#fff}
 @media(max-width:640px){.bgrid{grid-template-columns:1fr}}
-</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable" data-src="content/w-longform-scripts/EN/row-level-security-power-bi.md"><div class="fm"><b></b><span></span><span></span></div><h1></h1><p>### [0:45-2:15] BEAT 1: What&#x27;s row-level security really doing? (animation)
+</style><section class="ph"><div class="wrap"><a href="youtube.html" style="font-size:13px;color:var(--faint);text-decoration:none">← all scripts</a></div></section><div class="wrap article-wrap"><div class="body article annotatable" data-src="content/w-longform-scripts/EN/row-level-security-power-bi.md"><div class="fm"><b></b><span></span><span></span></div><h1></h1><h3>[0:45-2:15] BEAT 1: What&#x27;s row-level security really doing? (animation)
 CLAIM (on-screen card): &quot;RLS filters rows at the model, before any visual draws.&quot;
 PROOF (MODALITY: custom animation, RLS mechanism from the brand library):
 - A Sales fact table sits center, rows tagged Nord, Sued, West, Ost.
@@ -142,7 +143,7 @@ PROOF (MODALITY: custom animation, RLS mechanism from the brand library):
 - User B signs in. Nord drops, a different set survives, the same chart redraws to new numbers.
 - Colour: brand green #1D967C for the surviving rows, neutral grey for the filtered-out rows. No stock network-globe visuals.
 PAYOFF (on-screen numbered takeaway): &quot;Takeaway 1: RLS is a row filter tied to who&#x27;s logged in. Hiding a page still ships the data sitting underneath it.&quot;
-RE-HOOK: &quot;So where does that filter get written. It lives in something called a role →&quot;</p><p>### [2:15-4:00] BEAT 2: How do I build static RLS with roles? (screen-record)
+RE-HOOK: &quot;So where does that filter get written. It lives in something called a role →&quot;</h3><h3>[2:15-4:00] BEAT 2: How do I build static RLS with roles? (screen-record)
 CLAIM (on-screen card): &quot;A static role is a fixed filter you write once, then assign people to.&quot;
 PROOF (MODALITY: screen-record, Power BI Desktop, real cursor):
 - Modeling tab, click Manage roles.
@@ -152,14 +153,14 @@ PROOF (MODALITY: screen-record, Power BI Desktop, real cursor):
 - Cut to the Service: open the dataset, Security, drop a user&#x27;s email into the Nord role.
 (VISIBLE CHANGE ~6s: cursor zoom on the DAX box, then a callout box circling the Security assignment screen.)
 PAYOFF (on-screen numbered takeaway): &quot;Takeaway 2: one role equals one filter. Build a role per group, then drop the right people into each role in the Service.&quot;
-RE-HOOK: &quot;That&#x27;s clean for four regions. Now picture four hundred sales reps →&quot;</p><p>### [4:00-5:30] BEAT 3: Why does one role per person fall apart? (animation)
+RE-HOOK: &quot;That&#x27;s clean for four regions. Now picture four hundred sales reps →&quot;</h3><h3>[4:00-5:30] BEAT 3: Why does one role per person fall apart? (animation)
 CLAIM (on-screen card): &quot;A role per person doesn&#x27;t scale, and it rots the day someone changes teams.&quot;
 PROOF (MODALITY: custom animation):
 - Three role cards on screen. They multiply, 3 to 30 to 300, each card needing a manual hand-assignment in the Service. The pile gets visibly unmanageable.
 - One person icon moves from Nord to Sued. A red tag pops: &quot;manual edit needed&quot;. Then a second red tag: &quot;who owns this?&quot;.
 - Cut to a single card labelled &quot;Dynamic role&quot; that reads from a small table. One card, green.
 PAYOFF (on-screen numbered takeaway): &quot;Takeaway 3: if you&#x27;re writing a role per person, stop. You want one role that looks up the user while the report runs.&quot;
-RE-HOOK: &quot;That lookup is one function, and it&#x27;s already in your model →&quot;</p><p>### [5:30-7:30] BEAT 4: How do I make it dynamic with USERPRINCIPALNAME? (screen-record)
+RE-HOOK: &quot;That lookup is one function, and it&#x27;s already in your model →&quot;</h3><h3>[5:30-7:30] BEAT 4: How do I make it dynamic with USERPRINCIPALNAME? (screen-record)
 CLAIM (on-screen card): &quot;Dynamic RLS uses the logged-in email to filter, from a small mapping table.&quot;
 PROOF (MODALITY: screen-record, Power BI Desktop):
 - Show a mapping table called UserRegion with two columns: UserEmail and Region. A few rows of real-looking emails mapped to Nord, Sued and so on.
@@ -168,14 +169,14 @@ PROOF (MODALITY: screen-record, Power BI Desktop):
 - Publish. In the Service, assign every user to the single Dynamic role.
 (VISIBLE CHANGE ~6s: zoom on the USERPRINCIPALNAME() line, then a marker sweeping the relationship arrow in Model view.)
 PAYOFF (on-screen numbered takeaway): &quot;Takeaway 4: one role, filter [UserEmail] = USERPRINCIPALNAME(), backed by a mapping table you update without opening the model. Add a person as a row and you&#x27;re done.&quot;
-RE-HOOK: &quot;This is also the exact spot where it silently leaks. Two ways →&quot;</p><p>### [7:30-9:30] BEAT 5: Why is my RLS leaking or showing nothing? (data-viz)
+RE-HOOK: &quot;This is also the exact spot where it silently leaks. Two ways →&quot;</h3><h3>[7:30-9:30] BEAT 5: Why is my RLS leaking or showing nothing? (data-viz)
 CLAIM (on-screen card): &quot;Almost every RLS breakdown is a relationship direction or a missing mapping row.&quot;
 PROOF (MODALITY: animated data-viz / diagram, the two cases side by side):
 - Leak case: the relationship between UserRegion and the fact points the wrong way, so the filter never reaches Sales. The report shows every row for everyone. Show the arrow, then flip its direction, and watch the rows clamp down to the correct set.
 - Empty case: the logged-in email isn&#x27;t in the UserRegion table. The filter matches zero rows and the whole report goes blank. Show the email miss, then the blank canvas, then add the row and the report fills back in.
 - Add the snowflake gotcha: on a longer dimension path the filter can stall one table short of the fact. Show it stopping, then reaching.
 PAYOFF (on-screen numbered takeaway): &quot;Takeaway 5: if a report shows everything, the filter isn&#x27;t reaching the fact table. If it shows nothing, the user&#x27;s email is missing from the mapping. Those two cover most leaks.&quot;
-RE-HOOK: &quot;Which is why you never ship RLS you haven&#x27;t seen through the user&#x27;s own eyes →&quot;</p><p>### [9:30-11:15] BEAT 6: How do I test it before it ships? (screen-record)
+RE-HOOK: &quot;Which is why you never ship RLS you haven&#x27;t seen through the user&#x27;s own eyes →&quot;</h3><h3>[9:30-11:15] BEAT 6: How do I test it before it ships? (screen-record)
 CLAIM (on-screen card): &quot;View As lets you see the report as a role or as a specific person before anyone logs in.&quot;
 PROOF (MODALITY: screen-record, Power BI Desktop then Service):
 - Desktop: Modeling, View as. Tick the Dynamic role, then type a real user&#x27;s email into the &quot;Other user&quot; box. The report re-renders to that person&#x27;s rows in place.
@@ -183,14 +184,14 @@ PROOF (MODALITY: screen-record, Power BI Desktop then Service):
 - Cut to the Service: dataset, Security, use &quot;Test as role&quot; on the same role to confirm it behaves live.
 (VISIBLE CHANGE ~5s: cursor zoom on the &quot;Other user&quot; field, then a side-by-side of two emails giving two row sets.)
 PAYOFF (on-screen numbered takeaway): &quot;Takeaway 6: before you publish, View As every role and at least one real email per region. If the rows are wrong here, they&#x27;re wrong in production.&quot;
-RE-HOOK: &quot;Do that, and the two-login demo from the very start just works →&quot;</p><p>### [11:15-12:15] PAYOFF: recap + pay off the open loop (on-screen text / kinetic)
+RE-HOOK: &quot;Do that, and the two-login demo from the very start just works →&quot;</h3><h3>[11:15-12:15] PAYOFF: recap + pay off the open loop (on-screen text / kinetic)
 Spoken: &quot;Quick recap, and this is the whole thing. RLS filters rows by who&#x27;s logged in. A static role is one fixed filter. A role per person doesn&#x27;t scale. Dynamic RLS is one role filtering on USERPRINCIPALNAME against a mapping table. Leaks are almost always a relationship that doesn&#x27;t reach the fact table, or an email missing from the mapping. And you check every role with View As and a real email before you publish. That View As step is the leak-catcher I promised at the start. Run it for one real person per region and a leak can&#x27;t reach production.&quot;
 (MODALITY: kinetic type. The six takeaways stack on screen as a numbered list, each line snapping in as it&#x27;s spoken, brand green accents.)
-(ON-SCREEN: &quot;The 6 RLS rules&quot; list, all visible by the end.)</p><p>### [12:15-13:00] SOFT CTA (talking head)
+(ON-SCREEN: &quot;The 6 RLS rules&quot; list, all visible by the end.)</h3><h3>[12:15-13:00] SOFT CTA (talking head)
 Spoken: &quot;The finished .pbix from this build, both roles wired up, is linked below, along with a free Power BI Governance and Cost Scorecard. It&#x27;s a five-minute check that scores where your reports are exposed and hands you your top three risks. If your team&#x27;s carrying RLS across a lot of workspaces and you want a second set of eyes, request a governance assessment from us. Link&#x27;s in the description, no pitch, just a look at your real setup. Next video takes dynamic RLS further, more than one role landing on the same user, which is where it gets tricky.&quot;
 (MODALITY: talking head, steady single shot on the core line.)
 (ON-SCREEN: three link cards in sequence: &quot;RLS .pbix&quot; / &quot;Governance &amp; Cost Scorecard&quot; / &quot;Request a governance assessment&quot;.)
-(ON-SCREEN: one plain subscribe line, no &quot;smash like&quot;.)</p><h2>Description
+(ON-SCREEN: one plain subscribe line, no &quot;smash like&quot;.)</h3><h2>Description
 Row-level security in Power BI, done properly: build static roles and dynamic RLS with USERPRINCIPALNAME on one model, and find the leaks before your users do.</h2><p>Free RLS .pbix + Power BI Governance &amp; Cost Scorecard: [link]
 Work with CaseWhen (request a governance assessment): [link]</p><p>0:00 Can two people open the same report and see different rows?
 0:45 What&#x27;s row-level security really doing?

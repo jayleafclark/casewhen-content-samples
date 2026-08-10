@@ -165,6 +165,7 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 .article{max-width:none}
 .article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
 .article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article h3{font-size:16px;margin:16px 0 4px;color:var(--dark)}
 .article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
 .article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
 .article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
@@ -252,6 +253,10 @@ def md_to_html(md):
                     txt = re.sub(r"\s*-{3,}\s*$", "", blocks[j].strip()).strip()
                     skip = j
             out.append(f'<div class="qa"><b>Quick answer.</b> {esc(txt)}</div>'); continue
+        if b.startswith("#### "):
+            out.append(f'<h3>{esc(b[5:].strip())}</h3>'); continue
+        if b.startswith("### "):
+            out.append(f'<h3>{esc(b[4:].strip())}</h3>'); continue
         if b.startswith("## "):
             out.append(f'<h2>{esc(b[3:].strip())}</h2>'); continue
         if b.startswith("|"):  # table
@@ -263,15 +268,15 @@ def md_to_html(md):
                 body = "".join("<tr>"+"".join(f"<td>{esc(x)}</td>" for x in row)+"</tr>" for row in cells[1:])
                 out.append(f'<table><tr>{h}</tr>{body}</table>')
             continue
-        debold = lambda s: re.sub(r"\*\*(.+?)\*\*", r"\1", s)
+        debold = lambda s: re.sub(r"\*\*(.+?)\*\*", r"\1", re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", s))
         if re.match(r"^\d+\.\s", b):
             items = "".join("<li>%s</li>" % esc(debold(re.sub(r"^\d+\.\s", "", x))) for x in b.splitlines() if x.strip())
             out.append(f"<ol>{items}</ol>"); continue
         if b.startswith("- "):
             items = "".join("<li>%s</li>" % esc(debold(x[2:])) for x in b.splitlines() if x.strip().startswith("- "))
             out.append(f"<ul>{items}</ul>"); continue
-        # paragraph (strip bold markers for plain render)
-        out.append(f'<p>{esc(re.sub(r"\*\*(.+?)\*\*", r"\1", b))}</p>')
+        # paragraph (strip bold markers + inline link syntax for plain render)
+        out.append(f'<p>{esc(debold(b))}</p>')
     return f'<div class="body article annotatable">{"".join(out)}</div>'
 
 def render_script(c):
@@ -1851,7 +1856,7 @@ def _fm_body(md):
 def article_chart(kw):
     k = (kw or "").lower()
     if any(w in k for w in ["train","cert","course","class","tutorial","learn","schulung"]):
-        title, src = "Business spreadsheets used in decision-making", "Poon et al. (peer-reviewed), 2024"
+        title, src = "Business spreadsheets used in decision-making", "Panko et al. (peer-reviewed), 2024"
         data = [("Error-free", 6, "6%"), ("Contain errors", 94, "94%")]
     elif any(w in k for w in ["pric","licens","cost"," pro","premium","capacity"]):
         title, src = "Power BI Pro list price, per user per month", "Microsoft, 2025 price update"

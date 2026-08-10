@@ -78,6 +78,7 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 .article{max-width:none}
 .article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
 .article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article h3{font-size:16px;margin:16px 0 4px;color:var(--dark)}
 .article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
 .article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
 .article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
@@ -149,7 +150,7 @@ Spoken: &quot;This pipeline copies yesterday&#x27;s sales into a clean database 
 (ON-SCREEN: keyword card &quot;Azure Data Factory&quot;.)</p><p>[0:12-0:40] PROMISE + STAKES + OPEN LOOP
 Spoken: &quot;By the end of this you&#x27;ll have built a working pipeline that moves data from one place to another on a schedule, and you&#x27;ll understand every part of it. If you keep downloading CSVs and pasting them into a Power BI model by hand, this is the thing that ends that. About 94% of business spreadsheets used to make decisions carry errors, and a lot of those creep in from doing the same import by hand over and over. And near the end I&#x27;ll show you the one setting that decides whether your nightly copy costs a few cents or reloads your entire history every single night. We stand these pipelines up for BI teams in Berlin most weeks, so this is the plain version, no data engineering background needed.&quot;
 (MODALITY: talking head, Austin to camera, one hard cut to a lower-third at &quot;94%&quot;.)
-(ON-SCREEN: stat card &quot;94% of business spreadsheets used in decision-making contain errors. Poon et al., 2024.&quot; Then a teaser card: &quot;One setting = cents vs. a full reload every night&quot;.)</p><p>[0:40-1:20] VALUE BEAT 1, what it is
+(ON-SCREEN: stat card &quot;94% of business spreadsheets used in decision-making contain errors. Panko et al., 2024.&quot; Then a teaser card: &quot;One setting = cents vs. a full reload every night&quot;.)</p><p>[0:40-1:20] VALUE BEAT 1, what it is
 CLAIM (on-screen card): &quot;Azure Data Factory moves and reshapes data on a schedule.&quot;
 Spoken: &quot;So what&#x27;s this thing. Azure Data Factory is a managed service in Azure that picks data up from one place, optionally reshapes it, and drops it somewhere else, on a schedule you set. That&#x27;s the job. For a BI person the common version looks like this: files land in storage, or rows sit in some source database, and you want them clean and sitting in one table that Power BI reads from. Instead of you doing that copy by hand each morning, Data Factory does it at 2am while you&#x27;re asleep.&quot;
 DEMO (b-roll): (MODALITY: b-roll, an analyst dragging CSV files into Power BI by hand, copy-pasting cells, then a red error on a refresh; the messy manual loop.)

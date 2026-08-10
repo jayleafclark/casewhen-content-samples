@@ -78,6 +78,7 @@ padding:18px;background:var(--card);transition:transform .12s,box-shadow .12s}
 .article{max-width:none}
 .article h1{font-size:clamp(22px,3vw,30px);margin:2px 0 10px}
 .article h2{font-size:19px;margin:22px 0 6px;color:var(--dark)}
+.article h3{font-size:16px;margin:16px 0 4px;color:var(--dark)}
 .article p{font-size:14.5px;color:#33372f;margin:0 0 11px}
 .article .qa{background:var(--pale);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 14px;font-size:14px;margin:0 0 16px}
 .article table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
@@ -180,8 +181,8 @@ RE-HOOK: SAJU: &quot;Damit haben Sie das ganze Bild. Was heißt das jetzt konkre
 SAJU: &quot;Machen wir es an einem echten Fall. Ein Team in Berlin, klassischer Monatsabschluss: 40 Dateien, jede Nacht von Hand aus drei Quelldatenbanken exportiert, und morgens setzt jemand alles in Excel zusammen. Wir haben nichts Exotisches gebaut. Eine ForEach-Schleife über die 40 Quelltabellen, eine Copy-Aktivität in ein Azure SQL Warehouse, ein Trigger um zwei Uhr nachts, und für die Datenbank im eigenen Rechenzentrum eine selbstgehostete Integration Runtime.&quot;
 (B-ROLL: Whiteboard mit einer Pipeline-Skizze, vier Kästchen und Pfeile; Hände, die Haftnotizen umsortieren.)
 (DATA-VIZ: Vorher-Nachher, links &quot;40 Exporte · jede Nacht von Hand · Excel&quot;, rechts &quot;1 Pipeline · 02:00 automatisch · 0 Handgriffe&quot;.)
-SAJU: &quot;Ergebnis nach zwei Wochen: Der Bericht stand morgens um sechs fertig da, ohne dass jemand ihn angefasst hat. Und die 94 Prozent Fehlerquote aus manuellen Tabellen greifen hier nicht mehr, weil niemand mehr von Hand kopiert. Zur Einordnung, was das wert ist: Diese 94 Prozent stammen aus einer geprüften Untersuchung von Poon und Kollegen aus 2024. Eine terminierte Pipeline nimmt genau diese Fehlerquelle heraus.&quot;
-(ON-SCREEN: Statistik-Karte &quot;94 Prozent der Geschäfts-Tabellen enthalten Fehler. Quelle: Poon et al., 2024.&quot;)
+SAJU: &quot;Ergebnis nach zwei Wochen: Der Bericht stand morgens um sechs fertig da, ohne dass jemand ihn angefasst hat. Und die 94 Prozent Fehlerquote aus manuellen Tabellen greifen hier nicht mehr, weil niemand mehr von Hand kopiert. Zur Einordnung, was das wert ist: Diese 94 Prozent stammen aus einer geprüften Untersuchung von Panko und Kollegen aus 2024. Eine terminierte Pipeline nimmt genau diese Fehlerquelle heraus.&quot;
+(ON-SCREEN: Statistik-Karte &quot;94 Prozent der Geschäfts-Tabellen enthalten Fehler. Quelle: Panko et al., 2024.&quot;)
 SAJU: &quot;Und jetzt der Punkt, den ich Ihnen am Anfang versprochen habe. Warum benutzt ADF in Fabric denselben Motor? Weil Microsoft dieselben vier Bausteine nach Fabric übernommen hat, statt sie neu zu bauen. Wer heute eine Copy-Aktivität und einen Trigger anlegt, baut morgen in Fabric fast das Gleiche. Genau deshalb ist die Angst vor dem Abschalten unbegründet: Sie lernen einmal, wie Pipelines funktionieren, und nutzen dieses Wissen in ADF, in Synapse und in Fabric.&quot;</p><p>[10:00-10:40] PAYOFF: Recap, der volle Gewinn zum Mitnehmen
 (MODALITY: kinetic type, Liste baut sich Zeile für Zeile auf.)
 SAJU: &quot;Fassen wir zusammen, das ist Ihr komplettes Rezept, auch wenn Sie uns nie kontaktieren.
