@@ -219,6 +219,9 @@ footer.ffoot img{height:20px;opacity:.8;margin-bottom:12px}
 
 /* ---- page-local only: centre the active card + capacity-direction box ------ */
 .stage{max-width:640px;margin:0 auto}
+/* cards live inside the dark hero (light inherited colour); restore ink text on
+   the white surfaces so titles, options and labels stay readable. */
+.card,.formcard,.mock{color:var(--ink)}
 .card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px 26px;box-shadow:0 30px 70px rgba(17,73,63,.12)}
 @media(max-width:560px){.card{padding:24px 20px}}
 .capdir{margin-top:20px;border-top:1px solid var(--line);padding-top:16px}
@@ -226,7 +229,7 @@ footer.ffoot img{height:20px;opacity:.8;margin-bottom:12px}
 .capbox{background:var(--pale);border-radius:13px;padding:15px 16px;font-size:14px;color:var(--dark)}
 .capbox b{color:var(--dark)}
 .capnote{font-size:12px;color:var(--muted);margin-top:9px}
-</style>
+/*legibility-fix*/.card{color:var(--ink)}.formcard{color:var(--ink)}.mock{color:var(--ink)}</style>
 </head><body>
 
 <!-- ===== sticky header: wordmark + funnel ladder ===== -->
