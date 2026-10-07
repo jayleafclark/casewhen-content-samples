@@ -160,6 +160,7 @@ h2.h2{font-size:clamp(25px,4vw,37px);margin:12px 0 0}
 .bench .track{height:10px;border-radius:6px;background:var(--neutral);position:relative}
 .bench .fill{height:100%;border-radius:6px;background:var(--accent)}
 .bench .peer{position:absolute;top:-4px;width:3px;height:18px;background:var(--dark);border-radius:2px}
+.bnote{font-size:11px;color:var(--faint);margin-top:8px;line-height:1.4}
 
 /* ---- results scorecard: ranked risks/recommendations ---------------------- */
 .risks{margin-top:20px;border-top:1px solid var(--line);padding-top:16px}
@@ -399,15 +400,15 @@ footer.ffoot img{height:20px;opacity:.8;margin-bottom:12px}
     <!-- TODO: set Web3Forms/Formspree key -->
     <form class="formcard" onsubmit="return unlock(event)">
       <label for="name" data-en="Name" data-de="Name">Name</label>
-      <input id="name" type="text" placeholder="Your name" data-en-ph="Your name" data-de-ph="Ihr Name" autocomplete="name" required>
+      <input id="name" name="name" type="text" placeholder="Your name" data-en-ph="Your name" data-de-ph="Ihr Name" autocomplete="name" required>
       <label for="company" style="margin-top:14px" data-en="Company" data-de="Unternehmen">Company</label>
       <input id="company" name="company" type="text" placeholder="Company GmbH" data-en-ph="Company GmbH" data-de-ph="Unternehmen GmbH" autocomplete="organization" required>
       <label for="email" data-en="Work email" data-de="Geschäftliche E-Mail">Work email</label>
-      <input id="email" type="email" placeholder="you@company.com" data-en-ph="you@company.com" data-de-ph="sie@unternehmen.de" autocomplete="email" required>
+      <input id="email" name="email" type="email" placeholder="you@company.com" data-en-ph="you@company.com" data-de-ph="sie@unternehmen.de" autocomplete="email" required>
       <label for="phone" style="margin-top:14px" data-en="Phone (optional)" data-de="Telefon (optional)">Phone (optional)</label>
       <input id="phone" name="phone" type="tel" placeholder="+49 ..." data-en-ph="+49 ..." data-de-ph="+49 ..." autocomplete="tel">
       <button class="go" type="submit" data-en="Show my score" data-de="Meine Punktzahl anzeigen">Show my score</button>
-      <div class="fine" data-en="We'll sign your NDA on request. No spam, no sales sequence, one email." data-de="Auf Wunsch unterschreiben wir Ihre Vertraulichkeitsvereinbarung. Kein Spam, keine Verkaufsserie, eine E-Mail.">We&#x27;ll sign your NDA on request. No spam, no sales sequence, one email.</div>
+      <div class="fine" data-en="We'll email your results and a few short, useful follow-ups. No spam, unsubscribe anytime." data-de="Wir senden Ihnen Ihre Ergebnisse und danach ein paar kurze, nützliche Hinweise. Kein Spam, jederzeit abbestellbar.">We&#x27;ll email your results and a few short, useful follow-ups. No spam, unsubscribe anytime.</div>
       <div class="mockmsg" id="mockmsg" data-en="This is a mockup, so nothing actually sends. On the live page your scorecard would be on its way." data-de="Dies ist ein Muster, es wird also nichts wirklich versendet. Auf der Live-Seite wäre Ihre Scorecard bereits unterwegs.">This is a mockup, so nothing actually sends. On the live page your
       scorecard would be on its way.</div>
     </form>
@@ -428,6 +429,7 @@ footer.ffoot img{height:20px;opacity:.8;margin-bottom:12px}
           <div class="lbl"><span data-en="Your score" data-de="Ihre Punktzahl">Your score</span><span><span data-en="Peer median" data-de="Vergleichsmedian">Peer median</span> <span id="peerval">64</span></span></div>
           <div class="track"><div class="fill" id="benchfill" style="width:0"></div>
             <div class="peer" id="benchpeer" style="left:64%"></div></div>
+          <div class="bnote" data-en="The peer median is a chosen indicative figure, not a measured median from your sector." data-de="Der Vergleichsmedian ist eine gewählte Richtgröße, kein gemessener Median aus Ihrer Branche.">The peer median is a chosen indicative figure, not a measured median from your sector.</div>
         </div>
         <div class="risks" id="risklist"></div>
         <p class="gate-note" id="clean-note" style="display:none" data-en="No structural flags fired. Your top answers already hold up. Keep the model this tight as it grows." data-de="Keine strukturellen Warnungen ausgelöst. Ihre besten Antworten halten bereits stand. Behalten Sie das Modell so straff, während es wächst.">No structural flags fired. Your top
@@ -488,7 +490,7 @@ const TOOL = {
         {label:{en:"No, I filter on date columns in the fact tables",de:"Nein, ich filtere über Datumsspalten in den Faktentabellen"},v:0}] },
 
     { title:{en:"4. Is that date table marked as a date table in Power BI?",de:"4. Ist diese Datumstabelle in Power BI als Datumstabelle markiert?"},
-      hint:{en:"Model view, right-click the table, Mark as date table. It also stops the auto date hierarchies.",de:"Modellansicht, Rechtsklick auf die Tabelle, „Als Datumstabelle markieren“. Das stoppt auch die automatischen Datumshierarchien."},
+      hint:{en:"Model view, right-click the table, Mark as date table. That alone does not stop the hidden auto date/time tables; switch auto date/time off in Options as well.",de:"Modellansicht, Rechtsklick auf die Tabelle, „Als Datumstabelle markieren“. Das allein stoppt die versteckten automatischen Datums-/Uhrzeittabellen nicht; deaktivieren Sie die automatische Datums-/Uhrzeitfunktion zusätzlich in den Optionen."},
       options:[
         {label:{en:"Yes, marked, and auto date/time is turned off",de:"Ja, markiert, und die automatische Datums-/Uhrzeitfunktion ist deaktiviert"},v:2},
         {label:{en:"There is a date table but it is not marked",de:"Es gibt eine Datumstabelle, aber sie ist nicht markiert"},v:1},
@@ -585,7 +587,7 @@ const TOOL = {
       note:{en:"Without one calendar, time intelligence is inconsistent and comparisons across facts break.",de:"Ohne eine Kalendertabelle ist die Zeitintelligenz uneinheitlich und Vergleiche über Faktentabellen hinweg brechen."},
       fix:{en:"Build one continuous date table and relate every fact date to it.",de:"Erstellen Sie eine durchgehende Datumstabelle und verknüpfen Sie jedes Faktendatum damit."} },
     { q:3, atOrBelow:1, title:{en:"Date table is not marked as one.",de:"Die Datumstabelle ist nicht als solche markiert."},
-      note:{en:"Unmarked, Power BI spins up hidden per-column date tables that bloat the model.",de:"Unmarkiert erstellt Power BI versteckte Datumstabellen pro Spalte, die das Modell aufblähen."},
+      note:{en:"Marking the date table alone does not stop the hidden auto date/time tables; auto date/time is a separate setting, on by default, that adds a hidden per-column date table for every date column.",de:"Das Markieren der Datumstabelle allein stoppt die versteckten automatischen Datums-/Uhrzeittabellen nicht; die automatische Datums-/Uhrzeitfunktion ist eine separate, standardmäßig aktivierte Einstellung, die für jede Datumsspalte eine versteckte Datumstabelle pro Spalte anlegt."},
       fix:{en:"Mark the table as a date table and switch off auto date/time in options.",de:"Markieren Sie die Tabelle als Datumstabelle und deaktivieren Sie die automatische Datums-/Uhrzeitfunktion in den Optionen."} },
     { q:8, atOrBelow:1, title:{en:"Relationships join on messy keys.",de:"Beziehungen verknüpfen über unsaubere Schlüssel."},
       note:{en:"Text names and composite keys join slowly and break silently when values drift.",de:"Textnamen und zusammengesetzte Schlüssel verknüpfen langsam und brechen unbemerkt, wenn Werte abweichen."},

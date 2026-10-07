@@ -119,6 +119,7 @@ h2.h2{font-size:clamp(25px,4vw,37px);margin:12px 0 0}
 .bench .track{height:10px;border-radius:6px;background:var(--neutral);position:relative}
 .bench .fill{height:100%;border-radius:6px;background:var(--accent)}
 .bench .peer{position:absolute;top:-4px;width:3px;height:18px;background:var(--dark);border-radius:2px}
+.bnote{font-size:11px;color:var(--faint);margin-top:8px;line-height:1.4}
 
 /* ---- results scorecard: ranked risks/recommendations ---------------------- */
 .risks{margin-top:20px;border-top:1px solid var(--line);padding-top:16px}
@@ -247,7 +248,7 @@ footer.ffoot img{height:20px;opacity:.8;margin-bottom:12px}
       <label for="phone" style="margin-top:14px" data-en="Phone (optional)" data-de="Telefon (optional)">Phone (optional)</label>
       <input id="phone" name="phone" type="tel" placeholder="+49 ..." data-en-ph="+49 ..." data-de-ph="+49 ..." autocomplete="tel">
       <button class="go" type="submit" data-en="Show my score" data-de="Meine Punktzahl anzeigen">Show my score</button>
-      <div class="fine" data-en="We'll sign your NDA on request. No spam, no sales sequence, one email." data-de="Auf Wunsch unterschreiben wir Ihre Vertraulichkeitsvereinbarung. Kein Spam, keine Verkaufsserie, eine E-Mail.">We&#x27;ll sign your NDA on request. No spam, no sales sequence, one email.</div>
+      <div class="fine" data-en="We'll email your results and a few short, useful follow-ups. No spam, unsubscribe anytime." data-de="Wir senden Ihnen Ihre Ergebnisse und danach ein paar kurze, nützliche Hinweise. Kein Spam, jederzeit abbestellbar.">We&#x27;ll email your results and a few short, useful follow-ups. No spam, unsubscribe anytime.</div>
       <div class="mockmsg" id="mockmsg" data-en="This is a preview, so nothing actually sends. On the live page your scorecard would be on its way." data-de="Dies ist eine Vorschau, es wird also nichts wirklich versendet. Auf der Live-Seite wäre Ihre Scorecard bereits unterwegs.">This is a preview, so nothing actually sends. On the live page
       your scorecard would be on its way.</div>
     </form>
@@ -268,6 +269,7 @@ footer.ffoot img{height:20px;opacity:.8;margin-bottom:12px}
           <div class="lbl"><span data-en="Your score" data-de="Ihre Punktzahl">Your score</span><span><span data-en="Peer median" data-de="Vergleichsmedian">Peer median</span> <span id="peerval">61</span></span></div>
           <div class="track"><div class="fill" id="benchfill" style="width:0"></div>
             <div class="peer" id="benchpeer" style="left:61%"></div></div>
+          <div class="bnote" data-en="The peer median is a chosen indicative figure, not a measured median from your sector." data-de="Der Vergleichsmedian ist eine gewählte Richtgröße, kein gemessener Median aus Ihrer Branche.">The peer median is a chosen indicative figure, not a measured median from your sector.</div>
         </div>
         <div class="risks" id="risklist"></div>
         <p id="noris" style="display:none;font-size:13.5px;color:var(--muted);margin-top:16px;border-top:1px solid var(--line);padding-top:16px" data-en="No major gaps triggered. Your answers point to a foundation that is holding up. The soft spots to keep watching are any question you did not answer with the strongest option." data-de="Keine größeren Lücken ausgelöst. Ihre Antworten deuten auf ein Fundament hin, das trägt. Die Schwachstellen, die Sie im Blick behalten sollten, sind alle Fragen, die Sie nicht mit der stärksten Option beantwortet haben.">No major gaps triggered. Your answers point to a
@@ -316,7 +318,7 @@ const TOOL = {
       options:[{label:{en:"Delta or Parquet, partitioned, with the schema enforced",de:"Delta oder Parquet, partitioniert, mit erzwungenem Schema"},v:2},{label:{en:"Parquet in places, CSV or Excel still in the pipeline",de:"Stellenweise Parquet, CSV oder Excel noch in der Pipeline"},v:1},{label:{en:"Mostly CSV, Excel, or flat extracts",de:"Überwiegend CSV, Excel oder flache Extrakte"},v:0}] },
 
     { title:{en:"5. How is your pipeline compute scheduled?",de:"5. Wie wird die Rechenleistung Ihrer Pipelines geplant?"},
-      hint:{en:"Integration Runtime or Fabric capacity: on demand versus billing while idle.",de:"Integration Runtime oder Fabric-Kapazität: bei Bedarf gegenüber Abrechnung im Leerlauf."},
+      hint:{en:"The Azure Integration Runtime bills per run, so it costs nothing between runs. Dedicated SQL pools and Spark clusters keep billing while idle until you stop or scale them down.",de:"Die Azure Integration Runtime rechnet pro Ausführung ab und kostet zwischen den Ausführungen nichts. Dedizierte SQL-Pools und Spark-Cluster rechnen im Leerlauf weiter ab, bis Sie sie anhalten oder herunterskalieren."},
       options:[{label:{en:"On demand or auto paused, compute runs only when work does",de:"Bei Bedarf oder automatisch pausiert, Rechenleistung läuft nur bei Arbeit"},v:2},{label:{en:"Mostly scheduled, some clusters or capacity sit idle",de:"Meist geplant, einige Cluster oder Kapazitäten stehen im Leerlauf"},v:1},{label:{en:"Runs and bills around the clock regardless of load",de:"Läuft und rechnet rund um die Uhr, unabhängig von der Last"},v:0}] },
 
     { title:{en:"6. Do you have spend guardrails on the data platform?",de:"6. Haben Sie Ausgaben-Leitplanken für die Datenplattform?"},

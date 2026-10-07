@@ -403,7 +403,7 @@ footer.ffoot img{height:20px;opacity:.8;margin-bottom:12px}
         <input id="phone" name="phone" type="tel" placeholder="+49 ..." data-en-ph="+49 ..." data-de-ph="+49 ..." autocomplete="tel">
       </div>
       <button class="go" type="submit" data-en="Show my score" data-de="Meine Punktzahl anzeigen">Show my score</button>
-      <div class="fine" data-en="We will sign your NDA on request. No spam, no sales sequence, one email." data-de="Auf Wunsch unterschreiben wir Ihre Vertraulichkeitsvereinbarung. Kein Spam, keine Verkaufsserie, eine E-Mail.">We will sign your NDA on request. No spam, no sales sequence, one email.</div>
+      <div class="fine" data-en="We will email your results and a few short, useful follow-ups. No spam, unsubscribe anytime." data-de="Wir senden Ihnen Ihre Ergebnisse und danach ein paar kurze, nützliche Hinweise. Kein Spam, jederzeit abbestellbar.">We will email your results and a few short, useful follow-ups. No spam, unsubscribe anytime.</div>
       <div class="mockmsg" id="mockmsg" data-en="This is a mockup, so nothing actually sends. On the live page your readiness report would be on its way." data-de="Dies ist ein Muster, es wird also nichts wirklich versendet. Auf der Live-Seite wäre Ihr Bereitschaftsbericht bereits unterwegs.">This is a mockup, so nothing actually sends. On the live page your
       readiness report would be on its way.</div>
     </form>
@@ -463,7 +463,7 @@ const TOOL = {
       options:[{label:{en:"Yes, counted and triaged, we know what to drop",de:"Ja, gezählt und priorisiert, wir wissen, was wegfällt"},v:3},{label:{en:"A rough count, not yet triaged",de:"Eine grobe Zählung, noch nicht priorisiert"},v:2},{label:{en:"No, nobody knows how many there are",de:"Nein, niemand weiß, wie viele es sind"},v:0}] },
 
     { title:{en:"3. How complex are the reports that actually matter?",de:"3. Wie komplex sind die Berichte, die wirklich zählen?"},
-      hint:{en:"Pixel-perfect bursting, Tableau LOD calcs and Qlik set analysis do not lift over.",de:"Pixelgenaues Bursting, Tableau-LOD-Berechnungen und Qlik-Set-Analysen lassen sich nicht übernehmen."},
+      hint:{en:"Pixel-perfect bursting carries over, though not automatically: it needs paginated reports and subscriptions set up. Tableau LOD calcs and Qlik set analysis do not carry over.",de:"Pixelgenaues Bursting lässt sich übernehmen, jedoch nicht automatisch: Dafür müssen paginierte Berichte und Abonnements eingerichtet werden. Tableau-LOD-Berechnungen und Qlik-Set-Analysen lassen sich nicht übernehmen."},
       options:[{label:{en:"Mostly standard tables and charts",de:"Überwiegend Standardtabellen und -diagramme"},v:3},{label:{en:"A mix, with some complex or pixel-perfect layouts",de:"Eine Mischung, mit einigen komplexen oder pixelgenauen Layouts"},v:2},{label:{en:"Heavy custom visuals, bursting or scripted logic",de:"Viele individuelle Visualisierungen, Bursting oder skriptbasierte Logik"},v:0}] },
 
     { title:{en:"4. Where does the business logic live, and can it be rebuilt?",de:"4. Wo liegt die Geschäftslogik und lässt sie sich neu aufbauen?"},

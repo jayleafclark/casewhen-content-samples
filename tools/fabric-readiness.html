@@ -121,6 +121,7 @@ h2.h2{font-size:clamp(25px,4vw,37px);margin:12px 0 0}
 .bench .track{height:10px;border-radius:6px;background:var(--neutral);position:relative}
 .bench .fill{height:100%;border-radius:6px;background:var(--accent)}
 .bench .peer{position:absolute;top:-4px;width:3px;height:18px;background:var(--dark);border-radius:2px}
+.bnote{font-size:11px;color:var(--faint);margin-top:8px;line-height:1.4}
 
 .risks{margin-top:20px;border-top:1px solid var(--line);padding-top:16px}
 .risks .rk{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;margin:9px 0}
@@ -295,7 +296,7 @@ footer.ffoot img{height:20px;opacity:.8;margin-bottom:12px}
       <label for="phone" style="margin-top:14px" data-en="Phone (optional)" data-de="Telefon (optional)">Phone (optional)</label>
       <input id="phone" name="phone" type="tel" placeholder="+49 ..." data-en-ph="+49 ..." data-de-ph="+49 ..." autocomplete="tel">
       <button class="go" type="submit" data-en="Show my score" data-de="Meine Punktzahl anzeigen">Show my score</button>
-      <div class="fine" data-en="We'll sign your NDA on request. No spam, no sales sequence, one email." data-de="Auf Wunsch unterschreiben wir Ihre Vertraulichkeitsvereinbarung. Kein Spam, keine Verkaufsserie, eine E-Mail.">We&#x27;ll sign your NDA on request. No spam, no sales sequence, one email.</div>
+      <div class="fine" data-en="We'll email your results and a few short, useful follow-ups. No spam, unsubscribe anytime." data-de="Wir senden Ihnen Ihre Ergebnisse und danach ein paar kurze, nützliche Hinweise. Kein Spam, jederzeit abbestellbar.">We&#x27;ll email your results and a few short, useful follow-ups. No spam, unsubscribe anytime.</div>
       <div class="mockmsg" id="mockmsg" data-en="This is a mockup, so nothing actually sends. On the live page your scorecard would be on its way." data-de="Dies ist ein Muster, es wird also nichts wirklich versendet. Auf der Live-Seite wäre Ihre Scorecard bereits unterwegs.">This is a mockup, so nothing actually sends. On the live page
       your scorecard would be on its way.</div>
     </form>
@@ -316,6 +317,7 @@ footer.ffoot img{height:20px;opacity:.8;margin-bottom:12px}
           <div class="lbl"><span data-en="Your readiness" data-de="Ihr Reifegrad">Your readiness</span><span><span data-en="Peer median" data-de="Vergleichsmedian">Peer median</span> <span id="peerval">58</span></span></div>
           <div class="track"><div class="fill" id="benchfill" style="width:0"></div>
             <div class="peer" id="benchpeer" style="left:58%"></div></div>
+          <div class="bnote" data-en="The peer median is a chosen indicative figure, not a measured median from your sector." data-de="Der Vergleichsmedian ist eine gewählte Richtgröße, kein gemessener Median aus Ihrer Branche.">The peer median is a chosen indicative figure, not a measured median from your sector.</div>
         </div>
         <!-- capacity direction (drives off viewer + workload + data answers) -->
         <div class="capdir">
@@ -421,7 +423,7 @@ const TOOL = {
         {label:{en:"Big unpredictable spikes at month-end or close",de:"Große, unvorhersehbare Spitzen zum Monatsende oder Abschluss"},v:0}] },
 
     { title:{en:"9. Who would run the capacity day to day?",de:"9. Wer würde die Kapazität im Tagesbetrieb betreiben?"},
-      hint:{en:"A capacity needs someone to watch usage, pause or scale it, and act on throttling. Pausing when idle is the main cost lever.",de:"Eine Kapazität braucht jemanden, der die Nutzung beobachtet, sie pausiert oder skaliert und auf Drosselung reagiert. Das Pausieren im Leerlauf ist der wichtigste Kostenhebel."},
+      hint:{en:"A capacity needs someone to watch usage, size it, and act on throttling. The cost levers are the SKU size you pick and whether you reserve it; stopping it when idle takes reports offline for anyone without a Pro seat, so it is not a reliable lever.",de:"Eine Kapazität braucht jemanden, der die Nutzung beobachtet, sie dimensioniert und auf Drosselung reagiert. Die Kostenhebel sind die gewählte SKU-Größe und ob Sie sie reservieren; ein Stoppen im Leerlauf nimmt Berichte für alle ohne Pro-Lizenz offline und ist daher kein verlässlicher Hebel."},
       options:[
         {label:{en:"A named owner or platform team who can monitor and scale it",de:"Eine benannte verantwortliche Person oder ein Plattformteam, das sie überwacht und skaliert"},v:3},
         {label:{en:"IT could, but it is not anyone's job yet",de:"Die IT könnte, aber es ist noch niemandes Aufgabe"},v:1},
@@ -469,9 +471,9 @@ const TOOL = {
       note:{en:"Below a few hundred viewers, Pro or PPU seats are usually cheaper than F64. Recheck when the audience grows.",de:"Unter einigen hundert Betrachtern sind Pro- oder PPU-Lizenzen meist günstiger als F64. Prüfen Sie erneut, wenn das Publikum wächst."} },
     { q:7, atOrBelow:0, title:{en:"Month-end spikes can throttle a small capacity.",de:"Spitzen zum Monatsende können eine kleine Kapazität drosseln."},
       note:{en:"Fabric smooths short bursts, but sustained peaks on an undersized SKU slow everyone down. Size for the peak or plan to scale.",de:"Fabric gleicht kurze Spitzen aus, aber anhaltende Spitzen auf einem zu kleinen SKU bremsen alle aus. Dimensionieren Sie für die Spitze oder planen Sie das Skalieren ein."} },
-    { q:4, atOrBelow:1, title:{en:"Data is copied across systems and drifting.",de:"Daten werden über Systeme hinweg kopiert und driften auseinander."},
+    { q:4, atOrAbove:3, title:{en:"Data is copied across systems and drifting.",de:"Daten werden über Systeme hinweg kopiert und driften auseinander."},
       note:{en:"OneLake shortcuts let Fabric read data in place. Duplication is both cost and a reconciliation headache.",de:"OneLake-Verknüpfungen lassen Fabric Daten am Ort lesen. Duplikation kostet Geld und verursacht Abgleichsaufwand."} },
-    { q:5, atOrBelow:1, title:{en:"Import refreshes are a recurring problem.",de:"Importaktualisierungen sind ein wiederkehrendes Problem."},
+    { q:5, atOrAbove:3, title:{en:"Import refreshes are a recurring problem.",de:"Importaktualisierungen sind ein wiederkehrendes Problem."},
       note:{en:"Large or failing refreshes are where Direct Lake earns its place. Fix the model design as you move, not after.",de:"Bei großen oder fehlschlagenden Aktualisierungen zeigt Direct Lake seinen Wert. Verbessern Sie das Modelldesign beim Umzug, nicht danach."} },
     { q:12, atOrBelow:0, title:{en:"The team has not run a capacity before.",de:"Das Team hat noch nie eine Kapazität betrieben."},
       note:{en:"Sizing, reserving, and managing throttling is new work. Budget for enablement, not just the SKU.",de:"Dimensionieren, Reservieren und der Umgang mit Drosselung sind neue Aufgaben. Planen Sie Budget für die Befähigung ein, nicht nur für das SKU."} },
@@ -501,7 +503,7 @@ const CAP = {
   d1:{en:"<b>F64 is the line that matters.</b> At a few hundred viewers, or heavy data work, F64 and up is where viewers need only a free licence and you get room to grow. Plan a reserved capacity to cut the rate.",de:"<b>F64 ist die entscheidende Grenze.</b> Bei einigen hundert Betrachtern oder umfangreicher Datenarbeit brauchen Betrachter ab F64 nur eine kostenlose Lizenz, und Sie haben Raum zum Wachsen. Planen Sie eine reservierte Kapazität, um den Tarif zu senken."},
   d2:{en:"<b>Around F8 to F32 to start.</b> Enough for pipelines and a mid-size audience, but watch the free-viewer cliff: viewers only stop needing Pro or PPU seats at F64 and above.",de:"<b>Für den Start etwa F8 bis F32.</b> Ausreichend für Pipelines und ein mittelgroßes Publikum, aber achten Sie auf die Grenze bei kostenlosen Betrachtern: Betrachter benötigen erst ab F64 keine Pro- oder PPU-Lizenzen mehr."},
   d3:{en:"<b>F2 covers a pilot, but seats likely win.</b> For a small, Power BI only setup, Pro or PPU seats are usually the cheaper answer. Turning Fabric on is not yet the win.",de:"<b>F2 deckt einen Piloten ab, aber Lizenzen gewinnen wohl.</b> Für ein kleines, reines Power BI-Setup sind Pro- oder PPU-Lizenzen meist die günstigere Antwort. Fabric zu aktivieren lohnt sich noch nicht."},
-  note:{en:"Rough crossover: a capacity starts to beat per-seat Pro somewhere around 300 to 600 viewers (approximate, and it depends on reserved versus pay-as-you-go). Figures are approximate list prices.",de:"Grobe Grenze: Eine Kapazität beginnt irgendwo zwischen 300 und 600 Betrachtern günstiger zu werden als Pro pro Lizenz (Näherungswert, abhängig von reserviert oder nutzungsbasiert). Die Angaben sind ungefähre Listenpreise."}
+  note:{en:"Rough crossover: a capacity starts to beat per-seat Pro somewhere around 350 to 600 viewers (approximate, and it depends on reserved versus pay-as-you-go). Figures are approximate list prices.",de:"Grobe Grenze: Eine Kapazität beginnt irgendwo zwischen 350 und 600 Betrachtern günstiger zu werden als Pro pro Lizenz (Näherungswert, abhängig von reserviert oder nutzungsbasiert). Die Angaben sind ungefähre Listenpreise."}
 };
 function setLang(l){
   if(l!=='en'&&l!=='de') l='en';
@@ -589,7 +591,7 @@ function computeResult(){
 
   capacityDirection();
 
-  const fired = TOOL.risks.filter(r => (ans[r.q]||0) <= r.atOrBelow).slice(0,3);
+  const fired = TOOL.risks.filter(r => r.atOrAbove!=null ? (ans[r.q]||0) >= r.atOrAbove : (ans[r.q]||0) <= r.atOrBelow).slice(0,3);
   const rl = document.getElementById('risklist'); rl.innerHTML='';
   if(fired.length===0){
     const d=document.createElement('div'); d.className='rk';

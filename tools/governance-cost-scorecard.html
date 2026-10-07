@@ -407,7 +407,7 @@ footer.ffoot img{height:20px;opacity:.8;margin-bottom:12px}
       <label for="phone" style="margin-top:14px" data-en="Phone (optional)" data-de="Telefon (optional)">Phone (optional)</label>
       <input id="phone" name="phone" type="tel" placeholder="+49 ..." data-en-ph="+49 ..." data-de-ph="+49 ..." autocomplete="tel">
       <button class="go" type="submit" data-en="Show my score" data-de="Meine Punktzahl anzeigen">Show my score</button>
-      <div class="fine" data-en="We'll sign your NDA on request. No spam, no sales sequence, one email." data-de="Auf Wunsch unterschreiben wir Ihre Vertraulichkeitsvereinbarung. Kein Spam, keine Verkaufsserie, eine E-Mail.">We&#x27;ll sign your NDA on request. No spam, no sales sequence, one email.</div>
+      <div class="fine" data-en="We'll email your results and a few short, useful follow-ups. No spam, unsubscribe anytime." data-de="Wir senden Ihnen Ihre Ergebnisse und danach ein paar kurze, nützliche Hinweise. Kein Spam, jederzeit abbestellbar.">We&#x27;ll email your results and a few short, useful follow-ups. No spam, unsubscribe anytime.</div>
       <div class="mockmsg" id="mockmsg" data-en="This is a mockup, so nothing actually sends. On the live page your scorecard would be on its way." data-de="Dies ist ein Muster, es wird also nichts wirklich versendet. Auf der Live-Seite wäre Ihre Scorecard bereits unterwegs.">This is a mockup, so nothing actually sends. On the live page your
       scorecard would be on its way.</div>
     </form>
@@ -475,9 +475,9 @@ const TOOL = {
       hint:{en:"One definition, or many.",de:"Eine Definition oder viele."},
       options:[{label:{en:"Once, in a shared model everyone builds on",de:"Einmal, in einem gemeinsamen Modell, auf dem alle aufbauen"},v:3},{label:{en:"In a shared model, but some reports override it",de:"In einem gemeinsamen Modell, aber einige Berichte überschreiben sie"},v:2},{label:{en:"Mostly rebuilt per report from raw tables",de:"Meist pro Bericht aus Rohdaten neu aufgebaut"},v:1},{label:{en:"Every report defines it its own way",de:"Jeder Bericht definiert sie auf eigene Weise"},v:0}] },
 
-    { title:{en:"4. Are the datasets people should trust marked Certified or Promoted?",de:"4. Sind die Datasets, denen man vertrauen soll, als „Zertifiziert“ oder „Höhergestuft“ gekennzeichnet?"},
-      hint:{en:"Endorsement tells builders which dataset is the real one.",de:"Die Empfehlung zeigt den Erstellern, welches Dataset das maßgebliche ist."},
-      options:[{label:{en:"Yes, certified datasets are the default source",de:"Ja, zertifizierte Datasets sind die Standardquelle"},v:3},{label:{en:"A few are endorsed, most are not",de:"Einige sind empfohlen, die meisten nicht"},v:2},{label:{en:"We know endorsement exists but have not used it",de:"Wir kennen die Empfehlungsfunktion, nutzen sie aber nicht"},v:1},{label:{en:"People connect to whatever dataset they find",de:"Man verbindet sich mit irgendeinem gefundenen Dataset"},v:0}] },
+    { title:{en:"4. Are the semantic models people should trust marked Certified or Promoted?",de:"4. Sind die semantischen Modelle, denen man vertrauen soll, als „Zertifiziert“ oder „Höhergestuft“ gekennzeichnet?"},
+      hint:{en:"Endorsement tells builders which semantic model is the trusted one.",de:"Die Empfehlung zeigt den Erstellern, welches semantische Modell das maßgebliche ist."},
+      options:[{label:{en:"Yes, certified semantic models are the default source",de:"Ja, zertifizierte semantische Modelle sind die Standardquelle"},v:3},{label:{en:"A few are endorsed, most are not",de:"Einige sind empfohlen, die meisten nicht"},v:2},{label:{en:"We know endorsement exists but have not used it",de:"Wir kennen die Empfehlungsfunktion, nutzen sie aber nicht"},v:1},{label:{en:"People connect to whatever semantic model they find",de:"Man verbindet sich mit irgendeinem gefundenen semantischen Modell"},v:0}] },
 
     { title:{en:"5. When someone needs a new report, do they start from a shared model or a fresh one?",de:"5. Wenn jemand einen neuen Bericht braucht, startet er von einem gemeinsamen Modell oder einem neuen?"},
       hint:{en:"Model reuse versus a new one-off each time.",de:"Wiederverwendung des Modells gegenüber jedes Mal einer neuen Einzellösung."},
@@ -491,7 +491,7 @@ const TOOL = {
       hint:{en:"Dormant seats are pure waste.",de:"Ungenutzte Lizenzen sind reine Verschwendung."},
       options:[{label:{en:"We review usage and reclaim unused seats each quarter",de:"Wir prüfen die Nutzung und ziehen ungenutzte Lizenzen jedes Quartal zurück"},v:3},{label:{en:"We clean up about once a year",de:"Wir räumen etwa einmal im Jahr auf"},v:2},{label:{en:"Only when someone leaves the company",de:"Nur wenn jemand das Unternehmen verlässt"},v:1},{label:{en:"We buy seats and never reclaim them",de:"Wir kaufen Lizenzen und ziehen sie nie zurück"},v:0}] },
 
-    { title:{en:"8. If a scheduled dataset refresh fails overnight, what happens?",de:"8. Wenn eine geplante Datenaktualisierung über Nacht fehlschlägt, was passiert dann?"},
+    { title:{en:"8. If a scheduled semantic model refresh fails overnight, what happens?",de:"8. Wenn eine geplante Datenaktualisierung über Nacht fehlschlägt, was passiert dann?"},
       hint:{en:"Do you hear about it, or do users?",de:"Erfahren Sie davon oder die Nutzer?"},
       options:[{label:{en:"We get an alert and know before users do",de:"Wir erhalten eine Benachrichtigung und wissen es vor den Nutzern"},v:3},{label:{en:"We usually catch it, sometimes users notice first",de:"Wir bemerken es meist, manchmal fällt es zuerst den Nutzern auf"},v:2},{label:{en:"We find out when someone reports a stale report",de:"Wir erfahren es, wenn jemand einen veralteten Bericht meldet"},v:1},{label:{en:"We do not monitor refresh failures",de:"Wir überwachen fehlgeschlagene Aktualisierungen nicht"},v:0}] },
 
@@ -558,9 +558,9 @@ const TOOL = {
     { q:13, atOrBelow:1, title:{en:"No visibility into whether you over- or under-pay.",de:"Kein Überblick, ob Sie zu viel oder zu wenig zahlen."},
       note:{en:"You are either wasting capacity or throttling users, and cannot tell which.",de:"Sie verschwenden entweder Kapazität oder bremsen Nutzer und können nicht sagen, was davon."},
       rec:{en:"Check your licence or capacity mix against your load, then right-size instead of guessing.",de:"Prüfen Sie Ihren Lizenz- oder Kapazitätsmix gegen Ihre Last und dimensionieren Sie richtig, statt zu raten."} },
-    { q:3, atOrBelow:1, title:{en:"Trusted datasets are not endorsed.",de:"Vertrauenswürdige Datasets sind nicht empfohlen."},
+    { q:3, atOrBelow:1, title:{en:"Trusted semantic models are not endorsed.",de:"Vertrauenswürdige semantische Modelle sind nicht empfohlen."},
       note:{en:"Builders connect to random copies because nothing marks the real one.",de:"Ersteller verbinden sich mit beliebigen Kopien, weil nichts das maßgebliche kennzeichnet."},
-      rec:{en:"Mark the datasets you trust as Certified so people stop guessing.",de:"Kennzeichnen Sie die Datasets, denen Sie vertrauen, als „Zertifiziert“, damit niemand mehr rät."} },
+      rec:{en:"Mark the semantic models you trust as Certified so people stop guessing.",de:"Kennzeichnen Sie die semantischen Modelle, denen Sie vertrauen, als „Zertifiziert“, damit niemand mehr rät."} },
     { q:4, atOrBelow:1, title:{en:"Reports are built on one-off models.",de:"Berichte werden auf Einzelmodellen aufgebaut."},
       note:{en:"Each new report reinvents the data model, so definitions never converge.",de:"Jeder neue Bericht erfindet das Datenmodell neu, sodass Definitionen nie zusammenfinden."},
       rec:{en:"Have new reports connect to a governed shared model rather than importing raw tables.",de:"Lassen Sie neue Berichte sich mit einem verwalteten gemeinsamen Modell verbinden, statt Rohdaten zu importieren."} },
