@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -30,12 +30,12 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font);line-height:1.
 .card{background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);
   max-width:380px;width:100%;padding:28px 26px}
 .ghead{text-align:center;margin-bottom:22px}
-.logo-img{display:inline-block;height:32px;width:auto;max-width:220px}
+.logo-img{display:inline-block;height:26px;width:auto;max-width:100%;object-fit:contain}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo-img{filter:brightness(0) invert(1)}}
 :root[data-theme="dark"] .logo-img{filter:brightness(0) invert(1)}
 .card-title{font-family:var(--display);font-weight:700;font-size:20px;margin:16px 0 3px;letter-spacing:-.01em}
 .card p.k{color:var(--muted);font-size:13px;margin:0}
-.logo-hdr{height:26px;max-width:180px}
+.logo-hdr{height:22px}
 .fld{margin-bottom:12px}
 .fld label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px;letter-spacing:.02em}
 .fld input{width:100%;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:11px 12px;
@@ -118,13 +118,13 @@ select.month{background:var(--surface);border:1px solid var(--line);color:var(--
 <div id="gate">
   <form class="card" id="gform" autocomplete="off">
     <div class="ghead">
-      <img class="logo-img" src="casewhen-logo.png" alt="CaseWhen" width="220" height="32">
+      <img class="logo-img" src="casewhen-logo.png" alt="CaseWhen" width="289" height="30">
       <div class="card-title">Social Schedule</div>
-      <p class="k">Interne Vorschau · bitte anmelden</p>
+      <p class="k">Internal preview · please sign in</p>
     </div>
-    <div class="fld"><label for="gu">Benutzername</label><input id="gu" type="text" autocomplete="username"></div>
-    <div class="fld"><label for="gp">Passwort</label><input id="gp" type="password" autocomplete="current-password"></div>
-    <button class="gbtn" type="submit" id="gbtn">Ansehen</button>
+    <div class="fld"><label for="gu">Username</label><input id="gu" type="text" autocomplete="username"></div>
+    <div class="fld"><label for="gp">Password</label><input id="gp" type="password" autocomplete="current-password"></div>
+    <button class="gbtn" type="submit" id="gbtn">View</button>
     <div class="gerr" id="gerr"></div>
   </form>
 </div>
@@ -132,7 +132,7 @@ select.month{background:var(--surface);border:1px solid var(--line);color:var(--
 <div id="app" hidden><div class="wrap">
   <header class="brand">
     <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-      <img class="logo-img logo-hdr" src="casewhen-logo.png" alt="CaseWhen">
+      <img class="logo-img logo-hdr" src="casewhen-logo.png" alt="CaseWhen" width="212" height="22">
       <h1 class="t" style="font-size:clamp(18px,3.5vw,24px)">Social Schedule</h1>
     </div>
     <p class="sub" id="sub"></p>
@@ -142,8 +142,8 @@ select.month{background:var(--surface);border:1px solid var(--line);color:var(--
   <div class="filters" id="filters">
     <div id="platchips" style="display:flex;gap:8px;flex-wrap:wrap"></div>
     <span class="spacer"></span>
-    <button class="chip prop" id="propchip" aria-pressed="false">Vorschläge</button>
-    <button class="chip" id="langchip" aria-pressed="false">Alle Sprachen</button>
+    <button class="chip prop" id="propchip" aria-pressed="false">Proposed</button>
+    <button class="chip" id="langchip" aria-pressed="false">All languages</button>
     <select class="month" id="monthsel"></select>
   </div>
   <main id="list"></main>
@@ -153,7 +153,7 @@ select.month{background:var(--surface);border:1px solid var(--line);color:var(--
 
 <script>
 const PLAT={instagram:{c:'var(--ig)',ab:'IG',name:'Instagram'},tiktok:{c:'var(--tiktok)',ab:'TT',name:'TikTok'},youtube:{c:'var(--youtube)',ab:'YT',name:'YouTube'},facebook:{c:'var(--facebook)',ab:'FB',name:'Facebook'},threads:{c:'var(--threads)',ab:'TH',name:'Threads'},linkedin:{c:'var(--linkedin)',ab:'in',name:'LinkedIn'},google:{c:'var(--google)',ab:'G',name:'Google'}};
-const MON=['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'],WK=['So','Mo','Di','Mi','Do','Fr','Sa'];
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],WK=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 let DATA=[],fPlat=new Set(),fLang='',fProp=false;
 const esc=s=>(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const parse=d=>{const[y,m,da]=d.date.split('-').map(Number);const dt=new Date(Date.UTC(y,m-1,da));return{...d,_dt:dt,_mkey:y+'-'+String(m).padStart(2,'0'),_y:y,_m:m,_da:da,_wk:dt.getUTCDay()};};
@@ -170,13 +170,13 @@ function showApp(raw){DATA=raw.map(parse);document.getElementById('gate').hidden
 document.getElementById('gform').addEventListener('submit',async e=>{
   e.preventDefault();const u=document.getElementById('gu').value.trim().toLowerCase(),pw=document.getElementById('gp').value;
   const err=document.getElementById('gerr');const btn=document.getElementById('gbtn');
-  err.textContent='';btn.textContent='Entschlüsseln…';
+  err.textContent='';btn.textContent='Decrypting…';
   try{
     if(u!=='casewhen')throw 0;
     const raw=await decrypt(pw);
     try{sessionStorage.setItem('cw_k',pw);}catch(_){}
     showApp(raw);
-  }catch(_){err.textContent='Benutzername oder Passwort falsch.';btn.textContent='Ansehen';}
+  }catch(_){err.textContent='Wrong username or password.';btn.textContent='View';}
 });
 (function(){try{const k=sessionStorage.getItem('cw_k');if(k){document.getElementById('gu').value='casewhen';decrypt(k).then(showApp).catch(()=>{});}}catch(_){}})();
 
@@ -184,49 +184,49 @@ function buildStats(){
   const sc=DATA.filter(d=>!d.proposed),pr=DATA.filter(d=>d.proposed);
   const byP={};sc.forEach(d=>byP[d.platform]=(byP[d.platform]||0)+1);
   const first=DATA.reduce((a,b)=>a._dt<b._dt?a:b),last=DATA.reduce((a,b)=>a._dt>b._dt?a:b);
-  document.getElementById('sub').innerHTML='<b>'+sc.length+'</b> geplante Posts · '+MON[first._m-1]+' '+first._y+' – '+MON[last._m-1]+' '+last._y+' · nur Ansicht';
+  document.getElementById('sub').innerHTML='<b>'+sc.length+'</b> scheduled posts · '+MON[first._m-1]+' '+first._y+' – '+MON[last._m-1]+' '+last._y+' · view only';
   if(pr.length){const n=document.getElementById('propnote');n.hidden=false;
-    n.textContent='+ '+pr.length+' VORGESCHLAGENE Posts für Sajus persönliches LinkedIn (gestrichelt markiert) — warten auf Sajus Freigabe, noch nicht geplant.';}
+    n.textContent='+ '+pr.length+' PROPOSED posts for Saju’s personal LinkedIn (dashed border) — awaiting Saju’s approval, not yet scheduled.';}
   const order=['instagram','facebook','linkedin','threads','tiktok','youtube','google'];
   document.getElementById('stats').innerHTML=order.filter(p=>byP[p]).map(p=>'<span class="stat"><span class="dot" style="background:'+PLAT[p].c+'"></span>'+PLAT[p].name+' <b>'+byP[p]+'</b></span>').join('');
 }
 function buildFilters(){
   const plats=[...new Set(DATA.map(d=>d.platform))].sort((a,b)=>DATA.filter(x=>x.platform===b).length-DATA.filter(x=>x.platform===a).length);
-  document.getElementById('platchips').innerHTML='<button class="chip" data-p="" aria-pressed="true">Alle Kanäle</button>'+plats.map(p=>'<button class="chip" data-p="'+p+'" aria-pressed="false">'+PLAT[p].name+'</button>').join('');
+  document.getElementById('platchips').innerHTML='<button class="chip" data-p="" aria-pressed="true">All channels</button>'+plats.map(p=>'<button class="chip" data-p="'+p+'" aria-pressed="false">'+PLAT[p].name+'</button>').join('');
   document.getElementById('platchips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;const p=b.dataset.p;if(p==='')fPlat.clear();else fPlat.has(p)?fPlat.delete(p):fPlat.add(p);document.querySelectorAll('#platchips .chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.p===''?(fPlat.size===0):fPlat.has(c.dataset.p)));render();});
   document.getElementById('propchip').addEventListener('click',e=>{fProp=!fProp;e.target.setAttribute('aria-pressed',fProp);render();});
-  document.getElementById('langchip').addEventListener('click',e=>{fLang=fLang===''?'DE':fLang==='DE'?'EN':'';e.target.textContent=fLang===''?'Alle Sprachen':fLang==='DE'?'Nur Deutsch':'Nur Englisch';e.target.setAttribute('aria-pressed',fLang!=='');render();});
+  document.getElementById('langchip').addEventListener('click',e=>{fLang=fLang===''?'DE':fLang==='DE'?'EN':'';e.target.textContent=fLang===''?'All languages':fLang==='DE'?'German only':'English only';e.target.setAttribute('aria-pressed',fLang!=='');render();});
   const months=[...new Set(DATA.map(d=>d._mkey))].sort();
-  document.getElementById('monthsel').innerHTML='<option value="">Zum Monat…</option>'+months.map(mk=>{const[y,m]=mk.split('-');return '<option value="'+mk+'">'+MON[+m-1]+' '+y+'</option>';}).join('');
+  document.getElementById('monthsel').innerHTML='<option value="">Jump to month…</option>'+months.map(mk=>{const[y,m]=mk.split('-');return '<option value="'+mk+'">'+MON[+m-1]+' '+y+'</option>';}).join('');
   document.getElementById('monthsel').addEventListener('change',e=>{const el=document.getElementById('d-'+e.target.value);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});});
 }
 function render(){
   let rows=DATA.filter(d=>(fPlat.size===0||fPlat.has(d.platform))&&(fLang===''||d.lang===fLang)&&(!fProp||d.proposed));
   const list=document.getElementById('list');
-  if(!rows.length){list.innerHTML='<p class="none">Keine Posts für diese Auswahl.</p>';document.getElementById('foot').textContent='';return;}
+  if(!rows.length){list.innerHTML='<p class="none">No posts for this selection.</p>';document.getElementById('foot').textContent='';return;}
   const groups={};rows.forEach(d=>{(groups[d.date]=groups[d.date]||[]).push(d);});
   const dates=Object.keys(groups).sort();let html='';
   dates.forEach(date=>{
     const g=groups[date].sort((a,b)=>((a.proposed?1:0)-(b.proposed?1:0))||(a.utc+a.platform).localeCompare(b.utc+b.platform));
     const d0=g[0];
-    html+='<section class="daygrp" data-mk="'+d0._mkey+'"><div class="dayhd"><span class="dnum">'+d0._da+' '+MON[d0._m-1]+'</span><span class="dwk">'+WK[d0._wk]+' '+d0._y+'</span><span class="dline"></span><span class="dcount">'+g.length+'</span></div><div class="posts">';
+    html+='<section class="daygrp" data-mk="'+d0._mkey+'"><div class="dayhd"><span class="dnum">'+MON[d0._m-1]+' '+d0._da+'</span><span class="dwk">'+WK[d0._wk]+' '+d0._y+'</span><span class="dline"></span><span class="dcount">'+g.length+'</span></div><div class="posts">';
     g.forEach(d=>{
       const P=PLAT[d.platform]||{c:'#888',ab:'?',name:d.platform};
       html+='<button class="post'+(d.proposed?' prop':'')+'" data-i="'+DATA.indexOf(d)+'">'+
         '<span class="pf"><span class="plat" style="background:'+(d.proposed?'var(--prop)':P.c)+'">'+P.ab+'</span><span class="pmeta"><div class="phandle">'+esc(d.handle)+'</div><div class="pname">'+P.name+'</div></span></span>'+
         '<span class="pcap">'+esc((d.caption||'').split('\n')[0])+'</span>'+
-        '<span class="badges">'+(d.proposed?'<span class="badge b-prop">VORSCHLAG</span>':'')+'<span class="badge b-type">'+d.type+'</span><span class="badge b-lang '+(d.lang==='DE'?'de':'')+'">'+d.lang+'</span><span class="ptime">'+d.ber+'</span></span></button>';
+        '<span class="badges">'+(d.proposed?'<span class="badge b-prop">PROPOSED</span>':'')+'<span class="badge b-type">'+d.type+'</span><span class="badge b-lang '+(d.lang==='DE'?'de':'')+'">'+d.lang+'</span><span class="ptime">'+d.ber+'</span></span></button>';
     });
     html+='</div></section>';
   });
   list.innerHTML=html;
   const seen=new Set();list.querySelectorAll('.daygrp').forEach(s=>{const mk=s.dataset.mk;if(!seen.has(mk)){seen.add(mk);s.id='d-'+mk;}});
   list.querySelectorAll('.post').forEach(b=>b.addEventListener('click',()=>openModal(DATA[+b.dataset.i])));
-  document.getElementById('foot').innerHTML=rows.length+' von '+DATA.length+' Einträgen · Zeiten in Berliner Zeit · Nur-Ansicht fürs CaseWhen-Team';
+  document.getElementById('foot').innerHTML=rows.length+' of '+DATA.length+' entries · times in Berlin time · view-only for the CaseWhen team';
 }
 function openModal(d){
   const P=PLAT[d.platform]||{c:'#888',ab:'?',name:d.platform};
-  document.getElementById('modalRoot').innerHTML='<div class="ov" id="ov"><div class="modal" role="dialog" aria-modal="true"><div class="mhd"><span class="plat" style="width:38px;height:38px;flex:0 0 38px;border-radius:11px;font-size:15px;background:'+(d.proposed?'var(--prop)':P.c)+'">'+P.ab+'</span><span class="pmeta"><div class="phandle" style="font-size:15px">'+esc(d.handle)+'</div><div class="pname">'+P.name+'</div></span><button class="mclose" id="mclose" aria-label="Schließen">✕</button></div><div class="mbody">'+(d.proposed?'<div class="mprop">VORSCHLAG für Sajus persönliches LinkedIn — noch nicht geplant, wartet auf seine Freigabe.</div>':'')+'<div class="mrow">'+kv('Datum',d._da+'. '+MON[d._m-1]+' '+d._y+' ('+WK[d._wk]+')')+kv('Berlin',d.ber)+kv('US-Ost',d.et)+kv('UTC',d.utc)+kv('Typ',d.type)+kv('Sprache',d.lang==='DE'?'Deutsch':'Englisch')+'</div><div class="mk" style="margin-bottom:7px">Caption</div><div class="mcap">'+esc(d.caption||'(kein Text)')+'</div></div></div></div>';
+  document.getElementById('modalRoot').innerHTML='<div class="ov" id="ov"><div class="modal" role="dialog" aria-modal="true"><div class="mhd"><span class="plat" style="width:38px;height:38px;flex:0 0 38px;border-radius:11px;font-size:15px;background:'+(d.proposed?'var(--prop)':P.c)+'">'+P.ab+'</span><span class="pmeta"><div class="phandle" style="font-size:15px">'+esc(d.handle)+'</div><div class="pname">'+P.name+'</div></span><button class="mclose" id="mclose" aria-label="Close">✕</button></div><div class="mbody">'+(d.proposed?'<div class="mprop">PROPOSED for Saju’s personal LinkedIn — not yet scheduled, awaiting his approval.</div>':'')+'<div class="mrow">'+kv('Date',MON[d._m-1]+' '+d._da+', '+d._y+' ('+WK[d._wk]+')')+kv('Berlin',d.ber)+kv('US East',d.et)+kv('UTC',d.utc)+kv('Type',d.type)+kv('Language',d.lang==='DE'?'German':'English')+'</div><div class="mk" style="margin-bottom:7px">Caption</div><div class="mcap">'+esc(d.caption||'(no text)')+'</div></div></div></div>';
   const close=()=>document.getElementById('modalRoot').innerHTML='';
   document.getElementById('ov').addEventListener('click',e=>{if(e.target.id==='ov')close();});
   document.getElementById('mclose').addEventListener('click',close);
