@@ -29,8 +29,13 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font);line-height:1.
 #gate{min-height:100vh;display:grid;place-items:center;padding:24px 0}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);
   max-width:380px;width:100%;padding:28px 26px}
-.card h1{font-family:var(--display);font-size:22px;margin:0 0 4px;letter-spacing:-.02em}
-.card p.k{color:var(--muted);font-size:13px;margin:0 0 20px}
+.ghead{text-align:center;margin-bottom:22px}
+.logo-img{display:inline-block;height:32px;width:auto;max-width:220px}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo-img{filter:brightness(0) invert(1)}}
+:root[data-theme="dark"] .logo-img{filter:brightness(0) invert(1)}
+.card-title{font-family:var(--display);font-weight:700;font-size:20px;margin:16px 0 3px;letter-spacing:-.01em}
+.card p.k{color:var(--muted);font-size:13px;margin:0}
+.logo-hdr{height:26px;max-width:180px}
 .fld{margin-bottom:12px}
 .fld label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px;letter-spacing:.02em}
 .fld input{width:100%;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:11px 12px;
@@ -112,8 +117,11 @@ select.month{background:var(--surface);border:1px solid var(--line);color:var(--
 <body>
 <div id="gate">
   <form class="card" id="gform" autocomplete="off">
-    <h1>CaseWhen Social Schedule</h1>
-    <p class="k">Interne Vorschau · bitte anmelden</p>
+    <div class="ghead">
+      <img class="logo-img" src="casewhen-logo.png" alt="CaseWhen" width="220" height="32">
+      <div class="card-title">Social Schedule</div>
+      <p class="k">Interne Vorschau · bitte anmelden</p>
+    </div>
     <div class="fld"><label for="gu">Benutzername</label><input id="gu" type="text" autocomplete="username"></div>
     <div class="fld"><label for="gp">Passwort</label><input id="gp" type="password" autocomplete="current-password"></div>
     <button class="gbtn" type="submit" id="gbtn">Ansehen</button>
@@ -123,7 +131,10 @@ select.month{background:var(--surface);border:1px solid var(--line);color:var(--
 
 <div id="app" hidden><div class="wrap">
   <header class="brand">
-    <h1 class="t">CaseWhen Social Schedule</h1>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <img class="logo-img logo-hdr" src="casewhen-logo.png" alt="CaseWhen">
+      <h1 class="t" style="font-size:clamp(18px,3.5vw,24px)">Social Schedule</h1>
+    </div>
     <p class="sub" id="sub"></p>
     <div class="note" id="propnote" hidden></div>
     <div class="stats" id="stats"></div>
