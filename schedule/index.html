@@ -178,7 +178,9 @@ select.month{background:var(--surface);border:1px solid var(--line);color:var(--
 <script>
 const PLAT={instagram:{c:'var(--ig)',ab:'IG',name:'Instagram'},tiktok:{c:'var(--tiktok)',ab:'TT',name:'TikTok'},youtube:{c:'var(--youtube)',ab:'YT',name:'YouTube'},facebook:{c:'var(--facebook)',ab:'FB',name:'Facebook'},threads:{c:'var(--threads)',ab:'TH',name:'Threads'},linkedin:{c:'var(--linkedin)',ab:'in',name:'LinkedIn'},google:{c:'var(--google)',ab:'G',name:'Google'}};
 const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],WK=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-let DATA=[],fPlat=new Set(),fLang='',fProp=false;
+let DATA=[],fPlat=new Set(),fPerson='',fProp=false;
+// Person membership: Saju owns his proposed LinkedIn posts + all German posts; Austin owns the English posts.
+const personMatch=d=> fPerson==='' || (fPerson==='saju' ? (d.proposed||d.lang==='DE') : (d.lang==='EN'&&!d.proposed));
 const esc=s=>(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const parse=d=>{const[y,m,da]=d.date.split('-').map(Number);const dt=new Date(Date.UTC(y,m-1,da));return{...d,_dt:dt,_mkey:y+'-'+String(m).padStart(2,'0'),_y:y,_m:m,_da:da,_wk:dt.getUTCDay()};};
 
@@ -250,18 +252,18 @@ function buildFilters(){
   document.getElementById('platchips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;const p=b.dataset.p;if(p==='')fPlat.clear();else fPlat.has(p)?fPlat.delete(p):fPlat.add(p);document.querySelectorAll('#platchips .chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.p===''?(fPlat.size===0):fPlat.has(c.dataset.p)));render();});
   document.getElementById('propchip').addEventListener('click',e=>{fProp=!fProp;e.target.setAttribute('aria-pressed',fProp);render();});
   // Person filters: Austin = all English content, Saju = all German content. Mutually exclusive; re-click clears.
-  const setPerson=p=>{fLang=p;
-    document.getElementById('austinchip').setAttribute('aria-pressed',fLang==='EN');
-    document.getElementById('sajuchip').setAttribute('aria-pressed',fLang==='DE');
+  const setPerson=p=>{fPerson=p;
+    document.getElementById('austinchip').setAttribute('aria-pressed',fPerson==='austin');
+    document.getElementById('sajuchip').setAttribute('aria-pressed',fPerson==='saju');
     render();};
-  document.getElementById('austinchip').addEventListener('click',()=>setPerson(fLang==='EN'?'':'EN'));
-  document.getElementById('sajuchip').addEventListener('click',()=>setPerson(fLang==='DE'?'':'DE'));
+  document.getElementById('austinchip').addEventListener('click',()=>setPerson(fPerson==='austin'?'':'austin'));
+  document.getElementById('sajuchip').addEventListener('click',()=>setPerson(fPerson==='saju'?'':'saju'));
   const months=[...new Set(DATA.map(d=>d._mkey))].sort();
   document.getElementById('monthsel').innerHTML='<option value="">Jump to month…</option>'+months.map(mk=>{const[y,m]=mk.split('-');return '<option value="'+mk+'">'+MON[+m-1]+' '+y+'</option>';}).join('');
   document.getElementById('monthsel').addEventListener('change',e=>{const el=document.getElementById('d-'+e.target.value);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});});
 }
 function render(){
-  let rows=DATA.filter(d=>(fPlat.size===0||fPlat.has(d.platform))&&(fLang===''||d.lang===fLang)&&(!fProp||d.proposed));
+  let rows=DATA.filter(d=>(fPlat.size===0||fPlat.has(d.platform))&&personMatch(d)&&(!fProp||d.proposed));
   const list=document.getElementById('list');
   if(!rows.length){list.innerHTML='<p class="none">No posts for this selection.</p>';document.getElementById('foot').textContent='';return;}
   const groups={};rows.forEach(d=>{(groups[d.date]=groups[d.date]||[]).push(d);});
