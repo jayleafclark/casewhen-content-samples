@@ -32,7 +32,8 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font);line-height:1.
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .card{box-shadow:0 24px 70px rgba(0,0,0,.5)}}
 :root[data-theme="dark"] .card{box-shadow:0 24px 70px rgba(0,0,0,.5)}
 /* ---- on-brand animated backdrop behind the login box (CaseWhen greens: drifting aurora + flowing waves) ---- */
-.gfx{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+/* full-bleed: fixed to the viewport so it ignores the body's side padding and reaches every edge */
+.gfx{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
 .gfx .glow{position:absolute;border-radius:50%;filter:blur(64px);will-change:transform}
 .gfx .g1{width:54vmax;height:54vmax;left:-12vmax;top:-16vmax;background:radial-gradient(circle,var(--accent) 0%,transparent 66%);opacity:.5;animation:gdrift1 34s ease-in-out infinite}
 .gfx .g2{width:48vmax;height:48vmax;right:-14vmax;top:4vmax;background:radial-gradient(circle,var(--accent-mid) 0%,transparent 64%);opacity:.42;animation:gdrift2 44s ease-in-out infinite}
