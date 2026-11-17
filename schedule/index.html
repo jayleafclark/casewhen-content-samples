@@ -158,27 +158,48 @@ let DATA=[],fPlat=new Set(),fLang='',fProp=false;
 const esc=s=>(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const parse=d=>{const[y,m,da]=d.date.split('-').map(Number);const dt=new Date(Date.UTC(y,m-1,da));return{...d,_dt:dt,_mkey:y+'-'+String(m).padStart(2,'0'),_y:y,_m:m,_da:da,_wk:dt.getUTCDay()};};
 
+let ENCBUF=null;
+async function loadEnc(){
+  if(ENCBUF)return ENCBUF;
+  const ctl=new AbortController(),to=setTimeout(()=>ctl.abort(),15000);
+  let resp;
+  try{resp=await fetch('schedule.enc?_='+Date.now(),{signal:ctl.signal});}
+  catch(e){throw new Error('NET');}
+  finally{clearTimeout(to);}
+  if(!resp.ok)throw new Error('NET');
+  ENCBUF=await resp.arrayBuffer();
+  return ENCBUF;
+}
 async function decrypt(pw){
-  const buf=await (await fetch('schedule.enc',{cache:'no-store'})).arrayBuffer();
+  if(!(window.crypto&&crypto.subtle))throw new Error('CRYPTO');
+  const buf=await loadEnc();
   const b=new Uint8Array(buf),salt=b.slice(0,16),iv=b.slice(16,28),ct=b.slice(28);
   const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
   const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:150000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
-  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv},key,ct);
+  let pt;
+  try{pt=await crypto.subtle.decrypt({name:'AES-GCM',iv},key,ct);}
+  catch(e){throw new Error('PW');}
   return JSON.parse(new TextDecoder().decode(pt));
 }
 function showApp(raw){DATA=raw.map(parse);document.getElementById('gate').hidden=true;document.getElementById('app').hidden=false;buildStats();buildFilters();render();}
 document.getElementById('gform').addEventListener('submit',async e=>{
   e.preventDefault();const u=document.getElementById('gu').value.trim().toLowerCase(),pw=document.getElementById('gp').value;
   const err=document.getElementById('gerr');const btn=document.getElementById('gbtn');
-  err.textContent='';btn.textContent='Decrypting…';
+  err.textContent='';btn.textContent='Decrypting…';btn.disabled=true;
+  if(u!=='casewhen'){err.textContent='Wrong username or password.';btn.textContent='View';btn.disabled=false;return;}
+  let raw;
   try{
-    if(u!=='casewhen')throw 0;
-    const raw=await decrypt(pw);
-    try{sessionStorage.setItem('cw_k',pw);}catch(_){}
-    showApp(raw);
-  }catch(_){err.textContent='Wrong username or password.';btn.textContent='View';}
+    raw=await decrypt(pw);
+  }catch(e){
+    err.textContent=e&&e.message==='NET'?'Couldn’t load the schedule — check your connection and tap View again.'
+      :e&&e.message==='CRYPTO'?'This browser can’t run the decryption step. Open the link in Safari or Chrome (not an in-app browser).'
+      :'Wrong username or password.';
+    btn.textContent='View';btn.disabled=false;return;
+  }
+  try{sessionStorage.setItem('cw_k',pw);}catch(_){}
+  showApp(raw);
 });
-(function(){try{const k=sessionStorage.getItem('cw_k');if(k){document.getElementById('gu').value='casewhen';decrypt(k).then(showApp).catch(()=>{});}}catch(_){}})();
+(function(){try{const k=sessionStorage.getItem('cw_k');if(k){document.getElementById('gu').value='casewhen';decrypt(k).then(showApp).catch(()=>{try{sessionStorage.removeItem('cw_k');}catch(_){}});}}catch(_){}})();
 
 function buildStats(){
   const sc=DATA.filter(d=>!d.proposed),pr=DATA.filter(d=>d.proposed);
