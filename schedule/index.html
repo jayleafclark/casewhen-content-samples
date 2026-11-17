@@ -26,9 +26,27 @@ html,body{margin:0}
 body{background:var(--bg);color:var(--fg);font-family:var(--font);line-height:1.45;-webkit-font-smoothing:antialiased;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 /* ---- login gate ---- */
-#gate{min-height:100vh;display:grid;place-items:center;padding:24px 0}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);
-  max-width:380px;width:100%;padding:28px 26px}
+#gate{min-height:100vh;display:grid;place-items:center;padding:24px 0;position:relative;overflow:hidden;isolation:isolate}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:0 24px 60px rgba(14,47,40,.22);
+  max-width:380px;width:100%;padding:28px 26px;position:relative;z-index:1;backdrop-filter:saturate(1.05)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .card{box-shadow:0 24px 70px rgba(0,0,0,.5)}}
+:root[data-theme="dark"] .card{box-shadow:0 24px 70px rgba(0,0,0,.5)}
+/* ---- on-brand animated backdrop behind the login box (CaseWhen greens: drifting aurora + flowing waves) ---- */
+.gfx{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.gfx .glow{position:absolute;border-radius:50%;filter:blur(64px);will-change:transform}
+.gfx .g1{width:54vmax;height:54vmax;left:-12vmax;top:-16vmax;background:radial-gradient(circle,var(--accent) 0%,transparent 66%);opacity:.5;animation:gdrift1 34s ease-in-out infinite}
+.gfx .g2{width:48vmax;height:48vmax;right:-14vmax;top:4vmax;background:radial-gradient(circle,var(--accent-mid) 0%,transparent 64%);opacity:.42;animation:gdrift2 44s ease-in-out infinite}
+.gfx .g3{width:42vmax;height:42vmax;left:16vmax;bottom:-18vmax;background:radial-gradient(circle,var(--accent-deep) 0%,transparent 70%);opacity:.55;animation:gdrift3 38s ease-in-out infinite}
+.gfx .waves{position:absolute;left:0;bottom:-1px;width:200%;height:46vh;will-change:transform}
+.gfx .waves path{fill:var(--accent)}
+.gfx .w1{opacity:.16;animation:gwave 24s linear infinite}
+.gfx .w2{opacity:.11;height:36vh;animation:gwave 34s linear infinite reverse}
+.gfx .w2 path{fill:var(--accent-mid)}
+@keyframes gdrift1{0%,100%{transform:translate(0,0)}50%{transform:translate(6vmax,4vmax)}}
+@keyframes gdrift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-5vmax,5vmax)}}
+@keyframes gdrift3{0%,100%{transform:translate(0,0)}50%{transform:translate(4vmax,-5vmax)}}
+@keyframes gwave{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.gfx .glow,.gfx .waves{animation:none!important}}
 .ghead{text-align:center;margin-bottom:22px}
 .logo-img{display:inline-block;height:26px;width:auto;max-width:100%;object-fit:contain}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo-img{filter:brightness(0) invert(1)}}
@@ -116,6 +134,11 @@ select.month{background:var(--surface);border:1px solid var(--line);color:var(--
 </head>
 <body>
 <div id="gate">
+  <div class="gfx" aria-hidden="true">
+    <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
+    <svg class="waves w1" viewBox="0 0 2880 320" preserveAspectRatio="none"><path d="M0,180 C180,110 540,110 720,180 C900,250 1260,250 1440,180 C1620,110 1980,110 2160,180 C2340,250 2700,250 2880,180 L2880,320 L0,320 Z"/></svg>
+    <svg class="waves w2" viewBox="0 0 2880 320" preserveAspectRatio="none"><path d="M0,210 C240,150 480,270 720,210 C960,150 1200,270 1440,210 C1680,150 1920,270 2160,210 C2400,150 2640,270 2880,210 L2880,320 L0,320 Z"/></svg>
+  </div>
   <form class="card" id="gform" autocomplete="off">
     <div class="ghead">
       <img class="logo-img" src="casewhen-logo.png" alt="CaseWhen" width="289" height="30">
@@ -142,8 +165,9 @@ select.month{background:var(--surface);border:1px solid var(--line);color:var(--
   <div class="filters" id="filters">
     <div id="platchips" style="display:flex;gap:8px;flex-wrap:wrap"></div>
     <span class="spacer"></span>
+    <button class="chip person" id="austinchip" aria-pressed="false">Austin</button>
+    <button class="chip person" id="sajuchip" aria-pressed="false">Saju</button>
     <button class="chip prop" id="propchip" aria-pressed="false">Proposed</button>
-    <button class="chip" id="langchip" aria-pressed="false">All languages</button>
     <select class="month" id="monthsel"></select>
   </div>
   <main id="list"></main>
@@ -225,7 +249,13 @@ function buildFilters(){
   document.getElementById('platchips').innerHTML='<button class="chip" data-p="" aria-pressed="true">All channels</button>'+plats.map(p=>'<button class="chip" data-p="'+p+'" aria-pressed="false">'+PLAT[p].name+'</button>').join('');
   document.getElementById('platchips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;const p=b.dataset.p;if(p==='')fPlat.clear();else fPlat.has(p)?fPlat.delete(p):fPlat.add(p);document.querySelectorAll('#platchips .chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.p===''?(fPlat.size===0):fPlat.has(c.dataset.p)));render();});
   document.getElementById('propchip').addEventListener('click',e=>{fProp=!fProp;e.target.setAttribute('aria-pressed',fProp);render();});
-  document.getElementById('langchip').addEventListener('click',e=>{fLang=fLang===''?'DE':fLang==='DE'?'EN':'';e.target.textContent=fLang===''?'All languages':fLang==='DE'?'German only':'English only';e.target.setAttribute('aria-pressed',fLang!=='');render();});
+  // Person filters: Austin = all English content, Saju = all German content. Mutually exclusive; re-click clears.
+  const setPerson=p=>{fLang=p;
+    document.getElementById('austinchip').setAttribute('aria-pressed',fLang==='EN');
+    document.getElementById('sajuchip').setAttribute('aria-pressed',fLang==='DE');
+    render();};
+  document.getElementById('austinchip').addEventListener('click',()=>setPerson(fLang==='EN'?'':'EN'));
+  document.getElementById('sajuchip').addEventListener('click',()=>setPerson(fLang==='DE'?'':'DE'));
   const months=[...new Set(DATA.map(d=>d._mkey))].sort();
   document.getElementById('monthsel').innerHTML='<option value="">Jump to month…</option>'+months.map(mk=>{const[y,m]=mk.split('-');return '<option value="'+mk+'">'+MON[+m-1]+' '+y+'</option>';}).join('');
   document.getElementById('monthsel').addEventListener('change',e=>{const el=document.getElementById('d-'+e.target.value);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});});
