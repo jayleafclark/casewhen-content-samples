@@ -115,6 +115,7 @@ select.month{background:var(--surface);border:1px solid var(--line);color:var(--
 .plat.thumb .mct.play{background:rgba(0,0,0,.62);color:#fff;font-size:8px;padding:0;width:16px;height:16px;display:grid;place-items:center;padding-left:1px;border-radius:50%}
 .mreelwrap{position:relative;display:inline-block;max-width:100%;margin-bottom:4px}
 .mreelposter{height:min(52vh,420px);width:auto;max-width:100%;border-radius:14px;border:1px solid var(--line);background:var(--surface-2);display:block}
+.mreelvid{height:min(56vh,460px);width:auto;max-width:100%;border-radius:14px;border:1px solid var(--line);background:#000;display:block}
 .mreelwrap .rtag{position:absolute;left:10px;top:10px;background:rgba(0,0,0,.62);color:#fff;font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;letter-spacing:.02em}
 .phandle{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pname{font-size:11px;color:var(--muted);white-space:nowrap}
@@ -317,7 +318,9 @@ function openModal(d){
   const P=PLAT[d.platform]||{c:'#888',ab:'?',name:d.platform};
   const mu=mediaUrls(d);
   let mediaBlock='';
-  if(d.type==='Reel'&&mu.length){
+  if(d.type==='Reel'&&d.video){
+    mediaBlock='<div class="mreelwrap"><video class="mreelvid" controls playsinline preload="metadata" poster="'+esc(mu[0]||'')+'"><source src="'+esc(d.video)+'" type="video/mp4"></video></div><div class="mmcount">Preview clip · the full-quality reel publishes to the platform.</div>';
+  }else if(d.type==='Reel'&&mu.length){
     mediaBlock='<div class="mreelwrap"><img class="mreelposter" loading="lazy" decoding="async" src="'+esc(mu[0])+'" alt="Reel preview"><span class="rtag">► Reel</span></div><div class="mmcount">Opening frame — the full reel plays on the platform.</div>';
   }else if(mu.length){
     mediaBlock='<div class="mmedia">'+mu.map((u,i)=>'<img loading="lazy" decoding="async" src="'+esc(u)+'" alt="'+(d.type==='Carousel'?'Slide '+(i+1):'Media')+'">').join('')+'</div>'+(mu.length>1?'<div class="mmcount">'+mu.length+' '+(d.type==='Carousel'?'slides':'images')+' · swipe to see all →</div>':'');
