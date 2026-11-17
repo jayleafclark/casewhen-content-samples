@@ -112,6 +112,10 @@ select.month{background:var(--surface);border:1px solid var(--line);color:var(--
 .mreel .mreel-ic{display:grid;place-items:center;width:30px;height:30px;flex:0 0 30px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px}
 :root[data-theme="dark"] .mreel .mreel-ic{color:#0b2520}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .mreel .mreel-ic{color:#0b2520}}
+.plat.thumb .mct.play{background:rgba(0,0,0,.62);color:#fff;font-size:8px;padding:0;width:16px;height:16px;display:grid;place-items:center;padding-left:1px;border-radius:50%}
+.mreelwrap{position:relative;display:inline-block;max-width:100%;margin-bottom:4px}
+.mreelposter{height:min(52vh,420px);width:auto;max-width:100%;border-radius:14px;border:1px solid var(--line);background:var(--surface-2);display:block}
+.mreelwrap .rtag{position:absolute;left:10px;top:10px;background:rgba(0,0,0,.62);color:#fff;font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;letter-spacing:.02em}
 .phandle{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pname{font-size:11px;color:var(--muted);white-space:nowrap}
 .pcap{min-width:0;color:var(--muted);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -292,8 +296,10 @@ function render(){
     g.forEach(d=>{
       const P=PLAT[d.platform]||{c:'#888',ab:'?',name:d.platform};
       const mu=mediaUrls(d);
+      const isReel=d.type==='Reel';
+      const corner=isReel?'<span class="mct play">►</span>':(mu.length>1?'<span class="mct">'+mu.length+'</span>':'');
       const plat=mu.length
-        ? '<span class="plat thumb'+(mu.length>1?' multi':'')+'" style="background-image:url('+esc(mu[0])+');border-color:'+(d.proposed?'var(--prop)':P.c)+'">'+(mu.length>1?'<span class="mct">'+mu.length+'</span>':'')+'</span>'
+        ? '<span class="plat thumb'+(mu.length>1?' multi':'')+'" style="background-image:url('+esc(mu[0])+');border-color:'+(d.proposed?'var(--prop)':P.c)+'">'+corner+'</span>'
         : '<span class="plat" style="background:'+(d.proposed?'var(--prop)':P.c)+'">'+P.ab+'</span>';
       html+='<button class="post'+(d.proposed?' prop':'')+'" data-i="'+DATA.indexOf(d)+'">'+
         '<span class="pf">'+plat+'<span class="pmeta"><div class="phandle">'+esc(handleOf(d))+'</div><div class="pname">'+P.name+'</div></span></span>'+
@@ -311,7 +317,9 @@ function openModal(d){
   const P=PLAT[d.platform]||{c:'#888',ab:'?',name:d.platform};
   const mu=mediaUrls(d);
   let mediaBlock='';
-  if(mu.length){
+  if(d.type==='Reel'&&mu.length){
+    mediaBlock='<div class="mreelwrap"><img class="mreelposter" loading="lazy" decoding="async" src="'+esc(mu[0])+'" alt="Reel preview"><span class="rtag">► Reel</span></div><div class="mmcount">Opening frame — the full reel plays on the platform.</div>';
+  }else if(mu.length){
     mediaBlock='<div class="mmedia">'+mu.map((u,i)=>'<img loading="lazy" decoding="async" src="'+esc(u)+'" alt="'+(d.type==='Carousel'?'Slide '+(i+1):'Media')+'">').join('')+'</div>'+(mu.length>1?'<div class="mmcount">'+mu.length+' '+(d.type==='Carousel'?'slides':'images')+' · swipe to see all →</div>':'');
   }else if(d.type==='Reel'){
     mediaBlock='<div class="mreel"><span class="mreel-ic">►</span> Reel · vertical video — it plays on the platform (not hosted in this preview)</div>';
