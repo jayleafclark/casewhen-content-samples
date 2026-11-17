@@ -26,7 +26,9 @@ html,body{margin:0}
 body{background:var(--bg);color:var(--fg);font-family:var(--font);line-height:1.45;-webkit-font-smoothing:antialiased;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 /* ---- login gate ---- */
-#gate{min-height:100vh;display:grid;place-items:center;padding:24px 0;position:relative;overflow:hidden;isolation:isolate}
+/* scroll-lock the login: no document scroll while the gate is up (released on sign-in) */
+html.locked,html.locked body{height:100%;overflow:hidden;overscroll-behavior:none}
+#gate{min-height:100dvh;display:grid;place-items:center;padding:24px 0;position:relative;overflow:hidden;isolation:isolate}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:0 24px 60px rgba(14,47,40,.22);
   max-width:380px;width:100%;padding:28px 26px;position:relative;z-index:1;backdrop-filter:saturate(1.05)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .card{box-shadow:0 24px 70px rgba(0,0,0,.5)}}
@@ -236,10 +238,12 @@ function showApp(raw){
   // Then swap to the schedule like a page change: reveal it, fully remove the login, land at the top.
   document.getElementById('app').hidden=false;
   const g=document.getElementById('gate');if(g)g.remove();
+  document.documentElement.classList.remove('locked');  // release the login scroll-lock
   try{if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();}catch(_){}
   window.scrollTo(0,0);
   if(document.scrollingElement)document.scrollingElement.scrollTop=0;
 }
+document.documentElement.classList.add('locked');  // lock scroll while the login gate is shown
 document.getElementById('gform').addEventListener('submit',async e=>{
   e.preventDefault();const u=document.getElementById('gu').value.trim().toLowerCase(),pw=document.getElementById('gp').value;
   const err=document.getElementById('gerr');const btn=document.getElementById('gbtn');
