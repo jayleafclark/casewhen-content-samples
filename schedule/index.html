@@ -196,10 +196,9 @@ document.getElementById('gform').addEventListener('submit',async e=>{
       :'Wrong username or password.';
     btn.textContent='View';btn.disabled=false;return;
   }
-  try{sessionStorage.setItem('cw_k',pw);}catch(_){}
   showApp(raw);
 });
-(function(){try{const k=sessionStorage.getItem('cw_k');if(k){document.getElementById('gu').value='casewhen';decrypt(k).then(showApp).catch(()=>{try{sessionStorage.removeItem('cw_k');}catch(_){}});}}catch(_){}})();
+/* no session persistence: the password is required on every load — nothing is remembered. */
 
 function buildStats(){
   const sc=DATA.filter(d=>!d.proposed),pr=DATA.filter(d=>d.proposed);
