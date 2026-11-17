@@ -181,7 +181,16 @@ async function decrypt(pw){
   catch(e){throw new Error('PW');}
   return JSON.parse(new TextDecoder().decode(pt));
 }
-function showApp(raw){DATA=raw.map(parse);document.getElementById('gate').hidden=true;document.getElementById('app').hidden=false;buildStats();buildFilters();render();}
+function showApp(raw){
+  // Build the schedule while the login is still present, so a failure can't strand the user.
+  DATA=raw.map(parse);buildStats();buildFilters();render();
+  // Then swap to the schedule like a page change: reveal it, fully remove the login, land at the top.
+  document.getElementById('app').hidden=false;
+  const g=document.getElementById('gate');if(g)g.remove();
+  try{if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();}catch(_){}
+  window.scrollTo(0,0);
+  if(document.scrollingElement)document.scrollingElement.scrollTop=0;
+}
 document.getElementById('gform').addEventListener('submit',async e=>{
   e.preventDefault();const u=document.getElementById('gu').value.trim().toLowerCase(),pw=document.getElementById('gp').value;
   const err=document.getElementById('gerr');const btn=document.getElementById('gbtn');
@@ -196,7 +205,8 @@ document.getElementById('gform').addEventListener('submit',async e=>{
       :'Wrong username or password.';
     btn.textContent='View';btn.disabled=false;return;
   }
-  showApp(raw);
+  try{showApp(raw);}
+  catch(e){err.textContent='Couldn’t open the schedule — please reload and try again.';btn.textContent='View';btn.disabled=false;}
 });
 /* no session persistence: the password is required on every load — nothing is remembered. */
 
