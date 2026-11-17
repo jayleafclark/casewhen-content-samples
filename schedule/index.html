@@ -182,6 +182,8 @@ let DATA=[],fPlat=new Set(),fPerson='',fProp=false;
 // Person membership: Saju owns his proposed LinkedIn posts + all German posts; Austin owns the English posts.
 const personMatch=d=> fPerson==='' || (fPerson==='saju' ? (d.proposed||d.lang==='DE') : (d.lang==='EN'&&!d.proposed));
 const esc=s=>(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// Display name override: the Facebook account "CaseWhen (Austin Levine)" is shown simply as "CaseWhen Facebook".
+const handleOf=d=>d.handle==='CaseWhen (Austin Levine)'?'CaseWhen Facebook':d.handle;
 const parse=d=>{const[y,m,da]=d.date.split('-').map(Number);const dt=new Date(Date.UTC(y,m-1,da));return{...d,_dt:dt,_mkey:y+'-'+String(m).padStart(2,'0'),_y:y,_m:m,_da:da,_wk:dt.getUTCDay()};};
 
 let ENCBUF=null;
@@ -275,7 +277,7 @@ function render(){
     g.forEach(d=>{
       const P=PLAT[d.platform]||{c:'#888',ab:'?',name:d.platform};
       html+='<button class="post'+(d.proposed?' prop':'')+'" data-i="'+DATA.indexOf(d)+'">'+
-        '<span class="pf"><span class="plat" style="background:'+(d.proposed?'var(--prop)':P.c)+'">'+P.ab+'</span><span class="pmeta"><div class="phandle">'+esc(d.handle)+'</div><div class="pname">'+P.name+'</div></span></span>'+
+        '<span class="pf"><span class="plat" style="background:'+(d.proposed?'var(--prop)':P.c)+'">'+P.ab+'</span><span class="pmeta"><div class="phandle">'+esc(handleOf(d))+'</div><div class="pname">'+P.name+'</div></span></span>'+
         '<span class="pcap">'+esc((d.caption||'').split('\n')[0])+'</span>'+
         '<span class="badges">'+(d.proposed?'<span class="badge b-prop">PROPOSED</span>':'')+'<span class="badge b-type">'+d.type+'</span><span class="badge b-lang '+(d.lang==='DE'?'de':'')+'">'+d.lang+'</span><span class="ptime">'+d.ber+'</span></span></button>';
     });
@@ -288,7 +290,7 @@ function render(){
 }
 function openModal(d){
   const P=PLAT[d.platform]||{c:'#888',ab:'?',name:d.platform};
-  document.getElementById('modalRoot').innerHTML='<div class="ov" id="ov"><div class="modal" role="dialog" aria-modal="true"><div class="mhd"><span class="plat" style="width:38px;height:38px;flex:0 0 38px;border-radius:11px;font-size:15px;background:'+(d.proposed?'var(--prop)':P.c)+'">'+P.ab+'</span><span class="pmeta"><div class="phandle" style="font-size:15px">'+esc(d.handle)+'</div><div class="pname">'+P.name+'</div></span><button class="mclose" id="mclose" aria-label="Close">✕</button></div><div class="mbody">'+(d.proposed?'<div class="mprop">PROPOSED for Saju’s personal LinkedIn — not yet scheduled, awaiting his approval.</div>':'')+'<div class="mrow">'+kv('Date',MON[d._m-1]+' '+d._da+', '+d._y+' ('+WK[d._wk]+')')+kv('Berlin',d.ber)+kv('US East',d.et)+kv('UTC',d.utc)+kv('Type',d.type)+kv('Language',d.lang==='DE'?'German':'English')+'</div><div class="mk" style="margin-bottom:7px">Caption</div><div class="mcap">'+esc(d.caption||'(no text)')+'</div></div></div></div>';
+  document.getElementById('modalRoot').innerHTML='<div class="ov" id="ov"><div class="modal" role="dialog" aria-modal="true"><div class="mhd"><span class="plat" style="width:38px;height:38px;flex:0 0 38px;border-radius:11px;font-size:15px;background:'+(d.proposed?'var(--prop)':P.c)+'">'+P.ab+'</span><span class="pmeta"><div class="phandle" style="font-size:15px">'+esc(handleOf(d))+'</div><div class="pname">'+P.name+'</div></span><button class="mclose" id="mclose" aria-label="Close">✕</button></div><div class="mbody">'+(d.proposed?'<div class="mprop">PROPOSED for Saju’s personal LinkedIn — not yet scheduled, awaiting his approval.</div>':'')+'<div class="mrow">'+kv('Date',MON[d._m-1]+' '+d._da+', '+d._y+' ('+WK[d._wk]+')')+kv('Berlin',d.ber)+kv('US East',d.et)+kv('UTC',d.utc)+kv('Type',d.type)+kv('Language',d.lang==='DE'?'German':'English')+'</div><div class="mk" style="margin-bottom:7px">Caption</div><div class="mcap">'+esc(d.caption||'(no text)')+'</div></div></div></div>';
   const close=()=>document.getElementById('modalRoot').innerHTML='';
   document.getElementById('ov').addEventListener('click',e=>{if(e.target.id==='ov')close();});
   document.getElementById('mclose').addEventListener('click',close);
