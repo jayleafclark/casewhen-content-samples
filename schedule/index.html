@@ -143,6 +143,10 @@ select.month{background:var(--surface);border:1px solid var(--line);color:var(--
 .mk{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
 .mv{font-size:13.5px;font-weight:600;font-variant-numeric:tabular-nums}
 .mcap{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:14px;white-space:pre-wrap;font-size:14px;line-height:1.55}
+.seotags{display:flex;flex-wrap:wrap;gap:7px}
+.seotag{background:var(--accent-pale);color:var(--accent-deep);border:1px solid var(--accent-mid);border-radius:999px;padding:4px 11px;font-size:12.5px;font-weight:600;font-variant-numeric:tabular-nums}
+:root[data-theme="dark"] .seotag{background:var(--accent-pale);color:var(--accent-mid)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .seotag{background:var(--accent-pale);color:var(--accent-mid)}}
 .mprop{background:var(--prop-bg);border:1px solid var(--prop);color:var(--prop);border-radius:10px;padding:10px 12px;font-size:12.5px;margin-bottom:14px}
 .foot{margin-top:40px;text-align:center;color:var(--muted);font-size:12px;line-height:1.6}
 @media(max-width:520px){
@@ -332,7 +336,18 @@ function openModal(d){
   }else if(d.type==='Reel'){
     mediaBlock='<div class="mreel"><span class="mreel-ic">►</span> Reel · vertical video — it plays on the platform (not hosted in this preview)</div>';
   }
-  document.getElementById('modalRoot').innerHTML='<div class="ov" id="ov"><div class="modal" role="dialog" aria-modal="true"><div class="mhd"><span class="plat" style="width:38px;height:38px;flex:0 0 38px;border-radius:11px;font-size:15px;background:'+(d.proposed?'var(--prop)':P.c)+'">'+P.ab+'</span><span class="pmeta"><div class="phandle" style="font-size:15px">'+esc(handleOf(d))+'</div><div class="pname">'+P.name+'</div></span><button class="mclose" id="mclose" aria-label="Close">✕</button></div><div class="mbody">'+mediaBlock+(d.proposed?'<div class="mprop">PROPOSED for Saju’s personal LinkedIn — not yet scheduled, awaiting his approval.</div>':'')+'<div class="mrow">'+kv('Date',MON[d._m-1]+' '+d._da+', '+d._y+' ('+WK[d._wk]+')')+kv('Berlin',d.ber)+kv('US East',d.et)+kv('UTC',d.utc)+kv('Type',d.type)+kv('Language',d.lang==='DE'?'German':'English')+'</div><div class="mk" style="margin-bottom:7px">Caption</div><div class="mcap">'+esc(d.caption||'(no text)')+'</div></div></div></div>';
+  const seo=d.seo||{};const stags=seo.hashtags||[];const sbits=[];
+  if(seo.yt_title)sbits.push(kv('SEO title',seo.yt_title));
+  if(seo.threads_tag)sbits.push(kv('Topic tag','#'+seo.threads_tag));
+  if(seo.alt)sbits.push(kv('Image alt text',seo.alt));
+  let seoHtml='';
+  if(stags.length||sbits.length){
+    seoHtml='<div class="mk" style="margin:18px 0 8px">Proposed SEO'+(seo.topic&&seo.topic!=='general'?' · '+seo.topic:'')+'</div>';
+    if(stags.length)seoHtml+='<div class="seotags">'+stags.map(t=>'<span class="seotag">'+esc(t)+'</span>').join('')+'</div>';
+    if(sbits.length)seoHtml+='<div class="mrow" style="margin-top:12px">'+sbits.join('')+'</div>';
+    seoHtml+='<div class="mmcount" style="margin-top:8px">Suggested additions · not yet applied to the live post.</div>';
+  }
+  document.getElementById('modalRoot').innerHTML='<div class="ov" id="ov"><div class="modal" role="dialog" aria-modal="true"><div class="mhd"><span class="plat" style="width:38px;height:38px;flex:0 0 38px;border-radius:11px;font-size:15px;background:'+(d.proposed?'var(--prop)':P.c)+'">'+P.ab+'</span><span class="pmeta"><div class="phandle" style="font-size:15px">'+esc(handleOf(d))+'</div><div class="pname">'+P.name+'</div></span><button class="mclose" id="mclose" aria-label="Close">✕</button></div><div class="mbody">'+mediaBlock+(d.proposed?'<div class="mprop">PROPOSED for Saju’s personal LinkedIn — not yet scheduled, awaiting his approval.</div>':'')+'<div class="mrow">'+kv('Date',MON[d._m-1]+' '+d._da+', '+d._y+' ('+WK[d._wk]+')')+kv('Berlin',d.ber)+kv('US East',d.et)+kv('UTC',d.utc)+kv('Type',d.type)+kv('Language',d.lang==='DE'?'German':'English')+'</div><div class="mk" style="margin-bottom:7px">Caption</div><div class="mcap">'+esc(d.caption||'(no text)')+'</div>'+seoHtml+'</div></div></div>';
   const close=()=>document.getElementById('modalRoot').innerHTML='';
   document.getElementById('ov').addEventListener('click',e=>{if(e.target.id==='ov')close();});
   document.getElementById('mclose').addEventListener('click',close);
