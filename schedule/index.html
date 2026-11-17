@@ -99,7 +99,19 @@ select.month{background:var(--surface);border:1px solid var(--line);color:var(--
 .post.prop:hover{border-color:var(--prop)}
 .pf{display:flex;align-items:center;gap:9px;min-width:0}
 .plat{width:30px;height:30px;border-radius:9px;flex:0 0 30px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:13px}
+.plat.thumb{width:38px;height:38px;flex:0 0 38px;background-size:cover;background-position:center;border:2px solid #fff;position:relative;box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.plat.thumb .mct{position:absolute;right:-5px;bottom:-5px;background:var(--accent-deep);color:#fff;font-size:9.5px;font-weight:700;line-height:1;padding:3px 4px;border-radius:6px;border:1.5px solid var(--surface)}
+:root[data-theme="dark"] .plat.thumb .mct{background:var(--accent-mid);color:#0b2520}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .plat.thumb .mct{background:var(--accent-mid);color:#0b2520}}
 .pmeta{min-width:0}
+/* modal media gallery */
+.mmedia{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:2px 0 8px;margin:-2px 0 4px}
+.mmedia img{height:min(46vh,340px);width:auto;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);scroll-snap-align:center;flex:0 0 auto}
+.mmcount{font-size:11.5px;color:var(--muted);margin-bottom:14px}
+.mreel{display:flex;align-items:center;gap:9px;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;color:var(--muted);font-size:13px;margin-bottom:14px}
+.mreel .mreel-ic{display:grid;place-items:center;width:30px;height:30px;flex:0 0 30px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px}
+:root[data-theme="dark"] .mreel .mreel-ic{color:#0b2520}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .mreel .mreel-ic{color:#0b2520}}
 .phandle{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pname{font-size:11px;color:var(--muted);white-space:nowrap}
 .pcap{min-width:0;color:var(--muted);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -184,6 +196,9 @@ const personMatch=d=> fPerson==='' || (fPerson==='saju' ? (d.proposed||d.lang===
 const esc=s=>(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 // Display name override: the Facebook account "CaseWhen (Austin Levine)" is shown simply as "CaseWhen Facebook".
 const handleOf=d=>d.handle==='CaseWhen (Austin Levine)'?'CaseWhen Facebook':d.handle;
+// Media lives at the site root (../ from /schedule/). Returns absolute image URLs for a post.
+const MB='../';
+const mediaUrls=d=>(d.media||[]).map(p=>/^https?:/.test(p)?p:MB+p);
 const parse=d=>{const[y,m,da]=d.date.split('-').map(Number);const dt=new Date(Date.UTC(y,m-1,da));return{...d,_dt:dt,_mkey:y+'-'+String(m).padStart(2,'0'),_y:y,_m:m,_da:da,_wk:dt.getUTCDay()};};
 
 let ENCBUF=null;
@@ -276,8 +291,12 @@ function render(){
     html+='<section class="daygrp" data-mk="'+d0._mkey+'"><div class="dayhd"><span class="dnum">'+MON[d0._m-1]+' '+d0._da+'</span><span class="dwk">'+WK[d0._wk]+' '+d0._y+'</span><span class="dline"></span><span class="dcount">'+g.length+'</span></div><div class="posts">';
     g.forEach(d=>{
       const P=PLAT[d.platform]||{c:'#888',ab:'?',name:d.platform};
+      const mu=mediaUrls(d);
+      const plat=mu.length
+        ? '<span class="plat thumb'+(mu.length>1?' multi':'')+'" style="background-image:url('+esc(mu[0])+');border-color:'+(d.proposed?'var(--prop)':P.c)+'">'+(mu.length>1?'<span class="mct">'+mu.length+'</span>':'')+'</span>'
+        : '<span class="plat" style="background:'+(d.proposed?'var(--prop)':P.c)+'">'+P.ab+'</span>';
       html+='<button class="post'+(d.proposed?' prop':'')+'" data-i="'+DATA.indexOf(d)+'">'+
-        '<span class="pf"><span class="plat" style="background:'+(d.proposed?'var(--prop)':P.c)+'">'+P.ab+'</span><span class="pmeta"><div class="phandle">'+esc(handleOf(d))+'</div><div class="pname">'+P.name+'</div></span></span>'+
+        '<span class="pf">'+plat+'<span class="pmeta"><div class="phandle">'+esc(handleOf(d))+'</div><div class="pname">'+P.name+'</div></span></span>'+
         '<span class="pcap">'+esc((d.caption||'').split('\n')[0])+'</span>'+
         '<span class="badges">'+(d.proposed?'<span class="badge b-prop">PROPOSED</span>':'')+'<span class="badge b-type">'+d.type+'</span><span class="badge b-lang '+(d.lang==='DE'?'de':'')+'">'+d.lang+'</span><span class="ptime">'+d.ber+'</span></span></button>';
     });
@@ -290,7 +309,14 @@ function render(){
 }
 function openModal(d){
   const P=PLAT[d.platform]||{c:'#888',ab:'?',name:d.platform};
-  document.getElementById('modalRoot').innerHTML='<div class="ov" id="ov"><div class="modal" role="dialog" aria-modal="true"><div class="mhd"><span class="plat" style="width:38px;height:38px;flex:0 0 38px;border-radius:11px;font-size:15px;background:'+(d.proposed?'var(--prop)':P.c)+'">'+P.ab+'</span><span class="pmeta"><div class="phandle" style="font-size:15px">'+esc(handleOf(d))+'</div><div class="pname">'+P.name+'</div></span><button class="mclose" id="mclose" aria-label="Close">✕</button></div><div class="mbody">'+(d.proposed?'<div class="mprop">PROPOSED for Saju’s personal LinkedIn — not yet scheduled, awaiting his approval.</div>':'')+'<div class="mrow">'+kv('Date',MON[d._m-1]+' '+d._da+', '+d._y+' ('+WK[d._wk]+')')+kv('Berlin',d.ber)+kv('US East',d.et)+kv('UTC',d.utc)+kv('Type',d.type)+kv('Language',d.lang==='DE'?'German':'English')+'</div><div class="mk" style="margin-bottom:7px">Caption</div><div class="mcap">'+esc(d.caption||'(no text)')+'</div></div></div></div>';
+  const mu=mediaUrls(d);
+  let mediaBlock='';
+  if(mu.length){
+    mediaBlock='<div class="mmedia">'+mu.map((u,i)=>'<img loading="lazy" decoding="async" src="'+esc(u)+'" alt="'+(d.type==='Carousel'?'Slide '+(i+1):'Media')+'">').join('')+'</div>'+(mu.length>1?'<div class="mmcount">'+mu.length+' '+(d.type==='Carousel'?'slides':'images')+' · swipe to see all →</div>':'');
+  }else if(d.type==='Reel'){
+    mediaBlock='<div class="mreel"><span class="mreel-ic">►</span> Reel · vertical video — it plays on the platform (not hosted in this preview)</div>';
+  }
+  document.getElementById('modalRoot').innerHTML='<div class="ov" id="ov"><div class="modal" role="dialog" aria-modal="true"><div class="mhd"><span class="plat" style="width:38px;height:38px;flex:0 0 38px;border-radius:11px;font-size:15px;background:'+(d.proposed?'var(--prop)':P.c)+'">'+P.ab+'</span><span class="pmeta"><div class="phandle" style="font-size:15px">'+esc(handleOf(d))+'</div><div class="pname">'+P.name+'</div></span><button class="mclose" id="mclose" aria-label="Close">✕</button></div><div class="mbody">'+mediaBlock+(d.proposed?'<div class="mprop">PROPOSED for Saju’s personal LinkedIn — not yet scheduled, awaiting his approval.</div>':'')+'<div class="mrow">'+kv('Date',MON[d._m-1]+' '+d._da+', '+d._y+' ('+WK[d._wk]+')')+kv('Berlin',d.ber)+kv('US East',d.et)+kv('UTC',d.utc)+kv('Type',d.type)+kv('Language',d.lang==='DE'?'German':'English')+'</div><div class="mk" style="margin-bottom:7px">Caption</div><div class="mcap">'+esc(d.caption||'(no text)')+'</div></div></div></div>';
   const close=()=>document.getElementById('modalRoot').innerHTML='';
   document.getElementById('ov').addEventListener('click',e=>{if(e.target.id==='ov')close();});
   document.getElementById('mclose').addEventListener('click',close);
